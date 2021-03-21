@@ -3,6 +3,8 @@ import random
 from parser import *
 from formula import *
 from sequence_formula import *
+sys.path.insert('./../telatko2.0/playground.py')
+
 
 
 def edge_dictionary(aut):

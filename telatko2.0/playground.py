@@ -154,7 +154,7 @@ def get_dependencies(merged_f):
 
 
 
-def play(aut):
+def process_automaton(aut):
     spot.cleanup_acceptance_here(aut)
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
@@ -246,7 +246,7 @@ def main(argv):
     for a in aut:
         counter += 1
         origin = spot.automaton(a.to_str())
-        play(a)
+        process_automaton(a)
         if args.outfile:
             print_aut(a, args.outfile, "a")
         else:
