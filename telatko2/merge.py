@@ -1,6 +1,9 @@
-from classes import *
-from simplify import *
+
+from telatko2.classes import *
+from telatko2.simplify import *
 import copy
+import warnings
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 def shift_fst_acc(aut, acc, scc, m):
     next_m = m + 1

@@ -1,6 +1,7 @@
-from classes import *
-from simplify import *
-from merge import get_set_nums
+
+from telatko2.classes import *
+from telatko2.simplify import *
+from telatko2.merge import get_set_nums
 
 def make_true(aut, scc, merged_acc):
     scc_clean_up_edges(aut, PACC(""), scc)

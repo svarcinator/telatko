@@ -1,9 +1,9 @@
+
 import random
 
-from classes import *
-from simplify import *
-from merge import *
-from restore_equivalence import *
+
+from telatko2.merge import *
+from telatko2.restore_equivalence import *
 import copy
 
 

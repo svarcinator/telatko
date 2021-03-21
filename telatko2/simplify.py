@@ -1,4 +1,4 @@
-from classes import *
+from telatko2.classes import *
 
 
 ### SIMPLIFY AUXILIARY ###

@@ -1,6 +1,6 @@
 import random
-from classes import *
-from parser import process_variables
+from qbf.classes import *
+from qbf.parser import process_variables
 
 
 def create_one_inf_clause(clause, acc_set, T, sequence_num, sequence):

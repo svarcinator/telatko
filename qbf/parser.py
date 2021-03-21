@@ -1,4 +1,4 @@
-from classes import *
+from qbf.classes import *
 
 
 def create_acc(variables):
