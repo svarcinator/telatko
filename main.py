@@ -13,6 +13,7 @@ def main(argv):
         "--autfile",
         help="File containing automata in HOA format.")
     parser.add_argument("-O", "--outfile", help="File to print output to.")
+    parser.add_argument("-M", "--mode", help="Level of simplification.")
     args = parser.parse_args()
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
@@ -26,14 +27,17 @@ def main(argv):
         try:
             spot.cleanup_acceptance_here(a)
             process_automaton(a)
-            acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
-            print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
+            if args.mode != '1':
+                acc_sets_count = a.get_acceptance().used_sets().count()
+                clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
+                print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
 
-            if acc_sets_count == 0:
-                auto = a
+                if acc_sets_count == 0:
+                    auto = a
+                else:
+                    auto = play(a, clauses_count, acc_sets_count, args.mode)
             else:
-                auto = play(a, clauses_count, acc_sets_count)
+                auto = a
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")

@@ -170,6 +170,21 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     # prints our formula into text file
     SAT_output(quant_edges, con)
 
+def resolve_flags(precision_flag, ck_flag, mode, C, K):
+    if ck_flag:
+        if precision_flag or mode == '1':
+            return None, None, None, None, True
+        else:
+            precision_flag = 1
+    else:
+        if precision_flag or mode == '1':
+            ck_flag = 1
+            precision_flag = 0
+            K += 1
+        else:
+            precision_flag = 1
+    return precision_flag, ck_flag, C, K, False
+
 
 def try_evaluate0(aut):
     """
@@ -188,7 +203,7 @@ def try_evaluate0(aut):
         return aut
     return last_eq_aut
 
-def play(aut, C, K):
+def play(aut, C, K, mode):
     spot.cleanup_acceptance_here(aut)
 
     if aut.get_acceptance().used_sets().count(
@@ -220,7 +235,7 @@ def play(aut, C, K):
         edge_dict = edge_dictionary(aut)
 
         acc = PACC(aut.get_acceptance().to_dnf())
-        if(acc.formula ==  []):
+        if acc.formula ==  []:
             a = try_evaluate0(aut)
             return a
 
@@ -230,27 +245,16 @@ def play(aut, C, K):
 
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole", "./sat_file"], universal_newlines=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
 
         except subprocess.TimeoutExpired:
             print("expired")
-            if ck_flag:
-                if precision_flag:
-                    return aut
-                else:
-                    print("precision flag")
-                    precision_flag = 1
-                    ck_flag = 0
-                    continue
+            precision_flag, ck_flag, C, K, done = resolve_flags(precision_flag, ck_flag, mode, C, K)
+            if done:
+                return aut
             else:
-                if precision_flag:
-                    precision_flag = 0
-                    ck_flag = 1
-                    K += 1
-                    continue
-                else:
-                    precision_flag = 1
-                    continue
+                continue
+
 
         out = cp.stdout.splitlines()
         f = open("sat_evaluation", "w")
@@ -260,23 +264,11 @@ def play(aut, C, K):
 
         if len(out) == 1:
             print("unsatisfiable")
-            if ck_flag:
-                if precision_flag:
-                    return aut
-                else:
-                    print("precision flag")
-                    precision_flag = 1
-                    ck_flag = 0
-                    continue
+            precision_flag, ck_flag, C, K, done = resolve_flags(precision_flag, ck_flag, mode, C, K)
+            if done:
+                return aut
             else:
-                if precision_flag:
-                    precision_flag = 0
-                    ck_flag = 1
-                    K += 1
-                    continue
-                else:
-                    precision_flag = 1
-                    continue
+                continue
 
         if len(out) == 0:
             print("sat error")
