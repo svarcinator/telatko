@@ -129,15 +129,20 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     if precision_flag:
         quant_edges += w_quant(aut)
 
-    con = SATformula("&")
+    con_lw = SATformula("&")
     # edges that are true create continuous cycle of edges aka laso
     laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
-    con.add_subf(laso)
+    con_lw.add_subf(laso)
 
     # makes sure that laso is continuous
     if precision_flag:
         neg = negate_part(aut, inner_edges)
-        con.add_subf(neg)
+        if neg:
+            con_lw.add_subf(neg)
+        else:
+            con = laso
+    else:
+        con = laso
 
 
 
@@ -153,7 +158,7 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
 
 
     impl = SATformula("->")
-    impl.add_subf(laso)
+    impl.add_subf(con_lw)
     impl.add_subf(eq)
 
     # root of QBFformula
@@ -242,11 +247,11 @@ def play(aut, C, K, mode):
 
         # QBF formula is written into ./sat_file
 
-        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, precision_flag)
+        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode)
 
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole", "./sat_file"], universal_newlines=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
 
         except subprocess.TimeoutExpired:
             print("expired")

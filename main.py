@@ -21,6 +21,8 @@ def main(argv):
         mode = '0'
 
     aut = spot.automata(args.autfile)
+    orig_clauses_counter = 0
+    new_clauses_counter = 0
 
     for a in aut:
 
@@ -33,11 +35,15 @@ def main(argv):
                 acc_sets_count = a.get_acceptance().used_sets().count()
                 clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
                 print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
+                orig_clauses_counter += clauses_count
 
                 if acc_sets_count == 0:
                     auto = a
                 else:
                     auto = play(a, clauses_count, acc_sets_count, args.mode)
+                    clauses_count2 = max(len(a.get_acceptance().top_disjuncts()),
+                                        len(a.get_acceptance().top_conjuncts()))
+                    new_clauses_counter += clauses_count2
             else:
                 auto = a
 
@@ -57,6 +63,7 @@ def main(argv):
             print(
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
+    print("orig clauses count:", orig_clauses_counter, "new clauses count:", new_clauses_counter)
 
     
 if __name__ == "__main__":
