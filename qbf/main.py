@@ -1,0 +1,364 @@
+import random
+# from classes import *
+from parser import *
+from formula import *
+from sequence_formula import *
+
+
+def edge_dictionary(aut):
+    """
+
+    Args:
+        aut: spot::twa - automaton from input
+
+    Returns: Dictionary {acceptance set number : [number of edge in this set]}
+
+    """
+    list_of_all_edges = aut.edges()
+    edge_dict = {}
+    set_nums = aut.get_acceptance().used_sets()
+
+    for acc_set in set_nums.sets():
+        edge_dict[acc_set] = list(map(aut.edge_number, list(
+            filter(lambda edg: edg.acc.has(acc_set), list_of_all_edges))))
+    return edge_dict
+
+
+def get_edges(aut):
+    """
+
+    Args:
+        aut: spot::twa - automaton
+
+    Returns: [numbers of inner edges of all sccs], [spot::twa_graph::edge_storage_t - inner edges of all sccs]
+
+    """
+    edge_nums = []
+    edges_list = []
+    si = spot.scc_info(aut)
+    for scc in range(si.scc_count()):
+        edges = si.inner_edges_of(scc)
+        for e in edges:
+            edge_nums.append(aut.edge_number(e))
+            edges_list.append(e)
+    return edge_nums, edges_list
+
+
+def scc_info(aut):
+    """
+
+    Args:
+        aut:
+
+    Returns: scc_state_info[{state_number : [edges out of the state], [edges in the state]}]
+              scc_edg [[numbers of edges of one SCC]]
+
+    """
+    scc_state_inf = []
+
+    scc_edg = []
+    si = spot.scc_info(aut)
+    counter = 0
+    for i in range(si.scc_count()):
+        states = si.states_of(i)
+        if si.is_trivial(i):
+            continue
+        state_dict = {}
+        for s in states:
+            state_dict[s] = [[], []]
+        edges = si.inner_edges_of(i)
+        scc_edg.append([])
+        for e in edges:
+            scc_edg[counter].append(aut.edge_number(e))
+            state_dict[e.src][0].append(aut.edge_number(e))
+            state_dict[e.dst][1].append(aut.edge_number(e))
+        counter += 1
+        scc_state_inf.append(state_dict)
+    return scc_state_inf, scc_edg
+
+
+def SAT_output(quantified, formula):
+    """
+    Prints formula into file(for QBF solver) named satfile.
+    Args:
+        quantified: Universal quantificators of formula
+        formula: SATformula - Boolean formula
+
+    Returns:
+
+    """
+    f = open("sat_file", "w")
+    f.write(str(quantified) + str(formula))
+    f.close()
+
+def w_quant(aut):
+    """
+    Creates universal variables w_
+    Args:
+        aut:
+
+    Returns:
+
+    """
+    univ_formula = ""
+    num_states = aut.num_states()
+    for i in range(num_states):
+        univ_formula += "#w_" + str(i)
+    return univ_formula
+
+
+def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, precision_flag):
+    """
+
+    :param aut:
+    :param acc:
+    :param edge_dict:
+    :param scc_edg:
+    :param state_dict:
+    :param inner_edges: [edge_num :: int] all inner edges of SCCs
+    :param C: ::int - clauses caunt
+    :param K: :: int - acceptance sets count
+    :return:
+    """
+
+    # quantified edges #e_1 ... #e_n
+    quant_edges = quant_all(inner_edges_nums)
+    # quantified variables #w_1 #w_2 ... #w_n
+    if precision_flag:
+        quant_edges += w_quant(aut)
+
+    con = SATformula("&")
+    # edges that are true create continuous cycle of edges aka laso
+    laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
+    con.add_subf(laso)
+
+    # makes sure that laso is continuous
+    if precision_flag:
+        neg = negate_part(aut, inner_edges)
+        con.add_subf(neg)
+
+
+
+    # reqiurements on old acceptance formula
+    old = old_formula(acc, edge_dict)
+
+    # assignment of variables to create new acceptance formula
+    new = new_formula(inner_edges_nums, C, K)
+    # old and new need to be equivalent
+    eq = SATformula('<->')
+    eq.add_subf(old)
+    eq.add_subf(new)
+
+
+    impl = SATformula("->")
+    impl.add_subf(laso)
+    impl.add_subf(eq)
+
+    # root of QBFformula
+    con = SATformula("&")
+    con.add_subf(impl)
+
+    # not (Inf1 & Fin1)
+    inf_not_fin = inf_is_not_fin_clause(C, K)
+
+    # (Fin1 | Inf1) - we need control over formula
+    inf_or_fin = inf_or_fin_f(C, K)
+    con.add_subf(inf_not_fin)
+    con.add_subf(inf_or_fin)
+    # prints our formula into text file
+    SAT_output(quant_edges, con)
+
+
+def try_evaluate0(aut):
+    """
+    Try evaluate with K = 0(len of acceptance formula == 0)
+    :param aut: spot::automaton
+    :return: potentionally zero acceptance spot::automaton
+    """
+    last_eq_aut = spot.automaton(aut.to_str())
+    clear_aut_edges(aut)
+    aut.set_acceptance(0, spot.acc_code.t())
+    if spot.are_equivalent(last_eq_aut, aut):
+        return aut
+
+    aut.set_acceptance(0, spot.acc_code.f())
+    if spot.are_equivalent(last_eq_aut, aut):
+        return aut
+    return last_eq_aut
+
+def play(aut, C, K):
+    spot.cleanup_acceptance_here(aut)
+
+    if aut.get_acceptance().used_sets().count(
+    ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
+        return aut
+    original = spot.automaton(aut.to_str())
+
+    # [int] - all nums of inner edges of SCCs
+    inner_edges_nums, inner_edges = get_edges(aut)
+
+
+    # scc_edg [[nums of edges of one scc]]
+    # scc state info [{state num : [[num of edge of which is the state source of][num of edge of which is the state destination of]]}]
+    scc_state_info, scc_edg = scc_info(aut)
+
+    K = K - 1  # we dont want to try what we already know
+
+    ck_flag = 0
+    precision_flag = 0
+
+    while C > 0 and K > 0:
+        print(C, K, "precision:", precision_flag, "ck_flag:", ck_flag)
+
+        if aut.get_acceptance().used_sets().count(
+        ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
+            return aut
+
+        # dictionary {edge_num : [num of acceptance set]}
+        edge_dict = edge_dictionary(aut)
+
+        acc = PACC(aut.get_acceptance().to_dnf())
+        if(acc.formula ==  []):
+            a = try_evaluate0(aut)
+            return a
+
+        # QBF formula is written into ./sat_file
+
+        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, precision_flag)
+
+        try:
+            cp = subprocess.run(["./limboole1.2/limboole", "./sat_file"], universal_newlines=True,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120)
+
+        except subprocess.TimeoutExpired:
+            print("expired")
+            if ck_flag:
+                if precision_flag:
+                    return aut
+                else:
+                    print("precision flag")
+                    precision_flag = 1
+                    ck_flag = 0
+                    continue
+            else:
+                if precision_flag:
+                    precision_flag = 0
+                    ck_flag = 1
+                    K += 1
+                    continue
+                else:
+                    precision_flag = 1
+                    continue
+
+        out = cp.stdout.splitlines()
+        f = open("sat_evaluation", "w")
+        f.write(cp.stdout)
+        f.close()
+
+
+        if len(out) == 1:
+            print("unsatisfiable")
+            if ck_flag:
+                if precision_flag:
+                    return aut
+                else:
+                    print("precision flag")
+                    precision_flag = 1
+                    ck_flag = 0
+                    continue
+            else:
+                if precision_flag:
+                    precision_flag = 0
+                    ck_flag = 1
+                    K += 1
+                    continue
+                else:
+                    precision_flag = 1
+                    continue
+
+        if len(out) == 0:
+            print("sat error")
+            return aut
+        variables = out[1:]
+
+        process_variables(aut, variables)
+
+        if K == 1:
+            ck_flag = 1
+
+        if not ck_flag:
+            K = K - 1
+        else:
+            C = C - 1
+    # print(aut.to_str())
+    a = try_evaluate0(aut)
+    return a
+
+
+def main(argv):
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-F",
+        "--autfile",
+        help="File containing automata in HOA format.")
+    parser.add_argument("-O", "--outfile", help="File to print output to.")
+    args = parser.parse_args()
+    if not args.autfile:
+        print("No automata to process.", file=sys.stderr)
+
+    aut = spot.automata(args.autfile)
+
+    for a in aut:
+
+        origin = spot.automaton(a.to_str())
+        print_aut(origin, "problem", "w")
+        try:
+            spot.cleanup_acceptance_here(a)
+            acc_sets_count = a.get_acceptance().used_sets().count()
+            clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
+            print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
+
+            if acc_sets_count == 0:
+                auto = a
+            else:
+                auto = play(a, clauses_count, acc_sets_count)
+
+            if args.outfile:
+                print_aut(auto, args.outfile, "a")
+            else:
+                print_aut(auto, None, " ")
+
+            if not spot.are_equivalent(auto, origin):
+                print("nejsou ekvivalentni")
+                return
+
+            else:
+                print("ekvivalentni")
+
+        except RuntimeError:  # too many marks
+            print(
+                "Automaton has too many acceptance sets, 32 is the limit.",
+                file=sys.stderr)
+
+
+def test_aut(a1, a2):
+    f = open("summary.txt", "a")
+    if spot.are_equivalent(a1, a2):
+        if a1.get_acceptance().used_sets().max_set(
+        ) < a2.get_acceptance().used_sets().max_set():
+            f.write("ok, simplified")
+        else:
+            f.write("ok, NOT simplified, (" +
+                    str(a1.get_acceptance().used_sets()) +
+                    ", " +
+                    str(a2.get_acceptance().used_sets()) +
+                    ')')
+    else:
+        f.write("nok")
+        # print_aut(a1, "err_aut.hoa", "a")
+    f.write('\n')
+    f.close()
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
