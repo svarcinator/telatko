@@ -204,6 +204,7 @@ def try_evaluate0(aut):
     return last_eq_aut
 
 def play(aut, C, K, mode):
+    print("mode",mode)
     spot.cleanup_acceptance_here(aut)
 
     if aut.get_acceptance().used_sets().count(

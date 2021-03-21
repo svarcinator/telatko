@@ -17,6 +17,8 @@ def main(argv):
     args = parser.parse_args()
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
+    if not args.mode:
+        mode = '0'
 
     aut = spot.automata(args.autfile)
 
@@ -27,7 +29,7 @@ def main(argv):
         try:
             spot.cleanup_acceptance_here(a)
             process_automaton(a)
-            if args.mode != '1':
+            if args.mode != '0':
                 acc_sets_count = a.get_acceptance().used_sets().count()
                 clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
                 print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
