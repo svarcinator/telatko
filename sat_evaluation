@@ -1,19 +1,8 @@
 % TRUE FORMULA (satisfying assignment of outermost existential variables follows)
 p_1_1 = 0
-f_8_1 = 0
-f_9_1 = 0
-f_10_1 = 0
-f_11_1 = 0
-f_12_1 = 0
-f_13_1 = 1
-f_14_1 = 1
+f_2_1 = 1
+f_3_1 = 0
+f_4_1 = 0
+f_5_1 = 0
+f_6_1 = 0
 n_1_1 = 1
-p_1_2 = 1
-f_8_2 = 1
-f_9_2 = 0
-f_10_2 = 1
-f_11_2 = 1
-f_12_2 = 1
-f_13_2 = 0
-f_14_2 = 1
-n_1_2 = 0

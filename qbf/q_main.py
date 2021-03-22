@@ -6,7 +6,6 @@ from qbf.sequence_formula import *
 
 
 
-
 def edge_dictionary(aut):
     """
 
@@ -247,11 +246,11 @@ def play(aut, C, K, mode):
 
         # QBF formula is written into ./sat_file
 
-        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode)
+        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, precision_flag)
 
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole", "./sat_file"], universal_newlines=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
 
         except subprocess.TimeoutExpired:
             print("expired")
