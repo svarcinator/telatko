@@ -253,6 +253,8 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     laso.add_subf(least_one)
     laso.add_subf(in_out)
     laso.add_subf(one_scc)
+    neg = negate_part(aut, inner_edges)
+    #laso.add_subf(neg)
 
     return laso
 
@@ -394,6 +396,7 @@ def negate_part(aut, inner_edges):
         con.add_subf(neg)
     con.negate()
     con.imper()
+    #print(con)
     if con.get_subformula():
         return con
     return None

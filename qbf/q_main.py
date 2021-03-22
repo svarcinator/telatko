@@ -132,16 +132,12 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     # edges that are true create continuous cycle of edges aka laso
     laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
     con_lw.add_subf(laso)
-
-    # makes sure that laso is continuous
-    if precision_flag:
-        neg = negate_part(aut, inner_edges)
-        if neg:
-            con_lw.add_subf(neg)
-        else:
-            con = laso
+    neg = negate_part(aut, inner_edges)
+    if precision_flag and neg.get_subformula():
+        con_lw.add_subf(neg)
     else:
-        con = laso
+        con_lw = laso
+
 
 
 

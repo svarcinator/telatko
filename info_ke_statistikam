@@ -1,9 +1,0 @@
-tele - set1.hoa - zmnseni delku formula(pocet klauzuli pred a po):
-orig clauses count: 1618 new clauses count: 1204
-
-tele - set2.hoa - Formula length before and after:
-orig clauses count: 884 new clauses count: 763
-
-scc - set2.hoa -Formula length before and after:
-orig clauses count: 884 new clauses count: 761
-
