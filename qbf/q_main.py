@@ -104,11 +104,83 @@ def w_quant(aut):
     univ_formula = ""
     num_states = aut.num_states()
     for i in range(num_states):
-        univ_formula += "#w_" + str(i)
+        univ_formula += "?w_" + str(i)
     return univ_formula
 
 
-def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, precision_flag):
+def laso2(aut, inner_edges, scc_edg):
+    main_dis = SATformula("|")
+
+    con3 = SATformula("&")
+    dis1 = SATformula("|")
+    dis2 = SATformula("|")
+    con1 = SATformula("&")
+    con2 = SATformula("&")
+
+    for e in inner_edges:
+        src = str(e.src)
+        dst = str(e.dst)
+        """
+        if e.src == e.dst:
+            continue
+        """
+
+        # part one
+        impl = SATformula("->")
+        impl.add_subf(SATformula("e_"+str(aut.edge_number(e))))
+        c = SATformula("&")
+        c.add_subf(SATformula("w_" + src))
+        c.add_subf(SATformula("w_" + dst))
+        impl.add_subf(c)
+        con1.add_subf(impl)
+
+        # part two
+        impl2 = SATformula("->")
+        impl2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c1 = SATformula("&")
+        c1.add_subf(SATformula("!w_" + src))
+        c1.add_subf(SATformula("!w_" + dst))
+        impl2.add_subf(c1)
+        con2.add_subf(impl2)
+
+        # part three
+        ## dis 1
+        c2 = SATformula("&")
+        c2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c2.add_subf(SATformula("w_" + src))
+        c2.add_subf(SATformula("!w_" + dst))
+        dis1.add_subf(c2)
+
+        ## dis 2
+        c3 = SATformula("&")
+        c3.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c3.add_subf(SATformula("!w_" + src))
+        c3.add_subf(SATformula("w_" + dst))
+        dis2.add_subf(c3)
+
+    con3.add_subf(dis1)
+    con3.add_subf(dis2)
+
+    main_dis.add_subf(con1)
+    main_dis.add_subf(con2)
+    main_dis.add_subf(con3)
+    laso = SATformula("&")
+    one_scc = one_scc_f(scc_edg)
+    laso.add_subf(main_dis)
+    laso.add_subf(one_scc)
+    return laso
+
+
+
+
+
+
+
+
+
+
+
+def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges):
     """
 
     :param aut:
@@ -125,18 +197,13 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     # quantified edges #e_1 ... #e_n
     quant_edges = quant_all(inner_edges_nums)
     # quantified variables #w_1 #w_2 ... #w_n
-    if precision_flag:
-        quant_edges += w_quant(aut)
 
-    con_lw = SATformula("&")
+    quant_edges += w_quant(aut)
+
     # edges that are true create continuous cycle of edges aka laso
     laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
-    con_lw.add_subf(laso)
-    neg = negate_part(aut, inner_edges)
-    if precision_flag and neg.get_subformula():
-        con_lw.add_subf(neg)
-    else:
-        con_lw = laso
+
+    #laso_2 = laso2(aut, inner_edges, scc_edg)
 
 
 
@@ -153,7 +220,7 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
 
 
     impl = SATformula("->")
-    impl.add_subf(con_lw)
+    impl.add_subf(laso)
     impl.add_subf(eq)
 
     # root of QBFformula
@@ -222,11 +289,10 @@ def play(aut, C, K, mode):
 
     K = K - 1  # we dont want to try what we already know
 
-    ck_flag = 0
-    precision_flag = 0
+
 
     while C > 0 and K > 0:
-        print(C, K, "precision:", precision_flag, "ck_flag:", ck_flag)
+        print(K)
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
@@ -242,19 +308,15 @@ def play(aut, C, K, mode):
 
         # QBF formula is written into ./sat_file
 
-        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, precision_flag)
+        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges)
 
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole", "./sat_file"], universal_newlines=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=100)
 
         except subprocess.TimeoutExpired:
             print("expired")
-            precision_flag, ck_flag, C, K, done = resolve_flags(precision_flag, ck_flag, mode, C, K)
-            if done:
-                return aut
-            else:
-                continue
+            return aut
 
 
         out = cp.stdout.splitlines()
@@ -263,13 +325,11 @@ def play(aut, C, K, mode):
         f.close()
 
 
+
         if len(out) == 1:
             print("unsatisfiable")
-            precision_flag, ck_flag, C, K, done = resolve_flags(precision_flag, ck_flag, mode, C, K)
-            if done:
-                return aut
-            else:
-                continue
+            return aut
+
 
         if len(out) == 0:
             print("sat error")
@@ -278,13 +338,8 @@ def play(aut, C, K, mode):
 
         process_variables(aut, variables)
 
-        if K == 1:
-            ck_flag = 1
+        K = K - 1
 
-        if not ck_flag:
-            K = K - 1
-        else:
-            C = C - 1
     # print(aut.to_str())
     a = try_evaluate0(aut)
     return a

@@ -254,8 +254,7 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     laso.add_subf(in_out)
     laso.add_subf(one_scc)
     neg = negate_part(aut, inner_edges)
-    #laso.add_subf(neg)
-
+    laso.add_subf(neg)
     return laso
 
 
@@ -346,7 +345,7 @@ def connection(aut, inner_edges):
             eq.add_subf(SATformula("w_" + str(dst)))
             impl.add_subf(eq)
             con.add_subf(impl)
-    if not con.get_subformula():
+    if con.is_empty():
         return None
     return con
 
@@ -357,7 +356,7 @@ def positive(aut, inner_edges):
         con.add_subf(SATformula("e_" + str(aut.edge_number(e))))
         con.add_subf(SATformula("w_" + str(e.src)))
         dis.add_subf(con)
-    if not dis.get_subformula():
+    if dis.is_empty():
         return None
     return dis
 
@@ -368,7 +367,7 @@ def negative(aut, inner_edges):
         con.add_subf(SATformula("e_" + str(aut.edge_number(e))))
         con.add_subf(SATformula("!w_" + str(e.src)))
         dis.add_subf(con)
-    if not dis.get_subformula():
+    if dis.is_empty():
         return None
     return dis
 
@@ -397,7 +396,7 @@ def negate_part(aut, inner_edges):
     con.negate()
     con.imper()
     #print(con)
-    if con.get_subformula():
+    if not con.is_empty():
         return con
     return None
 

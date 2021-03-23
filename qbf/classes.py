@@ -64,8 +64,8 @@ class SATformula:
                     elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
             return '(' + str(self.subformula[0]) + self.formula + ''.join(str(
                 elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
-    def get_subformula(self):
-        return self.subformula
+    def is_empty(self):
+        return self.subformula == []
 
     def add_subf(self, new_subform):
         self.subformula.append(new_subform)
