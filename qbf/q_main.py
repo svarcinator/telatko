@@ -109,6 +109,17 @@ def w_quant(aut):
 
 
 def laso2(aut, inner_edges, scc_edg):
+    """
+    Formula that makes sure that the edges are cycles.
+    Unluckily the complexity is too high to compute jeden pitomej automat s 12 stavama.
+    Args:
+        aut:
+        inner_edges:
+        scc_edg:
+
+    Returns:
+
+    """
     main_dis = SATformula("|")
 
     con3 = SATformula("&")
@@ -201,9 +212,9 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     quant_edges += w_quant(aut)
 
     # edges that are true create continuous cycle of edges aka laso
-    laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
+    #laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
 
-    #laso_2 = laso2(aut, inner_edges, scc_edg)
+    laso_2 = laso2(aut, inner_edges, scc_edg)
 
 
 
@@ -220,7 +231,7 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
 
 
     impl = SATformula("->")
-    impl.add_subf(laso)
+    impl.add_subf(laso_2)
     impl.add_subf(eq)
 
     # root of QBFformula

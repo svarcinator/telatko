@@ -253,6 +253,8 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     laso.add_subf(least_one)
     laso.add_subf(in_out)
     laso.add_subf(one_scc)
+
+    # this part makes sure, that the edges are connected
     neg = negate_part(aut, inner_edges)
     laso.add_subf(neg)
     return laso
