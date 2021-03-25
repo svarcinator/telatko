@@ -34,7 +34,7 @@ def main(argv):
             process_automaton(a)
 
             acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
+            clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
             print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
 
 

@@ -232,6 +232,7 @@ def old_formula(acc, edge_dict):
 
 def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     """
+    QBF CONNECTED/SCC
     Formula sais that at least one edge is true and it is infinite
     Args:
         aut:
@@ -243,6 +244,8 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     Returns:
 
     """
+    # QBF SCC
+
     # edg1 | edg2 | ...
     least_one = least_one_edge(inner_edges_nums)
     # e1 -> s1 -> e2
@@ -254,7 +257,7 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     laso.add_subf(in_out)
     laso.add_subf(one_scc)
 
-    # this part makes sure, that the edges are connected
+    # this part makes sure, that the edges are connected tzn QBF CONNECTED
     neg = negate_part(aut, inner_edges)
     laso.add_subf(neg)
     return laso

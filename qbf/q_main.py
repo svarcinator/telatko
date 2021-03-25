@@ -110,6 +110,7 @@ def w_quant(aut):
 
 def laso2(aut, inner_edges, scc_edg):
     """
+    QBF CYCLES ve statistikach
     Formula that makes sure that the edges are cycles.
     Unluckily the complexity is too high to compute jeden pitomej automat s 12 stavama.
     Args:
