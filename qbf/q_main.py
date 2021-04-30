@@ -184,15 +184,7 @@ def laso2(aut, inner_edges, scc_edg):
 
 
 
-
-
-
-
-
-
-
-
-def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges):
+def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode):
     """
 
     :param aut:
@@ -210,13 +202,15 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     quant_edges = quant_all(inner_edges_nums)
     # quantified variables #w_1 #w_2 ... #w_n
 
-    quant_edges += w_quant(aut)
+    if mode > 2:
+        quant_edges += w_quant(aut)
 
     # edges that are true create continuous cycle of edges aka laso
-    #laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
 
-    laso_2 = laso2(aut, inner_edges, scc_edg)
-
+    if mode == 4:
+        laso = laso2(aut, inner_edges, scc_edg)
+    else:
+        laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode)
 
 
 
@@ -232,7 +226,7 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
 
 
     impl = SATformula("->")
-    impl.add_subf(laso_2)
+    impl.add_subf(laso)
     impl.add_subf(eq)
 
     # root of QBFformula
@@ -282,7 +276,7 @@ def try_evaluate0(aut):
         return aut
     return last_eq_aut
 
-def play(aut, C, K, mode):
+def play(aut, C, K, mode, timeout):
     print("mode",mode)
     spot.cleanup_acceptance_here(aut)
 
@@ -320,11 +314,11 @@ def play(aut, C, K, mode):
 
         # QBF formula is written into ./sat_file
 
-        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges)
+        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode)
 
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole", "./sat_file"], universal_newlines=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=100)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=int(timeout))
 
         except subprocess.TimeoutExpired:
             print("expired")
