@@ -210,7 +210,7 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     quant_edges = quant_all(inner_edges_nums)
     # quantified variables #w_1 #w_2 ... #w_n
 
-    quant_edges += w_quant(aut)
+    #quant_edges += w_quant(aut)
 
     # edges that are true create continuous cycle of edges aka laso
     #laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges)
