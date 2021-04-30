@@ -2,6 +2,7 @@ import spot
 import sys
 import argparse
 import os
+
 from qbf.q_main import play, print_aut
 from telatko2.playground import process_automaton
 
@@ -14,13 +15,17 @@ def main(argv):
         help="File containing automata in HOA format.")
     parser.add_argument("-O", "--outfile", help="File to print output to.")
     parser.add_argument("-M", "--mode", help="Level of simplification.")
+    parser.add_argument("-T", "--timeout", help="Kill QBF solver after inserted number of seconds")
     args = parser.parse_args()
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
+    timeout = args.timeout
+    if not args.timeout:
+        timeout = 50
     if not args.mode:
-        mode = '0'
+        mode = 1
     else:
-        mode = args.mode
+        mode = int(args.mode)
 
     aut = spot.automata(args.autfile)
 
@@ -38,11 +43,12 @@ def main(argv):
             print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
 
 
-            if mode != '0':
+            if mode >=2 and mode <= 4:
                 if acc_sets_count == 0:
                     auto = a
                 else:
-                    auto = play(a, clauses_count, acc_sets_count, mode)
+                    auto = play(a, clauses_count, acc_sets_count, mode, timeout)
+                    process_automaton(auto)
 
             else:
                 auto = a

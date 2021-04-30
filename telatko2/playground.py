@@ -155,6 +155,7 @@ def get_dependencies(merged_f):
 
 
 def process_automaton(aut):
+    orig = spot.automaton(aut.to_str())
     spot.cleanup_acceptance_here(aut)
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
@@ -226,6 +227,11 @@ def process_automaton(aut):
     new_make_equiv(aut, short_accs, sccs, list_of_logs, merged_f, list_of_unmapped_dependencies)
     aut.set_acceptance(merged_f.max() + 1, spot.acc_code(str(merged_f)))
     spot.cleanup_acceptance_here(aut)
+    if not spot.are_equivalent(aut, orig):
+        print("nejsou ekvivalentni")
+        # precaution
+        aut = orig
+
 
 def main(argv):
     parser = argparse.ArgumentParser()

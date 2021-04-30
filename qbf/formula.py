@@ -230,7 +230,7 @@ def old_formula(acc, edge_dict):
 
 # connection of formula: quantified part . lasso -> (old <-> new)
 
-def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
+def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
     """
     QBF CONNECTED/SCC
     Formula sais that at least one edge is true and it is infinite
@@ -258,8 +258,13 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges):
     laso.add_subf(one_scc)
 
     # this part makes sure, that the edges are connected tzn QBF CONNECTED
-    neg = negate_part(aut, inner_edges)
-    laso.add_subf(neg)
+    if mode == 3:
+        print("mode je 3")
+        neg = negate_part(aut, inner_edges)
+        laso.add_subf(neg)
+        print(laso)
+    else:
+        print("mode je 2", laso)
     return laso
 
 
