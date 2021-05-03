@@ -36,7 +36,7 @@ def main(argv):
         try:
             spot.cleanup_acceptance_here(a)
 
-            process_automaton(a)
+            a = process_automaton(a)
 
             acc_sets_count = a.get_acceptance().used_sets().count()
             clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
@@ -48,7 +48,7 @@ def main(argv):
                     auto = a
                 else:
                     auto = play(a, clauses_count, acc_sets_count, mode, timeout)
-                    process_automaton(auto)
+                    # auto = process_automaton(auto)
 
             else:
                 auto = a

@@ -159,7 +159,7 @@ def process_automaton(aut):
     spot.cleanup_acceptance_here(aut)
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-        return
+        return aut
 
     # simplifies acceptance condition for each scc
     accs, sccs = get_accs(aut) # simplification occurs in here
@@ -173,7 +173,7 @@ def process_automaton(aut):
     if not nempty_short_accs:
         # sets acceptance and restores equivalence
         no_new_acceptance(aut, sccs, short_accs)
-        return
+        return aut
     # sorts accs and sccs - primary key is length(cardinality), secondary key is length of longest disjunct
     acc_quicksort(
         nempty_short_accs,
@@ -228,62 +228,12 @@ def process_automaton(aut):
     aut.set_acceptance(merged_f.max() + 1, spot.acc_code(str(merged_f)))
     spot.cleanup_acceptance_here(aut)
     if not spot.are_equivalent(aut, orig):
-        print("nejsou ekvivalentni")
+        print("nejsou ekvivalentni - fce playground")
         # precaution
-        aut = orig
+        return orig
+    else:
+        return aut
 
-
-def main(argv):
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-F",
-        "--autfile",
-        help="File containing automata in HOA format.")
-    parser.add_argument("-O", "--outfile", help="File to print output to.")
-
-    args = parser.parse_args()
-    if not args.autfile:
-        print("No automata to process.", file=sys.stderr)
-
-    aut = spot.automata(args.autfile)
-    counter = 0
-    worse = 0
-    same = 0
-    for a in aut:
-        counter += 1
-        origin = spot.automaton(a.to_str())
-        process_automaton(a)
-        if args.outfile:
-            print_aut(a, args.outfile, "a")
-        else:
-            print_aut(a, None, " ")
-        if origin.get_acceptance().used_sets().count(
-        ) < a.get_acceptance().used_sets().count():
-            print(
-                "origin used sets:",
-                origin.get_acceptance().used_sets().count())
-            print("aut used sets:", a.get_acceptance().used_sets().count())
-            worse += 1
-            #return
-        if origin.get_acceptance().used_sets().count(
-        ) == a.get_acceptance().used_sets().count():
-            #print("origin used sets:", origin.get_acceptance().used_sets().count())
-            #print("aut used sets:", a.get_acceptance().used_sets().count())
-            same += 1
-            # return
-
-        if not spot.are_equivalent(a, origin):
-            print_aut(origin, "orig.neekv", "w")
-            print_aut(a, "result.neekv", "w")
-            print("nejsou ekvivalentni")
-            return
-    print(
-        "pocet automatu:",
-        counter,
-        "zhorsene aut:",
-        worse,
-        "stejne aut",
-        same)
 
 
 def test_aut(a1, a2):
@@ -304,6 +254,3 @@ def test_aut(a1, a2):
     f.write('\n')
     f.close()
 
-
-if __name__ == "__main__":
-    main(sys.argv[1:])
