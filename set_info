@@ -1,0 +1,17 @@
+set1.hoa
+- 673 automatu vygenerovanych rabinizerem, zmensene autfiltem
+
+set2.hoa
+-399 automatu vygenerovanych ltl3tela, zmensene autfiltem
+
+set3.set4 a set5 jsou prelozeny ze stejnyho datasetu ltl formuli
+
+set3.hoa
+- 174 automatu prelozenych ltl2tgba-G z datasetu ltl_data3 (randltl n90000 4), vyfiltrovany 
+
+set4.hoa
+-1155 automatu prelozenych ltl3tela - vyfiltrovany (asi acc-sets=2..) - to si nejsem jista (je to shit)
+
+set5.hoa 
+- 
+
