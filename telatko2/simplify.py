@@ -40,7 +40,7 @@ def scc_everywhere(aut, scc):
         for e in aut.out(s):
             if e.dst in scc.states():
                 for m in list(m_all_edges):
-                    if not m in e.acc.sets():
+                    if m not in e.acc.sets():
                         m_all_edges.remove(m)
     return list(m_all_edges)
 
@@ -61,10 +61,13 @@ def scc_compl_sets(aut, scc):
                 are_compl = True
                 for s in scc.states():
                     for e in aut.out(s):
-                        if e.dst in scc.states() and ((m1 in e.acc.sets() and m2 in e.acc.sets()) or (
+                        if e.dst in scc.states() and (
+                            (m1 in e.acc.sets() and m2 in e.acc.sets()) or (
                                 m1 not in e.acc.sets() and m2 not in e.acc.sets())):
                             are_compl = False
-                if are_compl and (m1, m2) not in compl and (m2, m1) not in compl:
+                if are_compl and (
+                        m1, m2) not in compl and (
+                        m2, m1) not in compl:
                     compl.append((m1, m2))
     return compl
 
@@ -87,11 +90,10 @@ def scc_subsets(aut, scc):
                 is_sub = True
                 for s in scc.states():
                     for e in aut.out(s):
-                        if e.dst in scc.states() and m2 in e.acc.sets() and not m1 in e.acc.sets():
+                        if e.dst in scc.states() and m2 in e.acc.sets() and m1 not in e.acc.sets():
                             is_sub = False
                 if is_sub:
                     subsets.append((m1, m2))
-    # print(subsets)
     return subsets
 
 
@@ -106,7 +108,9 @@ def simpl_inf_con(aut, acc, scc, subsets):
         subsets {[(int, int)]} -- list if tuples that denote which set includes which
     """
     for sub in subsets:
-        if acc.get_mtype(sub[0]) == MarkType.Inf and acc.get_mtype(sub[1]) == MarkType.Inf:
+        if acc.get_mtype(
+                sub[0]) == MarkType.Inf and acc.get_mtype(
+                sub[1]) == MarkType.Inf:
             sub_i = acc.find_m_dis(sub[1])
             super_i = acc.find_m_dis(sub[0])
             if (all(i in sub_i for i in super_i)):
@@ -129,7 +133,8 @@ def simpl_fin_same_dis(aut, acc, scc):
             if fin1 is not fin2:
                 merge = True
                 for dis in acc.formula:
-                    if (fin1 not in dis and fin2 in dis) or (fin2 not in dis and fin1 in dis):
+                    if (fin1 not in dis and fin2 in dis) or (
+                            fin2 not in dis and fin1 in dis):
                         merge = False
                 if merge:
                     add_dupl_marks(aut, scc, fin2.num, fin1.num)
@@ -139,7 +144,9 @@ def simpl_fin_same_dis(aut, acc, scc):
 
 def simpl_fin_con_subsets(aut, acc, scc, subsets):
     for sub in subsets:
-        if acc.get_mtype(sub[0]) == MarkType.Fin and acc.get_mtype(sub[1]) == MarkType.Fin:
+        if acc.get_mtype(
+                sub[0]) == MarkType.Fin and acc.get_mtype(
+                sub[1]) == MarkType.Fin:
             sub_i = acc.find_m_dis(sub[1])
             super_i = acc.find_m_dis(sub[0])
             if (all(i in super_i for i in sub_i)):
@@ -182,7 +189,7 @@ def simpl_co_con(aut, acc, scc, compl_sets):
 def check_implies_marks(aut, scc, fin, inf):
     for s in scc.states():
         for e in aut.out(s):
-            if e.dst in scc.states() and not inf in e.acc.sets() and not fin in e.acc.sets():
+            if e.dst in scc.states() and inf not in e.acc.sets() and fin not in e.acc.sets():
                 return False
     return True
 
@@ -219,10 +226,11 @@ def simpl_substitute(aut, acc, scc):
                 if i not in rem_d:
                     rem_d.append(i)
             elif con.num in everywhere and con.type == MarkType.Inf:
-                acc.rem_from_dis(i, con.num)  # odstrani vzdy pravdivy konj z disj
+                # odstrani vzdy pravdivy konj z disj
+                acc.rem_from_dis(i, con.num)
             elif con.num not in current and con.type == MarkType.Fin:
-                acc.rem_from_dis(i, con.num)  # odstrani vzdy pravdivy konj z disj
-    # print("disj k odstr:" ,rem_d, acc)
+                # odstrani vzdy pravdivy konj z disj
+                acc.rem_from_dis(i, con.num)
 
     for index in reversed(rem_d):
         acc.rem_dis(index)
@@ -231,7 +239,9 @@ def simpl_substitute(aut, acc, scc):
 
 def simpl_false_subsets(aut, acc, subsets, scc):
     for sub in subsets:
-        if acc.get_mtype(sub[0]) == MarkType.Fin and acc.get_mtype(sub[1]) == MarkType.Inf:
+        if acc.get_mtype(
+                sub[0]) == MarkType.Fin and acc.get_mtype(
+                sub[1]) == MarkType.Inf:
             sub_i = acc.find_m_dis(sub[1])
             super_i = acc.find_m_dis(sub[0])
             for i in sub_i:
@@ -252,7 +262,8 @@ def simpl_false_fin(aut, acc, scc):
         current_dis = True
         for s in scc.states():
             for e in aut.out(s):
-                if e.dst in scc.states() and all(m not in e.acc.sets() for m in current_fins):
+                if e.dst in scc.states() and all(m not in e.acc.sets()
+                                                 for m in current_fins):
                     current_dis = False
         if current_dis:
             rem_dis.append(i)
@@ -263,30 +274,20 @@ def simpl_false_fin(aut, acc, scc):
 ### SIMPLIFY ###
 
 def simplify(aut, acc, scc):
-    acc_l = acc.count_total_unique_m()  # pocet unikatnich konjunktu v cele akc. podm
+    acc_l = acc.count_total_unique_m()
     # remove always false disjuncts
-    # a taky odstarni vzdy pravdivy konj z nekterych disjunktu
-    # print(1, scc.states(), str(acc), acc_l)
     simpl_substitute(aut, acc, scc)
-    # print(2,scc.states(),str(acc), acc_l)
     simpl_false_subsets(aut, acc, scc_subsets(aut, scc), scc)
-    # print(3, scc.states(),str(acc), acc_l)
     simpl_false_fin(aut, acc, scc)
-    # print(4, scc.states(),str(acc), acc_l)
-
-    # simplify inclusion mark sets
     simpl_inf_con(aut, acc, scc, scc_subsets(aut, scc))
-    # print(5,scc.states(), str(acc), acc_l)
     simpl_fin_con_subsets(aut, acc, scc, scc_subsets(aut, scc))
-    # print(6, scc.states(),str(acc), acc_l)
     simpl_fin_same_dis(aut, acc, scc)
-    # print(7,scc.states(), str(acc), acc_l)
+
     # simplify complementary marks
     simpl_co_con(aut, acc, scc, scc_compl_sets(aut, scc))
-    # print(8, scc.states(),str(acc), acc_l)
+
     # simplify disjuncts where (Fin = True) => (Inf = True)
     simpl_fin_implies_inf(aut, acc, scc)
-    # print(9, scc.states(),str(acc), acc_l)
     scc_clean_up_edges(aut, acc, scc)
     acc.clean_up(aut, scc)
     if acc_l > acc.count_total_unique_m():
@@ -297,5 +298,5 @@ def add_dupl_marks(aut, scc, origin_m, new_m):
     for s in scc.states():
         for e in aut.out(s):
             if e.dst in scc.states() and origin_m in e.acc.sets():
-                if not new_m in e.acc.sets():
+                if new_m not in e.acc.sets():
                     e.acc.set(new_m)

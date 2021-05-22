@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 import enum
 import spot
 import sys
@@ -12,7 +11,6 @@ import os
 import subprocess
 import itertools
 from math import ceil, log2
-
 
 
 class Variable:
@@ -49,21 +47,21 @@ class SATformula:
 
         if not self.subformula:
 
-            return ''.join(" "+ self.formula +" ")
+            return ''.join(" " + self.formula + " ")
 
         elif len(self.subformula) == 1:
             if self.negation and self.imperativ:
-                #print("tuna")
+                # print("tuna")
                 return ''.join('!(' + str(self.subformula[0]) + ')')
             return ''.join('(' + str(self.subformula[0]) + ')')
 
         else:
             if self.negation and self.imperativ:
-                #print("zde", self.formula)
                 return '!(' + str(self.subformula[0]) + self.formula + ''.join(str(
                     elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
             return '(' + str(self.subformula[0]) + self.formula + ''.join(str(
                 elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+
     def is_empty(self):
         return self.subformula == []
 
@@ -72,6 +70,7 @@ class SATformula:
 
     def negate(self):
         self.negation = not self.negation
+
     def imper(self):
         self.imperativ = True
 
@@ -80,7 +79,6 @@ class SATformula:
 
     def subformula_list(self):
         return self.subformula
-
 
 
 class MarkType(enum.Enum):
@@ -191,5 +189,3 @@ def parse_acc(acc):
             new_dis.append(ACCMark(mtype, int(''.join(num))))
         formula.append(new_dis)
     return formula
-
-

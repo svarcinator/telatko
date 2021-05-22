@@ -14,8 +14,11 @@ def main(argv):
         "--autfile",
         help="File containing automata in HOA format.")
     parser.add_argument("-O", "--outfile", help="File to print output to.")
-    parser.add_argument("-M", "--mode", help="Level of simplification.")
-    parser.add_argument("-T", "--timeout", help="Kill QBF solver after inserted number of seconds")
+    parser.add_argument("-L", "--mode", help="Level of simplification.")
+    parser.add_argument(
+        "-T",
+        "--timeout",
+        help="Kill QBF solver after inserted number of seconds")
     args = parser.parse_args()
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
@@ -35,44 +38,29 @@ def main(argv):
         print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
-            acc_sets_count1= a.get_acceptance().used_sets().count()
             a = process_automaton(a)
 
             acc_sets_count = a.get_acceptance().used_sets().count()
             clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
 
-
-
-            if mode >=2 and mode <= 4:
+            if mode >= 2 and mode <= 4:
                 if acc_sets_count == 0:
                     auto = a
                 else:
-                    auto = play(a, clauses_count, acc_sets_count, mode, timeout)
-                    # auto = process_automaton(auto)
-
+                    auto = play(
+                        a, clauses_count, acc_sets_count, mode, timeout)
             else:
                 auto = a
-            acc_sets_count2 = a.get_acceptance().used_sets().count()
-
-
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-
-
-            if not spot.are_equivalent(auto, origin):
-                print("nejsou ekvivalentni")
-                return
-
-            else:
-                print("ekvivalentni")
 
         except RuntimeError:  # too many marks
             print(
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
 
-    
+
 if __name__ == "__main__":
     main(sys.argv[1:])

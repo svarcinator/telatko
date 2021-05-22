@@ -42,7 +42,6 @@ def try_eval(aut, acc, scc):
 def try_eval2(aut, acc, scc, weak):
     if weak:
         if scc.is_rejecting():  # all cycles in scc are rejecting
-            # nechapu, pokud weak znamena, ze ma pouze akc. transitions
             acc.set_sat(False)
         else:
             acc.set_sat(True)
@@ -59,6 +58,7 @@ def print_aut(aut, output, m):
         f.close()
     else:
         print(aut.to_str())
+
 
 def get_accs(aut):
     """
@@ -152,8 +152,6 @@ def get_dependencies(merged_f):
     return dup
 
 
-
-
 def process_automaton(aut):
     orig = spot.automaton(aut.to_str())
     spot.cleanup_acceptance_here(aut)
@@ -162,7 +160,7 @@ def process_automaton(aut):
         return aut
 
     # simplifies acceptance condition for each scc
-    accs, sccs = get_accs(aut) # simplification occurs in here
+    accs, sccs = get_accs(aut)  # simplification occurs in here
 
     # puts acceptance to shorter form(cnf or dnf)
     short_accs = get_short_accs(aut, accs)
@@ -174,7 +172,8 @@ def process_automaton(aut):
         # sets acceptance and restores equivalence
         no_new_acceptance(aut, sccs, short_accs)
         return aut
-    # sorts accs and sccs - primary key is length(cardinality), secondary key is length of longest disjunct
+    # sorts accs and sccs - primary key is length(cardinality), secondary key
+    # is length of longest disjunct
     acc_quicksort(
         nempty_short_accs,
         nempty_sccs,
@@ -191,7 +190,8 @@ def process_automaton(aut):
     # final acceptance formula for whole automaton to be
     merged_f = copy.deepcopy(nempty_short_accs[0])
 
-    # shift numbers of acceptance sets in future final formula to prevent conflict
+    # shift numbers of acceptance sets in future final formula to prevent
+    # conflict
     shift_first_acc(merged_f, m)
 
     # list of numbers of acc sets with more than one occurance
@@ -222,10 +222,19 @@ def process_automaton(aut):
                 merged_f,
                 short_accs[i],
                 pairing_log,
-                sccs[i], nempty_sccs[0], dependence, list_of_unmapped_dependencies))
+                sccs[i],
+                nempty_sccs[0],
+                dependence,
+                list_of_unmapped_dependencies))
 
     # make aut equivalent with acceptance formula
-    new_make_equiv(aut, short_accs, sccs, list_of_logs, merged_f, list_of_unmapped_dependencies)
+    new_make_equiv(
+        aut,
+        short_accs,
+        sccs,
+        list_of_logs,
+        merged_f,
+        list_of_unmapped_dependencies)
     aut.set_acceptance(merged_f.max() + 1, spot.acc_code(str(merged_f)))
     spot.cleanup_acceptance_here(aut)
     if not spot.are_equivalent(aut, orig):
@@ -233,7 +242,6 @@ def process_automaton(aut):
         return orig
     else:
         return aut
-
 
 
 def test_aut(a1, a2):
@@ -253,4 +261,3 @@ def test_aut(a1, a2):
         print_aut(a1, "err_aut.hoa", "a")
     f.write('\n')
     f.close()
-

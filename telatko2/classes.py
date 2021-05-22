@@ -9,7 +9,6 @@ from scipy.optimize import linear_sum_assignment
 import numpy as np
 
 
-
 class MarkType(enum.Enum):
     """Represents whether acceptance set T appears in the formula as Fin(T) or Inf(T).
 
@@ -40,7 +39,8 @@ class ACCMark:
         Returns:
             string -- ACCMarks information as string
         """
-        return ''.join(["Inf" if self.type == MarkType.Inf else "Fin", '(', str(self.num), ')'])
+        return ''.join(
+            ["Inf" if self.type == MarkType.Inf else "Fin", '(', str(self.num), ')'])
 
     def __eq__(self, other):
         """Compare two ACCMarks, return true if they are the same, false otherwise.
@@ -138,8 +138,8 @@ class PACC:
         int_f = self.int_format()
         for i in range(len(self.formula)):
             for j in range(len(self.formula)):
-                if i != j and set(int_f[i]).issubset(set(int_f[j])) and not set(int_f[i]) == set(
-                        int_f[j]) and j not in rem_d:
+                if i != j and set(int_f[i]).issubset(set(int_f[j])) and not set(
+                        int_f[i]) == set(int_f[j]) and j not in rem_d:
                     rem_d.append(j)
 
         res_f = []
@@ -199,7 +199,6 @@ class PACC:
             for one in expr:
                 alist.append(one.num)
         return list(dict.fromkeys(alist))
-
 
 
 class PACC_CNF:
@@ -275,8 +274,8 @@ class PACC_CNF:
         int_f = self.int_format()
         for i in range(len(self.formula)):
             for j in range(len(self.formula)):
-                if i != j and set(int_f[i]).issubset(set(int_f[j])) and not set(int_f[i]) == set(
-                        int_f[j]) and j not in rem_d:
+                if i != j and set(int_f[i]).issubset(set(int_f[j])) and not set(
+                        int_f[i]) == set(int_f[j]) and j not in rem_d:
                     rem_d.append(j)
 
         res_f = []

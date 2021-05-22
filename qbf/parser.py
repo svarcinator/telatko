@@ -209,5 +209,3 @@ def print_aut(aut, output, m):
         f.close()
     else:
         print(aut.to_str())
-
-

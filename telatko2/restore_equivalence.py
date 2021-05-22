@@ -3,6 +3,7 @@ from telatko2.classes import *
 from telatko2.simplify import *
 from telatko2.merge import get_set_nums
 
+
 def make_true(aut, scc, merged_acc):
     scc_clean_up_edges(aut, PACC(""), scc)
 
@@ -47,6 +48,7 @@ def make_false(aut, scc, merged_acc):
             if e.dst in scc.states():
                 for m in add_m:
                     e.acc.set(m)
+
 
 def make_one_true(aut, scc, one):
     """
@@ -155,19 +157,19 @@ def restore_dnf(aut, scc, merged_f, unused, dep_log):
 
             for one in dis:
                 if one.num in unused:
-                    #print("nummmm:",one.num)
+                    # print("nummmm:",one.num)
                     make_one_false(aut, scc, one)
         elif any(num in unused for num in dis_nums):
             #print(scc.states(), merged_f, unused)
 
             for con in dis:
-                #print(con.num)
+                # print(con.num)
                 if con.num in unused:
-                    #print("con",con.num)
+                    # print("con",con.num)
                     make_one_true(aut, scc, con)
 
 
-def restore_maybe_accepting(aut, scc, merged_f, unused,dep_log):
+def restore_maybe_accepting(aut, scc, merged_f, unused, dep_log):
     if aut.get_acceptance().is_cnf():
         restore_cnf(aut, scc, merged_f, unused, dep_log)
     else:

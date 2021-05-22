@@ -5,6 +5,7 @@ import copy
 import warnings
 warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
+
 def shift_fst_acc(aut, acc, scc, m):
     next_m = m + 1
     log = {}
@@ -59,8 +60,9 @@ def replace_marks(aut, scc, origin_m, new_m):
         for e in aut.out(s):
             if e.dst in scc.states() and origin_m in e.acc.sets():
                 e.acc.clear(origin_m)
-                if not new_m in e.acc.sets():
+                if new_m not in e.acc.sets():
                     e.acc.set(new_m)
+
 
 def longest_expr_in_acc(acc):
     max = 0
@@ -68,6 +70,7 @@ def longest_expr_in_acc(acc):
         if len(expr) > max:
             max = len(expr)
     return max
+
 
 def partition(accs, sccs, low, high):
     """
@@ -94,7 +97,6 @@ def partition(accs, sccs, low, high):
             i += 1
             accs[i], accs[j] = accs[j], accs[i]
             sccs[i], sccs[j] = sccs[j], sccs[i]
-
 
     accs[i + 1], accs[high] = accs[high], accs[i + 1]
     sccs[i + 1], sccs[high] = sccs[high], sccs[i + 1]
@@ -125,7 +127,9 @@ def acc_quicksort(accs, sccs, low, high):
 def place_con(dis, con, used, dis_remaining):
     if con in dis and not used[dis.index(con)]:
         return dis.index(con)
-    remaining = []  # list of numbers of marks that remain unpaired (whatever comes after the current conjunct in the clause)
+    # list of numbers of marks that remain unpaired (whatever comes after the
+    # current conjunct in the clause)
+    remaining = []
     for c in dis_remaining:
         if con == c or remaining:
             remaining.append(c.num)
@@ -138,8 +142,6 @@ def place_con(dis, con, used, dis_remaining):
         if dis[i].type == con.type and not used[i]:
             return i
     return None
-
-
 
 
 def get_short_accs(aut, accs):
@@ -294,7 +296,8 @@ def map_paired(aut, m_expr, expr, scc, merge_log, merged_f, m_scc):
                 for key in merge_log.keys():
                     # acc sets are different (otherwise already mapped)
                     if merge_log[key] == m_expr[index].num and key != one.num:
-                        duplicate(merged_f, aut, scc, one, m_scc, m_expr, index)
+                        duplicate(
+                            merged_f, aut, scc, one, m_scc, m_expr, index)
             else:
                 merge_log[one.num] = m_expr[index].num
                 add_dupl_marks(aut, scc, one.num, m_expr[index].num)
@@ -305,7 +308,15 @@ def map_paired(aut, m_expr, expr, scc, merge_log, merged_f, m_scc):
                     duplicate(merged_f, aut, scc, one, m_scc, m_expr, i)
 
 
-def new_merge(aut, merged_f, acc, pairing_log, scc, m_scc, dependencies, unmaped_dependence):
+def new_merge(
+        aut,
+        merged_f,
+        acc,
+        pairing_log,
+        scc,
+        m_scc,
+        dependencies,
+        unmaped_dependence):
     """
     fce that merges conjuncts or disjuncts on merged_f
     :param aut:

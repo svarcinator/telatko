@@ -174,6 +174,7 @@ def quant_all(edges):
         formula += " # e_" + str(e)
     return formula
 
+
 def quant_exist(scc_state_info):
     formula = ""
     for dict in scc_state_info:
@@ -182,13 +183,12 @@ def quant_exist(scc_state_info):
         for q1 in dict:
             for q2 in dict:
                 i = n
-                while i >=1:
+                while i >= 1:
                     var_r = "_".join(["r", str(q1), str(q2), str(i)])
                     formula += "?" + var_r + " "
-                    i //=2
+                    i //= 2
 
     return formula
-
 
 
 # # # OLD FORMULA # # #
@@ -250,7 +250,8 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
     least_one = least_one_edge(inner_edges_nums)
     # e1 -> s1 -> e2
     in_out = in_n_out(scc_state_info)
-    # edges that are true are in one SCC and none of edges from other SCCs is true
+    # edges that are true are in one SCC and none of edges from other SCCs is
+    # true
     one_scc = one_scc_f(scc_edg)
     laso = SATformula("&")
     laso.add_subf(least_one)
@@ -337,6 +338,7 @@ def intersection(lst1, lst2):
 
 # negation formula auxiliary
 
+
 def connection(aut, inner_edges):
     con = SATformula("&")
     for e in inner_edges:
@@ -355,6 +357,7 @@ def connection(aut, inner_edges):
         return None
     return con
 
+
 def positive(aut, inner_edges):
     dis = SATformula("|")
     for e in inner_edges:
@@ -365,6 +368,7 @@ def positive(aut, inner_edges):
     if dis.is_empty():
         return None
     return dis
+
 
 def negative(aut, inner_edges):
     dis = SATformula("|")
@@ -401,14 +405,6 @@ def negate_part(aut, inner_edges):
         con.add_subf(neg)
     con.negate()
     con.imper()
-    #print(con)
     if not con.is_empty():
         return con
     return None
-
-
-
-
-
-
-

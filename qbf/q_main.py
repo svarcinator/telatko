@@ -5,7 +5,6 @@ from qbf.formula import *
 from qbf.sequence_formula import *
 
 
-
 def edge_dictionary(aut):
     """
 
@@ -92,6 +91,7 @@ def SAT_output(quantified, formula):
     f.write(str(quantified) + str(formula))
     f.close()
 
+
 def w_quant(aut):
     """
     Creates universal variables w_
@@ -139,7 +139,7 @@ def laso2(aut, inner_edges, scc_edg):
 
         # part one
         impl = SATformula("->")
-        impl.add_subf(SATformula("e_"+str(aut.edge_number(e))))
+        impl.add_subf(SATformula("e_" + str(aut.edge_number(e))))
         c = SATformula("&")
         c.add_subf(SATformula("w_" + src))
         c.add_subf(SATformula("w_" + dst))
@@ -156,14 +156,14 @@ def laso2(aut, inner_edges, scc_edg):
         con2.add_subf(impl2)
 
         # part three
-        ## dis 1
+        # dis 1
         c2 = SATformula("&")
         c2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
         c2.add_subf(SATformula("w_" + src))
         c2.add_subf(SATformula("!w_" + dst))
         dis1.add_subf(c2)
 
-        ## dis 2
+        # dis 2
         c3 = SATformula("&")
         c3.add_subf(SATformula("e_" + str(aut.edge_number(e))))
         c3.add_subf(SATformula("!w_" + src))
@@ -183,8 +183,17 @@ def laso2(aut, inner_edges, scc_edg):
     return laso
 
 
-
-def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode):
+def create_formula(
+        aut,
+        acc,
+        edge_dict,
+        scc_edg,
+        scc_state_info,
+        inner_edges_nums,
+        C,
+        K,
+        inner_edges,
+        mode):
     """
 
     :param aut:
@@ -200,21 +209,24 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
 
     # quantified edges #e_1 ... #e_n
     quant_edges = quant_all(inner_edges_nums)
-    # quantified variables #w_1 #w_2 ... #w_n
+    # quantified variables ?w_1 ?w_2 ... ?w_n
 
     quant_edges += w_quant(aut)
     if mode > 2:
         quant_edges += w_quant(aut)
-
 
     # edges that are true create continuous cycle of edges aka laso
 
     if mode == 4:
         laso = laso2(aut, inner_edges, scc_edg)
     else:
-        laso = laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode)
-
-
+        laso = laso_f(
+            aut,
+            inner_edges_nums,
+            scc_state_info,
+            scc_edg,
+            inner_edges,
+            mode)
 
     # reqiurements on old acceptance formula
     old = old_formula(acc, edge_dict)
@@ -225,7 +237,6 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     eq = SATformula('<->')
     eq.add_subf(old)
     eq.add_subf(new)
-
 
     impl = SATformula("->")
     impl.add_subf(laso)
@@ -244,6 +255,7 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     con.add_subf(inf_or_fin)
     # prints our formula into text file
     SAT_output(quant_edges, con)
+
 
 def resolve_flags(precision_flag, ck_flag, mode, C, K):
     if ck_flag:
@@ -278,8 +290,9 @@ def try_evaluate0(aut):
         return aut
     return last_eq_aut
 
+
 def play(aut, C, K, mode, timeout):
-    #print("mode",mode)
+
     spot.cleanup_acceptance_here(aut)
 
     if aut.get_acceptance().used_sets().count(
@@ -290,14 +303,12 @@ def play(aut, C, K, mode, timeout):
     # [int] - all nums of inner edges of SCCs
     inner_edges_nums, inner_edges = get_edges(aut)
 
-
     # scc_edg [[nums of edges of one scc]]
-    # scc state info [{state num : [[num of edge of which is the state source of][num of edge of which is the state destination of]]}]
+    # scc state info [{state num : [[num of edge of which is the state source
+    # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
 
     K = K - 1  # we dont want to try what we already know
-
-
 
     while C > 0 and K > 0:
 
@@ -309,37 +320,47 @@ def play(aut, C, K, mode, timeout):
         edge_dict = edge_dictionary(aut)
 
         acc = PACC(aut.get_acceptance().to_dnf())
-        if acc.formula ==  []:
+        if acc.formula == []:
             a = try_evaluate0(aut)
             return a
 
         # QBF formula is written into ./sat_file
 
-        create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode)
+        create_formula(
+            aut,
+            acc,
+            edge_dict,
+            scc_edg,
+            scc_state_info,
+            inner_edges_nums,
+            C,
+            K,
+            inner_edges,
+            mode)
 
         try:
-            cp = subprocess.run(["./qbf/limboole1.2/limboole", "./sat_file"], universal_newlines=True,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=int(timeout))
+            cp = subprocess.run(["./qbf/limboole1.2/limboole",
+                                 "./sat_file"],
+                                universal_newlines=True,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                timeout=int(timeout))
 
         except subprocess.TimeoutExpired:
-            print("expired")
+            # print("expired")
             return aut
-
 
         out = cp.stdout.splitlines()
         f = open("sat_evaluation", "w")
         f.write(cp.stdout)
         f.close()
 
-
-
         if len(out) == 1:
-            print("unsatisfiable")
+            # print("unsatisfiable")
             return aut
 
-
         if len(out) == 0:
-            print("sat error")
+            #print("sat error")
             return aut
         variables = out[1:]
 
@@ -347,7 +368,6 @@ def play(aut, C, K, mode, timeout):
 
         K = K - 1
 
-    # print(aut.to_str())
     a = try_evaluate0(aut)
     return a
 
@@ -368,12 +388,12 @@ def main(argv):
     for a in aut:
 
         origin = spot.automaton(a.to_str())
-        print_aut(origin, "problem", "w")
+        #print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
             acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(a.get_acceptance().top_conjuncts()))
-            print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
+            clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(
+                a.get_acceptance().top_conjuncts()))
 
             if acc_sets_count == 0:
                 auto = a
@@ -384,13 +404,6 @@ def main(argv):
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-
-            if not spot.are_equivalent(auto, origin):
-                print("nejsou ekvivalentni")
-                return
-
-            else:
-                print("ekvivalentni")
 
         except RuntimeError:  # too many marks
             print(

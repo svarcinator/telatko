@@ -215,9 +215,6 @@ def create_old_formula(acc, edge_dict, sequence_num):
     return disjunct_f
 
 
-
-
-
 def create_equivalence_formula(old_formula, new_formula):
     equiv = SATformula('<->')
     equiv.add_subf(old_formula)
@@ -322,7 +319,3 @@ def inf_or_fin_f(
 
         clauses_dis.add_subf(sets_dis)
     return clauses_dis
-
-
-
-
