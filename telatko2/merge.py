@@ -289,13 +289,11 @@ def map_paired(aut, m_expr, expr, scc, merge_log, merged_f, m_scc):
 
         else:
             used[index] = True
-            # pokud se na stenou acc mnozinu namapuji 2 akc mnoziny z expr
+            # on one acc set are mapped two acc sets from expr
             if m_expr[index].num in merge_log.values():
                 for key in merge_log.keys():
-                    #print("problem:", key, one.num)
-                    # akceptacni mnoziny z expr jsou ruzne (pokud jsou stejne, uz je namapovano)
+                    # acc sets are different (otherwise already mapped)
                     if merge_log[key] == m_expr[index].num and key != one.num:
-                        #print("problem:", key, one.num)
                         duplicate(merged_f, aut, scc, one, m_scc, m_expr, index)
             else:
                 merge_log[one.num] = m_expr[index].num
@@ -304,7 +302,6 @@ def map_paired(aut, m_expr, expr, scc, merge_log, merged_f, m_scc):
             m_one = m_expr[i]
             if not used[i] and m_one.num in merge_log.values():
                 if any(used):
-                    #print("here")
                     duplicate(merged_f, aut, scc, one, m_scc, m_expr, i)
 
 

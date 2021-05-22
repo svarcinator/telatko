@@ -199,6 +199,7 @@ def process_automaton(aut):
 
     #[{ACCMark.num : ACCMark.num}]
     list_of_logs = []
+    list_of_logs = []
     # numbers of dependent acc sets that are not mapped
     # [{index of expr : ACCMark.num}]
     list_of_unmapped_dependencies = []
@@ -228,7 +229,6 @@ def process_automaton(aut):
     aut.set_acceptance(merged_f.max() + 1, spot.acc_code(str(merged_f)))
     spot.cleanup_acceptance_here(aut)
     if not spot.are_equivalent(aut, orig):
-        print("nejsou ekvivalentni - fce playground")
         # precaution
         return orig
     else:

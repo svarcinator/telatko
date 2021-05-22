@@ -95,7 +95,7 @@ Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 --BODY--
 State: 0
-[!0&!1] 0
+[!0&!1] 0 {1}
 [0&!1] 0 {1}
 [!1] 1
 [1] 2
@@ -111,7 +111,7 @@ State: 2
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -119,10 +119,10 @@ properties: trans-labels explicit-labels state-acc deterministic
 State: 0 "{0}"
 [t] 1
 State: 1 "{1,2}"
-[0] 2
+[1] 2
 State: 2 "{3}"
 [0&1] 2
-[!1] 3
+[!0] 3
 State: 3 "{}"
 [t] 3
 --END--
@@ -155,7 +155,7 @@ State: 0
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p3" "p0" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -165,19 +165,19 @@ State: 0
 State: 1
 [t] 2
 State: 2
-[!0&!1] 2 {0}
-[0 | 1] 3
-[0 | 1] 4
-[!0&1] 5
+[!0&!2] 2 {0}
+[0 | 2] 3
+[0 | 2] 4
+[0&!2] 5
 State: 3
 [!0&!1&!2] 2 {0}
-[0&!2 | 1&!2] 3
-[!0&1&!2] 5
+[0&!1 | !1&2] 3
+[0&!1&!2] 5
 State: 4
-[1] 4 {0}
+[0] 4 {0}
 State: 5
-[!0&!1] 2 {0}
-[!0&1] 5
+[!0&!2] 2 {0}
+[0&!2] 5
 --END--
 HOA: v1
 States: 1
@@ -205,7 +205,7 @@ State: 0
 HOA: v1
 States: 29
 Start: 0
-AP: 3 "p2" "p0" "p3"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -213,43 +213,43 @@ properties: trans-labels explicit-labels trans-acc
 State: 0
 [t] 1
 State: 1
-[0&2] 2
-[0&!2] 3
-[0&2] 4
-[0&!2] 5
-[0&!2] 6
-[!0&!2] 7
-[!0&!2] 8
-[!0&2] 9
-[!0&!2] 10
-[!0&2] 11
-[!0&!2] 12
+[1&2] 2
+[1&!2] 3
+[1&2] 4
+[1&!2] 5
+[1&!2] 6
+[!1&!2] 7
+[!1&!2] 8
+[!1&2] 9
+[!1&!2] 10
+[!1&2] 11
+[!1&!2] 12
 State: 2
-[0] 2 {0}
+[1] 2 {0}
 [t] 4
-[!0] 13
+[!1] 13
 State: 3
-[0&2] 2
-[0&!2] 3
+[1&2] 2
+[1&!2] 3
 [2] 4
 [!2] 5
-[!0&2] 13
-[!0&!2] 14
+[!1&2] 13
+[!1&!2] 14
 State: 4
-[1] 15
+[0] 15
 State: 5
-[1&2] 15
-[1&!2] 16
+[0&2] 15
+[0&!2] 16
 State: 6
-[!1&!2] 6
+[!0&!2] 6
 [!0&!1&!2] 17
 State: 7
-[1&!2] 18
+[0&!2] 18
 State: 8
-[0&!2] 7
-[!0&!2] 8
-[0&!2] 19 {0}
-[!0&!2] 20
+[1&!2] 7
+[!1&!2] 8
+[1&!2] 19 {0}
+[!1&!2] 20
 State: 9
 [!0&!1] 21
 State: 10
@@ -257,26 +257,26 @@ State: 10
 [!0&!1&!2] 22
 State: 11
 [!0&!1] 9
-[!1] 11
+[!0] 11
 State: 12
 [!0&!1&2] 9
 [!0&!1&!2] 10
-[!1&2] 11
-[!1&!2] 12
+[!0&2] 11
+[!0&!2] 12
 State: 13
-[0] 2 {0}
-[0] 4
-[!0] 13
-[!0] 23
+[1] 2 {0}
+[1] 4
+[!1] 13
+[!1] 23
 State: 14
-[0&2] 2
-[0&!2] 3
-[0&2] 4
-[0&!2] 5
-[!0&2] 13
-[!0&!2] 14
-[!0&2] 23
-[!0&!2] 24
+[1&2] 2
+[1&!2] 3
+[1&2] 4
+[1&!2] 5
+[!1&2] 13
+[!1&!2] 14
+[!1&2] 23
+[!1&!2] 24
 State: 15
 [t] 15 {0}
 State: 16
@@ -288,53 +288,53 @@ State: 18
 [!2] 18 {0}
 State: 19
 [!2] 7
-[!0&!2] 8
-[0&!2] 19 {0}
+[!1&!2] 8
+[1&!2] 19 {0}
 State: 20
 [0&1&!2] 18
-[!0&1&!2] 26
+[0&!1&!2] 26
 State: 21
-[!0] 21 {0}
+[!1] 21 {0}
 State: 22
-[!0&2] 21
-[!0&!2] 22
+[!1&2] 21
+[!1&!2] 22
 State: 23
 [0&1] 15
-[!0&1] 27
+[0&!1] 27
 State: 24
 [0&1&2] 15
 [0&1&!2] 16
-[!0&1&2] 27
-[!0&1&!2] 28
+[0&!1&2] 27
+[0&!1&!2] 28
 State: 25
-[!0&!2] 25 {0}
+[!1&!2] 25 {0}
 State: 26
-[0&!1&!2] 18
+[!0&1&!2] 18
 [!0&!1&!2] 26
 State: 27
-[0&!1] 15
+[!0&1] 15
 [!0&!1] 27
 State: 28
-[0&!1&2] 15
-[0&!1&!2] 16
+[!0&1&2] 15
+[!0&1&!2] 16
 [!0&!1&2] 27
 [!0&!1&!2] 28
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&!1 | 2] 0 {0}
-[0&!2 | 1&!2] 1
+[0 | !1&!2] 0 {0}
+[!0&1 | !0&2] 1
 State: 1
-[2] 0 {0}
-[!2] 1
+[0] 0 {0}
+[!0] 1
 --END--
 HOA: v1
 States: 3
@@ -357,45 +357,45 @@ State: 2
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p2" "p0" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc very-weak
 --BODY--
 State: 0
-[0] 1
-[!0] 2
-[!0] 3
-[!0&2] 4
+[2] 1
+[!2] 2
+[!2] 3
+[1&!2] 4
 State: 1
 [t] 1
 State: 2
-[0&1] 1
-[!0&1] 2
-[!0&1] 3
-[!0&1&2] 4
+[0&2] 1
+[0&!2] 2
+[0&!2] 3
+[0&1&!2] 4
 State: 3
-[0] 3
-[0&2] 4
+[2] 3
+[1&2] 4
 State: 4
-[2] 4
+[1] 4
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 --BODY--
 State: 0 "{0,1}"
-[1] 1
+[0] 1
 State: 1 "{1,2}"
-[1] 2
+[0] 2
 State: 2 "{1,3}"
 [0&1] 3
 State: 3 "{1}"
-[1] 3
+[0] 3
 --END--
 HOA: v1
 States: 1
@@ -412,7 +412,7 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc very-weak
@@ -422,57 +422,57 @@ State: 0
 [t] 2
 State: 1
 [1&2] 3
-[0&2] 4
+[0&1] 4
 State: 2 {0}
-[0&2] 1
-[2] 2
+[0&1] 1
+[1] 2
 State: 3 {0}
-[1] 3
+[2] 3
 State: 4
-[1] 3
+[2] 3
 [0] 4
 --END--
 HOA: v1
 States: 8
 Start: 2
-AP: 3 "p3" "p0" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0] 5
+[!2] 5
 State: 1
-[0] 5
+[2] 5
 State: 2
 [!0&!1&!2] 0
-[!0&1&!2] 1
-[!0&!1&2] 3
-[!0&1&2] 4
-[0&1&!2] 5
-[0&!1&2] 6
+[0&!1&!2] 1
+[!0&1&!2] 3
+[0&1&!2] 4
+[0&!1&2] 5
+[!0&1&2] 6
 [0&1&2] 7
 State: 3
-[!0&!2] 5
-[0&2] 6
-[!0&2] 7
+[!1&!2] 5
+[1&2] 6
+[1&!2] 7
 State: 4
-[0&!2] 5
-[!0&2] 6
-[0&2] 7
+[!1&2] 5
+[1&!2] 6
+[1&2] 7
 State: 5 {0}
 [t] 5
 State: 6 {0}
-[2] 6
+[1] 6
 State: 7
-[!2] 5
-[2] 7
+[!1] 5
+[1] 7
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p2" "p0" "p3"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -481,18 +481,18 @@ properties: deterministic
 State: 0
 [t] 1
 State: 1
-[0] 2
-[!0] 3
+[1] 2
+[!1] 3
 State: 2
-[1 | 2] 2
-[!1&!2] 2 {0}
+[0 | 2] 2
+[!0&!2] 2 {0}
 State: 3
 [t] 3 {0}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -501,11 +501,11 @@ properties: deterministic terminal
 State: 0
 [t] 1
 State: 1
-[0] 2
-[!0] 3
+[1] 2
+[!1] 3
 State: 2
-[!1] 2
-[1] 3
+[!0] 2
+[0] 3
 State: 3 {0}
 [t] 3
 --END--
@@ -570,40 +570,41 @@ State: 1 "{1}"
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p2" "p1" "p3"
-Acceptance: 4 (Inf(2) | Fin(1)) & Inf(3) & Fin(0)
+AP: 3 "p1" "p2" "p3"
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0 | !1 | !2] 0
-[!0&1&2] 1
-[0&!2] 2
-[0&!1&2] 3
+[!0 | 1 | !2] 0 {1}
+[0&!1&2] 1
+[1&!2] 2
+[!0&1&2] 3
 [!0&!1&2] 4
-[!0&!1 | !0&!2] 5
+[!0&!1 | !1&!2] 5
 State: 1
-[t] 1 {3}
+[t] 1 {0}
 State: 2
-[!2] 2 {2 3}
-[!1&2] 3
+[!2] 2 {0}
+[!0&2] 3
 State: 3
-[!1&2] 3 {1 3}
-[!1&!2] 3 {2 3}
+[!0&2] 3 {1}
+[!0&!2] 3 {0}
 State: 4
-[1] 1
-[!1] 4
+[0] 1
+[!0] 4 {1}
 State: 5
-[1&2] 1
-[!1&2] 4
-[!1&2] 5 {3}
-[!2] 5 {0 3}
+[0&2] 1
+[!0&2] 4
+[!0&2] 5
+[!2] 5 {1}
 --END--
 HOA: v1
 States: 10
 Start: 0
 AP: 2 "p0" "p2"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+acc-name: Streett 1
+Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
@@ -613,8 +614,8 @@ State: 1
 State: 2
 [!0&!1] 3
 [!0&1] 4
-[!0] 2 {0}
-[t] 2 {1}
+[!0] 2
+[t] 2 {0}
 State: 3
 [0] 5
 State: 4
@@ -622,39 +623,39 @@ State: 4
 [0&1] 7
 [!0&1] 8
 State: 5
-[t] 5 {0}
+[t] 5 {1}
 State: 6
 [!0] 5
-[0] 6
+[0] 6 {0}
 State: 7
 [!0&!1] 5
 [0&!1] 6
-[!0&1] 7 {0}
-[0&1] 7
+[!0&1] 7 {0 1}
+[0&1] 7 {0}
 State: 8
-[1] 8
+[1] 8 {0}
 [0] 9
 State: 9
-[0] 9 {0}
+[0] 9 {1}
 --END--
 HOA: v1
 States: 8
 Start: 7
-AP: 4 "p0" "p1" "p3" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: terminal
 --BODY--
 State: 0
-[2] 0
-[0&2] 2
-[!0&2] 3
+[3] 0
+[0&3] 2
+[!0&3] 3
 State: 1
 [0] 4
 [!0] 5
 State: 2
-[3] 4
+[2] 4
 State: 3
 [0&2&3] 4
 [!0&2&3] 6
@@ -663,13 +664,13 @@ State: 4 {0}
 State: 5
 [1] 4
 State: 6
-[0&2&!3] 4
-[!0&2&!3] 6
+[0&!2&3] 4
+[!0&!2&3] 6
 State: 7
-[2] 0
+[3] 0
 [t] 1
-[0&2] 2
-[!0&2] 3
+[0&3] 2
+[!0&3] 3
 --END--
 HOA: v1
 States: 1
@@ -686,7 +687,7 @@ State: 0
 HOA: v1
 States: 8
 Start: 0
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
@@ -694,31 +695,31 @@ properties: trans-labels explicit-labels trans-acc
 State: 0
 [t] 1
 State: 1
-[0] 2
-[0&!1] 3
-[!0] 4
+[1] 2
+[!0&1] 3
+[!1] 4
 [!0&!1] 5
 State: 2
 [!0&!1] 2 {1}
-[0&!1] 2
+[!0&1] 2
 [0&1] 2 {0}
-[!0&1] 6 {0 1}
+[0&!1] 6 {0 1}
 State: 3
-[0&!1] 3 {0 1}
+[!0&1] 3 {0 1}
 State: 4
 [t] 4
 [!0&!1] 5
 [0&1] 7
 State: 5
-[!1] 5 {0 1}
+[!0] 5 {0 1}
 State: 6
 [!0&!1] 2 {1}
-[0&!1] 2
+[!0&1] 2
 [0&1] 2 {0}
-[0&!1] 3
-[!0&1] 6 {0 1}
+[!0&1] 3
+[0&!1] 6 {0 1}
 State: 7
-[0] 7 {0 1}
+[1] 7 {0 1}
 --END--
 HOA: v1
 States: 9
@@ -760,25 +761,25 @@ State: 8
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p2" "p1" "p3" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0&2 | 0&!3 | !1&2 | !1&!3] 0 {0}
-[!0&1] 1
-[0&1&!2&3] 2
-[!1&!2&3] 3
+[!0&!1 | !0&2 | !1&3 | 2&3] 0 {0}
+[1&!2] 1
+[0&1&2&!3] 2
+[0&!1&!3] 3
 State: 1
 [t] 1 {0}
 State: 2
-[!0&1] 1
-[0&1] 2 {0}
+[1&!2] 1
+[1&2] 2 {0}
 State: 3
-[0&!3 | !1&!3] 0 {0}
-[!0&1&!3] 1
-[!1&3] 3
+[!0&!1 | !0&2] 0 {0}
+[!0&1&!2] 1
+[0&!1] 3
 --END--
 HOA: v1
 States: 2
@@ -815,30 +816,30 @@ HOA: v1
 States: 6
 Start: 5
 AP: 3 "p0" "p2" "p3"
-Acceptance: 3 Fin(1) & (Inf(2) | Fin(0))
+Acceptance: 2 (Inf(0) & Fin(1)) | (Fin(0) & Inf(1))
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1&2] 0 {2}
-[!1&2] 2 {2}
+[1&2] 0 {0}
+[!1&2] 2 {0}
 [!1 | !2] 3
 State: 1
-[t] 1
+[t] 1 {1}
 State: 2
-[1&2] 0 {2}
-[!1&2] 2 {2}
+[1&2] 0
+[!1&2] 2 {0}
 State: 3
-[0&!1 | 0&!2] 3 {0}
+[0&!1 | 0&!2] 3
 [!0&!1 | !0&!2] 3 {0 1}
-[0&1&2] 3 {2}
-[!0&1&2] 3 {1 2}
-[0&!1&2] 4 {2}
-[!0&!1&2] 4 {1 2}
+[0&1&2] 3 {0}
+[!0&1&2] 3 {0 1}
+[0&!1&2] 4
+[!0&!1&2] 4 {0 1}
 State: 4
-[0&1&2] 3 {2}
-[!0&1&2] 3 {1 2}
-[0&!1&2] 4 {2}
-[!0&!1&2] 4 {1 2}
+[0&1&2] 3 {0}
+[!0&1&2] 3 {0 1}
+[0&!1&2] 4 {0}
+[!0&!1&2] 4 {0 1}
 State: 5
 [1&2] 0
 [0] 1
@@ -891,46 +892,46 @@ State: 1
 HOA: v1
 States: 4
 Start: 2
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[2] 0
+[1] 0
 State: 1
-[2] 1
-[!2] 3
+[1] 1
+[!1] 3
 State: 2
-[!0&!1&2] 0
-[0&!1&2] 1
-[!0&1 | 0&!1&!2] 3
+[!0&1&!2] 0
+[0&1&!2] 1
+[!0&2 | 0&!1&!2] 3
 State: 3 {0}
 [t] 3
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: terminal
 --BODY--
 State: 0
-[!0] 1
-[0] 2
+[!1] 1
+[1] 2
 State: 1
 [0&1] 1
-[!0] 2
+[!1] 2
 State: 2 {0}
 [t] 2
 --END--
 HOA: v1
 States: 8
 Start: 0
-AP: 3 "p3" "p2" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -942,25 +943,25 @@ State: 0
 [!1] 4
 State: 1
 [0&2] 5
-[0&!2] 6
+[!0&2] 6
 State: 2
 [1] 1
-[1&!2] 2
-[1&2] 2 {0}
-[!1&2] 3
-[!1&2] 4
+[!0&1] 2
+[0&1] 2 {0}
+[0&!1] 3
+[0&!1] 4
 State: 3
-[0&!2] 7
+[!0&2] 7
 State: 4
-[!1&!2] 3
-[!1&!2] 4 {0}
+[!0&!1] 3
+[!0&!1] 4 {0}
 State: 5
 [t] 5 {0}
 State: 6
-[2] 5
-[!2] 6
+[0] 5
+[!0] 6
 State: 7
-[!2] 7 {0}
+[!0] 7 {0}
 --END--
 HOA: v1
 States: 1
@@ -1001,7 +1002,7 @@ State: 1 "init"
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p3" "p2" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -1009,14 +1010,14 @@ properties: deterministic
 --BODY--
 State: 0
 [0&2] 0
-[0&!2] 1
-[!0] 2
+[!0&2] 1
+[!2] 2
 State: 1
-[0] 1 {0}
-[!0] 2
+[2] 1 {0}
+[!2] 2
 State: 2
-[0&1] 1 {0}
-[!0&1] 2
+[1&2] 1 {0}
+[1&!2] 2
 [!1] 3
 State: 3
 [t] 3
@@ -1038,26 +1039,26 @@ HOA: v1
 States: 3
 Start: 0
 AP: 2 "p1" "p2"
-Acceptance: 5 Fin(4) & Fin(1) & (Inf(2) | Fin(3)) & Fin(0)
+Acceptance: 2 (Fin(0) & Fin(1)) | (Inf(0)&Inf(1))
 properties: trans-labels explicit-labels trans-acc complete
 properties: semi-deterministic
 --BODY--
 State: 0
 [!1] 0 {0}
-[1] 0 {1}
+[1] 0 {0}
 [0] 1
 [!0] 2
 State: 1
-[1] 1 {2}
-[!1] 1 {3}
+[1] 1 {0 1}
+[!1] 1 {0}
 State: 2
 [!1] 2
-[1] 2 {4}
+[1] 2 {1}
 --END--
 HOA: v1
 States: 5
 Start: 4
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -1066,56 +1067,56 @@ properties: terminal
 State: 0 {0}
 [t] 0
 State: 1
-[1] 0
+[0] 0
 State: 2
-[!1] 0
+[!0] 0
 State: 3
 [!0&!1] 2
-[0&!1] 3
+[!0&1] 3
 State: 4
-[!0] 1
-[0] 3
+[!1] 1
+[1] 3
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 --BODY--
 State: 0
-[0 | !1] 0 {0 1}
-[!0&1] 1 {1}
-[!0&1] 2 {0}
+[!0 | 1] 0 {0 1}
+[0&!1] 1 {1}
+[0&!1] 2 {0}
 State: 1
-[0] 0 {0 1}
-[!0] 1 {1}
+[1] 0 {0 1}
+[!1] 1 {1}
 State: 2
-[!1] 0 {0 1}
-[1] 2 {0}
+[!0] 0 {0 1}
+[0] 2 {0}
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p3" "p1" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0] 1
-[!0] 2
+[2] 1
+[!2] 2
 State: 1
-[1 | !2] 3
-[!1&2] 4
+[!0 | 1] 3
+[0&!1] 4
 State: 2
 [1] 3
 State: 3
 [t] 3 {0}
 State: 4
-[2] 4
-[!2] 5
+[0] 4
+[!0] 5
 State: 5
 [!1] 5
 [1] 5 {0}
@@ -1229,52 +1230,52 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1 | 2] 0 {0}
-[!0&!1&2] 1
-[1 | 2] 2
+[0 | 2] 0 {0}
+[0&!1&!2] 1
+[0 | 2] 2
 [!0&!1&!2] 3
-[!1&!2] 4
+[!0&!2] 4
 State: 1
-[!0] 1 {0}
+[!1] 1 {0}
 State: 2
-[!0&!1] 1
+[!1&!2] 1
 [t] 2
 State: 3
-[!0&1&2] 1
-[!0&1&!2] 3
+[0&!1&2] 1
+[!0&!1&2] 3
 State: 4
-[2] 0 {0}
-[!0&!1&2] 1
-[2] 2
+[0] 0 {0}
+[0&!1&!2] 1
+[0] 2
 [!0&!1&!2] 3
-[!2] 4
+[!0] 4
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 4 "p1" "p3" "p2" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic very-weak
 --BODY--
 State: 0
-[!3] 0
-[3] 3
+[!0] 0
+[0] 3
 State: 1 {0}
-[!2&!3] 0
-[2&!3] 1
-[3] 3
+[!0&!2] 0
+[!0&2] 1
+[0] 3
 State: 2
-[!0&!2&!3 | 0&1&!3] 0
-[!0&2&!3] 1
-[0&!1 | 3] 3
+[!0&!1&!2 | !0&1&3] 0
+[!0&!1&2] 1
+[0 | 1&!3] 3
 State: 3 {0}
 [t] 3
 --END--
@@ -1315,22 +1316,22 @@ State: 6
 HOA: v1
 States: 5
 Start: 2
-AP: 3 "p2" "p1" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[2] 0
+[0] 0
 State: 1
-[!1&2] 0
+[0&!1] 0
 [1] 4
 State: 2
 [t] 3
 State: 3
-[0] 1
-[!0] 3
+[2] 1
+[!2] 3
 State: 4 {0}
 [t] 4
 --END--
@@ -1352,20 +1353,20 @@ State: 1
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0&!1&2] 1
+[0&!1&!2] 1
 [!0&!1&!2] 2
 State: 1
-[!0&!1&2] 1
-[0&!1 | !1&!2] 2
+[0&!1&!2] 1
+[!0&!2 | 1&!2] 2
 State: 2 {0}
-[!1] 2
+[!2] 2
 --END--
 HOA: v1
 States: 4
@@ -1415,27 +1416,27 @@ State: 1 "{0,1}"
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p0" "p3" "p2"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 3 "p0" "p2" "p3"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0&!2] 0 {0}
-[!0&2] 2
-[!0&2] 1
-State: 1
-[!0&!1] 1 {0}
+[!0&!1] 0 {1}
+[!0&1] 2
 [!0&1] 1
-[t] 1 {1}
+State: 1
+[!0&!2] 1 {1}
+[!0&2] 1
+[t] 1 {0}
 State: 2
-[!0] 2 {0}
+[!0] 2 {1}
 [!0] 1
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -1481,58 +1482,58 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p2" "p3" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 --BODY--
 State: 0 "{0,1}"
-[1&!2] 1
-[!1&!2] 2
+[!0&2] 1
+[!0&!2] 2
 State: 1 "{2}"
-[0] 3
+[1] 3
 State: 2 "{1,2}"
-[0&1&!2] 3
-[0&!1&!2] 4
+[!0&1&2] 3
+[!0&1&!2] 4
 State: 3 "{}"
 [t] 3
 State: 4 "{1}"
-[1&!2] 3
-[!1&!2] 4
+[!0&2] 3
+[!0&!2] 4
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p3" "p1" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0] 0 {1}
+[!2] 0 {1}
 [0&2] 0 {0 1}
-[0&1&!2] 1 {0}
+[!0&1&2] 1 {0}
 State: 1
-[!0&2] 0 {1}
+[0&!2] 0 {1}
 [0&2] 0 {0 1}
 [!0&1&!2] 1
-[0&1&!2] 1 {0}
+[!0&1&2] 1 {0}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic stutter-invariant
 --BODY--
 State: 0
-[!0] 0
-[0] 1
-State: 1
-[!1] 1 {0}
+[!1] 0
 [1] 1
+State: 1
+[!0] 1 {0}
+[0] 1
 --END--
 HOA: v1
 States: 7
@@ -1571,38 +1572,38 @@ State: 6 {0}
 HOA: v1
 States: 8
 Start: 1
-AP: 3 "p2" "p3" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[!1] 0
+[!2] 0
 State: 1
-[!0] 2
-[0] 5
+[!1] 2
+[1] 5
 State: 2
 [t] 3
 State: 3
-[!1&!2] 0
-[!1&2] 3
+[!0&!2] 0
+[0&!2] 3
 State: 4
-[!1] 4
-[1] 6
+[!2] 4
+[2] 6
 State: 5
 [t] 7
 State: 6 {0}
 [t] 6
 State: 7 {0}
-[!1&!2] 4
-[1] 6
-[!1&2] 7
+[!0&!2] 4
+[2] 6
+[0&!2] 7
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -1610,16 +1611,16 @@ properties: terminal
 --BODY--
 State: 0
 [t] 0
-[!0] 1
+[!1] 1
 State: 1
 [t] 2
 State: 2
-[1] 3
-[!1] 4
+[0] 3
+[!0] 4
 State: 3
-[!0] 5
+[!1] 5
 State: 4
-[0] 5
+[1] 5
 State: 5 {0}
 [t] 5
 --END--
@@ -1663,36 +1664,36 @@ HOA: v1
 States: 4
 Start: 0
 AP: 2 "p0" "p1"
-Acceptance: 5 (Inf(3)&Inf(4)) & Fin(1) & (Inf(2) | Fin(0))
+Acceptance: 5 (Inf(0)&Inf(1)) & Fin(2) & (Inf(3) | Fin(4))
 properties: trans-labels explicit-labels trans-acc complete
 --BODY--
 State: 0
-[0&!1] 0 {3 4}
-[0&1] 0 {0 3 4}
-[!0&!1] 0 {2 3 4}
-[!0&1] 0 {1 2 3 4}
-[!0&1] 1 {2}
+[0&!1] 0 {0 1}
+[0&1] 0 {0 1 4}
+[!0&!1] 0 {0 1 3}
+[!0&1] 0 {0 1 2 3}
+[!0&1] 1 {3}
 State: 1
-[0&!1] 0 {3 4}
-[!0&1] 1 {2}
-[0&1] 2 {0 4}
-[!0&!1] 3 {2 3}
+[0&!1] 0 {0 1}
+[!0&1] 1 {3}
+[0&1] 2 {1 4}
+[!0&!1] 3 {0 3}
 State: 2
-[0&!1] 0 {3 4}
-[!0&!1] 0 {2 3 4}
-[!0&1] 1 {2}
-[0&1] 2 {0 4}
+[0&!1] 0 {0 1}
+[!0&!1] 0 {0 1 3}
+[!0&1] 1 {3}
+[0&1] 2 {1 4}
 State: 3
-[0&!1] 0 {3 4}
-[0&1] 0 {0 3 4}
-[!0&1] 1 {2}
-[!0&!1] 3 {2 3}
-[!0&1] 3 {1 2 3}
+[0&!1] 0 {0 1}
+[0&1] 0 {0 1 4}
+[!0&1] 1 {3}
+[!0&!1] 3 {0 3}
+[!0&1] 3 {0 2 3}
 --END--
 HOA: v1
 States: 8
 Start: 1
-AP: 3 "p3" "p2" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -1701,31 +1702,31 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1
-[!0&2] 0
-[0&!1&!2] 2
-[0&1&!2] 3
+[0&!2] 0
+[!0&!1&2] 2
+[!0&1&2] 3
 [!0&1&!2] 5
 [0&2] 6
 State: 2 {0}
-[0] 2
+[2] 2
 State: 3 {0}
-[0&!1] 2
-[0&1&!2] 3
-[!0&1&2] 4
+[!1&2] 2
+[!0&1&2] 3
+[0&1&!2] 4
 [!0&1&!2] 5
 [0&1&2] 7
 State: 4 {0}
 [1] 4
 State: 5
-[1&2] 4
-[1&!2] 5
+[0&1] 4
+[!0&1] 5
 State: 6
-[!0] 0
-[0] 6
+[!2] 0
+[2] 6
 State: 7
-[0&!1] 2
-[!0&1] 4
-[0&1] 7
+[!1&2] 2
+[1&!2] 4
+[1&2] 7
 --END--
 HOA: v1
 States: 3
@@ -1760,7 +1761,7 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -1773,28 +1774,28 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p3" "p0" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: terminal
 --BODY--
 State: 0
-[0&1&!2] 1
+[0&!1&2] 1
 [0&1&2] 2
-[!0 | !1] 4
+[!0 | !2] 4
 State: 1
-[0&1&!2] 1
-[!0&!1&2 | 0&1&2] 2
-[!0&1&!2] 3
-[!0&1&2 | 0&!1&2] 4
+[0&!1&2] 1
+[!0&1&!2 | 0&1&2] 2
+[0&!1&!2] 3
+[!0&1&2 | 0&1&!2] 4
 State: 2
-[0&1&!2] 1
-[!0&!1&2 | 0&1&2] 2
-[!0&1 | 0&!1] 4
+[0&!1&2] 1
+[!0&1&!2 | 0&1&2] 2
+[!0&2 | 0&!2] 4
 State: 3
-[1&!2] 3
-[2] 4
+[0&!1] 3
+[1] 4
 State: 4 {0}
 [t] 4
 --END--
@@ -1812,71 +1813,71 @@ State: 0
 HOA: v1
 States: 10
 Start: 7
-AP: 3 "p3" "p0" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0&1] 4
-[0&1] 8
-[0&!1] 9
+[0&!2] 4
+[0&2] 8
+[!0&2] 9
 State: 1
-[0] 9
+[2] 9
 State: 2 {0}
-[0&1&!2] 2
+[0&!1&2] 2
 [0&1&2] 6
-[!0 | !1] 9
+[!0 | !2] 9
 State: 3 {0}
-[1] 3
+[0] 3
 State: 4
-[0&1] 5
+[0&2] 5
 State: 5
 [0&1&2] 3
-[0&1&!2] 5
+[0&!1&2] 5
 State: 6
-[1] 6
-[!1] 9
+[0] 6
+[!0] 9
 State: 7
-[!1] 0
-[1] 1
+[!0] 0
+[0] 1
 State: 8
-[0&1] 2
-[!0 | !1] 9
+[0&2] 2
+[!0 | !2] 9
 State: 9 {0}
 [t] 9
 --END--
 HOA: v1
 States: 8
 Start: 7
-AP: 4 "p0" "p2" "p1" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc very-weak
 --BODY--
 State: 0
-[1] 0
-[!1&2] 2
-[!1&3] 3
+[2] 0
+[1&!2] 2
+[!2&3] 3
 State: 1
 [0] 4
 [!0] 5
 State: 2
-[2] 2
+[1] 2
 State: 3
 [3] 3
 State: 4
-[1] 6
+[2] 6
 State: 5
-[!1] 6
+[!2] 6
 State: 6
 [t] 6
 State: 7
-[1] 0
+[2] 0
 [t] 1
-[!1&2] 2
-[!1&3] 3
+[1&!2] 2
+[!2&3] 3
 --END--
 HOA: v1
 States: 2
@@ -1896,53 +1897,53 @@ State: 1
 HOA: v1
 States: 11
 Start: 0
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1&!2] 0
+[!1&2] 0
 [1&2] 1
-[!1&2] 2
-[2] 3
+[1&!2] 2
+[1] 3
 [!1&!2] 4
 [!1&!2] 5
 State: 1
-[1] 1 {0}
-[!1] 2
+[2] 1 {0}
+[!2] 2
 [t] 3
 State: 2
-[1] 1 {0}
-[!1] 2
-[1] 3
-[!1] 6
+[2] 1 {0}
+[!2] 2
+[2] 3
+[!2] 6
 State: 3
 [0] 7
 State: 4
-[1&!2] 0
+[!1&2] 0
 [1&2] 1
-[!1&2] 2
+[1&!2] 2
 [1&2] 3
 [!1&!2] 4
-[!1&2] 6
+[1&!2] 6
 State: 5
-[0&!1&2] 3
+[0&1&!2] 3
 [0&!1&!2] 5
 State: 6
-[0&1] 7
-[0&!1] 8
+[0&2] 7
+[0&!2] 8
 State: 7
 [0] 7
 [!0] 9
 State: 8
-[!0&1] 9
-[!0&!1] 10
+[!0&2] 9
+[!0&!2] 10
 State: 9
 [t] 9 {0}
 State: 10
-[1] 9
-[!1] 10
+[2] 9
+[!2] 10
 --END--
 HOA: v1
 States: 1
@@ -2040,34 +2041,34 @@ State: 3
 HOA: v1
 States: 6
 Start: 0
-AP: 4 "p2" "p1" "p0" "p3"
-Acceptance: 4 Inf(3) & (Inf(2) | Fin(1)) & Fin(0)
+AP: 4 "p0" "p1" "p2" "p3"
+Acceptance: 2 (Inf(0) & Fin(1)) | (Fin(0) & Inf(1))
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0] 0 {0 3}
-[0&!1] 0 {1 3}
-[0&1] 0 {2 3}
-[!0] 1
+[!2] 0 {0 1}
+[!1&2] 0
+[1&2] 0 {0}
+[!2] 1
 State: 1
-[!0] 1
+[!2] 1 {0 1}
 [!3] 2
 [3] 3
 State: 2
-[!2] 4
+[!0] 4
 State: 3
-[!2&!3] 4
-[!2&3] 5
+[!0&!3] 4
+[!0&3] 5
 State: 4
-[t] 4 {3}
+[t] 4 {0}
 State: 5
 [!3] 4
-[3] 5
+[3] 5 {0 1}
 --END--
 HOA: v1
 States: 6
 Start: 5
-AP: 3 "p3" "p0" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2076,21 +2077,21 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[!0] 0
-[0&1] 1
-State: 2 {0}
-[2] 2
-State: 3
 [!2] 0
-[2] 3
+[0&2] 1
+State: 2 {0}
+[1] 2
+State: 3
+[!1] 0
+[1] 3
 State: 4
-[!0&!2] 0
-[0&1&!2] 1
-[!0&2] 3
+[!1&!2] 0
+[0&!1&2] 1
+[1&!2] 3
 [0&1&2] 4
 State: 5
-[0&1&!2] 1
-[!0&2] 2
+[0&!1&2] 1
+[1&!2] 2
 [0&1&2] 4
 --END--
 HOA: v1
@@ -2181,19 +2182,19 @@ State: 2 "init"
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p3" "p2"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 2 "p2" "p3"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1] 1
-[0] 2
+[0] 1
+[1] 2
 State: 1
-[1] 1 {0}
+[0] 1
 State: 2
-[0&1] 2 {0}
-[0] 2 {1}
+[0&1] 2
+[1] 2 {0}
 --END--
 HOA: v1
 States: 2
@@ -2211,7 +2212,7 @@ State: 1 "{}"
 HOA: v1
 States: 5
 Start: 2
-AP: 3 "p1" "p0" "p3"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2221,77 +2222,77 @@ State: 0 {0}
 [t] 0
 State: 1 {0}
 [0&1] 0
-[!0&1] 1
+[0&!1] 1
 State: 2
 [t] 3
 State: 3
 [0&1&2] 0
-[!0&1] 1
+[0&!1] 1
 [0&1&!2] 4
 State: 4
-[!0 | 2] 0
-[0&!2] 4
+[!1 | 2] 0
+[1&!2] 4
 --END--
 HOA: v1
 States: 9
 Start: 0
-AP: 3 "p2" "p1" "p3"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0] 1
+[1] 1
 [t] 2
-[!0&!2] 3
-[!0] 4
+[!1&!2] 3
+[!1] 4
 State: 1
-[0] 1 {0}
+[1] 1 {0}
 State: 2
 [t] 2
-[!0&!2] 3 {0}
-[!0] 4 {0}
+[!1&!2] 3 {0}
+[!1] 4 {0}
 State: 3
-[!0&1&!2] 3 {0}
-[!0&1] 4 {0}
-[0&!2] 5
-[0] 6
-[0&!2] 7
-[0] 8
+[0&!1&!2] 3 {0}
+[0&!1] 4 {0}
+[1&!2] 5
+[1] 6
+[1&!2] 7
+[1] 8
 State: 4
-[0&!1] 1
-[!1] 2
+[!0&1] 1
+[!0] 2
 [!0&!1&!2] 3 {0}
 [!0&!1] 4 {0}
 State: 5
-[!0&1&!2] 3 {0}
-[!0&1] 4 {0}
-[0&!2] 5
-[0] 6
+[0&!1&!2] 3 {0}
+[0&!1] 4 {0}
+[1&!2] 5
+[1] 6
 State: 6
-[!1] 2
+[!0] 2
 [!0&!1&!2] 3 {0}
 [!0&!1] 4 {0}
 State: 7
-[0&!2] 7 {0}
-[0] 8
+[1&!2] 7 {0}
+[1] 8
 State: 8
-[0&!1] 1
+[!0&1] 1
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[1] 0
+[0] 0
 State: 1
-[!0] 0
-[0] 2
+[!1] 0
+[1] 2
 State: 2 {0}
 [t] 2
 --END--
@@ -2313,22 +2314,22 @@ State: 1
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p3" "p1"
-Acceptance: 3 (Fin(0)|Fin(1)) & Inf(2)
+AP: 2 "p1" "p3"
+Acceptance: 2 (Inf(0) & Fin(1)) | (Fin(0) & Inf(1))
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0] 1
-[!0] 2
+[1] 1
+[!1] 2
 State: 1
-[!0&1] 1
-[0&1] 1 {0 2}
-[!0&!1] 1 {1 2}
-[0&!1] 1 {0 1 2}
+[0&!1] 1
+[0&1] 1 {0}
+[!0&!1] 1 {1}
+[!0&1] 1 {0 1}
 State: 2
-[1] 2 {0 2}
-[!1] 2 {0 1 2}
+[0] 2 {1}
+[!0] 2 {0 1}
 --END--
 HOA: v1
 States: 2
@@ -2392,20 +2393,20 @@ State: 5
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic stutter-invariant
 --BODY--
 State: 0
-[!1] 0
-[!0&1] 1
+[!0] 0
+[0&!1] 1
 [0&1] 2
 State: 1
 [!0&!1] 1
-[!0&1] 1 {0}
-[0] 2
+[0&!1] 1 {0}
+[1] 2
 State: 2
 [t] 2 {0}
 --END--
@@ -2424,33 +2425,33 @@ State: 0
 HOA: v1
 States: 6
 Start: 0
-AP: 2 "p2" "p1"
-acc-name: Streett 1
-Acceptance: 2 Fin(0) | Inf(1)
+AP: 2 "p1" "p2"
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[1] 1
-[0&!1] 2
+[0] 1
+[!0&1] 2
 [!0&!1] 3
 State: 1
-[0 | !1] 1 {0}
-[!0&1] 4
+[!0 | 1] 1 {1}
+[0&!1] 4
 State: 2
 [0&1] 1
-[0&!1] 2 {0 1}
+[!0&1] 2 {0}
 [!0&!1] 3
-[!0&1] 4
+[0&!1] 4
 State: 3
-[0 | !1] 3 {0 1}
-[!0&1] 5 {0}
+[!0 | 1] 3 {0 1}
+[0&!1] 5 {1}
 State: 4
-[0] 1 {0}
-[!0] 4
+[1] 1 {1}
+[!1] 4
 State: 5
-[0] 3 {0 1}
-[!0] 5 {0}
+[1] 3 {0 1}
+[!1] 5 {1}
 --END--
 HOA: v1
 States: 2
@@ -2468,7 +2469,7 @@ State: 1 "{1}"
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -2478,11 +2479,11 @@ State: 0
 State: 1
 [t] 2
 State: 2
-[!0] 2
-[0] 2 {0}
+[!1] 2
+[1] 2 {0}
 [0&1] 3
 State: 3
-[1] 3 {0}
+[0] 3 {0}
 --END--
 HOA: v1
 States: 2
@@ -2532,7 +2533,7 @@ State: 0
 HOA: v1
 States: 5
 Start: 4
-AP: 3 "p1" "p0" "p3"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc very-weak
@@ -2541,16 +2542,16 @@ State: 0
 [2] 0
 [!2] 3
 State: 1 {0}
-[0] 1
+[1] 1
 [0&1] 2
 State: 2 {0}
-[1] 2
+[0] 2
 State: 3 {0}
 [t] 3
 State: 4
 [2] 0
 [2] 1
-[1&2] 2
+[0&2] 2
 [!2] 3
 --END--
 HOA: v1
@@ -2569,29 +2570,30 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p3" "p1" "p0"
-Acceptance: 3 Fin(2) & Fin(1) & Inf(0)
+AP: 3 "p0" "p1" "p3"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&!1] 1
-[!0&!1] 3
-[0&1] 4
+[!1&2] 1
+[!1&!2] 3
+[1&2] 4
 [!0&1&!2] 0
-[!0&1&2] 0 {0}
-[!0 | 1] 0 {1}
-[0&1] 2
+[0&1&!2] 0 {1}
+[1 | !2] 0 {0}
+[1&2] 2
 State: 1
-[t] 1 {0}
+[t] 1 {1}
 State: 2
-[!2] 2 {0}
-[t] 2 {2}
+[!0] 2 {1}
+[t] 2 {0 1}
 State: 3
-[0&1] 1
-[!0&1] 3
+[1&2] 1
+[1&!2] 3 {0}
 State: 4
-[!0&!1] 1
-[!0&1] 4
+[!1&!2] 1
+[1&!2] 4 {0}
 --END--
 HOA: v1
 States: 2
@@ -2709,24 +2711,24 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: parity min even 2
 Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1] 0
+[!0&1] 0
 [!0&!1] 0 {1}
-[1] 1
+[0] 1
 State: 1
-[!0] 1 {0}
-[0] 1 {1}
+[!1] 1 {0}
+[1] 1 {1}
 --END--
 HOA: v1
 States: 8
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc semi-deterministic
@@ -2734,84 +2736,84 @@ properties: stutter-invariant
 --BODY--
 State: 0
 [t] 0
-[0&!1&!2] 1
-[!0&1&!2 | 0&!1&!2] 2
-[!0&!1&2 | 0&1&2] 3
-[!0&1&2] 4
-[0&!1&2] 5
+[!0&1&!2] 1
+[!0&!1&2 | !0&1&!2] 2
+[0&!1&!2 | 0&1&2] 3
+[0&!1&2] 4
+[0&1&!2] 5
 State: 1
-[0] 1 {0}
+[1] 1 {0}
 State: 2
-[0&!1&2] 1
-[!0&1&2 | 0&!1&2] 2
-State: 3
-[2] 3 {0}
-State: 4
-[!0&!1&2 | 0&1&2] 3
-[!0&1&2] 4 {0}
-[0&!1&2] 6
-State: 5
 [0&1&!2] 1
+[0&!1&2 | 0&1&!2] 2
+State: 3
+[0] 3 {0}
+State: 4
+[0&!1&!2 | 0&1&2] 3
+[0&!1&2] 4 {0}
+[0&1&!2] 6
+State: 5
+[!0&1&2] 1
 [0&1&2] 5
 State: 6
-[!0&!1&2] 3
-[!0&1&2] 4 {0}
-[0&!1&2] 6
+[0&!1&!2] 3
+[0&!1&2] 4 {0}
+[0&1&!2] 6
 [0&1&2] 7
 State: 7
-[!0&2] 3
-[0&2] 7
+[0&!1] 3
+[0&1] 7
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p0" "p1" "p3" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 --BODY--
 State: 0 "{0}"
-[!0&2 | 1&2] 0
-[0&!1&2] 1
-[0&!1&!2] 2
-[!0&!2 | 1&!2] 3
+[!0&3 | 1&3] 0
+[0&!1&3] 1
+[0&!1&!3] 2
+[!0&!3 | 1&!3] 3
 State: 1 "{}"
 [t] 1
 State: 2 "{1}"
-[3] 1
+[2] 1
 State: 3 "{0,1}"
 [!0&2&3 | 1&2&3] 0
 [0&!1&2&3] 1
-[0&!1&!2&3] 2
-[!0&!2&3 | 1&!2&3] 3
+[0&!1&2&!3] 2
+[!0&2&!3 | 1&2&!3] 3
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 3 "p1" "p0" "p2"
+AP: 3 "p0" "p1" "p2"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1&!2 | 0&1&2] 0
-[!0 | !1&2 | 1&!2] 0 {0}
+[!0&1&!2 | 0&1&2] 0
+[!0&2 | 0&!2 | !1] 0 {0}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p3" "p2"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 3 "p1" "p2" "p3"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&1] 1
-[!0&1&2] 0 {0}
-[1] 0 {1}
+[0&2] 1
+[!0&1&2] 0
+[2] 0 {0}
 State: 1
-[2] 1 {0}
+[1] 1
 --END--
 HOA: v1
 States: 2
@@ -2832,7 +2834,7 @@ State: 1
 HOA: v1
 States: 4
 Start: 3
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2841,47 +2843,47 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[!1] 1
+[!0] 1
 State: 2
-[1] 0
-[!1] 2
+[0] 0
+[!0] 2
 State: 3
-[!0&1] 0
-[0&!1] 1
+[0&!1] 0
+[!0&1] 1
 [!0&!1] 2
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p0" "p3" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&!1&2] 1
+[!0&1&!2] 1
 [0&1&2] 2
-[0&1&!2] 3
+[0&!1&2] 3
 [!0&!1&!2] 4
 State: 1
-[!1&2] 1 {0}
+[1&!2] 1 {0}
 [1&2] 2
-[1&!2] 3
+[!1&2] 3
 [!1&!2] 4
 State: 2
-[!1&2] 1 {0}
+[1&!2] 1 {0}
 [1&2] 2
-[!2] 4
+[!1] 4
 State: 3
-[1&!2] 3 {0}
-[!1 | 2] 4
+[!1&2] 3 {0}
+[1 | !2] 4
 State: 4
 [t] 4
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2890,13 +2892,13 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[!0&!1 | 0&1] 0
-[!0&1&2 | 0&!1&2] 1
+[!0&!2 | 0&2] 0
+[!0&1&2 | 0&1&!2] 1
 --END--
 HOA: v1
 States: 7
 Start: 0
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -2905,18 +2907,18 @@ properties: terminal
 State: 0
 [t] 1
 State: 1
-[!0] 1
+[!1] 1
 [t] 2
-[0&!1] 3
+[!0&1] 3
 State: 2
 [t] 4
 State: 3
-[!0] 1
-[!0] 2
-[0&!1] 3
-[0&!1] 5
+[!1] 1
+[!1] 2
+[!0&1] 3
+[!0&1] 5
 State: 4
-[!0] 6
+[!1] 6
 State: 5
 [!0 | !1] 4
 State: 6 {0}
@@ -2960,16 +2962,16 @@ State: 2
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 2 "p0" "p1"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1] 0
-[1] 0 {0}
-[!0&!1] 0 {1}
+[!0&1] 0
+[0] 0 {1}
+[!0&!1] 0 {0}
 --END--
 HOA: v1
 States: 1
@@ -2998,7 +3000,7 @@ State: 0
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p3" "p2"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
@@ -3006,30 +3008,30 @@ properties: trans-labels explicit-labels trans-acc deterministic
 State: 0
 [0] 1
 State: 1
-[0&1 | 0&!2] 1 {0}
-[0&!1&2] 2
+[0&!1 | 0&2] 1 {0}
+[0&1&!2] 2
 State: 2
-[0&!2] 1 {0}
-[0&2] 2
+[0&!1] 1 {0}
+[0&1] 2
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p0" "p3" "p1"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 3 "p0" "p1" "p3"
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[2] 0 {0}
-[!2] 0 {1}
+[1] 0
+[!1] 0 {1}
 State: 1
-[2] 1
-[!2] 1 {0}
+[1] 1 {1}
+[!1] 1 {0 1}
 State: 2
-[!0&!1 | 0&1] 0
-[!0&1 | 0&!1] 1
+[!0&!2 | 0&2] 0
+[!0&2 | 0&!2] 1
 --END--
 HOA: v1
 States: 2
@@ -3095,7 +3097,7 @@ State: 0
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -3104,10 +3106,10 @@ properties: terminal
 State: 0
 [t] 1
 State: 1
-[0&1] 2
+[0&2] 2
 State: 2
-[0&1&!2] 2
-[2] 3
+[0&!1&2] 2
+[1] 3
 State: 3 {0}
 [t] 3
 --END--
@@ -3226,8 +3228,8 @@ HOA: v1
 States: 6
 Start: 0
 AP: 2 "p2" "p3"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+acc-name: Streett 1
+Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
@@ -3237,18 +3239,18 @@ State: 0
 [!0&!1] 5
 [0&1] 1
 State: 1
-[0] 1 {0}
-[t] 1 {1}
+[0] 1
+[t] 1 {0}
 State: 2
-[1] 2 {0}
+[1] 2 {1}
 State: 3
-[!0] 3 {0}
-[0] 3
+[!0] 3 {0 1}
+[0] 3 {0}
 State: 4
 [!1] 3
-[1] 4
+[1] 4 {0}
 State: 5
-[1] 5
+[1] 5 {0}
 [!1] 1
 --END--
 HOA: v1
@@ -3269,7 +3271,7 @@ State: 2 "{}"
 HOA: v1
 States: 7
 Start: 6
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc semi-deterministic
@@ -3277,115 +3279,116 @@ properties: trans-labels explicit-labels trans-acc semi-deterministic
 State: 0
 [t] 0 {0}
 State: 1
-[!0&2&3 | 0&!2] 0
-[!0&!2&3 | 0&2] 1 {0}
-[!0&2&!3] 4
-[!0&!2&!3] 5
+[!0&1 | 0&!1&3] 0
+[!0&!1&3 | 0&1] 1 {0}
+[0&!1&!3] 4
+[!0&!1&!3] 5
 State: 2
-[!0&!2 | 0&2] 2
-[!0&!3] 3
+[!0&!1 | 0&1] 2
+[!1&!3] 3
 State: 3
-[!0] 3 {0}
+[!1] 3 {0}
 State: 4
-[0] 0
-[!0] 4
+[1] 0
+[!1] 4
 State: 5
-[0&!2] 0
-[0&2] 1 {0}
-[!0&2] 4
-[!0&!2] 5
+[!0&1] 0
+[0&1] 1 {0}
+[0&!1] 4
+[!0&!1] 5
 State: 6
-[!0&!1&2&3 | 0&1&!2] 0
+[!0&1&2 | 0&!1&!2&3] 0
 [!0&!1&!2&3 | 0&1&2] 1
-[!0&1&!2 | 0&!1&2] 2
-[!0&1&!3] 3
-[!0&!1&2&!3] 4
+[!0&!1&2 | 0&1&!2] 2
+[!1&2&!3] 3
+[0&!1&!2&!3] 4
 [!0&!1&!2&!3] 5
 --END--
 HOA: v1
 States: 13
 Start: 0
-AP: 3 "p1" "p0" "p2"
-Acceptance: 2 Inf(0) & Fin(1)
+AP: 3 "p0" "p1" "p2"
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
 [0&1] 1
-[0&!1] 2
-[!0&1] 3
+[!0&1] 2
+[0&!1] 3
 [!0&!1] 4
 State: 1
-[0&!1] 5
-[0] 6
-[!0&1] 7
+[!0&1] 5
+[1] 6
+[0&!1] 7
 [!0&!1] 8
 State: 2
-[0&!1&!2] 5
-[0&!2] 6
-[!0&1&!2] 7
+[!0&1&!2] 5
+[1&!2] 6
+[0&!1&!2] 7
 [!0&!1&!2] 8
-[0&2] 9
+[1&2] 9
 State: 3
 [0&1] 7
-[0&!1] 8
-[!0] 10
+[!0&1] 8
+[!1] 10
 [!0&!1] 11
 State: 4
 [0&1&!2] 7
-[0&!1&!2] 8
-[!0] 10
+[!0&1&!2] 8
+[!1] 10
 [!0&!1] 11
-[!0&2] 12
+[!1&2] 12
 State: 5
 [2] 9
 State: 6
-[!1] 5
-[1&2] 6 {0}
-[!1 | !2] 6 {0 1}
+[!0] 5
+[0&2] 6
+[!0 | !2] 6 {1}
 State: 7
-[1] 7
-[t] 8 {0}
+[0] 7 {1}
+[t] 8 {0 1}
 State: 8
-[1&!2] 7
-[!2] 8 {0}
+[0&!2] 7 {1}
+[!2] 8 {0 1}
 State: 9
 [t] 9 {0}
 State: 10
-[0&!1] 5
-[0] 6
-[!0] 10 {1}
+[!0&1] 5
+[1] 6
+[!1] 10 {1}
 [!0&!1] 11
 State: 11
-[0&2] 9
-[!0&2] 12
+[1&2] 9
+[!1&2] 12
 State: 12
-[0] 9
-[!0] 12 {1}
+[1] 9
+[!1] 12 {1}
 --END--
 HOA: v1
 States: 6
 Start: 1
-AP: 3 "p2" "p0" "p3"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0 {0}
-[!0&1] 0
-[0] 5
+[0&!1] 0
+[1] 5
 State: 1
 [t] 2
 State: 2
-[!0&1] 3
-[0] 4
+[0&!1] 3
+[1] 4
 State: 3
-[!0&1&2] 0
-[!0&1&!2] 3
-[0&!2] 4
-[0&2] 5
+[0&!1&2] 0
+[0&!1&!2] 3
+[1&!2] 4
+[1&2] 5
 State: 4
-[!0&1&!2] 3
-[0&!2] 4
+[0&!1&!2] 3
+[1&!2] 4
 [2] 5
 State: 5 {0}
 [t] 5
@@ -3410,55 +3413,55 @@ State: 2 {0}
 HOA: v1
 States: 12
 Start: 4
-AP: 3 "p3" "p1" "p2"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic terminal
 --BODY--
 State: 0
-[!0&!2] 0
-[!0&2] 1
-[0&!1&!2] 9
-[0&1&!2] 10
-[0&2] 11
+[!1&!2] 0
+[1&!2] 1
+[!0&!1&2] 9
+[0&!1&2] 10
+[1&2] 11
 State: 1
-[!0] 1
-[0] 11
+[!2] 1
+[2] 11
 State: 2
-[0&1&!2] 2
+[0&!1&2] 2
 [0&1&2] 3
-[!0&!2 | !1&!2] 9
-[!0&2 | !1&2] 11
+[!0&!1 | !1&!2] 9
+[!0&1 | 1&!2] 11
 State: 3
-[0&1] 3
-[!0 | !1] 11
+[0&2] 3
+[!0 | !2] 11
 State: 4
-[!0] 5
-[0&!1] 7
-[0&1] 8
+[!2] 5
+[!0&2] 7
+[0&2] 8
 State: 5
-[!0] 0
-[0&!1] 9
-[0&1] 10
+[!2] 0
+[!0&2] 9
+[0&2] 10
 State: 6
-[0&1&!2] 2
-[!0&!2 | !1&!2] 9
-[2] 11
+[0&!1&2] 2
+[!0&!1 | !1&!2] 9
+[1] 11
 State: 7
-[!0 | !1] 9
-[0&1] 10
+[!0 | !2] 9
+[0&2] 10
 State: 8
-[0&1] 6
-[!0 | !1] 9
+[0&2] 6
+[!0 | !2] 9
 State: 9
-[!0&!2 | !1&!2] 9
-[0&1&!2] 10
-[2] 11
+[!0&!1 | !1&!2] 9
+[0&!1&2] 10
+[1] 11
 State: 10
-[0&1&!2] 6
-[!0&!2 | !1&!2] 9
-[2] 11
+[0&!1&2] 6
+[!0&!1 | !1&!2] 9
+[1] 11
 State: 11 {0}
 [t] 11
 --END--
@@ -3487,77 +3490,77 @@ State: 0
 HOA: v1
 States: 12
 Start: 11
-AP: 3 "p3" "p1" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&1] 7
+[1&2] 7
 State: 1
 [0&2] 0
-[0&!2] 1
+[!0&2] 1
 [0&2] 1 {0}
-[0&!2] 2
+[!0&2] 2
 State: 2
 [0&1&2] 7
-[0&1&!2] 8
+[!0&1&2] 8
 State: 3
 [!0&!2] 3
-[0&!2] 9
+[!0&2] 9
 State: 4
 [!0&!1&!2] 3
-[!0&!1] 4
-[0&!1&!2] 9
-[0&!1] 10
+[!1&!2] 4
+[!0&!1&2] 9
+[!1&2] 10
 State: 5
-[0&!2] 5
+[!0&2] 5
 [!0&!2] 9
 State: 6
-[0&!1&!2] 5
-[0&!1] 6
+[!0&!1&2] 5
+[!1&2] 6
 [!0&!1&!2] 9
-[!0&!1] 10
+[!1&!2] 10
 State: 7
-[0] 7 {0}
+[2] 7 {0}
 State: 8
 [0&!1&2] 7
-[0&!1&!2] 8
+[!0&!1&2] 8
 State: 9
-[!2] 9 {0}
+[!0] 9 {0}
 State: 10
-[!1&!2] 9
+[!0&!1] 9
 [!1] 10
 State: 11
 [0&2] 0
-[0] 1
-[0&!2] 2
+[2] 1
+[!0&2] 2
 [!0&!2] 3
-[!0] 4
-[0&!2] 5
-[0] 6
+[!2] 4
+[!0&2] 5
+[2] 6
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 3 "p3" "p0" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[!1&!2] 0
+[!0&!1] 0
 State: 1
 [!0&!1&!2] 0
-[0] 2
+[2] 2
 State: 2 {0}
 [t] 2
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p2" "p0" "p3"
+AP: 3 "p0" "p2" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -3565,8 +3568,8 @@ properties: deterministic
 --BODY--
 State: 0
 [0&1&2] 0
-[0&!1&2] 0 {0}
-[!0 | !2] 1
+[!0&1&2] 0 {0}
+[!1 | !2] 1
 State: 1
 [t] 1
 State: 2
@@ -3606,7 +3609,7 @@ State: 2 {0}
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: generalized-co-Buchi 2
 Acceptance: 2 Fin(0)|Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -3614,31 +3617,31 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1] 0 {0 1}
-[!0&1] 0 {0}
-[0&!1] 0 {1}
+[0&!1] 0 {0}
+[!0&1] 0 {1}
 [0&1] 0
 --END--
 HOA: v1
 States: 6
 Start: 5
-AP: 3 "p1" "p0" "p3"
+AP: 3 "p0" "p1" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1 | 2] 0
+[0 | 2] 0
 State: 1
 [t] 2
 State: 2
 [t] 3
 State: 3
-[0] 4
+[1] 4
 State: 4
 [t] 4
 State: 5
-[1 | 2] 0
+[0 | 2] 0
 [t] 1
 --END--
 HOA: v1
@@ -3656,30 +3659,30 @@ State: 0
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p3" "p2"
-Acceptance: 3 (Inf(2) | Fin(0)) & Inf(1)
+AP: 3 "p1" "p2" "p3"
+Acceptance: 2 (Fin(0) & Fin(1)) | (Inf(0)&Inf(1))
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0] 0 {1}
+[0] 0
 [!0] 1
 [!0] 2
 State: 1
-[0&1&2] 0 {1 2}
-[0&!1&2] 3 {0 1}
+[0&1&2] 0 {0 1}
+[0&1&!2] 3 {1}
 State: 2
-[0&!1&2] 1 {1}
-[0&!1&2] 2 {1}
+[0&1&!2] 1 {1}
+[0&1&!2] 2
 State: 3
-[0&1] 0 {1 2}
-[!0&1] 1
-[!0&!1] 1 {0}
-[0&!1] 3 {0 1}
+[0&2] 0 {0 1}
+[!0&2] 1 {1}
+[!0&!2] 1 {1}
+[0&!2] 3 {1}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -3687,8 +3690,8 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1&!2] 0
-[!0&!1&2] 0 {0}
-[0 | 1] 1
+[0&!1&!2] 0 {0}
+[1 | 2] 1
 State: 1
 [t] 1
 --END--
@@ -3773,25 +3776,25 @@ State: 2 {0}
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p0" "p3" "p2" "p1"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0&1&3 | 0&!1&2&3] 0 {0}
-[!0&1&!3 | 0&!1&2&!3] 1
+[!0&1&3 | 0&1&2&!3] 0 {0}
+[!0&!1&3 | 0&!1&2&!3] 1
 [0&!2 | !1&!2 | !2&!3] 2
 State: 1
-[!0&1&3 | 0&!1&2&3] 0 {0}
-[!0&1&!3 | 0&!1&2&!3] 1
-[0&!2&3 | !1&!2&3] 2
-[0&!2&!3 | !1&!2&!3] 3
+[!0&1&3 | 0&1&2&!3] 0 {0}
+[!0&!1&3 | 0&!1&2&!3] 1
+[0&1&!2 | 1&!2&!3] 2
+[0&!1&!2 | !1&!2&!3] 3
 State: 2
 [!2] 2 {0}
 State: 3
-[!2&3] 2
-[!2&!3] 3
+[1&!2] 2
+[!1&!2] 3
 --END--
 HOA: v1
 States: 4
@@ -3818,36 +3821,36 @@ State: 3 {0}
 HOA: v1
 States: 5
 Start: 4
-AP: 3 "p3" "p2" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic very-weak
 --BODY--
 State: 0
-[2] 0
-[!2] 3
+[0] 0
+[!0] 3
 State: 1 {0}
-[1&2] 0
-[!1&2] 1
-[!2] 3
+[0&1] 0
+[0&!1] 1
+[!0] 3
 State: 2 {0}
-[!0&2] 0
+[0&!2] 0
 [0&2] 2
-[!2] 3
+[!0] 3
 State: 3 {0}
 [t] 3
 State: 4 {0}
-[!0&1&2] 0
-[!0&!1&2] 1
+[0&1&!2] 0
+[0&!1&!2] 1
 [0&1&2] 2
-[!2] 3
+[!0] 3
 [0&!1&2] 4
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p2" "p0" "p3"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -3856,8 +3859,8 @@ properties: deterministic terminal
 State: 0 {0}
 [t] 0
 State: 1
-[!0&!1 | !0&2 | 0&1&!2] 0
-[!0&1&!2 | 0&!1 | 0&2] 1
+[!0&!1 | 0&1&!2 | !1&2] 0
+[!0&1 | 0&!1&!2 | 1&2] 1
 --END--
 HOA: v1
 States: 3
@@ -3878,37 +3881,37 @@ State: 2 {0}
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p3" "p1"
-acc-name: Streett 1
-Acceptance: 2 Fin(0) | Inf(1)
+AP: 2 "p1" "p3"
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&!1] 0 {0}
-[!0&1] 0 {0 1}
-[0] 1
+[!0&!1] 0 {1}
+[0&!1] 0 {0 1}
+[1] 1
 State: 1
-[!1] 1
-[1] 1 {0}
+[!0] 1
+[0] 1 {1}
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&!1 | 0&1] 0 {0}
-[!0&1] 1
-[0&!1] 2
+[!1&!2 | 1&2] 0 {0}
+[!1&2] 1
+[1&!2] 2
 State: 1
-[!0&!2] 1 {0}
-[!0&2] 1
-[0] 2
+[!0&!1] 1 {0}
+[0&!1] 1
+[1] 2
 State: 2
 [t] 2
 --END--
@@ -3953,39 +3956,39 @@ State: 1 "{}"
 HOA: v1
 States: 7
 Start: 0
-AP: 3 "p1" "p0" "p2"
+AP: 3 "p0" "p1" "p2"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0] 1
-[!0] 2
+[1] 1
+[!1] 2
 State: 1
 [t] 3
 State: 2
-[0] 3
-[!0] 4
+[1] 3
+[!1] 4
 State: 3
 [0&2 | 1&2] 3
 [!0&!1&2] 3 {0}
 [!2] 5
 State: 4
-[0&2] 3
-[!0&2] 4 {0}
-[0&!2] 5
-[!0&!2] 6
+[1&2] 3
+[!1&2] 4 {0}
+[1&!2] 5
+[!1&!2] 6
 State: 5
 [t] 5
 State: 6
-[0] 5
-[!0] 6 {0}
+[1] 5
+[!1] 6 {0}
 --END--
 HOA: v1
 States: 8
 Start: 7
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -3994,25 +3997,25 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1
-[!1&2] 3
+[0&!2] 3
 State: 2
-[!1&!2] 3
+[!0&!2] 3
 State: 3 {0}
-[!1] 3
+[!2] 3
 State: 4
-[1&!2] 0
-[!1&!2] 6
+[!0&2] 0
+[!0&!2] 6
 State: 5
-[1&2] 0
-[!1&2] 6
+[0&2] 0
+[0&!2] 6
 State: 6
-[1] 0
-[!1] 6
+[2] 0
+[!2] 6
 State: 7
-[0&1] 1
-[0&!1] 2
-[!0&1] 4
-[!0&!1] 5
+[1&2] 1
+[1&!2] 2
+[!1&2] 4
+[!1&!2] 5
 --END--
 HOA: v1
 States: 2
@@ -4060,8 +4063,9 @@ State: 2
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p3" "p1" "p0"
-Acceptance: 4 Inf(0) | Fin(1) | (Fin(2) & Inf(3))
+AP: 3 "p0" "p1" "p3"
+acc-name: parity min even 3
+Acceptance: 3 Inf(0) | (Fin(1) & Inf(2))
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
@@ -4069,13 +4073,13 @@ State: 0
 [1] 1
 [!1] 2
 State: 1
-[!0&!1 | !0&!2] 1
-[0] 1 {0}
-[!0&1&2] 1 {1}
+[!0&!2 | !1&!2] 1 {2}
+[2] 1 {0 2}
+[0&1&!2] 1 {1 2}
 State: 2
-[!0&!1 | !0&!2] 2 {1}
-[0] 2 {1 2}
-[!0&1&2] 2 {1 3}
+[!0&!2 | !1&!2] 2
+[2] 2 {1}
+[0&1&!2] 2 {2}
 --END--
 HOA: v1
 States: 3
@@ -4113,16 +4117,16 @@ State: 1
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&!1&2] 0
+[0&!1&!2] 0
 [!0&!1&!2] 0 {0}
-[0 | 1] 1
+[1 | 2] 1
 State: 1
 [t] 1
 --END--
@@ -4183,136 +4187,136 @@ State: 0
 HOA: v1
 States: 8
 Start: 0
-AP: 3 "p3" "p0" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: terminal
 --BODY--
 State: 0
-[0] 0
-[1] 1
-[!1] 2
-[!0] 3
+[2] 0
+[0] 1
+[!0] 2
+[!2] 3
 State: 1
-[2] 4
+[1] 4
 State: 2
-[!2] 4
+[!1] 4
 State: 3
-[0] 0
-[0&1] 1
-[0&!1] 2
-[!0] 3
-[!0&1] 5
-[!0&!1] 6
+[2] 0
+[0&2] 1
+[!0&2] 2
+[!2] 3
+[0&!2] 5
+[!0&!2] 6
 State: 4 {0}
 [t] 4
 State: 5
-[0&2] 4
-[!0&2] 7
+[1&2] 4
+[1&!2] 7
 State: 6
-[0&!2] 4
-[!0&!2] 7
+[!1&2] 4
+[!1&!2] 7
 State: 7
-[0] 4
-[!0] 7
+[2] 4
+[!2] 7
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p3" "p1" "p2"
+AP: 3 "p1" "p2" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
 [t] 0 {1}
-[0] 1
-[0] 2 {0}
+[2] 1
+[2] 2 {0}
 State: 1
-[0&!1&2] 1 {0}
+[!0&1&2] 1 {0}
 [0&1&2] 1 {0 1}
 [0&1&2] 3 {1}
 State: 2
-[!0&!2] 0 {1}
-[0&!1&!2] 2 {0 1}
-[0&!1&2] 2 {0}
-[0&!1&!2] 4 {1}
-[!0&2] 5
+[!1&!2] 0 {1}
+[!0&!1&2] 2 {0 1}
+[!0&1&2] 2 {0}
+[!0&!1&2] 4 {1}
+[1&!2] 5
 State: 3
-[0&2] 1 {0}
-[2] 3 {1}
+[1&2] 1 {0}
+[1] 3 {1}
 State: 4
-[!0] 0 {1}
-[0&!1] 2 {0}
-[0&!1] 4 {1}
-State: 5
 [!2] 0 {1}
-[0&!2] 1
-[0&!2] 2 {0 1}
-[0&2] 2 {0}
-[2] 5
+[!0&2] 2 {0}
+[!0&2] 4 {1}
+State: 5
+[!1] 0 {1}
+[!1&2] 1
+[!1&2] 2 {0 1}
+[1&2] 2 {0}
+[1] 5
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p0" "p3" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&2] 0 {0}
+[0&1] 0 {0}
 [!0] 1
-[0&1&!2] 2
-[0&!2] 3
+[0&!1&2] 2
+[0&!1] 3
 State: 1
 [t] 1 {0}
 State: 2
-[1] 2 {0}
+[2] 2 {0}
 State: 3
-[0&2] 0 {0}
+[0&1] 0 {0}
 [!0] 1
-[0&!2] 3
+[0&!1] 3
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p0" "p2" "p1"
-Acceptance: 3 Fin(2) & (Inf(0)&Inf(1))
+AP: 3 "p0" "p1" "p2"
+Acceptance: 3 Inf(0) & (Inf(1) | Fin(2))
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0&2] 2
-[0&2] 3
-[!2] 4
-[!0&!2] 5
+[!0&1] 2
+[0&1] 3
+[!1] 4
+[!0&!1] 5
 [0] 1
 State: 1
-[0&1] 1 {0 1}
-[0] 1 {2}
+[0&2] 1 {0}
+[0] 1 {0 2}
 State: 2
-[!1] 2 {0 1}
-[1] 2 {0}
+[!2] 2 {0}
+[2] 2
 State: 3
 [!0] 2
 [0] 3
 State: 4
-[!0&2] 2
-[0&2] 3
-[!0&!1&!2] 4 {0 1}
-[!0&1&!2] 4 {0}
-[0&!1&!2] 4 {1}
-[0&1&!2] 4
-[!0&!2] 5
+[!0&1] 2
+[0&1] 3
+[!0&!1&!2] 4 {0 1 2}
+[!0&!1&2] 4 {0 2}
+[0&!1&!2] 4 {1 2}
+[0&!1&2] 4 {2}
+[!0&!1] 5
 State: 5
-[0&2] 2
-[0&!2] 5
+[0&1] 2
+[0&!1] 5
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -4322,7 +4326,7 @@ State: 0 {0}
 [t] 0
 State: 1
 [0&1] 0
-[0&!1] 1
+[!0&1] 1
 --END--
 HOA: v1
 States: 5
@@ -4361,25 +4365,25 @@ State: 4
 HOA: v1
 States: 5
 Start: 3
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic very-weak
 --BODY--
 State: 0
-[1] 0
-[!1] 4
+[0] 0
+[!0] 4
 State: 1 {0}
-[!0&1] 0
+[0&!1] 0
 [0&1] 1
-[!1] 4
+[!0] 4
 State: 2
-[1] 1
-[!1] 4
+[0] 1
+[!0] 4
 State: 3
-[1] 2
-[!1] 4
+[0] 2
+[!0] 4
 State: 4 {0}
 [t] 4
 --END--
@@ -4412,62 +4416,62 @@ State: 5
 HOA: v1
 States: 3
 Start: 1
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic terminal
 --BODY--
 State: 0
-[!2] 0
-[2] 2
+[!0] 0
+[0] 2
 State: 1
-[!0&!1&!2 | 0&1&!2] 0
-[!0&1 | 0&!1] 1
-[!0&!1&2 | 0&1&2] 2
+[!0&!1&!2 | !0&1&2] 0
+[!1&2 | 1&!2] 1
+[0&!1&!2 | 0&1&2] 2
 State: 2 {0}
 [t] 2
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p2" "p0" "p3"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0 | 1&!2] 0
-[0&!1 | 0&2] 0 {0}
+[0&!2 | !1] 0
+[!0&1 | 1&2] 0 {0}
 [0&1&!2] 1 {0}
 State: 1
-[!0&1&2] 0
+[0&!1&2] 0
 [0&1&2] 0 {0}
-[!0&1&!2] 1
+[0&!1&!2] 1
 [0&1&!2] 1 {0}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p3" "p0" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: Rabin 1
 Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0&!2] 1
-[!0&!2] 2
-[!0&2] 3
+[!1&2] 1
+[!1&!2] 2
+[1&!2] 3
 State: 1
-[1&!2] 1 {0}
-[!1&!2] 1 {1}
+[0&!1] 1 {0 1}
+[!0&!1] 1 {1}
 State: 2
-[!2] 2
-[2] 3
+[!1] 2 {0}
+[1] 3
 State: 3
-[!1&2] 3
-[1] 3 {0}
-[!1&!2] 3 {1}
+[!0&1] 3
+[0] 3 {0}
+[!0&!1] 3 {1}
 --END--
 HOA: v1
 States: 2
@@ -4578,7 +4582,7 @@ State: 3 "init"
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -4586,19 +4590,19 @@ properties: deterministic stutter-invariant
 --BODY--
 State: 0
 [!0&!1] 0 {0}
-[0&!1] 0
-[!0&1] 1
+[!0&1] 0
+[0&!1] 1
 [0&1] 2
 State: 1
 [t] 1 {0}
 State: 2
-[!0] 1
-[0] 2
+[!1] 1
+[1] 2
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p2" "p0" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -4607,21 +4611,21 @@ properties: deterministic terminal
 State: 0
 [t] 2
 State: 1
-[2] 1
-[!2] 4
+[1] 1
+[!1] 4
 State: 2
-[1&2] 3
-[!1 | !2] 4
+[0&1] 3
+[!0 | !1] 4
 State: 3
-[!0&2] 1
-[0 | !2] 4
+[1&!2] 1
+[!1 | 2] 4
 State: 4 {0}
 [t] 4
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -4629,19 +4633,19 @@ properties: very-weak
 --BODY--
 State: 0
 [t] 0
-[0&1&!2] 1
+[0&!1&2] 1
 [0&1&2] 2
 State: 1 {0}
-[0&1] 1
+[0&2] 1
 [!0] 3
 State: 2
-[!0&!2] 3
-[!0&2] 4
+[!0&!1] 3
+[!0&1] 4
 State: 3 {0}
 [t] 3
 State: 4
-[!2] 3
-[2] 4
+[!1] 3
+[1] 4
 --END--
 HOA: v1
 States: 2
@@ -4662,14 +4666,14 @@ State: 1
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p3" "p0" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[0] 1
+[2] 1
 State: 1 {0}
 [t] 1
 State: 2
@@ -4728,7 +4732,7 @@ State: 3 {0}
 HOA: v1
 States: 3
 Start: 1
-AP: 2 "p3" "p1"
+AP: 2 "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -4737,10 +4741,10 @@ properties: terminal
 State: 0 {0}
 [t] 0
 State: 1
-[!0] 2
-State: 2
-[1] 0
 [!1] 2
+State: 2
+[0] 0
+[!0] 2
 --END--
 HOA: v1
 States: 6
@@ -4786,49 +4790,49 @@ State: 1
 HOA: v1
 States: 12
 Start: 1
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[!1] 0
+[!2] 0
 State: 1
-[0] 6
-[!0&1&!2] 7
-[!0&!1] 9
-[!0&1&2] 10
+[1] 6
+[!0&!1&2] 7
+[!1&!2] 9
+[0&!1&2] 10
 State: 2 {0}
-[1&!2] 2
-[1&2] 4
-[!1] 5
+[!0&2] 2
+[0&2] 4
+[!2] 5
 State: 3
-[!1] 3
-[1] 5
+[!2] 3
+[2] 5
 State: 4
-[1] 4
-[!1] 5
+[2] 4
+[!2] 5
 State: 5 {0}
 [t] 5
 State: 6
 [t] 0
 State: 7
-[!1] 3
-[1&!2] 8
-[1&2] 11
+[!2] 3
+[!0&2] 8
+[0&2] 11
 State: 8
-[1&!2] 2
-[!1] 3
-[1&2] 4
+[!0&2] 2
+[!2] 3
+[0&2] 4
 State: 9
 [t] 3
 State: 10
-[!1] 3
-[1] 11
+[!2] 3
+[2] 11
 State: 11
-[!1] 3
-[1] 4
+[!2] 3
+[2] 4
 --END--
 HOA: v1
 States: 1
@@ -4887,7 +4891,7 @@ State: 7
 HOA: v1
 States: 8
 Start: 6
-AP: 3 "p1" "p0" "p3"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -4898,58 +4902,58 @@ State: 0 {0}
 State: 1 {0}
 [!2] 1
 State: 2 {0}
-[!1] 2
+[!0] 2
 State: 3 {0}
-[1&!2] 1
-[!1&2] 2
-[!1&!2] 3
+[0&!2] 1
+[!0&2] 2
+[!0&!2] 3
 State: 4
 [2] 0
 [!2] 4
 State: 5
-[1&2] 0
-[1&!2] 4
-[!1&!2] 5
-[!1&2] 7
+[0&2] 0
+[0&!2] 4
+[!0&!2] 5
+[!0&2] 7
 State: 6
 [0&1&2] 0
-[!0&1&!2] 1
+[0&!1&!2] 1
 [!0&!1&2] 2
 [!0&!1&!2] 3
 [0&1&!2] 4
-[0&!1&!2] 5
-[0&!1&2] 7
+[!0&1&!2] 5
+[!0&1&2] 7
 State: 7
-[1] 0
-[!1] 7
+[0] 0
+[!0] 7
 --END--
 HOA: v1
 States: 5
 Start: 2
-AP: 3 "p2" "p3" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic terminal
 --BODY--
 State: 0
-[1&2] 0
-[!1&2] 3
-[!2] 4
+[0&2] 0
+[0&!2] 3
+[!0] 4
 State: 1
-[1&2] 0
-[!1&!2] 1
-[!1&2] 3
-[1&!2] 4
+[0&2] 0
+[!0&!2] 1
+[0&!2] 3
+[!0&2] 4
 State: 2
 [0&1&2] 0
-[0&!1&!2] 1
-[!0] 2
-[0&!1&2] 3
-[0&1&!2] 4
+[!0&1&!2] 1
+[!1] 2
+[0&1&!2] 3
+[!0&1&2] 4
 State: 3
-[!1&!2] 1
-[1 | 2] 4
+[!0&!2] 1
+[0 | 2] 4
 State: 4 {0}
 [t] 4
 --END--
@@ -4991,7 +4995,7 @@ State: 3 "{3}"
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -4999,17 +5003,17 @@ properties: terminal
 --BODY--
 State: 0
 [0&1&2] 1
-[0&!1&2] 2
+[0&1&!2] 2
 State: 1
 [0] 1
 [t] 3
 State: 2
 [0&1&2] 1
-[0&!1&2] 2
+[0&1&!2] 2
 [1&2] 3
-[!1&2] 4
+[1&!2] 4
 State: 3
-[1] 5
+[2] 5
 State: 4
 [1&2] 5
 State: 5 {0}
@@ -5018,7 +5022,7 @@ State: 5 {0}
 HOA: v1
 States: 2
 Start: 1
-AP: 4 "p0" "p1" "p3" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -5026,7 +5030,7 @@ properties: trans-labels explicit-labels state-acc deterministic
 State: 0 "{}"
 [t] 0
 State: 1 "init"
-[0&1&!2 | 0&!2&3] 0
+[0&1&!3 | 0&2&!3] 0
 --END--
 HOA: v1
 States: 1
@@ -5068,27 +5072,27 @@ State: 0
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p2" "p1"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 2 "p1" "p2"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&!1] 0 {0}
+[!0&1] 0 {1}
 [0&1] 1
-[!0 | 1] 2
+[0 | !1] 2
 State: 1
-[0&!1] 0 {0}
+[!0&1] 0 {1}
 [0&1] 1
 State: 2
-[!0&1] 2 {0}
+[0&!1] 2 {1}
 [0&1] 2
-[t] 2 {1}
+[t] 2 {0}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p3" "p2" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -5100,8 +5104,8 @@ State: 1
 [!0&!2] 2
 [0 | 2] 3
 State: 2
-[0&!1] 2
-[!0] 3
+[!1&2] 2
+[!2] 3
 State: 3 {0}
 [t] 3
 --END--
@@ -5217,7 +5221,7 @@ State: 2
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p3" "p1" "p2"
+AP: 3 "p1" "p2" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -5233,66 +5237,66 @@ State: 3
 [!0&!1&2 | !0&1&!2 | 0&!1&!2 | 0&1&2] 4
 [!0&!1&!2 | !0&1&2 | 0&!1&2 | 0&1&!2] 5
 State: 4
-[!2] 4 {0}
-[2] 4
+[!1] 4 {0}
+[1] 4
 State: 5
 [t] 5
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p3" "p0" "p1"
-acc-name: Streett 1
-Acceptance: 2 Fin(0) | Inf(1)
+AP: 3 "p0" "p1" "p3"
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0&1] 1
-[0&!1] 2
-[!0&!1] 3
+[0&2] 1
+[!0&2] 2
+[!0&!2] 3
 State: 1
-[!2] 1
-[2] 1 {0}
+[!1] 1
+[1] 1 {1}
 State: 2
-[!2] 2 {0}
-[2] 2 {0 1}
+[!1] 2 {1}
+[1] 2 {0 1}
 State: 3
-[t] 3
+[t] 3 {0}
 --END--
 HOA: v1
 States: 6
 Start: 2
-AP: 4 "p2" "p1" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0 {0}
-[0] 0
+[2] 0
 State: 1 {0}
 [0&2] 0
-[0&!1&!2 | 0&!2&!3] 1
-[0&1&!2&3] 4
+[!0&!1&2 | !0&2&!3] 1
+[!0&1&2&3] 4
 State: 2
-[0] 0
-[!0&!1&2 | !0&2&!3] 2
+[2] 0
+[0&!1&!2 | 0&!2&!3] 2
 [!0&!1&!2 | !0&!2&!3] 3
-[!0&1&3] 5
+[1&!2&3] 5
 State: 3
 [0&2] 0
-[0&!1&!2 | 0&!2&!3] 1
-[!0&!1&2 | !0&2&!3] 2
+[!0&!1&2 | !0&2&!3] 1
+[0&!1&!2 | 0&!2&!3] 2
 [!0&!1&!2 | !0&!2&!3] 3
-[0&1&!2&3] 4
-[!0&1&3] 5
+[!0&1&2&3] 4
+[1&!2&3] 5
 State: 4
 [0&2] 0
-[0&!2] 4
+[!0&2] 4
 State: 5
-[!0&!1&2 | !0&2&!3] 2
+[0&!1&!2 | 0&!2&!3] 2
 [!0&!1&!2 | !0&!2&!3] 3
-[!0&1&3] 5
+[1&!2&3] 5
 --END--
 HOA: v1
 States: 4
@@ -5338,15 +5342,15 @@ State: 2 {0}
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 --BODY--
 State: 0 "{0,1}"
-[0] 1
+[1] 1
 State: 1 "{2}"
-[1] 2
+[0] 2
 State: 2 "{}"
 [t] 2
 --END--
@@ -5364,100 +5368,100 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p2" "p3" "p0"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 3 "p0" "p2" "p3"
+acc-name: Streett 1
+Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0&1] 1
-[0&!1] 2
-[0] 3
-[!0] 4
-State: 1
-[1] 1 {0}
-State: 2
-[!2] 2 {0}
-[2] 2
-State: 3
-[!1] 2
-[!1] 3 {0}
+[!1&2] 1
+[1&!2] 2
 [1] 3
+[!1] 4
+State: 1
+[2] 1 {1}
+State: 2
+[!0] 2 {0 1}
+[0] 2 {0}
+State: 3
+[!2] 2
+[!2] 3 {0 1}
+[2] 3 {0}
 State: 4
-[1&2] 4 {0}
-[t] 4 {1}
+[0&2] 4
+[t] 4 {0}
 --END--
 HOA: v1
 States: 6
 Start: 1
-AP: 4 "p3" "p2" "p1" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0
-[1&!3] 0
-[1&3] 3
+[!0&2] 0
+[0&2] 3
 State: 1 {0}
-[1&!3] 0
-[0&!1&!3] 1
-[1&3] 3
+[!0&2] 0
+[!0&!2&3] 1
+[0&2] 3
 [0&!1&!2&3] 4
-[0&!1&2&3] 5
+[0&1&!2&3] 5
 State: 2 {0}
-[1&!2&3] 2
-[1&!3] 3
+[0&!1&2] 2
+[!0&2] 3
 State: 3 {0}
-[1] 3
+[2] 3
 State: 4 {0}
-[1&!3] 0
-[0&!1&!3] 1
-[1&!2&3] 2
+[!0&2] 0
+[!0&!2&3] 1
+[0&!1&2] 2
 [0&!1&!2&3] 4
-[0&!1&2&3] 5
+[0&1&!2&3] 5
 State: 5 {0}
-[0&!1&!3] 1
+[!0&!2&3] 1
 [0&!1&!2&3] 4
-[0&!1&2&3] 5
+[0&1&!2&3] 5
 --END--
 HOA: v1
 States: 9
 Start: 0
-AP: 4 "p2" "p1" "p3" "p0"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 4 "p0" "p1" "p2" "p3"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0] 0
-[3] 1
-[0&2&!3] 3
-[0] 4
-[0] 2
+[!2] 0 {0}
+[0] 1
+[!0&2&3] 3
+[2] 4
+[2] 2
 State: 1
-[3] 1 {0}
+[0] 1 {1}
 State: 2
-[0&1] 6
-[!1&3] 2
-[1&3] 2 {0}
-[t] 2 {1}
+[1&2] 6
+[0&!1] 2
+[0&1] 2 {1}
+[t] 2 {0}
 State: 3
-[!0&2&3] 7
+[0&!2&3] 7
 State: 4
-[0&2] 3
-[0] 4 {0}
+[2&3] 3
+[2] 4 {1}
 State: 5
-[!0&2&3] 8
+[0&!2&3] 8
 State: 6
-[0&2] 5
-[0&!1] 6
-[0&1] 6 {0}
+[2&3] 5
+[!1&2] 6
+[1&2] 6 {1}
 State: 7
-[2&3] 7 {0}
+[0&3] 7 {1}
 State: 8
-[!1&2&3] 8
-[1&2&3] 8 {0}
+[0&!1&3] 8
+[0&1&3] 8 {1}
 --END--
 HOA: v1
 States: 3
@@ -5480,48 +5484,48 @@ State: 2 {0}
 HOA: v1
 States: 10
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1] 3
-[!1] 5
+[2] 3
+[!2] 5
 State: 1 {0}
-[!1] 1
+[!2] 1
 State: 2
-[!1&2] 1
-[!2] 8
+[0&!2] 1
+[!0] 8
 State: 3 {0}
-[0&!1&2] 2
-[!0&1&2] 3
-[!0&!1&2] 5
+[0&1&!2] 2
+[0&!1&2] 3
+[0&!1&!2] 5
 [0&1&2] 7
-[0&!2] 8
-[!0&!2] 9
+[!0&1] 8
+[!0&!1] 9
 State: 4 {0}
-[!0] 4
+[!1] 4
 State: 5
-[0&!1&2] 1
-[!0&1&2] 4
-[!0&!1&2] 6
-[0&!2] 8
-[!0&!2] 9
+[0&1&!2] 1
+[0&!1&2] 4
+[0&!1&!2] 6
+[!0&1] 8
+[!0&!1] 9
 State: 6
-[0&!1] 1
-[!0&1] 4
-[!0&!1] 6
+[1&!2] 1
+[!1&2] 4
+[!1&!2] 6
 State: 7
-[!1&2] 2
-[1&2] 7
-[!2] 8
+[0&!2] 2
+[0&2] 7
+[!0] 8
 State: 8 {0}
 [t] 8
 State: 9
-[0] 8
-[!0] 9
+[1] 8
+[!1] 9
 --END--
 HOA: v1
 States: 1
@@ -5538,99 +5542,99 @@ State: 0
 HOA: v1
 States: 15
 Start: 0
-AP: 3 "p2" "p1" "p0"
-Acceptance: 4 Inf(0) | Fin(1) | (Fin(2) & Inf(3))
+AP: 3 "p0" "p1" "p2"
+Acceptance: 2 (Fin(0) & Fin(1)) | (Inf(0)&Inf(1))
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&1&2] 1
+[0&1&!2] 1
 [0&1&2] 2
-[0&1&!2] 3
+[!0&1&2] 3
 [!0&1&!2] 4
 [0&!1&2] 5
-[0&!1&!2] 6
-[!0&!1&2] 7
+[!0&!1&2] 6
+[0&!1&!2] 7
 State: 1
-[!0&2] 1
+[0&!2] 1 {0 1}
 State: 2
 [0&2] 2 {1}
-[0&!2] 8 {0}
+[!0&2] 8 {0 1}
 State: 3
-[0&!2] 3 {1}
+[!0&2] 3 {1}
 [!0&!2] 4
-[!0&2] 9
+[0&!2] 9
 [0&2] 10
 State: 4
-[t] 4
+[t] 4 {0 1}
 State: 5
 [0&1&2] 2
-[0&!1&2] 5 {1 3}
-[0&1&!2] 8
-[0&!1&!2] 11 {1 2}
-[!0&!1] 12
+[0&!1&2] 5
+[!0&1&2] 8
+[!0&!1&2] 11 {1}
+[!1&!2] 12
 State: 6
-[0&1&!2] 3
+[!0&1&2] 3
 [!0&1&!2] 4
-[0&!1&!2] 6 {1 3}
-[!0&1&2] 9
+[!0&!1&2] 6 {0 1}
+[0&1&!2] 9
 [0&1&2] 10
-[0&!1&2] 13 {1}
-[!0&!1&2] 14
+[0&!1&2] 13 {0 1}
+[0&!1&!2] 14
 State: 7
-[!0&2] 7 {1}
-[0 | !2] 12
+[0&!2] 7 {1}
+[!0 | 2] 12
 State: 8
-[!0&2] 1
-[0&2] 2
-[0&!2] 8 {0}
+[0&!2] 1
+[0&2] 2 {0 1}
+[!0&2] 8 {0 1}
 State: 9
-[0 | !2] 4
-[!0&2] 9 {1}
+[!0 | 2] 4
+[0&!2] 9 {1}
 State: 10
-[0&!2] 3 {1}
-[!0] 4
+[!0&2] 3 {1}
+[!2] 4
 [0&2] 10
 State: 11
-[!0&1&2] 1
+[0&1&!2] 1
 [0&1&2] 2
 [0&!1&2] 5 {1}
-[!0&!1&2] 7
-[0&1&!2] 8
-[0&!1&!2] 11 {1 2}
+[0&!1&!2] 7
+[!0&1&2] 8
+[!0&!1&2] 11 {1}
 [!0&!1&!2] 12
 State: 12
-[t] 12 {1 3}
+[t] 12 {0 1}
 State: 13
-[0&1&!2] 3
-[!0&1] 4
-[0&!1&!2] 6 {1 3}
+[!0&1&2] 3
+[1&!2] 4
+[!0&!1&2] 6 {0 1}
 [0&1&2] 10
 [0&!1&2] 13 {1}
 State: 14
-[!0&2] 14 {1 3}
+[0&!2] 14 {0 1}
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[0] 0
-State: 1
 [1] 0
-[!1] 2
+State: 1
+[0] 0
+[!0] 2
 State: 2
 [0&1] 0
-[0&!1] 2
+[!0&1] 2
 --END--
 HOA: v1
 States: 6
 Start: 2
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -5639,21 +5643,21 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[!1] 1
+[!2] 1
 State: 2
-[!0&!2 | 0&2] 4
-[!0&2 | 0&!2] 5
+[!0&!1 | 0&1] 4
+[!0&1 | 0&!1] 5
 State: 3
-[1] 0
-[!1] 3
+[2] 0
+[!2] 3
 State: 4
-[!0&1] 0
-[0&!1] 1
-[!0&!1] 3
+[!1&2] 0
+[1&!2] 1
+[!1&!2] 3
 State: 5
-[0&1] 0
-[!0&!1] 1
-[0&!1] 3
+[1&2] 0
+[!1&!2] 1
+[1&!2] 3
 --END--
 HOA: v1
 States: 2
@@ -5671,32 +5675,32 @@ State: 1 "{}"
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p0" "p3" "p1"
+AP: 3 "p0" "p1" "p3"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&!1&!2 | 0&1] 0 {0}
-[0&!1&2] 1 {0}
-[!0&!1&2] 2
-[!0&1 | 0&!1&!2] 3
+[!0&!1&!2 | 0&2] 0 {0}
+[0&1&!2] 1 {0}
+[!0&1&!2] 2
+[!0&2 | 0&!1&!2] 3
 State: 1
-[0&1] 0 {0}
-[0&!1&2] 1 {0}
+[0&2] 0 {0}
+[0&1&!2] 1 {0}
 [!0 | !1&!2] 3
 State: 2
 [!0&!1&!2] 0 {0}
-[!0&!1&2] 2
-[0 | 1] 3
+[!0&1&!2] 2
+[0 | 2] 3
 State: 3
 [t] 3
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 3 "p1" "p0" "p3"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc very-weak
@@ -5704,21 +5708,21 @@ properties: trans-labels explicit-labels state-acc very-weak
 State: 0
 [t] 1
 State: 1
-[1] 2
-[!1] 3
+[0] 2
+[!0] 3
 State: 2 {0}
-[!1&!2 | 1&2] 2
-[0&!1&!2 | 0&1&2] 4
+[!0&!2 | 0&2] 2
+[!0&1&!2 | 0&1&2] 4
 State: 3
-[1&2] 2
-[!1&!2] 3
+[0&2] 2
+[!0&!2] 3
 [0&1&2] 4
-[0&!1&!2] 5
+[!0&1&!2] 5
 State: 4 {0}
-[0] 4
+[1] 4
 State: 5
 [0&1] 4
-[0&!1] 5
+[!0&1] 5
 --END--
 HOA: v1
 States: 2
@@ -5751,40 +5755,40 @@ State: 0
 HOA: v1
 States: 6
 Start: 0
-AP: 4 "p0" "p2" "p3" "p1"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 properties: stutter-invariant
 --BODY--
 State: 0
-[!0&2 | 0&!2 | 3] 1
-[!0&1&!2&!3 | 0&2&!3] 2
+[!0&3 | 0&!3 | 1] 1
+[!0&!1&2&!3 | 0&!1&3] 2
 [!0&!1&!2&!3] 3
 State: 1
 [t] 1 {0}
 State: 2
-[!0&2 | 0&!2] 1
-[!0&1&!2 | 0&2] 2 {0}
-[!0&!1&!2] 3
+[!0&3 | 0&!3] 1
+[!0&2&!3 | 0&3] 2 {0}
+[!0&!2&!3] 3
 State: 3
-[!0&1&2] 1
-[!0&1&!2] 2 {0}
-[!0&!1&!2] 3
-[!0&!1&2] 4
-[0&!2] 5
+[!0&2&3] 1
+[!0&2&!3] 2 {0}
+[!0&!2&!3] 3
+[!0&!2&3] 4
+[0&!3] 5
 State: 4
-[!0&1] 1
-[!0&!1] 4
+[!0&2] 1
+[!0&!2] 4
 State: 5
-[!0&1] 1
-[!0&!1&2] 4
-[0&!2 | !1&!2] 5
+[!0&2] 1
+[!0&!2&3] 4
+[0&!3 | !2&!3] 5
 --END--
 HOA: v1
 States: 6
 Start: 2
-AP: 4 "p0" "p1" "p3" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -5795,41 +5799,42 @@ State: 0 {0}
 State: 1 {0}
 [2&3] 0
 [!2&!3] 1
-[!2&3] 3
-[2&!3] 4
+[2&!3] 3
+[!2&3] 4
 State: 2
-[!0&!1&2 | 1&2&3] 0
+[!0&!1&3 | 1&2&3] 0
 [1&!2&!3] 1
-[!0&!1&!2 | 1&!2&3] 3
-[1&2&!3] 4
-[0&!1&!2] 5
+[!0&!1&!3 | 1&2&!3] 3
+[1&!2&3] 4
+[0&!1&!3] 5
 State: 3
-[2] 0
-[!2] 3
-State: 4
 [3] 0
-[!3] 4
+[!3] 3
+State: 4
+[2] 0
+[!2] 4
 State: 5 {0}
-[!2] 5
+[!3] 5
 --END--
 HOA: v1
 States: 3
 Start: 0
 AP: 2 "p1" "p3"
-Acceptance: 4 (Inf(2) | Fin(1)) & Fin(0) & Inf(3)
+acc-name: parity min even 2
+Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: semi-deterministic
 --BODY--
 State: 0
-[t] 0
+[t] 0 {1}
 [0] 1
 [!0] 2
 State: 1
-[1] 1 {3}
-[!1] 1 {0 3}
+[1] 1
+[!1] 1 {1}
 State: 2
-[1] 2 {1 3}
-[!1] 2 {2 3}
+[1] 2 {1}
+[!1] 2 {0}
 --END--
 HOA: v1
 States: 1
@@ -5845,18 +5850,18 @@ State: 0
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p0" "p2" "p1" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic terminal
 --BODY--
 State: 0
-[!0&1 | 0&!1] 1
-[!0&!1 | 0&1] 3
+[!0&2 | 0&!2] 1
+[!0&!2 | 0&2] 3
 State: 1
-[0&2&!3] 1
-[0&!2&!3] 2
+[0&1&!3] 1
+[0&!1&!3] 2
 [!0 | 3] 3
 State: 2
 [0] 2
@@ -5867,7 +5872,7 @@ State: 3 {0}
 HOA: v1
 States: 4
 Start: 2
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -5876,13 +5881,13 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[0] 1
+[1] 1
 State: 2
-[1] 0
-[0&!1] 3
+[0] 0
+[!0&1] 3
 State: 3
 [0&1] 1
-[0&!1] 3
+[!0&1] 3
 --END--
 HOA: v1
 States: 4
@@ -5928,7 +5933,7 @@ State: 0
 HOA: v1
 States: 7
 Start: 0
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -5940,16 +5945,16 @@ State: 0
 [!0&!1 | 0&1] 2
 State: 1
 [0&1] 3
-[!0&1] 4
+[0&!1] 4
 State: 2
-[!0&1] 4
+[0&!1] 4
 [0&1] 5
 [!0&!1] 6
 State: 3 {0}
 [t] 3
 State: 4
-[0] 3
-[!0] 4
+[1] 3
+[!1] 4
 State: 5
 [!0&1 | 0&!1] 3
 [!0&!1] 5
@@ -5959,29 +5964,29 @@ State: 6 {0}
 HOA: v1
 States: 5
 Start: 0
-AP: 4 "p0" "p3" "p1" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc very-weak
 --BODY--
 State: 0 {0}
 [!0] 0
-[0&1] 1
-[0&!1&!2&3 | 0&!1&2&!3] 2
+[0&3] 1
+[0&!1&2&!3 | 0&1&!2&!3] 2
 [0&!1&!2&!3] 3
-[0&!1&!2&!3 | 0&!1&2&3] 4
+[0&!1&!2&!3 | 0&1&2&!3] 4
 State: 1 {0}
 [t] 1
 State: 2 {0}
-[0&1] 1
-[!0&!2&3 | !0&2&!3 | !1&!2&3 | !1&2&!3] 2
-[!0&!2&!3 | !1&!2&!3] 3
-[0&!1&!2&!3 | 0&!1&2&3] 4
+[0&3] 1
+[!0&!1&2 | !0&1&!2 | !1&2&!3 | 1&!2&!3] 2
+[!0&!1&!2 | !1&!2&!3] 3
+[0&!1&!2&!3 | 0&1&2&!3] 4
 State: 3 {0}
-[!2] 3
+[!1] 3
 State: 4
-[0&1] 1
-[0&!1] 4
+[0&3] 1
+[0&!3] 4
 --END--
 HOA: v1
 States: 4
@@ -6090,31 +6095,31 @@ State: 1 "init"
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
-properties: trans-labels explicit-labels trans-acc
+properties: trans-labels explicit-labels trans-acc very-weak
 --BODY--
 State: 0
 [t] 1
 [t] 2
-[!2] 4
+[!0] 4
 State: 1
-[!0] 1 {0}
-[!0] 2
-[!0&!2] 4
+[!1] 1 {0}
+[!1] 2
+[!0&!1] 4
 State: 2
 [t] 2
-[!0&!1] 3
+[!1&!2] 3
 State: 3
-[!0] 3 {0}
+[!1] 3 {0}
 State: 4
-[!2] 4 {0}
+[!0] 4 {0}
 --END--
 HOA: v1
 States: 4
 Start: 3
-AP: 3 "p2" "p3" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -6123,49 +6128,49 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[!0] 1
+[!1] 1
 State: 2
-[0] 0
-[!0] 2
+[1] 0
+[!1] 2
 State: 3
-[0&1] 0
-[!0&!1&2 | !0&1&!2] 1
-[!0&!1&!2 | !0&1&2] 2
+[1&2] 0
+[!0&!1&2 | 0&!1&!2] 1
+[!0&!1&!2 | 0&!1&2] 2
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 4 "p2" "p3" "p1" "p0"
-acc-name: Rabin 1
-Acceptance: 2 Fin(0) & Inf(1)
+AP: 4 "p0" "p1" "p2" "p3"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc semi-deterministic
 --BODY--
 State: 0
-[!0&2 | 1&2] 0
-[!0&!2 | 1&!2] 1
-[0&!1&!2] 2
-[0&!1&!2] 3
-[0&!1&2] 4
-[0&!1&2] 5
+[1&!2 | 1&3] 0 {0}
+[!1&!2 | !1&3] 1
+[!1&2&!3] 2
+[!1&2&!3] 3
+[1&2&!3] 4 {0}
+[1&2&!3] 5 {0}
 State: 1
-[t] 1 {1}
+[t] 1
 State: 2
-[1] 1
-[!1&2] 2 {1}
-[!1&!2] 2 {0 1}
+[3] 1
+[1&!3] 2
+[!1&!3] 2 {0}
 State: 3
-[!0&!3] 1
-[0&!3] 3
+[!0&!2] 1
+[!0&2] 3 {0}
 State: 4
-[1&2] 0
-[1&!2] 1
-[!1&!2] 2
-[!1&2] 4
+[1&3] 0 {0}
+[!1&3] 1
+[!1&!3] 2
+[1&!3] 4 {0}
 State: 5
-[!0&2&!3] 0
-[!0&!2&!3] 1
-[0&!2&!3] 3
-[0&2&!3] 5
+[!0&1&!2] 0 {0}
+[!0&!1&!2] 1
+[!0&!1&2] 3
+[!0&1&2] 5 {0}
 --END--
 HOA: v1
 States: 2
@@ -6189,9 +6194,9 @@ State: 1
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p3" "p2"
-acc-name: parity max even 2
-Acceptance: 2 Fin(1) & Inf(0)
+AP: 3 "p1" "p2" "p3"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 --BODY--
 State: 0
@@ -6199,12 +6204,12 @@ State: 0
 State: 1
 [t] 2
 State: 2
-[!0&!2 | 0&2] 3
+[!0&!1 | 0&1] 3
 [0&!1&!2] 2
-[0&1&!2] 2 {0}
-[!0&2 | 0&!2] 2 {1}
+[0&!1&2] 2 {1}
+[!0&1 | 0&!1] 2 {0}
 State: 3
-[t] 3 {0}
+[t] 3 {1}
 --END--
 HOA: v1
 States: 3
@@ -6237,7 +6242,7 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -6245,14 +6250,14 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1] 0
-[!0&1] 0 {1}
-[0&!1] 0 {0}
+[0&!1] 0 {1}
+[!0&1] 0 {0}
 [0&1] 0 {0 1}
 --END--
 HOA: v1
 States: 4
 Start: 3
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -6261,34 +6266,34 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[1] 1
+[0] 1
 State: 2
-[!1] 0
-[1] 2
+[!0] 0
+[0] 2
 State: 3
 [!0&!1] 0
 [0&1] 1
-[!0&1] 2
+[0&!1] 2
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[1] 0
+[0] 0
 State: 1
 [0&1] 0
-[!0&1] 1
+[0&!1] 1
 --END--
 HOA: v1
 States: 6
 Start: 2
-AP: 3 "p1" "p0" "p2"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -6297,19 +6302,19 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1
-[!1&!2] 0
+[!0&!2] 0
 State: 2
-[!0&!1&2 | !0&1&!2] 1
-[!0&!1&!2 | !0&1&2] 3
-[0&!1&!2 | 0&1&2] 5
+[!0&!1&2 | 0&!1&!2] 1
+[!0&!1&!2 | 0&!1&2] 3
+[!0&1&!2 | 0&1&2] 5
 State: 3
-[!1&!2] 4
-[1&2] 5
+[!0&!2] 4
+[0&2] 5
 State: 4
-[!1&2 | 1&!2] 0
-[!1&!2 | 1&2] 4
+[!0&2 | 0&!2] 0
+[!0&!2 | 0&2] 4
 State: 5 {0}
-[!1&!2 | 1&2] 5
+[!0&!2 | 0&2] 5
 --END--
 HOA: v1
 States: 1
@@ -6386,34 +6391,34 @@ State: 0
 HOA: v1
 States: 7
 Start: 0
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1] 0
-[0&1] 1
-[!0&1] 2
+[2] 0
+[0&2] 1
+[!0&2] 2
 State: 1
-[1&!2] 3
+[!1&2] 3
 [1&2] 4
-[!1&2] 5
+[1&!2] 5
 State: 2
-[0&1&!2] 3
+[0&!1&2] 3
 [0&1&2] 4
-[!0&1&!2] 6
+[!0&!1&2] 6
 State: 3 {0}
 [t] 3
 State: 4
-[!2] 3
-[2] 4
+[!1] 3
+[1] 4
 State: 5 {0}
-[2] 5
+[1] 5
 State: 6 {0}
-[0&1] 3
-[!0&1] 6
+[0&2] 3
+[!0&2] 6
 --END--
 HOA: v1
 States: 3
@@ -6464,39 +6469,39 @@ State: 1
 HOA: v1
 States: 7
 Start: 0
-AP: 4 "p1" "p3" "p0" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: weak
 --BODY--
 State: 0
-[0 | 1] 0
-[0 | 1] 1
-[!0&!1&2] 2
+[1 | 3] 0
+[1 | 3] 1
+[0&!1&!3] 2
 State: 1
 [t] 3
 State: 2
-[1] 0
-[1] 1
-[!1&2] 2
-[1] 3
-[!1&2] 4
+[3] 0
+[3] 1
+[0&!3] 2
+[3] 3
+[0&!3] 4
 State: 3
-[!3] 5
+[!2] 5
 State: 4
-[1&!3] 5
-[!1&2&!3] 6
+[!2&3] 5
+[0&!2&!3] 6
 State: 5 {0}
 [t] 5
 State: 6 {0}
-[1] 5
-[!1&2] 6
+[3] 5
+[0&!3] 6
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc very-weak
@@ -6504,10 +6509,10 @@ properties: trans-labels explicit-labels state-acc very-weak
 State: 0
 [t] 1
 State: 1
-[1] 1
-[!0&1] 2
+[0] 1
+[0&!1] 2
 State: 2
-[!0] 2
+[!1] 2
 --END--
 HOA: v1
 States: 3
@@ -6529,48 +6534,48 @@ State: 2
 HOA: v1
 States: 5
 Start: 2
-AP: 3 "p2" "p1" "p3"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[1&!2] 0
+[0&!2] 0
 State: 1 {0}
-[0] 1
+[1] 1
 State: 2
-[0&!1 | 0&2] 1
-[!0&1&!2] 3
+[!0&1 | 1&2] 1
+[0&!1&!2] 3
 [0&1&!2] 4
 State: 3
 [0&1&!2] 0
-[!0&1&!2] 3
+[0&!1&!2] 3
 State: 4
-[!0&1&!2] 0
-[0&!1 | 0&2] 1
+[0&!1&!2] 0
+[!0&1 | 1&2] 1
 [0&1&!2] 4
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!1] 1
-[1] 3
+[!0] 1
+[0] 3
 State: 1
 [!0&!1] 1
-[0&!1] 2
-[1] 3
+[!0&1] 2
+[0] 3
 State: 2
 [!0&!1] 2 {0}
-[0&!1] 2
-[1] 3
+[!0&1] 2
+[0] 3
 State: 3
 [t] 3
 --END--
@@ -6615,21 +6620,21 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Rabin 1
 Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&1] 0
-[0] 0 {0}
+[0&!1] 0
+[1] 0 {0}
 [!0&!1] 0 {1}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p0" "p3" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: generalized-Buchi 3
 Acceptance: 3 Inf(0)&Inf(1)&Inf(2)
 properties: trans-labels explicit-labels trans-acc
@@ -6637,25 +6642,25 @@ properties: trans-labels explicit-labels trans-acc
 State: 0
 [0] 1
 [t] 2
-[!0&1] 3
+[!0&2] 3
 State: 1
-[!0&1&!2] 1 {0 1}
+[!0&!1&2] 1 {0 1}
 [0&!1&!2] 1 {1 2}
-[0&1&!2] 1 {0 1 2}
-[!0&1&!2] 3 {0 2}
+[0&!1&2] 1 {0 1 2}
+[!0&!1&2] 3 {0 2}
 State: 2
-[0&!2] 1
-[!2] 2
-[!0&1&!2] 3
+[0&!1] 1
+[!1] 2
+[!0&!1&2] 3
 State: 3
 [0&!1&!2] 1 {1 2}
-[0&1&!2] 1 {0 1 2}
-[!0&1&!2] 3 {0 2}
+[0&!1&2] 1 {0 1 2}
+[!0&!1&2] 3 {0 2}
 --END--
 HOA: v1
 States: 12
 Start: 2
-AP: 3 "p3" "p1" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic weak
@@ -6663,50 +6668,50 @@ properties: trans-labels explicit-labels state-acc deterministic weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[0] 1
+[2] 1
 State: 2
-[!0] 3
-[0] 7
+[!2] 3
+[2] 7
 State: 3
-[1&!2] 9
-[1&2] 11
+[!0&1] 9
+[0&1] 11
 State: 4
-[0&!1] 1
-[0&1&!2] 4
+[!1&2] 1
+[!0&1&2] 4
 [0&1&2] 6
 State: 5
-[0&1&!2] 4
-[0&!1] 5
+[!0&1&2] 4
+[!1&2] 5
 [0&1&2] 6
 State: 6
-[0&!1&!2] 1
-[0&1&!2] 4
+[!0&!1&2] 1
+[!0&1&2] 4
 [0&1&2] 6
 [0&!1&2] 8
 State: 7
-[0&!1] 5
-[1&!2] 9
-[1&2] 11
+[!1&2] 5
+[!0&1] 9
+[0&1] 11
 State: 8
-[0&!2] 1
+[!0&2] 1
 [0&2] 8
 State: 9
 [!1] 0
-[1&!2] 9
-[1&2] 11
+[!0&1] 9
+[0&1] 11
 State: 10
-[!2] 0
-[2] 10
+[!0] 0
+[0] 10
 State: 11
-[!1&!2] 0
-[1&!2] 9
-[!1&2] 10
-[1&2] 11
+[!0&!1] 0
+[!0&1] 9
+[0&!1] 10
+[0&1] 11
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p3" "p0" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -6718,10 +6723,10 @@ State: 0
 State: 1
 [t] 3
 State: 2
-[1] 2
-[!1&!2] 4
+[0] 2
+[!0&!1] 4
 State: 3
-[!0] 4
+[!2] 4
 State: 4
 [t] 4
 --END--
@@ -6746,52 +6751,52 @@ State: 2
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc very-weak
 --BODY--
 State: 0
-[0] 0
+[1] 0
 [t] 1
 [!0&!1] 2
 State: 1
-[0] 3
+[1] 3
 State: 2
-[!1] 2
+[!0] 2
 State: 3
 [t] 3
 --END--
 HOA: v1
 States: 6
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[!2] 0
+[!0] 0
 State: 1
-[0&!2] 2
-[0&2] 3
-[!0&2] 4
-[!0&!2] 5
+[!0&1] 2
+[0&1] 3
+[0&!1] 4
+[!0&!1] 5
 State: 2 {0}
-[1&!2] 0
-[0&!1&!2] 2
-[0&!1&2] 3
-[!0&!1&2] 4
+[!0&2] 0
+[!0&1&!2] 2
+[0&1&!2] 3
+[0&!1&!2] 4
 [!0&!1&!2] 5
 State: 3
-[0&!1] 3
-[!0&!1] 4
+[1&!2] 3
+[!1&!2] 4
 State: 4 {0}
 [t] 4
 State: 5
-[2] 4
-[!2] 5
+[0] 4
+[!0] 5
 --END--
 HOA: v1
 States: 1
@@ -6842,7 +6847,7 @@ State: 2 {0}
 HOA: v1
 States: 5
 Start: 2
-AP: 3 "p0" "p2" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -6851,18 +6856,18 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1
-[2] 0
-[!2] 1
+[1] 0
+[!1] 1
 State: 2
-[0&2] 0
-[0&!2] 1
+[0&1] 0
+[0&!1] 1
 [!0&!1&!2] 3
-[!0&1&!2] 4
+[!0&!1&2] 4
 State: 3
-[!0&!2] 3
-[0&!2] 4
+[!0&!1] 3
+[0&!1] 4
 State: 4 {0}
-[!2] 4
+[!1] 4
 --END--
 HOA: v1
 States: 3
@@ -6883,20 +6888,20 @@ State: 2 "init"
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic very-weak
 --BODY--
 State: 0
-[!0] 0
-[0] 1
+[!1] 0
+[1] 1
 State: 1 {0}
 [t] 1
 State: 2 {0}
-[!0&1] 0
-[0] 1
+[0&!1] 0
+[1] 1
 [!0&!1] 2
 --END--
 HOA: v1
@@ -6914,37 +6919,37 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p2" "p1"
+AP: 2 "p1" "p2"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&1] 0
+[0&!1] 0
 [!0&!1] 0 {0}
-[0] 1
+[1] 1
 State: 1
 [t] 1
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p0" "p3" "p2" "p1"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc weak
 --BODY--
 State: 0
-[!1] 0
+[!3] 0
 [t] 1
-[1&!2] 2
+[!2&3] 2
 State: 1
 [!0] 3
 State: 2
 [!1&!3] 0
-[!3] 1
-[1&!2&!3] 2
+[!1] 1
+[!1&!2&3] 2
 State: 3
 [t] 3
 --END--
@@ -6993,7 +6998,7 @@ State: 3 {0}
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p3" "p1"
+AP: 2 "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7002,11 +7007,11 @@ properties: terminal
 State: 0 {0}
 [t] 0
 State: 1
-[1] 0
-[!1] 1
+[0] 0
+[!0] 1
 State: 2
 [0&1] 0
-[0&!1] 1
+[!0&1] 1
 --END--
 HOA: v1
 States: 1
@@ -7023,62 +7028,62 @@ State: 0
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p2" "p0" "p1"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1 | !2] 0 {0}
-[0&1 | 0&!2] 1
-[!1&2] 2
+[0 | !1] 0 {0}
+[0&2 | !1&2] 1
+[!0&1] 2
 State: 1
-[0] 1 {0}
+[2] 1 {0}
 State: 2
-[!2] 0 {0}
-[0&!2] 1
-[2] 2
+[!1] 0 {0}
+[!1&2] 1
+[1] 2
 --END--
 HOA: v1
 States: 5
 Start: 4
-AP: 4 "p0" "p2" "p1" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc very-weak
 --BODY--
 State: 0
-[0&1] 0
+[0&2] 0
 State: 1
-[!2&!3] 1
-[2&!3] 2
-[0&!2&!3] 3
+[!1&!3] 1
+[1&!3] 2
+[0&!1&!3] 3
 State: 2
 [t] 2
 State: 3
 [0] 3
 State: 4
-[0&1&3] 0
-[!2&!3] 1
-[2&!3] 2
-[0&!2&!3] 3
+[0&2&3] 0
+[!1&!3] 1
+[1&!3] 2
+[0&!1&!3] 3
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 --BODY--
 State: 0 "{0}"
-[!0] 1
-[0] 2
+[!1] 1
+[1] 2
 State: 1 "{1}"
-[!1] 3
+[!0] 3
 State: 2 "{0,1}"
 [!0&!1] 1
-[0&!1] 2
+[!0&1] 2
 State: 3 "{}"
 [t] 3
 --END--
@@ -7111,78 +7116,78 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p3" "p2" "p0"
+AP: 3 "p0" "p2" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0] 0 {0}
-[0] 0
-[!0&!1] 1 {0 1}
-[0&!1] 1 {1}
+[!2] 0 {0}
+[2] 0
+[!1&!2] 1 {0 1}
+[!1&2] 1 {1}
 State: 1
 [!0&!2] 0 {0}
-[0&!2] 0
-[!0&!1] 1 {0 1}
-[0&!1] 1 {1}
+[!0&2] 0
+[!1&!2] 1 {0 1}
+[!1&2] 1 {1}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p3" "p2" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!2] 0 {0}
-[2] 0
-[0&1&!2] 1
+[!0] 0 {0}
+[0] 0
+[!0&1&2] 1
 State: 1
-[0&1] 1 {0}
+[1&2] 1 {0}
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1&!2] 0
+[!0&2] 0
 [0&1&2] 1
-[!0&1&2] 2
+[0&!1&2] 2
 State: 1 {0}
 [t] 1
 State: 2 {0}
-[0&1] 1
-[!0&1] 2
+[1&2] 1
+[!1&2] 2
 --END--
 HOA: v1
 States: 5
 Start: 4
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1] 1
+[2] 1
 State: 1
 [t] 1
 State: 2
-[!1] 2
+[!2] 2
 State: 3
-[!1] 1
+[!2] 1
 State: 4
-[0&2] 0
-[!0&!2] 1
-[!1&2] 2
-[0&!2] 3
+[0&1] 0
+[!0&!1] 1
+[0&!2] 2
+[!0&1] 3
 --END--
 HOA: v1
 States: 3
@@ -7202,32 +7207,32 @@ State: 2 "{}"
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p1" "p0" "p2"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc semi-deterministic
 properties: stutter-invariant
 --BODY--
 State: 0
-[1&2] 1
-[1] 2
+[0&2] 1
+[0] 2
 [t] 3
 State: 1
 [2] 1 {0}
 State: 2
-[1&2] 1
-[1] 2
+[0&2] 1
+[0] 2
 State: 3
 [t] 3
-[1&2] 4
+[0&2] 4
 State: 4
-[!0&2] 4
-[0&2] 4 {0}
+[!1&2] 4
+[1&2] 4 {0}
 --END--
 HOA: v1
 States: 7
 Start: 2
-AP: 4 "p2" "p1" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7238,39 +7243,39 @@ State: 0
 State: 1
 [1] 5
 State: 2
-[0&!2] 0
+[!0&2] 0
 [0&!1&2&3 | 0&1&2&!3] 1
 [0&!1&2&!3 | 0&1&2&3] 3
 [!0&!2] 5
-[!0&!1&2&!3 | !0&1&2&3] 6
+[0&!1&!2&!3 | 0&1&!2&3] 6
 State: 3
-[1&2&3] 4
-[!1&!2 | 1&2&!3] 5
-[!1&2&!3] 6
+[0&1&3] 4
+[!0&!1 | 0&1&!3] 5
+[0&!1&!3] 6
 State: 4
-[!1&2&!3 | 1&2&3] 4
-[!1&2&3 | 1&2&!3] 5
+[0&!1&!3 | 0&1&3] 4
+[0&!1&3 | 0&1&!3] 5
 State: 5 {0}
 [t] 5
 State: 6 {0}
-[!2] 5
-[!1&2&!3 | 1&2&3] 6
+[!0] 5
+[0&!1&!3 | 0&1&3] 6
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic terminal
 --BODY--
 State: 0
-[!1] 0
-[1] 2
+[!0] 0
+[0] 2
 State: 1
-[0&!1] 0
-[!0 | 1] 2
+[!0&1] 0
+[0 | !1] 2
 State: 2 {0}
 [t] 2
 --END--
@@ -7306,51 +7311,51 @@ State: 2
 HOA: v1
 States: 3
 Start: 1
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[1] 0
+[0] 0
 State: 1
-[!0&1] 0
-[0] 2
+[0&!1] 0
+[1] 2
 State: 2 {0}
 [t] 2
 --END--
 HOA: v1
 States: 8
 Start: 0
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Streett 1
 Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0] 1
-[!0] 2
+[1] 1
+[!1] 2
 State: 1
-[0] 3
-[!0] 4
+[1] 3
+[!1] 4
 State: 2
 [t] 4
 State: 3
 [0&1] 5
-[0&!1] 6
-[!0&1] 7
+[!0&1] 6
+[0&!1] 7
 State: 4
-[1] 7
+[0] 7
 State: 5
-[0&!1] 5
+[!0&1] 5
 [0&1] 5 {0}
-[!0] 7
+[!1] 7
 State: 6
-[0] 6
+[1] 6 {1}
 State: 7
-[!1] 7 {0}
-[1] 7 {0 1}
+[!0] 7 {0}
+[0] 7 {0 1}
 --END--
 HOA: v1
 States: 1
@@ -7367,19 +7372,19 @@ State: 0
 HOA: v1
 States: 3
 Start: 0
-AP: 4 "p3" "p0" "p1" "p2"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0&!1] 1
+[!0&3] 1
 State: 1
-[0&!1 | !1&!2&!3] 1 {0}
-[!0&!1&!2&3] 2
+[!0&!1&!2 | !0&3] 1 {0}
+[!0&!1&2&!3] 2
 State: 2
-[!1&!2&!3] 1 {0}
-[!1&!2&3] 2
+[!0&!1&!2] 1 {0}
+[!0&!1&2] 2
 --END--
 HOA: v1
 States: 1
@@ -7412,14 +7417,14 @@ State: 1 {0}
 HOA: v1
 States: 1
 Start: 0
-AP: 3 "p1" "p0" "p2"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&1&!2] 0
-[!0&2] 0 {0}
+[0&!1&!2] 0
+[!1&2] 0 {0}
 --END--
 HOA: v1
 States: 3
@@ -7497,7 +7502,7 @@ State: 4
 HOA: v1
 States: 12
 Start: 11
-AP: 4 "p2" "p3" "p0" "p1"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -7505,54 +7510,54 @@ properties: trans-labels explicit-labels trans-acc
 State: 0
 [t] 0 {0}
 State: 1
-[3] 0
+[1] 0
 State: 2
-[2&3] 1
-[!2&3] 2 {0}
-[!1&!2&3] 3
-[!1&2&3] 4
-[1&2&3] 5
+[0&1] 1
+[!0&1] 2 {0}
+[!0&1&!3] 3
+[0&1&!3] 4
+[0&1&3] 5
 State: 3
-[2&!3] 1
-[!2&!3] 2 {0}
-[!1&!2&!3] 3
-[!1&2&!3] 4
-[1&2&!3] 5
+[0&!1] 1
+[!0&!1] 2 {0}
+[!0&!1&!3] 3
+[0&!1&!3] 4
+[0&!1&3] 5
 State: 4
-[!2] 1
-[!1&2] 4
-[!1&!2] 7
-[2] 8
+[!0] 1
+[0&!3] 4
+[!0&!3] 7
+[0] 8
 State: 5
-[1&2] 5
-[2] 9
+[0&3] 5
+[0] 9
 State: 6
-[!2] 0
-[2] 6
+[!0] 0
+[0] 6
 State: 7
 [t] 1
-[!1&2] 4
-[1&2] 5
-[!1&!2] 7
+[0&!3] 4
+[0&3] 5
+[!0&!3] 7
 State: 8
-[!2&3] 0
-[2&3] 6
+[!0&1] 0
+[0&1] 6
 State: 9
-[2&3] 10
+[0&1] 10
 State: 10
-[2] 10 {0}
+[0] 10 {0}
 State: 11
-[0] 0
-[!0&2] 1
+[2] 0
+[0&!2] 1
 [!0&!2] 2
-[!0&!1&!2] 3
-[!0&!1&2] 4
-[!0&1&2] 5
+[!0&!2&!3] 3
+[0&!2&!3] 4
+[0&!2&3] 5
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p3" "p2"
+AP: 2 "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7585,37 +7590,37 @@ State: 4
 HOA: v1
 States: 8
 Start: 0
-AP: 3 "p1" "p0" "p3"
-acc-name: Rabin 1
-Acceptance: 2 Fin(0) & Inf(1)
+AP: 3 "p0" "p1" "p3"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc semi-deterministic
 --BODY--
 State: 0
-[!0] 0
-[0] 1
-[0&!1&2] 2
+[!1] 0 {0}
+[1] 1
+[!0&1&2] 2
 [0&1&2] 3
-[0&!1] 4
+[!0&1] 4
 [0&1] 5
 State: 1
-[t] 1
-[!1&2] 2
-[1&2] 3
-[!1] 4
-[1] 5
+[t] 1 {0}
+[!0&2] 2
+[0&2] 3
+[!0] 4
+[0] 5
 State: 2
-[1&2] 6
+[0&2] 6
 State: 3
-[!1&2] 6
+[!0&2] 6
 State: 4
-[1] 7
+[0] 7
 State: 5
-[!1] 7
+[!0] 7
 State: 6
-[2] 6 {1}
+[2] 6
 State: 7
-[!0] 7 {1}
-[0] 7 {0 1}
+[!1] 7
+[1] 7 {0}
 --END--
 HOA: v1
 States: 1
@@ -7631,134 +7636,134 @@ State: 0
 HOA: v1
 States: 5
 Start: 4
-AP: 4 "p1" "p3" "p2" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0&!1&2] 0
+[!1&2&!3] 0
 [!2] 1
 State: 1 {0}
 [t] 1
 State: 2
-[1&3] 3
+[0&3] 3
 State: 3 {0}
-[3] 3
+[0] 3
 State: 4
-[!0&!1&2] 0
+[!1&2&!3] 0
 [!2] 1
 [2] 2
 --END--
 HOA: v1
 States: 21
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&!1] 0 {1}
-[!0&1] 1 {0}
-[0&1] 2 {1}
+[1&!2] 0 {1}
+[!1&2] 1 {0}
+[1&2] 2 {1}
 State: 1
-[!0&1] 1 {0}
-[!0&1] 3 {0 1}
-[0&!1] 4 {1}
-[0&1] 5 {1}
+[!1&2] 1 {0}
+[!1&2] 3 {0 1}
+[1&!2] 4 {1}
+[1&2] 5 {1}
 State: 2
-[0&!1] 6 {1}
-[0&1] 7 {1}
+[1&!2] 6 {1}
+[1&2] 7 {1}
 State: 3
-[!0&1] 8 {0}
-[!0&1] 9 {0 1}
-[0&!1] 10 {1}
-[0&1] 11 {1}
+[!1&2] 8 {0}
+[!1&2] 9 {0 1}
+[1&!2] 10 {1}
+[1&2] 11 {1}
 State: 4
-[!0&1] 8 {0}
-[0&!1] 12 {1}
-[0&1] 13 {1}
+[!1&2] 8 {0}
+[1&!2] 12 {1}
+[1&2] 13 {1}
 State: 5
-[0&!1] 14 {1}
-[0&1] 15 {1}
+[1&!2] 14 {1}
+[1&2] 15 {1}
 State: 6
-[!0&1] 16 {0}
-[0&!1] 17 {1}
-[0&1] 18 {1}
+[!1&2] 16 {0}
+[1&!2] 17 {1}
+[1&2] 18 {1}
 State: 7
-[0&!1] 19 {1}
-[0&1] 20 {1}
+[1&!2] 19 {1}
+[1&2] 20 {1}
 State: 8
-[!0&1&2] 1 {0}
-[!0&1&2] 3 {0 1}
-[0&!1&2] 4 {1}
+[0&!1&2] 1 {0}
+[0&!1&2] 3 {0 1}
+[0&1&!2] 4 {1}
 [0&1&2] 5 {1}
 State: 9
-[!0&1&2] 8 {0}
-[!0&1&2] 9 {0 1}
-[0&!1&2] 10 {1}
+[0&!1&2] 8 {0}
+[0&!1&2] 9 {0 1}
+[0&1&!2] 10 {1}
 [0&1&2] 11 {1}
 State: 10
-[!0&1&2] 8 {0}
-[0&!1&2] 12 {1}
+[0&!1&2] 8 {0}
+[0&1&!2] 12 {1}
 [0&1&2] 13 {1}
 State: 11
-[0&!1&2] 14 {1}
+[0&1&!2] 14 {1}
 [0&1&2] 15 {1}
 State: 12
-[0&!1&2] 0 {1}
-[!0&1&2] 1 {0}
+[0&1&!2] 0 {1}
+[0&!1&2] 1 {0}
 [0&1&2] 2 {1}
 State: 13
-[0&!1&2] 6 {1}
+[0&1&!2] 6 {1}
 [0&1&2] 7 {1}
 State: 14
-[!0&1&2] 16 {0}
-[0&!1&2] 17 {1}
+[0&!1&2] 16 {0}
+[0&1&!2] 17 {1}
 [0&1&2] 18 {1}
 State: 15
-[0&!1&2] 19 {1}
+[0&1&!2] 19 {1}
 [0&1&2] 20 {1}
 State: 16
-[!0&1&!2] 1 {0}
-[!0&1&!2] 3 {0 1}
-[0&!1&!2] 4 {1}
-[0&1&!2] 5 {1}
+[!0&!1&2] 1 {0}
+[!0&!1&2] 3 {0 1}
+[!0&1&!2] 4 {1}
+[!0&1&2] 5 {1}
 State: 17
-[0&!1&!2] 0 {1}
-[!0&1&!2] 1 {0}
-[0&1&!2] 2 {1}
+[!0&1&!2] 0 {1}
+[!0&!1&2] 1 {0}
+[!0&1&2] 2 {1}
 State: 18
-[0&!1&!2] 6 {1}
-[0&1&!2] 7 {1}
+[!0&1&!2] 6 {1}
+[!0&1&2] 7 {1}
 State: 19
-[!0&1&!2] 16 {0}
-[0&!1&!2] 17 {1}
-[0&1&!2] 18 {1}
+[!0&!1&2] 16 {0}
+[!0&1&!2] 17 {1}
+[!0&1&2] 18 {1}
 State: 20
-[0&!1&!2] 19 {1}
-[0&1&!2] 20 {1}
+[!0&1&!2] 19 {1}
+[!0&1&2] 20 {1}
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0] 1
-[0] 3
-State: 1
 [!1] 1
-[1] 1 {0}
+[1] 3
+State: 1
+[!0] 1
+[0] 1 {0}
 State: 2
-[!0] 0
-[0] 3
+[!1] 0
+[1] 3
 State: 3
 [t] 3 {0}
 --END--
@@ -7813,7 +7818,7 @@ State: 0
 HOA: v1
 States: 8
 Start: 0
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
@@ -7821,53 +7826,53 @@ properties: weak
 --BODY--
 State: 0
 [t] 0
-[0&!1] 1
+[!0&1] 1
 [0&1] 2
-[!0] 3
-[!0&1] 4
+[!1] 3
+[0&!1] 4
 [0&1] 5
 State: 1 {0}
-[0&!1] 1
+[!0&1] 1
 [0&1] 2
 State: 2 {0}
-[0&!1] 1
+[!0&1] 1
 State: 3
-[0] 3
+[1] 3
 [0&1] 4
 State: 4
-[1] 6
+[0] 6
 State: 5
-[!0&1] 6
+[0&!1] 6
 [0&1] 7
 State: 6 {0}
 [t] 6
 State: 7
-[!0] 6
-[0] 7
+[!1] 6
+[1] 7
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[0] 0
-[2] 1
-[!0&1] 2
+[1] 0
+[0] 1
+[!1&2] 2
 State: 1 {0}
-[2] 1
+[0] 1
 State: 2
-[2] 1
-[1] 2
+[0] 1
+[2] 2
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p1" "p0" "p3"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7875,21 +7880,21 @@ properties: terminal
 --BODY--
 State: 0
 [0&1&2] 1
-[0&!2] 2
-[0&!1&2] 3
+[1&!2] 2
+[!0&1&2] 3
 State: 1 {0}
 [t] 1
 State: 2
-[1&2] 1
+[0&2] 1
 [!2] 2
-[!1&2] 3
+[!0&2] 3
 State: 3
-[1&!2] 1
+[0&!2] 1
 [2] 3
-[!1&!2] 4
+[!0&!2] 4
 State: 4
-[1] 1
-[!1] 4
+[0] 1
+[!0] 4
 --END--
 HOA: v1
 States: 4
@@ -7938,7 +7943,7 @@ State: 0
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p3" "p0"
+AP: 2 "p0" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7947,11 +7952,11 @@ properties: terminal
 State: 0 {0}
 [t] 0
 State: 1
-[1] 0
-[!1] 1
+[0] 0
+[!0] 1
 State: 2
 [0&1] 0
-[0&!1] 1
+[!0&1] 1
 --END--
 HOA: v1
 States: 1
@@ -7969,30 +7974,30 @@ State: 0
 HOA: v1
 States: 6
 Start: 5
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[2&!3] 0
-[!2&!3] 3
+[0&!3] 0
+[!0&!3] 3
 State: 1
-[0] 3
+[1] 3
 State: 2
-[0&1] 3
-[0&!1] 4
+[1&2] 3
+[1&!2] 4
 State: 3 {0}
 [t] 3
 State: 4
-[1] 3
-[!1] 4
+[2] 3
+[!2] 4
 State: 5
-[2&!3] 0
-[1&2 | 1&3] 1
-[!1&2 | !1&3] 2
-[!2&!3] 3
+[0&!3] 0
+[0&2 | 2&3] 1
+[0&!2 | !2&3] 2
+[!0&!3] 3
 --END--
 HOA: v1
 States: 1
@@ -8131,28 +8136,28 @@ State: 5
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p3" "p0" "p2"
+AP: 3 "p0" "p2" "p3"
 acc-name: parity min even 2
 Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic stutter-invariant
 --BODY--
 State: 0
-[0&!2] 0 {0}
-[2] 1
-[!0&!2] 2
+[!1&2] 0 {0}
+[1] 1
+[!1&!2] 2
 State: 1
-[t] 1
+[t] 1 {0}
 State: 2
-[0&!2] 0 {0}
-[0&2] 1
-[!0&1&!2] 2
+[!1&2] 0 {0}
+[1&2] 1
+[0&!1&!2] 2
 [!0&!1&!2] 2 {1}
-[!0&2] 3
+[1&!2] 3
 State: 3
-[0] 1
-[!0&1] 3
-[!0&!1] 3 {1}
+[2] 1
+[0&!2] 3
+[!0&!2] 3 {1}
 --END--
 HOA: v1
 States: 1
@@ -8187,40 +8192,40 @@ State: 3
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p3" "p2"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!0&!1 | 2] 0 {0}
+[!0&!2 | 1] 0 {0}
 [0&!1&!2] 1 {0}
-[0&!2 | 1&!2] 2
+[0&!1 | !1&2] 2
 State: 1
-[!0&!1] 0 {0}
-[0&!1] 1 {0}
+[!0&!2] 0 {0}
+[0&!2] 1 {0}
 State: 2
-[2] 0 {0}
-[!2] 2
+[1] 0 {0}
+[!1] 2
 --END--
 HOA: v1
 States: 4
 Start: 1
-AP: 3 "p1" "p3" "p0"
+AP: 3 "p0" "p1" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: terminal
 --BODY--
 State: 0
-[!2] 3
+[!0] 3
 State: 1
-[0&!1] 0
-[!0&!1] 2
-[1] 3
+[1&!2] 0
+[!1&!2] 2
+[2] 3
 State: 2
-[!0] 2
-[0] 3
+[!1] 2
+[1] 3
 State: 3 {0}
 [t] 3
 --END--
@@ -8239,29 +8244,29 @@ State: 0
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p2" "p3" "p1"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0&!2 | !1&!2] 0 {0}
-[!0&1] 1
+[!0&1 | !0&!2] 0 {0}
+[!1&2] 1
 [0&1&2] 2
-[0&2 | !1&2] 3
+[0&1 | 0&!2] 3
 State: 1
 [t] 1 {0}
 State: 2
-[!0&1] 1
-[0&1] 2 {0}
+[!1&2] 1
+[1&2] 2 {0}
 State: 3
-[0&!2 | !1&!2] 0 {0}
-[!0&1&!2] 1
-[0&2 | !1&2] 3
-[!0&1&2] 4
+[!0&1 | !0&!2] 0 {0}
+[!0&!1&2] 1
+[0&1 | 0&!2] 3
+[0&!1&2] 4
 State: 4
-[!2] 1
-[2] 4
+[!0] 1
+[0] 4
 --END--
 HOA: v1
 States: 2
@@ -8282,7 +8287,7 @@ State: 1
 HOA: v1
 States: 7
 Start: 5
-AP: 3 "p2" "p1" "p3"
+AP: 3 "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -8294,22 +8299,22 @@ State: 1 {0}
 [2] 1
 State: 2 {0}
 [0&1&2] 1
-[!0&1&2] 2
-[0&!1&2] 4
+[0&!1&2] 2
+[!0&1&2] 4
 State: 3
-[1] 1
-[0&!1] 4
+[0] 1
+[!0&1] 4
 State: 4
-[1&2] 1
-[0&!1&2] 4
+[0&2] 1
+[!0&1&2] 4
 State: 5
 [0&1] 0
-[0&!1] 3
-[!0&1] 6
+[!0&1] 3
+[0&!1] 6
 State: 6
 [0&1] 1
-[!0&1] 2
-[0&!1] 4
+[0&!1] 2
+[!0&1] 4
 --END--
 HOA: v1
 States: 1
@@ -8325,15 +8330,15 @@ State: 0
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic terminal
 --BODY--
 State: 0
-[!0] 1
-[0] 2
+[!1] 1
+[1] 2
 State: 1
 [0 | 1] 1
 [!0&!1] 2

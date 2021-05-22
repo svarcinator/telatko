@@ -35,12 +35,12 @@ def main(argv):
         print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
-
+            acc_sets_count1= a.get_acceptance().used_sets().count()
             a = process_automaton(a)
 
             acc_sets_count = a.get_acceptance().used_sets().count()
             clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
-            print("formula:", a.get_acceptance(), "C:", clauses_count, "K:", acc_sets_count)
+
 
 
             if mode >=2 and mode <= 4:
@@ -52,13 +52,14 @@ def main(argv):
 
             else:
                 auto = a
-            clauses_count2 = max(len(auto.get_acceptance().top_disjuncts()),
-                                 len(auto.get_acceptance().top_conjuncts()))
+            acc_sets_count2 = a.get_acceptance().used_sets().count()
+
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
+
 
             if not spot.are_equivalent(auto, origin):
                 print("nejsou ekvivalentni")

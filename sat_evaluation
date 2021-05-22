@@ -1,16 +1,1 @@
-% TRUE FORMULA (satisfying assignment of outermost existential variables follows)
-p_1_1 = 1
-f_14_1 = 1
-f_15_1 = 1
-f_16_1 = 1
-f_17_1 = 1
-f_11_1 = 0
-f_24_1 = 1
-f_5_1 = 1
-f_6_1 = 1
-f_9_1 = 1
-f_10_1 = 0
-f_23_1 = 0
-n_1_1 = 0
-p_2_1 = 1
-n_2_1 = 0
+% FALSE formula
