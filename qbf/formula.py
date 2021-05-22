@@ -259,12 +259,8 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
 
     # this part makes sure, that the edges are connected tzn QBF CONNECTED
     if mode == 3:
-        print("mode je 3")
         neg = negate_part(aut, inner_edges)
         laso.add_subf(neg)
-        print(laso)
-    else:
-        print("mode je 2", laso)
     return laso
 
 

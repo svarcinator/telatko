@@ -203,8 +203,8 @@ def create_formula(aut, acc, edge_dict, scc_edg, scc_state_info, inner_edges_num
     # quantified variables #w_1 #w_2 ... #w_n
 
     quant_edges += w_quant(aut)
-    # if mode > 2:
-        # quant_edges += w_quant(aut)
+    if mode > 2:
+        quant_edges += w_quant(aut)
 
 
     # edges that are true create continuous cycle of edges aka laso
@@ -279,7 +279,7 @@ def try_evaluate0(aut):
     return last_eq_aut
 
 def play(aut, C, K, mode, timeout):
-    print("mode",mode)
+    #print("mode",mode)
     spot.cleanup_acceptance_here(aut)
 
     if aut.get_acceptance().used_sets().count(
@@ -300,7 +300,6 @@ def play(aut, C, K, mode, timeout):
 
 
     while C > 0 and K > 0:
-        print(K)
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
