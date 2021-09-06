@@ -56,6 +56,14 @@ def main(argv):
             else:
                 print_aut(auto, None, " ")
 
+            if not spot.are_equivalent(auto, origin):
+                print("nejsou ekvivalentni")
+                return
+
+            else:
+                print("ekvivalentni")
+
+
         except RuntimeError:  # too many marks
             print(
                 "Automaton has too many acceptance sets, 32 is the limit.",

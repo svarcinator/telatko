@@ -3,6 +3,7 @@ import random
 from qbf.parser import *
 from qbf.formula import *
 from qbf.sequence_formula import *
+from qbf.optimization import *
 
 
 def edge_dictionary(aut):
@@ -11,7 +12,7 @@ def edge_dictionary(aut):
     Args:
         aut: spot::twa - automaton from input
 
-    Returns: Dictionary {acceptance set number : [number of edge in this set]}
+    Returns: Dictionary {acceptance set number : [numbers of edges in this set]}
 
     """
     list_of_all_edges = aut.edges()
@@ -62,7 +63,9 @@ def scc_info(aut):
     for i in range(si.scc_count()):
         states = si.states_of(i)
         if si.is_trivial(i):
+            #print("trivial before", i)
             continue
+        #print("i: ", i)
         state_dict = {}
         for s in states:
             state_dict[s] = [[], []]
@@ -121,6 +124,7 @@ def laso2(aut, inner_edges, scc_edg):
     Returns:
 
     """
+
     main_dis = SATformula("|")
 
     con3 = SATformula("&")
@@ -177,6 +181,7 @@ def laso2(aut, inner_edges, scc_edg):
     main_dis.add_subf(con2)
     main_dis.add_subf(con3)
     laso = SATformula("&")
+
     one_scc = one_scc_f(scc_edg)
     laso.add_subf(main_dis)
     laso.add_subf(one_scc)
@@ -211,7 +216,7 @@ def create_formula(
     quant_edges = quant_all(inner_edges_nums)
     # quantified variables ?w_1 ?w_2 ... ?w_n
 
-    quant_edges += w_quant(aut)
+    # quant_edges += w_quant(aut)
     if mode > 2:
         quant_edges += w_quant(aut)
 
@@ -219,6 +224,8 @@ def create_formula(
 
     if mode == 4:
         laso = laso2(aut, inner_edges, scc_edg)
+        in_out = in_n_out(scc_state_info)
+        laso.add_subf(in_out)
     else:
         laso = laso_f(
             aut,
@@ -291,6 +298,47 @@ def try_evaluate0(aut):
     return last_eq_aut
 
 
+def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
+    formula = SATformula('&')
+   # print("scc state info:" , scc_state_info)
+
+    si = spot.scc_info(aut)
+    max_T = 0
+    max_states = 0
+    counter = 0
+    for scc in range(si.scc_count()):
+        if si.is_trivial(scc):
+            #print("trivial", scc)
+            continue
+        scc_inner_edges = si.inner_edges_of(scc)
+        edges_translator = {}
+        mark_edg_dict = get_mark_edg(aut, scc_inner_edges, edges_translator)
+        max_T = max(max_T, len(edges_translator))
+        max_states = max(len(si.states_of(scc)), max_states)
+        eq = SATformula('<->')
+        old = old_formula2(acc, mark_edg_dict, edges_translator)
+        if(len(old) == 1):
+            old = SATformula("t")
+        new = new_formula2(edges_translator, C, K)
+        eq.add_subf(old)
+        eq.add_subf(new)
+        impl = SATformula('->')
+        laso = laso_part(scc_state_info[counter], edges_translator, L, scc_inner_edges, aut)
+        if L == 4:
+            laso = laso22(aut, scc_inner_edges, scc_state_info[counter], edges_translator)
+        impl.add_subf(laso)
+        impl.add_subf(eq)
+        formula.add_subf(impl)
+        counter += 1
+    formula.add_subf(inf_or_fin_f(C, K))
+    formula.add_subf(inf_is_not_fin_clause(C, K))
+    formula.add_subf(least_one(max_T))
+
+    q = quantify_e(max_T)
+    if L > 2:
+        q += w_quant2(aut, max_states)
+    SAT_output(q, formula)
+
 def play(aut, C, K, mode, timeout):
 
     spot.cleanup_acceptance_here(aut)
@@ -338,6 +386,7 @@ def play(aut, C, K, mode, timeout):
             inner_edges,
             mode)
 
+        #scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole",
                                  "./sat_file"],
@@ -347,7 +396,7 @@ def play(aut, C, K, mode, timeout):
                                 timeout=int(timeout))
 
         except subprocess.TimeoutExpired:
-            # print("expired")
+            print("expired")
             return aut
 
         out = cp.stdout.splitlines()
@@ -356,13 +405,14 @@ def play(aut, C, K, mode, timeout):
         f.close()
 
         if len(out) == 1:
-            # print("unsatisfiable")
+            print("unsatisfiable")
             return aut
 
         if len(out) == 0:
-            #print("sat error")
+            print("sat error")
             return aut
         variables = out[1:]
+        print("satisfiable")
 
         process_variables(aut, variables)
 

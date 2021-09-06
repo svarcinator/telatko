@@ -199,7 +199,6 @@ def old_formula(acc, edge_dict):
         Args:
             acc: Original acceptance condition in DNF
             edge_dict: Dictionary with number of acceptance set : numbers of edges that the acceptance set contains
-            edges_count: Number of all edges.
 
         Returns: Formula in DNF
 

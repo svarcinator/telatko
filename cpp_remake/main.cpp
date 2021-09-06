@@ -10,8 +10,13 @@
 #include "cxxopts/include/cxxopts.hpp"
 
 
-int process_aut( spot::twa_graph_ptr &aut ) {
-    std::cout << "Automat v procesu\n";
+int process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
+    std::cout << "Automat v procesu\n" << "level:" << level << " timeout: " << timeout << std::endl;
+    int  K = aut->acc().num_sets();
+    int C = aut->get_acceptance().to_dnf().top_disjuncts().size();
+    std::cout << "K: " << K << "C: " << C << std::endl;
+
+
     return 0;
 }
 
@@ -24,18 +29,37 @@ int process_aut( spot::twa_graph_ptr &aut ) {
            ("F,autfile", "file containing automata in HOA format", cxxopts::value<std::string>())
            ("h,help", "print usage")
            ("O,output", "output file", cxxopts::value<std::string>())
+           ("L,level", "level of simplification", cxxopts::value<int>())
+           ("T,timeout", "QBF solver timeout", cxxopts::value<int>())
            ;
    options.allow_unrecognised_options();
 
    auto result = options.parse(argc, argv);
+   int level = 1;
+   int timeout = 40;
+
    if (result.count("help"))
    {
        std::cout << options.help() << std::endl;
        exit(0);
    }
 
+
    if ( !result.count( "autfile" ) ) {
        std::cerr << "missing input: use parameter -F (see help)";
+   }
+
+   if ( result.count( "level" ) ) {
+     level = result[ "level" ].as< int >();
+     if ( level > 4 ) {
+       level = 4;
+     }
+
+   }
+
+   if ( result.count( "timeout" ) ) {
+     timeout = result[ "timeout" ].as< int >();
+
    }
 
    auto dump = [&](const auto &what) {
@@ -53,7 +77,7 @@ int process_aut( spot::twa_graph_ptr &aut ) {
            auto parser = spot::automaton_stream_parser( result[ "autfile" ].as<std::string>() );
            auto aut = parser.parse( dict )->aut;
            while ( aut != nullptr ){
-               process_aut( aut );
+               process_aut( aut, level, timeout );
                dump( aut );
                aut = parser.parse( dict )->aut;
            }
@@ -63,5 +87,6 @@ int process_aut( spot::twa_graph_ptr &aut ) {
        std::cerr << "Error during parsing automaton.\n" << e.what();
        return 1;
    }
+   return 0;
 
 }

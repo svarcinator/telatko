@@ -174,14 +174,6 @@ def process_variables(aut, variables):
     acc_set_vars = list(
         filter(lambda var: var[0] == "f" and var[-1] == '1', variables))
 
-    """
-    if not condition_vars:
-        clear_aut_edges(aut)
-        aut.set_acceptance(0, spot.acc_code.t())
-        spot.cleanup_acceptance_here(aut)
-        return
-    """
-
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))
 
