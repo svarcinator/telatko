@@ -8,17 +8,10 @@
 #include <spot/parseaut/public.hh>
 #include <spot/twaalgos/sccfilter.hh>
 #include "cxxopts/include/cxxopts.hpp"
+#include "telatko2/t_main.cpp"
 
 
-int process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
-    std::cout << "Automat v procesu\n" << "level:" << level << " timeout: " << timeout << std::endl;
-    int  K = aut->acc().num_sets();
-    int C = aut->get_acceptance().to_dnf().top_disjuncts().size();
-    std::cout << "K: " << K << "C: " << C << std::endl;
 
-
-    return 0;
-}
 
  int main( int argc, char* argv[] ) {
      spot::bdd_dict_ptr dict = spot::make_bdd_dict();
@@ -77,7 +70,7 @@ int process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
            auto parser = spot::automaton_stream_parser( result[ "autfile" ].as<std::string>() );
            auto aut = parser.parse( dict )->aut;
            while ( aut != nullptr ){
-               process_aut( aut, level, timeout );
+               process_aut( aut, level, timeout );  // telatko
                dump( aut );
                aut = parser.parse( dict )->aut;
            }

@@ -422,43 +422,7 @@ def play(aut, C, K, mode, timeout):
     return a
 
 
-def main(argv):
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-F",
-        "--autfile",
-        help="File containing automata in HOA format.")
-    parser.add_argument("-O", "--outfile", help="File to print output to.")
-    args = parser.parse_args()
-    if not args.autfile:
-        print("No automata to process.", file=sys.stderr)
 
-    aut = spot.automata(args.autfile)
-
-    for a in aut:
-
-        origin = spot.automaton(a.to_str())
-        #print_aut(origin, "problem", "w")
-        try:
-            spot.cleanup_acceptance_here(a)
-            acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = max(len(a.get_acceptance().top_disjuncts()), len(
-                a.get_acceptance().top_conjuncts()))
-
-            if acc_sets_count == 0:
-                auto = a
-            else:
-                auto = play(a, clauses_count, acc_sets_count)
-
-            if args.outfile:
-                print_aut(auto, args.outfile, "a")
-            else:
-                print_aut(auto, None, " ")
-
-        except RuntimeError:  # too many marks
-            print(
-                "Automaton has too many acceptance sets, 32 is the limit.",
-                file=sys.stderr)
 
 
 def test_aut(a1, a2):
