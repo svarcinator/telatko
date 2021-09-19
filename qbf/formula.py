@@ -224,6 +224,7 @@ def old_formula(acc, edge_dict):
                             "!e_" + str(edge)))
             conjunct_f.add_subf(new_shape)
         dnf_formula.add_subf(conjunct_f)
+
     return dnf_formula
 
 

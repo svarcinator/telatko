@@ -323,7 +323,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         eq.add_subf(old)
         eq.add_subf(new)
         impl = SATformula('->')
-        laso = laso_part(scc_state_info[counter], edges_translator, L, scc_inner_edges, aut)
+        laso = laso_part(scc_state_info[counter], edges_translator, L, scc_inner_edges, aut, max_T)
         if L == 4:
             laso = laso22(aut, scc_inner_edges, scc_state_info[counter], edges_translator)
         impl.add_subf(laso)
@@ -332,7 +332,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         counter += 1
     formula.add_subf(inf_or_fin_f(C, K))
     formula.add_subf(inf_is_not_fin_clause(C, K))
-    formula.add_subf(least_one(max_T))
+    #formula.add_subf(least_one(max_T))
 
     q = quantify_e(max_T)
     if L > 2:
@@ -374,6 +374,7 @@ def play(aut, C, K, mode, timeout):
 
         # QBF formula is written into ./sat_file
 
+        """
         create_formula(
             aut,
             acc,
@@ -385,8 +386,11 @@ def play(aut, C, K, mode, timeout):
             K,
             inner_edges,
             mode)
+            """
 
-        #scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
+
+
+        scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole",
                                  "./sat_file"],

@@ -105,10 +105,7 @@ def disjunct_formula2(edges, edge_translator):
     return disjunct
 
 def in_n_out2(scc_info, edge_translator):
-    #print("________________________________")
-    #print("scc info", scc_info)
-    #print("translator", edge_translator)
-    #print("|||||||||||||||||||||||||||||||||||")
+
     conjunct = SATformula("&")
     for src_dst in scc_info.values():
         src = src_dst[0]
@@ -121,16 +118,19 @@ def in_n_out2(scc_info, edge_translator):
 
     return conjunct
 
-def laso_part(scc_info, edge_translator, L, inner_edges, aut):
+def laso_part(scc_info, edge_translator, L, inner_edges, aut, max_T):
     laso = SATformula("&")
     in_out = in_n_out2(scc_info, edge_translator)
+    least_one = least_one_edge2(max_T)
+    laso.add_subf(least_one)
+    laso.add_subf(in_out)
     if L == 3:
         laso.add_subf(in_out)
         neg = negate_part2(aut, inner_edges, edge_translator)
         laso.add_subf(neg)
         return laso
 
-    return in_out
+    return laso
 
 def quantify_e(T):
     formula = ""
@@ -172,10 +172,11 @@ def old_formula2(acc, edge_dict, edge_translator):
                     new_shape.add_subf(
                         SATformula(
                             "!e_" + str(edge_translator[edge])))
-            if len(new_shape) != 1:
-                conjunct_f.add_subf(new_shape)
+            # bude tu problem pokud nekde bude pouze samotnej log operator
+            conjunct_f.add_subf(new_shape)
         if len(conjunct_f) != 1:
             dnf_formula.add_subf(conjunct_f)
+
     return dnf_formula
 
 def least_one(T):
@@ -273,7 +274,7 @@ def laso22(aut, inner_edges, scc_info, edge_translator):
     """
     QBF CYCLES ve statistikach
     Formula that makes sure that the edges are cycles.
-    Unluckily the complexity is too high to compute jeden pitomej automat s 12 stavama.
+
     Args:
         aut:
         inner_edges:

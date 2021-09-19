@@ -1,4 +1,5 @@
 #include <spot/twaalgos/cleanacc.hh>
+#include "./../classes.cpp"
 
 void process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
 
@@ -14,6 +15,20 @@ void process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
          aut->prop_state_acc() == spot::trival::yes_value ) {
         return;
     }
+
+    if ( aut->get_acceptance().to_dnf().size() < aut->get_acceptance().to_cnf().size() ) {
+
+        // dnf simplification
+        std::cout << "Future DNF simplification\n";
+    } else {
+      // cnf simplification
+      std::cout << "Future CNF simplification\n";
+      auto formula = CNF_PACC(aut->get_acceptance().to_cnf());
+      int a = formula.fce();
+      formula.print();
+
+    }
+
 
 
 

@@ -134,6 +134,11 @@ class PACC:
         return f
 
     def resolve_redundancy(self):
+        """
+        
+        Returns:
+
+        """
         rem_d = []
         int_f = self.int_format()
         for i in range(len(self.formula)):
