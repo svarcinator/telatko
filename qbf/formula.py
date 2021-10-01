@@ -174,8 +174,9 @@ def quant_all(edges):
         formula += " # e_" + str(e)
     return formula
 
-
+"""
 def quant_exist(scc_state_info):
+    print("tohle se podle me nevyuziva, ne?")
     formula = ""
     for dict in scc_state_info:
         n = 2 ** (ceil(log2(len(dict))))
@@ -189,6 +190,7 @@ def quant_exist(scc_state_info):
                     i //= 2
 
     return formula
+"""
 
 
 # # # OLD FORMULA # # #

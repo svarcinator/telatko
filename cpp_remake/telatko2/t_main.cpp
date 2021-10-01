@@ -1,6 +1,27 @@
 #include <spot/twaalgos/cleanacc.hh>
 #include "./../classes.cpp"
 
+std::map< spot::scc_info, PACC >get_accs( spot::twa_graph_ptr &aut ) {
+
+    std::map< spot::scc_info, PACC > acc_map;
+
+    for (auto scc : spot::scc_info(aut)) {
+
+        if ( aut->get_acceptance().to_dnf().size() < aut->get_acceptance().to_cnf().size() ) {
+            // dnf simplification
+            std::cout << "Future DNF simplification\n";
+            DNF_PACC formula = DNF_PACC(aut->get_acceptance().to_dnf());
+        } else {
+          // cnf simplification
+          std::cout << "Future CNF simplification\n";
+          CNF_PACC formula = CNF_PACC(aut->get_acceptance().to_cnf());
+        }
+
+    }
+    return acc_map;
+
+}
+
 void process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
 
     std::cout << "Automat v procesu\n" << "level:" << level << " timeout: " << timeout << std::endl;
@@ -16,18 +37,20 @@ void process_aut( spot::twa_graph_ptr &aut, int level, int timeout ) {
         return;
     }
 
-    if ( aut->get_acceptance().to_dnf().size() < aut->get_acceptance().to_cnf().size() ) {
+    std::map< spot::scc_info, PACC > scc_acc_map = get_accs(aut);
 
+
+    /*
+    if ( aut->get_acceptance().to_dnf().size() < aut->get_acceptance().to_cnf().size() ) {
         // dnf simplification
         std::cout << "Future DNF simplification\n";
+        auto formula = DNF_PACC(aut->get_acceptance().to_dnf());
     } else {
       // cnf simplification
       std::cout << "Future CNF simplification\n";
       auto formula = CNF_PACC(aut->get_acceptance().to_cnf());
-      int a = formula.fce();
-      formula.print();
-
     }
+    */
 
 
 

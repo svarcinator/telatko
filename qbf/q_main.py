@@ -4,6 +4,7 @@ from qbf.parser import *
 from qbf.formula import *
 from qbf.sequence_formula import *
 from qbf.optimization import *
+from qbf.sympy_formula import *
 
 
 def edge_dictionary(aut):
@@ -263,7 +264,36 @@ def create_formula(
     # prints our formula into text file
     SAT_output(quant_edges, con)
 
+def create_formula_sym(aut, acc, edge_dict, scc_edg, scc_state_info,
+    inner_edges_nums, C, K, inner_edges, mode):
 
+    # quantified edges #e_1 ... #e_n
+    quant_edges = quant_all(inner_edges_nums)
+    laso = laso_f_sym(
+        aut,
+        inner_edges_nums,
+        scc_state_info,
+        scc_edg,
+        inner_edges,
+        mode)
+
+    # reqiurements on old acceptance formula
+    old = old_formula_sym(acc, edge_dict)
+
+    # assignment of variables to create new acceptance formula
+    new = new_formula_sym(inner_edges_nums, C, K)
+
+    eq = Equivalent(old, new)
+    impl = Implies(laso, eq)
+
+    inf_or_fin = inf_or_fin_sym(C, K)
+    con = impl & inf_or_fin
+    print("to cnf:")
+    cnf = to_cnf(con, force=True)
+    print("hototvo, v cnf")
+    SAT_output(quant_edges, con)
+
+"""
 def resolve_flags(precision_flag, ck_flag, mode, C, K):
     if ck_flag:
         if precision_flag or mode == '1':
@@ -278,6 +308,7 @@ def resolve_flags(precision_flag, ck_flag, mode, C, K):
         else:
             precision_flag = 1
     return precision_flag, ck_flag, C, K, False
+"""
 
 
 def try_evaluate0(aut):
@@ -374,7 +405,7 @@ def play(aut, C, K, mode, timeout):
 
         # QBF formula is written into ./sat_file
 
-        """
+
         create_formula(
             aut,
             acc,
@@ -386,11 +417,23 @@ def play(aut, C, K, mode, timeout):
             K,
             inner_edges,
             mode)
-            """
+
+        """
+        create_formula_sym(aut,
+        acc,
+        edge_dict,
+        scc_edg,
+        scc_state_info,
+        inner_edges_nums,
+        C,
+        K,
+        inner_edges,
+        mode)
+        """
 
 
 
-        scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
+        #scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole",
                                  "./sat_file"],

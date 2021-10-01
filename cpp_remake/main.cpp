@@ -9,6 +9,7 @@
 #include <spot/twaalgos/sccfilter.hh>
 #include "cxxopts/include/cxxopts.hpp"
 #include "telatko2/t_main.cpp"
+#include <spot/twaalgos/sccinfo.hh>
 
 
 

@@ -362,6 +362,8 @@ def parse_acc(acc):
 
 
 def scc_current_marks(aut, scc):
+
+    # c++ marks_of(scc)
     """Return a list of marks currently present on edges in given scc.
 
     Arguments:
