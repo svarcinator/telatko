@@ -1,0 +1,252 @@
+% Automata stuff
+\usetikzlibrary{automata}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{bending}
+\usetikzlibrary{shapes.callouts}
+\usetikzlibrary{quotes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+%\usetikzlibrary{extshapes}
+\usetikzlibrary{matrix}
+
+% Colors for marks as used in Spot
+\definecolor{spotblue}{RGB}{31,120,180}
+\definecolor{spotpink}{RGB}{255,77,160}
+\definecolor{spotorange}{RGB}{255,127,0}
+\definecolor{spotpurple}{RGB}{106,61,154}
+\definecolor{spotgreen}{RGB}{51,160,44}
+\definecolor{spotred}{RGB}{227,26,28}
+\definecolor{spotyellowish}{RGB}{196,196,0}
+\definecolor{spotgray}{RGB}{80,80,80}
+\definecolor{spotlight blue}{RGB}{107,246,255}
+\definecolor{spotlight pink}{RGB}{255,154,255}
+\definecolor{spotlight orange}{RGB}{255,156,103}
+\definecolor{spotlight purple}{RGB}{178,164,255}
+\definecolor{spotlight green}{RGB}{167,237,121}
+\definecolor{spotlight red}{RGB}{255,104,104}
+\definecolor{spotlight yellowish}{RGB}{255,224,64}
+\definecolor{spotlight gray}{RGB}{192,192,144}
+
+
+\def\accsize{6pt}
+
+\tikzset{
+  >={Stealth[round,bend]},
+}
+
+\tikzstyle{automaton}=[
+  % Use nice arrows that do not touch their destination.
+  semithick,shorten >=1pt,>={Stealth[round,bend]},
+  % Encourage a common distance between all states.
+  node distance=1.5cm,
+  % Disable the "start" text in front of the initial arrow.
+  initial text=,
+  % Allows to use scale to scale the figure
+%  transform shape,
+  % Reduce the size of the hidden node at the beginning of the initial arrow.
+  every initial by arrow/.style={every node/.style={inner sep=0pt}},
+  % Encourage a common size of all states that is smaller than the default.
+  every state/.style={
+    align=center,
+    fill=white,
+    minimum size=7.5mm,
+    inner sep=0pt,
+    % all states have the same height and baseline
+    execute at begin node=\strut,
+  },%
+]
+
+\tikzstyle{smallautomaton}=[
+  automaton,
+  node distance=8mm,
+  every state/.style={minimum size=4mm,fill=white,inner sep=1pt}
+]
+
+\tikzstyle{mediumautomaton}=[
+  automaton,
+  node distance=1cm,
+  every state/.style={minimum size=5mm,fill=white,inner sep=2pt}
+]
+
+\tikzstyle{cstate}=[state,capsule,text width=,inner xsep=-5pt]
+\tikzstyle{dot}=[fill=black,circle,minimum size=4pt,inner sep=0]
+
+\makeatletter
+\tikzoption{initial angle}{\tikzaddafternodepathoption{\def\tikz@initial@angle{#1}}}
+\makeatother
+
+% pass "initial overlay" as a parameter to the tikz figure if you want
+% to initial arrow to be ignored from the computation of the figure
+% box.  This might be needed for better caption centering.
+\tikzstyle{initial overlay}=[every initial by arrow/.append style={overlay}]
+
+\tikzstyle{unreachable} = [densely dotted]
+
+% % % Usage: \node[acclabel]{label\strut}
+% The command \strut makes all labels have the same height.
+\tikzstyle{acclabel} = [
+  fill=yellow!20,
+  rounded corners=3pt,
+  draw=black,
+  inner ysep=0pt,
+  inner xsep=3pt,
+]
+\tikzstyle{ltllabel} = [acclabel,fill=darkgreen!20]
+
+\tikzstyle{namelabel} = [
+  execute at begin node = {$($},%
+  execute at end node = {$)$}
+]
+
+\tikzstyle{matrix of states} = [
+matrix of nodes,
+every node/.style={state},
+column sep=.8cm,
+row sep=.8cm,
+execute at empty cell={
+  \node[transparent,name=
+    \tikzmatrixname-\the\pgfmatrixcurrentrow-\the\pgfmatrixcurrentcolumn]{};]},
+]
+
+% Acceptance sets are displayed as small circles with white
+% sans-serif number.  The default color is light blue. Can be
+% changed by collacc styles.  Use anchor=center to ignore the
+% predefined anchor on edges like "loop above" or "loop left"
+% or when using path[auto].
+\tikzstyle{accset}=[
+  circle,inner sep=.5pt,
+  draw=none, %draw=white,
+  solid,
+  collacc0, text=white,
+  thin,
+  anchor=center,
+  minimum size=3.3mm,
+  text width={}, % in case tacc{} is called inside a node with text width set
+  font=\bfseries\sffamily\footnotesize
+]
+% Acceptance set as square
+\tikzstyle{accsquare}=[accset,rectangle,inner sep=1.9pt,rounded corners=0pt]
+
+% % % Colors % % %
+\tikzset{
+  collacc0/.style={fill=spotblue},
+  collacc1/.style={fill=spotpink},
+  collacc2/.style={fill=spotorange},
+  collacc3/.style={fill=spotpurple},
+  collacc4/.style={fill=spotgreen},
+  collacc5/.style={fill=spotred},
+  collacc6/.style={fill=spotyellowish},
+  collacc7/.style={fill=spotgray},
+  collacc8/.style={fill=spotlight blue},
+  collacc9/.style={fill=spotlight pink},
+  collacc10/.style={fill=spotlight orange},
+  collacc11/.style={fill=spotlight purple},
+  collacc12/.style={fill=spotlight green},
+  collacc13/.style={fill=spotlight red},
+  collacc14/.style={fill=spotlight yellowish},
+  collacc15/.style={fill=spotlight gray},
+}
+
+
+% The key /sacc/where is used to determine where the acc marks on
+% states should be placed using the sacc/derived keys
+% The default value is center
+% It has to be used in scopes, does not work inside nodes
+\pgfkeyssetvalue{/sacc/where}{center}
+\tikzset{
+  sacc where/.code={
+    \pgfkeyssetvalue{/sacc/where}{#1}
+  }
+}
+
+% % % Labels and marks of automata % % %
+\tikzset{
+  % Labels of edges that have some acceptance mark. Shifts label
+  % further from the edge to avoid ugly clash with the mark.
+  % Usage:
+  %   (n1) edge pic[pos=.3,left]{l=LABEL}
+  l/.pic={\node[outer sep=2pt] {#1};},%
+  % A colored mark with number inside. Use acc for a small circle and
+  % accsq for a small square.
+  % Usage:
+  %   (n1) edge pic[pos=.3]{acc=ACC_ID}
+  % collaccACC_ID must be defined
+  acc/.pic={\node[accset,collacc#1]{#1};},%
+  accsq/.pic={\node[accsquare,collacc#1]{#1};},%
+  % No number inside the bullets
+  eacc/.pic={\node[accset,collacc#1]{\emptyacc};},%
+  eaccsq/.pic={\node[accsquare,collacc#1]{\emptyacc};},%
+  % State labels on north east
+  sacc/.style = {
+    append after command=
+      {pic at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {acc=#1}}
+  },
+  saccsq/.style = {
+    append after command=
+      {pic at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {accsq=#1}}
+  },
+  esacc/.style = {
+    append after command=
+      {pic at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {eacc=#1}}
+  },
+%  esacc/.style 2 args = {
+%    append after command=
+%      {pic[#2] at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {eacc=#1}}
+%  },
+  esaccsq/.style = {
+    append after command=
+      {pic at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {eaccsq=#1}}
+  },
+  % Easy typesetting of colored accepting marks with custom labels.
+  % Usage:
+  %   (n1) edge pic[pos=.3]{acc={COLOR_ID}{LABEL}}
+  % collaccCOLOR_ID must be defined
+  pics/cacc/.style 2 args={%
+    code={\node[accset,collacc#1]{#2};}%
+  },%
+  pics/caccsq/.style 2 args={%
+      code={\node[accsquare,collacc#1]{#2};}%
+    },%
+  csacc/.style 2 args = {%
+      append after command=%
+        {pic at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {cacc={#1}{#2}}}%
+  },%
+  csaccsq/.style 2 args = {%
+      append after command=%
+        {pic at (\tikzlastnode.\pgfkeysvalueof{/sacc/where}) {caccsq={#1}{#2}}}%
+  },%
+}
+
+% Macros for colored acceptance marks used in text. Usage:
+% \tacc{COLOR_ID}{LABEL}
+\def\markbaseline{-.33em}
+\def\tacc#1{\tikz[baseline=\markbaseline]\pic{acc=#1};\xspace}
+\def\tcacc#1#2{\tikz[baseline=\markbaseline]\pic{cacc={#1}{#2}};\xspace}
+\def\taccsq#1{\tikz[baseline=\markbaseline]\pic{accsq=#1};\xspace}
+\def\tcaccsq#1#2{\tikz[baseline=\markbaseline]\pic{caccsq={#1}{#2}};\xspace}
+
+% % % some predefined marks with no number inside
+\def\emptyacc{\phantom{0}}
+\def\gm{\tcacc{2}{\emptyacc}}
+\def\om{\tcacc{1}{\emptyacc}}
+\def\bm{\tcacc{0}{\emptyacc}}
+\def\bsq{\tcaccsq{0}{\emptyacc}}
+\def\rsq{\tcaccsq{3}{\emptyacc}}
+
+\def\minimark#1{
+\def\emptyacc{}
+\def\accsize{4pt}
+#1
+}
+
+% SCC boxes
+\tikzstyle{removed} = [opacity=0, overlay]
+\tikzstyle{SCC} = [
+  rounded corners=3pt,
+  inner sep=5pt,
+  draw, very thin,
+  fill=black!10
+]
+\tikzstyle{trivial} = [dashed]
+%%% Make it overlay if put on the side
+\tikzstyle{sccname} = [red,anchor=south east,outer xsep=13pt]

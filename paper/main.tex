@@ -1,0 +1,135 @@
+\documentclass[runningheads]{llncs}
+
+% \usepackage[numbers]{natbib}
+% \renewcommand\bibsection{\section*{\refname}\small\renewcommand\bibnumfmt[1]{##1.}}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+\usepackage{hyperref}
+% \usepackage{xspace}
+% \usepackage{amsthm}
+% \usepackage{enumitem} % topsep
+
+\usepackage{tikz}
+% TikZ libraries
+\usetikzlibrary{myautomata}
+\usetikzlibrary{fit, backgrounds}
+
+\newenvironment{nstabbing}
+  {\setlength{\topsep}{0pt}%
+   \setlength{\partopsep}{0pt}%
+   \tabbing}
+  {\endtabbing}
+
+%{{{ (La)TeX definitions
+
+\newcommand{\Nset}{{\mathbb{N}_0}}
+
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\def\Inf{\ensuremath{\mathsf{Inf}}}
+\def\Fin{\ensuremath{\mathsf{Fin}}}
+\def\ttrue{\ensuremath{\mathsf{t}}}
+\def\ffalse{\ensuremath{\mathsf{f}}}
+\def\CQ{\mathcal{C}}
+\def\BigO#1{\ensuremath{\mathcal{O}\left(#1\right)}}
+\newcommand{\B}{\texorpdfstring{\ensuremath{\mathds{B}}}{B}}
+\def\isempty{\textsc{is\_empty}\xspace}
+\def\sccsof{\textsc{SCCs\_of}\xspace}
+\def\issccempty{\textsc{is\_SCC\_empty}\xspace}
+\def\marksof{\textsc{marks\_of}\xspace}
+\def\remove{\textsc{remove}\xspace}
+
+\def\Mocc{M_{\mathrm{occur}}}
+\def\Mevery{M_{\mathrm{every}}}
+\newcommand{\G}{\mathbf{G}}
+\newcommand{\CA}{\ensuremath{\mathcal{A}}}
+\newcommand{\CB}{\ensuremath{\mathcal{B}}}
+\def\init{\iota}
+\def\lang{L} % FIX this
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\bscc}{\mathcal{B}}
+\newcommand{\sched}{\mathfrak{s}}
+\newcommand{\Act}{\mathit{Act}}
+\newcommand{\NP}{\textsf{NP}}
+\newcommand{\POLY}{\textsf{P}}
+\newcommand{\class}{\ensuremath{\mathcal{C}}}
+\newcommand{\finally}{\mathsf{F}}
+\newcommand{\globally}{\mathsf{G}}
+% \newcommand{\finally}{\mathbf{F}}
+% \newcommand{\globally}{\mathbf{G}}
+
+% Remove space from footnote after interpunction. Usage:
+% \punct{.}\footnote{footnotetext}
+\newlength{\spc} % declare a variable to save spacing value
+\newcommand{\punct}[1]{%
+  \settowidth{\spc}{#1}% set value of \spc variable to the width of #1 argument
+  \addtolength{\spc}{-1.8\spc}% subtract from \spc about two (1.8) of its values making its magnitude negative
+  #1% print the optional argument
+  \hspace*{\spc}% print an additional negative spacing stored in \spc after #1
+}
+
+%}}}
+
+\begin{document}
+
+%{{{ Title and authors
+
+\title{Reducing Acceptance Condition\\ of Emerson-Lei Automata}
+\authorrunning{T.~Schwarzová and J. Strej\v{c}ek}
+ \author{Tereza Schwarzová \and Jan Strej\v{c}ek}
+ \institute{%
+   Masaryk University, Brno, Czech Republic\\ \email{\{xschwar3,strejcek\}@mail.muni.cz}
+ }
+
+%}}}
+
+\maketitle
+
+%{{{ Abstract
+
+\begin{abstract}
+  We present an QBF-based algorithm that reduces the number of
+  acceptance sets of transition-based Emerson-Lei automata.
+\end{abstract}
+
+%}}}
+
+\section{Introduction}
+\begin{itemize}
+\item Emerson-Lei automata jsou v principu staré, ale v poslední době
+  znovuobjevene~\cite{babiak.15.cav} a je o tom ted spousta
+  clanku~\cite{baier.19.atva} a nastroju
+\item algoritmy jsou obvykle citlive na akceptacni podminku (citace)
+\item cilem prace je zjednodusit akceptacni podminku (zejmnena
+  redukovat pocet akceptacnich znacek) bez zmeny struktury automatu
+\end{itemize}
+
+\section{Preliminaries}
+Definice TELA, popsat QBF
+
+\section{Reduction based on acceptance sets relations}
+Puvodni telatko
+
+\section{QBF-based reduction}
+\begin{itemize}
+\item obecny popis konstrukce formule
+\item (level 3)
+\item level 4
+\end{itemize}
+
+\section{Implementation and experimental evaluation}
+
+\section{Conclusions}
+
+
+%\bibliographystyle{abbrvnat}
+\bibliographystyle{plain}
+\bibliography{mc}
+
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% End:
