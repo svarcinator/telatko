@@ -1,0 +1,3 @@
+autcross --file='./new_sets/ltl3tela.hoa' --tool='python3 ./main.py -F%H -O%O -M 1' --language-preserved --csv='./new_sets/ltletela.tele'
+
+

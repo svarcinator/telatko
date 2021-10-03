@@ -1,0 +1,6 @@
+odstranit p_c_k | n_c_k a zjistit, rpoc to zlobi.
+Optimalizace pro scc
+old neprevadet do dnf -- lze tam usetrit
+postupne zvysovat level a kouknout jakej to bude mit efekt -- v nejhorsim pripade musi solver 2x vyhodnotit, ze je to unsatisfiable. Otazka, jakej to bude mit efekt.
+doplnit do texove sablony veci.
+proc obcas cvakne, ze je ekvivalentni, aniz by zkousel, zda je to satisfiable?

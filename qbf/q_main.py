@@ -388,6 +388,7 @@ def play(aut, C, K, mode, timeout):
     scc_state_info, scc_edg = scc_info(aut)
 
     K = K - 1  # we dont want to try what we already know
+    tmp_mode = 2
 
     while C > 0 and K > 0:
 
@@ -416,7 +417,7 @@ def play(aut, C, K, mode, timeout):
             C,
             K,
             inner_edges,
-            mode)
+            tmp_mode)
 
         """
         create_formula_sym(aut,
@@ -453,7 +454,13 @@ def play(aut, C, K, mode, timeout):
 
         if len(out) == 1:
             print("unsatisfiable")
-            return aut
+            if ( tmp_mode < mode):
+
+                tmp_mode+=1
+                print("new level of simplification:", tmp_mode)
+                continue
+            else:
+                return aut
 
         if len(out) == 0:
             print("sat error")

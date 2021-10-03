@@ -249,14 +249,14 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
     # QBF SCC
 
     # edg1 | edg2 | ...
-    least_one = least_one_edge(inner_edges_nums)
+    #least_one = least_one_edge(inner_edges_nums)
     # e1 -> s1 -> e2
     in_out = in_n_out(scc_state_info)
     # edges that are true are in one SCC and none of edges from other SCCs is
     # true
     one_scc = one_scc_f(scc_edg)
     laso = SATformula("&")
-    laso.add_subf(least_one)
+    #laso.add_subf(least_one)
     laso.add_subf(in_out)
     laso.add_subf(one_scc)
 
@@ -322,9 +322,9 @@ def inf_or_fin_f(
 
     """
 
-    clauses_dis = SATformula('&')
+    clauses_dis = SATformula('|')
     for c in range(1, clauses_count + 1):
-        sets_dis = SATformula('&')
+        sets_dis = SATformula('|')
         for k in range(1, acc_sets_count + 1):
             disj = SATformula('|')
             disj.add_subf(SATformula('p_' + str(c) + '_' + str(k)))
