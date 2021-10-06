@@ -61,7 +61,10 @@ class SATformula:
                     elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
             return '(' + str(self.subformula[0]) + self.formula + ''.join(str(
                 elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
-
+    def just_operator(self):
+        if is_empty() and ["&", "|", "->", "<->"] in bool and lne(bool) <=3:
+            return true
+        return false
     def is_empty(self):
         return self.subformula == []
 
@@ -153,6 +156,50 @@ class PACC:
 
     def __len__(self):
         return len(self.formula)
+
+    def int_format(self):
+        f = []
+        for dis in self.formula:
+            d = []
+            for con in dis:
+                d.append(con.num)
+            f.append(d)
+        return f
+
+    def resolve_redundancy(self):
+        """
+
+        Returns:
+
+        """
+        rem_d = []
+        int_f = self.int_format()
+        for i in range(len(self.formula)):
+            for j in range(len(self.formula)):
+                if i != j and set(int_f[i]).issubset(set(int_f[j])) and not set(
+                        int_f[i]) == set(int_f[j]) and j not in rem_d:
+                    rem_d.append(j)
+
+        res_f = []
+        for i in range(len(self.formula)):
+            if self.formula[i] not in res_f and i not in rem_d:
+                res_f.append(self.formula[i])
+        self.formula = res_f
+
+    def clean_up(self, present_acc_sets):
+        clean_f = []
+        marks = present_acc_sets
+        for dis in self.formula:
+            clean_dis = []
+            for con in dis:
+                if con.num in marks:
+                    clean_dis.append(con)
+            if clean_dis:
+                clean_f.append(clean_dis)
+        self.formula = clean_f
+        self.resolve_redundancy()
+
+
 
 
 ### PARSE ACC ###

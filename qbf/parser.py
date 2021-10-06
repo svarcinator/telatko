@@ -95,7 +95,9 @@ def parse_dict(f_list):
 
     """
     f_dict = {}
+    
     for item in f_list:
+
         item = item.split('_')
         if int(item[1]) not in f_dict.keys():
             f_dict[int(item[1])] = [int(item[2].split('=')[0])]

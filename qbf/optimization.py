@@ -1,7 +1,12 @@
 
 from qbf.classes import  *
 from qbf.formula import *
+import copy
+
 def get_mark_edg( aut, edges, edges_translator):
+    """
+        Returns: dictionary {acc_mark : [real_edge_numbers]}
+    """
     dict = {}
     counter = 1
     for e in edges:
@@ -118,14 +123,20 @@ def in_n_out2(scc_info, edge_translator):
 
     return conjunct
 
+def count_edges(edges):
+    counter = 0
+    for e in edges:
+        counter += 1
+    return counter
+
 def laso_part(scc_info, edge_translator, L, inner_edges, aut, max_T):
     laso = SATformula("&")
     in_out = in_n_out2(scc_info, edge_translator)
-    least_one = least_one_edge2(max_T)
+    least_one = least_one_edge2(count_edges(inner_edges))
     laso.add_subf(least_one)
     laso.add_subf(in_out)
     if L == 3:
-        laso.add_subf(in_out)
+        #laso.add_subf(in_out)
         neg = negate_part2(aut, inner_edges, edge_translator)
         laso.add_subf(neg)
         return laso
@@ -138,7 +149,10 @@ def quantify_e(T):
         formula += "# e_" + str(i)
     return formula
 
-def old_formula2(acc, edge_dict, edge_translator):
+
+
+
+def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut):
     """
 
         Args:
@@ -148,14 +162,20 @@ def old_formula2(acc, edge_dict, edge_translator):
         Returns: Formula in DNF
 
         """
+    #print("acc: ", acc)
+    #print("scc sets:", scc_sets)
+    tmp_acc = copy.deepcopy(acc)
 
+
+    tmp_acc.clean_up(list(scc_sets.sets()))
+
+    #print("cleaned acc: ", tmp_acc)
     dnf_formula = SATformula('|')
-    for dis in acc.formula:
+    for dis in tmp_acc.formula:
         conjunct_f = SATformula('&')
         for con in dis:
             new_shape = None
-            if con.num not in edge_dict:
-                continue
+
             if con.type == MarkType.Inf:
                 new_shape = SATformula('|')
 
@@ -174,8 +194,9 @@ def old_formula2(acc, edge_dict, edge_translator):
                             "!e_" + str(edge_translator[edge])))
             # bude tu problem pokud nekde bude pouze samotnej log operator
             conjunct_f.add_subf(new_shape)
-        if len(conjunct_f) != 1:
-            dnf_formula.add_subf(conjunct_f)
+
+        dnf_formula.add_subf(conjunct_f)
+    #print("dnf formula:  ",dnf_formula)
 
     return dnf_formula
 

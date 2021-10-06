@@ -3,6 +3,25 @@ import sys
 import argparse
 import os
 from qbf.classes import *
+import re
+
+def inf_set_old_formula(edge_dict, set_num):
+    new_shape = SATformula('|')
+    for edge in edge_dict[set_num]:
+        new_shape.add_subf(
+            SATformula(
+                "e_" +
+                str(edge)))
+    return new_shape
+
+def fin_set_old_formula(edge_dict, set_num):
+    new_shape = SATformula('&')
+    for edge in edge_dict[set_num]:
+        new_shape.add_subf(
+            SATformula(
+                "!e_" +
+                str(edge)))
+    return new_shape
 
 
 def old_formula(acc, edge_dict):
@@ -15,9 +34,27 @@ def old_formula(acc, edge_dict):
         Returns: Formula in DNF
 
         """
-    print(acc)
-    for a in acc:
-        print(a)
+
+    sets = acc.used_inf_fin_sets()
+    inf_sets = list(sets[0].sets())
+    fin_sets = list(sets[1].sets())
+    print(inf_sets)
+    formula = str(acc)
+
+    for i in inf_sets:
+        reg = "Inf\(" + str(i) + "\)"
+        formula = re.sub(reg, str(inf_set_old_formula(edge_dict, i)), formula)
+    for f in fin_sets:
+        reg = "Fin\(" + str(f) + "\)"
+        formula = re.sub(reg, str(fin_set_old_formula(edge_dict, f)), formula)
+        
+    return SATformula(formula)
+
+
+
+    print(formula)
+
+
     """
     dnf_formula = SATformula('|')
     for dis in acc.formula:

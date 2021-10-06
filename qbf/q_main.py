@@ -191,7 +191,6 @@ def laso2(aut, inner_edges, scc_edg):
 
 def create_formula(
         aut,
-        acc,
         edge_dict,
         scc_edg,
         scc_state_info,
@@ -237,7 +236,7 @@ def create_formula(
             mode)
 
     # reqiurements on old acceptance formula
-    old = old_formula(acc, edge_dict)
+    old = old_formula(aut.get_acceptance(), edge_dict)
 
     # assignment of variables to create new acceptance formula
     new = new_formula(inner_edges_nums, C, K)
@@ -328,6 +327,11 @@ def try_evaluate0(aut):
         return aut
     return last_eq_aut
 
+def count_sets(sets):
+    counter = 0
+    for s in sets:
+        counter += 1
+    return counter
 
 def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     formula = SATformula('&')
@@ -338,8 +342,12 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     max_states = 0
     counter = 0
     for scc in range(si.scc_count()):
+        print("scc: ", scc, si.states_of(scc))
+        #print("marks: ", si.marks_of(scc))
+        #print("used_acc_of: ", si.used_acc_of(scc))
+        #print("acc_sets_of: ", si.acc_sets_of(scc))
         if si.is_trivial(scc):
-            #print("trivial", scc)
+            #print("trivial", scc, si.states_of(scc))
             continue
         scc_inner_edges = si.inner_edges_of(scc)
         edges_translator = {}
@@ -347,12 +355,27 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         max_T = max(max_T, len(edges_translator))
         max_states = max(len(si.states_of(scc)), max_states)
         eq = SATformula('<->')
-        old = old_formula2(acc, mark_edg_dict, edges_translator)
-        if(len(old) == 1):
-            old = SATformula("t")
+        #old = old_formula_scc(aut.get_acceptance(), mark_edg_dict, edges_translator, si.acc_sets_of(scc))
+        old = old_formula2(acc, mark_edg_dict, edges_translator, si.acc_sets_of(scc), aut )
+
+
+        if(len(list(si.acc_sets_of(scc).sets())) == 0):
+            #print("scc:", scc, "old je delky 1: ", old, "states: ", si.states_of(scc))
+            if si.is_accepting_scc(scc):
+                #print("accepting")
+                # old je True
+                old = SATformula("t | !t")
+            if si.is_rejecting_scc(scc):
+                #print("rejecting")
+                # old je False
+                old = SATformula("t & !t")
+
+
+
         new = new_formula2(edges_translator, C, K)
         eq.add_subf(old)
         eq.add_subf(new)
+
         impl = SATformula('->')
         laso = laso_part(scc_state_info[counter], edges_translator, L, scc_inner_edges, aut, max_T)
         if L == 4:
@@ -399,17 +422,16 @@ def play(aut, C, K, mode, timeout):
         # dictionary {edge_num : [num of acceptance set]}
         edge_dict = edge_dictionary(aut)
 
-        acc = PACC(aut.get_acceptance().to_dnf())
-        if acc.formula == []:
+
+        if aut.get_acceptance().used_sets().count() <= 1:
             a = try_evaluate0(aut)
             return a
 
         # QBF formula is written into ./sat_file
 
-
+        """
         create_formula(
             aut,
-            acc,
             edge_dict,
             scc_edg,
             scc_state_info,
@@ -418,23 +440,15 @@ def play(aut, C, K, mode, timeout):
             K,
             inner_edges,
             tmp_mode)
-
-        """
-        create_formula_sym(aut,
-        acc,
-        edge_dict,
-        scc_edg,
-        scc_state_info,
-        inner_edges_nums,
-        C,
-        K,
-        inner_edges,
-        mode)
         """
 
 
 
-        #scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
+
+
+
+        acc = PACC(aut.get_acceptance().to_dnf())
+        scc_optimized_formula(aut, acc, scc_state_info, C, K, mode)
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole",
                                  "./sat_file"],
@@ -471,6 +485,7 @@ def play(aut, C, K, mode, timeout):
         process_variables(aut, variables)
 
         K = K - 1
+        #return aut
 
     a = try_evaluate0(aut)
     return a

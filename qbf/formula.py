@@ -1,4 +1,5 @@
 from qbf.classes import *
+import re
 
 ### NEW FORMULA ###
 
@@ -195,16 +196,9 @@ def quant_exist(scc_state_info):
 
 # # # OLD FORMULA # # #
 
+"""
 def old_formula(acc, edge_dict):
-    """
 
-        Args:
-            acc: Original acceptance condition in DNF
-            edge_dict: Dictionary with number of acceptance set : numbers of edges that the acceptance set contains
-
-        Returns: Formula in DNF
-
-        """
 
     dnf_formula = SATformula('|')
     for dis in acc.formula:
@@ -228,6 +222,52 @@ def old_formula(acc, edge_dict):
         dnf_formula.add_subf(conjunct_f)
 
     return dnf_formula
+"""
+
+def inf_set_old_formula(edge_dict, set_num):
+    new_shape = SATformula('|')
+    for edge in edge_dict[set_num]:
+        new_shape.add_subf(
+            SATformula(
+                "e_" +
+                str(edge)))
+    return new_shape
+
+def fin_set_old_formula(edge_dict, set_num):
+    new_shape = SATformula('&')
+    for edge in edge_dict[set_num]:
+        new_shape.add_subf(
+            SATformula(
+                "!e_" +
+                str(edge)))
+    return new_shape
+
+
+def old_formula(acc, edge_dict):
+    """
+
+        Args:
+            acc: Original acceptance condition
+            edge_dict: Dictionary with number of acceptance set : numbers of edges that the acceptance set contains
+
+        Returns: Formula in DNF
+
+        """
+
+    sets = acc.used_inf_fin_sets()
+    inf_sets = list(sets[0].sets())
+    fin_sets = list(sets[1].sets())
+    formula = str(acc)
+
+    for i in inf_sets:
+        reg = "Inf\(" + str(i) + "\)"
+        formula = re.sub(reg, str(inf_set_old_formula(edge_dict, i)), formula)
+    for f in fin_sets:
+        reg = "Fin\(" + str(f) + "\)"
+        formula = re.sub(reg, str(fin_set_old_formula(edge_dict, f)), formula)
+
+    return SATformula(formula)
+
 
 
 # connection of formula: quantified part . lasso -> (old <-> new)
