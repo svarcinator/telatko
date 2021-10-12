@@ -7,6 +7,81 @@ import sys
 import argparse
 from scipy.optimize import linear_sum_assignment
 import numpy as np
+import copy
+import os
+import subprocess
+import itertools
+from math import ceil, log2
+
+class Variable:
+    """
+    Class that contains information retrieved from SAT-result.
+     Variable in this class formulates shape of new acceptance condition.
+    """
+
+    def __init__(self, var):
+        self.type = var[0]
+        self.clause = int(var[1])
+        self.set = int(var[2].split('=')[0])
+
+
+class SATformula:
+    """
+    Represents boolean formula, retrieved from the input automata, that will be given to SAT-solver.
+
+    """
+
+    def __init__(self, bool):
+        self.formula = bool
+        self.subformula = []
+        self.negation = False
+        self.imperativ = False
+
+    def __len__(self):
+        if not self.subformula:
+            return 1
+        else:
+            return sum(map(len, self.subformula))
+
+    def __str__(self):
+
+        if not self.subformula:
+
+            return ''.join(" " + self.formula + " ")
+
+        elif len(self.subformula) == 1:
+            if self.negation and self.imperativ:
+                # print("tuna")
+                return ''.join('!(' + str(self.subformula[0]) + ')')
+            return ''.join('(' + str(self.subformula[0]) + ')')
+
+        else:
+            if self.negation and self.imperativ:
+                return '!(' + str(self.subformula[0]) + self.formula + ''.join(str(
+                    elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+            return '(' + str(self.subformula[0]) + self.formula + ''.join(str(
+                elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+    def just_operator(self):
+        if is_empty() and ["&", "|", "->", "<->"] in bool and lne(bool) <=3:
+            return true
+        return false
+    def is_empty(self):
+        return self.subformula == []
+
+    def add_subf(self, new_subform):
+        self.subformula.append(new_subform)
+
+    def negate(self):
+        self.negation = not self.negation
+
+    def imper(self):
+        self.imperativ = True
+
+    def remove_last_kiddo(self):
+        self.subformula.pop()
+
+    def subformula_list(self):
+        return self.subformula
 
 
 class MarkType(enum.Enum):
@@ -135,7 +210,7 @@ class PACC:
 
     def resolve_redundancy(self):
         """
-        
+
         Returns:
 
         """
@@ -165,6 +240,24 @@ class PACC:
                 clean_f.append(clean_dis)
         self.formula = clean_f
         self.resolve_redundancy()
+
+    def clean_up2(self, scc_sets):
+        clean_f = []
+        for dis in self.formula:
+            clean_dis = []
+            add_disj = True
+            for con in dis:
+                if con.num in scc_sets:
+                    clean_dis.append(con)
+                else:
+                    if con.type == MarkType.Inf:
+                        # inf mark not present in scc
+                        # whole conjunct is false
+                        add_disj = False
+            if clean_dis and add_disj:
+                clean_f.append(clean_dis)
+        self.formula = clean_f
+        #self.resolve_redundancy()
 
     def get_mtype(self, m):
         for dis in self.formula:
@@ -301,6 +394,9 @@ class PACC_CNF:
                 clean_f.append(clean_dis)
         self.formula = clean_f
         self.resolve_redundancy()
+
+
+
 
 
 def parse_orig_acc(acc):

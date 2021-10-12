@@ -1,5 +1,5 @@
 
-from qbf.classes import  *
+from telatko2.classes import *
 from qbf.formula import *
 import copy
 
@@ -19,15 +19,14 @@ def get_mark_edg( aut, edges, edges_translator):
         counter += 1
     return  dict
 
-def one_fin2(clause, acc_set, inner_edges):
+def one_fin2(clause, acc_set, edges_translator):
     """
         Create formula in shape of :
         n_ck -> (&_1<=t<=T (!f_tk | !e_t)
         Args:
             clause: num of clause
             acc_set: num of acc set
-            T: count of all edges
-            sequence_num: num of sequence
+
 
         Returns:
 
@@ -38,32 +37,35 @@ def one_fin2(clause, acc_set, inner_edges):
     impl.add_subf(SATformula('n_' + c + '_' + k))
 
     conjunction = SATformula('&')
-    for t in inner_edges:
+    for t in edges_translator:
         disj = SATformula('|')
-        disj.add_subf(SATformula('!e_' + str(inner_edges[t])))
+        disj.add_subf(SATformula('!e_' + str(edges_translator[t])))
         disj.add_subf(SATformula('!f_' + str(t) + '_' + k))
 
         conjunction.add_subf(disj)
     impl.add_subf(conjunction)
     return impl
 
-def one_inf2(clause, acc_set, inner_edges):
+def one_inf2(clause, acc_set, edges_translator):
     """
 
     :param clause: num of clause c
     :param acc_set: num off acc set k
-    :param edges_count: number of edges in automaton
+    :param edges_translator: {num_of_edge_in_aut : num_of_edge_in_SATformula}
+
     :return:
     """
+
+
     c = str(clause)
     k = str(acc_set)
     impl = SATformula('->')
     impl.add_subf(SATformula('p_' + c + '_' + k))
 
     disjunction = SATformula('|')
-    for t in inner_edges:
+    for t in edges_translator:
         conj = SATformula('&')
-        conj.add_subf(SATformula('e_' + str(inner_edges[t])))
+        conj.add_subf(SATformula('e_' + str(edges_translator[t])))
         conj.add_subf(SATformula('f_' + str(t) + '_' + k))
 
         disjunction.add_subf(conj)
@@ -71,7 +73,7 @@ def one_inf2(clause, acc_set, inner_edges):
     return impl
 
 
-def new_formula2(inner_edges, C, K):
+def new_formula2(edges_translator, C, K):
     """
     Creates requirements for variables for new, short acceptance formula of automaton
     :param inner_edges: all inner edges of SCCs of automaton
@@ -85,8 +87,8 @@ def new_formula2(inner_edges, C, K):
         sets_conj = SATformula('&')
         for k in range(1, K + 1):
             conj = SATformula('&')
-            conj.add_subf(one_inf2(c, k, inner_edges))
-            conj.add_subf(one_fin2(c, k, inner_edges))
+            conj.add_subf(one_inf2(c, k, edges_translator))
+            conj.add_subf(one_fin2(c, k, edges_translator))
 
             sets_conj.add_subf(conj)
         clauses_disj.add_subf(sets_conj)
@@ -152,7 +154,7 @@ def quantify_e(T):
 
 
 
-def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut):
+def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
     """
 
         Args:
@@ -167,7 +169,8 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut):
     tmp_acc = copy.deepcopy(acc)
 
 
-    tmp_acc.clean_up(list(scc_sets.sets()))
+    tmp_acc.clean_up2(list(scc_sets.sets()))
+
 
     #print("cleaned acc: ", tmp_acc)
     dnf_formula = SATformula('|')

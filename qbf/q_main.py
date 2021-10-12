@@ -81,7 +81,7 @@ def scc_info(aut):
     return scc_state_inf, scc_edg
 
 
-def SAT_output(quantified, formula):
+def SAT_output(name, quantified, formula):
     """
     Prints formula into file(for QBF solver) named satfile.
     Args:
@@ -91,7 +91,7 @@ def SAT_output(quantified, formula):
     Returns:
 
     """
-    f = open("sat_file", "w")
+    f = open(name, "w")
     f.write(str(quantified) + str(formula))
     f.close()
 
@@ -261,7 +261,7 @@ def create_formula(
     con.add_subf(inf_not_fin)
     con.add_subf(inf_or_fin)
     # prints our formula into text file
-    SAT_output(quant_edges, con)
+    SAT_output("sat_file", quant_edges, con)
 
 def create_formula_sym(aut, acc, edge_dict, scc_edg, scc_state_info,
     inner_edges_nums, C, K, inner_edges, mode):
@@ -290,24 +290,7 @@ def create_formula_sym(aut, acc, edge_dict, scc_edg, scc_state_info,
     print("to cnf:")
     cnf = to_cnf(con, force=True)
     print("hototvo, v cnf")
-    SAT_output(quant_edges, con)
-
-"""
-def resolve_flags(precision_flag, ck_flag, mode, C, K):
-    if ck_flag:
-        if precision_flag or mode == '1':
-            return None, None, None, None, True
-        else:
-            precision_flag = 1
-    else:
-        if precision_flag or mode == '1':
-            ck_flag = 1
-            precision_flag = 0
-            K += 1
-        else:
-            precision_flag = 1
-    return precision_flag, ck_flag, C, K, False
-"""
+    SAT_output("sat_file", quant_edges, con)
 
 
 def try_evaluate0(aut):
@@ -335,46 +318,51 @@ def count_sets(sets):
 
 def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     formula = SATformula('&')
-   # print("scc state info:" , scc_state_info)
+    #print("scc state info:" , scc_state_info)
+    weak = spot.scc_info(aut).weak_sccs()
 
     si = spot.scc_info(aut)
     max_T = 0
     max_states = 0
     counter = 0
-    for scc in range(si.scc_count()):
-        print("scc: ", scc, si.states_of(scc))
+    scc_counter = 0
+    for scc in (si):
+        #print("scc: ",  si.states_of(scc_counter))
         #print("marks: ", si.marks_of(scc))
         #print("used_acc_of: ", si.used_acc_of(scc))
         #print("acc_sets_of: ", si.acc_sets_of(scc))
-        if si.is_trivial(scc):
-            #print("trivial", scc, si.states_of(scc))
+        if si.is_trivial(scc_counter):
+            #print("trivial", si.states_of(scc_counter))
+            scc_counter += 1
             continue
-        scc_inner_edges = si.inner_edges_of(scc)
+        scc_inner_edges = si.inner_edges_of(scc_counter)
         edges_translator = {}
         mark_edg_dict = get_mark_edg(aut, scc_inner_edges, edges_translator)
         max_T = max(max_T, len(edges_translator))
-        max_states = max(len(si.states_of(scc)), max_states)
+        max_states = max(len(si.states_of(scc_counter)), max_states)
         eq = SATformula('<->')
         #old = old_formula_scc(aut.get_acceptance(), mark_edg_dict, edges_translator, si.acc_sets_of(scc))
-        old = old_formula2(acc, mark_edg_dict, edges_translator, si.acc_sets_of(scc), aut )
 
+        #print(si.used_acc_of(scc_counter))
+        if si.is_rejecting_scc(scc_counter):
+            #print("rejecting")
+            # old je False
+            old = SATformula("&")
+            old.add_subf("t")
+            old.add_subf("!t")
+        elif weak[scc_counter] and si.is_accepting_scc(scc_counter):
 
-        if(len(list(si.acc_sets_of(scc).sets())) == 0):
-            #print("scc:", scc, "old je delky 1: ", old, "states: ", si.states_of(scc))
-            if si.is_accepting_scc(scc):
-                #print("accepting")
-                # old je True
-                old = SATformula("t | !t")
-            if si.is_rejecting_scc(scc):
-                #print("rejecting")
-                # old je False
-                old = SATformula("t & !t")
-
-
+            #print("weak accepting", si.states_of(scc_counter))
+            old = SATformula("|")
+            old.add_subf("t")
+            old.add_subf("!t")
+        else:
+            old = old_formula2(acc, mark_edg_dict, edges_translator, si.acc_sets_of(scc_counter), aut, scc )
 
         new = new_formula2(edges_translator, C, K)
         eq.add_subf(old)
         eq.add_subf(new)
+
 
         impl = SATformula('->')
         laso = laso_part(scc_state_info[counter], edges_translator, L, scc_inner_edges, aut, max_T)
@@ -384,14 +372,15 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         impl.add_subf(eq)
         formula.add_subf(impl)
         counter += 1
+        scc_counter += 1
     formula.add_subf(inf_or_fin_f(C, K))
     formula.add_subf(inf_is_not_fin_clause(C, K))
     #formula.add_subf(least_one(max_T))
 
     q = quantify_e(max_T)
     if L > 2:
-        q += w_quant2(aut, max_states)
-    SAT_output(q, formula)
+        q += w_quant(aut)
+    SAT_output("sat_file", q, formula)
 
 def play(aut, C, K, mode, timeout):
 
@@ -399,6 +388,7 @@ def play(aut, C, K, mode, timeout):
 
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
+
         return aut
     original = spot.automaton(aut.to_str())
 
@@ -417,15 +407,12 @@ def play(aut, C, K, mode, timeout):
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-            return aut
+            a = try_evaluate0(aut)
+            return a
 
         # dictionary {edge_num : [num of acceptance set]}
         edge_dict = edge_dictionary(aut)
 
-
-        if aut.get_acceptance().used_sets().count() <= 1:
-            a = try_evaluate0(aut)
-            return a
 
         # QBF formula is written into ./sat_file
 
@@ -441,10 +428,6 @@ def play(aut, C, K, mode, timeout):
             inner_edges,
             tmp_mode)
         """
-
-
-
-
 
 
         acc = PACC(aut.get_acceptance().to_dnf())
@@ -471,7 +454,7 @@ def play(aut, C, K, mode, timeout):
             if ( tmp_mode < mode):
 
                 tmp_mode+=1
-                print("new level of simplification:", tmp_mode)
+                #print("new level of simplification:", tmp_mode)
                 continue
             else:
                 return aut
@@ -481,10 +464,13 @@ def play(aut, C, K, mode, timeout):
             return aut
         variables = out[1:]
         print("satisfiable")
+        #print_aut(aut, "last_equivalent", "w")
+
 
         process_variables(aut, variables)
 
         K = K - 1
+
         #return aut
 
     a = try_evaluate0(aut)

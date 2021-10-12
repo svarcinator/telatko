@@ -1,4 +1,4 @@
-from qbf.classes import *
+from telatko2.classes import *
 
 
 def create_acc(variables):
@@ -95,7 +95,7 @@ def parse_dict(f_list):
 
     """
     f_dict = {}
-    
+
     for item in f_list:
 
         item = item.split('_')

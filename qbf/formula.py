@@ -1,4 +1,4 @@
-from qbf.classes import *
+from telatko2.classes import *
 import re
 
 ### NEW FORMULA ###
@@ -302,7 +302,7 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
 
     # this part makes sure, that the edges are connected tzn QBF CONNECTED
     if mode == 3:
-        neg = negate_part(aut, inner_edges)
+        neg = negate_part(aut, inner_edges, edges_translator)
         laso.add_subf(neg)
     return laso
 
@@ -389,7 +389,7 @@ def connection(aut, inner_edges):
         if src != dst:
 
             impl = SATformula("->")
-            impl.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+            impl.add_subf(SATformula("e_" + str(edges_translator[aut.edge_number(e)])))
             eq = SATformula("<->")
             eq.add_subf(SATformula("w_" + str(src)))
             eq.add_subf(SATformula("w_" + str(dst)))
@@ -400,11 +400,11 @@ def connection(aut, inner_edges):
     return con
 
 
-def positive(aut, inner_edges):
+def positive(aut, inner_edges, edges_translator):
     dis = SATformula("|")
     for e in inner_edges:
         con = SATformula("&")
-        con.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        con.add_subf(SATformula("e_" + str(edges_translator[aut.edge_number(e)])))
         con.add_subf(SATformula("w_" + str(e.src)))
         dis.add_subf(con)
     if dis.is_empty():
@@ -412,11 +412,11 @@ def positive(aut, inner_edges):
     return dis
 
 
-def negative(aut, inner_edges):
+def negative(aut, inner_edges, edges_translator):
     dis = SATformula("|")
     for e in inner_edges:
         con = SATformula("&")
-        con.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        con.add_subf(SATformula("e_" + str(edges_translator[aut.edge_number(e)])))
         con.add_subf(SATformula("!w_" + str(e.src)))
         dis.add_subf(con)
     if dis.is_empty():
@@ -424,7 +424,7 @@ def negative(aut, inner_edges):
     return dis
 
 
-def negate_part(aut, inner_edges):
+def negate_part(aut, inner_edges, edges_translator):
     """
     Part of formula that ensures that cycles are connected.
     We say that cycles are disconnected and than we negate it.
@@ -436,9 +436,9 @@ def negate_part(aut, inner_edges):
 
     """
     con = SATformula("&")
-    connect = connection(aut, inner_edges)
-    pos = positive(aut, inner_edges)
-    neg = negative(aut, inner_edges)
+    connect = connection(aut, inner_edges, edges_translator)
+    pos = positive(aut, inner_edges, edges_translator)
+    neg = negative(aut, inner_edges, edges_translator)
     if connect:
         con.add_subf(connect)
     if pos:

@@ -55,13 +55,7 @@ def main(argv):
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-
-            if not spot.are_equivalent(auto, origin):
-                print("nejsou ekvivalentni")
-                return
-
-            else:
-                print("ekvivalentni")
+        
 
 
         except RuntimeError:  # too many marks

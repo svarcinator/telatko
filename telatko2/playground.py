@@ -163,7 +163,7 @@ def process_automaton(aut):
     accs, sccs = get_accs(aut)  # simplification occurs in here
 
     # puts acceptance to shorter form(cnf or dnf)
-    short_accs = get_short_accs(aut, accs) # nebude v c++ treba
+    short_accs = get_short_accs(aut, accs)
 
     # Filters emty assceptance formulas from short_accs
     nempty_sccs, nempty_short_accs = check_emptyness(sccs, short_accs)

@@ -83,49 +83,28 @@ class SATformula:
     def subformula_list(self):
         return self.subformula
 
-
+"""
 class MarkType(enum.Enum):
-    """Represents whether acceptance set T appears in the formula as Fin(T) or Inf(T).
 
-    Arguments:
-        enum {int}
-    """
     Inf = 1
     Fin = 2
 
 
 class ACCMark:
-    """Represents an acceptance set.
-    """
+
 
     def __init__(self, mtype, num):
-        """ACCMark constructor.
 
-        Arguments:
-            mtype {MarkType} -- denotes whether a set appears in Inf or Fin term in the formula
-            num {int} -- number of the acceptance set
-        """
         self.type = mtype
         self.num = num
 
     def __str__(self):
-        """Return the information about ACCMark as string.
 
-        Returns:
-            string -- ACCMarks information as string
-        """
         return ''.join(
             ["Inf" if self.type == MarkType.Inf else "Fin", '(', str(self.num), ')'])
 
     def __eq__(self, other):
-        """Compare two ACCMarks, return true if they are the same, false otherwise.
 
-        Arguments:
-            other {ACCMark} -- the other ACCMark
-
-        Returns:
-            bool -- true if marks are the same, false otherwise
-        """
         if (self.type == other.type) and (self.num == other.num):
             return True
         else:
@@ -133,10 +112,7 @@ class ACCMark:
 
 
 class PACC:
-    """
-        Class for DNF form of acceptance formula
-         format self.formula = [[ACCMark]]
-    """
+
 
     def __init__(self, acc):
         self.formula = parse_acc(acc)
@@ -167,11 +143,7 @@ class PACC:
         return f
 
     def resolve_redundancy(self):
-        """
 
-        Returns:
-
-        """
         rem_d = []
         int_f = self.int_format()
         for i in range(len(self.formula)):
@@ -205,17 +177,7 @@ class PACC:
 ### PARSE ACC ###
 
 def parse_acc(acc):
-    """Parses an acc in DNF and returns the formula represented by list of
-    lists of ACCMarks. The inner lists represent disjuncts of the formula. The
-    inner lists contain ACCMark (see ACCMark class documentation) objects
-    representing atomic conditions (such as Inf(1)).
 
-    Arguments:
-        acc {spot::acc_cond::acc_code} -- spot representation of acceptance condition formula
-
-    Returns:
-        [[ACCMark]] -- list of lists of ACCMarks
-    """
     if acc == "":
         return []
     formula = []
@@ -236,3 +198,5 @@ def parse_acc(acc):
             new_dis.append(ACCMark(mtype, int(''.join(num))))
         formula.append(new_dis)
     return formula
+
+    """
