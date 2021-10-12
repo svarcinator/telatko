@@ -131,7 +131,7 @@ def count_edges(edges):
         counter += 1
     return counter
 
-def laso_part(scc_info, edge_translator, L, inner_edges, aut, max_T):
+def laso_part(scc_info, edge_translator, L, inner_edges, aut):
     laso = SATformula("&")
     in_out = in_n_out2(scc_info, edge_translator)
     least_one = least_one_edge2(count_edges(inner_edges))
@@ -172,6 +172,7 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
     tmp_acc.clean_up2(list(scc_sets.sets()))
 
 
+
     #print("cleaned acc: ", tmp_acc)
     dnf_formula = SATformula('|')
     for dis in tmp_acc.formula:
@@ -209,19 +210,6 @@ def least_one(T):
         f.add_subf("e_" + str(i))
     return f
 
-def w_quant2(aut, max_states):
-    """
-    Creates universal variables w_
-    Args:
-        aut:
-
-    Returns:
-
-    """
-    univ_formula = ""
-    for i in range(max_states):
-        univ_formula += "?w_" + str(i)
-    return univ_formula
 
 
 def connection2(aut, inner_edges, edge_translator):
@@ -294,7 +282,7 @@ def negate_part2(aut, inner_edges, edge_translator):
         return con
     return None
 
-def laso22(aut, inner_edges, scc_info, edge_translator):
+def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
     """
     QBF CYCLES ve statistikach
     Formula that makes sure that the edges are cycles.
@@ -366,7 +354,8 @@ def laso22(aut, inner_edges, scc_info, edge_translator):
     main_dis.add_subf(con3)
     laso = SATformula("&")
 
-    #one_scc = one_scc_f(scc_edg)
+
     laso.add_subf(main_dis)
     laso.add_subf(in_n_out2(scc_info, edge_translator))
+    
     return laso

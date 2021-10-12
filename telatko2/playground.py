@@ -5,6 +5,7 @@ import random
 from telatko2.merge import *
 from telatko2.restore_equivalence import *
 import copy
+from qbf.parser import clear_aut_edges
 
 
 def eval_set(aut, mark, scc, m_all_e):
@@ -151,6 +152,22 @@ def get_dependencies(merged_f):
     dup = u[c > 1]
     return dup
 
+def try_tt_ff(aut):
+    """
+    Try evaluate with K = 0(len of acceptance formula == 0)
+    :param aut: spot::automaton
+    :return: potentionally zero acceptance spot::automaton
+    """
+    last_eq_aut = spot.automaton(aut.to_str())
+    clear_aut_edges(aut)
+    aut.set_acceptance(0, spot.acc_code.t())
+    if spot.are_equivalent(last_eq_aut, aut):
+        return aut, True
+
+    aut.set_acceptance(0, spot.acc_code.f())
+    if spot.are_equivalent(last_eq_aut, aut):
+        return aut, True
+    return last_eq_aut, False
 
 def process_automaton(aut):
     orig = spot.automaton(aut.to_str())
@@ -158,6 +175,10 @@ def process_automaton(aut):
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
         return aut
+    aut, is_simple = try_tt_ff(aut)
+    if is_simple:
+        return aut
+
 
     # simplifies acceptance condition for each scc
     accs, sccs = get_accs(aut)  # simplification occurs in here
@@ -238,6 +259,7 @@ def process_automaton(aut):
     aut.set_acceptance(merged_f.max() + 1, spot.acc_code(str(merged_f)))
     spot.cleanup_acceptance_here(aut)
     if not spot.are_equivalent(aut, orig):
+        print("telatko not equivalent")
         # precaution
         return orig
     else:
