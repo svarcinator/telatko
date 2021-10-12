@@ -35,7 +35,7 @@ def main(argv):
     for a in aut:
 
         origin = spot.automaton(a.to_str())
-        print_aut(origin, "problem", "w")
+        #print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
             a = process_automaton(a)
@@ -55,7 +55,7 @@ def main(argv):
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-        
+
 
 
         except RuntimeError:  # too many marks

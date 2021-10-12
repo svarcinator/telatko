@@ -4,7 +4,6 @@ from qbf.parser import *
 from qbf.formula import *
 from qbf.sequence_formula import *
 from qbf.optimization import *
-from qbf.sympy_formula import *
 
 
 def edge_dictionary(aut):
@@ -263,34 +262,7 @@ def create_formula(
     # prints our formula into text file
     SAT_output("sat_file", quant_edges, con)
 
-def create_formula_sym(aut, acc, edge_dict, scc_edg, scc_state_info,
-    inner_edges_nums, C, K, inner_edges, mode):
 
-    # quantified edges #e_1 ... #e_n
-    quant_edges = quant_all(inner_edges_nums)
-    laso = laso_f_sym(
-        aut,
-        inner_edges_nums,
-        scc_state_info,
-        scc_edg,
-        inner_edges,
-        mode)
-
-    # reqiurements on old acceptance formula
-    old = old_formula_sym(acc, edge_dict)
-
-    # assignment of variables to create new acceptance formula
-    new = new_formula_sym(inner_edges_nums, C, K)
-
-    eq = Equivalent(old, new)
-    impl = Implies(laso, eq)
-
-    inf_or_fin = inf_or_fin_sym(C, K)
-    con = impl & inf_or_fin
-    print("to cnf:")
-    cnf = to_cnf(con, force=True)
-    print("hototvo, v cnf")
-    SAT_output("sat_file", quant_edges, con)
 
 
 def try_evaluate0(aut):
