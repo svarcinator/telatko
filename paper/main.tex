@@ -90,8 +90,26 @@
 %{{{ Abstract
 
 \begin{abstract}
-  We present an QBF-based algorithm that reduces the number of
-  acceptance sets of transition-based Emerson-Lei automata.
+  The formalism called \emph{transition-based Emerson-Lei automata
+    (TELA)} generalizes many traditional kinds of automata over
+  infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
+  automata. Transitions in TELA are marked with acceptance marks and
+  accepting formulas are boolean combinations of terms saying that a
+  particular mark has to be visited infinitely or finitely often in an
+  accepting run. Algorithms processing these automata can be very
+  sensitive to the number of different acceptance marks. We introduce
+  two techniques reducing the number of acceptance marks in a TELA
+  without altering its structure and the represented language. One
+  technique represents a standard approach based on relations among
+  acceptance marks in individual strongly connected components of the
+  automaton. The other technique constructs quantified boolean formula
+  (QBF) queries that ask a QBF solver for an acceptance condition with
+  fewer acceptance marks and the placement of these marks in the
+  automaton structure. Both techniques are implemented and experiments
+  show that the number of acceptance marks in TELA produced by
+  state-of-the-art tools ltl3tela, Rabinizer~4, and SPOT can be
+  sometimes reduced. In the case of Rabinizer~4, we reduced the
+  cummulative number of acceptance marks to less than one half.
 \end{abstract}
 
 %}}}
