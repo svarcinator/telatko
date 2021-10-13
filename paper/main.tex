@@ -74,9 +74,9 @@
 
 \begin{document}
 
-%{{{ Title and authors
+%{{{ title and authors
 
-\title{Reducing Acceptance Condition\\ of Emerson-Lei Automata}
+\title{Reducing Acceptance Marks \\ in Emerson-Lei Automata}
 \authorrunning{T.~Schwarzová and J. Strej\v{c}ek}
  \author{Tereza Schwarzová \and Jan Strej\v{c}ek}
  \institute{%
@@ -87,7 +87,7 @@
 
 \maketitle
 
-%{{{ Abstract
+%{{{ abstract
 
 \begin{abstract}
   The formalism called \emph{transition-based Emerson-Lei automata
@@ -114,6 +114,8 @@
 
 %}}}
 
+%{{{ introduction
+
 \section{Introduction}
 \begin{itemize}
 \item Emerson-Lei automata jsou v principu staré, ale v poslední době
@@ -123,6 +125,9 @@
 \item cilem prace je zjednodusit akceptacni podminku (zejmnena
   redukovat pocet akceptacnich znacek) bez zmeny struktury automatu
 \end{itemize}
+
+%}}}
+%{{{ preliminaries
 
 \section{Preliminaries}
 
@@ -171,6 +176,9 @@ Let $\Phi$ be a QBF. Semantically we define the \emph{universal} quantifier as $
 Let $X$ be a finite set of variables. Assignment $\mathcal{A}_{X}$ $:X \rightarrow \{\false, \true\}$ is a total mapping of variables defined on set $X$ to Boolean values.
 Let $\Phi$ be a QBF. If there is an assignment $\mathcal{A}_{X}$ that evaluates formula $\Phi$ as $\true$, then $\Phi$ is $\mathit{satisfiable}$ (SAT).
 A set $S \subseteq X$ is a \emph{model} of $\Phi$ if the assignment $\mathcal{A}_{X}$ maps $\true$ to every element of $S$. If there is no such assignment that evaluates the formula as $\true$, we say the formula is $\mathit{unsatisfiable}$ (UNSAT).
+
+%}}}
+%{{{ standard reductions
 
 \section{Reduction based on acceptance sets relations / SCC-based reduction}
 In this section, the simplification strategy is to find relations between acceptance sets and reduce the redundant ones. SCC-based simplification is the coarsest simplification we propose.
@@ -452,8 +460,8 @@ Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might cha
     \label{fig:L1_done}
 \end{figure}
 
-
- 
+%}}}
+%{{{ QBF-based reduction 
 
 \section{QBF-based reduction}
 \begin{itemize}
@@ -462,10 +470,17 @@ Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might cha
 \item level 4
 \end{itemize}
 
+%}}}
+%{{{ implementation and experimental evaluation
+
 \section{Implementation and experimental evaluation}
+
+%}}}
+%{{{ conclusion
 
 \section{Conclusions}
 
+%}}}
 
 %\bibliographystyle{abbrvnat}
 \bibliographystyle{plain}
