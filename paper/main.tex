@@ -38,6 +38,8 @@
 \def\issccempty{\textsc{is\_SCC\_empty}\xspace}
 \def\marksof{\textsc{marks\_of}\xspace}
 \def\remove{\textsc{remove}\xspace}
+\def\false{\mathit{false}}
+\def\true{\mathit{true}}
 
 \def\Mocc{M_{\mathrm{occur}}}
 \def\Mevery{M_{\mathrm{every}}}
@@ -105,10 +107,79 @@
 \end{itemize}
 
 \section{Preliminaries}
-Definice TELA, popsat QBF
 
-\section{Reduction based on acceptance sets relations}
-Puvodni telatko
+\subsection{TELA}
+A \emph{transition-based Emerson-Lei automaton} over alphabet $\Sigma$ is a tuple $\mathcal{A} = \left(  \mathcal{Q}, M, \Sigma,q_{0}, \delta, \varphi \right)$, where
+\begin{itemize}
+    
+    \item $\mathcal{Q}$ is a finite set of \emph{states},
+    \item $M$ is a finite set of \emph{acceptance marks},
+    \item $\Sigma$ is a finite \emph{alphabet},
+    \item $q_{0}$ is an \emph{initial state},
+    \item $\delta \subseteq \mathcal{Q} \times \Sigma \times 2^{M} \times \mathcal{Q}$ is a transition relation,
+    \item $\varphi$ is the acceptance condition constructed by the following abstract syntax equation, where $m \in M$:
+
+    \begin{center}
+        $\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$.\\
+    \end{center} 
+\end{itemize}
+
+
+
+A run $\pi$ of $\mathcal{A}$ on word $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence of transitions $\pi = (q_{0}, u_{0}, M_{0}, q_{1})(q_{2}, u_{1}, M_{1}, q_{2}) \dots \in \delta^{\omega}$.
+
+Let $M(\pi)$ denote set of all acceptance marks, that occur in run $\pi$ in infinitely many transitions. The run satisfies $\Inf(m)$ $\mathit{iff} \ m \in M(\pi)$ and it satisfies $\Fin(m) \ \mathit{iff} \ m \ \not \in M(\pi)$.
+Run $\pi$ is \emph{accepting} if it satisfies the formula $\varphi$. A set of words, which are accepted by $\mathcal{A}$, represent a language $\mathcal{L}(\mathcal{A})$.
+
+Sometimes the set of transitions with the same acceptance mark $m\in M$ is referred to as \emph{acceptance set} $Z(m)$.
+
+\begin{itemize}
+    \item define DNF
+    \item define SCC
+\end{itemize}
+
+\subsection{Quantified Boolean formula}
+\emph{Quantified Boolean formulae} (QBFs) is an extension of propositional logic -- some Boolean variables in the formula can be quantified with \emph{universal} or \emph{existential} quantifiers.
+Formula $\Phi$ is a QBF formula in \emph{prenex normal form} $\iff$ $\Phi = Q_{1}x_{1}...Q_{n}x_{n} . \varphi$, where $Q_{i} \in \{\forall, \exists\}$, $x_{i}$ is a quantified Boolean variable and $\varphi$ is quantifier-free Boolean formula.  
+
+\smallskip 
+Let $\Phi$ be a QBF. Semantically we define the \emph{universal} quantifier as $\forall x . \Phi = \Phi [x \rightarrow \true] \land \Phi [x \rightarrow \false]$ and the \emph{existential} quantifier as $\exists x . \Phi = \Phi [x \rightarrow \true] \lor \Phi [x \rightarrow \false]$.
+
+Let $X$ be a finite set of variables. Assignment $\mathcal{A}_{X}$ $:X \rightarrow \{\false, \true\}$ is a total mapping of variables defined on set $X$ to Boolean values.
+Let $\Phi$ be a QBF. If there is an assignment $\mathcal{A}_{X}$ that evaluates formula $\Phi$ as $\true$, then $\Phi$ is $\mathit{satisfiable}$ (SAT).
+A set $S \subseteq X$ is a \emph{model} of $\Phi$ if the assignment $\mathcal{A}_{X}$ maps $\true$ to every element of $S$. If there is no such assignment that evaluates the formula as $\true$, we say the formula is $\mathit{unsatisfiable}$ (UNSAT).
+
+\section{Reduction based on acceptance sets relations / SCC-based reduction}
+In this section, the simplification strategy is to find relations between acceptance sets and reduce the redundant ones. SCC-based simplification is the coarsest simplification we propose.
+
+Let $\mathcal{A}$ be an original automaton and let $\psi$ be an acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has an infinite suffix that takes place within one SCC $S_{i}$. Thus the evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can optimize the acceptance condition for each SCC separately. :w
+This optimization consists of removing redundant terms from acceptance condition and relabeling of acceptance marks on the transitions. The state and transition structure of the SCC does not change. This way we obtain set of simplified acceptance conditions that we merge into new acceptance formula $\psi'$. The automaton with relabeled transitons and new acceptance condition $\psi'$ we denote $\mathcal{A}'$.  Finally, we ensure that automaton $\mathcal{A'}$ is equivalent to the original automaton $\mathcal{A}$.  
+
+
+\subsection{$S_{i}$ simplification}
+At first, we remove the unused acceptance marks and transform the SCC's acceptance condition $\psi_{i}$ to \emph{disjunctive normal form} (DNF), so we have a unified shape of the condition.
+If TELA acceptance condition is in DNF, two distinct terms in one disjunct can only appear in three possible forms:
+
+\begin{itemize}
+    \item $\Inf\tacc{2}{i} \land \Inf\tacc{4}{j}$
+    \item $\Fin\tacc{8}{i} \land \Fin\tacc{4}{j}$
+    \item $\Fin\tacc{8}{i} \land \Inf\tacc{4}{j}$
+\end{itemize}
+
+Since formula $\psi_{i}$ is in DNF, we can represent it as a set of disjuncts $\overline{\psi_{i}} = \{D_1, D_2, \ldots D_k\}$.
+
+Let $D_{k} \in \overline{\psi_{i}}$ be a disjunct of formula $\overline{\psi_{i}}$ and $C_{j} \in D_{k}$ a conjunct of disjunct $D_{k}$. Furthermore let  $\tacc{0}{i}, \tacc{4}{j}, \tacc{8}{k}, \tacc{2}{l} \in M$ be distinct acceptance marks that occur in $\mathcal{A}$.
+
+In the next section, some properties of an automaton allow us to substitute a Boolean value $\true$ or $\false$ for a particular term of the formula $\psi_i$.
+The consequences of this substitution are divided into a number of cases. We represent it on the set-format of formula we just defined.
+
+\begin{itemize}
+    \item If $C_{j}$ is substituted by $\true$, the conjunct is omitted from $D_{k}$. Thus $D_{k} = D_{k} \setminus \{C_{j}\}$.
+    \item If $C_{j}$ is substituted by $\false$, the conjunct causes that the evaluates of the whole $D_{k}$ is $\false$. Thus $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{k}\}$.
+
+\end{itemize}
+
+That being said, we can define the reduction techniques. 
 
 \section{QBF-based reduction}
 \begin{itemize}
