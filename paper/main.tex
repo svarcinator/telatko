@@ -117,6 +117,25 @@
 %{{{ introduction
 
 \section{Introduction}
+
+Automata over infinite words (also known as $\omega$-automata) are now
+used mainly in specification, verification, analysis, monitoring, and
+synthesis of various systems with infinite behaviour. The first and
+the most common kind of $\omega$-automata is Büchi
+automaton~\cite{buchi.60.clmps} introduced in 1960. Other kinds of
+$\omega$-automata have been defined \ldots
+
+\todo{Honza je tu!}
+
+
+
+Emerson-Lei automata~\cite{emerson.87.scp} were
+introduced Automata over infinite words are studied for decades and
+used in many areas of computer science including verification,
+controller synthesis, m
+
+
+Emerson-Lei automata~\cite{emerson.87.scp} were introduced in 
 \begin{itemize}
 \item Emerson-Lei automata jsou v principu staré, ale v poslední době
   znovuobjevene~\cite{babiak.15.cav} a je o tom ted spousta
@@ -286,7 +305,7 @@ After applying reduction techniques from the previous section, each $S_{i}$ has 
 At first, the algorithm finds $\psi_{i}$ with the greatest number of disjuncts and states it as a base of the new acceptance condition $\psi'$. Now the algorithm continues by the successive merging of $\psi'$ with the unmerged formula $\psi_{i}$ that has the greatest number of disjuncts. This repeats until all formulae $\psi_{i}$ are merged. This process updates the form of $\psi'$ until it reaches its final form. The process of merging two formulae consists of two phases. In the first phase a suitable pairing of disjuncts is found and in the second phase, these disjuncts are merged.
 
 \begin{enumerate}
-	\item Let $\psi'$ denote the future acceptance condition of $\mathcal{A}'$ and $\psi_{i}$ is the acceptance condition of $S_{i}$ chosen to be merged. Then the algorithm uses \emph{linear sum assignment} to determine which disjunct of $\psi_{i}$ is merged with which disjunct of $\psi'$. The process of using \emph{linear sum assignment} and the pairing procedure is described in detail in work by T. Šťastná \cite{ts_simpl}.
+	\item Let $\psi'$ denote the future acceptance condition of $\mathcal{A}'$ and $\psi_{i}$ is the acceptance condition of $S_{i}$ chosen to be merged. Then the algorithm uses \emph{linear sum assignment} to determine which disjunct of $\psi_{i}$ is merged with which disjunct of $\psi'$. The process of using \emph{linear sum assignment} and the pairing procedure is described in detail in work by T. Šťastná \cite{stastna.19.bc}.
     \item Let $D_{K} \in \overline{\psi_{i}}$ be a disjunct paired with $D_{L} \in \overline{\psi'}$. All conjuncts of $D_{L}$ are initially labeled as unused. Now the algorithm maps every conjunct $C_{k} \in D_{K}$ to a suitable conjunct $C_{l} \in D_{L}$ and labels $C_{l}$ as used. \footnote{The indexes differ to emphasize the fact that they are not equal.} A conjunct $C_{l}$ is suitable for $C_{k}$ is it is on the same type ($\Fin$ or $\Inf$), it is labeled as unused. If no suitable $C_{l}$ is found, the algorithm adds $C_{k}$ to disjunct $D_{L}$ and marks it as used.
 \end{enumerate}
 
