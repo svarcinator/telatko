@@ -189,15 +189,15 @@ one reduced acceptance condition.
 
 The second technique is completely different. For a given TELA and
 parameters $k,n$, it produces a \emph{quantified boolean formula
-  (QBF)} which is satisfiable if and only if there exists an
-equivalent automaton with the identical structure, $n$ acceptance
-marks, and an acceptance formula in \todo{conjunctive?}  normal form
-with $k$ clauses. The placement of the marks on transitions and the
+  (QBF)} which is satisfiable if and only if there exists an automaton
+with the same structure, $n$ acceptance marks, an acceptance formula
+in \todo{conjunctive?}  normal form with $k$ clauses, and the same set
+of accepting runs. The placement of the marks on transitions and the
 acceptance formula can be obtained from a model of the
 formula. Besides this formula, we describe also the construction of a
 simpler formula such its satisfiability implies existence of an
-equivalent automaton with the identical structure and $n$ acceptacne
-marks, but not vice versa.
+automaton with the same structure, $n$ acceptance marks, and the same
+set of accepting runs, but not vice versa.
 
 We have implemented both reduction techniques in a tool called
 \texttt{telatko}. We show that the tool can reduce acceptance marks in
