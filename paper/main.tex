@@ -50,6 +50,7 @@
 \def\init{\iota}
 \def\lang{L} % FIX this
 \newcommand{\cM}{\mathcal{M}}
+\newcommand{\mA}{\mathcal{A}}
 \newcommand{\bscc}{\mathcal{B}}
 \newcommand{\sched}{\mathfrak{s}}
 \newcommand{\Act}{\mathit{Act}}
@@ -94,23 +95,24 @@
   The formalism called \emph{transition-based Emerson-Lei automata
     (TELA)} generalizes many traditional kinds of automata over
   infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
-  automata. Transitions in TELA are marked with acceptance marks and
-  accepting formulas are boolean combinations of terms saying that a
-  particular mark has to be visited infinitely or finitely often in an
-  accepting run. Algorithms processing these automata can be very
-  sensitive to the number of different acceptance marks. We introduce
-  two techniques reducing the number of acceptance marks in a TELA
-  without altering its structure and the represented language. One
-  technique represents a standard approach based on relations among
-  acceptance marks in individual strongly connected components of the
-  automaton. The other technique constructs \emph{quantified boolean
-    formula (QBF)} queries that ask a QBF solver for an acceptance
-  condition with fewer acceptance marks and the placement of these
-  marks in the automaton structure. Both techniques are implemented
-  and experiments show that the number of acceptance marks in TELA
-  produced by state-of-the-art tools ltl3tela, Rabinizer~4, and SPOT
-  can be sometimes reduced. In the case of Rabinizer~4, we reduced the
-  cummulative number of acceptance marks to less than one half.
+  automata. Transitions in a TELA are marked with acceptance marks and
+  its accepting formula is a positive Boolean combinations of terms
+  saying that a particular mark has to be visited infinitely or
+  finitely often in an accepting run. Algorithms processing these
+  automata can be very sensitive to the number of different acceptance
+  marks. We introduce two techniques reducing the number of acceptance
+  marks in a TELA without altering its structure and the represented
+  language. One technique represents a standard approach based on
+  relations among acceptance marks in individual strongly connected
+  components of the automaton. The other technique constructs
+  \emph{quantified Boolean formula (QBF)} queries that ask a QBF
+  solver for an acceptance condition with fewer acceptance marks and
+  the placement of these marks in the automaton structure. Both
+  techniques are implemented and experiments show that the number of
+  acceptance marks in TELA produced by state-of-the-art tools
+  ltl3tela, Rabinizer~4, and SPOT can be sometimes reduced. In the
+  case of Rabinizer~4, we reduced the cummulative number of acceptance
+  marks to less than one half.
 \end{abstract}
 
 %}}}
@@ -151,12 +153,12 @@ automata.
 
 TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
-often use less states than equivalent automata with traditional
-acceptance conditions. Further, algorithms handling TELA can
-automatically handle all automata with traditional acceptance
-conditions. TELA automata can be obtained for example by translating
-LTL formulas by Delag~\cite{muller.17.gandalf},
-ltl3tela~\cite{major.19.atva}, Rabinizer~4~\cite{kretinsky.18.cav}, or
+often use less states than equivalent automata with simpler acceptance
+conditions. Further, algorithms handling TELA can automatically handle
+all automata with traditional acceptance conditions. TELA automata can
+be obtained for example by translating LTL formulas by
+Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
+Rabinizer~4~\cite{kretinsky.18.cav}, or
 SPOT~\cite{duret.16.atva2}. There are also some algorithms processing
 these automata, for example the emptiness check~\cite{baier.19.atva}
 or translation of TELA to parity automata~\cite{renkin.20.atva}.
@@ -189,7 +191,7 @@ simplified acceptance conditions for each SCC are merged together into
 one reduced acceptance condition.
 
 The second technique is completely different. For a given TELA and
-parameters $c,m$, it produces a \emph{quantified boolean formula
+parameters $c,m$, it produces a \emph{quantified Boolean formula
   (QBF)} which is satisfiable if and only if there exists an automaton
 with the same structure, $m$ acceptance marks, an acceptance formula
 in disjunctive normal form with $c$ clauses, and the same set
@@ -239,52 +241,97 @@ In this section we recall the basic terms around TELA and QBF.
 
 \begin{definition}[TELA]
   A \emph{transition-based Emerson-Lei automaton (TELA)} is a tuple
-  $\mathcal{A} =(Q,M,\Sigma,q_{0},\delta,\varphi)$, where
+  $\mA =(Q,M,\Sigma,q_I,\delta,\varphi)$, where
   \begin{itemize}
   \item $Q$ is a finite set of \emph{states},
   \item $M$ is a finite set of \emph{acceptance marks},
   \item $\Sigma$ is a finite \emph{alphabet},
-  \item $q_{0}\in Q$ is an \emph{initial state},
+  \item $q_I\in Q$ is an \emph{initial state},
   \item $\delta \subseteq Q \times \Sigma \times 2^{M} \times Q$ is a
     \emph{transition relation}, and
-  \item $\varphi$ is the \emph{acceptance condition} constructed by
-    the following abstract syntax equation, where $m$ ranges over $M$:
-
-    \begin{center}
-        $\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$.\\
-    \end{center} 
+  \item $\varphi$ is the \emph{acceptance condition} constructed
+    according to the following abstract syntax equation, where $m$
+    ranges over $M$:
+    $$\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right).$$
 \end{itemize}
 \end{definition}
 
-\todo{Honza je tu a jde spat (je 5 rano pryc).}
+%A transition $(p,a,M',q)\in\delta$ is a transition leading from state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$
+A run $\pi$ of $\mA$ over an infinite word
+$u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
+of adjacent transitions
+$\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
+$q_0=q_I$. Let $M(\pi)$ denote set of all acceptance marks that occur
+in run $\pi$ in infinitely many transitions. Run $\pi$ is
+\emph{accepting} iff it satisfies the formula $\varphi$, where $\pi$
+satisfies $\Inf(m)$ iff $m\in M(\pi)$ and $\pi$ satisfies $\Fin(m)$
+iff $m\not\in M(\pi)$. The \emph{language} of automaton $\mA$ is the
+set $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of }\mA\textrm{ over }u\}$.
+% such that $\mA$ has
+% an accepting run over $u$.
 
-A run $\pi$ of $\mathcal{A}$ on word $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence of transitions $\pi = (q_{0}, u_{0}, M_{0}, q_{1})(q_{2}, u_{1}, M_{1}, q_{2}) \dots \in \delta^{\omega}$.
+An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
+  (DNF)} if it is a disjunction of clauses, where each clause is a
+conjunction of some terms of the form $\Fin(m)$ or $\Inf(m)$.  Formula
+$\false$ corresponds to the disjunction of zero clauses and formula
+$\true$ is the clause with zero terms. Each acceptance formula can be
+transformed into an equivalent formula in DNF.
 
-Let $M(\pi)$ denote set of all acceptance marks, that occur in run $\pi$ in infinitely many transitions. The run satisfies $\Inf(m)$ $\mathit{iff} \ m \in M(\pi)$ and it satisfies $\Fin(m) \ \mathit{iff} \ m \ \not \in M(\pi)$.
-Run $\pi$ is \emph{accepting} if it satisfies the formula $\varphi$. A set of words, which are accepted by $\mathcal{A}$, represent a language $\mathcal{L}(\mathcal{A})$.
+For each mark $m\in M$, let $\delta_m$ denotes the set of all
+transitions marked with $m$, i.e.,
+$\delta_m=\{(p,a,M',q)\in\delta\mid m\in M'\}$. Further, a \emph{path}
+from a state $p$ to a state $q$ is a finite sequence of adjacent
+transitions of the form
+$(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
+such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
+is called a nontrivial \emph{strongly connected component (SCC)} if
+for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
+\emph{maximal} if there is no SCC $S'$ satisfying $S\subsetneq S'$. In
+the rest of this paper, SCC always refers to a maximal SCC. Given an
+SCC $S$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
+denotes the set of all transitions between states in $S$.
 
-Sometimes the set of transitions with the same acceptance mark $m\in M$ is referred to as \emph{acceptance set} $Z(m)$.
+We often use acceptance marks $\tacc{1}{1},\tacc{2}{2},\ldots\in M$
+and we write $\Inf\tacc{4}{j}$ and $\Fin\tacc{8}{k}$ instead of
+$\Inf(\tacc{4}{j})$ and $\Fin(\tacc{8}{k})$, respectively. In our
+graphical representation of automata,
+\begin{tikzpicture}[smallautomaton]
+  \node[state] (p) at (0,0) {$p$};
+  \node[state] (q) at (1.8,0) {$q$};
+  \path [->] (p) edge node[above,pos=.5,overlay] {$a$} node[accset,collacc8, pos=0.65] {k} node[accset,collacc4, pos=0.3] {j} (q);
+\end{tikzpicture}
+denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$.
 
-\begin{itemize}
-    \item define DNF
-    
-\end{itemize}
+% Finaly, \emph{loop} is a path from a state $p$ to the same state.
 
-\subsection{Strongly connected component}
-Let us consider a TELA $\mathcal{A} = \left(  \mathcal{Q}, M, \Sigma,q_{0}, \delta, \varphi \right)$. \emph{Strongly connected component} (SCC) of $\mathcal{A}$ is each maximal set of states $S \subseteq Q$ such that any two states $q_{1}, q_{2} \in S$ are connected by a sequence of transitions.
-Let us enumerate the SCCs of $\mathcal{A}$.
-Set of all transitions of the SCC $S_{i} \text{ is } \delta_{S_{i}} = \delta \cap (S_{i} \times \Sigma \times 2^M \times S_{i})$. A run of SCC $S_{i}$ is a run of automaton $\mathcal{A}$ with the infinite suffix contained within $S_{i}$. 
+\bigskip
 
-\subsection{Quantified Boolean formula}
-\emph{Quantified Boolean formulae} (QBFs) is an extension of propositional logic -- some Boolean variables in the formula can be quantified with \emph{universal} or \emph{existential} quantifiers.
-Formula $\Phi$ is a QBF formula in \emph{prenex normal form} $\iff$ $\Phi = Q_{1}x_{1}...Q_{n}x_{n} . \varphi$, where $Q_{i} \in \{\forall, \exists\}$, $x_{i}$ is a quantified Boolean variable and $\varphi$ is quantifier-free Boolean formula.  
+\emph{Quantified Boolean formulas (QBFs)} are Boolean formulas
+extended with universal or existential quantification over
+propositional variables. We assume that subformulas of the form
+$\forall x.\psi$ and $\exists x.\psi$ do not contain another
+quantification of variable $x$ inside $\psi$. The semantics of
+$\forall x.\psi$ and $\exists x.\psi$ is given by equivalences
+\[
+  \begin{array}{rcl}
+    \forall x.\psi &~\equiv~& \psi[x\rightarrow\true]~\wedge~\psi[x\rightarrow\false]\\
+    \exists x.\psi &~\equiv~& \psi[x\rightarrow\true]~\vee~   \psi[x\rightarrow\false]
+  \end{array}
+\]
+where $\psi[x\rightarrow \rho]$ denotes the formula $\psi$ with all
+occurrences of $x$ simultaneously replaced by $\rho$. The equivalences
+imply that each QBF can be transformed into an equivalent Boolean
+formula. However, the size of this Boolean formula can be exponential
+in the size of the original QBF. Let $V$ be the set of all
+propositional variables. A mapping $\mu:V\rightarrow\{\true,\false\}$
+is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
+assignment of the equivalent Boolean formula. A QBF formula is
+\emph{satisfiable} iff it has a model.
 
-\smallskip 
-Let $\Phi$ be a QBF. Semantically we define the \emph{universal} quantifier as $\forall x . \Phi = \Phi [x \rightarrow \true] \land \Phi [x \rightarrow \false]$ and the \emph{existential} quantifier as $\exists x . \Phi = \Phi [x \rightarrow \true] \lor \Phi [x \rightarrow \false]$.
-
-Let $X$ be a finite set of variables. Assignment $\mathcal{A}_{X}$ $:X \rightarrow \{\false, \true\}$ is a total mapping of variables defined on set $X$ to Boolean values.
-Let $\Phi$ be a QBF. If there is an assignment $\mathcal{A}_{X}$ that evaluates formula $\Phi$ as $\true$, then $\Phi$ is $\mathit{satisfiable}$ (SAT).
-A set $S \subseteq X$ is a \emph{model} of $\Phi$ if the assignment $\mathcal{A}_{X}$ maps $\true$ to every element of $S$. If there is no such assignment that evaluates the formula as $\true$, we say the formula is $\mathit{unsatisfiable}$ (UNSAT).
+A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
+$\varphi = Q_{1}x_{1}...Q_{n}x_{n} . \psi$, where
+$Q_1,Q_2,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
+formula.
 
 %}}}
 %{{{ standard reductions
