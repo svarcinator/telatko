@@ -790,10 +790,10 @@ Observe the alternation of $\lor \land$ from the second part of the formula (4.2
 
 \subsection{Connection formula}
 \label{subsection:connection}
-The connection formula distinguishes the remaining three levels of simplification. Previously we denoted it as $\varphi_{C}$.
+The connection formula distinguishes the remaining two levels of simplification. Previously we denoted it as $\varphi_{C}$.
 
 Formula $\varphi_{C}$ defines requirements on the edges that are together in \emph{selection of edges}. These requirements are based on some properties of these edges. The more restrictive these requirements are, the more properties of \emph{relevant sets} are possessed by the \emph{selection of edges}. 
-In other words, formula $\varphi_{C}$ holds if the \emph{selection of edges} has the required property. If not, the formula $\varphi_{C}$ is $\false$, and then the whole formula $\varphi$ is trivially satisfied. Formula $\varphi_{C}$ consists of two parts.
+In other words, formula $\varphi_{C}$ holds if the \emph{selection of edges} has the required property. If not, the formula $\varphi_{C}$ is $\false$, and then the whole formula $\varphi$ is trivially satisfied. Formula $\varphi_{C}$ consists of two parts $\varphi_{C_{1}}$ and $\varphi_{C_{2}}$.
 
 The first part expresses the requirement that the \emph{selection of edges} is \emph{continuous}. Loosely said, this means that if a transition from \emph{selection of edges} enters some state $q$ then another transition that belongs to the \emph{selection of edges} exits the state $q$. This holds in the opposite direction as well. Thus if a transition from \emph{selection of edges} exits some state $q$ then another transition that belongs to the \emph{selection of edges} enters the state $q$. This is naturally expressed by equivalence. 
 Note that if the selected transition is a self-loop, the destination and the source of the edge is the same state.
@@ -851,7 +851,7 @@ Consider the automaton in Figure \ref{fig:continuousNotConnected}. The transitio
 \end{figure}
 \end{example}
  
-The second part of $\varphi_{C}$ specifies the properties of \emph{relevant set} that the edges that belong together to \emph{selected edges} need to have. We divided these properties into two levels Level 2, Level 3, Level 4, all described in ensuing sections.
+The second part of $\varphi_{C}$ specifies the properties of \emph{relevant set} that the edges that belong together to \emph{selected edges} need to have. We divided these properties into two levels Level 2 and Level 3, all described in ensuing sections.
 
 
 \subsubsection{SCC accuracy}
@@ -868,7 +868,7 @@ Finally, the connection formula is the conjunction of the two parts:
 \end{center}
 
 \begin{example}
-This example works as a motivation for simplification Level 3. For simplification Level 2, edges number $1$ and number $3$ in Figure \ref{fig:connected_motivation} can be in the same \emph{selection of edges} because they are placed in the same SCC. Obviously, since they are not connected, they cannot form \emph{relevant set}. Therefore we can specify a new level of simplification -- Level 3, which forces all edges from the \emph{selection of edges} to be connected.
+This example works as a motivation for simplification Level 3. For simplification Level 2, edges number $1$ and number $3$ in Figure \ref{fig:connected_motivation} can be in the same \emph{selection of edges} because they are placed in the same SCC. Obviously, since they are not connected, they cannot form \emph{relevant set}. Therefore we can specify a new level of simplification -- Level 3, which forces all edges from the \emph{selection of edges} to be cycles.
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}[automaton]
@@ -891,9 +891,9 @@ This example works as a motivation for simplification Level 3. For simplificatio
 \end{example}
 
 \subsubsection{CYCLES accuracy}
-The simplification Level 3 ensures that \emph{selection of edges} is connected, but we can go one step further and specify that \emph{selection of edges} is in fact a \emph{relevant set}.
+The simplification Level 2 ensures that \emph{selection of edges} is placed in one SCC, but we can go further and specify that \emph{selection of edges} is in fact a \emph{relevant set}.
 
-The intuition by simplification Level 4 is that the states of an automaton are again divided into two groups -- the states that belong to \emph{selected states} and the states do not belong to \emph{selected states}.  We consider three possible scenarios that can occur while the states are divided into these two groups:
+The intuition by simplification Level 3 is that the states of an automaton are  divided into two groups -- the states that belong to the group of \emph{selected states} and the states do not belong to the group of \emph{selected states}. Then we require that the states that belong to the same group are connected. We consider three possible scenarios that can occur while the states are divided into these two groups:
 \begin{enumerate}
     \item The source of edge $t_{i}$ is in different group than the destination of edge $t_{i}$.
     \item Source and destination of edge $t_{i}$ are in the \emph{selected states}.
@@ -914,7 +914,7 @@ Since we want to ensure that for every \emph{selection of edges} (for every eval
 \end{align*}
 
 \smallskip
-
+\todo{neoptimalni}
 Since we want the statement to hold for every \emph{selection of edges}, we place the existentially quantified variables $\{w_{1}, \ldots, w_{|Q|} \}$ behind the universally quantified variables $\{e_{1}, \ldots, e_{|\delta|} \} $.
 At first we update the quantified prefix:
 \begin{align*}
