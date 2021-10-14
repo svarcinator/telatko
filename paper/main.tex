@@ -188,15 +188,15 @@ simplified acceptance conditions for each SCC are merged together into
 one reduced acceptance condition.
 
 The second technique is completely different. For a given TELA and
-parameters $k,n$, it produces a \emph{quantified boolean formula
+parameters $c,m$, it produces a \emph{quantified boolean formula
   (QBF)} which is satisfiable if and only if there exists an automaton
-with the same structure, $n$ acceptance marks, an acceptance formula
-in \todo{conjunctive?}  normal form with $k$ clauses, and the same set
+with the same structure, $m$ acceptance marks, an acceptance formula
+in disjunctive normal form with $c$ clauses, and the same set
 of accepting runs. The placement of the marks on transitions and the
 acceptance formula can be obtained from a model of the
 formula. Besides this formula, we describe also the construction of a
 simpler formula such its satisfiability implies existence of an
-automaton with the same structure, $n$ acceptance marks, and the same
+automaton with the same structure, $m$ acceptance marks, and the same
 set of accepting runs, but not vice versa.
 
 We have implemented both reduction techniques in a tool called
@@ -589,6 +589,11 @@ Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might cha
 %{{{ conclusion
 
 \section{Conclusions}\label{sec:conclusion}
+
+chceme sem napsat, ze QBF-based reduction se da pouzit napr. k
+nalezeni akceptacni formule s $c$ klauzulemi a $m$ znackami v CNF,
+pripadne k nalezeni ekvivalentniho paritniho automat s danou maximalni
+paritou $p$ a stejnou strukturou.
 
 %}}}
 
