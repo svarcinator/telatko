@@ -51,6 +51,7 @@
 \def\lang{L} % FIX this
 \newcommand{\cM}{\mathcal{M}}
 \newcommand{\mA}{\mathcal{A}}
+\newcommand{\mB}{\mathcal{B}}
 \newcommand{\bscc}{\mathcal{B}}
 \newcommand{\sched}{\mathfrak{s}}
 \newcommand{\Act}{\mathit{Act}}
@@ -210,7 +211,7 @@ While the reduction is relatively modest for TELA produced by ltl3tela
 and SPOT, it is substantial for automata produced by Rabinizer~4.
 
 \subsubsection{Related results}
-We are not aware about any existing research focused on simplification
+We are not aware about any existing research aimed at simplification
 of acceptance formulas of TELA or reduction of the number of its
 acceptance marks without increasing the number of states.
 
@@ -251,8 +252,8 @@ In this section we recall the basic terms around TELA and QBF.
     \emph{transition relation}, and
   \item $\varphi$ is the \emph{acceptance condition} constructed
     according to the following abstract syntax equation, where $m$
-    ranges over $M$:
-    $$\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right).$$
+    ranges over $M$.
+    $$\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$$
 \end{itemize}
 \end{definition}
 
@@ -266,7 +267,10 @@ in run $\pi$ in infinitely many transitions. Run $\pi$ is
 \emph{accepting} iff it satisfies the formula $\varphi$, where $\pi$
 satisfies $\Inf(m)$ iff $m\in M(\pi)$ and $\pi$ satisfies $\Fin(m)$
 iff $m\not\in M(\pi)$. The \emph{language} of automaton $\mA$ is the
-set $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of }\mA\textrm{ over }u\}$.
+set
+$L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
+}\mA\textrm{ over }u\}$. Two automata $\mA,\mB$ are \emph{equivalent}
+if $L(\mA)=L(\mB)$.
 % such that $\mA$ has
 % an accepting run over $u$.
 
@@ -277,11 +281,8 @@ $\false$ corresponds to the disjunction of zero clauses and formula
 $\true$ is the clause with zero terms. Each acceptance formula can be
 transformed into an equivalent formula in DNF.
 
-For each mark $m\in M$, let $\delta_m$ denotes the set of all
-transitions marked with $m$, i.e.,
-$\delta_m=\{(p,a,M',q)\in\delta\mid m\in M'\}$. Further, a \emph{path}
-from a state $p$ to a state $q$ is a finite sequence of adjacent
-transitions of the form
+A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
+adjacent transitions of the form
 $(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
 such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
 is called a nontrivial \emph{strongly connected component (SCC)} if
@@ -289,13 +290,18 @@ for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
 \emph{maximal} if there is no SCC $S'$ satisfying $S\subsetneq S'$. In
 the rest of this paper, SCC always refers to a maximal SCC. Given an
 SCC $S$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
-denotes the set of all transitions between states in $S$.
+denotes the set of all transitions between states in $S$. Further, for
+each mark $m\in M$, let $\delta_m$ denotes the set of all transitions
+marked with $m$, i.e., $\delta_m=\{(p,a,M',q)\in\delta\mid m\in
+M'\}$. The sets $\delta_m$ are called \emph{acceptance sets}.
+Finally, given an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we
+denote the set $\delta_{S,m}=\delta_S\cap\delta_m$.
 
 We often use acceptance marks $\tacc{1}{1},\tacc{2}{2},\ldots\in M$
 and we write $\Inf\tacc{4}{j}$ and $\Fin\tacc{8}{k}$ instead of
 $\Inf(\tacc{4}{j})$ and $\Fin(\tacc{8}{k})$, respectively. In our
 graphical representation of automata,
-\begin{tikzpicture}[smallautomaton]
+\begin{tikzpicture}[smallautomaton,baseline=-2pt]
   \node[state] (p) at (0,0) {$p$};
   \node[state] (q) at (1.8,0) {$q$};
   \path [->] (p) edge node[above,pos=.5,overlay] {$a$} node[accset,collacc8, pos=0.65] {k} node[accset,collacc4, pos=0.3] {j} (q);
@@ -330,7 +336,7 @@ assignment of the equivalent Boolean formula. A QBF formula is
 
 A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
 $\varphi = Q_{1}x_{1}...Q_{n}x_{n} . \psi$, where
-$Q_1,Q_2,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
+$Q_1,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
 formula.
 
 %}}}
@@ -338,22 +344,46 @@ formula.
 
 \section{Reduction based on acceptance marks relations}\label{sec:standard}
 
-In this section, the simplification strategy is to find relations between acceptance sets and reduce the redundant ones. SCC-based simplification is the coarsest simplification we propose.
+This section presents a reduction technique based on relations between
+acceptance sets restricted to individual SCCs. It employs the fact
+that acceptance of a run always depends only on a single SCC, namely
+the SCC that contains the whole run except some finite prefix.
 
-Let $\mathcal{A}$ be an original automaton and let $\psi$ be an acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has an infinite suffix that takes place within one SCC $S_{i}$. Thus the evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can optimize the acceptance condition for each SCC separately. :w
-This optimization consists of removing redundant terms from acceptance condition and relabeling of acceptance marks on the transitions. The state and transition structure of the SCC does not change. This way we obtain set of simplified acceptance conditions that we merge into new acceptance formula $\psi'$. The automaton with relabeled transitons and new acceptance condition $\psi'$ we denote $\mathcal{A}'$.  Finally, we ensure that automaton $\mathcal{A'}$ is equivalent to the original automaton $\mathcal{A}$.  
+Let $\mA$ be a TELA with the acceptance condition $\varphi$. We assume
+that $\varphi$ is in DNF. This technique has two steps.
+\begin{enumerate}
+\item For each SCC $S$, we make a copy $\varphi_S$ of $\varphi$ and
+  simplify it according to relations between acceptance sets
+  restricted to $\delta_S$. 
+\item We collect the simplified acceptance conditions
+  $\varphi_{S_1},\ldots,\varphi_{S_k}$ of all SCCs and merge them into
+  one acceptance condition $\varphi'$. Additionally, we sometimes add
+  acceptance marks to all transitions of some SCCs to make the
+  resulting automaton with acceptance formula $\varphi'$ equivalent to
+  the original automaton.
+\end{enumerate}
+
+% Let $\mathcal{A}$ be an original automaton and let $\psi$ be an
+% acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has
+% an infinite suffix that takes place within one SCC $S_{i}$. Thus the
+% evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can
+% optimize the acceptance condition for each SCC separately. This
+% optimization consists of removing redundant terms from acceptance
+% condition and relabeling of acceptance marks on the transitions. The
+% state and transition structure of the SCC does not change. This way we
+% obtain set of simplified acceptance conditions that we merge into new
+% acceptance formula $\psi'$. The automaton with relabeled transitons
+% and new acceptance condition $\psi'$ we denote $\mathcal{A}'$.
+% Finally, we ensure that automaton $\mathcal{A'}$ is equivalent to the
+% original automaton $\mathcal{A}$.
+
+\subsection{Simplification of $\varphi_S$ for an SCC $S$}\label{ssec:step1}
+Recall that $\varphi_S$ is in DNF. Hence, we can represent it as a set
+$\varphi_S=\{D_1,\ldots,D_k\}$ of disjunctive clauses.
 
 
-\subsection{$S_{i}$ simplification}
-\label{section:simplification}
-At first, we remove the unused acceptance marks and transform the SCC's acceptance condition $\psi_{i}$ to \emph{disjunctive normal form} (DNF), so we have a unified shape of the condition.
-If TELA acceptance condition is in DNF, two distinct terms in one disjunct can only appear in three possible forms:
 
-\begin{itemize}
-    \item $\Inf\tacc{2}{i} \land \Inf\tacc{4}{j}$
-    \item $\Fin\tacc{8}{i} \land \Fin\tacc{4}{j}$
-    \item $\Fin\tacc{8}{i} \land \Inf\tacc{4}{j}$
-\end{itemize}
+
 
 Since formula $\psi_{i}$ is in DNF, we can represent it as a set of disjuncts $\overline{\psi_{i}} = \{D_1, D_2, \ldots D_k\}$.
 
