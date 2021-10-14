@@ -102,13 +102,13 @@
   without altering its structure and the represented language. One
   technique represents a standard approach based on relations among
   acceptance marks in individual strongly connected components of the
-  automaton. The other technique constructs quantified boolean formula
-  (QBF) queries that ask a QBF solver for an acceptance condition with
-  fewer acceptance marks and the placement of these marks in the
-  automaton structure. Both techniques are implemented and experiments
-  show that the number of acceptance marks in TELA produced by
-  state-of-the-art tools ltl3tela, Rabinizer~4, and SPOT can be
-  sometimes reduced. In the case of Rabinizer~4, we reduced the
+  automaton. The other technique constructs \emph{quantified boolean
+    formula (QBF)} queries that ask a QBF solver for an acceptance
+  condition with fewer acceptance marks and the placement of these
+  marks in the automaton structure. Both techniques are implemented
+  and experiments show that the number of acceptance marks in TELA
+  produced by state-of-the-art tools ltl3tela, Rabinizer~4, and SPOT
+  can be sometimes reduced. In the case of Rabinizer~4, we reduced the
   cummulative number of acceptance marks to less than one half.
 \end{abstract}
 
@@ -118,55 +118,144 @@
 
 \section{Introduction}
 
-Automata over infinite words (also known as $\omega$-automata) are now
-used mainly in specification, verification, analysis, monitoring, and
-synthesis of various systems with infinite behaviour. The first and
-the most common kind of $\omega$-automata is Büchi
-automaton~\cite{buchi.60.clmps} introduced in 1960. Other kinds of
-$\omega$-automata have been defined \ldots
+% Automata over infinite words (also known as $\omega$-automata) are now
+% used in specification, verification, analysis, monitoring, and
+% synthesis of various systems with infinite behaviour. The first and
+% the most common kind of $\omega$-automata is Büchi
+% automaton~\cite{buchi.60.clmps} introduced in 1960. As deterministic
+% Büchi automata are less expressive than nondeterministic ones,
+% deterministic $\omega$-automata are typically considered with other
+% acceptance condition like Rabin, Streett, Muller, or parity. In 1987,
+% Emerson and Lei~\cite{emerson.87.scp} introduced $\omega$-automata
+% where the acceptance condition can be an arbitrary combination of
+% acceptance primitives saying that a certain set of states should be
+% visited finitely often or infinitely often. In 2015, the same kind of
+% acceptance condition was implemented in the \emph{Hanoi omega-automata
+%   format (HOAF)}~\cite{babiak.15.cav}, with the difference that finiteness 
 
-\todo{Honza je tu!}
+In 1987, Emerson and Lei~\cite{emerson.87.scp} introduced automata
+over infinite words where acceptance conditions are arbitrary
+combinations of acceptance primitives saying that a certain set of
+states should be visited finitely often or infinitely often. In 2015,
+the same kind of acceptance condition was described in the \emph{Hanoi
+  omega-automata format (HOAF)}~\cite{babiak.15.cav}. The only
+difference is that the acceptance primitives talk about finitely or
+infinitely often visited acceptance marks rather than sets of states.
+Acceptance marks are placed on transitions and each mark identifies
+the set of transitions containing this mark. Hence, these automata are
+called \emph{transition-based Emerson-Lei automata (TELA)} and they
+generalize many traditional kinds of automata over infinite words
+including Büchi, co-Büchi, Rabin, Streett, Muller or parity
+automata.
 
+TELA have attracted a lot of attention during the last five years.
+Their popularity comes probably from the fact that these automata can
+often use less states than equivalent automata with traditional
+acceptance conditions. Further, algorithms handling TELA can
+automatically handle all automata with traditional acceptance
+conditions. TELA automata can be obtained for example by translating
+LTL formulas by Delag~\cite{muller.17.gandalf},
+ltl3tela~\cite{major.19.atva}, Rabinizer~4~\cite{kretinsky.18.cav}, or
+SPOT~\cite{duret.16.atva2}. There are also some algorithms processing
+these automata, for example the emptiness check~\cite{baier.19.atva}
+or translation of TELA to parity automata~\cite{renkin.20.atva}.
 
+\todo{Nechcem do experimentu pridat Delag?}
 
-Emerson-Lei automata~\cite{emerson.87.scp} were
-introduced Automata over infinite words are studied for decades and
-used in many areas of computer science including verification,
-controller synthesis, m
+Algorithms processing TELA are often sensitive to the number of
+acceptance marks more than to other parts of the automaton. For
+example, the transformation of TELA to parity automata based on
+\emph{color appearance record}~\cite{renkin.20.atva} transforms a TELA
+with $s$ states and $m$ acceptance marks into a parity automaton with
+up to $s\cdot m!$ states. Further, the emptiness
+check~\cite{baier.19.atva} is exponential in the number of acceptance
+marks that appear in acceptance primitives saying that a mark has to
+be visited finitely often, while it is only polynomial in other
+measures of the input automaton.
 
+These observations motivate our study of techniques reducing the
+number of acceptance marks without altering the structure of the
+automaton. We present basically two reduction techniques. The first
+one is based on relations among individual transition sets defined by
+various acceptance marks in each \emph{strongly connected component
+  (SCC)}. This technique can be seen as an extension of the
+\emph{SCC-base simplifications of acceptance
+  conditions}~\cite{babiak.13.spin} designed for
+\emph{transition-based generalized Büchi automata (TGBA)} and
+implemented in SPOT. Probably the main difference between the original
+technique for TGBA and the one for TELA is in the final step when
+simplified acceptance conditions for each SCC are merged together into
+one reduced acceptance condition.
 
-Emerson-Lei automata~\cite{emerson.87.scp} were introduced in 
-\begin{itemize}
-\item Emerson-Lei automata jsou v principu staré, ale v poslední době
-  znovuobjevene~\cite{babiak.15.cav} a je o tom ted spousta
-  clanku~\cite{baier.19.atva} a nastroju
-\item algoritmy jsou obvykle citlive na akceptacni podminku (citace)
-\item cilem prace je zjednodusit akceptacni podminku (zejmnena
-  redukovat pocet akceptacnich znacek) bez zmeny struktury automatu
-\end{itemize}
+The second technique is completely different. For a given TELA and
+parameters $k,n$, it produces a \emph{quantified boolean formula
+  (QBF)} which is satisfiable if and only if there exists an
+equivalent automaton with the identical structure, $n$ acceptance
+marks, and an acceptance formula in \todo{conjunctive?}  normal form
+with $k$ clauses. The placement of the marks on transitions and the
+acceptance formula can be obtained from a model of the
+formula. Besides this formula, we describe also the construction of a
+simpler formula such its satisfiability implies existence of an
+equivalent automaton with the identical structure and $n$ acceptacne
+marks, but not vice versa.
+
+We have implemented both reduction techniques in a tool called
+\texttt{telatko}. We show that the tool can reduce acceptance marks in
+automata produced by ltl3tela~\cite{major.19.atva},
+Rabinizer~4~\cite{kretinsky.18.cav}, and SPOT~\cite{duret.16.atva2}.
+While the reduction is relatively modest for TELA produced by ltl3tela
+and SPOT, it is substantial for automata produced by Rabinizer~4.
+
+\subsubsection{Related results}
+We are not aware about any existing research focused on simplification
+of acceptance formulas of TELA or reduction of the number of its
+acceptance marks without increasing the number of states.
+
+Casares, Colcombet, and Fijalkow very recently introduced a structure
+called \emph{alternating cycle decomposition
+  (ACD)}~\cite{casares.21.icalp} which compactly represents the
+information about all accepting and non-accepting automata cycles.  We
+expect that ACD could potentialy be used to reduce the number of
+acceptance marks or to simplify the acceptance condition. However,
+such a reduction is not obvious. Moreover, the construction of ACD
+seems to be computationally expensive.
+
+\subsubsection{Structure of the paper} The next section introduces
+basic terms used in the paper. Section~\ref{sec:standard} presents the
+reduction technique based on relations among individual acceptance
+marks on each SCC. The QBF-based technique is explained in
+Section~\ref{sec:qbf}. Implementation is briefly described in
+Section~\ref{sec:experiments}, which also shows the experimental
+results. Finally, Section~\ref{sec:conclusion} suggests other
+applications of our QBF-reduction technique and closes the paper.
 
 %}}}
 %{{{ preliminaries
 
-\section{Preliminaries}
+\section{Preliminaries}\label{sec:prelim}
 
-\subsection{TELA}
-A \emph{transition-based Emerson-Lei automaton} over alphabet $\Sigma$ is a tuple $\mathcal{A} = \left(  \mathcal{Q}, M, \Sigma,q_{0}, \delta, \varphi \right)$, where
-\begin{itemize}
-    
-    \item $\mathcal{Q}$ is a finite set of \emph{states},
-    \item $M$ is a finite set of \emph{acceptance marks},
-    \item $\Sigma$ is a finite \emph{alphabet},
-    \item $q_{0}$ is an \emph{initial state},
-    \item $\delta \subseteq \mathcal{Q} \times \Sigma \times 2^{M} \times \mathcal{Q}$ is a transition relation,
-    \item $\varphi$ is the acceptance condition constructed by the following abstract syntax equation, where $m \in M$:
+In this section we recall the basic terms around TELA and QBF.
+
+\begin{definition}[TELA]
+  A \emph{transition-based Emerson-Lei automaton (TELA)} is a tuple
+  $\mathcal{A} =(Q,M,\Sigma,q_{0},\delta,\varphi)$, where
+  \begin{itemize}
+  \item $Q$ is a finite set of \emph{states},
+  \item $M$ is a finite set of \emph{acceptance marks},
+  \item $\Sigma$ is a finite \emph{alphabet},
+  \item $q_{0}\in Q$ is an \emph{initial state},
+  \item $\delta \subseteq Q \times \Sigma \times 2^{M} \times Q$ is a
+    \emph{transition relation}, and
+  \item $\varphi$ is the \emph{acceptance condition} constructed by
+    the following abstract syntax equation, where $m$ ranges over $M$:
 
     \begin{center}
         $\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$.\\
     \end{center} 
 \end{itemize}
+\end{definition}
 
-
+\todo{Honza je tu a jde spat (je 5 rano pryc).}
 
 A run $\pi$ of $\mathcal{A}$ on word $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence of transitions $\pi = (q_{0}, u_{0}, M_{0}, q_{1})(q_{2}, u_{1}, M_{1}, q_{2}) \dots \in \delta^{\omega}$.
 
@@ -199,7 +288,8 @@ A set $S \subseteq X$ is a \emph{model} of $\Phi$ if the assignment $\mathcal{A}
 %}}}
 %{{{ standard reductions
 
-\section{Reduction based on acceptance sets relations / SCC-based reduction}
+\section{Reduction based on acceptance marks relations}\label{sec:standard}
+
 In this section, the simplification strategy is to find relations between acceptance sets and reduce the redundant ones. SCC-based simplification is the coarsest simplification we propose.
 
 Let $\mathcal{A}$ be an original automaton and let $\psi$ be an acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has an infinite suffix that takes place within one SCC $S_{i}$. Thus the evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can optimize the acceptance condition for each SCC separately. :w
@@ -482,7 +572,8 @@ Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might cha
 %}}}
 %{{{ QBF-based reduction 
 
-\section{QBF-based reduction}
+\section{QBF-based reduction}\label{sec:qbf}
+
 \begin{itemize}
 \item obecny popis konstrukce formule
 \item (level 3)
@@ -492,12 +583,12 @@ Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might cha
 %}}}
 %{{{ implementation and experimental evaluation
 
-\section{Implementation and experimental evaluation}
+\section{Implementation and experimental evaluation}\label{sec:experiments}
 
 %}}}
 %{{{ conclusion
 
-\section{Conclusions}
+\section{Conclusions}\label{sec:conclusion}
 
 %}}}
 
