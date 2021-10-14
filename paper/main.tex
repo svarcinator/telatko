@@ -14,6 +14,7 @@
 % TikZ libraries
 \usetikzlibrary{myautomata}
 \usetikzlibrary{fit, backgrounds}
+\usetikzlibrary{extshapes}
 
 \newenvironment{nstabbing}
   {\setlength{\topsep}{0pt}%
@@ -573,6 +574,437 @@ Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might cha
 %{{{ QBF-based reduction 
 
 \section{QBF-based reduction}\label{sec:qbf}
+
+The aim of this section is to create a QBF-formula for given $n$ that guarantees the existence of equivalent acceptance condition of a given automaton with $n$ acceptance marks. 
+\smallskip
+
+Let $\mathcal{A}$ with the acceptance condition $\psi$ be an original automaton on the input. Let $\mathcal{A}'$ denote automaton with simplified acceptance condition $\psi'$ equivalent to the original automaton $\mathcal{A}$. We encode $\psi$ and the placement of acceptance marks into QBF  $\varphi$.
+
+Let $\varphi$ be a QBF formula in \emph{prenex normal form}. Formula $\varphi$
+is composed of quantified prefix $\overrightarrow{Q}$ and three subformulae $\varphi_{O}, \varphi_{N} $ and $\varphi_{C}$. The exact shape of the formula is $\varphi = \overrightarrow{Q} . \  \varphi_{C} \implies ( \varphi_{O} \Longleftrightarrow \varphi_{N})$. 
+Subformula $\varphi_{O}$ expresses properties of $\psi$. Subformula $\varphi_{N}$ expresses properties of $\psi'$, namely the number of acceptance marks and a shape of $\psi'$. Before we describe the role of $\varphi_{C}$, we need to introduce \emph{relevant set}.
+
+\smallskip
+
+Evaluation of a run of $\mathcal{A}$ is dependent on set of edges that are contained infinitely within the run. The set of these edges is from now on referred to as \emph{relevant set}, since only these edges are relevant for the evaluation of $\psi$. The \emph{relevant set} is a subset of $\delta_{S_{i}}$ for some SCC $S_{i}$ and any two edges from the \emph{relevant set} are connected by a sequence of edges that also belong to the \emph{relevant set}. The purpose of subformula $\varphi_{C}$ is to describe some properties of \emph{relevant sets}. For each level of simplification, $\varphi_{C}$ describes these properties more specifically. Naturally, the more we specify these properties, the more complex the formula $\varphi_{C}$ is. 
+
+\smallskip
+
+Afterwards the formula $\varphi$ is created, we use a QBF-solver to find a model of $\varphi$. If no such model exists ($\varphi$ is UNSAT), we know that automaton $\mathcal{A}'$ with $n$ acceptance marks and equivalent to $\mathcal{A}$ does not exist. Otherwise, we use the model of $\varphi$ for decoding the automaton $\mathcal{A}'$. The structure of $\mathcal{A}'$ remains the same as the structure of $\mathcal{A}$. The only thing we change is the acceptance condition $\psi'$ and the placement of acceptance marks on the edges. 
+
+
+
+\subsection{Motivation}
+Based on the fundamentals given in the previous section, the simplification Level 1 is based on a relationship between acceptance sets of an automaton. To achieve finer simplification levels, the relation between the inner structure of the automaton and its acceptance condition needs to be taken into consideration.
+
+As the acceptance condition and the inner structure differ for every specific automaton, finding algorithmic ways of reducing acceptance marks would be complicated.
+Instead, we encode the given automaton into a QBF-formula and let the solver find the redundant marks for us.
+
+\subsection{Encoding}
+ In this section we propose encoding of the relevant parts of a given automaton into QBF-formula.
+\subsubsection{Intuition}
+The goal of the procedure is to find acceptance condition for a particular automaton with less acceptance marks. Whilst doing that, we need to ensure that the new automaton stays equivalent to the original automaton because the algorithm not only changes the acceptance condition it also changes the placement of acceptance marks on the edges. To do so, we need to ensure that every run on $\mathcal{A}'$ is evaluated the same way as run on $\mathcal{A}$ (these two automata have the same structure).
+
+Since we work with transition-based automata, the evaluation of an acceptance condition is dependent on the edges.
+Intuitively we want formula $\varphi$ to say that for every \emph{relevant set}, the acceptance condition $\psi'$ is evaluated as $\true$ $\iff$ $\psi$ is evaluated as $\true$. Unfortunately, to identify the exact edges that belong to the \emph{relevant set} of a run is not trivial, since we need to take into consideration every infinite suffix of every run on $\mathcal{A}$. Instead we let the formula $\varphi$ say that for every \emph{selection of edges} the acceptance condition $\psi'$ is evaluated as $\true$ $\iff$ $\psi$ is evaluated as $\true$. For now the \emph{selection of edges} can contain any edges of the automaton. Later we restrict the \emph{selection of edges} as we force it to have some properties of \emph{relevant set}.
+
+To express this in the QBF formula, we need to introduce variables that represent edges of the automaton. 
+
+Let us enumerate set of edges $\delta$. Every edge of the automaton is represented by variable $e_{i}$, where the index corresponds with the enumeration, thus $e_{i}$ represents the edge $t_{i} \in \delta$. If such a variable is evaluated as $\true$, it means that the edge is contained in the \emph{selection of edges}. Analogously if a variable $e_{i}$ is evaluated as $\false$, it means that the edge is not contained in the \emph{selection of edges}.
+
+\smallskip
+
+If we want to consider every possible \emph{selection of edges}, we need to consider every possible evaluation of every variable that represents an edge.
+
+\todo{tohle bych odstranila}
+\begin{example}
+   Let $t_{1}, t_{2} \in \delta$ be the edges of the automaton from the Figure \ref{fig:elval_of_edges}. Since the automaton has two edges, we get four possible evaluation of variables representing the edges.
+    \begin{enumerate}
+        \item $e_{1}$ is $\true \land e_{2}$ is $\true \Longleftrightarrow t_{1}, t_{2}$ are in the \emph{selection of edges}.
+        \item $e_{1}$ is $\true \land e_{2}$ is $\false \Longleftrightarrow t_{1}$ is in the \emph{selection of edges} and $t_{2}$ is not in the \emph{selection of edges}.
+        \item $e_{1}$ is $\false \land e_{2}$ is $\true \Longleftrightarrow t_{1}$ is not in the \emph{selection of edges} and $t_{2}$ is in the \emph{selection of edges}.
+        \item $e_{1}$ is $\false \land e_{2}$ is $\false \Longleftrightarrow t_{1}, t_{2}$ are not in the \emph{selection of edges}.
+    \end{enumerate}
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[state, initial] (z) at (0,0) {};
+
+			\path[->]
+			
+            	(z) edge[loop, in = 70, out = 110, looseness=6] node [above, scale=0.7] {1} (z)
+            	(z) edge[loop, in = 68, out = 112, looseness=10] node [above, scale=0.7] {2} (z)
+			;
+		\end{tikzpicture}
+    \caption{TELA with enumerated edges}
+    \label{fig:elval_of_edges}
+\end{figure}
+
+
+Hereby the expressive power of quantified Boolean formula comes to use. If we universally quantify every variable $e_{i}$ that represents an edge $t_{i} \in \delta$, then we consider the situation when $t_{i}$ is contained in the \emph{selection of edges} and the situation when $t_{i}$ is not contained in the \emph{selection of edges}. 
+
+That being said, we can proceed to the encoding of some information about automaton into the QBF-formula $\varphi$. As mentioned before, the formula $\varphi$ expresses that for every \emph{selection of edges}, the acceptance condition $\psi$ is evaluated as $\true$ $\mathit{iff}$ the acceptance condition $\psi'$ is evaluated as true. 
+
+The subformula $\varphi_{O}$ encodes the shape of the acceptance condition $\psi$ and information which edges are labeled with which acceptance marks. The evaluation of $\varphi_{O}$ depends purely on the evaluation of variables that represent edges of the automaton. 
+It is encoded in such way that the subformula $\varphi_{O}$ is satisfied iff the edges of \emph{selection of edges} satisfy $\psi$. The details of $\varphi_{O}$ encoding are described in Subsection \ref{subsection:original}.
+
+\smallskip
+
+The subformula $\varphi_{N}$ contains information about the number of acceptance marks we want in the new acceptance formula $\psi'$. Further, it contains free variables. The model of these free variables gives us the information about the shape of $\psi'$ and the placement of acceptance marks on the edges of $\mathcal{A}'$. The details of $\varphi_{N}$ encoding are described in Subsection \ref{subsection:new}.
+
+The quantification of all variables that represent the edges of the automaton ensures that we consider every possible \emph{selection of edges}, as described in Section \ref{subsection:quant_pref}. 
+\begin{center}
+    $\forall \{ e_{1}, \ldots, e_{|\delta|}\} . ( \varphi_{O} \Longleftrightarrow \varphi_{N} ) $
+\end{center}
+However, one can clearly notice that some edges will never be visited infinitely often in the same run. (For example, when some of the edges occur in different strongly connected components than the others.) In other words, these edges will never belong to any \emph{relevant set} together. Therefore it is possible to eliminate every evaluation of QBF, where variables representing such edges are evaluated as $\true$. It is natural to express this constrain as an implication. Let $\varphi_{C}$ be a formula describing that the \emph{selection of edges} has a potential be a \emph{relevant set}. The QBF representation is:
+\begin{center}
+    $\forall \{ e_{1}, \ldots, e_{|\delta|}\} . \varphi_{C} \implies (\varphi_{O} \Longleftrightarrow \varphi_{N})$
+\end{center}
+The matter of eliminating various combinations of edges is described in more detail in Subection \ref{subsection:connection}. 
+
+\subsubsection{Variables}
+In this section, we describe the syntax and intended semantics of variables, parameters, and auxiliary letters used in this section.
+Hereby is the overview of the parameters used when building the formula:
+\begin{itemize}
+    \item K -- The number of acceptance marks in $\psi'$.
+    \item C -- the number of clauses in formula $\psi'$.
+\end{itemize}
+
+These parameters are derived from the original automaton $\mathcal{A}$. As the algorithm iterates (see Subection \ref{subsection:procedure} )  the parameter $K$ decreases.
+
+\smallskip
+
+The auxiliary letters have the following function:
+\begin{itemize}
+    \item $k$ -- the number of particular acceptance mark
+    \item $c$ -- the number of particular clause
+    \item $i$ -- the number of particular edge 
+\end{itemize}
+
+Hereby is the overview of the variables used when building the QBF formula $\varphi$ :
+\begin{itemize}
+    \item $$f_{i,k} = \begin{cases}
+    1& \text{edge }t_{i} \text{ is labeled with the acceptance mark }k\\
+    0& \text{else}
+\end{cases}$$
+\item $$p_{c,k} = \begin{cases}
+    1& \Inf(k) \text{ is in the clause }c\\
+    0& \text{else}
+\end{cases}$$
+\item $$n_{c,k}= \begin{cases}
+    1& \Fin(k) \text{ is in the clause }c\\
+    0& \text{else}
+\end{cases}$$
+\item $$e_{i} \;= \begin{cases}
+    1& \text{The edge } t_{i} \text{ is in the \emph{selection of edges} }\\
+    0& \text{else}
+\end{cases}$$
+\end{itemize}
+
+\subsection{QBF decoding}
+After we build $\varphi$, we use QBF-solver to find satisfying assignment of variables. If such a valuation exists, we can build a new automaton $\mathcal{A}'$ with the same structure and fewer acceptance marks. This new automaton is equivalent to the original one $\mathcal{A}$ -- this is guaranteed by the QBF-formula $\varphi$. 
+There are two possible outcomes from the QBF-solver:
+\begin{enumerate}
+    \item $\varphi$ is UNSAT -- a model of $\varphi$ does not exist. That means that the acceptance condition of $\mathcal{A}$ cannot be simplified for given C and K. Thus we return automaton $\mathcal{A}$ and the information that $\mathcal{A}$ is the automaton with the simplest acceptance condition possible.
+    \item $\varphi$ is SAT -- QBF-solver provides (returns) a model of unquantified variables. Namely to $p_{c, k},n_{c,k} \text{ and } f_{i,k}, \text{ for each }1 \leq c \leq C, 1 \leq k \leq K, 1 \leq i \leq |\delta|$.
+    Firstly, we decode the variables $f_{i,k}$ and use them to identify new placement of the acceptance marks. Specifically, we create a new automaton $\mathcal{A}'$ with the same structure as $\mathcal{A}$. Then  we add acceptance mark $\tacc{5}{k}$ on edge $t_{i}$ for every $f_{i,k}$ variable evaluated as $\true$. 
+    
+    The new acceptance condition of automaton $\mathcal{A}'$ is then build from variables $p_{c,k}$ and $n_{c,k}$. The second part of $\varphi_{N}$ was encoded to produce new acceptance formula in DNF. (See the alternation between Boolean operators  in order $\lor, \land$ in Section \ref{subsection:new}.) Thus the shape of the new acceptance condition is set as DNF skeleton, and we simply add terms according to the evaluation of variables. If $p_{c,k}$ is $\true$, we add term $\Inf\tacc{5}{k}$ to the disjunct $c$. Similarly, if $n_{c,k}$ is $\true$, then we add $\Fin\tacc{5}{k}$ to the disjunct $c$. This way, we process every variable that QBF-solver gives us and produce the new automaton $\mathcal{A}'$
+    equivalent to the original one.
+    
+\end{enumerate}
+
+\subsection{Quantified prefix}
+\label{subsection:quant_pref}
+The aim of the quantified prefix in formula $\varphi$ is to consider every possible selection of edges. As mentioned in the previous sections, edge $t_{i} \in \delta$ belongs to the \emph{selection of edges} if the variable $e_{i}$ that represents the edge $t_{i}$ is evaluated as $\true$. Therefore if we want to consider every possible \emph{selection of edges}, we need to consider every evaluation of the variables representing edges. We use a universal quantifier to express this. The universal quantifier states that the formula has to hold for both evaluations of the quantified variable.
+
+The QBF prefix that expresses the universal quantification for every variable representing an edge has the following shape:
+\begin{align*}
+    \overrightarrow{Q} = \forall\{e_{1}, \ldots ,e_{|\delta|} \}
+\end{align*}
+
+The advantage of QBF is that it is able to express a statement in shorter formula then if we tried to express the statement in standard Boolean formula with the use of conjunction.
+
+
+\begin{example}
+Consider the QBF $\theta = \forall e_{1} \forall e_{2} . (e_1 \lor e_2) $. The QBF $\theta $ transformed to standard Boolean formula is $\theta' = (e_{1} \lor e_{2}) \land (  e_{1} \lor \lnot e_{2}) \land  (  \lnot e_{1} \lor e_{2}) \land  (  \lnot e_{1} \lor \lnot e_{2}) .$
+\end{example}
+
+
+\subsection{Original acceptance formula}
+\label{subsection:original}
+
+
+
+As mentioned before, the satisfiability of $\varphi_{O}$ is purely resultant of assessment of $e_{i}, 1 \leq i \leq |\delta|$ variables representing edges in automaton.
+
+Let us enumerate the edges of the original automaton $\mathcal{A}$ and let $Z(m), m \in M$ be the set of edges labeled with mark $m$. 
+The encoding of original acceptance condition terms into $\varphi_{O}$ is defined as follows:
+%%davat tam rovnitko nebo nejak sipku??
+\begin{align*}
+    &\varphi(\Inf(m))=\bigvee\limits_{t_{i} \in Z(m)} e_{i}\\
+    &\varphi(\Fin(m)) = \bigwedge\limits_{t_{i} \in Z(m)} \lnot e_{i}
+\end{align*}
+\begin{example}
+
+Consider the automaton in Figure \ref{fig:oficial_acc}. The set $Z_{0} = \{t_3, t_2\},\, Z_{1} = \{t_1\}$, where $t_{1}, t_{2}, t_{3} \in \delta$. Thus the encoded $\varphi_{O} = e_1 \land (\lnot e_2 \land \lnot e_3)$. Therefore if variable $e_{1}=\true$, $e_{2}=\false$ and $e_{3}=\false$, acceptance formula is $\true$.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+\node[cstate, initial] (g) {};
+\node[flabel, above] at (0, 1.5) {$\Fin\taccsq{0}{0}\land\Inf\tacc{1}{1}$};
+%
+\path[->]
+    (g) edge[loop, in=330, out=30, looseness=6]node[right, pos=0.4, scale=0.8] {$1$} node[accset,collacc1, pos=0.6] {1}(g)
+	(g) edge[loop, in=80, out=140, looseness=6] node[above, pos= 0.4, scale=0.8] {$2$} node[accsquare, collacc0, pos=0.6]{0}(g)
+	(g) edge[loop, in=220, out=280, looseness=6] node[below, pos=0.6, scale=0.8] {$3$} node[accsquare, collacc0, pos=0.4] {0} (g)
+	;
+\end{tikzpicture}
+    \caption{TELA with edges labeled with their numbers}
+    \label{fig:oficial_acc}
+\end{figure}
+
+\end{example}
+
+\subsection{New acceptance formula}
+\label{subsection:new}
+The new acceptance formula $\varphi_{N}$ determines the shape of the future acceptance condition of automaton, and the assignment of variables used in $\varphi_{N}$ determines new positions of acceptance marks on the transitions.
+
+The formula $\varphi_{N}$ is divided into two parts.
+The first part of the formula (4.1) expresses a simple constrain that the acceptance set that occurs in one clause cannot be in $\Inf$ and simultaneously in $\Fin$ form.
+
+The second part (4.2) of $\varphi_{N}$ is divided into two subformulas. The first subformula expresses that if the term $\Inf(k)$ is present in clause $c$, then at least one edge of the \emph{selection of edges} needs to be labeled with the acceptance mark $k$.
+
+Similarly, the second subformula implies that if the term $\Fin(k)$ is present in clause $c$, then none of the \emph{selected edges} can be labeled with the acceptance mark $k$.
+
+
+Using the variables presented in previous sections, we encode $\varphi_{N}$:
+\begin{align}
+    \varphi_{N} = & \bigwedge\limits_{1 \leq c \leq C}\;\bigwedge\limits_{1 \leq k \leq K} (\lnot p_{c,k} \lor \lnot n_{c,k}) \; \land \\
+    &\bigvee\limits_{1 \leq c \leq C} \; \bigwedge\limits_{1 \leq k \leq K} \Bigg[\big(  p_{c, k} \implies \bigvee\limits_{t_{i} \in \delta}(f_{i,k} \land e_{i})  \big) \land \\& \;\;\;\quad\quad\quad\quad\quad\quad\big(  n_{c, k} \implies \bigwedge\limits_{t_{i} \in \delta}(\lnot f_{i,k} \lor \lnot e_{i})  \big)\Bigg]
+\end{align}
+
+Observe the alternation of $\lor \land$ from the second part of the formula (4.2). This alternation determines that the formula $\psi'$ is in DNF. 
+
+\subsection{Connection formula}
+\label{subsection:connection}
+The connection formula distinguishes the remaining three levels of simplification. Previously we denoted it as $\varphi_{C}$.
+
+Formula $\varphi_{C}$ defines requirements on the edges that are together in \emph{selection of edges}. These requirements are based on some properties of these edges. The more restrictive these requirements are, the more properties of \emph{relevant sets} are possessed by the \emph{selection of edges}. 
+In other words, formula $\varphi_{C}$ holds if the \emph{selection of edges} has the required property. If not, the formula $\varphi_{C}$ is $\false$, and then the whole formula $\varphi$ is trivially satisfied. Formula $\varphi_{C}$ consists of two parts.
+
+The first part expresses the requirement that the \emph{selection of edges} is \emph{continuous}. Loosely said, this means that if a transition from \emph{selection of edges} enters some state $q$ then another transition that belongs to the \emph{selection of edges} exits the state $q$. This holds in the opposite direction as well. Thus if a transition from \emph{selection of edges} exits some state $q$ then another transition that belongs to the \emph{selection of edges} enters the state $q$. This is naturally expressed by equivalence. 
+Note that if the selected transition is a self-loop, the destination and the source of the edge is the same state.
+
+The Boolean formula for the described statement:
+\begin{center}
+    $\varphi_{C_{1}}=\bigwedge\limits_{q \in Q} \Bigg( ( \bigvee\limits_{t_{i} \in \delta \cap \{ q \} \times  \Sigma \times  2^M \times Q} e_i ) \Longleftrightarrow( \bigvee\limits_{t_{j} \in \delta  \cap \ Q \times  \Sigma \times 2^M \times \{q\}} e_{j} ) \Bigg)$
+\end{center}
+
+\begin{example}
+   Consider the state $q$ in Figure \ref{fig:inNout} this part of formula is $(e_1 \lor e_2) \Longleftrightarrow (e_3 \lor e_4 \lor e_5)$.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+        \node[state] (q) at (0, 0) {$q$};
+	
+
+	    \path[->]
+		(q) edge node[above, pos=0.4, scale=0.8] {$4$} ++(1.5, 0)
+		(q) edge node[above, pos=0.4, scale=0.8] {$5$} ++(1.3, 1)
+		(q) edge node[above, pos=0.4, scale=0.8] {$3$} ++(1.3, -1)
+	;
+	\path[<-]
+	(q) edge node[above, pos=0.6, scale=0.8] {$2$} ++(-1.3, -0.5)
+	(q) edge node[above, pos=0.6, scale=0.8] {$1$} ++(-1.3, 0.5)
+	;
+    \end{tikzpicture}
+    \caption{State $q$ and its entering and exiting edges}
+    \label{fig:inNout}
+\end{figure}
+\end{example}
+
+
+Even though we ensured that the selected transitions create continuous paths, the paths might not be connected. 
+
+\begin{example}
+Consider the automaton in Figure \ref{fig:continuousNotConnected}. The transitions $t_1$ and $t_2$ are loops (the simplest cycles), but are not connected (each is located in different SCC). Thus $\{ t_{1}, t_{2}\}$ is not a \emph{relevant set}.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[cstate, initial] (i) at (0, 0) {};
+			\node[cstate] (j) at (2.5, 1) {};
+			\node[cstate] (k) at (2.5, -1) {};
+			\path[->]
+			
+			(i) edge  (k)
+			(i) edge (j)
+			(j) edge[loop right, draw=red] node[right] {$1$} (j)
+			(k) edge[loop right, draw=red] node[right] {$2$} (k)
+				
+		;
+    \end{tikzpicture}
+    \caption{Not connected cycles}
+    \label{fig:continuousNotConnected}
+\end{figure}
+\end{example}
+ 
+The second part of $\varphi_{C}$ specifies the properties of \emph{relevant set} that the edges that belong together to \emph{selected edges} need to have. We divided these properties into two levels Level 2, Level 3, Level 4, all described in ensuing sections.
+
+
+\subsubsection{SCC accuracy}
+The SCC accuracy corresponds with the Level of simplification 2. At this level, the formula specifies that the edges from one \emph{selection of edges} belong to the same SCC.
+ Thus straightforwardly translated into QBF formula:
+\begin{center}
+    $\varphi_{C_{2}} = \bigvee\limits_{\delta_{S_{i}} \subseteq \delta}\Bigg( ( \bigvee\limits_{t_{i} \in \delta_{S_{i}}} e_i ) \land  ( \bigwedge\limits_{t_{j} \in \delta \setminus \delta_{S_{i}}} \lnot e_j  ) \Bigg)$
+\end{center}
+
+
+Finally, the connection formula is the conjunction of the two parts:
+\begin{center}
+    $\varphi_{C} = \varphi_{C_{1}} \land \varphi_{C_{2}}$.
+\end{center}
+
+\begin{example}
+This example works as a motivation for simplification Level 3. For simplification Level 2, edges number $1$ and number $3$ in Figure \ref{fig:connected_motivation} can be in the same \emph{selection of edges} because they are placed in the same SCC. Obviously, since they are not connected, they cannot form \emph{relevant set}. Therefore we can specify a new level of simplification -- Level 3, which forces all edges from the \emph{selection of edges} to be connected.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+    \node[state, initial] (g) {$0$};
+    \node[state, right=2cm of g](q){$1$};
+    %
+    \path[->, auto]
+    (g) edge[bend right] node[below, scale=0.8] {$2$}(q)
+    (q) edge[bend right]node[above, scale=0.8] {$4$} (g)
+    (q) edge[loop, in=65, out=115, looseness=10, draw=red] node[ scale=0.8] {$3$}(q)
+    (g) edge[loop, in=65, out=115, looseness=10, draw=red] node[scale=0.8] {$1$}(g)
+	;
+
+\end{tikzpicture}
+        
+    \caption{Motivation for simplification L3}
+    \label{fig:connected_motivation}
+\end{figure}
+
+\end{example}
+
+\subsubsection{CYCLES accuracy}
+The simplification Level 3 ensures that \emph{selection of edges} is connected, but we can go one step further and specify that \emph{selection of edges} is in fact a \emph{relevant set}.
+
+The intuition by simplification Level 4 is that the states of an automaton are again divided into two groups -- the states that belong to \emph{selected states} and the states do not belong to \emph{selected states}.  We consider three possible scenarios that can occur while the states are divided into these two groups:
+\begin{enumerate}
+    \item The source of edge $t_{i}$ is in different group than the destination of edge $t_{i}$.
+    \item Source and destination of edge $t_{i}$ are in the \emph{selected states}.
+    \item Source and destination of edge $t_{i}$ are not in \emph{selected states}.
+\end{enumerate}
+Cases two and three do not violate the requirement that all connected states need to be in one group. Case one is a little more complicated. If an edge has a source in \emph{selected states} and destination not in the \emph{selected states}, we need to secure that the sequence of the edges returns to \emph{selected states}. In other words, there exists another edge that has a source in the not \emph{selected states} and destination in the \emph{selected states}. (Dually the other way around.)
+
+In order to express this in the QBF-formula we introduce a new set of quantified variables $\{ w_{1}, \ldots , w_{|Q|}$. The variables have the following semantics:
+\begin{align*}
+    w_{q} = \begin{cases}
+    1& \text{state } q \in Q \text{ is in the \emph{selected group}}\\
+    0& \text{else}
+    \end{cases}
+\end{align*}
+Since we want to ensure that for every \emph{selection of edges} (for every evaluation of variables that represent the edges) there exist such a groups we update the quantified prefix  $\overrightarrow{Q}$ in following way:
+\begin{align*}
+    \overrightarrow{Q} = \forall \{ e_{1}, \ldots,  e_{|\delta|}\} \exists \{ w_{1}, \ldots, w_{|Q|}\}
+\end{align*}
+
+\smallskip
+
+Since we want the statement to hold for every \emph{selection of edges}, we place the existentially quantified variables $\{w_{1}, \ldots, w_{|Q|} \}$ behind the universally quantified variables $\{e_{1}, \ldots, e_{|\delta|} \} $.
+At first we update the quantified prefix:
+\begin{align*}
+    \overrightarrow{Q} = \forall \{ e_{1}, \ldots,  e_{|\delta|}\} \exists \{ w_{1}, \ldots, w_{|Q|}\}
+\end{align*}
+
+And then we can create the $\varphi_{C}$ formula:
+\begin{align*}
+    \varphi_{C} =  \Bigg[ &\bigwedge\limits_{\substack{t_{i} \in \{q\}  \times \Sigma \times 2^M \times \{ r \}, \\ q \in Q, r \in Q}} \Bigg( e_{i} \implies (w_{q} \land w_{r}) \Bigg) \lor \\
+    &  \bigwedge\limits_{\substack{t_{i} \in \{q\}  \times \Sigma  \times 2^M \times \{ r \}, \\ q \in Q, r \in Q}} \Bigg( e_{i} \implies (\lnot w_{q} \land \lnot w_{r}) \Bigg) \lor \\ \Bigg( &\bigvee \limits_{\substack{t_{i} \in \{q\} \times \Sigma \times 2^M  \times \{ r \}, \\ q \in Q, r \in Q}} ( e_{i} \land w_{q} \land \lnot w_{r} )  \land \bigvee \limits_{\substack{t_{i} \in \{q\}  \times \Sigma \times 2^M \times \{ r \}, \\ q \in Q, r \in Q}} (e_{i} \land \lnot  w_{q} \land  w_{r}) \Bigg) \Bigg]
+\end{align*}
+
+\begin{example}
+Figure \ref{fig:cycles_sensitivity} displays an example of an automaton reduced by Level 4.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+
+
+    \node[state, initial] (g) {$0$};
+
+    \node[flabel] at (1.5, 2.5){$ \Fin\tacc{0}{0} \land \Inf\tacc{1}{1} \land \Inf\tacc{2}{2}$};
+    \node[state, right=2cm of g](q){$1$};
+
+    \path[->, auto]
+    (g) edge[bend right] node [accset,collacc0, pos=0.5]{0}node [below, pos=0.2, scale=0.8] {$2$}(q)
+    (q) edge[bend right] node[above, pos=0.8, scale=0.8] {$4$}(g)
+    (q) edge[loop, in=75, out=105, looseness=8]node[left, pos=0.1, scale=0.8]{5} (q)
+    (q) edge[loop, in=70, out=110, looseness=12] node[accset,collacc1] {1}node[left, pos=0.2, scale=0.8]{6} (q)
+    (g) edge[loop, in=75, out=105, looseness=8] node[accset,collacc2] {2} node[left, pos=0.1, scale=0.8]{1}(g)
+    (g) edge[loop, in=70, out=110, looseness=12] node[accset,collacc2, pos=0.4] {2} node[accset,collacc1, pos=0.7] {1} node[left, pos=0.2, scale=0.8]{3}(g)
+	;
+	
+	\node[state, initial, right=4cm of g] (o){$0$};
+
+    \node[flabel] at (6.7, 2.5){$ \Fin\tacc{0}{0} \land \Inf\tacc{3}{3}$};
+    \node[state, right=2cm of o](p){$1$};
+
+    \path[->, auto]
+    (o) edge[bend right] node [accset,collacc0, pos=0.5]{0}(p)
+    (p) edge[bend right](o)
+    (p) edge[loop, in=75, out=105, looseness=8] (p)
+    (p) edge[loop, in=70, out=110, looseness=12] (p)
+    (o) edge[loop, in=75, out=105, looseness=8] (o)
+    (o) edge[loop, in=70, out=110, looseness=12] node[accset,collacc3] {3}(o)
+
+    
+	;
+
+\end{tikzpicture}
+        
+    \caption{TELA reduced with the CYCLES sensitivity}
+    \label{fig:cycles_sensitivity}
+\end{figure}
+\end{example}
+
+Similarly as in the previous section the connection formula is the conjunction of the two parts:
+\begin{align*}
+    \varphi_{C} = \varphi_{C_{1}} \land \varphi_{C_{2}}.
+\end{align*}
+
+\subsection{Simplification procedure}
+\label{subsection:procedure}
+
+Now we describe our simplification algorithm taking as input an arbitrary TELA $\mathcal{A}$ with an acceptance condition $\psi$, required level of simplification $L$ and timeout period $T$.
+\begin{enumerate}
+    \item Convert acceptance condition $ \psi$ to DNF.
+    \item Apply the algorithm for simplification Level 1 described in Section \ref{sec:standard} on $\mathcal{A}$.
+    \item If $L = 1$ return automaton $\mathcal{A}$.
+     \item The initial value of $C$ is the number of clauses in $\psi$. Similarly, the initial value of $K$ is the number of acceptance sets of $\psi$ decreased by 1.
+    \item Encode $\mathcal{A}$ into QBF formula $\varphi$ according to the required level of simplification $L$.
+    \item Run a QBF-solver on $\varphi$ for $T$ seconds.
+    \begin{enumerate}
+        \item If the QBF-solver evaluates $\varphi$ as UNSAT, return automaton $\mathcal{A}'$.
+        \item If the timeout $T$ expires before the QBF-solver evaluates $\varphi$, return automaton $\mathcal{A}'$.
+        \item If the QBF-solver evaluates $\varphi$ as SAT. Decode the assignment into next TELA $\mathcal{A}'$.
+        \begin{enumerate}
+            \item If $K=1$, try to reduce $\varphi$ to $\true$ or $\false$, the simplest form of acceptance condition and return $\mathcal{A}$.
+            \item Decrease $K$ by 1 and go to (b).
+        
+    \end{enumerate}
+        
+    \end{enumerate}
+\end{enumerate}
+
+\todo{kde je optimalni misto, kam napsat:}
+For simplicity, we do not display letters on the edges of the automata in Figures. We can afford to omit them because they are not important for our simplification techniques. 
+
+
+
 
 \begin{itemize}
 \item obecny popis konstrukce formule
