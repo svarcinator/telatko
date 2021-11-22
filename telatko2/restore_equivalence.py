@@ -5,7 +5,7 @@ from telatko2.merge import get_set_nums
 
 
 def make_true(aut, scc, merged_acc):
-    scc_clean_up_edges(aut, PACC(""), scc)
+    scc_clean_up_edges(aut, ACC_DNF(""), scc)
 
     min_inf = len(merged_acc[0])
     cheap_dis = merged_acc[0]
@@ -35,7 +35,7 @@ def make_true(aut, scc, merged_acc):
 
 
 def make_false(aut, scc, merged_acc):
-    scc_clean_up_edges(aut, PACC(""), scc)
+    scc_clean_up_edges(aut, ACC_DNF(""), scc)
     add_m = []
     for dis in merged_acc.formula:
         if all(con.type == MarkType.Fin for con in dis):
@@ -170,7 +170,7 @@ def restore_dnf(aut, scc, merged_f, unused, dep_log):
 
 
 def restore_maybe_accepting(aut, scc, merged_f, unused, dep_log):
-    if aut.get_acceptance().is_cnf():
+    if merged_f.acc_type == AccType.cnf:
         restore_cnf(aut, scc, merged_f, unused, dep_log)
     else:
         restore_dnf(aut, scc, merged_f, unused, dep_log)
@@ -184,7 +184,7 @@ def restore_always_accepting(aut, scc, merged_f):
     :param merged_f: new acc formula
     :return:
     """
-    if aut.get_acceptance().is_cnf():
+    if merged_f.acc_type == AccType.cnf:
         for expr in merged_f.formula:
             make_expr_true(aut, scc, expr)
     else:
@@ -200,7 +200,7 @@ def restore_never_accepting(aut, scc, merged_f):
         :param merged_f: new acc formula
         :return:
         """
-    if aut.get_acceptance().is_cnf():
+    if merged_f.acc_type == AccType.cnf:
         make_expr_false(aut, scc, merged_f.formula[0])
     else:           # dnf
         for expr in merged_f:

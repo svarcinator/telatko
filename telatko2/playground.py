@@ -8,19 +8,17 @@ import copy
 from qbf.parser import clear_aut_edges
 
 
-def eval_set(aut, mark, scc, m_all_e):
-    if mark.num in m_all_e:
-        return mark.type == MarkType.Inf
-    if mark.num not in scc_current_marks(aut, scc):  # list of marks dane scc
-        return mark.type == MarkType.Fin
-    return None
+
 
 
 def try_eval(aut, acc, scc):
+    """
+
+    """
     m_all_edges = set(scc_everywhere(aut, scc))  # set of marks that include
     # all transitions of SCC
 
-    eval_f = False
+    eval_f = False  # proc
     for dis in acc.formula:
         eval_dis = True
         for con in dis:
@@ -40,16 +38,15 @@ def try_eval(aut, acc, scc):
         acc.formula = []
 
 
-def try_eval2(aut, acc, scc, weak):
+def weak_eval(aut, acc, scc, weak):
     if weak:
         if scc.is_rejecting():  # all cycles in scc are rejecting
             acc.set_sat(False)
         else:
             acc.set_sat(True)
         acc.formula = []
-        return
-    else:
-        try_eval(aut, acc, scc)
+        return True
+    return False
 
 
 def print_aut(aut, output, m):
@@ -60,6 +57,22 @@ def print_aut(aut, output, m):
     else:
         print(aut.to_str())
 
+
+def get_acc(aut):
+    """
+    Returns PACC (dnf) if dnf formula is shorter else PACC_CNF(cnf)
+    """
+    cnf_acc = ACC_CNF(aut.get_acceptance().to_cnf())
+    dnf_acc = ACC_DNF(aut.get_acceptance().to_dnf())
+    #print((cnf_acc),"\n", (dnf_acc))
+
+    if (dnf_acc.acc_len() < cnf_acc.acc_len()) or (dnf_acc.acc_len() == cnf_acc.acc_len() and len(dnf_acc) <= len(cnf_acc)):
+        print("DNF")
+        return dnf_acc
+    else:
+        #acc = PACC_CNF(cnf_acc)
+        print("CNF")
+        return cnf_acc
 
 def get_accs(aut):
     """
@@ -74,14 +87,21 @@ def get_accs(aut):
     sccs = []
     counter = 0
     weak = spot.scc_info(aut).weak_sccs()  # bool if scc is weak
-    for scc in spot.scc_info(aut):
+    orig_acc = get_acc(aut)
+    si = spot.scc_info(aut)
+    for scc in si:
         sccs.append(scc)
-        acc = PACC(
-            aut.get_acceptance().to_dnf())
-        try_eval2(aut, acc, scc, weak[counter])
+        acc = copy.deepcopy(orig_acc)
+        acc.set_scc_index(counter)
+
+        # acc = PACC(aut.get_acceptance().to_dnf()) # proc bych to z toho furt dolovala?
+        if ( not weak_eval(aut, acc, scc, weak[counter])):
+            acc.initial_cleanup(aut, scc)
+
         counter += 1
+
         if acc.sat is None:
-            simplify(aut, acc, scc)
+            simplify(aut, acc, scc, counter, acc.acc_type)
         accs.append(acc)
 
     return accs, sccs
@@ -119,16 +139,16 @@ def no_new_acceptance(aut, sccs, accs):
 
     if all(acc.sat is True for acc in accs):
         for scc in sccs:
-            scc_clean_up_edges(aut, PACC(""), scc)
+            scc_clean_up_edges(aut, ACC(""), scc)
         aut.set_acceptance(0, spot.acc_code.t())
 
     elif all(acc.sat is False for acc in accs):
         for scc in sccs:
-            scc_clean_up_edges(aut, PACC(""), scc)
+            scc_clean_up_edges(aut, ACC(""), scc)
         aut.set_acceptance(0, spot.acc_code.f())
 
     else:
-        new_acc = PACC("Inf(0)")
+        new_acc = ACC_DNF("Inf(0)")
         for i in range(len(accs)):
             if accs[i].sat is True:
                 make_true(aut, sccs[i], new_acc)
@@ -181,10 +201,11 @@ def process_automaton(aut):
 
 
     # simplifies acceptance condition for each scc
-    accs, sccs = get_accs(aut)  # simplification occurs in here
+    short_accs, sccs = get_accs(aut)  # simplification occurs in here
 
     # puts acceptance to shorter form(cnf or dnf)
-    short_accs = get_short_accs(aut, accs)
+    #short_accs = get_short_accs(aut, accs)
+
 
     # Filters emty assceptance formulas from short_accs
     nempty_sccs, nempty_short_accs = check_emptyness(sccs, short_accs)
@@ -202,7 +223,7 @@ def process_automaton(aut):
         len(nempty_short_accs) -
         1)
     # stores original acc formula
-    orig_acc = PACC_CNF(aut.get_acceptance())
+    orig_acc = ACC_CNF(aut.get_acceptance())
 
     # highest number of acceptance set in formula
     m = orig_acc.max()
@@ -261,7 +282,7 @@ def process_automaton(aut):
     if not spot.are_equivalent(aut, orig):
         print("telatko not equivalent")
         # precaution
-        return orig
+        return aut
     else:
         return aut
 

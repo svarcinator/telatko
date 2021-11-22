@@ -359,7 +359,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         q += w_quant(aut)
     SAT_output("sat_file", q, formula)
 
-def play(aut, C, K, mode, timeout):
+def play(aut, C, K, mode, timeout, timeouted, scc):
 
     spot.cleanup_acceptance_here(aut)
 
@@ -394,22 +394,29 @@ def play(aut, C, K, mode, timeout):
 
         # QBF formula is written into ./sat_file
 
-        """
-        create_formula(
-            aut,
-            edge_dict,
-            scc_edg,
-            scc_state_info,
-            inner_edges_nums,
-            C,
-            K,
-            inner_edges,
-            tmp_mode)
-        """
+        if (scc):
+            acc = PACC(aut.get_acceptance().to_dnf())
+            #print("scc")
+            scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
+        else:
+            #print("not scc")
+
+            create_formula(
+                aut,
+                edge_dict,
+                scc_edg,
+                scc_state_info,
+                inner_edges_nums,
+                C,
+                K,
+                inner_edges,
+                tmp_mode)
 
 
-        acc = PACC(aut.get_acceptance().to_dnf())
-        scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
+
+
+
+
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole",
                                  "./sat_file"],
@@ -420,6 +427,7 @@ def play(aut, C, K, mode, timeout):
 
         except subprocess.TimeoutExpired:
             print("expired")
+            timeouted[0] += 1
             return aut
 
         out = cp.stdout.splitlines()
@@ -431,7 +439,7 @@ def play(aut, C, K, mode, timeout):
             print("unsatisfiable")
             if ( tmp_mode < mode):
 
-                tmp_mode+=1
+                tmp_mode = 4
                 print("new level of simplification:", tmp_mode)
                 continue
             else:

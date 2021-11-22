@@ -19,6 +19,11 @@ def main(argv):
         "-T",
         "--timeout",
         help="Kill QBF solver after inserted number of seconds")
+    parser.add_argument(
+        "-S",
+        "--scc",
+        help="Scc optimization")
+
     args = parser.parse_args()
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
@@ -30,7 +35,15 @@ def main(argv):
     else:
         mode = int(args.mode)
 
+
+    if not args.scc:
+        scc = False
+    else:
+        scc = True
+
+
     aut = spot.automata(args.autfile)
+    timeouted = [0]
 
     for a in aut:
 
@@ -48,7 +61,7 @@ def main(argv):
                     auto = a
                 else:
                     auto = play(
-                        a, clauses_count, acc_sets_count, mode, timeout)
+                        a, clauses_count, acc_sets_count, mode, timeout, timeouted, scc)
             else:
                 auto = a
             if args.outfile:
@@ -57,6 +70,8 @@ def main(argv):
                 print_aut(auto, None, " ")
             if not spot.are_equivalent(origin, auto):
                 print("not equivalent")
+                print_aut(origin, "not_eq", "w")
+                print("timeouted:", timeouted[0])
                 return
             else:
                 print("equivalent")
@@ -67,6 +82,7 @@ def main(argv):
             print(
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
+    print("timeouted:", timeouted[0])
 
 
 if __name__ == "__main__":

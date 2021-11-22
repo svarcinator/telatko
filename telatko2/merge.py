@@ -157,7 +157,7 @@ def get_short_accs(aut, accs):
         if orig.is_cnf():
             if a.sat is None:
                 to_be_removed = []
-                new_acc = PACC_CNF(aut.get_acceptance())
+                new_acc = ACC_CNF(aut.get_acceptance())
                 for i in range(len(new_acc.formula)):
                     expr = new_acc.formula[i]
                     for z in range(len(expr)):
@@ -173,7 +173,7 @@ def get_short_accs(aut, accs):
                 new_acc.resolve_redundancy()
                 short_accs.append(new_acc)
             else:
-                new_acc = PACC_CNF(aut.get_acceptance())
+                new_acc = ACC_CNF(aut.get_acceptance())
                 new_acc.formula = []
                 new_acc.sat = a.sat
                 short_accs.append(new_acc)
