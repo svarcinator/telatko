@@ -97,7 +97,13 @@ def get_accs(aut):
         # acc = PACC(aut.get_acceptance().to_dnf()) # proc bych to z toho furt dolovala?
         if ( not weak_eval(aut, acc, scc, weak[counter])):
             acc.initial_cleanup(aut, scc)
-
+        else:
+            if scc.is_rejecting():  # all cycles in scc are rejecting
+                acc.set_sat(False)
+            else:
+                acc.set_sat(True)
+            acc.formula = []
+            
         counter += 1
 
         if acc.sat is None:

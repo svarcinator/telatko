@@ -287,6 +287,19 @@ def count_sets(sets):
         counter += 1
     return counter
 
+def max_acc_sets_in_scc(aut):
+    si = spot.scc_info(aut)
+    scc_counter = 0
+    max_acc_sets = 0
+    for scc in si:
+        current = si.acc_sets_of(scc_counter).count()
+        if (max_acc_sets < current):
+            max_acc_sets = current
+        scc_counter += 1
+    return max_acc_sets
+
+
+
 def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     formula = SATformula('&')
     #print("scc state info:" , scc_state_info)
@@ -297,7 +310,11 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     max_states = 0
     counter = 0
     scc_counter = 0
+    max_acc_sets = _in_scc(aut)
+    done = False
     for scc in (si):
+        if si.acc_sets_of(scc_counter).count() == max_acc_sets:
+            done = True
         #print("scc: ",  si.states_of(scc_counter))
         #print("marks: ", si.marks_of(scc))
         #print("used_acc_of: ", si.used_acc_of(scc))
@@ -395,7 +412,7 @@ def play(aut, C, K, mode, timeout, timeouted, scc):
         # QBF formula is written into ./sat_file
 
         if (scc):
-            acc = PACC(aut.get_acceptance().to_dnf())
+            acc = ACC_DNF(aut.get_acceptance().to_dnf())
             #print("scc")
             scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
         else:

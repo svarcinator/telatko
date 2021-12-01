@@ -23,6 +23,10 @@ def main(argv):
         "-S",
         "--scc",
         help="Scc optimization")
+    parser.add_argument(
+        "-W",
+        "--worst_SCC",
+        help="Simplify gradually just the `worst` SCC", action='store_true')
 
     args = parser.parse_args()
     if not args.autfile:
@@ -53,10 +57,24 @@ def main(argv):
             spot.cleanup_acceptance_here(a)
             a = process_automaton(a)
 
-            acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
 
-            if mode >= 2 and mode <= 4:
+            if mode == 1:
+                auto = a
+            else:
+                acc_sets_count = a.get_acceptance().used_sets().count()
+                clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
+                if acc_sets_count == 0:
+                    auto = a
+                elif args.worst_SCC:
+                    ## TODO: new idea -- gradually reduce `worst` SCC
+                    print("TODO")
+                    auto = a
+                else:
+                    auto = play(
+                        a, clauses_count, acc_sets_count, mode, timeout, timeouted, scc)
+            """
+            if mode >= 2 and mode <= 4 and not args.worst_SCC:
+
                 if acc_sets_count == 0:
                     auto = a
                 else:
@@ -64,6 +82,7 @@ def main(argv):
                         a, clauses_count, acc_sets_count, mode, timeout, timeouted, scc)
             else:
                 auto = a
+            """
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:
