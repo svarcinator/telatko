@@ -310,11 +310,16 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     max_states = 0
     counter = 0
     scc_counter = 0
-    max_acc_sets = _in_scc(aut)
+    max_acc_sets = max_acc_sets_in_scc(aut)
     done = False
     for scc in (si):
+        if done:
+            break
         if si.acc_sets_of(scc_counter).count() == max_acc_sets:
             done = True
+        else:
+            scc_counter += 1
+            continue
         #print("scc: ",  si.states_of(scc_counter))
         #print("marks: ", si.marks_of(scc))
         #print("used_acc_of: ", si.used_acc_of(scc))

@@ -1,0 +1,54 @@
+
+MODULE buffer (reset, clock, read_enable, write_enable, full, empty) 
+
+-- inputs
+--  reset  : boolean;        -- asynchronous (instant) reset
+--  clock  : boolean;        -- clock
+--  read_enable  : boolean;  -- data read request = enqueue
+--  write_enable : boolean;  -- data write request = dequeue
+
+-- outputs
+--  full   : boolean;  -- is the buffer full?
+--  empty  : boolean;  -- is the buffer empty?
+
+-- use SIZE for the maximal buffer size
+
+-- TODO ....
+VAR
+counter : 0 .. SIZE;
+
+ASSIGN
+
+init(full) := FALSE;
+init(empty) := TRUE;
+init(counter):= 0;
+
+next(counter):= case 
+		   counter != SIZE & !clock & write_enable & 
+		   (empty| !read_enable )&
+		   next(clock) & !next(reset) :  counter + 1;
+		   
+		   counter != 0 & !clock & read_enable & 
+		   (full | !write_enable )&
+		   next(clock) & !next(reset) :  counter - 1;
+		   
+		   next(reset) :  0;
+		   
+		   TRUE : counter;
+		   
+		   esac;
+
+
+next(empty):= case
+	       next(reset) : TRUE;
+	       next(counter) > 0 : FALSE;
+	       next(counter) = 0 : TRUE;
+	       esac;
+	       
+next(full):= case
+	       next(reset) : FALSE;
+	       next(counter) < SIZE : FALSE;
+	       next(counter) = SIZE : TRUE;
+	       esac;
+
+

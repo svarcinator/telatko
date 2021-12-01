@@ -1,0 +1,3 @@
+LTLSPEC
+G(full -> ((full U ((reset) | (read_enable & X(clock))))| G(full)) );
+

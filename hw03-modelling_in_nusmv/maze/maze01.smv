@@ -1,0 +1,123 @@
+#define SIZE 7
+#define INIT_POS 3
+#define G1 4
+#define G2 1
+#define G3 6
+#define K1 2
+#define K2 5
+#define K3 0
+--#define T -1
+--#define P -1
+--#define D -1
+#define C 7
+
+
+
+MODULE maze(dir, wall, locked_gate, trap, stucked, trap_warn, rusting, drier, unl_g1, k1_found, unl_g2, k2_found, unl_g3, k3_found, charging)
+
+-- TODO
+
+VAR
+robot_pos : 0.. SIZE;
+
+DEFINE
+r_position := robot_pos + 1;
+l_position := robot_pos - 1;
+
+ASSIGN
+init(trap) := FALSE;
+next(trap) := FALSE;
+init(stucked) := FALSE;
+next(stucked) := FALSE;
+init(trap_warn) := FALSE;
+next(trap_warn) := FALSE;
+init(rusting) := FALSE;
+next(rusting) := FALSE;
+init(drier) := FALSE;
+next(drier) := FALSE;
+
+
+init(robot_pos) := INIT_POS;
+init(wall):= FALSE;
+init(locked_gate) := FALSE;
+init(unl_g1) := FALSE;
+init(unl_g2) := FALSE;
+init(unl_g3) := FALSE;
+init(k1_found) := FALSE;
+init(k2_found) := FALSE;
+init(k3_found) := FALSE;
+init(charging) := FALSE;
+
+next(charging):= case
+		next(robot_pos) = C : TRUE;
+		TRUE: FALSE;
+		esac;
+		
+next(robot_pos) := case
+			
+			robot_pos < SIZE  & !next(locked_gate) & (next(dir) = r) : r_position;
+			robot_pos > 0 & !next(locked_gate) & (next(dir) = l): l_position;
+			TRUE : robot_pos;
+			esac;
+
+next(wall) := case
+	      next(dir) = u | next(dir) = d | (next(dir) = l & robot_pos = 0)
+	       | (next(dir) = r & robot_pos = SIZE) : TRUE;
+	       TRUE : FALSE;
+	       
+	       --(dir = r & robot_pos != (SIZE - 1)) : FALSE;
+	       --(dir = l & robot_pos != (0)) : FALSE;
+	       
+	       --TRUE: TRUE;
+	       esac;
+	     
+next(locked_gate) := case
+		      ( next(dir) = r & ( (r_position = G1 & !k1_found )
+		       | (r_position = G2 & !k2_found )
+		       | (r_position = G3 & !k3_found ))) 
+		      |
+		       ( next(dir) = l & ( (robot_pos - 1 = G1 & !k1_found )
+		       | (l_position= G2 & !k2_found )
+		       | (l_position = G3 & !k3_found ))) : TRUE;
+		       
+		       TRUE : FALSE;
+		       esac;
+		       
+next(k1_found):= case
+		k1_found : TRUE;
+		next(robot_pos) = K1 : TRUE;
+		TRUE : FALSE;
+		esac;
+		
+next(k2_found):= case
+		k2_found : TRUE;
+		next(robot_pos) = K2 : TRUE;
+		TRUE : FALSE;
+		esac;
+		
+next(k3_found):= case
+		k3_found : TRUE;
+		next(robot_pos) = K3 : TRUE;
+		TRUE : FALSE;
+		esac;
+		
+next(unl_g1) := case
+		next(robot_pos) = G1 : TRUE;
+		TRUE : FALSE;
+		esac;
+		
+next(unl_g2) := case
+		next(robot_pos) = G2 : TRUE;
+		TRUE : FALSE;
+		esac;
+
+next(unl_g3) := case
+		next(robot_pos) = G3 : TRUE;
+		TRUE : FALSE;
+		esac;
+		
+		       
+		       
+		       
+		       
+		       

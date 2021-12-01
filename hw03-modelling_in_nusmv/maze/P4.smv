@@ -1,0 +1,3 @@
+LTLSPEC
+G((X(unl_g1) -> k1_found) & (X(unl_g2) -> k2_found) & (X(unl_g3) -> k3_found));
+

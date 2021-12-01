@@ -1,0 +1,88 @@
+-- NOT AN OFFICIAL TEST USE AT OWN RISK PROVIDED AS IS
+-- AUTHOR: 517531
+-- This test checks that robot state doesnt change to "charging" when the robot is trapped and attempts to move to charger
+
+MODULE main
+
+VAR
+dir : {l, r, u, d};
+-- errors
+wall : boolean;       -- the direction went to a wall
+locked_gate: boolean; -- the direction went to a locked gate 
+trap : boolean;       -- robot cannot move due to a trap
+stucked :  boolean;   -- robot is stucked (due to a log rusting)
+-- warnings
+trap_warn : boolean;  -- robot is in a trap
+rusting : boolean;    -- robot is in a puddle or it has been there and it is rusting now
+drier : boolean;      -- robot is in a drier
+unl_g1 : boolean;     -- robot is in an unlocked gate 1 
+k1_found : boolean;   -- robot has found key k1
+unl_g2 : boolean;     -- robot is in an unlocked gate 2 
+k2_found : boolean;   -- robot has found key k2
+unl_g3 : boolean;     -- robot is in an unlocked gate 3 
+k3_found : boolean;   -- robot has found key k3
+charging : boolean;   -- robot is on a charging place
+
+maze_test : maze(dir, wall, locked_gate, trap, stucked, trap_warn, rusting, drier, unl_g1, k1_found, unl_g2, k2_found, unl_g3, k3_found, charging);
+
+
+LTLSPEC
+         dir=r -- step_counter 0 p2
+   & X ( dir=r -- step_counter 1 p3
+   & X ( dir=r -- step_counter 2 p4
+   & X ( dir=r -- step_counter 3 p5
+   & X ( dir=r -- step_counter 4 p6
+   & X ( dir=l -- step_counter 5 p5
+   & X ( dir=l -- step_counter 6 p4
+   & X ( dir=l -- step_counter 7 p3
+   & X ( dir=r -- step_counter 8 p4
+   & X ( dir=r -- step_counter 9 p5
+   & X ( dir=r -- step_counter 10 p6
+   & X ( dir=r -- step_counter 11 p7
+   & X ( dir=r -- step_counter 12 p8
+   & X ( dir=r -- step_counter 13 p9
+   & X ( dir=l -- step_counter 14 - still p9 
+   & X ( TRUE  -- step_counter 15
+  )))))))))))))))
+  -> (
+  -- errors
+         !wall & !locked_gate & !trap & !stucked  -- step_counter 0 p1
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 1 p2
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 2 p3
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 3 p4
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 4 p5 
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 5 p6 
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 6 p5
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 7 p4
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 8 p3
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 9 p4
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 10 p5
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 11 p6
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 12 p7
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 13 p8
+   & X ( !wall & !locked_gate & !trap & !stucked  -- step_counter 14 p9
+   & X ( !wall & !locked_gate &  trap & !stucked  -- step_counter 15 p9
+  ))))))))))))))) 
+   & 
+  -- warnings
+         !trap_warn & !rusting & !drier & !unl_g1 & !k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 0 p1
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 1 p2
+   & X ( !trap_warn & !rusting &  drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 2 p3
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 3 p4
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 4 p5
+   & X ( !trap_warn &  rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 5 p6
+   & X ( !trap_warn &  rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 6 p5
+   & X ( !trap_warn &  rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 7 p4
+   & X ( !trap_warn & !rusting &  drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 8 p3
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 9 p4
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 10 p5
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 11 p6
+   & X ( !trap_warn & !rusting & !drier &  unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 12 p7
+   & X ( !trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found &  charging  -- step_counter 13 p8
+   & X (  trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 14 p9
+   & X (  trap_warn & !rusting & !drier & !unl_g1 &  k1_found & !unl_g2 & !k2_found & !unl_g3 & !k3_found & !charging  -- step_counter 15 p9
+  )))))))))))))))
+  );
+
+
+#include "maze02.smv"

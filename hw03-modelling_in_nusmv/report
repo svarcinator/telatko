@@ -1,0 +1,11 @@
+MAZE
+
+I'm using constants for positions of keys, gates, traps, ...
+
+Variable robot_pos is current position of robot and variable puddle is position of puddle or value -1, if the puddle has been already visited. 
+Variable rusting_limit counts number of steps after visiting puddle (init value of rusting_limit is 4, it decreases with every step when robot is rusting). 
+
+
+
+
+

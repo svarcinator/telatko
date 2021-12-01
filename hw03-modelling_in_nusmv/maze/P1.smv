@@ -1,0 +1,9 @@
+
+SPEC
+EG( !wall & !locked_gate & !trap & !stucked & !trap_warn & !rusting  )
+
+
+SPEC
+EG( !wall & !locked_gate & !trap & !stucked & !trap_warn & !rusting &!drier & !unl_g1 & !unl_g2 & !unl_g3 & !k1_found & !k2_found & !k3_found & !charging )
+
+-- nevim, ktere z techto 2, ponevadz nechapu, co vsechno je brano jako warning

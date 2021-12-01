@@ -1,0 +1,3 @@
+SPEC
+AG( unl_g2 -> E[(!wall & !locked_gate & !trap & !stucked & !trap_warn & !rusting &!drier & !unl_g1  & !unl_g3 & !k1_found & !k3_found) U charging ]);
+
