@@ -22,11 +22,8 @@ def main(argv):
     parser.add_argument(
         "-S",
         "--scc",
-        help="Scc optimization")
-    parser.add_argument(
-        "-W",
-        "--worst_SCC",
-        help="Simplify gradually just the `worst` SCC", action='store_true')
+        help="Scc optimization", action='store_true')
+
 
     args = parser.parse_args()
     if not args.autfile:
@@ -38,12 +35,6 @@ def main(argv):
         mode = 1
     else:
         mode = int(args.mode)
-
-
-    if not args.scc:
-        scc = False
-    else:
-        scc = True
 
 
     aut = spot.automata(args.autfile)
@@ -58,31 +49,20 @@ def main(argv):
             a = process_automaton(a)
 
 
-            if mode == 1:
-                auto = a
-            else:
+
+            if mode >= 2 and mode <= 4:
                 acc_sets_count = a.get_acceptance().used_sets().count()
                 clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
-                if acc_sets_count == 0:
-                    auto = a
-                elif args.worst_SCC:
-                    ## TODO: new idea -- gradually reduce `worst` SCC
-                    print("TODO")
-                    auto = a
-                else:
-                    auto = play(
-                        a, clauses_count, acc_sets_count, mode, timeout, timeouted, scc)
-            """
-            if mode >= 2 and mode <= 4 and not args.worst_SCC:
 
                 if acc_sets_count == 0:
                     auto = a
                 else:
                     auto = play(
-                        a, clauses_count, acc_sets_count, mode, timeout, timeouted, scc)
+                        a, clauses_count, acc_sets_count, mode, timeout, timeouted, args.scc)
             else:
                 auto = a
-            """
+
+
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:

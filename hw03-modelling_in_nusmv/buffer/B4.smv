@@ -1,2 +1,0 @@
-LTLSPEC
-G(reset -> ((empty U (write_enable & X(clock))) | G(empty)));

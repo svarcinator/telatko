@@ -1,2 +1,0 @@
-LTLSPEC
-(SIZE > 0) -> !F(full & empty);
