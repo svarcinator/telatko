@@ -3,6 +3,7 @@ import sys
 import argparse
 import os
 
+from telatko2.classes import FormulaAtribute
 from qbf.q_main import play, print_aut
 from telatko2.playground import process_automaton
 
@@ -13,32 +14,34 @@ def main(argv):
         "-F",
         "--autfile",
         help="File containing automata in HOA format.")
-    parser.add_argument("-O", "--outfile", help="File to print output to.")
-    parser.add_argument("-L", "--mode", help="Level of simplification.")
+    parser.add_argument("-O", "--outfile", help="File to print output to.", default=None)
+    parser.add_argument("-L", "--level", help="Level of simplification.", type=int, default=1)
     parser.add_argument(
         "-T",
         "--timeout",
-        help="Kill QBF solver after inserted number of seconds")
+        help="Kill QBF solver after inserted number of seconds.", type=int, default=50)
     parser.add_argument(
         "-S",
         "--scc",
-        help="Scc optimization", action='store_true')
+        help="Use SCC optimization.", action='store_true')
+    parser.add_argument(
+        "-M",
+        "--minimized_atribut",
+        help="Acceptance condition atribute we want to minimize.", choices=['clauses', 'acc_marks', 'all'], default='clauses')
+    parser.add_argument(
+        "-Q",
+        "--qbf_solver",
+        help="Choose wchich solver is going to be used.", choices=['limboole', 'z3'], default='limboole')
 
 
     args = parser.parse_args()
+
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
-    timeout = args.timeout
-    if not args.timeout:
-        timeout = 50
-    if not args.mode:
-        mode = 1
-    else:
-        mode = int(args.mode)
-
 
     aut = spot.automata(args.autfile)
     timeouted = [0]
+    success = [False]
 
     for a in aut:
 
@@ -46,37 +49,44 @@ def main(argv):
         print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
+            """
+            acc_sets_count = a.get_acceptance().used_sets().count()
+            clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
+            auto = experiment(a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc,success )
+            """
+
+
             a = process_automaton(a)
 
-
-
-            if mode >= 2 and mode <= 4:
+            if args.level >= 2 and args.level <= 4:
                 acc_sets_count = a.get_acceptance().used_sets().count()
                 clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
+
 
                 if acc_sets_count == 0:
                     auto = a
                 else:
                     auto = play(
-                        a, clauses_count, acc_sets_count, mode, timeout, timeouted, args.scc)
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
             else:
                 auto = a
+
 
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
+            print("nyni")
+
             if not spot.are_equivalent(origin, auto):
+
                 print("not equivalent")
                 print_aut(origin, "not_eq", "w")
                 print("timeouted:", timeouted[0])
                 return
             else:
                 print("equivalent")
-
-
-
         except RuntimeError:  # too many marks
             print(
                 "Automaton has too many acceptance sets, 32 is the limit.",

@@ -103,7 +103,7 @@ def get_accs(aut):
             else:
                 acc.set_sat(True)
             acc.formula = []
-            
+
         counter += 1
 
         if acc.sat is None:
@@ -208,10 +208,6 @@ def process_automaton(aut):
 
     # simplifies acceptance condition for each scc
     short_accs, sccs = get_accs(aut)  # simplification occurs in here
-
-    # puts acceptance to shorter form(cnf or dnf)
-    #short_accs = get_short_accs(aut, accs)
-
 
     # Filters emty assceptance formulas from short_accs
     nempty_sccs, nempty_short_accs = check_emptyness(sccs, short_accs)

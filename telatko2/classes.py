@@ -83,6 +83,13 @@ class SATformula:
     def subformula_list(self):
         return self.subformula
 
+class FormulaAtribute(enum.Enum):
+    """
+        Used in q_main function play.
+        To distinguish if we are decreasing number of clauses or acceptance marks.
+    """
+    C = 1
+    K = 2
 
 class MarkType(enum.Enum):
     """Represents whether acceptance set T appears in the formula as Fin(T) or Inf(T).
@@ -318,7 +325,7 @@ class ACC_DNF(ACC):
             for con in dis:
 
                 val = eval_set(aut, con, marks_on_some_edges, marks__on_all_edges)
-                
+
                 if val == None:
                     clean_dis.append(con)
 

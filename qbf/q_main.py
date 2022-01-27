@@ -364,14 +364,101 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         q += w_quant(aut)
     SAT_output("sat_file", q, formula)
 
-def play(aut, C, K, mode, timeout, timeouted, scc):
+def resolve_formula_atributes(minimized_atribute, C, K):
+    if minimized_atribute == 'clauses':
+        #print("reducing clauses")
+
+        return FormulaAtribute.C
+    else:
+
+        return FormulaAtribute.K
+
+def minimize_clauses_experiment(aut, C, K, mode, timeout, timeouted, scc, success):
+    # automaton with reduced clauses
+    orig = spot.automaton(aut.to_str())
+    print("init: ", "C",  C, "K", K)
+    aut2 = play(aut, C, K, mode, timeout, timeouted, scc, 'clauses')
+
+    if not spot.are_equivalent(orig, aut2):
+        print("minimalizace poctu klauzuli zpusobila neekv. automat")
+
+
+    C = len(aut2.get_acceptance().to_dnf().top_disjuncts())
+    K =  aut2.get_acceptance().used_sets().count()
+    print("min clauses:", C, K)
+    if (C <= 1 or K == 0):
+        return aut
+
+
+
+    inner_edges_nums, inner_edges = get_edges(aut2)
+    scc_state_info, scc_edg = scc_info(aut2)
+    edge_dict = edge_dictionary(aut2)
+
+    C = C - 1
+    for i in range(5):
+        K += 1
+        print("Zkousime C=", C, " K=", K)
+
+        create_formula(
+            aut2,
+            edge_dict,
+            scc_edg,
+            scc_state_info,
+            inner_edges_nums,
+            C,
+            K,
+            inner_edges,
+            mode)
+
+        try:
+            cp = subprocess.run(["./qbf/limboole1.2/limboole",
+                                 "./sat_file"],
+                                universal_newlines=True,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                timeout=int(timeout))
+
+        except subprocess.TimeoutExpired:
+            print("expired")
+            timeouted[0] += 1
+            continue
+
+        out = cp.stdout.splitlines()
+        f = open("sat_evaluation", "w")
+        f.write(cp.stdout)
+        f.close()
+
+        if len(out) == 1:
+            print("unsatisfiable")
+            continue
+
+        if len(out) == 0:
+            print("sat error")
+            return aut2
+
+        variables = out[1:]
+        success[0] = True
+        print("satisfiable")
+        process_variables(aut2, variables)
+        print("Zadarilo se pridanim akc znacky zredukovat pocet klauzuli, C=", C, ", K=", K)
+        if not spot.are_equivalent(orig, aut2):
+            print("Pridanim promenne a ubranim kluzule jsme vytvorili neekv automat")
+        return aut2
+
+
+
+
+def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solver):
 
     spot.cleanup_acceptance_here(aut)
 
+
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-
+        print("nyni")
         return aut
+
     original = spot.automaton(aut.to_str())
 
     # [int] - all nums of inner edges of SCCs
@@ -382,15 +469,25 @@ def play(aut, C, K, mode, timeout, timeouted, scc):
     # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
 
-    K = K - 1  # we dont want to try what we already know
+    #K = K - 1  # we dont want to try what we already know
     tmp_mode = 2
 
+    currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
+    if currently_reduced == FormulaAtribute.K:
+        K -= 1
+    else:
+        C -= 1
+
+
     while C > 0 and K > 0:
+        print("C: ", C, ", K: ", K)
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
             #a = try_evaluate0(aut, original)
             #return a
+            print("used_sets < 1", aut.get_acceptance().used_sets().count(
+            ), aut.get_acceptance())
             return aut
 
         # dictionary {edge_num : [num of acceptance set]}
@@ -416,10 +513,6 @@ def play(aut, C, K, mode, timeout, timeouted, scc):
                 K,
                 inner_edges,
                 tmp_mode)
-
-
-
-
 
 
         try:
@@ -448,19 +541,27 @@ def play(aut, C, K, mode, timeout, timeouted, scc):
                 print("new level of simplification:", tmp_mode)
                 continue
             else:
-                return aut
+                if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
+                    currently_reduced = FormulaAtribute.C
+                    K = K + 1
+                    C = C - 1
+                    continue
+                else:
+                    return aut
 
         if len(out) == 0:
             print("sat error")
             return aut
         variables = out[1:]
         print("satisfiable")
-        #print_aut(aut, "last_equivalent", "w")
+        print_aut(aut, "last_equivalent", "w")
 
 
         process_variables(aut, variables)
-
-        K = K - 1
+        if currently_reduced == FormulaAtribute.K:
+            K = K - 1
+        else:
+            C = C - 1
 
         #return aut
 
