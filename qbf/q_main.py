@@ -453,12 +453,10 @@ def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solve
 
     spot.cleanup_acceptance_here(aut)
 
-
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-        print("nyni")
-        return aut
 
+        return aut
     original = spot.automaton(aut.to_str())
 
     # [int] - all nums of inner edges of SCCs

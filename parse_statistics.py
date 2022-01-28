@@ -36,8 +36,8 @@ def add_output(data_frame, dict):
 
 def to_string(output, mrkdwn):
     if output is not None:
-        f = open(output, 'a')
-        f.write(mrkdwn + "\n\n" )
+        f = open(output, m)
+        f.write(mrkdwn)
         f.close()
     else:
         print(mrkdwn)
@@ -88,7 +88,7 @@ def main(argv):
                     index =indices)
 
     mrkdwn = df.to_markdown()
-    #print(mrkdwn)
+    print(args.outfile)
     to_string(args.outfile, mrkdwn)
 
 
