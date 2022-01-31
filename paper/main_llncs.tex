@@ -1,0 +1,1119 @@
+\documentclass[runningheads]{llncs}
+
+% \usepackage[numbers]{natbib}
+% \renewcommand\bibsection{\section*{\refname}\small\renewcommand\bibnumfmt[1]{##1.}}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+\usepackage{hyperref}
+% \usepackage{xspace}
+% \usepackage{amsthm}
+% \usepackage{enumitem} % topsep
+
+\usepackage{tikz}
+% TikZ libraries
+\usetikzlibrary{myautomata}
+\usetikzlibrary{fit, backgrounds}
+\usetikzlibrary{extshapes}
+
+\newenvironment{nstabbing}
+  {\setlength{\topsep}{0pt}%
+   \setlength{\partopsep}{0pt}%
+   \tabbing}
+  {\endtabbing}
+
+%{{{ (La)TeX definitions
+
+\newcommand{\Nset}{{\mathbb{N}_0}}
+
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\def\Inf{\ensuremath{\mathsf{Inf}}}
+\def\Fin{\ensuremath{\mathsf{Fin}}}
+\def\ttrue{\ensuremath{\mathsf{t}}}
+\def\ffalse{\ensuremath{\mathsf{f}}}
+\def\CQ{\mathcal{C}}
+\def\BigO#1{\ensuremath{\mathcal{O}\left(#1\right)}}
+\newcommand{\B}{\texorpdfstring{\ensuremath{\mathds{B}}}{B}}
+\def\isempty{\textsc{is\_empty}\xspace}
+\def\sccsof{\textsc{SCCs\_of}\xspace}
+\def\issccempty{\textsc{is\_SCC\_empty}\xspace}
+\def\marksof{\textsc{marks\_of}\xspace}
+\def\remove{\textsc{remove}\xspace}
+\def\false{\mathit{false}}
+\def\true{\mathit{true}}
+
+\def\Mocc{M_{\mathrm{occur}}}
+\def\Mevery{M_{\mathrm{every}}}
+\newcommand{\G}{\mathbf{G}}
+\newcommand{\CA}{\ensuremath{\mathcal{A}}}
+\newcommand{\CB}{\ensuremath{\mathcal{B}}}
+\def\init{\iota}
+\def\lang{L} % FIX this
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\mA}{\mathcal{A}}
+\newcommand{\mB}{\mathcal{B}}
+\newcommand{\bscc}{\mathcal{B}}
+\newcommand{\sched}{\mathfrak{s}}
+\newcommand{\Act}{\mathit{Act}}
+\newcommand{\NP}{\textsf{NP}}
+\newcommand{\POLY}{\textsf{P}}
+\newcommand{\class}{\ensuremath{\mathcal{C}}}
+\newcommand{\finally}{\mathsf{F}}
+\newcommand{\globally}{\mathsf{G}}
+% \newcommand{\finally}{\mathbf{F}}
+% \newcommand{\globally}{\mathbf{G}}
+
+% Remove space from footnote after interpunction. Usage:
+% \punct{.}\footnote{footnotetext}
+\newlength{\spc} % declare a variable to save spacing value
+\newcommand{\punct}[1]{%
+  \settowidth{\spc}{#1}% set value of \spc variable to the width of #1 argument
+  \addtolength{\spc}{-1.8\spc}% subtract from \spc about two (1.8) of its values making its magnitude negative
+  #1% print the optional argument
+  \hspace*{\spc}% print an additional negative spacing stored in \spc after #1
+}
+
+%}}}
+
+\begin{document}
+
+%{{{ title and authors
+
+\title{Reducing Acceptance Marks \\ in Emerson-Lei Automata}
+\authorrunning{T.~Schwarzová and J. Strej\v{c}ek}
+ \author{Tereza Schwarzová \and Jan Strej\v{c}ek}
+ \institute{%
+   Masaryk University, Brno, Czech Republic\\ \email{\{xschwar3,strejcek\}@mail.muni.cz}
+ }
+
+%}}}
+
+\maketitle
+
+%{{{ abstract
+
+\begin{abstract}
+  The formalism called \emph{transition-based Emerson-Lei automata
+    (TELA)} generalizes many traditional kinds of automata over
+  infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
+  automata. Transitions in a TELA are marked with acceptance marks and
+  its accepting formula is a positive Boolean combinations of terms
+  saying that a particular mark has to be visited infinitely or
+  finitely often in an accepting run. Algorithms processing these
+  automata can be very sensitive to the number of different acceptance
+  marks. We introduce two techniques reducing the number of acceptance
+  marks in a TELA without altering its structure and the represented
+  language. One technique represents a standard approach based on
+  relations among acceptance marks in individual strongly connected
+  components of the automaton. The other technique constructs
+  \emph{quantified Boolean formula (QBF)} queries that ask a QBF
+  solver for an acceptance condition with fewer acceptance marks and
+  the placement of these marks in the automaton structure. Both
+  techniques are implemented and experiments show that the number of
+  acceptance marks in TELA produced by state-of-the-art tools
+  ltl3tela, Rabinizer~4, and SPOT can be sometimes reduced. In the
+  case of Rabinizer~4, we reduced the cummulative number of acceptance
+  marks to less than one half.
+\end{abstract}
+
+%}}}
+
+%{{{ introduction
+
+\section{Introduction}
+
+% Automata over infinite words (also known as $\omega$-automata) are now
+% used in specification, verification, analysis, monitoring, and
+% synthesis of various systems with infinite behaviour. The first and
+% the most common kind of $\omega$-automata is Büchi
+% automaton~\cite{buchi.60.clmps} introduced in 1960. As deterministic
+% Büchi automata are less expressive than nondeterministic ones,
+% deterministic $\omega$-automata are typically considered with other
+% acceptance condition like Rabin, Streett, Muller, or parity. In 1987,
+% Emerson and Lei~\cite{emerson.87.scp} introduced $\omega$-automata
+% where the acceptance condition can be an arbitrary combination of
+% acceptance primitives saying that a certain set of states should be
+% visited finitely often or infinitely often. In 2015, the same kind of
+% acceptance condition was implemented in the \emph{Hanoi omega-automata
+%   format (HOAF)}~\cite{babiak.15.cav}, with the difference that finiteness 
+
+In 1987, Emerson and Lei~\cite{emerson.87.scp} introduced automata
+over infinite words where acceptance conditions are arbitrary
+combinations of acceptance primitives saying that a certain set of
+states should be visited finitely often or infinitely often. In 2015,
+the same kind of acceptance condition was described in the \emph{Hanoi
+  omega-automata format (HOAF)}~\cite{babiak.15.cav}. The only
+difference is that the acceptance primitives talk about finitely or
+infinitely often visited acceptance marks rather than sets of states.
+Acceptance marks are placed on transitions and each mark identifies
+the set of transitions containing this mark. Hence, these automata are
+called \emph{transition-based Emerson-Lei automata (TELA)} and they
+generalize many traditional kinds of automata over infinite words
+including Büchi, co-Büchi, Rabin, Streett, Muller or parity
+automata.
+
+TELA have attracted a lot of attention during the last five years.
+Their popularity comes probably from the fact that these automata can
+often use less states than equivalent automata with simpler acceptance
+conditions. Further, algorithms handling TELA can automatically handle
+all automata with traditional acceptance conditions. TELA automata can
+be obtained for example by translating LTL formulas by
+Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
+Rabinizer~4~\cite{kretinsky.18.cav}, or
+SPOT~\cite{duret.16.atva2}. There are also some algorithms processing
+these automata, for example the emptiness check~\cite{baier.19.atva}
+or translation of TELA to parity automata~\cite{renkin.20.atva}.
+
+\todo{Nechcem do experimentu pridat Delag?}
+
+Algorithms processing TELA are often sensitive to the number of
+acceptance marks more than to other parts of the automaton. For
+example, the transformation of TELA to parity automata based on
+\emph{color appearance record}~\cite{renkin.20.atva} transforms a TELA
+with $s$ states and $m$ acceptance marks into a parity automaton with
+up to $s\cdot m!$ states. Further, the emptiness
+check~\cite{baier.19.atva} is exponential in the number of acceptance
+marks that appear in acceptance primitives saying that a mark has to
+be visited finitely often, while it is only polynomial in other
+measures of the input automaton.
+
+These observations motivate our study of techniques reducing the
+number of acceptance marks without altering the structure of the
+automaton. We present basically two reduction techniques. The first
+one is based on relations among individual transition sets defined by
+various acceptance marks in each \emph{strongly connected component
+  (SCC)}. This technique can be seen as an extension of the
+\emph{SCC-base simplifications of acceptance
+  conditions}~\cite{babiak.13.spin} designed for
+\emph{transition-based generalized Büchi automata (TGBA)} and
+implemented in SPOT. Probably the main difference between the original
+technique for TGBA and the one for TELA is in the final step when
+simplified acceptance conditions for each SCC are merged together into
+one reduced acceptance condition.
+
+The second technique is completely different. For a given TELA and
+parameters $c,m$, it produces a \emph{quantified Boolean formula
+  (QBF)} which is satisfiable if and only if there exists an automaton
+with the same structure, $m$ acceptance marks, an acceptance formula
+in disjunctive normal form with $c$ clauses, and the same set
+of accepting runs. The placement of the marks on transitions and the
+acceptance formula can be obtained from a model of the
+formula. Besides this formula, we describe also the construction of a
+simpler formula such its satisfiability implies existence of an
+automaton with the same structure, $m$ acceptance marks, and the same
+set of accepting runs, but not vice versa.
+
+We have implemented both reduction techniques in a tool called
+\texttt{telatko}. We show that the tool can reduce acceptance marks in
+automata produced by ltl3tela~\cite{major.19.atva},
+Rabinizer~4~\cite{kretinsky.18.cav}, and SPOT~\cite{duret.16.atva2}.
+While the reduction is relatively modest for TELA produced by ltl3tela
+and SPOT, it is substantial for automata produced by Rabinizer~4.
+
+\subsubsection{Related results}
+We are not aware about any existing research aimed at simplification
+of acceptance formulas of TELA or reduction of the number of its
+acceptance marks without increasing the number of states.
+
+Casares, Colcombet, and Fijalkow very recently introduced a structure
+called \emph{alternating cycle decomposition
+  (ACD)}~\cite{casares.21.icalp} which compactly represents the
+information about all accepting and non-accepting automata cycles.  We
+expect that ACD could potentialy be used to reduce the number of
+acceptance marks or to simplify the acceptance condition. However,
+such a reduction is not obvious. Moreover, the construction of ACD
+seems to be computationally expensive.
+
+\subsubsection{Structure of the paper} The next section introduces
+basic terms used in the paper. Section~\ref{sec:standard} presents the
+reduction technique based on relations among individual acceptance
+marks on each SCC. The QBF-based technique is explained in
+Section~\ref{sec:qbf}. Implementation is briefly described in
+Section~\ref{sec:experiments}, which also shows the experimental
+results. Finally, Section~\ref{sec:conclusion} suggests other
+applications of our QBF-reduction technique and closes the paper.
+
+%}}}
+%{{{ preliminaries
+
+\section{Preliminaries}\label{sec:prelim}
+
+In this section we recall the basic terms around TELA and QBF.
+
+\begin{definition}[TELA]
+  A \emph{transition-based Emerson-Lei automaton (TELA)} is a tuple
+  $\mA =(Q,M,\Sigma,q_I,\delta,\varphi)$, where
+  \begin{itemize}
+  \item $Q$ is a finite set of \emph{states},
+  \item $M$ is a finite set of \emph{acceptance marks},
+  \item $\Sigma$ is a finite \emph{alphabet},
+  \item $q_I\in Q$ is an \emph{initial state},
+  \item $\delta \subseteq Q \times \Sigma \times 2^{M} \times Q$ is a
+    \emph{transition relation}, and
+  \item $\varphi$ is the \emph{acceptance condition} constructed
+    according to the following abstract syntax equation, where $m$
+    ranges over $M$.
+    $$\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$$
+\end{itemize}
+\end{definition}
+
+%A transition $(p,a,M',q)\in\delta$ is a transition leading from state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$
+A run $\pi$ of $\mA$ over an infinite word
+$u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
+of adjacent transitions
+$\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
+$q_0=q_I$. Let $M(\pi)$ denote set of all acceptance marks that occur
+in run $\pi$ in infinitely many transitions. Run $\pi$ is
+\emph{accepting} iff it satisfies the formula $\varphi$, where $\pi$
+satisfies $\Inf(m)$ iff $m\in M(\pi)$ and $\pi$ satisfies $\Fin(m)$
+iff $m\not\in M(\pi)$. The \emph{language} of automaton $\mA$ is the
+set
+$L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
+}\mA\textrm{ over }u\}$. Two automata $\mA,\mB$ are \emph{equivalent}
+if $L(\mA)=L(\mB)$.
+% such that $\mA$ has
+% an accepting run over $u$.
+
+An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
+  (DNF)} if it is a disjunction of clauses, where each clause is a
+conjunction of some terms of the form $\Fin(m)$ or $\Inf(m)$.  Formula
+$\false$ corresponds to the disjunction of zero clauses and formula
+$\true$ is the clause with zero terms. Each acceptance formula can be
+transformed into an equivalent formula in DNF.
+
+A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
+adjacent transitions of the form
+$(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
+such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
+is called a nontrivial \emph{strongly connected component (SCC)} if
+for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
+\emph{maximal} if there is no SCC $S'$ satisfying $S\subsetneq S'$. In
+the rest of this paper, SCC always refers to a maximal SCC. Given an
+SCC $S$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
+denotes the set of all transitions between states in $S$. Further, for
+each mark $m\in M$, let $\delta_m$ denotes the set of all transitions
+marked with $m$, i.e., $\delta_m=\{(p,a,M',q)\in\delta\mid m\in
+M'\}$. The sets $\delta_m$ are called \emph{acceptance sets}.
+Finally, given an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we
+denote the set $\delta_{S,m}=\delta_S\cap\delta_m$.
+
+We often use acceptance marks $\tacc{1}{1},\tacc{2}{2},\ldots\in M$
+and we write $\Inf\tacc{4}{j}$ and $\Fin\tacc{8}{k}$ instead of
+$\Inf(\tacc{4}{j})$ and $\Fin(\tacc{8}{k})$, respectively. In our
+graphical representation of automata,
+\begin{tikzpicture}[smallautomaton,baseline=-2pt]
+  \node[state] (p) at (0,0) {$p$};
+  \node[state] (q) at (1.8,0) {$q$};
+  \path [->] (p) edge node[above,pos=.5,overlay] {$a$} node[accset,collacc8, pos=0.65] {k} node[accset,collacc4, pos=0.3] {j} (q);
+\end{tikzpicture}
+denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$.
+
+% Finaly, \emph{loop} is a path from a state $p$ to the same state.
+
+\bigskip
+
+\emph{Quantified Boolean formulas (QBFs)} are Boolean formulas
+extended with universal or existential quantification over
+propositional variables. We assume that subformulas of the form
+$\forall x.\psi$ and $\exists x.\psi$ do not contain another
+quantification of variable $x$ inside $\psi$. The semantics of
+$\forall x.\psi$ and $\exists x.\psi$ is given by equivalences
+\[
+  \begin{array}{rcl}
+    \forall x.\psi &~\equiv~& \psi[x\rightarrow\true]~\wedge~\psi[x\rightarrow\false]\\
+    \exists x.\psi &~\equiv~& \psi[x\rightarrow\true]~\vee~   \psi[x\rightarrow\false]
+  \end{array}
+\]
+where $\psi[x\rightarrow \rho]$ denotes the formula $\psi$ with all
+occurrences of $x$ simultaneously replaced by $\rho$. The equivalences
+imply that each QBF can be transformed into an equivalent Boolean
+formula. However, the size of this Boolean formula can be exponential
+in the size of the original QBF. Let $V$ be the set of all
+propositional variables. A mapping $\mu:V\rightarrow\{\true,\false\}$
+is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
+assignment of the equivalent Boolean formula. A QBF formula is
+\emph{satisfiable} iff it has a model.
+
+A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
+$\varphi = Q_{1}x_{1}...Q_{n}x_{n} . \psi$, where
+$Q_1,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
+formula.
+
+%}}}
+%{{{ standard reductions
+
+\section{Reduction based on acceptance marks relations}\label{sec:standard}
+
+This section presents a reduction technique based on relations between
+acceptance sets restricted to individual SCCs. It employs the fact
+that acceptance of a run always depends only on a single SCC, namely
+the SCC that contains the whole run except some finite prefix.
+
+Let $\mA$ be a TELA with the acceptance condition $\varphi$. We assume
+that $\varphi$ is in DNF. This technique has two steps.
+\begin{enumerate}
+\item For each SCC $S$, we make a copy $\varphi_S$ of $\varphi$ and
+  simplify it according to relations between acceptance sets
+  restricted to $\delta_S$. 
+\item We collect the simplified acceptance conditions
+  $\varphi_{S_1},\ldots,\varphi_{S_k}$ of all SCCs and merge them into
+  one acceptance condition $\varphi'$. Additionally, we sometimes add
+  acceptance marks to all transitions of some SCCs to make the
+  resulting automaton with acceptance formula $\varphi'$ equivalent to
+  the original automaton.
+\end{enumerate}
+
+% Let $\mathcal{A}$ be an original automaton and let $\psi$ be an
+% acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has
+% an infinite suffix that takes place within one SCC $S_{i}$. Thus the
+% evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can
+% optimize the acceptance condition for each SCC separately. This
+% optimization consists of removing redundant terms from acceptance
+% condition and relabeling of acceptance marks on the transitions. The
+% state and transition structure of the SCC does not change. This way we
+% obtain set of simplified acceptance conditions that we merge into new
+% acceptance formula $\psi'$. The automaton with relabeled transitons
+% and new acceptance condition $\psi'$ we denote $\mathcal{A}'$.
+% Finally, we ensure that automaton $\mathcal{A'}$ is equivalent to the
+% original automaton $\mathcal{A}$.
+
+\subsection{Simplification of $\varphi_S$ for an SCC $S$}\label{ssec:step1}
+Recall that $\varphi_S$ is in DNF. Hence, we can represent it as a set
+$\varphi_S=\{D_1,\ldots,D_k\}$ of disjunctive clauses.
+
+
+
+
+
+Since formula $\psi_{i}$ is in DNF, we can represent it as a set of disjuncts $\overline{\psi_{i}} = \{D_1, D_2, \ldots D_k\}$.
+
+Let $D_{k} \in \overline{\psi_{i}}$ be a disjunct of formula $\overline{\psi_{i}}$ and $C_{j} \in D_{k}$ a conjunct of disjunct $D_{k}$. Furthermore let  $\tacc{0}{i}, \tacc{4}{j}, \tacc{8}{k}, \tacc{2}{l} \in M$ be distinct acceptance marks that occur in $\mathcal{A}$.
+
+In the next section, some properties of an automaton allow us to substitute a Boolean value $\true$ or $\false$ for a particular term of the formula $\psi_i$.
+The consequences of this substitution are divided into a number of cases. We represent it on the set-format of formula we just defined.
+
+\begin{itemize}
+    \item If $C_{j}$ is substituted by $\true$, the conjunct is omitted from $D_{k}$. Thus $D_{k} = D_{k} \setminus \{C_{j}\}$.
+    \item If $C_{j}$ is substituted by $\false$, the conjunct causes that the whole $D_{k}$ evaluates to $\false$. Thus $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{k}\}$.
+
+\end{itemize}
+
+That being said, we can define the reduction techniques. 
+
+\subsubsection{Acceptance formula modifications\\} 
+\label{subsection:acc_modif}
+Since we optimize for each SCC separately, the acceptance formula corresponding to SCC $S_{i}$ can contain terms with acceptance marks that are not present on the transitions of $S_{i}$.
+Let $\tacc{8}{k} \in M$ be an acceptance mark that is not present on any edge of $S_{i}$. Then any term that contains this acceptance mark in $\overline{\psi_{i}}$ can be immediately substituted with a boolean value and thus removed from $\overline{\psi_{i}}$.
+\medskip
+
+Therefore acceptance mark $\tacc{8}{k}$ is not visited in any run of $S_{i}$ and thus every term in form $\Fin\tacc{8}{k}$ is substituted with $\true$ and every term $\Inf\tacc{8}{k}$ is substituted with $\false$.
+
+On the contrary, let $\tacc{4}{j}$ be an acceptance mark that is present on every transition of $S_{i}$. That means that at least one transition with $\tacc{4}{j}$ is visited infinitely often by a run of $\mathcal{S_{i}}$. Thus every term $\Fin\tacc{4}{j}$ is substituted by $\false$ and every term in form $\Inf\tacc{4}{j}$ is substituted by $\true$. 
+
+\subsubsection{$\Inf$ conjuncts\\}
+\label{subsection:simpl_inf}
+Reduction of a conjunct of $\Inf\tacc{8}{k}$ form  is based on the inclusion of the sets of edges labeled with $\tacc{8}{k}$ and set of edges labeled with $\tacc{4}{j}$. If all transitions that contain an acceptance mark $\tacc{8}{k}$ also contain $\tacc{4}{j}$, we can remove $\Inf\tacc{4}{j}$ from all disjuncts, where it occurs together with $\Inf\tacc{8}{k}$. 
+More formally, if the following conditions hold:
+\begin{itemize}
+    \item $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$
+    \item $\Inf\tacc{8}{k}, \Inf\tacc{4}{j} \in D_{k}$
+\end{itemize}
+then we can we can substitute $\Inf\tacc{4}{j}$ with Boolean value $\true$. 
+This modification does not change the language because it does not affect accepting runs of $S_{i}$. The transitions can create an accepting run that has the potential to satisfy $D_{k}$ only if they are labeled with both  $\tacc{8}{k}$  and $\tacc{4}{j}$. Since $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$, one can notice that that if a run satisfies $\Inf\tacc{8}{k}$ then  $\Inf\tacc{4}{j}$ is satisfied as well. Therefore if we remove $\Inf \tacc{4}{j}$ from $\overline{\psi_{i}}$, this modification does not affect the language.
+
+\subsubsection{$\Fin$ conjuncts\\}
+Similarly as in previous section, this reduction is based on inclusion.
+If following conditions hold:
+\begin{itemize}
+    \item $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$
+    \item $\Fin\tacc{8}{k}, \Fin\tacc{4}{j} \in D_{k}$
+\end{itemize}
+then we can we can substitute $\Fin\tacc{8}{k}$ with boolean value $\true$. This modification does not change the language because from if $\tacc{4}{j}$ is visited finitely often, then also $\tacc{8}{k}$ is visited finitely often. 
+\medskip
+
+We can merge two conjuncts into one if the conjuncts always occur in the same disjuncts in $\Fin$ form. We can do so regardless of the position of the acceptance marks that are contained in the conjuncts. 
+If the following condition is met:
+\begin{itemize}
+    \item $\forall D_{k}: \Fin\tacc{8}{k} \in D_{k} \Longleftrightarrow \Fin\tacc{4}{j} \in D_{k}$
+\end{itemize}
+We introduce a fresh acceptance mark $\tacc{2}{l}$, such that $Z(\tacc{2}{l}) = Z(\tacc{8}{k}) \cup Z(\tacc{4}{j})$.
+ Finally, we can update $D_{k}$:
+\begin{align*}
+    D_{k} = (D_{k} \setminus \{ \Fin\tacc{8}{k}, \Fin\tacc{4}{j} \}) \cup \{\Fin\tacc{2}{l}\}
+\end{align*}
+
+This update basically means that $\Fin\tacc{8}{k}, \Fin\tacc{4}{j}$ are substituted by $\true$ and new conjunct $\Fin\tacc{2}{l}$ is added to $D_{k}$. The acceptance mark $\tacc{2}{j}$ is placed on every edge of the SCC $S_{i}$ that is labeled with $\tacc{8}{k}$ or $\tacc{4}{j}$.
+This modification does not change the language because it does not change the acceptance runs of $S_{i}$. It only relabels the acceptance marks on edges that can be seen finitely often. 
+
+
+
+\subsubsection{$\Fin \land \Inf$ conjuncts\\}
+There are two cases when we can reduce one of the pair of $\Inf\tacc{0}{i}$ and $\Fin\tacc{2}{l}$ conjuncts.
+
+At first, if every transition labeled with  $\tacc{0}{i}$ is also labeled with $\tacc{2}{l}$, the conjunction of $\Inf\tacc{0}{i} \land \Fin\tacc{2}{l}$ is never $\true$ because every run that visits $\tacc{2}{l}$ also visits $\tacc{0}{i}$. Therefore we can reduce the whole disjunct $D_{k}$.
+If the following conditions are met:
+\begin{itemize}
+    \item $Z(\tacc{0}{i}) \subseteq Z(\tacc{2}{l})$
+    \item $\Inf\tacc{0}{i}, \Fin\tacc{2}{l} \in D_{k}$
+\end{itemize}
+We substitute the whole disjunct $D_{k}$ for $\false$. In other words $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{K}\}$.
+
+Finally we can simplify $\overline{\psi_{i}}$, if the edges labeled with $\tacc{0}{i}$ and edges labeled with $\tacc{2}{l}$ are complementary.
+More formally if:
+\begin{itemize}
+    \item  $\Inf\tacc{0}{i}$ and $\Fin\tacc{2}{l} \in D_{k}$
+    \item $Z(\tacc{0}{i}) \cap Z(\tacc{2}{l}) = \emptyset \land Z(\tacc{0}{i}) \cup Z(\tacc{2}{l}) = \delta_{S_{i}} $
+\end{itemize}
+Then we can substitute $\true$ for $\Inf\tacc{0}{i}$.
+This reduction does not change the language because if during a run of $S_{i}$ all transitions labeled with $\tacc{2}{l}$ are visited only finitely often, then necessarily at least one transition labeled with $\tacc{0}{i}$ is visited infinitely often. Therefore removing $\Inf\tacc{0}{i}$ from $\overline{\psi_{i}}$ does not affect the language, since the validity of $\Fin\tacc{2}{l}$ implies the validity of $\Inf\tacc{0}{i}$.
+
+\subsection{Merge of $\psi_{i}$}
+After applying reduction techniques from the previous section, each $S_{i}$ has its own acceptance condition $\psi_{i}$. The goal of this section is to merge these acceptance conditions into one formula $\psi'$ with emphasis on obtaining a formula with the minimal number of acceptance sets.
+
+At first, the algorithm finds $\psi_{i}$ with the greatest number of disjuncts and states it as a base of the new acceptance condition $\psi'$. Now the algorithm continues by the successive merging of $\psi'$ with the unmerged formula $\psi_{i}$ that has the greatest number of disjuncts. This repeats until all formulae $\psi_{i}$ are merged. This process updates the form of $\psi'$ until it reaches its final form. The process of merging two formulae consists of two phases. In the first phase a suitable pairing of disjuncts is found and in the second phase, these disjuncts are merged.
+
+\begin{enumerate}
+	\item Let $\psi'$ denote the future acceptance condition of $\mathcal{A}'$ and $\psi_{i}$ is the acceptance condition of $S_{i}$ chosen to be merged. Then the algorithm uses \emph{linear sum assignment} to determine which disjunct of $\psi_{i}$ is merged with which disjunct of $\psi'$. The process of using \emph{linear sum assignment} and the pairing procedure is described in detail in work by T. Šťastná \cite{stastna.19.bc}.
+    \item Let $D_{K} \in \overline{\psi_{i}}$ be a disjunct paired with $D_{L} \in \overline{\psi'}$. All conjuncts of $D_{L}$ are initially labeled as unused. Now the algorithm maps every conjunct $C_{k} \in D_{K}$ to a suitable conjunct $C_{l} \in D_{L}$ and labels $C_{l}$ as used. \footnote{The indexes differ to emphasize the fact that they are not equal.} A conjunct $C_{l}$ is suitable for $C_{k}$ is it is on the same type ($\Fin$ or $\Inf$), it is labeled as unused. If no suitable $C_{l}$ is found, the algorithm adds $C_{k}$ to disjunct $D_{L}$ and marks it as used.
+\end{enumerate}
+
+
+In an acceptance mark $m_{l} \in M$ occurs in $\psi'$ in more than one conjunct, we need to check whether all of these conjuncts are mapped to conjuncts form $\psi_{i}$ with the same acceptance mark $m_{k} \in M$. If not, we resolve this conflict by replacing all additional occurrences of $m_{l}$ with fresh acceptance mark $m_{n}$ and we place $m_{n}$ on the exact transition of $\mathcal{A}'$ where $m_{l}$ is placed.
+Finally, in the end, the algorithm removes every acceptance mark that is not present in $\psi'$ from the edge of $\mathcal{A}$.
+
+\medskip
+
+\begin{example}
+Consider $\overline{\psi'} =  \{ \{ \Fin\tacc{0}{0}, \Inf\tacc{1}{1} \} , \{\Fin\tacc{0}{0} \} \}$ \\ and $\overline{\psi_{i}} = \{  \{\Fin\tacc{4}{4} \}, \{ \Fin\tacc{2}{2}, \Inf\tacc{3}{3} \} \} $. We obtain the pairing $(1,2), (2,1)$, meaning that the first disjunct of $\overline{\psi_{i}}$ is merged wit the second disjunct of $\overline{\psi'}$ and second disjunct of $\overline{\psi_{i}}$ is merged with the first disjunct of $\overline{\psi'}$. Then $\Fin\tacc{0}{0}$ is mapped to $\Fin\tacc{2}{2}$, $\Inf\tacc{1}{1} $ is mapped to $\Inf\tacc{3}{3}$ and $\Fin\tacc{0}{0}$ is again mapped to $\Fin\tacc{4}{4}$ which causes a conflict. Therefore we need to replace the second occurrence of $\tacc{0}{0}$ with fresh mark $\tacc{5}{5}$. The set-representation of formula $\psi'$ after merging is $\psi' =  \{ \{ \Fin\tacc{0}{0}, \Inf\tacc{1}{1} \} , \{\Fin\tacc{5}{5} \} \}$.
+
+\end{example}
+
+Unfortunately, sometimes when the optimal mapping was not found, the procedure produces an automaton with a more complex acceptance condition than the acceptance condition of the input automaton. Therefore we propose and implement an optimization, which prevents such a behavior and in general, produces smaller acceptance condition than the original one.
+
+\begin{itemize}
+    \item The selection of base of $\psi'$ is based on two keys. The primary key is cardinality (number of clauses) of $\overline{\psi_{i}}$, the secondary key is cardinality of clauses (number of terms in clause).
+    \item We order the disjunct in every $\overline{\psi_{i}}$ in descending order, where the key is the cardinality of a particular disjunct.
+    \item The DNF conversion of the input acceptance condition can lead to an exponential blowup of the formula, where some acceptance marks occur more than once. Since the reduction of acceptance sets is basically denoting the redundant ones as $\true$ or $\false$, we can as well easily obtain simplified acceptance formula in CNF (we simply denote the same acceptance sets as $\true$ or $\false$ as we did in DNF). According to the shape of the input acceptance condition, we choose the suitable (shorter) normal form and perform the merging algorithm on it.
+\end{itemize}
+By choosing the CNF over DNF in the cases where CNF is more natural (shorter), we prevent the formula to contain some acceptance marks more than once (at least, we do not create them by conversion of $\psi$ to DNF). This way, we prevent adding new acceptance marks to the formula when resolving conflicts of acceptance marks which leads to better results. If the original formula contains an acceptance mark that is present in more than one disjunct, then by ordering the disjuncts in every $\overline{\psi_{i}}$, the \emph{linear sum assignment} returns more convenient pairing. Meaning that if \emph{linear sum assignment} finds two equal assignments, it respects the order and the disjuncts with the  acceptance mark that occurs more than once are paired with disjuncts that also contain acceptance mark that occurs more than once.
+
+\begin{example}
+	Consider an automaton $\mathcal{A}$ in Figure \ref{fig:L1_before}. In this example, we demonstrate the simplification procedure described in Section \ref{section:simplification} and obtain simplified acceptance conditions $\psi_{i}$ for each SCC $S_{i}$. The simplified acceptance conditions $\overline{\psi_{i}}$ are displayed in the set-format we introduced earlier because we make use of it afterward during the merge. Then we merge these formulae into the acceptance condition of the simplified automaton $\mathcal{A}'$.
+We enumerate the SCCs $S_{1}, S_{2}, S_{3}$. (The indices correspond with the numbers inside the states in Figure \ref{fig:L1_before}.) And we assign an accepting condition $\psi_{1}$ to $S_{1}$, $\psi_{2}$ to $S_{2}$ and $\psi_{3}$ to $S_{3}$.
+    \begin{enumerate}
+	    \item We simplify $\psi_{1}$ according to the placement of acceptance marks on the edges in $S_{1}$. At first we notice, that the formula $\overline{\psi_{1}}$ contains acceptance marks that are not present on the edges of $S_{1}$. Therefore modify $\overline{\psi_{1}}$ as described in Subsection \ref{subsection:acc_modif}. We substitute $\true$ for $\Fin\tacc{3}{3}$ and $\false$ for $\Inf\tacc{1}{1}$ and $\Inf\tacc{0}{0}$. (This substitution deletes the whole disjunct $D_{1}$.) Then we notice that the acceptance marks are in a position which allows us to perform the simplification described in first part of subsection 3.1.4. We substitute $\true $ for $\Inf\tacc{4}{4}$ and obtain the final form of $\overline{\psi_{1}} = \{\{ \Fin\tacc{2}{2}\} \}$.
+	    \item Similarly as in previous case, we notice that acceptance marks $\tacc{2}{2}$, $\tacc{3}{3}$ and $\tacc{4}{4}$ are not present on the edges of $S_{2}$. Therefore we substitute $\true$ for both $\Fin\tacc{2}{2} \text{ and } \Fin\tacc{3}{3}$ and $\false$ for $\Inf\tacc{4}{4}$ (and thus remove the whole disjunct $D_{2}$).  Then we use the procedure described in Subsection \ref{subsection:simpl_inf} and remove $\Inf\tacc{1}{1}$ from the disjunct $D_{1}$ and obtain $\overline{\psi_{2}} = \{ \{\Inf\tacc{0}{0}\} \}$.
+        \item Finally, we yet again remove marks that are not present in $S_{3}$ and perform the simplification described in subsection 3.1.3. We substitute $\true $ for $\Fin\tacc{2}{2} \text{ and } \Fin\tacc{3}{3}$ and add new term $\Fin\tacc{5}{5}$ into $D_{2}$ and place $\tacc{5}{5}$ on the edges that are labeled with $\tacc{2}{2}$ or $\tacc{3}{3}$. The simplified acceptance condition is $\overline{\psi_{3}} = \{\{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4}\}\}$.
+    \end{enumerate}
+
+	Now we proceed to the merge of the formulae of the SCCs $\psi_{i}$. As a base of the new acceptance condition $\psi'$ we choose the formula $\psi_{3}$ because it has the highest number of disjuncts compared to the other formulae $\psi_i$, so $\overline{\psi'}=\{ \{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4} \}\}$. Now we merge  $\psi_{1}$ and $\psi_{2}$ with $\psi'$. The order is in this particular case irrelevant because $\overline{\psi_{1}}$ has the same number of disjuncts as $\overline{\psi_{2}}$ (and both disjuncts have the same number of conjuncts). So we merge $\overline{\psi_{1}}$ at first because of its lower index. Since both $\overline{\psi'}$ and $\overline{\psi_{1}}$ have only one disjunct, the only possible pairing that \emph{linear sum assignment 
+    } can give us is $(0,0)$, meaning that $\{ \Fin\tacc{2}{2}\}$ is merged with $\{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4}\}$. Then we need to map an unused conjunct  $\Fin\tacc{5}{5}$ to a conjunct of the same type which is $\Fin\tacc{2}{2}$. Similarly in case of $\overline{\psi_{2}}$ we map $\Inf\tacc{4}{4}$ on $\Inf\tacc{0}{0}$. This way we produce $\mathcal{A}'$ displayed in Figure  \ref{fig:L1_middle} with the acceptance condition $ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$. Observe that the automaton $\mathcal{A}'$ is not equivalent to the original $\mathcal{A}$. For example in Figure \ref{fig:L1_middle} is the highlighted loop not accepting but in the original automaton in Figure \ref{fig:L1_before} the loop accepting is. To reach the equivalence between the two automata, we need to \emph{restore equivalence} which is described in the next section.
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[flabel] at (2,5) {$( \Inf\tacc{0}{0} \land \Inf\tacc{1}{1}) \lor (\Fin\tacc{2}{2} \land \Fin\tacc{3}{3} \land \Inf\tacc{4}{4})$};
+
+			\node[state, initial] (x) at (0,0) {0};
+			\node[state] (y) at (2,2) {1};
+			\node[state] (z) at (2,-1.5) {2};
+			\node[state] (w) at (5,-1.5) {3};
+
+			\path[->]
+				(x) edge[]  (y)
+				(x) edge[]  (z)
+				(z) edge[] (w)
+				
+            	
+            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
+            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
+            	(z) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc1] {1}(z)
+            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc0, pos=0.6] {0} node[accset,collacc1, pos=0.4] {1}(z)
+            	
+            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
+            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc3] {3}(w)
+            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc2] {2}(w)
+            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
+            	
+            	(y) edge[loop, in = 75, out = 105, looseness=6] node[accset,collacc4] {4}(y)
+            	(y) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc4] {4}(y)
+            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc2] {2} (y)
+            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc2] {2}(y)
+            	
+            	
+			;
+		\end{tikzpicture}
+    \caption{TELA before simplification Level 1}
+    \label{fig:L1_before}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[flabel] at (2,5) {$ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$};
+
+			\node[state, initial] (x) at (0,0) {0};
+			\node[state] (y) at (2,2) {1};
+			\node[state] (z) at (2,-1.5) {2};
+			\node[state] (w) at (5,-1.5) {3};
+
+			\path[->]
+				(x) edge[]  (y)
+				(x) edge[]  (z)
+				(z) edge[] (w)
+				
+            	
+            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
+            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
+            	(z) edge[loop, in = 70, out = 110, looseness=12]  (z)
+            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4} (z)
+            	
+            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
+            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
+            	
+            	(y) edge[loop, in = 75, out = 105, looseness=6, color=red] (y)
+            	(y) edge[loop, in = 72, out = 108, looseness=9] (y)
+            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc5] {5} (y)
+            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc5] {5}(y)
+            	
+            	
+			;
+		\end{tikzpicture}
+    \caption{TELA after simplification and merging in Level 1}
+    \label{fig:L1_middle}
+\end{figure}
+
+\subsection{Restoring equivalence}
+Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might change the language, so it is no longer equivalent to the language recognized by the original automaton $\mathcal{A}$. 
+ By now, each SCC $S_{i}$ is adjusted to the acceptance condition $\psi_{i}$ which might be different than $\psi'$. 
+ Therefore, for each SCC we need to restore equivalence with the new acceptance condition $\psi'$.
+ The idea is that the only terms of $\psi'$ that can affect accepting runs on SCC $S_{i}$ are the ones that have been mapped on some terms in $\psi_{i}$. From now on, we refer to them as \emph{used terms}. We need to make sure that the other terms (the ones that have not been mapped on any term of $\psi_{i}$) can't affect any accepting run of $\mathcal{A}'$. From now on, we call these terms \emph{unused terms}.  We influence the evaluation of the  \emph{unused terms} in the following way:
+\begin{itemize}
+     \item If we want to make term in the $\Fin$ form always $\false$, we place it's acceptance mark on every edge of the SCC.
+     \item If we want to make term in the $\Inf$ form always $\true$, we place it's acceptance mark on every edge of the SCC.
+\end{itemize}
+ Keep in mind that by now, any acceptance mark that is not in $\psi'$ is not present on any edge of $\mathcal{A}'$. Therefore any $\Fin$ term is already always $\true$ if its acceptance mark is not present on any edge of the SCC. Dually, $\Inf$ term is already always $\false$ if it is not present on any edge of the SCC.
+\medskip
+ Now we distinguish the cases when $\psi'$ is in DNF or $\psi'$ is in CNF. 
+\begin{itemize}
+     \item If $\psi'$ is in DNF, we need to make $\false $ every disjunct that does not contain any \emph{used term}. Further, every \emph{unused term} that occurs in the same disjunct as any \emph{used term} needs to be made $\true$. 
+     \item Dually, if $\psi'$ is in CNF, every conjunct that does not contain any \emph{used term} needs to be made $\true$ and every \emph{unused term} that occurs in a conjunct with any \emph{used term} needs to be made $\false$.  
+     
+\end{itemize}
+ 
+\begin{example}
+	Consider the example from the Figure \ref{fig:L1_middle}, where the DNF acceptance condition $\psi' = (\Fin\tacc{5}{5} \lor \Inf\tacc{4}{4})$ and the acceptance condition of SCC $S_{1}$ $\psi_{1} = (\Fin\tacc{2}{2})$. The term $\Fin\tacc{5}{5}$ is mapped to $\Fin\tacc{2}{2}$. Then we need to enforce that the \emph{unused term} $\Inf\tacc{4}{4}$ has no effect on the evaluation of $\psi'$ by the run with the infinite suffix contained within the SCC $S_{1}$. Otherwise the result will not be equivalent (see the highlited loop in Figure \ref{fig:L1_middle}). Therefore we make term $\Inf\tacc{4}{4}$ $\true$ by adding $\tacc{4}{4}$ on every edge of the SCC $S_{i}$. The result can be seen in Figure \ref{fig:L1_done}.
+\end{example}
+ 
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[flabel] at (2,5) {$ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$};
+
+			\node[state, initial] (x) at (0,0) {0};
+			\node[state] (y) at (2,2) {1};
+			\node[state] (z) at (2,-1.5) {2};
+			\node[state] (w) at (5,-1.5) {3};
+
+			\path[->]
+				(x) edge[]  (y)
+				(x) edge[]  (z)
+				(z) edge[] (w)
+				
+            	
+            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
+            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
+            	(z) edge[loop, in = 70, out = 110, looseness=12]  (z)
+            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4} (z)
+            	
+            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
+            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
+            	
+            	(y) edge[loop, in = 75, out = 105, looseness=6] node[accset,collacc4] {4} (y)
+            	(y) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc4] {4}(y)
+            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc4, pos=0.4] {4} node[accset,collacc5, pos=0.6] {5}(y)
+            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4, pos=0.4] {4} node[accset,collacc5, pos=0.6] {5}(y)
+            	
+            	
+			;
+		\end{tikzpicture}
+    \caption{Equivalent TELA after simplification Level 1}
+    \label{fig:L1_done}
+\end{figure}
+
+%}}}
+%{{{ QBF-based reduction 
+
+\section{QBF-based reduction}\label{sec:qbf}
+
+The aim of this section is to create a QBF-formula for given $n$ that guarantees the existence of equivalent acceptance condition of a given automaton with $n$ acceptance marks. 
+\smallskip
+
+Let $\mathcal{A}$ with the acceptance condition $\psi$ be an original automaton on the input. Let $\mathcal{A}'$ denote automaton with simplified acceptance condition $\psi'$ equivalent to the original automaton $\mathcal{A}$. We encode $\psi$ and the placement of acceptance marks into QBF  $\varphi$.
+
+Let $\varphi$ be a QBF formula in \emph{prenex normal form}. Formula $\varphi$
+is composed of quantified prefix $\overrightarrow{Q}$ and three subformulae $\varphi_{O}, \varphi_{N} $ and $\varphi_{C}$. The exact shape of the formula is $\varphi = \overrightarrow{Q} . \  \varphi_{C} \implies ( \varphi_{O} \Longleftrightarrow \varphi_{N})$. 
+Subformula $\varphi_{O}$ expresses properties of $\psi$. Subformula $\varphi_{N}$ expresses properties of $\psi'$, namely the number of acceptance marks and a shape of $\psi'$. Before we describe the role of $\varphi_{C}$, we need to introduce \emph{relevant set}.
+
+\smallskip
+
+Evaluation of a run of $\mathcal{A}$ is dependent on set of edges that are contained infinitely within the run. The set of these edges is from now on referred to as \emph{relevant set}, since only these edges are relevant for the evaluation of $\psi$. The \emph{relevant set} is a subset of $\delta_{S_{i}}$ for some SCC $S_{i}$ and any two edges from the \emph{relevant set} are connected by a sequence of edges that also belong to the \emph{relevant set}. The purpose of subformula $\varphi_{C}$ is to describe some properties of \emph{relevant sets}. For each level of simplification, $\varphi_{C}$ describes these properties more specifically. Naturally, the more we specify these properties, the more complex the formula $\varphi_{C}$ is. 
+
+\smallskip
+
+Afterwards the formula $\varphi$ is created, we use a QBF-solver to find a model of $\varphi$. If no such model exists ($\varphi$ is UNSAT), we know that automaton $\mathcal{A}'$ with $n$ acceptance marks and equivalent to $\mathcal{A}$ does not exist. Otherwise, we use the model of $\varphi$ for decoding the automaton $\mathcal{A}'$. The structure of $\mathcal{A}'$ remains the same as the structure of $\mathcal{A}$. The only thing we change is the acceptance condition $\psi'$ and the placement of acceptance marks on the edges. 
+
+
+
+\subsection{Motivation}
+Based on the fundamentals given in the previous section, the simplification Level 1 is based on a relationship between acceptance sets of an automaton. To achieve finer simplification levels, the relation between the inner structure of the automaton and its acceptance condition needs to be taken into consideration.
+
+As the acceptance condition and the inner structure differ for every specific automaton, finding algorithmic ways of reducing acceptance marks would be complicated.
+Instead, we encode the given automaton into a QBF-formula and let the solver find the redundant marks for us.
+
+\subsection{Encoding}
+ In this section we propose encoding of the relevant parts of a given automaton into QBF-formula.
+\subsubsection{Intuition}
+The goal of the procedure is to find acceptance condition for a particular automaton with less acceptance marks. Whilst doing that, we need to ensure that the new automaton stays equivalent to the original automaton because the algorithm not only changes the acceptance condition it also changes the placement of acceptance marks on the edges. To do so, we need to ensure that every run on $\mathcal{A}'$ is evaluated the same way as run on $\mathcal{A}$ (these two automata have the same structure).
+
+Since we work with transition-based automata, the evaluation of an acceptance condition is dependent on the edges.
+Intuitively we want formula $\varphi$ to say that for every \emph{relevant set}, the acceptance condition $\psi'$ is evaluated as $\true$ $\iff$ $\psi$ is evaluated as $\true$. Unfortunately, to identify the exact edges that belong to the \emph{relevant set} of a run is not trivial, since we need to take into consideration every infinite suffix of every run on $\mathcal{A}$. Instead we let the formula $\varphi$ say that for every \emph{selection of edges} the acceptance condition $\psi'$ is evaluated as $\true$ $\iff$ $\psi$ is evaluated as $\true$. For now the \emph{selection of edges} can contain any edges of the automaton. Later we restrict the \emph{selection of edges} as we force it to have some properties of \emph{relevant set}.
+
+To express this in the QBF formula, we need to introduce variables that represent edges of the automaton. 
+
+Let us enumerate set of edges $\delta$. Every edge of the automaton is represented by variable $e_{i}$, where the index corresponds with the enumeration, thus $e_{i}$ represents the edge $t_{i} \in \delta$. If such a variable is evaluated as $\true$, it means that the edge is contained in the \emph{selection of edges}. Analogously if a variable $e_{i}$ is evaluated as $\false$, it means that the edge is not contained in the \emph{selection of edges}.
+
+\smallskip
+
+If we want to consider every possible \emph{selection of edges}, we need to consider every possible evaluation of every variable that represents an edge.
+
+\todo{tohle bych odstranila}
+\begin{example}
+   Let $t_{1}, t_{2} \in \delta$ be the edges of the automaton from the Figure \ref{fig:elval_of_edges}. Since the automaton has two edges, we get four possible evaluation of variables representing the edges.
+    \begin{enumerate}
+        \item $e_{1}$ is $\true \land e_{2}$ is $\true \Longleftrightarrow t_{1}, t_{2}$ are in the \emph{selection of edges}.
+        \item $e_{1}$ is $\true \land e_{2}$ is $\false \Longleftrightarrow t_{1}$ is in the \emph{selection of edges} and $t_{2}$ is not in the \emph{selection of edges}.
+        \item $e_{1}$ is $\false \land e_{2}$ is $\true \Longleftrightarrow t_{1}$ is not in the \emph{selection of edges} and $t_{2}$ is in the \emph{selection of edges}.
+        \item $e_{1}$ is $\false \land e_{2}$ is $\false \Longleftrightarrow t_{1}, t_{2}$ are not in the \emph{selection of edges}.
+    \end{enumerate}
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[state, initial] (z) at (0,0) {};
+
+			\path[->]
+			
+            	(z) edge[loop, in = 70, out = 110, looseness=6] node [above, scale=0.7] {1} (z)
+            	(z) edge[loop, in = 68, out = 112, looseness=10] node [above, scale=0.7] {2} (z)
+			;
+		\end{tikzpicture}
+    \caption{TELA with enumerated edges}
+    \label{fig:elval_of_edges}
+\end{figure}
+
+
+Hereby the expressive power of quantified Boolean formula comes to use. If we universally quantify every variable $e_{i}$ that represents an edge $t_{i} \in \delta$, then we consider the situation when $t_{i}$ is contained in the \emph{selection of edges} and the situation when $t_{i}$ is not contained in the \emph{selection of edges}. 
+
+That being said, we can proceed to the encoding of some information about automaton into the QBF-formula $\varphi$. As mentioned before, the formula $\varphi$ expresses that for every \emph{selection of edges}, the acceptance condition $\psi$ is evaluated as $\true$ $\mathit{iff}$ the acceptance condition $\psi'$ is evaluated as true. 
+
+The subformula $\varphi_{O}$ encodes the shape of the acceptance condition $\psi$ and information which edges are labeled with which acceptance marks. The evaluation of $\varphi_{O}$ depends purely on the evaluation of variables that represent edges of the automaton. 
+It is encoded in such way that the subformula $\varphi_{O}$ is satisfied iff the edges of \emph{selection of edges} satisfy $\psi$. The details of $\varphi_{O}$ encoding are described in Subsection \ref{subsection:original}.
+
+\smallskip
+
+The subformula $\varphi_{N}$ contains information about the number of acceptance marks we want in the new acceptance formula $\psi'$. Further, it contains free variables. The model of these free variables gives us the information about the shape of $\psi'$ and the placement of acceptance marks on the edges of $\mathcal{A}'$. The details of $\varphi_{N}$ encoding are described in Subsection \ref{subsection:new}.
+
+The quantification of all variables that represent the edges of the automaton ensures that we consider every possible \emph{selection of edges}, as described in Section \ref{subsection:quant_pref}. 
+\begin{center}
+    $\forall \{ e_{1}, \ldots, e_{|\delta|}\} . ( \varphi_{O} \Longleftrightarrow \varphi_{N} ) $
+\end{center}
+However, one can clearly notice that some edges will never be visited infinitely often in the same run. (For example, when some of the edges occur in different strongly connected components than the others.) In other words, these edges will never belong to any \emph{relevant set} together. Therefore it is possible to eliminate every evaluation of QBF, where variables representing such edges are evaluated as $\true$. It is natural to express this constrain as an implication. Let $\varphi_{C}$ be a formula describing that the \emph{selection of edges} has a potential be a \emph{relevant set}. The QBF representation is:
+\begin{center}
+    $\forall \{ e_{1}, \ldots, e_{|\delta|}\} . \varphi_{C} \implies (\varphi_{O} \Longleftrightarrow \varphi_{N})$
+\end{center}
+The matter of eliminating various combinations of edges is described in more detail in Subection \ref{subsection:connection}. 
+
+\subsubsection{Variables}
+In this section, we describe the syntax and intended semantics of variables, parameters, and auxiliary letters used in this section.
+Hereby is the overview of the parameters used when building the formula:
+\begin{itemize}
+    \item K -- The number of acceptance marks in $\psi'$.
+    \item C -- the number of clauses in formula $\psi'$.
+\end{itemize}
+
+These parameters are derived from the original automaton $\mathcal{A}$. As the algorithm iterates (see Subection \ref{subsection:procedure} )  the parameter $K$ decreases.
+
+\smallskip
+
+The auxiliary letters have the following function:
+\begin{itemize}
+    \item $k$ -- the number of particular acceptance mark
+    \item $c$ -- the number of particular clause
+    \item $i$ -- the number of particular edge 
+\end{itemize}
+
+Hereby is the overview of the variables used when building the QBF formula $\varphi$ :
+\begin{itemize}
+    \item $$f_{i,k} = \begin{cases}
+    1& \text{edge }t_{i} \text{ is labeled with the acceptance mark }k\\
+    0& \text{else}
+\end{cases}$$
+\item $$p_{c,k} = \begin{cases}
+    1& \Inf(k) \text{ is in the clause }c\\
+    0& \text{else}
+\end{cases}$$
+\item $$n_{c,k}= \begin{cases}
+    1& \Fin(k) \text{ is in the clause }c\\
+    0& \text{else}
+\end{cases}$$
+\item $$e_{i} \;= \begin{cases}
+    1& \text{The edge } t_{i} \text{ is in the \emph{selection of edges} }\\
+    0& \text{else}
+\end{cases}$$
+\end{itemize}
+
+\subsection{QBF decoding}
+After we build $\varphi$, we use QBF-solver to find satisfying assignment of variables. If such a valuation exists, we can build a new automaton $\mathcal{A}'$ with the same structure and fewer acceptance marks. This new automaton is equivalent to the original one $\mathcal{A}$ -- this is guaranteed by the QBF-formula $\varphi$. 
+There are two possible outcomes from the QBF-solver:
+\begin{enumerate}
+    \item $\varphi$ is UNSAT -- a model of $\varphi$ does not exist. That means that the acceptance condition of $\mathcal{A}$ cannot be simplified for given C and K. Thus we return automaton $\mathcal{A}$ and the information that $\mathcal{A}$ is the automaton with the simplest acceptance condition possible.
+    \item $\varphi$ is SAT -- QBF-solver provides (returns) a model of unquantified variables. Namely to $p_{c, k},n_{c,k} \text{ and } f_{i,k}, \text{ for each }1 \leq c \leq C, 1 \leq k \leq K, 1 \leq i \leq |\delta|$.
+    Firstly, we decode the variables $f_{i,k}$ and use them to identify new placement of the acceptance marks. Specifically, we create a new automaton $\mathcal{A}'$ with the same structure as $\mathcal{A}$. Then  we add acceptance mark $\tacc{5}{k}$ on edge $t_{i}$ for every $f_{i,k}$ variable evaluated as $\true$. 
+    
+    The new acceptance condition of automaton $\mathcal{A}'$ is then build from variables $p_{c,k}$ and $n_{c,k}$. The second part of $\varphi_{N}$ was encoded to produce new acceptance formula in DNF. (See the alternation between Boolean operators  in order $\lor, \land$ in Section \ref{subsection:new}.) Thus the shape of the new acceptance condition is set as DNF skeleton, and we simply add terms according to the evaluation of variables. If $p_{c,k}$ is $\true$, we add term $\Inf\tacc{5}{k}$ to the disjunct $c$. Similarly, if $n_{c,k}$ is $\true$, then we add $\Fin\tacc{5}{k}$ to the disjunct $c$. This way, we process every variable that QBF-solver gives us and produce the new automaton $\mathcal{A}'$
+    equivalent to the original one.
+    
+\end{enumerate}
+
+\subsection{Quantified prefix}
+\label{subsection:quant_pref}
+The aim of the quantified prefix in formula $\varphi$ is to consider every possible selection of edges. As mentioned in the previous sections, edge $t_{i} \in \delta$ belongs to the \emph{selection of edges} if the variable $e_{i}$ that represents the edge $t_{i}$ is evaluated as $\true$. Therefore if we want to consider every possible \emph{selection of edges}, we need to consider every evaluation of the variables representing edges. We use a universal quantifier to express this. The universal quantifier states that the formula has to hold for both evaluations of the quantified variable.
+
+The QBF prefix that expresses the universal quantification for every variable representing an edge has the following shape:
+\begin{align*}
+    \overrightarrow{Q} = \forall\{e_{1}, \ldots ,e_{|\delta|} \}
+\end{align*}
+
+The advantage of QBF is that it is able to express a statement in shorter formula then if we tried to express the statement in standard Boolean formula with the use of conjunction.
+
+
+\begin{example}
+Consider the QBF $\theta = \forall e_{1} \forall e_{2} . (e_1 \lor e_2) $. The QBF $\theta $ transformed to standard Boolean formula is $\theta' = (e_{1} \lor e_{2}) \land (  e_{1} \lor \lnot e_{2}) \land  (  \lnot e_{1} \lor e_{2}) \land  (  \lnot e_{1} \lor \lnot e_{2}) .$
+\end{example}
+
+
+\subsection{Original acceptance formula}
+\label{subsection:original}
+
+
+
+As mentioned before, the satisfiability of $\varphi_{O}$ is purely resultant of assessment of $e_{i}, 1 \leq i \leq |\delta|$ variables representing edges in automaton.
+
+Let us enumerate the edges of the original automaton $\mathcal{A}$ and let $Z(m), m \in M$ be the set of edges labeled with mark $m$. 
+The encoding of original acceptance condition terms into $\varphi_{O}$ is defined as follows:
+%%davat tam rovnitko nebo nejak sipku??
+\begin{align*}
+    &\varphi(\Inf(m))=\bigvee\limits_{t_{i} \in Z(m)} e_{i}\\
+    &\varphi(\Fin(m)) = \bigwedge\limits_{t_{i} \in Z(m)} \lnot e_{i}
+\end{align*}
+\begin{example}
+
+Consider the automaton in Figure \ref{fig:oficial_acc}. The set $Z_{0} = \{t_3, t_2\},\, Z_{1} = \{t_1\}$, where $t_{1}, t_{2}, t_{3} \in \delta$. Thus the encoded $\varphi_{O} = e_1 \land (\lnot e_2 \land \lnot e_3)$. Therefore if variable $e_{1}=\true$, $e_{2}=\false$ and $e_{3}=\false$, acceptance formula is $\true$.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+\node[cstate, initial] (g) {};
+\node[flabel, above] at (0, 1.5) {$\Fin\taccsq{0}{0}\land\Inf\tacc{1}{1}$};
+%
+\path[->]
+    (g) edge[loop, in=330, out=30, looseness=6]node[right, pos=0.4, scale=0.8] {$1$} node[accset,collacc1, pos=0.6] {1}(g)
+	(g) edge[loop, in=80, out=140, looseness=6] node[above, pos= 0.4, scale=0.8] {$2$} node[accsquare, collacc0, pos=0.6]{0}(g)
+	(g) edge[loop, in=220, out=280, looseness=6] node[below, pos=0.6, scale=0.8] {$3$} node[accsquare, collacc0, pos=0.4] {0} (g)
+	;
+\end{tikzpicture}
+    \caption{TELA with edges labeled with their numbers}
+    \label{fig:oficial_acc}
+\end{figure}
+
+\end{example}
+
+\subsection{New acceptance formula}
+\label{subsection:new}
+The new acceptance formula $\varphi_{N}$ determines the shape of the future acceptance condition of automaton, and the assignment of variables used in $\varphi_{N}$ determines new positions of acceptance marks on the transitions.
+
+The formula $\varphi_{N}$ is divided into two parts.
+The first part of the formula (4.1) expresses a simple constrain that the acceptance set that occurs in one clause cannot be in $\Inf$ and simultaneously in $\Fin$ form.
+
+The second part (4.2) of $\varphi_{N}$ is divided into two subformulas. The first subformula expresses that if the term $\Inf(k)$ is present in clause $c$, then at least one edge of the \emph{selection of edges} needs to be labeled with the acceptance mark $k$.
+
+Similarly, the second subformula implies that if the term $\Fin(k)$ is present in clause $c$, then none of the \emph{selected edges} can be labeled with the acceptance mark $k$.
+
+
+Using the variables presented in previous sections, we encode $\varphi_{N}$:
+\begin{align}
+    \varphi_{N} = & \bigwedge\limits_{1 \leq c \leq C}\;\bigwedge\limits_{1 \leq k \leq K} (\lnot p_{c,k} \lor \lnot n_{c,k}) \; \land \\
+    &\bigvee\limits_{1 \leq c \leq C} \; \bigwedge\limits_{1 \leq k \leq K} \Bigg[\big(  p_{c, k} \implies \bigvee\limits_{t_{i} \in \delta}(f_{i,k} \land e_{i})  \big) \land \\& \;\;\;\quad\quad\quad\quad\quad\quad\big(  n_{c, k} \implies \bigwedge\limits_{t_{i} \in \delta}(\lnot f_{i,k} \lor \lnot e_{i})  \big)\Bigg]
+\end{align}
+
+Observe the alternation of $\lor \land$ from the second part of the formula (4.2). This alternation determines that the formula $\psi'$ is in DNF. 
+
+\subsection{Connection formula}
+\label{subsection:connection}
+The connection formula distinguishes the remaining two levels of simplification. Previously we denoted it as $\varphi_{C}$.
+
+Formula $\varphi_{C}$ defines requirements on the edges that are together in \emph{selection of edges}. These requirements are based on some properties of these edges. The more restrictive these requirements are, the more properties of \emph{relevant sets} are possessed by the \emph{selection of edges}. 
+In other words, formula $\varphi_{C}$ holds if the \emph{selection of edges} has the required property. If not, the formula $\varphi_{C}$ is $\false$, and then the whole formula $\varphi$ is trivially satisfied. Formula $\varphi_{C}$ consists of two parts $\varphi_{C_{1}}$ and $\varphi_{C_{2}}$.
+
+The first part expresses the requirement that the \emph{selection of edges} is \emph{continuous}. Loosely said, this means that if a transition from \emph{selection of edges} enters some state $q$ then another transition that belongs to the \emph{selection of edges} exits the state $q$. This holds in the opposite direction as well. Thus if a transition from \emph{selection of edges} exits some state $q$ then another transition that belongs to the \emph{selection of edges} enters the state $q$. This is naturally expressed by equivalence. 
+Note that if the selected transition is a self-loop, the destination and the source of the edge is the same state.
+
+The Boolean formula for the described statement:
+\begin{center}
+    $\varphi_{C_{1}}=\bigwedge\limits_{q \in Q} \Bigg( ( \bigvee\limits_{t_{i} \in \delta \cap \{ q \} \times  \Sigma \times  2^M \times Q} e_i ) \Longleftrightarrow( \bigvee\limits_{t_{j} \in \delta  \cap \ Q \times  \Sigma \times 2^M \times \{q\}} e_{j} ) \Bigg)$
+\end{center}
+
+\begin{example}
+   Consider the state $q$ in Figure \ref{fig:inNout} this part of formula is $(e_1 \lor e_2) \Longleftrightarrow (e_3 \lor e_4 \lor e_5)$.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+        \node[state] (q) at (0, 0) {$q$};
+	
+
+	    \path[->]
+		(q) edge node[above, pos=0.4, scale=0.8] {$4$} ++(1.5, 0)
+		(q) edge node[above, pos=0.4, scale=0.8] {$5$} ++(1.3, 1)
+		(q) edge node[above, pos=0.4, scale=0.8] {$3$} ++(1.3, -1)
+	;
+	\path[<-]
+	(q) edge node[above, pos=0.6, scale=0.8] {$2$} ++(-1.3, -0.5)
+	(q) edge node[above, pos=0.6, scale=0.8] {$1$} ++(-1.3, 0.5)
+	;
+    \end{tikzpicture}
+    \caption{State $q$ and its entering and exiting edges}
+    \label{fig:inNout}
+\end{figure}
+\end{example}
+
+
+Even though we ensured that the selected transitions create continuous paths, the paths might not be connected. 
+
+\begin{example}
+Consider the automaton in Figure \ref{fig:continuousNotConnected}. The transitions $t_1$ and $t_2$ are loops (the simplest cycles), but are not connected (each is located in different SCC). Thus $\{ t_{1}, t_{2}\}$ is not a \emph{relevant set}.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[cstate, initial] (i) at (0, 0) {};
+			\node[cstate] (j) at (2.5, 1) {};
+			\node[cstate] (k) at (2.5, -1) {};
+			\path[->]
+			
+			(i) edge  (k)
+			(i) edge (j)
+			(j) edge[loop right, draw=red] node[right] {$1$} (j)
+			(k) edge[loop right, draw=red] node[right] {$2$} (k)
+				
+		;
+    \end{tikzpicture}
+    \caption{Not connected cycles}
+    \label{fig:continuousNotConnected}
+\end{figure}
+\end{example}
+ 
+The second part of $\varphi_{C}$ specifies the properties of \emph{relevant set} that the edges that belong together to \emph{selected edges} need to have. We divided these properties into two levels Level 2 and Level 3, all described in ensuing sections.
+
+
+\subsubsection{SCC accuracy}
+The SCC accuracy corresponds with the Level of simplification 2. At this level, the formula specifies that the edges from one \emph{selection of edges} belong to the same SCC.
+ Thus straightforwardly translated into QBF formula:
+\begin{center}
+    $\varphi_{C_{2}} = \bigvee\limits_{\delta_{S_{i}} \subseteq \delta}\Bigg( ( \bigvee\limits_{t_{i} \in \delta_{S_{i}}} e_i ) \land  ( \bigwedge\limits_{t_{j} \in \delta \setminus \delta_{S_{i}}} \lnot e_j  ) \Bigg)$
+\end{center}
+
+
+Finally, the connection formula is the conjunction of the two parts:
+\begin{center}
+    $\varphi_{C} = \varphi_{C_{1}} \land \varphi_{C_{2}}$.
+\end{center}
+
+\begin{example}
+This example works as a motivation for simplification Level 3. For simplification Level 2, edges number $1$ and number $3$ in Figure \ref{fig:connected_motivation} can be in the same \emph{selection of edges} because they are placed in the same SCC. Obviously, since they are not connected, they cannot form \emph{relevant set}. Therefore we can specify a new level of simplification -- Level 3, which forces all edges from the \emph{selection of edges} to be cycles.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+    \node[state, initial] (g) {$0$};
+    \node[state, right=2cm of g](q){$1$};
+    %
+    \path[->, auto]
+    (g) edge[bend right] node[below, scale=0.8] {$2$}(q)
+    (q) edge[bend right]node[above, scale=0.8] {$4$} (g)
+    (q) edge[loop, in=65, out=115, looseness=10, draw=red] node[ scale=0.8] {$3$}(q)
+    (g) edge[loop, in=65, out=115, looseness=10, draw=red] node[scale=0.8] {$1$}(g)
+	;
+
+\end{tikzpicture}
+        
+    \caption{Motivation for simplification L3}
+    \label{fig:connected_motivation}
+\end{figure}
+
+\end{example}
+
+\subsubsection{CYCLES accuracy}
+The simplification Level 2 ensures that \emph{selection of edges} is placed in one SCC, but we can go further and specify that \emph{selection of edges} is in fact a \emph{relevant set}.
+
+The intuition by simplification Level 3 is that the states of an automaton are  divided into two groups -- the states that belong to the group of \emph{selected states} and the states do not belong to the group of \emph{selected states}. Then we require that the states that belong to the same group are connected. We consider three possible scenarios that can occur while the states are divided into these two groups:
+\begin{enumerate}
+    \item The source of edge $t_{i}$ is in different group than the destination of edge $t_{i}$.
+    \item Source and destination of edge $t_{i}$ are in the \emph{selected states}.
+    \item Source and destination of edge $t_{i}$ are not in \emph{selected states}.
+\end{enumerate}
+Cases two and three do not violate the requirement that all connected states need to be in one group. Case one is a little more complicated. If an edge has a source in \emph{selected states} and destination not in the \emph{selected states}, we need to secure that the sequence of the edges returns to \emph{selected states}. In other words, there exists another edge that has a source in the not \emph{selected states} and destination in the \emph{selected states}. (Dually the other way around.)
+
+In order to express this in the QBF-formula we introduce a new set of quantified variables $\{ w_{1}, \ldots , w_{|Q|}$. The variables have the following semantics:
+\begin{align*}
+    w_{q} = \begin{cases}
+    1& \text{state } q \in Q \text{ is in the \emph{selected group}}\\
+    0& \text{else}
+    \end{cases}
+\end{align*}
+Since we want to ensure that for every \emph{selection of edges} (for every evaluation of variables that represent the edges) there exist such a groups we update the quantified prefix  $\overrightarrow{Q}$ in following way:
+\begin{align*}
+    \overrightarrow{Q} = \forall \{ e_{1}, \ldots,  e_{|\delta|}\} \exists \{ w_{1}, \ldots, w_{|Q|}\}
+\end{align*}
+
+\smallskip
+\todo{neoptimalni}
+Since we want the statement to hold for every \emph{selection of edges}, we place the existentially quantified variables $\{w_{1}, \ldots, w_{|Q|} \}$ behind the universally quantified variables $\{e_{1}, \ldots, e_{|\delta|} \} $.
+At first we update the quantified prefix:
+\begin{align*}
+    \overrightarrow{Q} = \forall \{ e_{1}, \ldots,  e_{|\delta|}\} \exists \{ w_{1}, \ldots, w_{|Q|}\}
+\end{align*}
+
+And then we can create the $\varphi_{C}$ formula:
+\begin{align*}
+    \varphi_{C} =  \Bigg[ &\bigwedge\limits_{\substack{t_{i} \in \{q\}  \times \Sigma \times 2^M \times \{ r \}, \\ q \in Q, r \in Q}} \Bigg( e_{i} \implies (w_{q} \land w_{r}) \Bigg) \lor \\
+    &  \bigwedge\limits_{\substack{t_{i} \in \{q\}  \times \Sigma  \times 2^M \times \{ r \}, \\ q \in Q, r \in Q}} \Bigg( e_{i} \implies (\lnot w_{q} \land \lnot w_{r}) \Bigg) \lor \\ \Bigg( &\bigvee \limits_{\substack{t_{i} \in \{q\} \times \Sigma \times 2^M  \times \{ r \}, \\ q \in Q, r \in Q}} ( e_{i} \land w_{q} \land \lnot w_{r} )  \land \bigvee \limits_{\substack{t_{i} \in \{q\}  \times \Sigma \times 2^M \times \{ r \}, \\ q \in Q, r \in Q}} (e_{i} \land \lnot  w_{q} \land  w_{r}) \Bigg) \Bigg]
+\end{align*}
+
+\begin{example}
+Figure \ref{fig:cycles_sensitivity} displays an example of an automaton reduced by Level 4.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+
+
+    \node[state, initial] (g) {$0$};
+
+    \node[flabel] at (1.5, 2.5){$ \Fin\tacc{0}{0} \land \Inf\tacc{1}{1} \land \Inf\tacc{2}{2}$};
+    \node[state, right=2cm of g](q){$1$};
+
+    \path[->, auto]
+    (g) edge[bend right] node [accset,collacc0, pos=0.5]{0}node [below, pos=0.2, scale=0.8] {$2$}(q)
+    (q) edge[bend right] node[above, pos=0.8, scale=0.8] {$4$}(g)
+    (q) edge[loop, in=75, out=105, looseness=8]node[left, pos=0.1, scale=0.8]{5} (q)
+    (q) edge[loop, in=70, out=110, looseness=12] node[accset,collacc1] {1}node[left, pos=0.2, scale=0.8]{6} (q)
+    (g) edge[loop, in=75, out=105, looseness=8] node[accset,collacc2] {2} node[left, pos=0.1, scale=0.8]{1}(g)
+    (g) edge[loop, in=70, out=110, looseness=12] node[accset,collacc2, pos=0.4] {2} node[accset,collacc1, pos=0.7] {1} node[left, pos=0.2, scale=0.8]{3}(g)
+	;
+	
+	\node[state, initial, right=4cm of g] (o){$0$};
+
+    \node[flabel] at (6.7, 2.5){$ \Fin\tacc{0}{0} \land \Inf\tacc{3}{3}$};
+    \node[state, right=2cm of o](p){$1$};
+
+    \path[->, auto]
+    (o) edge[bend right] node [accset,collacc0, pos=0.5]{0}(p)
+    (p) edge[bend right](o)
+    (p) edge[loop, in=75, out=105, looseness=8] (p)
+    (p) edge[loop, in=70, out=110, looseness=12] (p)
+    (o) edge[loop, in=75, out=105, looseness=8] (o)
+    (o) edge[loop, in=70, out=110, looseness=12] node[accset,collacc3] {3}(o)
+
+    
+	;
+
+\end{tikzpicture}
+        
+    \caption{TELA reduced with the CYCLES sensitivity}
+    \label{fig:cycles_sensitivity}
+\end{figure}
+\end{example}
+
+Similarly as in the previous section the connection formula is the conjunction of the two parts:
+\begin{align*}
+    \varphi_{C} = \varphi_{C_{1}} \land \varphi_{C_{2}}.
+\end{align*}
+
+\subsection{Simplification procedure}
+\label{subsection:procedure}
+
+Now we describe our simplification algorithm taking as input an arbitrary TELA $\mathcal{A}$ with an acceptance condition $\psi$, required level of simplification $L$ and timeout period $T$.
+\begin{enumerate}
+    \item Convert acceptance condition $ \psi$ to DNF.
+    \item Apply the algorithm for simplification Level 1 described in Section \ref{sec:standard} on $\mathcal{A}$.
+    \item If $L = 1$ return automaton $\mathcal{A}$.
+     \item The initial value of $C$ is the number of clauses in $\psi$. Similarly, the initial value of $K$ is the number of acceptance sets of $\psi$ decreased by 1.
+    \item Encode $\mathcal{A}$ into QBF formula $\varphi$ according to the required level of simplification $L$.
+    \item Run a QBF-solver on $\varphi$ for $T$ seconds.
+    \begin{enumerate}
+        \item If the QBF-solver evaluates $\varphi$ as UNSAT, return automaton $\mathcal{A}'$.
+        \item If the timeout $T$ expires before the QBF-solver evaluates $\varphi$, return automaton $\mathcal{A}'$.
+        \item If the QBF-solver evaluates $\varphi$ as SAT. Decode the assignment into next TELA $\mathcal{A}'$.
+        \begin{enumerate}
+            \item If $K=1$, try to reduce $\varphi$ to $\true$ or $\false$, the simplest form of acceptance condition and return $\mathcal{A}$.
+            \item Decrease $K$ by 1 and go to (b).
+        
+    \end{enumerate}
+        
+    \end{enumerate}
+\end{enumerate}
+
+\todo{kde je optimalni misto, kam napsat:}
+For simplicity, we do not display letters on the edges of the automata in Figures. We can afford to omit them because they are not important for our simplification techniques. 
+
+
+
+
+\begin{itemize}
+\item obecny popis konstrukce formule
+\item (level 3)
+\item level 4
+\end{itemize}
+
+%}}}
+%{{{ implementation and experimental evaluation
+
+\section{Implementation and experimental evaluation}\label{sec:experiments}
+
+%}}}
+%{{{ conclusion
+
+\section{Conclusions}\label{sec:conclusion}
+
+chceme sem napsat, ze QBF-based reduction se da pouzit napr. k
+nalezeni akceptacni formule s $c$ klauzulemi a $m$ znackami v CNF,
+pripadne k nalezeni ekvivalentniho paritniho automat s danou maximalni
+paritou $p$ a stejnou strukturou.
+
+%}}}
+
+%\bibliographystyle{abbrvnat}
+\bibliographystyle{plain}
+\bibliography{mc}
+
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% End:
