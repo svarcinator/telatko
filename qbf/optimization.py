@@ -3,7 +3,8 @@ from telatko2.classes import *
 from qbf.formula import *
 import copy
 
-def get_mark_edg( aut, edges, edges_translator):
+
+def get_mark_edg(aut, edges, edges_translator):
     """
         Returns: dictionary {acc_mark : [real_edge_numbers]}
     """
@@ -17,7 +18,8 @@ def get_mark_edg( aut, edges, edges_translator):
             else:
                 dict[m] = [aut.edge_number(e)]
         counter += 1
-    return  dict
+    return dict
+
 
 def one_fin2(clause, acc_set, edges_translator):
     """
@@ -46,6 +48,7 @@ def one_fin2(clause, acc_set, edges_translator):
     impl.add_subf(conjunction)
     return impl
 
+
 def one_inf2(clause, acc_set, edges_translator):
     """
 
@@ -55,7 +58,6 @@ def one_inf2(clause, acc_set, edges_translator):
 
     :return:
     """
-
 
     c = str(clause)
     k = str(acc_set)
@@ -94,22 +96,26 @@ def new_formula2(edges_translator, C, K):
         clauses_disj.add_subf(sets_conj)
     return clauses_disj
 
+
 def least_one_edge2(T_max):
     f = SATformula("|")
     for i in range(1, T_max + 1):
         f.add_subf("e_" + str(i))
     return f
 
+
 def get_key(my_dict, val):
     for key, value in my_dict.items():
         if val == value:
             return key
+
 
 def disjunct_formula2(edges, edge_translator):
     disjunct = SATformula("|")
     for e in edges:
         disjunct.add_subf(SATformula("e_" + (str(edge_translator[e]))))
     return disjunct
+
 
 def in_n_out2(scc_info, edge_translator):
 
@@ -118,18 +124,20 @@ def in_n_out2(scc_info, edge_translator):
         src = src_dst[0]
         dst = src_dst[1]
         eq = SATformula("<->")
-        #print(edge_translator)
+        # print(edge_translator)
         eq.add_subf(disjunct_formula2(src, edge_translator))
         eq.add_subf(disjunct_formula2(dst, edge_translator))
         conjunct.add_subf(eq)
 
     return conjunct
 
+
 def count_edges(edges):
     counter = 0
     for e in edges:
         counter += 1
     return counter
+
 
 def laso_part(scc_info, edge_translator, L, inner_edges, aut):
     laso = SATformula("&")
@@ -138,20 +146,19 @@ def laso_part(scc_info, edge_translator, L, inner_edges, aut):
     laso.add_subf(least_one)
     laso.add_subf(in_out)
     if L == 3:
-        #laso.add_subf(in_out)
+        # laso.add_subf(in_out)
         neg = negate_part2(aut, inner_edges, edge_translator)
         laso.add_subf(neg)
         return laso
 
     return laso
 
+
 def quantify_e(T):
     formula = ""
     for i in range(1, T + 1):
         formula += "# e_" + str(i)
     return formula
-
-
 
 
 def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
@@ -168,10 +175,7 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
     #print("scc sets:", scc_sets)
     tmp_acc = copy.deepcopy(acc)
 
-
     tmp_acc.clean_up2(list(scc_sets.sets()))
-
-
 
     #print("cleaned acc: ", tmp_acc)
     dnf_formula = SATformula('|')
@@ -190,7 +194,7 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
                             str(edge_translator[edge])))
             else:
                 #print("con num:", con.num)
-                #print(edge_dict)
+                # print(edge_dict)
                 new_shape = SATformula('&')
                 for edge in edge_dict[con.num]:
                     new_shape.add_subf(
@@ -204,12 +208,12 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
 
     return dnf_formula
 
+
 def least_one(T):
     f = SATformula("|")
-    for i in range(1, T+1):
+    for i in range(1, T + 1):
         f.add_subf("e_" + str(i))
     return f
-
 
 
 def connection2(aut, inner_edges, edge_translator):
@@ -220,7 +224,8 @@ def connection2(aut, inner_edges, edge_translator):
         if src != dst:
 
             impl = SATformula("->")
-            impl.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+            impl.add_subf(SATformula("e_" +
+                                     str(edge_translator[aut.edge_number(e)])))
             eq = SATformula("<->")
             eq.add_subf(SATformula("w_" + str(src)))
             eq.add_subf(SATformula("w_" + str(dst)))
@@ -235,7 +240,8 @@ def positive2(aut, inner_edges, edge_translator):
     dis = SATformula("|")
     for e in inner_edges:
         con = SATformula("&")
-        con.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+        con.add_subf(SATformula(
+            "e_" + str(edge_translator[aut.edge_number(e)])))
         con.add_subf(SATformula("w_" + str(e.src)))
         dis.add_subf(con)
     if dis.is_empty():
@@ -247,7 +253,8 @@ def negative2(aut, inner_edges, edge_translator):
     dis = SATformula("|")
     for e in inner_edges:
         con = SATformula("&")
-        con.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+        con.add_subf(SATformula(
+            "e_" + str(edge_translator[aut.edge_number(e)])))
         con.add_subf(SATformula("!w_" + str(e.src)))
         dis.add_subf(con)
     if dis.is_empty():
@@ -282,6 +289,7 @@ def negate_part2(aut, inner_edges, edge_translator):
         return con
     return None
 
+
 def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
     """
     QBF CYCLES ve statistikach
@@ -295,7 +303,6 @@ def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
     Returns:
 
     """
-
 
     main_dis = SATformula("|")
 
@@ -315,7 +322,8 @@ def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
 
         # part one
         impl = SATformula("->")
-        impl.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+        impl.add_subf(SATformula(
+            "e_" + str(edge_translator[aut.edge_number(e)])))
         c = SATformula("&")
         c.add_subf(SATformula("w_" + src))
         c.add_subf(SATformula("w_" + dst))
@@ -324,7 +332,8 @@ def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
 
         # part two
         impl2 = SATformula("->")
-        impl2.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+        impl2.add_subf(SATformula(
+            "e_" + str(edge_translator[aut.edge_number(e)])))
         c1 = SATformula("&")
         c1.add_subf(SATformula("!w_" + src))
         c1.add_subf(SATformula("!w_" + dst))
@@ -334,14 +343,16 @@ def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
         # part three
         # dis 1
         c2 = SATformula("&")
-        c2.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+        c2.add_subf(SATformula(
+            "e_" + str(edge_translator[aut.edge_number(e)])))
         c2.add_subf(SATformula("w_" + src))
         c2.add_subf(SATformula("!w_" + dst))
         dis1.add_subf(c2)
 
         # dis 2
         c3 = SATformula("&")
-        c3.add_subf(SATformula("e_" + str(edge_translator[aut.edge_number(e)])))
+        c3.add_subf(SATformula(
+            "e_" + str(edge_translator[aut.edge_number(e)])))
         c3.add_subf(SATformula("!w_" + src))
         c3.add_subf(SATformula("w_" + dst))
         dis2.add_subf(c3)
@@ -354,8 +365,7 @@ def laso_scc_optimized(aut, inner_edges, scc_info, edge_translator):
     main_dis.add_subf(con3)
     laso = SATformula("&")
 
-
     laso.add_subf(main_dis)
     laso.add_subf(in_n_out2(scc_info, edge_translator))
-    
+
     return laso

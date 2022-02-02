@@ -14,8 +14,17 @@ def main(argv):
         "-F",
         "--autfile",
         help="File containing automata in HOA format.")
-    parser.add_argument("-O", "--outfile", help="File to print output to.", default=None)
-    parser.add_argument("-L", "--level", help="Level of simplification.", type=int, default=1)
+    parser.add_argument(
+        "-O",
+        "--outfile",
+        help="File to print output to.",
+        default=None)
+    parser.add_argument(
+        "-L",
+        "--level",
+        help="Level of simplification.",
+        type=int,
+        default=1)
     parser.add_argument(
         "-T",
         "--timeout",
@@ -27,12 +36,11 @@ def main(argv):
     parser.add_argument(
         "-M",
         "--minimized_atribut",
-        help="Acceptance condition atribute we want to minimize.", choices=['clauses', 'acc_marks', 'all'], default='clauses')
+        help="Acceptance condition atribute we want to minimize.", choices=['clauses', 'acc_marks', 'all'], default='acc_marks')
     parser.add_argument(
         "-Q",
         "--qbf_solver",
         help="Choose wchich solver is going to be used.", choices=['limboole', 'z3'], default='limboole')
-
 
     args = parser.parse_args()
 
@@ -41,7 +49,6 @@ def main(argv):
 
     aut = spot.automata(args.autfile)
     timeouted = [0]
-    success = [False]
 
     for a in aut:
 
@@ -49,19 +56,21 @@ def main(argv):
         print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
-            """
-            acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
-            auto = experiment(a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc,success )
-            """
 
 
             a = process_automaton(a)
 
-            if args.level >= 2 and args.level <= 4:
-                acc_sets_count = a.get_acceptance().used_sets().count()
-                clauses_count = len(a.get_acceptance().to_dnf().top_disjuncts())
+            acc_sets_count = a.get_acceptance().used_sets().count()
+            clauses_count = len(
+                a.get_acceptance().to_dnf().top_disjuncts())
 
+
+            if args.level >= 2 and args.level <= 4:
+                """
+                acc_sets_count = a.get_acceptance().used_sets().count()
+                clauses_count = len(
+                    a.get_acceptance().to_dnf().top_disjuncts())
+                """
 
                 if acc_sets_count == 0:
                     auto = a
@@ -71,26 +80,33 @@ def main(argv):
             else:
                 auto = a
 
-
-
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-            print("nyni")
 
             if not spot.are_equivalent(origin, auto):
-
                 print("not equivalent")
                 print_aut(origin, "not_eq", "w")
                 print("timeouted:", timeouted[0])
                 return
             else:
                 print("equivalent")
-        except RuntimeError:  # too many marks
-            print(
+
+            acc_sets_count2 = auto.get_acceptance().used_sets().count()
+
+            if acc_sets_count2 < acc_sets_count / 3:
+                print_aut(auto, "rab4_reduced.hoa", "a")
+
+
+        except BaseException as err:
+            print(f"Unexpected {err=}, {type(err)=}")
+
+        except RuntimeError as e:  # too many marks
+            """print(
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
+                """
     print("timeouted:", timeouted[0])
 
 

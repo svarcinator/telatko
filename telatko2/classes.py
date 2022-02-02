@@ -13,6 +13,7 @@ import subprocess
 import itertools
 from math import ceil, log2
 
+
 class Variable:
     """
     Class that contains information retrieved from SAT-result.
@@ -61,10 +62,12 @@ class SATformula:
                     elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
             return '(' + str(self.subformula[0]) + self.formula + ''.join(str(
                 elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+
     def just_operator(self):
-        if is_empty() and ["&", "|", "->", "<->"] in bool and lne(bool) <=3:
+        if is_empty() and ["&", "|", "->", "<->"] in bool and lne(bool) <= 3:
             return true
         return false
+
     def is_empty(self):
         return self.subformula == []
 
@@ -83,6 +86,7 @@ class SATformula:
     def subformula_list(self):
         return self.subformula
 
+
 class FormulaAtribute(enum.Enum):
     """
         Used in q_main function play.
@@ -90,6 +94,7 @@ class FormulaAtribute(enum.Enum):
     """
     C = 1
     K = 2
+
 
 class MarkType(enum.Enum):
     """Represents whether acceptance set T appears in the formula as Fin(T) or Inf(T).
@@ -100,9 +105,11 @@ class MarkType(enum.Enum):
     Inf = 1
     Fin = 2
 
+
 class AccType(enum.Enum):
     cnf = 1
     dnf = 2
+
 
 class ACCMark:
     """Represents an acceptance set.
@@ -148,7 +155,6 @@ class ACC:
         self.sat = None
         self.scc_index = None
         self.acc_type = acc_type
-
 
     def __getitem__(self, index):
         return self.formula[index]
@@ -204,6 +210,7 @@ class ACC:
                 d.append(con.num)
             f.append(d)
         return f
+
     def get_mtype(self, m):
         for dis in self.formula:
             for con in dis:
@@ -222,7 +229,6 @@ class ACC:
                     occurrences.append(i)
             i += 1
         return occurrences
-
 
     def rem_from_expr(self, index, m):
         new_expr = []
@@ -281,7 +287,6 @@ class ACC:
         self.resolve_redundancy()
 
 
-
 class ACC_DNF(ACC):
     """
         class for DNF form of acceptance formula
@@ -291,7 +296,6 @@ class ACC_DNF(ACC):
 
     def __init__(self, acc):
         super().__init__(parse_dnf_acc(acc), AccType.dnf)
-
 
     def __str__(self):
         f = []
@@ -305,8 +309,6 @@ class ACC_DNF(ACC):
             if dis is not self.formula[-1]:
                 f.append(" | ")
         return ''.join(f)
-
-
 
     def initial_cleanup(self, aut, scc):
         """
@@ -324,9 +326,13 @@ class ACC_DNF(ACC):
             add_dis = True
             for con in dis:
 
-                val = eval_set(aut, con, marks_on_some_edges, marks__on_all_edges)
+                val = eval_set(
+                    aut,
+                    con,
+                    marks_on_some_edges,
+                    marks__on_all_edges)
 
-                if val == None:
+                if val is None:
                     clean_dis.append(con)
 
                 elif val == False:
@@ -349,11 +355,6 @@ class ACC_DNF(ACC):
         self.sat = None
         self.resolve_redundancy()
 
-
-
-
-
-
     def clean_up2(self, scc_sets):
         clean_f = []
         for dis in self.formula:
@@ -371,8 +372,6 @@ class ACC_DNF(ACC):
                 clean_f.append(clean_dis)
         self.formula = clean_f
         self.resolve_redundancy()
-
-
 
 
 class ACC_CNF(ACC):
@@ -396,7 +395,6 @@ class ACC_CNF(ACC):
                 f.append(" & ")
         return ''.join(f)
 
-
     def initial_cleanup(self, aut, scc):
         """
         Evaluates acc condition for SCC and adjusts acc for SCC.
@@ -412,8 +410,12 @@ class ACC_CNF(ACC):
             add_con = True
             for dis in con:
 
-                val = eval_set(aut, dis, marks_on_some_edges, marks__on_all_edges)
-                if val == None:
+                val = eval_set(
+                    aut,
+                    dis,
+                    marks_on_some_edges,
+                    marks__on_all_edges)
+                if val is None:
                     #print("val is none")
                     clean_con.append(dis)
 
@@ -434,7 +436,6 @@ class ACC_CNF(ACC):
             return
         self.formula = clean_f
         self.sat = None
-
 
 
 def parse_cnf_acc(acc):
@@ -516,6 +517,7 @@ def eval_set(aut, mark, m_some_e, m_all_e):
     if mark.num not in m_some_e:  # list of marks dane scc
         return mark.type == MarkType.Fin
     return None
+
 
 def scc_everywhere(aut, scc_index):
     """Return a list of acceptance sets that include all transitions in the SCC.

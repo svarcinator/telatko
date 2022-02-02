@@ -175,6 +175,7 @@ def quant_all(edges):
         formula += " # e_" + str(e)
     return formula
 
+
 """
 def quant_exist(scc_state_info):
     print("tohle se podle me nevyuziva, ne?")
@@ -224,6 +225,7 @@ def old_formula(acc, edge_dict):
     return dnf_formula
 """
 
+
 def inf_set_old_formula(edge_dict, set_num):
     new_shape = SATformula('|')
     for edge in edge_dict[set_num]:
@@ -232,6 +234,7 @@ def inf_set_old_formula(edge_dict, set_num):
                 "e_" +
                 str(edge)))
     return new_shape
+
 
 def fin_set_old_formula(edge_dict, set_num):
     new_shape = SATformula('&')
@@ -260,14 +263,13 @@ def old_formula(acc, edge_dict):
     formula = str(acc)
 
     for i in inf_sets:
-        reg = "Inf\(" + str(i) + "\)"
+        reg = r"Inf\(" + str(i) + r"\)"
         formula = re.sub(reg, str(inf_set_old_formula(edge_dict, i)), formula)
     for f in fin_sets:
-        reg = "Fin\(" + str(f) + "\)"
+        reg = r"Fin\(" + str(f) + r"\)"
         formula = re.sub(reg, str(fin_set_old_formula(edge_dict, f)), formula)
 
     return SATformula(formula)
-
 
 
 # connection of formula: quantified part . lasso -> (old <-> new)
@@ -296,7 +298,7 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
     # true
     one_scc = one_scc_f(scc_edg)
     laso = SATformula("&")
-    #laso.add_subf(least_one)
+    # laso.add_subf(least_one)
     laso.add_subf(in_out)
     laso.add_subf(one_scc)
 
@@ -389,7 +391,8 @@ def connection(aut, inner_edges):
         if src != dst:
 
             impl = SATformula("->")
-            impl.add_subf(SATformula("e_" + str(edges_translator[aut.edge_number(e)])))
+            impl.add_subf(SATformula("e_" +
+                                     str(edges_translator[aut.edge_number(e)])))
             eq = SATformula("<->")
             eq.add_subf(SATformula("w_" + str(src)))
             eq.add_subf(SATformula("w_" + str(dst)))
@@ -404,7 +407,8 @@ def positive(aut, inner_edges, edges_translator):
     dis = SATformula("|")
     for e in inner_edges:
         con = SATformula("&")
-        con.add_subf(SATformula("e_" + str(edges_translator[aut.edge_number(e)])))
+        con.add_subf(SATformula(
+            "e_" + str(edges_translator[aut.edge_number(e)])))
         con.add_subf(SATformula("w_" + str(e.src)))
         dis.add_subf(con)
     if dis.is_empty():
@@ -416,7 +420,8 @@ def negative(aut, inner_edges, edges_translator):
     dis = SATformula("|")
     for e in inner_edges:
         con = SATformula("&")
-        con.add_subf(SATformula("e_" + str(edges_translator[aut.edge_number(e)])))
+        con.add_subf(SATformula(
+            "e_" + str(edges_translator[aut.edge_number(e)])))
         con.add_subf(SATformula("!w_" + str(e.src)))
         dis.add_subf(con)
     if dis.is_empty():

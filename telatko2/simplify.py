@@ -25,8 +25,7 @@ def scc_clean_up_edges(aut, acc, scc):
                     e.acc.clear(m)
 
 
-
-def scc_compl_sets(aut,scc, scc_index):
+def scc_compl_sets(aut, scc, scc_index):
     """Returns a list of tuples. Each tuple contains numbers of acceptance sets m1, m2,
     such that the set of transitions that hold m1 is complementary with the set of transitions
     that hold m2.
@@ -80,8 +79,10 @@ def scc_subsets(aut, scc, scc_index):
                     subsets.append((m1, m2))
     return subsets
 
+
 def removed_relation_set(relation_set, m):
     return set(filter(lambda x: (x[0] == m or x[1] == m), relation_set))
+
 
 def cnf_inf_dis(aut, acc, scc, subsets):
     """
@@ -97,7 +98,7 @@ def cnf_inf_dis(aut, acc, scc, subsets):
     removed_relations = set()
     for sub in subsets:
         if sub in removed_relations:
-            continue;
+            continue
         if acc.get_mtype(
                 sub[0]) == MarkType.Inf and acc.get_mtype(
                 sub[1]) == MarkType.Inf:
@@ -112,9 +113,12 @@ def cnf_inf_dis(aut, acc, scc, subsets):
 
                 scc_clean_up_edges(aut, acc, scc)
                 #cnf_inf_dis(aut, acc, scc, scc_subsets(aut, scc, acc.scc_index))
-                #return
-                removed_relations = set.union(removed_relations,  removed_relation_set(subsets, sub[1]))
+                # return
+                removed_relations = set.union(
+                    removed_relations, removed_relation_set(
+                        subsets, sub[1]))
     subsets = [elem for elem in subsets if elem not in removed_relations]
+
 
 def dnf_inf_con(aut, acc, scc, subsets):
     """If there are acceptance sets X, Y, such that X is a subset of Y, and X, Y always appear
@@ -131,7 +135,7 @@ def dnf_inf_con(aut, acc, scc, subsets):
     removed_relations = set()
     for sub in subsets:
         if sub in removed_relations:
-            continue;
+            continue
         if acc.get_mtype(
                 sub[0]) == MarkType.Inf and acc.get_mtype(
                 sub[1]) == MarkType.Inf:
@@ -142,8 +146,10 @@ def dnf_inf_con(aut, acc, scc, subsets):
                     acc.rem_from_expr(index, sub[0])
                 scc_clean_up_edges(aut, acc, scc)
                 #dnf_inf_con(aut, acc, scc, scc_subsets(aut, scc, acc.scc_index))
-                #return
-                removed_relations = set.union(removed_relations,  removed_relation_set(subsets, sub[0]))
+                # return
+                removed_relations = set.union(
+                    removed_relations, removed_relation_set(
+                        subsets, sub[0]))
     subsets = [elem for elem in subsets if elem not in removed_relations]
 
 
@@ -169,6 +175,7 @@ def fin_same_dis(aut, acc, scc):
                     add_dupl_marks(aut, scc, fin2.num, fin1.num)
                     acc.clean_up(aut, scc)
                     return
+
 
 def inf_same_con(aut, acc, scc):
     """
@@ -203,7 +210,7 @@ def cnf_fin_subsets(aut, acc, scc, subsets):
     removed_relations = set()
     for sub in subsets:
         if sub in removed_relations:
-            continue;
+            continue
         if acc.get_mtype(
                 sub[0]) == MarkType.Fin and acc.get_mtype(
                 sub[1]) == MarkType.Fin:
@@ -215,8 +222,10 @@ def cnf_fin_subsets(aut, acc, scc, subsets):
                 scc_clean_up_edges(aut, acc, scc)
                 acc.clean_up(aut, scc)
                 #cnf_fin_subsets(aut, acc, scc, scc_subsets(aut, scc, acc.scc_index))
-                #return
-                removed_relations = set.union(removed_relations,  removed_relation_set(subsets, sub[0]))
+                # return
+                removed_relations = set.union(
+                    removed_relations, removed_relation_set(
+                        subsets, sub[0]))
             else:
                 for i in reversed(super_i):
                     if i in sub_i:
@@ -232,7 +241,7 @@ def dnf_fin_subsets(aut, acc, scc, subsets):
     removed_relations = set()
     for sub in subsets:
         if sub in removed_relations:
-            continue;
+            continue
         if acc.get_mtype(
                 sub[0]) == MarkType.Fin and acc.get_mtype(
                 sub[1]) == MarkType.Fin:
@@ -244,8 +253,10 @@ def dnf_fin_subsets(aut, acc, scc, subsets):
                 scc_clean_up_edges(aut, acc, scc)
                 acc.clean_up(aut, scc)
                 #dnf_fin_subsets(aut, acc, scc, scc_subsets(aut, scc, acc.scc_index))
-                #return
-                removed_relations = set.union(removed_relations,  removed_relation_set(subsets, sub[1]))
+                # return
+                removed_relations = set.union(
+                    removed_relations, removed_relation_set(
+                        subsets, sub[1]))
 
             else:
                 for i in reversed(sub_i):
@@ -253,7 +264,6 @@ def dnf_fin_subsets(aut, acc, scc, subsets):
                         acc.rem_from_expr(i, sub[1])
                         acc.clean_up(aut, scc)
     subsets = [elem for elem in subsets if elem not in removed_relations]
-
 
 
 def cnf_co_dis(aut, acc, scc, compl_sets):
@@ -265,8 +275,8 @@ def cnf_co_dis(aut, acc, scc, compl_sets):
             inf, fin = co[0], co[1]
             if (acc.get_mtype(co[0]) == MarkType.Fin):
                 inf, fin = co[1], co[0]
-            inf_i = acc.find_m_dis(inf) # [index of disjunct with acc set m]
-            fin_i = acc.find_m_dis(fin) # [index of disjunct with acc set m]
+            inf_i = acc.find_m_dis(inf)  # [index of disjunct with acc set m]
+            fin_i = acc.find_m_dis(fin)  # [index of disjunct with acc set m]
             if all(i in fin_i for i in inf_i):
                 # nachazi se ve stejnych disjunktech (expressions)
                 for index in reversed(fin_i):
@@ -274,13 +284,16 @@ def cnf_co_dis(aut, acc, scc, compl_sets):
                     acc.rem_from_expr(index, fin)
 
                 scc_clean_up_edges(aut, acc, scc)
-                cnf_co_dis(aut, acc, scc, scc_compl_sets(aut, scc, acc.scc_index))
+                cnf_co_dis(
+                    aut, acc, scc, scc_compl_sets(
+                        aut, scc, acc.scc_index))
                 return
             else:
                 for i in fin_i:
                     if i in inf_i:
                         acc.rem_from_expr(i, fin)
                 acc.clean_up(aut, scc)
+
 
 def dnf_co_con(aut, acc, scc, compl_sets):
     """
@@ -291,8 +304,8 @@ def dnf_co_con(aut, acc, scc, compl_sets):
             inf, fin = co[0], co[1]
             if (acc.get_mtype(co[0]) == MarkType.Fin):
                 inf, fin = co[1], co[0]
-            inf_i = acc.find_m_dis(inf) # [index of disjunct with acc set m]
-            fin_i = acc.find_m_dis(fin) # [index of disjunct with acc set m]
+            inf_i = acc.find_m_dis(inf)  # [index of disjunct with acc set m]
+            fin_i = acc.find_m_dis(fin)  # [index of disjunct with acc set m]
             if all(i in fin_i for i in inf_i):
                 # nachazi se ve stejnych disjunktech (expressions)
                 for index in reversed(inf_i):
@@ -300,7 +313,9 @@ def dnf_co_con(aut, acc, scc, compl_sets):
                     acc.rem_from_expr(index, inf)
 
                 scc_clean_up_edges(aut, acc, scc)
-                dnf_co_con(aut, acc, scc, scc_compl_sets(aut, scc, acc.scc_index))
+                dnf_co_con(
+                    aut, acc, scc, scc_compl_sets(
+                        aut, scc, acc.scc_index))
                 return
             else:
                 for i in inf_i:
@@ -336,8 +351,6 @@ def simpl_fin_implies_inf(aut, acc, scc):
                         scc_clean_up_edges(aut, acc, scc)
                         simpl_fin_implies_inf(aut, acc, scc)
                         return
-
-
 
 
 def simpl_substitute(aut, acc, scc, scc_index):
@@ -376,7 +389,7 @@ def simpl_true_subsets(aut, acc, subsets, scc):
     removed_relations = set()
     for sub in subsets:
         if sub in removed_relations:
-            continue;
+            continue
         if acc.get_mtype(
                 sub[0]) == MarkType.Inf and acc.get_mtype(
                 sub[1]) == MarkType.Fin:
@@ -387,8 +400,10 @@ def simpl_true_subsets(aut, acc, subsets, scc):
                     acc.rem_expr(i)
                     scc_clean_up_edges(aut, acc, scc)
                     #simpl_true_subsets(aut, acc, scc_subsets(aut, scc, acc.scc_index), scc)
-                    #return
-                    removed_relations = set.union(removed_relations,  removed_relation_set(subsets, sub[1]))
+                    # return
+                    removed_relations = set.union(
+                        removed_relations, removed_relation_set(
+                            subsets, sub[1]))
     subsets = [elem for elem in subsets if elem not in removed_relations]
 
 
@@ -399,7 +414,7 @@ def simpl_false_subsets(aut, acc, subsets, scc):
     removed_relations = set()
     for sub in subsets:
         if sub in removed_relations:
-            continue;
+            continue
         if acc.get_mtype(
                 sub[0]) == MarkType.Fin and acc.get_mtype(
                 sub[1]) == MarkType.Inf:
@@ -410,10 +425,11 @@ def simpl_false_subsets(aut, acc, subsets, scc):
                     acc.rem_expr(i)
                     scc_clean_up_edges(aut, acc, scc)
                     #simpl_false_subsets(aut, acc, scc_subsets(aut, scc, acc.scc_index), scc)
-                    #return
-                    removed_relations = set.union(removed_relations,  removed_relation_set(subsets, sub[1]))
+                    # return
+                    removed_relations = set.union(
+                        removed_relations, removed_relation_set(
+                            subsets, sub[1]))
     subsets = [elem for elem in subsets if elem not in removed_relations]
-
 
 
 def simpl_false_fin(aut, acc, scc):
@@ -442,22 +458,20 @@ def simpl_false_fin(aut, acc, scc):
 ### SIMPLIFY ###
 
 def simplify(aut, acc, scc, scc_index, acc_type):
-    #print("------simplify-----------------")
+    # print("------simplify-----------------")
     orig = spot.automaton(aut.to_str())
     acc_l = acc.count_total_unique_m()
     while True:
 
-        #do while simplification fix point is not reached
+        # do while simplification fix point is not reached
 
         # remove always false disjuncts
         simpl_substitute(aut, acc, scc, scc_index)
-
 
         if acc_type == AccType.dnf:
             fin_same_dis(aut, acc, scc)
             # simplify complementary marks
             dnf_co_con(aut, acc, scc, scc_compl_sets(aut, scc, scc_index))
-
 
             subsets = scc_subsets(aut, scc, scc_index)
             simpl_false_subsets(aut, acc, subsets, scc)
@@ -465,7 +479,6 @@ def simplify(aut, acc, scc, scc_index, acc_type):
             dnf_inf_con(aut, acc, scc, subsets)
 
             dnf_fin_subsets(aut, acc, scc, subsets)
-
 
             # simplify disjuncts where (Fin = True) => (Inf = True)
             # this is complement, init?
@@ -483,21 +496,18 @@ def simplify(aut, acc, scc, scc_index, acc_type):
             cnf_inf_dis(aut, acc, scc, subsets)
             cnf_fin_subsets(aut, acc, scc, subsets)
 
-
         #simpl_false_fin(aut, acc, scc)
         simpl_substitute(aut, acc, scc, scc_index)
 
-
         scc_clean_up_edges(aut, acc, scc)
         acc.clean_up(aut, scc)
-        #print(acc)
+        # print(acc)
 
         unique_m = acc.count_total_unique_m()
         if acc_l == unique_m:
             break
         else:
             acc_l = unique_m
-
 
 
 def add_dupl_marks(aut, scc, origin_m, new_m):

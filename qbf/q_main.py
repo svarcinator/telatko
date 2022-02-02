@@ -262,8 +262,6 @@ def create_formula(
     SAT_output("sat_file", quant_edges, con)
 
 
-
-
 def try_evaluate0(aut, orig):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
@@ -281,14 +279,12 @@ def try_evaluate0(aut, orig):
         return aut
     return last_eq_aut
 
+
 def count_sets(sets):
     counter = 0
     for s in sets:
         counter += 1
     return counter
-
-
-
 
 
 def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
@@ -319,9 +315,9 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         eq = SATformula('<->')
         #old = old_formula_scc(aut.get_acceptance(), mark_edg_dict, edges_translator, si.acc_sets_of(scc))
 
-        #print(si.used_acc_of(scc_counter))
+        # print(si.used_acc_of(scc_counter))
         if si.is_rejecting_scc(scc_counter):
-            #print("rejecting")
+            # print("rejecting")
             # old je False
             old = SATformula("&")
             old.add_subf("t")
@@ -338,18 +334,30 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
             old.add_subf("!t")
             eq = new_formula2(edges_translator, C, K)
         else:
-            old = old_formula2(acc, mark_edg_dict, edges_translator, si.acc_sets_of(scc_counter), aut, scc )
+            old = old_formula2(
+                acc,
+                mark_edg_dict,
+                edges_translator,
+                si.acc_sets_of(scc_counter),
+                aut,
+                scc)
             new = new_formula2(edges_translator, C, K)
             eq.add_subf(old)
             eq.add_subf(new)
 
-
-
-
         impl = SATformula('->')
-        laso = laso_part(scc_state_info[counter], edges_translator, L, scc_inner_edges, aut)
+        laso = laso_part(
+            scc_state_info[counter],
+            edges_translator,
+            L,
+            scc_inner_edges,
+            aut)
         if L == 4:
-            laso = laso_scc_optimized(aut, scc_inner_edges, scc_state_info[counter], edges_translator)
+            laso = laso_scc_optimized(
+                aut,
+                scc_inner_edges,
+                scc_state_info[counter],
+                edges_translator)
         impl.add_subf(laso)
         impl.add_subf(eq)
         formula.add_subf(impl)
@@ -357,12 +365,13 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         scc_counter += 1
     formula.add_subf(inf_or_fin_f(C, K))
     formula.add_subf(inf_is_not_fin_clause(C, K))
-    #formula.add_subf(least_one(max_T))
+    # formula.add_subf(least_one(max_T))
 
     q = quantify_e(max_T)
     if L > 2:
         q += w_quant(aut)
     SAT_output("sat_file", q, formula)
+
 
 def resolve_formula_atributes(minimized_atribute, C, K):
     if minimized_atribute == 'clauses':
@@ -373,23 +382,22 @@ def resolve_formula_atributes(minimized_atribute, C, K):
 
         return FormulaAtribute.K
 
-def minimize_clauses_experiment(aut, C, K, mode, timeout, timeouted, scc, success):
+
+def minimize_clauses_experiment(
+        aut, C, K, mode, timeout, timeouted, scc, success):
     # automaton with reduced clauses
     orig = spot.automaton(aut.to_str())
-    print("init: ", "C",  C, "K", K)
+    #print("init: ", "C", C, "K", K)
     aut2 = play(aut, C, K, mode, timeout, timeouted, scc, 'clauses')
 
     if not spot.are_equivalent(orig, aut2):
         print("minimalizace poctu klauzuli zpusobila neekv. automat")
 
-
     C = len(aut2.get_acceptance().to_dnf().top_disjuncts())
-    K =  aut2.get_acceptance().used_sets().count()
+    K = aut2.get_acceptance().used_sets().count()
     print("min clauses:", C, K)
     if (C <= 1 or K == 0):
         return aut
-
-
 
     inner_edges_nums, inner_edges = get_edges(aut2)
     scc_state_info, scc_edg = scc_info(aut2)
@@ -441,15 +449,18 @@ def minimize_clauses_experiment(aut, C, K, mode, timeout, timeouted, scc, succes
         success[0] = True
         print("satisfiable")
         process_variables(aut2, variables)
-        print("Zadarilo se pridanim akc znacky zredukovat pocet klauzuli, C=", C, ", K=", K)
+        print(
+            "Zadarilo se pridanim akc znacky zredukovat pocet klauzuli, C=",
+            C,
+            ", K=",
+            K)
         if not spot.are_equivalent(orig, aut2):
             print("Pridanim promenne a ubranim kluzule jsme vytvorili neekv automat")
         return aut2
 
 
-
-
-def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solver):
+def play(aut, C, K, mode, timeout, timeouted,
+         optimized_scc, minimized_atribute, qbf_solver):
 
     spot.cleanup_acceptance_here(aut)
 
@@ -467,7 +478,7 @@ def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solve
     # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
 
-    #K = K - 1  # we dont want to try what we already know
+    # K = K - 1  # we dont want to try what we already know
     tmp_mode = 2
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
@@ -476,30 +487,25 @@ def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solve
     else:
         C -= 1
 
-
     while C > 0 and K > 0:
-        print("C: ", C, ", K: ", K)
+        #print("C: ", C, ", K: ", K)
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-            #a = try_evaluate0(aut, original)
-            #return a
-            print("used_sets < 1", aut.get_acceptance().used_sets().count(
-            ), aut.get_acceptance())
+
             return aut
 
         # dictionary {edge_num : [num of acceptance set]}
         edge_dict = edge_dictionary(aut)
 
-
         # QBF formula is written into ./sat_file
 
-        if (scc):
+        if (optimized_scc):
             acc = ACC_DNF(aut.get_acceptance().to_dnf())
-            #print("scc")
+            # print("scc")
             scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
         else:
-            #print("not scc")
+            # print("not scc")
 
             create_formula(
                 aut,
@@ -511,7 +517,6 @@ def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solve
                 K,
                 inner_edges,
                 tmp_mode)
-
 
         try:
             cp = subprocess.run(["./qbf/limboole1.2/limboole",
@@ -533,7 +538,7 @@ def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solve
 
         if len(out) == 1:
             print("unsatisfiable")
-            if ( tmp_mode < mode):
+            if (tmp_mode < mode):
 
                 tmp_mode = 4
                 print("new level of simplification:", tmp_mode)
@@ -554,20 +559,23 @@ def play(aut, C, K, mode, timeout, timeouted, scc, minimized_atribute, qbf_solve
         print("satisfiable")
         print_aut(aut, "last_equivalent", "w")
 
-
         process_variables(aut, variables)
+        """
+        if not spot.are_equivalent(original, aut):
+            print("q_main not equivalent")
+
+        else:
+            print("q_main equivalent")
+        """
         if currently_reduced == FormulaAtribute.K:
             K = K - 1
         else:
             C = C - 1
 
-        #return aut
+        # return aut
 
     #a = try_evaluate0(aut, original)
     return aut
-
-
-
 
 
 def test_aut(a1, a2):

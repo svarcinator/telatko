@@ -8,9 +8,6 @@ import copy
 from qbf.parser import clear_aut_edges
 
 
-
-
-
 def try_eval(aut, acc, scc):
     """
 
@@ -62,17 +59,21 @@ def get_acc(aut):
     """
     Returns PACC (dnf) if dnf formula is shorter else PACC_CNF(cnf)
     """
-    cnf_acc = ACC_CNF(aut.get_acceptance().to_cnf())
     dnf_acc = ACC_DNF(aut.get_acceptance().to_dnf())
+    return dnf_acc
+    cnf_acc = ACC_CNF(aut.get_acceptance().to_cnf())
+
     #print((cnf_acc),"\n", (dnf_acc))
 
-    if (dnf_acc.acc_len() < cnf_acc.acc_len()) or (dnf_acc.acc_len() == cnf_acc.acc_len() and len(dnf_acc) <= len(cnf_acc)):
+    if (dnf_acc.acc_len() < cnf_acc.acc_len()) or (dnf_acc.acc_len()
+                                                   == cnf_acc.acc_len() and len(dnf_acc) <= len(cnf_acc)):
         print("DNF")
         return dnf_acc
     else:
         #acc = PACC_CNF(cnf_acc)
         print("CNF")
         return cnf_acc
+
 
 def get_accs(aut):
     """
@@ -94,8 +95,9 @@ def get_accs(aut):
         acc = copy.deepcopy(orig_acc)
         acc.set_scc_index(counter)
 
-        # acc = PACC(aut.get_acceptance().to_dnf()) # proc bych to z toho furt dolovala?
-        if ( not weak_eval(aut, acc, scc, weak[counter])):
+        # acc = PACC(aut.get_acceptance().to_dnf()) # proc bych to z toho furt
+        # dolovala?
+        if (not weak_eval(aut, acc, scc, weak[counter])):
             acc.initial_cleanup(aut, scc)
         else:
             if scc.is_rejecting():  # all cycles in scc are rejecting
@@ -178,6 +180,7 @@ def get_dependencies(merged_f):
     dup = u[c > 1]
     return dup
 
+
 def try_tt_ff(aut):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
@@ -195,6 +198,7 @@ def try_tt_ff(aut):
         return aut, True
     return last_eq_aut, False
 
+
 def process_automaton(aut):
     orig = spot.automaton(aut.to_str())
     spot.cleanup_acceptance_here(aut)
@@ -204,7 +208,6 @@ def process_automaton(aut):
     aut, is_simple = try_tt_ff(aut)
     if is_simple:
         return aut
-
 
     # simplifies acceptance condition for each scc
     short_accs, sccs = get_accs(aut)  # simplification occurs in here
@@ -240,12 +243,14 @@ def process_automaton(aut):
 
     # list of numbers of acc sets with more than one occurance
     dependence = get_dependencies(merged_f)
+    #print("dependencies:", dependence)
+
 
     #[{ACCMark.num : ACCMark.num}]
     list_of_logs = []
     list_of_logs = []
     # numbers of dependent acc sets that are not mapped
-    # [{index of expr : ACCMark.num}]
+    # [{index of expr in merged_f : ACCMark.num}]
     list_of_unmapped_dependencies = []
 
     for i in range(len(short_accs)):
@@ -256,8 +261,10 @@ def process_automaton(aut):
             continue
 
         # linear sum assignment decides what maps on what
-        # log{acc_index : merged_f index}
+        # pairing_log = {acc_index : merged_f index}
         pairing_log = mergeable(merged_f, short_accs[i])
+        # print(short_accs[i])
+        #print(pairing_log)
 
         # does the heavy lifting - merges it
         list_of_logs.append(
@@ -270,6 +277,9 @@ def process_automaton(aut):
                 nempty_sccs[0],
                 dependence,
                 list_of_unmapped_dependencies))
+    #print("merged_f: ", merged_f)
+    #print("lol: ",list_of_logs)
+    #print("list of unmet dependencies: ", list_of_unmapped_dependencies)
 
     # make aut equivalent with acceptance formula
     new_make_equiv(

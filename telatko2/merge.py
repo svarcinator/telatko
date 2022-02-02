@@ -232,7 +232,7 @@ def shift_first_acc(acc, m):
                 next_m += 1
 
 
-def place_ACCset(one, expr, used):
+def place_ACCset(literal, expr, used):
     """
     Returns index of disjunkt from m_con(conjunct in merged_f) on which will be mapped dis
     :param one: disjunct or conjunct(ACCMark)
@@ -241,7 +241,7 @@ def place_ACCset(one, expr, used):
     :return:
     """
     for i in range(len(expr)):
-        if one.type == expr[i].type and not used[i]:
+        if literal.type == expr[i].type and not used[i]:
             return i
 
 
@@ -279,6 +279,7 @@ def map_paired(aut, m_expr, expr, scc, merge_log, merged_f, m_scc):
     used = [False] * len(m_expr)
     for j in range(len(expr)):
         one = expr[j]
+        # na ktery literal z m_expr se namapuje literal z expr
         index = place_ACCset(one, m_expr, used)
         #print(one.num, index)
         if index is None:
@@ -339,12 +340,12 @@ def new_merge(
                        scc,
                        merge_log,
                        merged_f, m_scc)
-
+    #print("used: ", used)
     for j in range(len(merged_f)):
         if not used[j]:
-            for one in merged_f.formula[j]:
-                if one.num in dependencies and one.num in merge_log.values():
-                    unmaped_dep_log[j] = one.num
+            for literal in merged_f.formula[j]:
+                if literal.num in dependencies and literal.num in merge_log.values():
+                    unmaped_dep_log[j] = literal.num
     unmaped_dependence.append(unmaped_dep_log)
 
     return merge_log

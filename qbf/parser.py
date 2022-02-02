@@ -137,7 +137,7 @@ def process_f_variables(aut, acc_set_vars):
     clear_aut_edges(aut)
     # creates dictionary {edge number : [acceptance set number]}
     f_dict = parse_dict(acc_set_vars)
-    
+
     # puts marks corresponding to dict on edges
     marks_on_edges(aut, f_dict)
 
@@ -180,14 +180,12 @@ def process_variables(aut, variables):
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))
 
-
     # puts new acceptance marks on edges and removes old acc. marks
     process_f_variables(aut, acc_set_vars)
     max_num = max_set_num(acc)
     aut.set_acceptance(max_num + 3, spot.acc_code(string_formula(acc)))
 
     spot.cleanup_acceptance_here(aut)
-
 
 
 def print_aut(aut, output, m):
