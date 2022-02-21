@@ -1,20 +1,14 @@
-\documentclass[a4paper,UKenglish,cleveref, autoref, anonymous, thm-restate]{lipics-v2021}
-%This is a template for producing LIPIcs articles. 
-%See lipics-v2021-authors-guidelines.pdf for further information.
-%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
-%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
-%for section-numbered lemmas etc., use "numberwithinsect"
-%for enabling cleveref support, use "cleveref"
-%for enabling autoref support, use "autoref"
-%for anonymousing the authors (e.g. for double-blind review), add "anonymous"
-%for enabling thm-restate support, use "thm-restate"
-%for enabling a two-column layout for the author/affilation part (only applicable for > 6 authors), use "authorcolumns"
-%for producing a PDF according the PDF/A standard, add "pdfa"
+\documentclass[runningheads]{llncs}
 
-%\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
-%\hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository% \usepackage[numbers]{natbib}
-
-\bibliographystyle{plainurl}% the mandatory bibstyle
+% \usepackage[numbers]{natbib}
+% \renewcommand\bibsection{\section*{\refname}\small\renewcommand\bibnumfmt[1]{##1.}}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+\usepackage{hyperref}
+% \usepackage{xspace}
+% \usepackage{amsthm}
+% \usepackage{enumitem} % topsep
 
 \usepackage{tikz}
 % TikZ libraries
@@ -22,11 +16,6 @@
 \usetikzlibrary{fit, backgrounds}
 \usetikzlibrary{extshapes}
 
-% \newenvironment{nstabbing}
-%   {\setlength{\topsep}{0pt}%
-%    \setlength{\partopsep}{0pt}%
-%    \tabbing}
-%   {\endtabbing}
 
 %{{{ (La)TeX definitions
 
@@ -38,52 +27,46 @@
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
 \newcommand{\mB}{\mathcal{B}}
-
-%}}}
-
-%{{{ title and authors
-
-\title{Reducing Acceptance Marks \\ in Emerson-Lei Automata}
-\author{Tereza Schwarzov\'{a}}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{xschwar3@mail.muni.cz}{}{}
-\author{Jan Strej\v{c}ek}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{strejcek@fi.muni.cz}{https://orcid.org/0000-0001-5873-403X}{}
-\author{Juraj Major}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{}{}
-\authorrunning{T. Schwarzov\'{a}, J. Strej\v{c}ek, and J. Major}
-\Copyright{Tereza Schwarzov\'{a}, Jan Strej\v{c}ek, and Juraj Major}
-\ccsdesc[500]{Theory of computation~Automata over infinite objects}
-\ccsdesc[500]{Theory of computation~Logic}
-\keywords{Emerson-Lei automata, TELA, automata reduction, QBF, \todo{telatko?}}
-\funding{This work has been supported by the Czech Science Foundation grant GA19-24397S.}
-
 %}}}
 
 \begin{document}
+
+%{{{ title and authors
+
+\title{Reducing Acceptance Marks\\ in Emerson-Lei Automata by QBF-solving}
+\authorrunning{J.~Major, T.~Schwarzová and J. Strej\v{c}ek}
+ \author{Juraj Major \and Tereza Schwarzová \and Jan Strej\v{c}ek}
+ \institute{%
+   Masaryk University, Brno, Czech Republic\\ \email{\{major,xschwar3,strejcek\}@fi.muni.cz}
+ }
+
+%}}}
 
 \maketitle
 
 %{{{ abstract
 
 \begin{abstract}
-  The formalism called \emph{transition-based Emerson-Lei automata
-    (TELA)} generalizes many traditional kinds of automata over
+  \emph{Transition-based Emerson-Lei automata (TELA)} become a popular
+  formalism that generalizes many traditional kinds of automata over
   infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
-  automata. Transitions in a TELA are marked with acceptance marks and
-  its accepting formula is a positive Boolean combinations of terms
+  automata. Transitions in a TELA are labelled with acceptance marks
+  and its accepting formula is a positive Boolean combination of terms
   saying that a particular mark has to be visited infinitely or
   finitely often in an accepting run. Algorithms processing these
-  automata can be very sensitive to the number of different acceptance
-  marks. We introduce two techniques reducing the number of acceptance
-  marks in a TELA without altering its structure and the represented
-  language. One technique represents a standard approach based on
-  relations among acceptance marks in individual strongly connected
-  components of the automaton. The other technique constructs
-  \emph{quantified Boolean formula (QBF)} queries that ask a QBF
-  solver for an acceptance condition with fewer acceptance marks and
-  the placement of these marks in the automaton structure. Both
-  techniques are implemented and experiments show that the number of
-  acceptance marks in TELA produced by state-of-the-art tools
-  ltl3tela, Rabinizer~4, and SPOT can be sometimes reduced. In the
-  case of Rabinizer~4, we reduced the cummulative number of acceptance
-  marks to less than one half.
+  automata are often very sensitive to the number of different
+  acceptance marks. We introduce a new technique reducing the number
+  of different acceptance marks in a TELA with use of \emph{quantified
+    Boolean formulas (QBF)}: if a constructed QBF formula is
+  satisfiable then its model encodes an equivalent accepting formula
+  with less acceptance marks. In fact, we present three formula
+  constructions trading the speed of the technique for higher
+  reduction efficiency. The technique is implemented and evaluated on
+  TELA produced by state-of-the-art tools Delag, ltl3tela,
+  Rabinizer~4, and SPOT. The technique reduced some acceptance marks
+  in automata produced by all these tools. In the case of Rabinizer~4,
+  the technique reduced the cummulative number of acceptance marks to
+  less than one half. 
 \end{abstract}
 
 %}}}
@@ -1076,7 +1059,8 @@ paritou $p$ a stejnou strukturou.
 
 %}}}
 
-%\bibliographystyle{plain}
+%\bibliographystyle{abbrvnat}
+\bibliographystyle{plain}
 \bibliography{mc}
 
 
