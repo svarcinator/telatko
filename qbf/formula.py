@@ -1,5 +1,104 @@
+
 from telatko2.classes import *
 import re
+
+def SAT_output(name, quantified, formula):
+    """
+    Prints formula into file(for QBF solver) named satfile.
+    Args:
+        quantified: Universal quantificators of formula
+        formula: SATformula - Boolean formula
+
+    Returns:
+
+    """
+    f = open(name, "w")
+    f.write(str(quantified) + str(formula))
+    f.close()
+
+
+class FormulaCreator:
+    """
+        Creates formula for QBF solver.
+    """
+
+    def __init__(self,  edge_dict, scc_edg, scc_state_info
+                  ,inner_edges_nums,C, K, inner_edges
+                  , mode, qbf_solver):
+
+        self.edge_dict = edge_dict
+        self.scc_edg = scc_edg
+        self.scc_state_info = scc_state_info
+        self.inner_edges_nums = inner_edges_nums
+        self.C = C
+        self.K = K
+        self.inner_edges = inner_edges
+        self.mode = mode # level of simplification
+        self.qbf_solver = qbf_solver
+
+
+# how can I write this more pretty?
+class Limboole_f_ctor(FormulaCreator):
+    def __init__(self,  edge_dict, scc_edg, scc_state_info
+                  ,inner_edges_nums,C, K, inner_edges
+                  , mode, qbf_solver):
+        super().__init__( edge_dict, scc_edg, scc_state_info
+                      ,inner_edges_nums,C, K, inner_edges
+                      , mode, qbf_solver)
+    def get_qbf_formula(self, aut):
+        # quantified edges #e_1 ... #e_n
+        quant_edges = quant_all(self.inner_edges_nums)
+        # quantified variables ?w_1 ?w_2 ... ?w_n
+
+        # quant_edges += w_quant(aut)
+        if self.mode > 2:
+            quant_edges += w_quant(aut)
+
+        # edges that are true create continuous cycle of edges aka laso
+
+        if self.mode == 4:
+            laso = laso2(aut, self.inner_edges, self.scc_edg)
+            in_out = in_n_out(self.scc_state_info)
+            laso.add_subf(in_out)
+        else:
+            laso = laso_f(
+                aut,
+                self.inner_edges_nums,
+                self.scc_state_info,
+                self.scc_edg,
+                self.inner_edges,
+                self.mode)
+
+        # reqiurements on old acceptance formula
+        old = old_formula(aut.get_acceptance(), self.edge_dict)
+
+        # assignment of variables to create new acceptance formula
+        new = new_formula(self.inner_edges_nums, self.C, self.K)
+        # old and new need to be equivalent
+        eq = SATformula('<->')
+        eq.add_subf(old)
+        eq.add_subf(new)
+
+        impl = SATformula("->")
+        impl.add_subf(laso)
+        impl.add_subf(eq)
+
+        # root of QBFformula
+        con = SATformula("&")
+        con.add_subf(impl)
+
+        # not (Inf1 & Fin1)
+        inf_not_fin = inf_is_not_fin_clause(self.C, self.K)
+
+        # (Fin1 | Inf1) - we need control over formula
+        inf_or_fin = inf_or_fin_f(self.C, self.K)
+        con.add_subf(inf_not_fin)
+        con.add_subf(inf_or_fin)
+        SAT_output("sat_file", quant_edges, con)
+
+        # prints our formula into text file
+        #SAT_output("sat_file", quant_edges, con)
+
 
 ### NEW FORMULA ###
 
@@ -176,54 +275,7 @@ def quant_all(edges):
     return formula
 
 
-"""
-def quant_exist(scc_state_info):
-    print("tohle se podle me nevyuziva, ne?")
-    formula = ""
-    for dict in scc_state_info:
-        n = 2 ** (ceil(log2(len(dict))))
 
-        for q1 in dict:
-            for q2 in dict:
-                i = n
-                while i >= 1:
-                    var_r = "_".join(["r", str(q1), str(q2), str(i)])
-                    formula += "?" + var_r + " "
-                    i //= 2
-
-    return formula
-"""
-
-
-# # # OLD FORMULA # # #
-
-"""
-def old_formula(acc, edge_dict):
-
-
-    dnf_formula = SATformula('|')
-    for dis in acc.formula:
-        conjunct_f = SATformula('&')
-        for con in dis:
-            new_shape = None
-            if con.type == MarkType.Inf:
-                new_shape = SATformula('|')
-                for edge in edge_dict[con.num]:
-                    new_shape.add_subf(
-                        SATformula(
-                            "e_" +
-                            str(edge)))
-            else:
-                new_shape = SATformula('&')
-                for edge in edge_dict[con.num]:
-                    new_shape.add_subf(
-                        SATformula(
-                            "!e_" + str(edge)))
-            conjunct_f.add_subf(new_shape)
-        dnf_formula.add_subf(conjunct_f)
-
-    return dnf_formula
-"""
 
 
 def inf_set_old_formula(edge_dict, set_num):
@@ -268,7 +320,7 @@ def old_formula(acc, edge_dict):
     for f in fin_sets:
         reg = r"Fin\(" + str(f) + r"\)"
         formula = re.sub(reg, str(fin_set_old_formula(edge_dict, f)), formula)
-
+    #print(formula)
     return SATformula(formula)
 
 
@@ -455,3 +507,95 @@ def negate_part(aut, inner_edges, edges_translator):
     if not con.is_empty():
         return con
     return None
+
+def w_quant(aut):
+    """
+    Creates existential variables w_
+    Args:
+        aut:
+
+    Returns:
+
+    """
+    exist_formula = ""
+    num_states = aut.num_states()
+    for i in range(num_states):
+        exist_formula += "?w_" + str(i)
+    return exist_formula
+
+
+def laso2(aut, inner_edges, scc_edg):
+    """
+    QBF CYCLES ve statistikach
+    Formula that makes sure that the edges are cycles.
+    Unluckily the complexity is too high to compute jeden pitomej automat s 12 stavama.
+    Args:
+        aut:
+        inner_edges:
+        scc_edg:
+
+    Returns:
+
+    """
+
+    main_dis = SATformula("|")
+
+    con3 = SATformula("&")
+    dis1 = SATformula("|")
+    dis2 = SATformula("|")
+    con1 = SATformula("&")
+    con2 = SATformula("&")
+
+    for e in inner_edges:
+        src = str(e.src)
+        dst = str(e.dst)
+        """
+        if e.src == e.dst:
+            continue
+        """
+
+        # part one
+        impl = SATformula("->")
+        impl.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c = SATformula("&")
+        c.add_subf(SATformula("w_" + src))
+        c.add_subf(SATformula("w_" + dst))
+        impl.add_subf(c)
+        con1.add_subf(impl)
+
+        # part two
+        impl2 = SATformula("->")
+        impl2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c1 = SATformula("&")
+        c1.add_subf(SATformula("!w_" + src))
+        c1.add_subf(SATformula("!w_" + dst))
+        impl2.add_subf(c1)
+        con2.add_subf(impl2)
+
+        # part three
+        # dis 1
+        c2 = SATformula("&")
+        c2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c2.add_subf(SATformula("w_" + src))
+        c2.add_subf(SATformula("!w_" + dst))
+        dis1.add_subf(c2)
+
+        # dis 2
+        c3 = SATformula("&")
+        c3.add_subf(SATformula("e_" + str(aut.edge_number(e))))
+        c3.add_subf(SATformula("!w_" + src))
+        c3.add_subf(SATformula("w_" + dst))
+        dis2.add_subf(c3)
+
+    con3.add_subf(dis1)
+    con3.add_subf(dis2)
+
+    main_dis.add_subf(con1)
+    main_dis.add_subf(con2)
+    main_dis.add_subf(con3)
+    laso = SATformula("&")
+
+    one_scc = one_scc_f(scc_edg)
+    laso.add_subf(main_dis)
+    laso.add_subf(one_scc)
+    return laso

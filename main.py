@@ -44,6 +44,7 @@ def main(argv):
 
     args = parser.parse_args()
 
+
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
 
@@ -57,13 +58,13 @@ def main(argv):
         try:
             spot.cleanup_acceptance_here(a)
 
-
             a = process_automaton(a)
 
             acc_sets_count = a.get_acceptance().used_sets().count()
             clauses_count = len(
                 a.get_acceptance().to_dnf().top_disjuncts())
-
+            if args.level > 3:
+                args.level = 3
 
             if args.level >= 2 and args.level <= 4:
                 """
@@ -75,8 +76,19 @@ def main(argv):
                 if acc_sets_count == 0:
                     auto = a
                 else:
+                    """
                     auto = play(
                         a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
+                    """
+                    auto_z = play(
+                        a, clauses_count, acc_sets_count,2, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
+
+                    auto_l = play(
+                        a, clauses_count, acc_sets_count, 2, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
+                    print(auto_l.get_acceptance().used_sets().count(), auto_z.get_acceptance().used_sets().count())
+                    if auto_l.get_acceptance().used_sets().count() < auto_z.get_acceptance().used_sets().count():
+                        print_aut(origin, "better_limboole.hoa", "a")
+                    auto = a
             else:
                 auto = a
 
@@ -95,18 +107,14 @@ def main(argv):
 
             acc_sets_count2 = auto.get_acceptance().used_sets().count()
 
-            if acc_sets_count2 < acc_sets_count / 3:
-                print_aut(auto, "rab4_reduced.hoa", "a")
-
-
-        except BaseException as err:
-            print(f"Unexpected {err=}, {type(err)=}")
+        # except BaseException as err:
+            #print(f"Unexpected {err=}, {type(err)=}")
 
         except RuntimeError as e:  # too many marks
-            """print(
+            print(
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
-                """
+
     print("timeouted:", timeouted[0])
 
 

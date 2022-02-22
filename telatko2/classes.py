@@ -124,6 +124,8 @@ class ACCMark:
         """
         self.type = mtype
         self.num = num
+        self.map_clause_index = None
+        self.map_literal_index = None
 
     def __str__(self):
         """Return the information about ACCMark as string.
@@ -148,6 +150,12 @@ class ACCMark:
         else:
             return False
 
+    def set_map_clause(self, clause):
+        self.map_clause_index = clause
+
+    def set_map_literal(self, literal):
+        self.map_literal_index = literal
+
 
 class ACC:
     def __init__(self, acc, acc_type):
@@ -155,6 +163,12 @@ class ACC:
         self.sat = None
         self.scc_index = None
         self.acc_type = acc_type
+        self.merged_f = False
+        # mapping of acc clause to merged_f clause (if not self.merged_f)
+        self.clauses_mapping = {}
+        # literals mapping on literals in paired clause (if not self.merged_f)
+        #self.literals_mapping = []
+        self.dependencies = None
 
     def __getitem__(self, index):
         return self.formula[index]
@@ -162,12 +176,30 @@ class ACC:
     def __len__(self):
         return len(self.formula)
 
+    def set_merged_f(self):
+        self.merged_f = True
+
     def acc_len(self):
         l = 0
         for dis in self.formula:
             for con in dis:
                 l += 1
         return l
+
+    def get_dependencies(self):
+        self.dependencies = {}
+        tmp = {}
+        for i in range(len(self.formula)):
+            for j in range(len(self.formula[i])):
+                literal = self.formula[i][j]
+                if literal.num in tmp:
+                    tmp[literal.num].append(i)
+                else:
+                    tmp[literal.num] = [i]
+
+        for i in tmp:
+            if len(tmp[i]) >= 2:
+                self.dependencies[i] = tmp[i]
 
     def set_sat(self, val):
         self.sat = val
