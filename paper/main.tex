@@ -48,7 +48,7 @@
 \Copyright{Tereza Schwarzov\'{a}, Jan Strej\v{c}ek, and Juraj Major}
 \ccsdesc[500]{Theory of computation~Logic}
 \ccsdesc[500]{Theory of computation~Automata over infinite objects}
-\keywords{Emerson-Lei automata, TELA, automata reduction, QBF, \todo{telatko?}}
+\keywords{Emerson-Lei automata, TELA, automata reduction, QBF, telatko}
 \funding{This work has been supported by the Czech Science Foundation grant GA19-24397S.}
 
 %}}}
@@ -66,25 +66,24 @@
   automata. Transitions in a TELA are labelled with acceptance marks
   and its accepting formula is a positive Boolean combination of terms
   saying that a particular mark has to be visited infinitely or
-  finitely often in an accepting run. Algorithms processing these
-  automata are often very sensitive to the number of different
+  finitely often. % in an accepting run.
+  Algorithms processing these automata are often very sensitive to the
+  number of %different
   acceptance marks. We introduce a new technique reducing the number
-  of different acceptance marks in a TELA with use of \emph{quantified
-    Boolean formulas (QBF)}: if a constructed QBF formula is
-  satisfiable then its model encodes an equivalent accepting formula
-  with less acceptance marks. In fact, we present three formula
-  constructions trading the speed of the technique for higher
-  reduction efficiency. The technique is implemented and evaluated on
-  TELA produced by state-of-the-art tools Delag, ltl3tela,
-  Rabinizer~4, and SPOT. The technique reduced some acceptance marks
-  in automata produced by all these tools. In the case of Rabinizer~4,
-  the technique reduced the cummulative number of acceptance marks to
-  less than one half. 
+  of %different
+  acceptance marks in TELA with use of \emph{quantified Boolean
+    formulas (QBF)}: if a constructed QBF formula is satisfiable then
+  its model encodes an equivalent accepting formula with less
+  acceptance marks. In fact, we present three formula constructions
+  trading the speed of the technique for higher reduction
+  efficiency. We evaluated our reduction technique on TELA produced by
+  state-of-the-art tools Delag, ltl3tela, Rabinizer~4, and SPOT. The
+  technique reduced some acceptance marks in automata produced by all
+  these tools. In the case of Rabinizer~4, the cumulative number of
+  acceptance marks was reduced to less than one half.
 \end{abstract}
 
 %}}}
-
-\todo{Nezapomenout na clanky o redukci automatu pomoci SATu - on virtue of patience?}
 
 %{{{ introduction
 
@@ -117,8 +116,7 @@ Acceptance marks are placed on transitions and each mark identifies
 the set of transitions containing this mark. Hence, these automata are
 called \emph{transition-based Emerson-Lei automata (TELA)} and they
 generalize many traditional kinds of automata over infinite words
-including Büchi, co-Büchi, Rabin, Streett, Muller or parity
-automata.
+including Büchi, co-Büchi, Rabin, Streett, and parity automata.
 
 TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
@@ -130,9 +128,7 @@ Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
 Rabinizer~4~\cite{kretinsky.18.cav}, or
 SPOT~\cite{duret.16.atva2}. There are also some algorithms processing
 these automata, for example the emptiness check~\cite{baier.19.atva}
-or translation of TELA to parity automata~\cite{renkin.20.atva}.
-
-\todo{Nechcem do experimentu pridat Delag?}
+or translation of TELA to parity automata~\cite{renkin.20.atva}. \todo{Doplnit!}
 
 Algorithms processing TELA are often sensitive to the number of
 acceptance marks more than to other parts of the automaton. For
@@ -144,6 +140,8 @@ check~\cite{baier.19.atva} is exponential in the number of acceptance
 marks that appear in acceptance primitives saying that a mark has to
 be visited finitely often, while it is only polynomial in other
 measures of the input automaton.
+
+\todo{Honza je tu!}
 
 These observations motivate our study of techniques reducing the
 number of acceptance marks without altering the structure of the
@@ -173,15 +171,29 @@ set of accepting runs, but not vice versa.
 
 We have implemented both reduction techniques in a tool called
 \texttt{telatko}. We show that the tool can reduce acceptance marks in
-automata produced by ltl3tela~\cite{major.19.atva},
-Rabinizer~4~\cite{kretinsky.18.cav}, and SPOT~\cite{duret.16.atva2}.
-While the reduction is relatively modest for TELA produced by ltl3tela
-and SPOT, it is substantial for automata produced by Rabinizer~4.
+automata produced by Delag~\cite{muller.17.gandalf},
+ltl3tela~\cite{major.19.atva}, Rabinizer~4~\cite{kretinsky.18.cav},
+and SPOT~\cite{duret.16.atva2}.  While the reduction is relatively
+modest for TELA produced by ltl3tela and SPOT, it is substantial for
+automata produced by Rabinizer~4.
 
 \subsubsection{Related results}
 We are not aware about any existing research aimed at simplification
 of acceptance formulas of TELA or reduction of the number of its
 acceptance marks without increasing the number of states.
+
+There are some SAT-based approaches aimed to reduce the number of
+states of automata over infinite words. Namely, there are reductions
+designed for nondeterministic Büchi automata~\cite{ehlers.10.spin},
+deterministic Büchi automata~\cite{ehlers.10.sat}, and deterministic
+generalized Büchi automata~\cite{baarir.14.forte}. Further, there is
+also a SAT-based approach that transforms a deterministic TELA
+automaton to an equivalent automaton with a given acceptance condition
+and a given number of states~\cite{baarir.15.lpar} (if such an
+automaton exists). Note that all these techniques are usually very
+slow and their authors typically suggest to use them only for specific
+purposes like looking for cases where some automata construction can
+be improved.
 
 Casares, Colcombet, and Fijalkow very recently introduced a structure
 called \emph{alternating cycle decomposition
