@@ -207,7 +207,7 @@ def restore_never_accepting(aut, scc, merged_f):
             make_expr_false(aut, scc, expr)
 
 
-def new_make_equiv(aut, accs, sccs, merge_logs, merged_f, depend_logs):
+def new_make_equiv(aut, accs, sccs, merged_f, depend_logs):
     """
     Makes automata equivalent with the new acceptance formula
     :param aut:
@@ -222,7 +222,6 @@ def new_make_equiv(aut, accs, sccs, merge_logs, merged_f, depend_logs):
     for i in range(len(accs)):
         scc = sccs[i]
         acc = accs[i]
-        m_log = merge_logs[i]
         dep_log = depend_logs[i]
         if acc.sat is True:
             restore_always_accepting(aut, scc, merged_f)
@@ -231,9 +230,16 @@ def new_make_equiv(aut, accs, sccs, merge_logs, merged_f, depend_logs):
         else:
             used = []
             unused = []
+            for clause in acc:
+                for lit in clause:
+                    used.append(merged_f.formula[lit.map_clause_index][lit.map_literal_index].num)
+            unused = [num for num in all_set_nums if num not in used]
+
+            """
             for num in all_set_nums:
                 if num in m_log.values():
                     used.append(num)
                 else:
                     unused.append(num)
+            """
             restore_maybe_accepting(aut, scc, merged_f, unused, dep_log)

@@ -3,6 +3,7 @@ import random
 from qbf.parser import *
 from qbf.formula import *
 from qbf.optimization import *
+from qbf.z3_formula import *
 
 
 def edge_dictionary(aut):
@@ -79,112 +80,8 @@ def scc_info(aut):
     return scc_state_inf, scc_edg
 
 
-def SAT_output(name, quantified, formula):
-    """
-    Prints formula into file(for QBF solver) named satfile.
-    Args:
-        quantified: Universal quantificators of formula
-        formula: SATformula - Boolean formula
-
-    Returns:
-
-    """
-    f = open(name, "w")
-    f.write(str(quantified) + str(formula))
-    f.close()
 
 
-def w_quant(aut):
-    """
-    Creates existential variables w_
-    Args:
-        aut:
-
-    Returns:
-
-    """
-    exist_formula = ""
-    num_states = aut.num_states()
-    for i in range(num_states):
-        exist_formula += "?w_" + str(i)
-    return exist_formula
-
-
-def laso2(aut, inner_edges, scc_edg):
-    """
-    QBF CYCLES ve statistikach
-    Formula that makes sure that the edges are cycles.
-    Unluckily the complexity is too high to compute jeden pitomej automat s 12 stavama.
-    Args:
-        aut:
-        inner_edges:
-        scc_edg:
-
-    Returns:
-
-    """
-
-    main_dis = SATformula("|")
-
-    con3 = SATformula("&")
-    dis1 = SATformula("|")
-    dis2 = SATformula("|")
-    con1 = SATformula("&")
-    con2 = SATformula("&")
-
-    for e in inner_edges:
-        src = str(e.src)
-        dst = str(e.dst)
-        """
-        if e.src == e.dst:
-            continue
-        """
-
-        # part one
-        impl = SATformula("->")
-        impl.add_subf(SATformula("e_" + str(aut.edge_number(e))))
-        c = SATformula("&")
-        c.add_subf(SATformula("w_" + src))
-        c.add_subf(SATformula("w_" + dst))
-        impl.add_subf(c)
-        con1.add_subf(impl)
-
-        # part two
-        impl2 = SATformula("->")
-        impl2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
-        c1 = SATformula("&")
-        c1.add_subf(SATformula("!w_" + src))
-        c1.add_subf(SATformula("!w_" + dst))
-        impl2.add_subf(c1)
-        con2.add_subf(impl2)
-
-        # part three
-        # dis 1
-        c2 = SATformula("&")
-        c2.add_subf(SATformula("e_" + str(aut.edge_number(e))))
-        c2.add_subf(SATformula("w_" + src))
-        c2.add_subf(SATformula("!w_" + dst))
-        dis1.add_subf(c2)
-
-        # dis 2
-        c3 = SATformula("&")
-        c3.add_subf(SATformula("e_" + str(aut.edge_number(e))))
-        c3.add_subf(SATformula("!w_" + src))
-        c3.add_subf(SATformula("w_" + dst))
-        dis2.add_subf(c3)
-
-    con3.add_subf(dis1)
-    con3.add_subf(dis2)
-
-    main_dis.add_subf(con1)
-    main_dis.add_subf(con2)
-    main_dis.add_subf(con3)
-    laso = SATformula("&")
-
-    one_scc = one_scc_f(scc_edg)
-    laso.add_subf(main_dis)
-    laso.add_subf(one_scc)
-    return laso
 
 
 def create_formula(
@@ -196,7 +93,7 @@ def create_formula(
         C,
         K,
         inner_edges,
-        mode):
+        mode, qbf_solver):
     """
 
     :param aut:
@@ -209,6 +106,21 @@ def create_formula(
     :param K: :: int - acceptance sets count
     :return:
     """
+    if qbf_solver == "limboole":
+        f_creator = Limboole_f_ctor(edge_dict, scc_edg, scc_state_info
+                      ,inner_edges_nums,C, K, inner_edges
+                      , mode, qbf_solver)
+        f_creator.get_qbf_formula(aut)
+
+        return None
+    else:
+
+        f_creator = Z3_f_ctor(edge_dict, scc_edg, scc_state_info
+                      ,inner_edges_nums,C, K, inner_edges
+                      , mode, qbf_solver)
+        z3_formula = f_creator.get_qbf_formula(aut)
+
+        return z3_formula
 
     # quantified edges #e_1 ... #e_n
     quant_edges = quant_all(inner_edges_nums)
@@ -383,82 +295,6 @@ def resolve_formula_atributes(minimized_atribute, C, K):
         return FormulaAtribute.K
 
 
-def minimize_clauses_experiment(
-        aut, C, K, mode, timeout, timeouted, scc, success):
-    # automaton with reduced clauses
-    orig = spot.automaton(aut.to_str())
-    #print("init: ", "C", C, "K", K)
-    aut2 = play(aut, C, K, mode, timeout, timeouted, scc, 'clauses')
-
-    if not spot.are_equivalent(orig, aut2):
-        print("minimalizace poctu klauzuli zpusobila neekv. automat")
-
-    C = len(aut2.get_acceptance().to_dnf().top_disjuncts())
-    K = aut2.get_acceptance().used_sets().count()
-    print("min clauses:", C, K)
-    if (C <= 1 or K == 0):
-        return aut
-
-    inner_edges_nums, inner_edges = get_edges(aut2)
-    scc_state_info, scc_edg = scc_info(aut2)
-    edge_dict = edge_dictionary(aut2)
-
-    C = C - 1
-    for i in range(5):
-        K += 1
-        print("Zkousime C=", C, " K=", K)
-
-        create_formula(
-            aut2,
-            edge_dict,
-            scc_edg,
-            scc_state_info,
-            inner_edges_nums,
-            C,
-            K,
-            inner_edges,
-            mode)
-
-        try:
-            cp = subprocess.run(["./qbf/limboole1.2/limboole",
-                                 "./sat_file"],
-                                universal_newlines=True,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE,
-                                timeout=int(timeout))
-
-        except subprocess.TimeoutExpired:
-            print("expired")
-            timeouted[0] += 1
-            continue
-
-        out = cp.stdout.splitlines()
-        f = open("sat_evaluation", "w")
-        f.write(cp.stdout)
-        f.close()
-
-        if len(out) == 1:
-            print("unsatisfiable")
-            continue
-
-        if len(out) == 0:
-            print("sat error")
-            return aut2
-
-        variables = out[1:]
-        success[0] = True
-        print("satisfiable")
-        process_variables(aut2, variables)
-        print(
-            "Zadarilo se pridanim akc znacky zredukovat pocet klauzuli, C=",
-            C,
-            ", K=",
-            K)
-        if not spot.are_equivalent(orig, aut2):
-            print("Pridanim promenne a ubranim kluzule jsme vytvorili neekv automat")
-        return aut2
-
-
 def play(aut, C, K, mode, timeout, timeouted,
          optimized_scc, minimized_atribute, qbf_solver):
 
@@ -507,7 +343,7 @@ def play(aut, C, K, mode, timeout, timeouted,
         else:
             # print("not scc")
 
-            create_formula(
+            formula = create_formula(
                 aut,
                 edge_dict,
                 scc_edg,
@@ -516,65 +352,90 @@ def play(aut, C, K, mode, timeout, timeouted,
                 C,
                 K,
                 inner_edges,
-                tmp_mode)
+                tmp_mode, qbf_solver)
 
-        try:
-            cp = subprocess.run(["./qbf/limboole1.2/limboole",
-                                 "./sat_file"],
-                                universal_newlines=True,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE,
-                                timeout=int(timeout))
+        if formula != None:
+            # QBF SOLVER
+            assert(qbf_solver == "z3")
+            #print("z3 formula: ", formula)
+            solver = Solver()
+            solver.add(formula)
+            solver.push()
+            solver.set("timeout", timeout)
+            #print("solver check: ", solver.check())
 
-        except subprocess.TimeoutExpired:
-            print("expired")
-            timeouted[0] += 1
-            return aut
+            if solver.check() == sat:
+                #print("--satisfiable--")
+                s = solver.model()
 
-        out = cp.stdout.splitlines()
-        f = open("sat_evaluation", "w")
-        f.write(cp.stdout)
-        f.close()
+                process_variables(aut, s, qbf_solver)
 
-        if len(out) == 1:
-            print("unsatisfiable")
-            if (tmp_mode < mode):
-
-                tmp_mode = 4
-                print("new level of simplification:", tmp_mode)
-                continue
+                #parse_model(solver.model())
             else:
-                if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
-                    currently_reduced = FormulaAtribute.C
-                    K = K + 1
-                    C = C - 1
+                # code repetition, necessary to rewrite
+                #print("unsatisfiable", "mode:", mode, "tmp_mode: ", tmp_mode)
+                if (tmp_mode < mode):
+                    tmp_mode = 4
+                    print("new level of simplification:", tmp_mode)
                     continue
                 else:
-                    return aut
 
-        if len(out) == 0:
-            print("sat error")
-            return aut
-        variables = out[1:]
-        print("satisfiable")
-        print_aut(aut, "last_equivalent", "w")
-
-        process_variables(aut, variables)
-        """
-        if not spot.are_equivalent(original, aut):
-            print("q_main not equivalent")
+                    if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
+                        currently_reduced = FormulaAtribute.C
+                        K = K + 1
+                        C = C - 1
+                        continue
+                    else:
+                        return aut
 
         else:
-            print("q_main equivalent")
-        """
+            assert(qbf_solver == "limboole")
+            # LIMBOOLE SOLVER
+            try:
+                cp = subprocess.run(["./qbf/limboole1.2/limboole",
+                                     "./sat_file"],
+                                    universal_newlines=True,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    timeout=int(timeout))
+
+            except subprocess.TimeoutExpired:
+                print("expired")
+                timeouted[0] += 1
+                return aut
+
+            out = cp.stdout.splitlines()
+            f = open("sat_evaluation", "w")
+            f.write(cp.stdout)
+            f.close()
+
+            if len(out) == 1:
+                print("unsatisfiable")
+                if (tmp_mode < mode):
+
+                    tmp_mode = 4
+                    print("new level of simplification:", tmp_mode)
+                    continue
+                else:
+                    if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
+                        currently_reduced = FormulaAtribute.C
+                        K = K + 1
+                        C = C - 1
+                        continue
+                    else:
+                        return aut
+
+            if len(out) == 0:
+                print("sat error")
+                return aut
+            variables = out[1:]
+            print("satisfiable")
+            process_variables(aut, variables, qbf_solver)
+
         if currently_reduced == FormulaAtribute.K:
             K = K - 1
         else:
             C = C - 1
-
-        # return aut
-
-    #a = try_evaluate0(aut, original)
     return aut
 
 

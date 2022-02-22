@@ -1,4 +1,5 @@
 from telatko2.classes import *
+from z3 import is_true
 
 
 def create_acc(variables):
@@ -158,24 +159,48 @@ def max_set_num(acc):
                 num = con.num
     return num
 
+def parse_limboole(model):
+    # list of variables that are true and are denoted as p/n - acceptance
+    # condition variables
+    condition_vars = list(filter(lambda var: (
+        var[0] == "p" or var[0] == "n") and var[-1] == '1', model))
+    # list of variables that are true and denoted as f - acceptance sets
+    acc_set_vars = list(
+        filter(lambda var: var[0] == "f" and var[-1] == '1', model))
+    #print("cond vars: ", condition_vars)
+    return condition_vars, acc_set_vars
 
-def process_variables(aut, variables):
+def parse_z3(model):
+    #TO DO TOMMOROW
+
+    condition_vars = []
+    acc_set_vars = []
+    for t in model.decls():
+        if is_true(model[t]):
+            if str(t)[0] == 'p' or str(t)[0] == 'n':
+                condition_vars.append(str(t))
+            elif str(t)[0] == 'f':
+                acc_set_vars.append(str(t))
+    #print("cond vars: ", condition_vars)
+    #print("acc set vars: ", acc_set_vars )
+    return condition_vars, acc_set_vars
+
+
+def process_variables(aut, model, qbf_solver):
     """
     Filters SAT-variables that are true and splits them. Then calls functions to process these variables.
     Args:
         aut: input automata
-        variables: output from SAT-solver
+        model: output from SAT-solver
+        qbf_solver : type of solver (solver output)
 
     Returns:
 
     """
-    # list of variables that are true and are denoted as p/n - acceptance
-    # condition variables
-    condition_vars = list(filter(lambda var: (
-        var[0] == "p" or var[0] == "n") and var[-1] == '1', variables))
-    # list of variables that are true and denoted as f - acceptance sets
-    acc_set_vars = list(
-        filter(lambda var: var[0] == "f" and var[-1] == '1', variables))
+    if qbf_solver == 'limboole':
+        condition_vars, acc_set_vars = parse_limboole(model)
+    else:
+        condition_vars, acc_set_vars = parse_z3(model)
 
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))
