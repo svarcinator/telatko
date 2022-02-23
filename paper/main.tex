@@ -29,8 +29,10 @@
 
 \newcommand{\Nset}{{\mathbb{N}_0}}
 \newcommand{\todo}[1]{\textcolor{red}{#1}}
-\def\Inf{\ensuremath{\mathsf{Inf}}}
-\def\Fin{\ensuremath{\mathsf{Fin}}}
+%\def\Inf{\ensuremath{\mathsf{Inf}}}
+%\def\Fin{\ensuremath{\mathsf{Fin}}}
+\DeclareMathOperator{\Inf}{\mathsf{Inf}}
+\DeclareMathOperator{\Fin}{\mathsf{Fin}}
 \def\false{\mathit{false}}
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
@@ -148,10 +150,10 @@ These observations motivate our study of a technique reducing the
 number of acceptance marks without altering the structure of the
 automaton. This paper presents a technique heavily based on
 \emph{quantified Boolean formulas (QBF)}. For a given TELA and
-parameters $c,m$, it produces a QBF which is satisfiable if and only
-if there exists an automaton with the same structure, $m$ acceptance
-marks, an acceptance formula in disjunctive normal form with $c$
-clauses, and the same set of accepting runs as the original
+parameters $c,m$, it produces a QBF formula which is satisfiable if
+and only if there exists an automaton with the same structure, $m$
+acceptance marks, an acceptance formula in disjunctive normal form
+with $c$ clauses, and the same set of accepting runs as the original
 automaton. The placement of the marks on transitions and the
 acceptance formula can be obtained from a model of the
 formula. Besides this formula, we describe also the construction of
@@ -201,7 +203,7 @@ construction of three mentioned QBF formulas. The reduction algorithm
 based on these formulas is described together with its implementation
 in Section~\ref{sec:algimpl}. Section~\ref{sec:experiments} shows the
 experimental results. Finally, Section~\ref{sec:conclusion} suggests
-other applications of our QBF-reduction technique and closes the
+other applications of our QBF-based reduction technique and closes the
 paper.
 
 %}}}
@@ -224,7 +226,7 @@ In this section we recall the basic terms around TELA and QBF.
   \item $\varphi$ is the \emph{acceptance condition} constructed
     according to the following abstract syntax equation, where $m$
     ranges over $M$.
-    $$\varphi ::= \true \mid \false \mid \Inf(m) \mid \Fin(m) \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$$
+    $$\varphi ::= \true \mid \false \mid \Inf m \mid \Fin m \mid \left( \varphi \land \varphi \right) \mid \left( \varphi \lor \varphi \right)$$
 \end{itemize}
 \end{definition}
 
@@ -236,7 +238,7 @@ $\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
 $q_0=q_I$. Let $M(\pi)$ denote set of all acceptance marks that occur
 in infinitely many transitions of run $\pi$. Run $\pi$ is
 \emph{accepting} iff it satisfies the formula $\varphi$, where $\pi$
-satisfies $\Inf(m)$ iff $m\in M(\pi)$ and $\pi$ satisfies $\Fin(m)$
+satisfies $\Inf m$ iff $m\in M(\pi)$ and $\pi$ satisfies $\Fin m$
 iff $m\not\in M(\pi)$. The \emph{language} of automaton $\mA$ is the
 set
 $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
@@ -245,14 +247,12 @@ if $L(\mA)=L(\mB)$.
 % such that $\mA$ has
 % an accepting run over $u$.
 
-\todo{Jan is here}
-
 An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
   (DNF)} if it is a disjunction of clauses, where each clause is a
-conjunction of some terms of the form $\Fin(m)$ or $\Inf(m)$.  Formula
+conjunction of some terms of the form $\Fin m$ or $\Inf m$. Formula
 $\false$ corresponds to the disjunction of zero clauses and formula
-$\true$ is the clause with zero terms. Each acceptance formula can be
-transformed into an equivalent formula in DNF.
+$\true$ corresponds to one clause with zero terms. Each acceptance
+formula can be transformed into an equivalent formula in DNF.
 
 A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
 adjacent transitions of the form
@@ -266,14 +266,15 @@ SCC $S$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
 denotes the set of all transitions between states in $S$. Further, for
 each mark $m\in M$, let $\delta_m$ denotes the set of all transitions
 marked with $m$, i.e., $\delta_m=\{(p,a,M',q)\in\delta\mid m\in
-M'\}$. The sets $\delta_m$ are called \emph{acceptance sets}.
-Finally, given an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we
-denote the set $\delta_{S,m}=\delta_S\cap\delta_m$.
+M'\}$. The sets $\delta_m$ are called \emph{acceptance sets}.  Given
+an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we denote the set
+$\delta_{S,m}=\delta_S\cap\delta_m$. Finally, a set of transitions
+$D\subseteq\delta$ is called a \emph{cycle} is there exists a path
+from a state $p$ to the same state containing all transitions of $D$
+and no transition outside $D$.
 
-We often use acceptance marks $\tacc{1}{1},\tacc{2}{2},\ldots\in M$
-and we write $\Inf\tacc{4}{j}$ and $\Fin\tacc{8}{k}$ instead of
-$\Inf(\tacc{4}{j})$ and $\Fin(\tacc{8}{k})$, respectively. In our
-graphical representation of automata,
+In graphical representation of automata, we often use acceptance marks
+$\tacc{1}{1},\tacc{2}{2},\ldots\in M$ and an edge 
 \begin{tikzpicture}[smallautomaton,baseline=-2pt]
   \node[state] (p) at (0,0) {$p$};
   \node[state] (q) at (1.8,0) {$q$};
@@ -281,12 +282,10 @@ graphical representation of automata,
 \end{tikzpicture}
 denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$.
 
-% Finaly, \emph{loop} is a path from a state $p$ to the same state.
-
 \bigskip
 
 \emph{Quantified Boolean formulas (QBFs)} are Boolean formulas
-extended with universal or existential quantification over
+extended with universal and existential quantification over
 propositional variables. We assume that subformulas of the form
 $\forall x.\psi$ and $\exists x.\psi$ do not contain another
 quantification of variable $x$ inside $\psi$. The semantics of
@@ -307,15 +306,15 @@ is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
 assignment of the equivalent Boolean formula. A QBF formula is
 \emph{satisfiable} iff it has a model.
 
-A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
-$\varphi = Q_{1}x_{1}...Q_{n}x_{n} . \psi$, where
-$Q_1,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
-formula.
+% A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
+% $\varphi = Q_{1}x_{1}...Q_{n}x_{n} . \psi$, where
+% $Q_1,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
+% formula.
 
 %}}}
-%{{{ QBF-based reduction 
+%{{{ construction of QBF formulas
 
-\section{QBF-based reduction}\label{sec:qbf}
+\section{Construction of QBF formulas}\label{sec:qbf}
 
 The aim of this section is to create a QBF-formula for given $n$ that guarantees the existence of equivalent acceptance condition of a given automaton with $n$ acceptance marks. 
 \smallskip
@@ -775,7 +774,8 @@ Vyuzivame incremental QBF solving?
 chceme sem napsat, ze QBF-based reduction se da pouzit napr. k
 nalezeni akceptacni formule s $c$ klauzulemi a $m$ znackami v CNF,
 pripadne k nalezeni ekvivalentniho paritniho automat s danou maximalni
-paritou $p$ a stejnou strukturou.
+paritou $p$ a stejnou strukturou. Nebo zkusit nalezt $\Fin$-less
+acceptance formuli.
 
 %}}}
 
