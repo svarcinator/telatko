@@ -150,15 +150,15 @@ These observations motivate our study of a technique reducing the
 number of acceptance marks without altering the structure of the
 automaton. This paper presents a technique heavily based on
 \emph{quantified Boolean formulas (QBF)}. For a given TELA and
-parameters $c,m$, it produces a QBF formula which is satisfiable if
-and only if there exists an automaton with the same structure, $m$
+parameters $C,K$, it produces a QBF formula which is satisfiable if
+and only if there exists an automaton with the same structure, $K$
 acceptance marks, an acceptance formula in disjunctive normal form
-with $c$ clauses, and the same set of accepting runs as the original
+with $C$ clauses, and the same set of accepting runs as the original
 automaton. The placement of the marks on transitions and the
 acceptance formula can be obtained from a model of the
 formula. Besides this formula, we describe also the construction of
 two simpler formulas such that their satisfiability implies the
-existence of an automaton with the same structure, $m$ acceptance
+existence of an automaton with the same structure, $K$ acceptance
 marks, and the same set of accepting runs, but not vice versa.
 
 We have implemented our reduction technique in a tool called
@@ -284,7 +284,7 @@ denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$.
 
 \bigskip
 
-\emph{Quantified Boolean formulas (QBFs)} are Boolean formulas
+\emph{Quantified Boolean formulas (QBF)} are Boolean formulas
 extended with universal and existential quantification over
 propositional variables. We assume that subformulas of the form
 $\forall x.\psi$ and $\exists x.\psi$ do not contain another
@@ -315,6 +315,57 @@ assignment of the equivalent Boolean formula. A QBF formula is
 %{{{ construction of QBF formulas
 
 \section{Construction of QBF formulas}\label{sec:qbf}
+
+Recall that we aim to reduce the number of acceptance marks in a given
+TELA $\mA =(Q,M,\Sigma,q_I,\delta,\varphi)$ without altering its
+structure and language. In other words, we change only the acceptance
+marks on individual transitions and we replace the acceptance formula
+by a new one with less acceptance marks. To ensure that the modified
+automaton is equivalent to the original one, we actually construct the
+new acceptance formula such that the set of acceptance runs (modulo
+changed acceptance marks on transitions) is preserved.
+
+We start with the following simple observation. Definovat $inf(\varphi)$?
+
+
+\textbf{Jan is here!}
+
+Recall that our goal is to reduce the number of acceptance marks in a
+given TELA $\mA =(Q,M,\Sigma,q_I,\delta,\varphi)$ without altering its
+structure and language. Hence, our reduction replaces the set $M$ of
+marks by a smaller set, the acceptance formula $\varphi$ by a new one,
+and changes the sets of acceptance marks on individual transitions.
+
+
+
+
+
+Let us assume that we are given a TELA $\mA$ and two integer
+parameters $C,K\ge 0$, where $K$ is the desired number of acceptance
+marks after the reduction and $C$ is the desired number of clauses in
+the new acceptance formula in DNF. This section describes the
+construction of a QBF formula for $\mA,C,K$ such that satisfiability
+of this formula implies existence of the reduced automata with 
+
+
+
+
+This section explains the construction of QBF formulas for a given
+TELA $\mA =(Q,M,\Sigma,q_I,\delta,\varphi)$ and two integer parameters
+$C,K\ge 0$ such that satisfiability of such a formula implies that
+there exists an acceptance formula in DNF with $C$ clauses and $K$
+acceptance marks and a placement of these marks on automata
+transitions such that $\mA$ with this acceptance formula and
+acceptance marks and acceptance formula
+
+
+
+
+such that their model describes an acceptance formula in DNF
+with $C$ clauses and $K$ acceptance marks and placement of these marks
+on automata transitions such that 
+
+
 
 The aim of this section is to create a QBF-formula for given $n$ that guarantees the existence of equivalent acceptance condition of a given automaton with $n$ acceptance marks. 
 \smallskip
@@ -766,6 +817,17 @@ Vyuzivame incremental QBF solving?
 
 \section{Experimental evaluation}\label{sec:experiments}
 
+Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
+automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
+redukce?  (zvysovat timeout od 1s do 50s a vzdy ukazat miru
+redukce). Ty redukce ukazovat nejak jinak nez jen celkovym cislem
+(boxplot? Scatterplot?).
+
+Zkusit upravit redukci tak, aby vysledkem bylo TGBA a zkusit dale
+redukovat akceptacni znacky TGBA automatu redukovanych Spotem?
+
+Chceme ukazovat, ze redukce znacek muze nekdy umoznit dalsi redukci stavu?
+
 %}}}
 %{{{ conclusion
 
@@ -776,6 +838,12 @@ nalezeni akceptacni formule s $c$ klauzulemi a $m$ znackami v CNF,
 pripadne k nalezeni ekvivalentniho paritniho automat s danou maximalni
 paritou $p$ a stejnou strukturou. Nebo zkusit nalezt $\Fin$-less
 acceptance formuli.
+
+Redukce netrva vecne, da se prakicky pouzit a zkracenim timeoutu na
+QBF-solver se da zrychlit (tradeoff s ucinnosti). Prinejmensim u
+Rabinizeru 4 je velmi dobra sance, ze se to vyplati. Pridat do
+experimentu nejaky graf, ktery ukaze, jak rychle se nektere automaty
+redukovaly na minimum?
 
 %}}}
 
