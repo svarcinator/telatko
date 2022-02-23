@@ -40,7 +40,7 @@
 
 %{{{ title and authors
 
-\title{Reducing Acceptance Marks\\ in Emerson-Lei Automata by QBF-solving}
+\title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF-solving}
 \author{Tereza Schwarzov\'{a}}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{xschwar3@mail.muni.cz}{}{}
 \author{Jan Strej\v{c}ek}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{strejcek@fi.muni.cz}{https://orcid.org/0000-0001-5873-403X}{}
 \author{Juraj Major}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{}{}
@@ -72,12 +72,14 @@
   acceptance marks. We introduce a new technique reducing the number
   of %different
   acceptance marks in TELA with use of \emph{quantified Boolean
-    formulas (QBF)}: if a constructed QBF formula is satisfiable then
-  its model encodes an equivalent accepting formula with less
-  acceptance marks. In fact, we present three formula constructions
-  trading the speed of the technique for higher reduction
+    formulas (QBF)}.
+  % : if a constructed QBF formula is satisfiable then
+  % its model encodes an equivalent accepting formula with less
+  % acceptance marks.
+  In fact, we present three formula constructions
+  trading speed for higher reduction
   efficiency. We evaluated our reduction technique on TELA produced by
-  state-of-the-art tools Delag, ltl3tela, Rabinizer~4, and SPOT. The
+  state-of-the-art tools Delag, ltl3tela, Rabinizer~4, and Spot. The
   technique reduced some acceptance marks in automata produced by all
   these tools. In the case of Rabinizer~4, the cumulative number of
   acceptance marks was reduced to less than one half.
@@ -128,7 +130,8 @@ Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
 Rabinizer~4~\cite{kretinsky.18.cav}, or
 SPOT~\cite{duret.16.atva2}. There are also some algorithms processing
 these automata, for example the emptiness check~\cite{baier.19.atva}
-or translation of TELA to parity automata~\cite{renkin.20.atva}. \todo{Doplnit!}
+or translation of TELA to parity
+automata~\cite{renkin.20.atva,casares.22.tacas}.
 
 Algorithms processing TELA are often sensitive to the number of
 acceptance marks more than to other parts of the automaton. For
@@ -141,77 +144,65 @@ marks that appear in acceptance primitives saying that a mark has to
 be visited finitely often, while it is only polynomial in other
 measures of the input automaton.
 
-\todo{Honza je tu!}
-
-These observations motivate our study of techniques reducing the
+These observations motivate our study of a technique reducing the
 number of acceptance marks without altering the structure of the
-automaton. We present basically two reduction techniques. The first
-one is based on relations among individual transition sets defined by
-various acceptance marks in each \emph{strongly connected component
-  (SCC)}. This technique can be seen as an extension of the
-\emph{SCC-base simplifications of acceptance
-  conditions}~\cite{babiak.13.spin} designed for
-\emph{transition-based generalized Büchi automata (TGBA)} and
-implemented in SPOT. Probably the main difference between the original
-technique for TGBA and the one for TELA is in the final step when
-simplified acceptance conditions for each SCC are merged together into
-one reduced acceptance condition.
-
-The second technique is completely different. For a given TELA and
-parameters $c,m$, it produces a \emph{quantified Boolean formula
-  (QBF)} which is satisfiable if and only if there exists an automaton
-with the same structure, $m$ acceptance marks, an acceptance formula
-in disjunctive normal form with $c$ clauses, and the same set
-of accepting runs. The placement of the marks on transitions and the
+automaton. This paper presents a technique heavily based on
+\emph{quantified Boolean formulas (QBF)}. For a given TELA and
+parameters $c,m$, it produces a QBF which is satisfiable if and only
+if there exists an automaton with the same structure, $m$ acceptance
+marks, an acceptance formula in disjunctive normal form with $c$
+clauses, and the same set of accepting runs as the original
+automaton. The placement of the marks on transitions and the
 acceptance formula can be obtained from a model of the
-formula. Besides this formula, we describe also the construction of a
-simpler formula such its satisfiability implies existence of an
-automaton with the same structure, $m$ acceptance marks, and the same
-set of accepting runs, but not vice versa.
+formula. Besides this formula, we describe also the construction of
+two simpler formulas such that their satisfiability implies the
+existence of an automaton with the same structure, $m$ acceptance
+marks, and the same set of accepting runs, but not vice versa.
 
-We have implemented both reduction techniques in a tool called
+We have implemented our reduction technique in a tool called
 \texttt{telatko}. We show that the tool can reduce acceptance marks in
 automata produced by Delag~\cite{muller.17.gandalf},
 ltl3tela~\cite{major.19.atva}, Rabinizer~4~\cite{kretinsky.18.cav},
-and SPOT~\cite{duret.16.atva2}.  While the reduction is relatively
-modest for TELA produced by ltl3tela and SPOT, it is substantial for
-automata produced by Rabinizer~4.
+and Spot~\cite{duret.16.atva2}.  While the reduction is relatively
+modest for TELA produced by ltl3tela and Spot, it is substantial for
+automata produced by Rabinizer~4. \todo{A jak vyjde Delag? Fixnout i
+  Abstract.}
 
-\subsubsection{Related results}
-We are not aware about any existing research aimed at simplification
-of acceptance formulas of TELA or reduction of the number of its
-acceptance marks without increasing the number of states.
-
-There are some SAT-based approaches aimed to reduce the number of
-states of automata over infinite words. Namely, there are reductions
-designed for nondeterministic Büchi automata~\cite{ehlers.10.spin},
-deterministic Büchi automata~\cite{ehlers.10.sat}, and deterministic
-generalized Büchi automata~\cite{baarir.14.forte}. Further, there is
-also a SAT-based approach that transforms a deterministic TELA
-automaton to an equivalent automaton with a given acceptance condition
-and a given number of states~\cite{baarir.15.lpar} (if such an
-automaton exists). Note that all these techniques are usually very
-slow and their authors typically suggest to use them only for specific
-purposes like looking for cases where some automata construction can
-be improved.
+\paragraph*{Related results}
+We are not aware about any existing research primarily aimed at
+simplification of acceptance formulas of TELA or reduction of the
+number of its acceptance marks without increasing the number of
+states. There exists only a SAT-based approach that transforms a
+deterministic TELA automaton to an equivalent automaton with a given
+acceptance condition and a given number of
+states~\cite{baarir.15.lpar} (if such an automaton exists). Further,
+there are some SAT-based approaches aimed to reduce the number of
+states of automata over infinite words. More preceisely, there are
+reductions designed for nondeterministic Büchi
+automata~\cite{ehlers.10.spin}, deterministic Büchi
+automata~\cite{ehlers.10.sat}, and deterministic generalized Büchi
+automata~\cite{baarir.14.forte}. Note that all these techniques are
+usually very slow and their authors typically suggest to use them only
+for specific purposes like looking for cases where some automata
+construction can be improved.
 
 Casares, Colcombet, and Fijalkow very recently introduced a structure
 called \emph{alternating cycle decomposition
   (ACD)}~\cite{casares.21.icalp} which compactly represents the
-information about all accepting and non-accepting automata cycles.  We
+information about all accepting and non-accepting automata cycles. We
 expect that ACD could potentialy be used to reduce the number of
 acceptance marks or to simplify the acceptance condition. However,
-such a reduction is not obvious. Moreover, the construction of ACD
-seems to be computationally expensive.
+such a reduction is not obvious.
+%Moreover, the construction of ACD seems to be computationally expensive.
 
-\subsubsection{Structure of the paper} The next section introduces
-basic terms used in the paper. Section~\ref{sec:standard} presents the
-reduction technique based on relations among individual acceptance
-marks on each SCC. The QBF-based technique is explained in
-Section~\ref{sec:qbf}. Implementation is briefly described in
-Section~\ref{sec:experiments}, which also shows the experimental
-results. Finally, Section~\ref{sec:conclusion} suggests other
-applications of our QBF-reduction technique and closes the paper.
+\paragraph*{Structure of the paper} The next section introduces basic
+terms used in the paper. Section~\ref{sec:qbf} explains the
+construction of three mentioned QBF formulas. The reduction algorithm
+based on these formulas is described together with its implementation
+in Section~\ref{sec:algimpl}. Section~\ref{sec:experiments} shows the
+experimental results. Finally, Section~\ref{sec:conclusion} suggests
+other applications of our QBF-reduction technique and closes the
+paper.
 
 %}}}
 %{{{ preliminaries
@@ -243,7 +234,7 @@ $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
 of adjacent transitions
 $\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
 $q_0=q_I$. Let $M(\pi)$ denote set of all acceptance marks that occur
-in run $\pi$ in infinitely many transitions. Run $\pi$ is
+in infinitely many transitions of run $\pi$. Run $\pi$ is
 \emph{accepting} iff it satisfies the formula $\varphi$, where $\pi$
 satisfies $\Inf(m)$ iff $m\in M(\pi)$ and $\pi$ satisfies $\Fin(m)$
 iff $m\not\in M(\pi)$. The \emph{language} of automaton $\mA$ is the
@@ -253,6 +244,8 @@ $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
 if $L(\mA)=L(\mB)$.
 % such that $\mA$ has
 % an accepting run over $u$.
+
+\todo{Jan is here}
 
 An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
   (DNF)} if it is a disjunction of clauses, where each clause is a
@@ -318,314 +311,6 @@ A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
 $\varphi = Q_{1}x_{1}...Q_{n}x_{n} . \psi$, where
 $Q_1,\ldots,Q_n \in \{\forall, \exists\}$ and $\psi$ is a Boolean
 formula.
-
-%}}}
-%{{{ standard reductions
-
-\section{Reduction based on acceptance marks relations}\label{sec:standard}
-
-This section presents a reduction technique based on relations between
-acceptance sets restricted to individual SCCs. It employs the fact
-that acceptance of a run always depends only on a single SCC, namely
-the SCC that contains the whole run except some finite prefix.
-
-Let $\mA$ be a TELA with the acceptance condition $\varphi$. We assume
-that $\varphi$ is in DNF. This technique has two steps.
-\begin{enumerate}
-\item For each SCC $S$, we make a copy $\varphi_S$ of $\varphi$ and
-  simplify it according to relations between acceptance sets
-  restricted to $\delta_S$. 
-\item We collect the simplified acceptance conditions
-  $\varphi_{S_1},\ldots,\varphi_{S_k}$ of all SCCs and merge them into
-  one acceptance condition $\varphi'$. Additionally, we sometimes add
-  acceptance marks to all transitions of some SCCs to make the
-  resulting automaton with acceptance formula $\varphi'$ equivalent to
-  the original automaton.
-\end{enumerate}
-
-% Let $\mathcal{A}$ be an original automaton and let $\psi$ be an
-% acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has
-% an infinite suffix that takes place within one SCC $S_{i}$. Thus the
-% evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can
-% optimize the acceptance condition for each SCC separately. This
-% optimization consists of removing redundant terms from acceptance
-% condition and relabeling of acceptance marks on the transitions. The
-% state and transition structure of the SCC does not change. This way we
-% obtain set of simplified acceptance conditions that we merge into new
-% acceptance formula $\psi'$. The automaton with relabeled transitons
-% and new acceptance condition $\psi'$ we denote $\mathcal{A}'$.
-% Finally, we ensure that automaton $\mathcal{A'}$ is equivalent to the
-% original automaton $\mathcal{A}$.
-
-\subsection{Simplification of $\varphi_S$ for an SCC $S$}\label{ssec:step1}
-Recall that $\varphi_S$ is in DNF. Hence, we can represent it as a set
-$\varphi_S=\{D_1,\ldots,D_k\}$ of disjunctive clauses.
-
-
-
-
-
-Since formula $\psi_{i}$ is in DNF, we can represent it as a set of disjuncts $\overline{\psi_{i}} = \{D_1, D_2, \ldots D_k\}$.
-
-Let $D_{k} \in \overline{\psi_{i}}$ be a disjunct of formula $\overline{\psi_{i}}$ and $C_{j} \in D_{k}$ a conjunct of disjunct $D_{k}$. Furthermore let  $\tacc{0}{i}, \tacc{4}{j}, \tacc{8}{k}, \tacc{2}{l} \in M$ be distinct acceptance marks that occur in $\mathcal{A}$.
-
-In the next section, some properties of an automaton allow us to substitute a Boolean value $\true$ or $\false$ for a particular term of the formula $\psi_i$.
-The consequences of this substitution are divided into a number of cases. We represent it on the set-format of formula we just defined.
-
-\begin{itemize}
-    \item If $C_{j}$ is substituted by $\true$, the conjunct is omitted from $D_{k}$. Thus $D_{k} = D_{k} \setminus \{C_{j}\}$.
-    \item If $C_{j}$ is substituted by $\false$, the conjunct causes that the whole $D_{k}$ evaluates to $\false$. Thus $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{k}\}$.
-
-\end{itemize}
-
-That being said, we can define the reduction techniques. 
-
-\subsubsection{Acceptance formula modifications\\} 
-\label{subsection:acc_modif}
-Since we optimize for each SCC separately, the acceptance formula corresponding to SCC $S_{i}$ can contain terms with acceptance marks that are not present on the transitions of $S_{i}$.
-Let $\tacc{8}{k} \in M$ be an acceptance mark that is not present on any edge of $S_{i}$. Then any term that contains this acceptance mark in $\overline{\psi_{i}}$ can be immediately substituted with a boolean value and thus removed from $\overline{\psi_{i}}$.
-\medskip
-
-Therefore acceptance mark $\tacc{8}{k}$ is not visited in any run of $S_{i}$ and thus every term in form $\Fin\tacc{8}{k}$ is substituted with $\true$ and every term $\Inf\tacc{8}{k}$ is substituted with $\false$.
-
-On the contrary, let $\tacc{4}{j}$ be an acceptance mark that is present on every transition of $S_{i}$. That means that at least one transition with $\tacc{4}{j}$ is visited infinitely often by a run of $\mathcal{S_{i}}$. Thus every term $\Fin\tacc{4}{j}$ is substituted by $\false$ and every term in form $\Inf\tacc{4}{j}$ is substituted by $\true$. 
-
-\subsubsection{$\Inf$ conjuncts\\}
-\label{subsection:simpl_inf}
-Reduction of a conjunct of $\Inf\tacc{8}{k}$ form  is based on the inclusion of the sets of edges labeled with $\tacc{8}{k}$ and set of edges labeled with $\tacc{4}{j}$. If all transitions that contain an acceptance mark $\tacc{8}{k}$ also contain $\tacc{4}{j}$, we can remove $\Inf\tacc{4}{j}$ from all disjuncts, where it occurs together with $\Inf\tacc{8}{k}$. 
-More formally, if the following conditions hold:
-\begin{itemize}
-    \item $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$
-    \item $\Inf\tacc{8}{k}, \Inf\tacc{4}{j} \in D_{k}$
-\end{itemize}
-then we can we can substitute $\Inf\tacc{4}{j}$ with Boolean value $\true$. 
-This modification does not change the language because it does not affect accepting runs of $S_{i}$. The transitions can create an accepting run that has the potential to satisfy $D_{k}$ only if they are labeled with both  $\tacc{8}{k}$  and $\tacc{4}{j}$. Since $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$, one can notice that that if a run satisfies $\Inf\tacc{8}{k}$ then  $\Inf\tacc{4}{j}$ is satisfied as well. Therefore if we remove $\Inf \tacc{4}{j}$ from $\overline{\psi_{i}}$, this modification does not affect the language.
-
-\subsubsection{$\Fin$ conjuncts\\}
-Similarly as in previous section, this reduction is based on inclusion.
-If following conditions hold:
-\begin{itemize}
-    \item $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$
-    \item $\Fin\tacc{8}{k}, \Fin\tacc{4}{j} \in D_{k}$
-\end{itemize}
-then we can we can substitute $\Fin\tacc{8}{k}$ with boolean value $\true$. This modification does not change the language because from if $\tacc{4}{j}$ is visited finitely often, then also $\tacc{8}{k}$ is visited finitely often. 
-\medskip
-
-We can merge two conjuncts into one if the conjuncts always occur in the same disjuncts in $\Fin$ form. We can do so regardless of the position of the acceptance marks that are contained in the conjuncts. 
-If the following condition is met:
-\begin{itemize}
-    \item $\forall D_{k}: \Fin\tacc{8}{k} \in D_{k} \Longleftrightarrow \Fin\tacc{4}{j} \in D_{k}$
-\end{itemize}
-We introduce a fresh acceptance mark $\tacc{2}{l}$, such that $Z(\tacc{2}{l}) = Z(\tacc{8}{k}) \cup Z(\tacc{4}{j})$.
- Finally, we can update $D_{k}$:
-\begin{align*}
-    D_{k} = (D_{k} \setminus \{ \Fin\tacc{8}{k}, \Fin\tacc{4}{j} \}) \cup \{\Fin\tacc{2}{l}\}
-\end{align*}
-
-This update basically means that $\Fin\tacc{8}{k}, \Fin\tacc{4}{j}$ are substituted by $\true$ and new conjunct $\Fin\tacc{2}{l}$ is added to $D_{k}$. The acceptance mark $\tacc{2}{j}$ is placed on every edge of the SCC $S_{i}$ that is labeled with $\tacc{8}{k}$ or $\tacc{4}{j}$.
-This modification does not change the language because it does not change the acceptance runs of $S_{i}$. It only relabels the acceptance marks on edges that can be seen finitely often. 
-
-
-
-\subsubsection{$\Fin \land \Inf$ conjuncts\\}
-There are two cases when we can reduce one of the pair of $\Inf\tacc{0}{i}$ and $\Fin\tacc{2}{l}$ conjuncts.
-
-At first, if every transition labeled with  $\tacc{0}{i}$ is also labeled with $\tacc{2}{l}$, the conjunction of $\Inf\tacc{0}{i} \land \Fin\tacc{2}{l}$ is never $\true$ because every run that visits $\tacc{2}{l}$ also visits $\tacc{0}{i}$. Therefore we can reduce the whole disjunct $D_{k}$.
-If the following conditions are met:
-\begin{itemize}
-    \item $Z(\tacc{0}{i}) \subseteq Z(\tacc{2}{l})$
-    \item $\Inf\tacc{0}{i}, \Fin\tacc{2}{l} \in D_{k}$
-\end{itemize}
-We substitute the whole disjunct $D_{k}$ for $\false$. In other words $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{K}\}$.
-
-Finally we can simplify $\overline{\psi_{i}}$, if the edges labeled with $\tacc{0}{i}$ and edges labeled with $\tacc{2}{l}$ are complementary.
-More formally if:
-\begin{itemize}
-    \item  $\Inf\tacc{0}{i}$ and $\Fin\tacc{2}{l} \in D_{k}$
-    \item $Z(\tacc{0}{i}) \cap Z(\tacc{2}{l}) = \emptyset \land Z(\tacc{0}{i}) \cup Z(\tacc{2}{l}) = \delta_{S_{i}} $
-\end{itemize}
-Then we can substitute $\true$ for $\Inf\tacc{0}{i}$.
-This reduction does not change the language because if during a run of $S_{i}$ all transitions labeled with $\tacc{2}{l}$ are visited only finitely often, then necessarily at least one transition labeled with $\tacc{0}{i}$ is visited infinitely often. Therefore removing $\Inf\tacc{0}{i}$ from $\overline{\psi_{i}}$ does not affect the language, since the validity of $\Fin\tacc{2}{l}$ implies the validity of $\Inf\tacc{0}{i}$.
-
-\subsection{Merge of $\psi_{i}$}
-After applying reduction techniques from the previous section, each $S_{i}$ has its own acceptance condition $\psi_{i}$. The goal of this section is to merge these acceptance conditions into one formula $\psi'$ with emphasis on obtaining a formula with the minimal number of acceptance sets.
-
-At first, the algorithm finds $\psi_{i}$ with the greatest number of disjuncts and states it as a base of the new acceptance condition $\psi'$. Now the algorithm continues by the successive merging of $\psi'$ with the unmerged formula $\psi_{i}$ that has the greatest number of disjuncts. This repeats until all formulae $\psi_{i}$ are merged. This process updates the form of $\psi'$ until it reaches its final form. The process of merging two formulae consists of two phases. In the first phase a suitable pairing of disjuncts is found and in the second phase, these disjuncts are merged.
-
-\begin{enumerate}
-	\item Let $\psi'$ denote the future acceptance condition of $\mathcal{A}'$ and $\psi_{i}$ is the acceptance condition of $S_{i}$ chosen to be merged. Then the algorithm uses \emph{linear sum assignment} to determine which disjunct of $\psi_{i}$ is merged with which disjunct of $\psi'$. The process of using \emph{linear sum assignment} and the pairing procedure is described in detail in work by T. Šťastná \cite{stastna.19.bc}.
-    \item Let $D_{K} \in \overline{\psi_{i}}$ be a disjunct paired with $D_{L} \in \overline{\psi'}$. All conjuncts of $D_{L}$ are initially labeled as unused. Now the algorithm maps every conjunct $C_{k} \in D_{K}$ to a suitable conjunct $C_{l} \in D_{L}$ and labels $C_{l}$ as used. \footnote{The indexes differ to emphasize the fact that they are not equal.} A conjunct $C_{l}$ is suitable for $C_{k}$ is it is on the same type ($\Fin$ or $\Inf$), it is labeled as unused. If no suitable $C_{l}$ is found, the algorithm adds $C_{k}$ to disjunct $D_{L}$ and marks it as used.
-\end{enumerate}
-
-
-In an acceptance mark $m_{l} \in M$ occurs in $\psi'$ in more than one conjunct, we need to check whether all of these conjuncts are mapped to conjuncts form $\psi_{i}$ with the same acceptance mark $m_{k} \in M$. If not, we resolve this conflict by replacing all additional occurrences of $m_{l}$ with fresh acceptance mark $m_{n}$ and we place $m_{n}$ on the exact transition of $\mathcal{A}'$ where $m_{l}$ is placed.
-Finally, in the end, the algorithm removes every acceptance mark that is not present in $\psi'$ from the edge of $\mathcal{A}$.
-
-\medskip
-
-\begin{example}
-Consider $\overline{\psi'} =  \{ \{ \Fin\tacc{0}{0}, \Inf\tacc{1}{1} \} , \{\Fin\tacc{0}{0} \} \}$ \\ and $\overline{\psi_{i}} = \{  \{\Fin\tacc{4}{4} \}, \{ \Fin\tacc{2}{2}, \Inf\tacc{3}{3} \} \} $. We obtain the pairing $(1,2), (2,1)$, meaning that the first disjunct of $\overline{\psi_{i}}$ is merged wit the second disjunct of $\overline{\psi'}$ and second disjunct of $\overline{\psi_{i}}$ is merged with the first disjunct of $\overline{\psi'}$. Then $\Fin\tacc{0}{0}$ is mapped to $\Fin\tacc{2}{2}$, $\Inf\tacc{1}{1} $ is mapped to $\Inf\tacc{3}{3}$ and $\Fin\tacc{0}{0}$ is again mapped to $\Fin\tacc{4}{4}$ which causes a conflict. Therefore we need to replace the second occurrence of $\tacc{0}{0}$ with fresh mark $\tacc{5}{5}$. The set-representation of formula $\psi'$ after merging is $\psi' =  \{ \{ \Fin\tacc{0}{0}, \Inf\tacc{1}{1} \} , \{\Fin\tacc{5}{5} \} \}$.
-
-\end{example}
-
-Unfortunately, sometimes when the optimal mapping was not found, the procedure produces an automaton with a more complex acceptance condition than the acceptance condition of the input automaton. Therefore we propose and implement an optimization, which prevents such a behavior and in general, produces smaller acceptance condition than the original one.
-
-\begin{itemize}
-    \item The selection of base of $\psi'$ is based on two keys. The primary key is cardinality (number of clauses) of $\overline{\psi_{i}}$, the secondary key is cardinality of clauses (number of terms in clause).
-    \item We order the disjunct in every $\overline{\psi_{i}}$ in descending order, where the key is the cardinality of a particular disjunct.
-    \item The DNF conversion of the input acceptance condition can lead to an exponential blowup of the formula, where some acceptance marks occur more than once. Since the reduction of acceptance sets is basically denoting the redundant ones as $\true$ or $\false$, we can as well easily obtain simplified acceptance formula in CNF (we simply denote the same acceptance sets as $\true$ or $\false$ as we did in DNF). According to the shape of the input acceptance condition, we choose the suitable (shorter) normal form and perform the merging algorithm on it.
-\end{itemize}
-By choosing the CNF over DNF in the cases where CNF is more natural (shorter), we prevent the formula to contain some acceptance marks more than once (at least, we do not create them by conversion of $\psi$ to DNF). This way, we prevent adding new acceptance marks to the formula when resolving conflicts of acceptance marks which leads to better results. If the original formula contains an acceptance mark that is present in more than one disjunct, then by ordering the disjuncts in every $\overline{\psi_{i}}$, the \emph{linear sum assignment} returns more convenient pairing. Meaning that if \emph{linear sum assignment} finds two equal assignments, it respects the order and the disjuncts with the  acceptance mark that occurs more than once are paired with disjuncts that also contain acceptance mark that occurs more than once.
-
-\begin{example}
-	Consider an automaton $\mathcal{A}$ in Figure \ref{fig:L1_before}. In this example, we demonstrate the simplification procedure described in Section \ref{section:simplification} and obtain simplified acceptance conditions $\psi_{i}$ for each SCC $S_{i}$. The simplified acceptance conditions $\overline{\psi_{i}}$ are displayed in the set-format we introduced earlier because we make use of it afterward during the merge. Then we merge these formulae into the acceptance condition of the simplified automaton $\mathcal{A}'$.
-We enumerate the SCCs $S_{1}, S_{2}, S_{3}$. (The indices correspond with the numbers inside the states in Figure \ref{fig:L1_before}.) And we assign an accepting condition $\psi_{1}$ to $S_{1}$, $\psi_{2}$ to $S_{2}$ and $\psi_{3}$ to $S_{3}$.
-    \begin{enumerate}
-	    \item We simplify $\psi_{1}$ according to the placement of acceptance marks on the edges in $S_{1}$. At first we notice, that the formula $\overline{\psi_{1}}$ contains acceptance marks that are not present on the edges of $S_{1}$. Therefore modify $\overline{\psi_{1}}$ as described in Subsection \ref{subsection:acc_modif}. We substitute $\true$ for $\Fin\tacc{3}{3}$ and $\false$ for $\Inf\tacc{1}{1}$ and $\Inf\tacc{0}{0}$. (This substitution deletes the whole disjunct $D_{1}$.) Then we notice that the acceptance marks are in a position which allows us to perform the simplification described in first part of subsection 3.1.4. We substitute $\true $ for $\Inf\tacc{4}{4}$ and obtain the final form of $\overline{\psi_{1}} = \{\{ \Fin\tacc{2}{2}\} \}$.
-	    \item Similarly as in previous case, we notice that acceptance marks $\tacc{2}{2}$, $\tacc{3}{3}$ and $\tacc{4}{4}$ are not present on the edges of $S_{2}$. Therefore we substitute $\true$ for both $\Fin\tacc{2}{2} \text{ and } \Fin\tacc{3}{3}$ and $\false$ for $\Inf\tacc{4}{4}$ (and thus remove the whole disjunct $D_{2}$).  Then we use the procedure described in Subsection \ref{subsection:simpl_inf} and remove $\Inf\tacc{1}{1}$ from the disjunct $D_{1}$ and obtain $\overline{\psi_{2}} = \{ \{\Inf\tacc{0}{0}\} \}$.
-        \item Finally, we yet again remove marks that are not present in $S_{3}$ and perform the simplification described in subsection 3.1.3. We substitute $\true $ for $\Fin\tacc{2}{2} \text{ and } \Fin\tacc{3}{3}$ and add new term $\Fin\tacc{5}{5}$ into $D_{2}$ and place $\tacc{5}{5}$ on the edges that are labeled with $\tacc{2}{2}$ or $\tacc{3}{3}$. The simplified acceptance condition is $\overline{\psi_{3}} = \{\{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4}\}\}$.
-    \end{enumerate}
-
-	Now we proceed to the merge of the formulae of the SCCs $\psi_{i}$. As a base of the new acceptance condition $\psi'$ we choose the formula $\psi_{3}$ because it has the highest number of disjuncts compared to the other formulae $\psi_i$, so $\overline{\psi'}=\{ \{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4} \}\}$. Now we merge  $\psi_{1}$ and $\psi_{2}$ with $\psi'$. The order is in this particular case irrelevant because $\overline{\psi_{1}}$ has the same number of disjuncts as $\overline{\psi_{2}}$ (and both disjuncts have the same number of conjuncts). So we merge $\overline{\psi_{1}}$ at first because of its lower index. Since both $\overline{\psi'}$ and $\overline{\psi_{1}}$ have only one disjunct, the only possible pairing that \emph{linear sum assignment 
-    } can give us is $(0,0)$, meaning that $\{ \Fin\tacc{2}{2}\}$ is merged with $\{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4}\}$. Then we need to map an unused conjunct  $\Fin\tacc{5}{5}$ to a conjunct of the same type which is $\Fin\tacc{2}{2}$. Similarly in case of $\overline{\psi_{2}}$ we map $\Inf\tacc{4}{4}$ on $\Inf\tacc{0}{0}$. This way we produce $\mathcal{A}'$ displayed in Figure  \ref{fig:L1_middle} with the acceptance condition $ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$. Observe that the automaton $\mathcal{A}'$ is not equivalent to the original $\mathcal{A}$. For example in Figure \ref{fig:L1_middle} is the highlighted loop not accepting but in the original automaton in Figure \ref{fig:L1_before} the loop accepting is. To reach the equivalence between the two automata, we need to \emph{restore equivalence} which is described in the next section.
-\end{example}
-
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[automaton]
-			\node[flabel] at (2,5) {$( \Inf\tacc{0}{0} \land \Inf\tacc{1}{1}) \lor (\Fin\tacc{2}{2} \land \Fin\tacc{3}{3} \land \Inf\tacc{4}{4})$};
-
-			\node[state, initial] (x) at (0,0) {0};
-			\node[state] (y) at (2,2) {1};
-			\node[state] (z) at (2,-1.5) {2};
-			\node[state] (w) at (5,-1.5) {3};
-
-			\path[->]
-				(x) edge[]  (y)
-				(x) edge[]  (z)
-				(z) edge[] (w)
-				
-            	
-            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
-            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
-            	(z) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc1] {1}(z)
-            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc0, pos=0.6] {0} node[accset,collacc1, pos=0.4] {1}(z)
-            	
-            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
-            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc3] {3}(w)
-            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc2] {2}(w)
-            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
-            	
-            	(y) edge[loop, in = 75, out = 105, looseness=6] node[accset,collacc4] {4}(y)
-            	(y) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc4] {4}(y)
-            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc2] {2} (y)
-            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc2] {2}(y)
-            	
-            	
-			;
-		\end{tikzpicture}
-    \caption{TELA before simplification Level 1}
-    \label{fig:L1_before}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[automaton]
-			\node[flabel] at (2,5) {$ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$};
-
-			\node[state, initial] (x) at (0,0) {0};
-			\node[state] (y) at (2,2) {1};
-			\node[state] (z) at (2,-1.5) {2};
-			\node[state] (w) at (5,-1.5) {3};
-
-			\path[->]
-				(x) edge[]  (y)
-				(x) edge[]  (z)
-				(z) edge[] (w)
-				
-            	
-            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
-            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
-            	(z) edge[loop, in = 70, out = 110, looseness=12]  (z)
-            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4} (z)
-            	
-            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
-            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc5] {5}(w)
-            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc5] {5}(w)
-            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
-            	
-            	(y) edge[loop, in = 75, out = 105, looseness=6, color=red] (y)
-            	(y) edge[loop, in = 72, out = 108, looseness=9] (y)
-            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc5] {5} (y)
-            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc5] {5}(y)
-            	
-            	
-			;
-		\end{tikzpicture}
-    \caption{TELA after simplification and merging in Level 1}
-    \label{fig:L1_middle}
-\end{figure}
-
-\subsection{Restoring equivalence}
-Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might change the language, so it is no longer equivalent to the language recognized by the original automaton $\mathcal{A}$. 
- By now, each SCC $S_{i}$ is adjusted to the acceptance condition $\psi_{i}$ which might be different than $\psi'$. 
- Therefore, for each SCC we need to restore equivalence with the new acceptance condition $\psi'$.
- The idea is that the only terms of $\psi'$ that can affect accepting runs on SCC $S_{i}$ are the ones that have been mapped on some terms in $\psi_{i}$. From now on, we refer to them as \emph{used terms}. We need to make sure that the other terms (the ones that have not been mapped on any term of $\psi_{i}$) can't affect any accepting run of $\mathcal{A}'$. From now on, we call these terms \emph{unused terms}.  We influence the evaluation of the  \emph{unused terms} in the following way:
-\begin{itemize}
-     \item If we want to make term in the $\Fin$ form always $\false$, we place it's acceptance mark on every edge of the SCC.
-     \item If we want to make term in the $\Inf$ form always $\true$, we place it's acceptance mark on every edge of the SCC.
-\end{itemize}
- Keep in mind that by now, any acceptance mark that is not in $\psi'$ is not present on any edge of $\mathcal{A}'$. Therefore any $\Fin$ term is already always $\true$ if its acceptance mark is not present on any edge of the SCC. Dually, $\Inf$ term is already always $\false$ if it is not present on any edge of the SCC.
-\medskip
- Now we distinguish the cases when $\psi'$ is in DNF or $\psi'$ is in CNF. 
-\begin{itemize}
-     \item If $\psi'$ is in DNF, we need to make $\false $ every disjunct that does not contain any \emph{used term}. Further, every \emph{unused term} that occurs in the same disjunct as any \emph{used term} needs to be made $\true$. 
-     \item Dually, if $\psi'$ is in CNF, every conjunct that does not contain any \emph{used term} needs to be made $\true$ and every \emph{unused term} that occurs in a conjunct with any \emph{used term} needs to be made $\false$.  
-     
-\end{itemize}
- 
-\begin{example}
-	Consider the example from the Figure \ref{fig:L1_middle}, where the DNF acceptance condition $\psi' = (\Fin\tacc{5}{5} \lor \Inf\tacc{4}{4})$ and the acceptance condition of SCC $S_{1}$ $\psi_{1} = (\Fin\tacc{2}{2})$. The term $\Fin\tacc{5}{5}$ is mapped to $\Fin\tacc{2}{2}$. Then we need to enforce that the \emph{unused term} $\Inf\tacc{4}{4}$ has no effect on the evaluation of $\psi'$ by the run with the infinite suffix contained within the SCC $S_{1}$. Otherwise the result will not be equivalent (see the highlited loop in Figure \ref{fig:L1_middle}). Therefore we make term $\Inf\tacc{4}{4}$ $\true$ by adding $\tacc{4}{4}$ on every edge of the SCC $S_{i}$. The result can be seen in Figure \ref{fig:L1_done}.
-\end{example}
- 
-
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[automaton]
-			\node[flabel] at (2,5) {$ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$};
-
-			\node[state, initial] (x) at (0,0) {0};
-			\node[state] (y) at (2,2) {1};
-			\node[state] (z) at (2,-1.5) {2};
-			\node[state] (w) at (5,-1.5) {3};
-
-			\path[->]
-				(x) edge[]  (y)
-				(x) edge[]  (z)
-				(z) edge[] (w)
-				
-            	
-            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
-            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
-            	(z) edge[loop, in = 70, out = 110, looseness=12]  (z)
-            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4} (z)
-            	
-            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
-            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc5] {5}(w)
-            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc5] {5}(w)
-            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
-            	
-            	(y) edge[loop, in = 75, out = 105, looseness=6] node[accset,collacc4] {4} (y)
-            	(y) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc4] {4}(y)
-            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc4, pos=0.4] {4} node[accset,collacc5, pos=0.6] {5}(y)
-            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4, pos=0.4] {4} node[accset,collacc5, pos=0.6] {5}(y)
-            	
-            	
-			;
-		\end{tikzpicture}
-    \caption{Equivalent TELA after simplification Level 1}
-    \label{fig:L1_done}
-\end{figure}
 
 %}}}
 %{{{ QBF-based reduction 
@@ -1070,9 +755,17 @@ For simplicity, we do not display letters on the edges of the automata in Figure
 \end{itemize}
 
 %}}}
-%{{{ implementation and experimental evaluation
+%{{{ algorithm and implementation
 
-\section{Implementation and experimental evaluation}\label{sec:experiments}
+\section{Reduction algorithm and its implementation}\label{sec:algimpl}
+Jak se nastavuji inicialni parametry a jak postupne klesaji.
+Jak prechazim od nizsich levelu k vyssim.
+Vyuzivame incremental QBF solving?
+
+%}}}
+%{{{ experimental evaluation 
+
+\section{Experimental evaluation}\label{sec:experiments}
 
 %}}}
 %{{{ conclusion
@@ -1091,6 +784,316 @@ paritou $p$ a stejnou strukturou.
 
 
 \end{document}
+
+%{{{ standard reductions
+
+\section{Reduction based on acceptance marks relations}\label{sec:standard}
+
+This section presents a reduction technique based on relations between
+acceptance sets restricted to individual SCCs. It employs the fact
+that acceptance of a run always depends only on a single SCC, namely
+the SCC that contains the whole run except some finite prefix.
+
+Let $\mA$ be a TELA with the acceptance condition $\varphi$. We assume
+that $\varphi$ is in DNF. This technique has two steps.
+\begin{enumerate}
+\item For each SCC $S$, we make a copy $\varphi_S$ of $\varphi$ and
+  simplify it according to relations between acceptance sets
+  restricted to $\delta_S$. 
+\item We collect the simplified acceptance conditions
+  $\varphi_{S_1},\ldots,\varphi_{S_k}$ of all SCCs and merge them into
+  one acceptance condition $\varphi'$. Additionally, we sometimes add
+  acceptance marks to all transitions of some SCCs to make the
+  resulting automaton with acceptance formula $\varphi'$ equivalent to
+  the original automaton.
+\end{enumerate}
+
+% Let $\mathcal{A}$ be an original automaton and let $\psi$ be an
+% acceptance condition of $\mathcal{A}$. Every run of $\mathcal{A}$ has
+% an infinite suffix that takes place within one SCC $S_{i}$. Thus the
+% evaluation of $\psi$ depends purely on the SCC $S_{i}$ and we can
+% optimize the acceptance condition for each SCC separately. This
+% optimization consists of removing redundant terms from acceptance
+% condition and relabeling of acceptance marks on the transitions. The
+% state and transition structure of the SCC does not change. This way we
+% obtain set of simplified acceptance conditions that we merge into new
+% acceptance formula $\psi'$. The automaton with relabeled transitons
+% and new acceptance condition $\psi'$ we denote $\mathcal{A}'$.
+% Finally, we ensure that automaton $\mathcal{A'}$ is equivalent to the
+% original automaton $\mathcal{A}$.
+
+\subsection{Simplification of $\varphi_S$ for an SCC $S$}\label{ssec:step1}
+Recall that $\varphi_S$ is in DNF. Hence, we can represent it as a set
+$\varphi_S=\{D_1,\ldots,D_k\}$ of disjunctive clauses.
+
+
+
+
+
+Since formula $\psi_{i}$ is in DNF, we can represent it as a set of disjuncts $\overline{\psi_{i}} = \{D_1, D_2, \ldots D_k\}$.
+
+Let $D_{k} \in \overline{\psi_{i}}$ be a disjunct of formula $\overline{\psi_{i}}$ and $C_{j} \in D_{k}$ a conjunct of disjunct $D_{k}$. Furthermore let  $\tacc{0}{i}, \tacc{4}{j}, \tacc{8}{k}, \tacc{2}{l} \in M$ be distinct acceptance marks that occur in $\mathcal{A}$.
+
+In the next section, some properties of an automaton allow us to substitute a Boolean value $\true$ or $\false$ for a particular term of the formula $\psi_i$.
+The consequences of this substitution are divided into a number of cases. We represent it on the set-format of formula we just defined.
+
+\begin{itemize}
+    \item If $C_{j}$ is substituted by $\true$, the conjunct is omitted from $D_{k}$. Thus $D_{k} = D_{k} \setminus \{C_{j}\}$.
+    \item If $C_{j}$ is substituted by $\false$, the conjunct causes that the whole $D_{k}$ evaluates to $\false$. Thus $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{k}\}$.
+
+\end{itemize}
+
+That being said, we can define the reduction techniques. 
+
+\subsubsection{Acceptance formula modifications\\} 
+\label{subsection:acc_modif}
+Since we optimize for each SCC separately, the acceptance formula corresponding to SCC $S_{i}$ can contain terms with acceptance marks that are not present on the transitions of $S_{i}$.
+Let $\tacc{8}{k} \in M$ be an acceptance mark that is not present on any edge of $S_{i}$. Then any term that contains this acceptance mark in $\overline{\psi_{i}}$ can be immediately substituted with a boolean value and thus removed from $\overline{\psi_{i}}$.
+\medskip
+
+Therefore acceptance mark $\tacc{8}{k}$ is not visited in any run of $S_{i}$ and thus every term in form $\Fin\tacc{8}{k}$ is substituted with $\true$ and every term $\Inf\tacc{8}{k}$ is substituted with $\false$.
+
+On the contrary, let $\tacc{4}{j}$ be an acceptance mark that is present on every transition of $S_{i}$. That means that at least one transition with $\tacc{4}{j}$ is visited infinitely often by a run of $\mathcal{S_{i}}$. Thus every term $\Fin\tacc{4}{j}$ is substituted by $\false$ and every term in form $\Inf\tacc{4}{j}$ is substituted by $\true$. 
+
+\subsubsection{$\Inf$ conjuncts\\}
+\label{subsection:simpl_inf}
+Reduction of a conjunct of $\Inf\tacc{8}{k}$ form  is based on the inclusion of the sets of edges labeled with $\tacc{8}{k}$ and set of edges labeled with $\tacc{4}{j}$. If all transitions that contain an acceptance mark $\tacc{8}{k}$ also contain $\tacc{4}{j}$, we can remove $\Inf\tacc{4}{j}$ from all disjuncts, where it occurs together with $\Inf\tacc{8}{k}$. 
+More formally, if the following conditions hold:
+\begin{itemize}
+    \item $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$
+    \item $\Inf\tacc{8}{k}, \Inf\tacc{4}{j} \in D_{k}$
+\end{itemize}
+then we can we can substitute $\Inf\tacc{4}{j}$ with Boolean value $\true$. 
+This modification does not change the language because it does not affect accepting runs of $S_{i}$. The transitions can create an accepting run that has the potential to satisfy $D_{k}$ only if they are labeled with both  $\tacc{8}{k}$  and $\tacc{4}{j}$. Since $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$, one can notice that that if a run satisfies $\Inf\tacc{8}{k}$ then  $\Inf\tacc{4}{j}$ is satisfied as well. Therefore if we remove $\Inf \tacc{4}{j}$ from $\overline{\psi_{i}}$, this modification does not affect the language.
+
+\subsubsection{$\Fin$ conjuncts\\}
+Similarly as in previous section, this reduction is based on inclusion.
+If following conditions hold:
+\begin{itemize}
+    \item $Z(\tacc{8}{k}) \subseteq Z(\tacc{4}{j})$
+    \item $\Fin\tacc{8}{k}, \Fin\tacc{4}{j} \in D_{k}$
+\end{itemize}
+then we can we can substitute $\Fin\tacc{8}{k}$ with boolean value $\true$. This modification does not change the language because from if $\tacc{4}{j}$ is visited finitely often, then also $\tacc{8}{k}$ is visited finitely often. 
+\medskip
+
+We can merge two conjuncts into one if the conjuncts always occur in the same disjuncts in $\Fin$ form. We can do so regardless of the position of the acceptance marks that are contained in the conjuncts. 
+If the following condition is met:
+\begin{itemize}
+    \item $\forall D_{k}: \Fin\tacc{8}{k} \in D_{k} \Longleftrightarrow \Fin\tacc{4}{j} \in D_{k}$
+\end{itemize}
+We introduce a fresh acceptance mark $\tacc{2}{l}$, such that $Z(\tacc{2}{l}) = Z(\tacc{8}{k}) \cup Z(\tacc{4}{j})$.
+ Finally, we can update $D_{k}$:
+\begin{align*}
+    D_{k} = (D_{k} \setminus \{ \Fin\tacc{8}{k}, \Fin\tacc{4}{j} \}) \cup \{\Fin\tacc{2}{l}\}
+\end{align*}
+
+This update basically means that $\Fin\tacc{8}{k}, \Fin\tacc{4}{j}$ are substituted by $\true$ and new conjunct $\Fin\tacc{2}{l}$ is added to $D_{k}$. The acceptance mark $\tacc{2}{j}$ is placed on every edge of the SCC $S_{i}$ that is labeled with $\tacc{8}{k}$ or $\tacc{4}{j}$.
+This modification does not change the language because it does not change the acceptance runs of $S_{i}$. It only relabels the acceptance marks on edges that can be seen finitely often. 
+
+
+
+\subsubsection{$\Fin \land \Inf$ conjuncts\\}
+There are two cases when we can reduce one of the pair of $\Inf\tacc{0}{i}$ and $\Fin\tacc{2}{l}$ conjuncts.
+
+At first, if every transition labeled with  $\tacc{0}{i}$ is also labeled with $\tacc{2}{l}$, the conjunction of $\Inf\tacc{0}{i} \land \Fin\tacc{2}{l}$ is never $\true$ because every run that visits $\tacc{2}{l}$ also visits $\tacc{0}{i}$. Therefore we can reduce the whole disjunct $D_{k}$.
+If the following conditions are met:
+\begin{itemize}
+    \item $Z(\tacc{0}{i}) \subseteq Z(\tacc{2}{l})$
+    \item $\Inf\tacc{0}{i}, \Fin\tacc{2}{l} \in D_{k}$
+\end{itemize}
+We substitute the whole disjunct $D_{k}$ for $\false$. In other words $\overline{\psi_{i}} = \overline{\psi_{i}} \setminus \{D_{K}\}$.
+
+Finally we can simplify $\overline{\psi_{i}}$, if the edges labeled with $\tacc{0}{i}$ and edges labeled with $\tacc{2}{l}$ are complementary.
+More formally if:
+\begin{itemize}
+    \item  $\Inf\tacc{0}{i}$ and $\Fin\tacc{2}{l} \in D_{k}$
+    \item $Z(\tacc{0}{i}) \cap Z(\tacc{2}{l}) = \emptyset \land Z(\tacc{0}{i}) \cup Z(\tacc{2}{l}) = \delta_{S_{i}} $
+\end{itemize}
+Then we can substitute $\true$ for $\Inf\tacc{0}{i}$.
+This reduction does not change the language because if during a run of $S_{i}$ all transitions labeled with $\tacc{2}{l}$ are visited only finitely often, then necessarily at least one transition labeled with $\tacc{0}{i}$ is visited infinitely often. Therefore removing $\Inf\tacc{0}{i}$ from $\overline{\psi_{i}}$ does not affect the language, since the validity of $\Fin\tacc{2}{l}$ implies the validity of $\Inf\tacc{0}{i}$.
+
+\subsection{Merge of $\psi_{i}$}
+After applying reduction techniques from the previous section, each $S_{i}$ has its own acceptance condition $\psi_{i}$. The goal of this section is to merge these acceptance conditions into one formula $\psi'$ with emphasis on obtaining a formula with the minimal number of acceptance sets.
+
+At first, the algorithm finds $\psi_{i}$ with the greatest number of disjuncts and states it as a base of the new acceptance condition $\psi'$. Now the algorithm continues by the successive merging of $\psi'$ with the unmerged formula $\psi_{i}$ that has the greatest number of disjuncts. This repeats until all formulae $\psi_{i}$ are merged. This process updates the form of $\psi'$ until it reaches its final form. The process of merging two formulae consists of two phases. In the first phase a suitable pairing of disjuncts is found and in the second phase, these disjuncts are merged.
+
+\begin{enumerate}
+	\item Let $\psi'$ denote the future acceptance condition of $\mathcal{A}'$ and $\psi_{i}$ is the acceptance condition of $S_{i}$ chosen to be merged. Then the algorithm uses \emph{linear sum assignment} to determine which disjunct of $\psi_{i}$ is merged with which disjunct of $\psi'$. The process of using \emph{linear sum assignment} and the pairing procedure is described in detail in work by T. Šťastná \cite{stastna.19.bc}.
+    \item Let $D_{K} \in \overline{\psi_{i}}$ be a disjunct paired with $D_{L} \in \overline{\psi'}$. All conjuncts of $D_{L}$ are initially labeled as unused. Now the algorithm maps every conjunct $C_{k} \in D_{K}$ to a suitable conjunct $C_{l} \in D_{L}$ and labels $C_{l}$ as used. \footnote{The indexes differ to emphasize the fact that they are not equal.} A conjunct $C_{l}$ is suitable for $C_{k}$ is it is on the same type ($\Fin$ or $\Inf$), it is labeled as unused. If no suitable $C_{l}$ is found, the algorithm adds $C_{k}$ to disjunct $D_{L}$ and marks it as used.
+\end{enumerate}
+
+
+In an acceptance mark $m_{l} \in M$ occurs in $\psi'$ in more than one conjunct, we need to check whether all of these conjuncts are mapped to conjuncts form $\psi_{i}$ with the same acceptance mark $m_{k} \in M$. If not, we resolve this conflict by replacing all additional occurrences of $m_{l}$ with fresh acceptance mark $m_{n}$ and we place $m_{n}$ on the exact transition of $\mathcal{A}'$ where $m_{l}$ is placed.
+Finally, in the end, the algorithm removes every acceptance mark that is not present in $\psi'$ from the edge of $\mathcal{A}$.
+
+\medskip
+
+\begin{example}
+Consider $\overline{\psi'} =  \{ \{ \Fin\tacc{0}{0}, \Inf\tacc{1}{1} \} , \{\Fin\tacc{0}{0} \} \}$ \\ and $\overline{\psi_{i}} = \{  \{\Fin\tacc{4}{4} \}, \{ \Fin\tacc{2}{2}, \Inf\tacc{3}{3} \} \} $. We obtain the pairing $(1,2), (2,1)$, meaning that the first disjunct of $\overline{\psi_{i}}$ is merged wit the second disjunct of $\overline{\psi'}$ and second disjunct of $\overline{\psi_{i}}$ is merged with the first disjunct of $\overline{\psi'}$. Then $\Fin\tacc{0}{0}$ is mapped to $\Fin\tacc{2}{2}$, $\Inf\tacc{1}{1} $ is mapped to $\Inf\tacc{3}{3}$ and $\Fin\tacc{0}{0}$ is again mapped to $\Fin\tacc{4}{4}$ which causes a conflict. Therefore we need to replace the second occurrence of $\tacc{0}{0}$ with fresh mark $\tacc{5}{5}$. The set-representation of formula $\psi'$ after merging is $\psi' =  \{ \{ \Fin\tacc{0}{0}, \Inf\tacc{1}{1} \} , \{\Fin\tacc{5}{5} \} \}$.
+
+\end{example}
+
+Unfortunately, sometimes when the optimal mapping was not found, the procedure produces an automaton with a more complex acceptance condition than the acceptance condition of the input automaton. Therefore we propose and implement an optimization, which prevents such a behavior and in general, produces smaller acceptance condition than the original one.
+
+\begin{itemize}
+    \item The selection of base of $\psi'$ is based on two keys. The primary key is cardinality (number of clauses) of $\overline{\psi_{i}}$, the secondary key is cardinality of clauses (number of terms in clause).
+    \item We order the disjunct in every $\overline{\psi_{i}}$ in descending order, where the key is the cardinality of a particular disjunct.
+    \item The DNF conversion of the input acceptance condition can lead to an exponential blowup of the formula, where some acceptance marks occur more than once. Since the reduction of acceptance sets is basically denoting the redundant ones as $\true$ or $\false$, we can as well easily obtain simplified acceptance formula in CNF (we simply denote the same acceptance sets as $\true$ or $\false$ as we did in DNF). According to the shape of the input acceptance condition, we choose the suitable (shorter) normal form and perform the merging algorithm on it.
+\end{itemize}
+By choosing the CNF over DNF in the cases where CNF is more natural (shorter), we prevent the formula to contain some acceptance marks more than once (at least, we do not create them by conversion of $\psi$ to DNF). This way, we prevent adding new acceptance marks to the formula when resolving conflicts of acceptance marks which leads to better results. If the original formula contains an acceptance mark that is present in more than one disjunct, then by ordering the disjuncts in every $\overline{\psi_{i}}$, the \emph{linear sum assignment} returns more convenient pairing. Meaning that if \emph{linear sum assignment} finds two equal assignments, it respects the order and the disjuncts with the  acceptance mark that occurs more than once are paired with disjuncts that also contain acceptance mark that occurs more than once.
+
+\begin{example}
+	Consider an automaton $\mathcal{A}$ in Figure \ref{fig:L1_before}. In this example, we demonstrate the simplification procedure described in Section \ref{section:simplification} and obtain simplified acceptance conditions $\psi_{i}$ for each SCC $S_{i}$. The simplified acceptance conditions $\overline{\psi_{i}}$ are displayed in the set-format we introduced earlier because we make use of it afterward during the merge. Then we merge these formulae into the acceptance condition of the simplified automaton $\mathcal{A}'$.
+We enumerate the SCCs $S_{1}, S_{2}, S_{3}$. (The indices correspond with the numbers inside the states in Figure \ref{fig:L1_before}.) And we assign an accepting condition $\psi_{1}$ to $S_{1}$, $\psi_{2}$ to $S_{2}$ and $\psi_{3}$ to $S_{3}$.
+    \begin{enumerate}
+	    \item We simplify $\psi_{1}$ according to the placement of acceptance marks on the edges in $S_{1}$. At first we notice, that the formula $\overline{\psi_{1}}$ contains acceptance marks that are not present on the edges of $S_{1}$. Therefore modify $\overline{\psi_{1}}$ as described in Subsection \ref{subsection:acc_modif}. We substitute $\true$ for $\Fin\tacc{3}{3}$ and $\false$ for $\Inf\tacc{1}{1}$ and $\Inf\tacc{0}{0}$. (This substitution deletes the whole disjunct $D_{1}$.) Then we notice that the acceptance marks are in a position which allows us to perform the simplification described in first part of subsection 3.1.4. We substitute $\true $ for $\Inf\tacc{4}{4}$ and obtain the final form of $\overline{\psi_{1}} = \{\{ \Fin\tacc{2}{2}\} \}$.
+	    \item Similarly as in previous case, we notice that acceptance marks $\tacc{2}{2}$, $\tacc{3}{3}$ and $\tacc{4}{4}$ are not present on the edges of $S_{2}$. Therefore we substitute $\true$ for both $\Fin\tacc{2}{2} \text{ and } \Fin\tacc{3}{3}$ and $\false$ for $\Inf\tacc{4}{4}$ (and thus remove the whole disjunct $D_{2}$).  Then we use the procedure described in Subsection \ref{subsection:simpl_inf} and remove $\Inf\tacc{1}{1}$ from the disjunct $D_{1}$ and obtain $\overline{\psi_{2}} = \{ \{\Inf\tacc{0}{0}\} \}$.
+        \item Finally, we yet again remove marks that are not present in $S_{3}$ and perform the simplification described in subsection 3.1.3. We substitute $\true $ for $\Fin\tacc{2}{2} \text{ and } \Fin\tacc{3}{3}$ and add new term $\Fin\tacc{5}{5}$ into $D_{2}$ and place $\tacc{5}{5}$ on the edges that are labeled with $\tacc{2}{2}$ or $\tacc{3}{3}$. The simplified acceptance condition is $\overline{\psi_{3}} = \{\{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4}\}\}$.
+    \end{enumerate}
+
+	Now we proceed to the merge of the formulae of the SCCs $\psi_{i}$. As a base of the new acceptance condition $\psi'$ we choose the formula $\psi_{3}$ because it has the highest number of disjuncts compared to the other formulae $\psi_i$, so $\overline{\psi'}=\{ \{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4} \}\}$. Now we merge  $\psi_{1}$ and $\psi_{2}$ with $\psi'$. The order is in this particular case irrelevant because $\overline{\psi_{1}}$ has the same number of disjuncts as $\overline{\psi_{2}}$ (and both disjuncts have the same number of conjuncts). So we merge $\overline{\psi_{1}}$ at first because of its lower index. Since both $\overline{\psi'}$ and $\overline{\psi_{1}}$ have only one disjunct, the only possible pairing that \emph{linear sum assignment 
+    } can give us is $(0,0)$, meaning that $\{ \Fin\tacc{2}{2}\}$ is merged with $\{ \Fin\tacc{5}{5}, \Inf\tacc{4}{4}\}$. Then we need to map an unused conjunct  $\Fin\tacc{5}{5}$ to a conjunct of the same type which is $\Fin\tacc{2}{2}$. Similarly in case of $\overline{\psi_{2}}$ we map $\Inf\tacc{4}{4}$ on $\Inf\tacc{0}{0}$. This way we produce $\mathcal{A}'$ displayed in Figure  \ref{fig:L1_middle} with the acceptance condition $ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$. Observe that the automaton $\mathcal{A}'$ is not equivalent to the original $\mathcal{A}$. For example in Figure \ref{fig:L1_middle} is the highlighted loop not accepting but in the original automaton in Figure \ref{fig:L1_before} the loop accepting is. To reach the equivalence between the two automata, we need to \emph{restore equivalence} which is described in the next section.
+\end{example}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[flabel] at (2,5) {$( \Inf\tacc{0}{0} \land \Inf\tacc{1}{1}) \lor (\Fin\tacc{2}{2} \land \Fin\tacc{3}{3} \land \Inf\tacc{4}{4})$};
+
+			\node[state, initial] (x) at (0,0) {0};
+			\node[state] (y) at (2,2) {1};
+			\node[state] (z) at (2,-1.5) {2};
+			\node[state] (w) at (5,-1.5) {3};
+
+			\path[->]
+				(x) edge[]  (y)
+				(x) edge[]  (z)
+				(z) edge[] (w)
+				
+            	
+            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
+            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
+            	(z) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc1] {1}(z)
+            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc0, pos=0.6] {0} node[accset,collacc1, pos=0.4] {1}(z)
+            	
+            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
+            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc3] {3}(w)
+            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc2] {2}(w)
+            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
+            	
+            	(y) edge[loop, in = 75, out = 105, looseness=6] node[accset,collacc4] {4}(y)
+            	(y) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc4] {4}(y)
+            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc2] {2} (y)
+            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc2] {2}(y)
+            	
+            	
+			;
+		\end{tikzpicture}
+    \caption{TELA before simplification Level 1}
+    \label{fig:L1_before}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[flabel] at (2,5) {$ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$};
+
+			\node[state, initial] (x) at (0,0) {0};
+			\node[state] (y) at (2,2) {1};
+			\node[state] (z) at (2,-1.5) {2};
+			\node[state] (w) at (5,-1.5) {3};
+
+			\path[->]
+				(x) edge[]  (y)
+				(x) edge[]  (z)
+				(z) edge[] (w)
+				
+            	
+            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
+            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
+            	(z) edge[loop, in = 70, out = 110, looseness=12]  (z)
+            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4} (z)
+            	
+            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
+            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
+            	
+            	(y) edge[loop, in = 75, out = 105, looseness=6, color=red] (y)
+            	(y) edge[loop, in = 72, out = 108, looseness=9] (y)
+            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc5] {5} (y)
+            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc5] {5}(y)
+            	
+            	
+			;
+		\end{tikzpicture}
+    \caption{TELA after simplification and merging in Level 1}
+    \label{fig:L1_middle}
+\end{figure}
+
+\subsection{Restoring equivalence}
+Replacing the input acceptance condition with $\psi'$ in $\mathcal{A}$ might change the language, so it is no longer equivalent to the language recognized by the original automaton $\mathcal{A}$. 
+ By now, each SCC $S_{i}$ is adjusted to the acceptance condition $\psi_{i}$ which might be different than $\psi'$. 
+ Therefore, for each SCC we need to restore equivalence with the new acceptance condition $\psi'$.
+ The idea is that the only terms of $\psi'$ that can affect accepting runs on SCC $S_{i}$ are the ones that have been mapped on some terms in $\psi_{i}$. From now on, we refer to them as \emph{used terms}. We need to make sure that the other terms (the ones that have not been mapped on any term of $\psi_{i}$) can't affect any accepting run of $\mathcal{A}'$. From now on, we call these terms \emph{unused terms}.  We influence the evaluation of the  \emph{unused terms} in the following way:
+\begin{itemize}
+     \item If we want to make term in the $\Fin$ form always $\false$, we place it's acceptance mark on every edge of the SCC.
+     \item If we want to make term in the $\Inf$ form always $\true$, we place it's acceptance mark on every edge of the SCC.
+\end{itemize}
+ Keep in mind that by now, any acceptance mark that is not in $\psi'$ is not present on any edge of $\mathcal{A}'$. Therefore any $\Fin$ term is already always $\true$ if its acceptance mark is not present on any edge of the SCC. Dually, $\Inf$ term is already always $\false$ if it is not present on any edge of the SCC.
+\medskip
+ Now we distinguish the cases when $\psi'$ is in DNF or $\psi'$ is in CNF. 
+\begin{itemize}
+     \item If $\psi'$ is in DNF, we need to make $\false $ every disjunct that does not contain any \emph{used term}. Further, every \emph{unused term} that occurs in the same disjunct as any \emph{used term} needs to be made $\true$. 
+     \item Dually, if $\psi'$ is in CNF, every conjunct that does not contain any \emph{used term} needs to be made $\true$ and every \emph{unused term} that occurs in a conjunct with any \emph{used term} needs to be made $\false$.  
+     
+\end{itemize}
+ 
+\begin{example}
+	Consider the example from the Figure \ref{fig:L1_middle}, where the DNF acceptance condition $\psi' = (\Fin\tacc{5}{5} \lor \Inf\tacc{4}{4})$ and the acceptance condition of SCC $S_{1}$ $\psi_{1} = (\Fin\tacc{2}{2})$. The term $\Fin\tacc{5}{5}$ is mapped to $\Fin\tacc{2}{2}$. Then we need to enforce that the \emph{unused term} $\Inf\tacc{4}{4}$ has no effect on the evaluation of $\psi'$ by the run with the infinite suffix contained within the SCC $S_{1}$. Otherwise the result will not be equivalent (see the highlited loop in Figure \ref{fig:L1_middle}). Therefore we make term $\Inf\tacc{4}{4}$ $\true$ by adding $\tacc{4}{4}$ on every edge of the SCC $S_{i}$. The result can be seen in Figure \ref{fig:L1_done}.
+\end{example}
+ 
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[automaton]
+			\node[flabel] at (2,5) {$ \Fin\tacc{5}{5} \land \Inf\tacc{4}{4}$};
+
+			\node[state, initial] (x) at (0,0) {0};
+			\node[state] (y) at (2,2) {1};
+			\node[state] (z) at (2,-1.5) {2};
+			\node[state] (w) at (5,-1.5) {3};
+
+			\path[->]
+				(x) edge[]  (y)
+				(x) edge[]  (z)
+				(z) edge[] (w)
+				
+            	
+            	(z) edge[loop, in = 75, out = 105, looseness=6] (z)
+            	(z) edge[loop, in = 72, out = 108, looseness=9] (z)
+            	(z) edge[loop, in = 70, out = 110, looseness=12]  (z)
+            	(z) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4} (z)
+            	
+            	(w) edge[loop, in = 75, out = 105, looseness=6] (w)
+            	(w) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 70, out = 110, looseness=12]  node[accset,collacc5] {5}(w)
+            	(w) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4] {4}(w)
+            	
+            	(y) edge[loop, in = 75, out = 105, looseness=6] node[accset,collacc4] {4} (y)
+            	(y) edge[loop, in = 72, out = 108, looseness=9] node[accset,collacc4] {4}(y)
+            	(y) edge[loop, in = 70, out = 110, looseness=12] node[accset,collacc4, pos=0.4] {4} node[accset,collacc5, pos=0.6] {5}(y)
+            	(y) edge[loop, in = 65, out = 115, looseness=14] node[accset,collacc4, pos=0.4] {4} node[accset,collacc5, pos=0.6] {5}(y)
+            	
+            	
+			;
+		\end{tikzpicture}
+    \caption{Equivalent TELA after simplification Level 1}
+    \label{fig:L1_done}
+\end{figure}
+
+%}}}
+
 
 
 %%% Local Variables:
