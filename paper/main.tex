@@ -130,7 +130,7 @@ all automata with traditional acceptance conditions. TELA automata can
 be obtained for example by translating LTL formulas by
 Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
 Rabinizer~4~\cite{kretinsky.18.cav}, or
-SPOT~\cite{duret.16.atva2}. There are also some algorithms processing
+Spot~\cite{duret.16.atva2}. There are also some algorithms processing
 these automata, for example the emptiness check~\cite{baier.19.atva}
 or translation of TELA to parity
 automata~\cite{renkin.20.atva,casares.22.tacas}.
@@ -146,20 +146,27 @@ marks that appear in acceptance primitives saying that a mark has to
 be visited finitely often, while it is only polynomial in other
 measures of the input automaton.
 
-These observations motivate our study of a technique reducing the
-number of acceptance marks without altering the structure of the
-automaton. This paper presents a technique heavily based on
-\emph{quantified Boolean formulas (QBF)}. For a given TELA and
-parameters $k,n$, it produces a QBF formula which is satisfiable if
-and only if there exists an automaton with the same structure, $n$
-acceptance marks, an acceptance formula in disjunctive normal form
-with $k$ clauses, and the same set of accepting runs as the original
-automaton. The placement of the marks on transitions and the
-acceptance formula can be obtained from a model of the
-formula. Besides this formula, we describe also the construction of
-two simpler formulas such that their satisfiability implies the
-existence of an automaton with the same structure, $n$ acceptance
-marks, and the same set of accepting runs, but not vice versa.
+The number of acceptance marks can be algorithmically reduced to one
+as every TELA can be transformed to an equivalent Büchi automaton
+(this can be easily done for example by Spot~\cite{duret.16.atva2}),
+but this reduction is paid by dramatic changes of state-space: the
+number of states can increase exponentially and some important
+structural properties like determinism can be lost. This motivates our
+study of a technique reducing the number of acceptance marks without
+altering the structure of the automaton.
+
+We present a technique heavily based on \emph{quantified Boolean
+  formulas (QBF)}. For a given TELA and parameters $k,n$, it produces
+a QBF formula which is satisfiable if and only if there exists an
+automaton with the same structure, $n$ acceptance marks, an acceptance
+formula in disjunctive normal form with $k$ clauses, and the same set
+of accepting runs as the original automaton. The placement of the
+marks on transitions and the acceptance formula can be obtained from a
+model of the formula. Besides this formula, we describe also the
+construction of two simpler formulas such that their satisfiability
+implies the existence of an automaton with the same structure, $n$
+acceptance marks, and the same set of accepting runs, but not vice
+versa.
 
 We have implemented our reduction technique in a tool called
 \texttt{telatko}. We show that the tool can reduce acceptance marks in
@@ -171,16 +178,18 @@ automata produced by Rabinizer~4. \todo{A jak vyjde Delag? Fixnout i
   Abstract.}
 
 \paragraph*{Related results}
-We are not aware about any existing research primarily aimed at
-simplification of acceptance formulas of TELA or reduction of the
-number of its acceptance marks without increasing the number of
-states. There exists only a SAT-based approach that transforms a
-deterministic TELA automaton to an equivalent automaton with a given
-acceptance condition and a given number of
-states~\cite{baarir.15.lpar} (if such an automaton exists). Further,
-there are some SAT-based approaches aimed to reduce the number of
-states of automata over infinite words. More preceisely, there are
-reductions designed for nondeterministic Büchi
+There is a simple technique~\cite{babiak.13.spin} reducing the number
+of acceptance marks in \emph{transition-based genealised Büchi
+  automata (TGBA)} without changing its structure. We are not aware
+about any existing research aimed at simplification of acceptance
+formulas of TELA or reduction of the number of its acceptance marks
+without increasing the number of states. There exists only a SAT-based
+approach that transforms a deterministic TELA automaton to an
+equivalent automaton with a given acceptance condition and a given
+number of states~\cite{baarir.15.lpar} (if such an automaton
+exists). Further, there are some SAT-based approaches aimed to reduce
+the number of states of automata over infinite words. More preceisely,
+there are reductions designed for nondeterministic Büchi
 automata~\cite{ehlers.10.spin}, deterministic Büchi
 automata~\cite{ehlers.10.sat}, and deterministic generalized Büchi
 automata~\cite{baarir.14.forte}. Note that all these techniques are
@@ -230,14 +239,11 @@ In this section we recall the basic terms around TELA and QBF.
 \end{itemize}
 \end{definition}
 
-A transition $t=(p,a,M',q)\in\delta$ is the transition leading from
+A tuple $t=(p,a,M',q)\in\delta$ is the \emph{transition} leading from
 state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$. We
-use $M(t)$ to refer to its set of acceptance marks $M'$. We extend
-this notation to a set $T\subseteq\delta$ of transitions such that
-$M(T)=\bigcup_{t\in T}M(t)$ denotes the set of acceptance marks that
-appear on transitions in $T$.
-
-\todo{Rozmyslet si, jak dal.}
+use $M(t)$ to refer to the set $M'$ of acceptance marks. Further, for
+a set $T\subseteq\delta$ of transitions, $M(T)=\bigcup_{t\in T}M(t)$
+denotes the set of acceptance marks that appear on transitions in $T$.
 
 A run $\pi$ of $\mA$ over an infinite word
 $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
@@ -287,7 +293,7 @@ from a state $p$ to the same state containing all transitions of $C$
 and no transition outside $C$.
 
 In graphical representation of automata, we often use acceptance marks
-$\tacc{1}{1},\tacc{2}{2},\ldots\in M$ and an edge 
+$\tacc{1}{1},\tacc{2}{2},\ldots\in M$. An edge 
 \begin{tikzpicture}[smallautomaton,baseline=-2pt]
   \node[state] (p) at (0,0) {$p$};
   \node[state] (q) at (1.8,0) {$q$};
