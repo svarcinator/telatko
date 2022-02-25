@@ -33,6 +33,7 @@
 \DeclareMathOperator{\Inf}{\mathsf{Inf}}
 \DeclareMathOperator{\Fin}{\mathsf{Fin}}
 \newcommand{\minf}{\mathit{inf}}
+\newcommand{\mks}{\mathit{mks}}
 \def\false{\mathit{false}}
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
@@ -150,12 +151,13 @@ The number of acceptance marks can be algorithmically reduced to one
 as every TELA can be transformed to an equivalent Büchi automaton
 (this can be easily done for example by Spot~\cite{duret.16.atva2}),
 but this reduction is paid by dramatic changes of state-space: the
-number of states can increase exponentially and some important
-structural properties like determinism can be lost. This motivates our
-study of a technique reducing the number of acceptance marks without
-altering the structure of the automaton.
+number of states can increase exponentially in the number of
+acceptance marks and some important structural properties like
+determinism can be lost. This motivates our study of a technique
+reducing the number of acceptance marks without altering the structure
+of the automaton.
 
-We present a technique heavily based on \emph{quantified Boolean
+We present such a technique heavily based on \emph{quantified Boolean
   formulas (QBF)}. For a given TELA and parameters $k,n$, it produces
 a QBF formula which is satisfiable if and only if there exists an
 automaton with the same structure, $n$ acceptance marks, an acceptance
@@ -240,22 +242,29 @@ In this section we recall the basic terms around TELA and QBF.
 \end{definition}
 
 A tuple $t=(p,a,M',q)\in\delta$ is the \emph{transition} leading from
-state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$. We
-use $M(t)$ to refer to the set $M'$ of acceptance marks. Further, for
-a set $T\subseteq\delta$ of transitions, $M(T)=\bigcup_{t\in T}M(t)$
-denotes the set of acceptance marks that appear on transitions in $T$.
-
-A run $\pi$ of $\mA$ over an infinite word
+state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$.  A
+run $\pi$ of $\mA$ over an infinite word
 $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
 of adjacent transitions
 $\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
 $q_0=q_I$. Let $\minf(\pi)$ denote the set of transitions that appear
-infinitely many times in $\pi$. Further, let $M(\pi)$ denote the set
-of acceptance marks that occur in infinitely many transitions of run
-$\pi$, i.e., $M(\pi)=M(\minf(\pi))$. Run $\pi$ is \emph{accepting} iff
-$M(\pi)$ satisfies the formula $\varphi$, where $M(\pi)$ satisfies
-$\Inf m$ iff $m\in M(\pi)$ and $M(\pi)$ satisfies $\Fin m$ iff
-$m\not\in M(\pi)$. The \emph{language} of automaton $\mA$ is the set
+infinitely many times in $\pi$.
+%
+We use $\mks(\cdot)$ to denote the set of acceptance
+marks of various objects:
+\begin{itemize}
+\item for a transitions $t=(p,a,M',q)\in\delta$, $\mks(t)$ denotes the set $M'$,
+\item for a set $T\subseteq\delta$ of transitions,
+  $\mks(T)=\bigcup_{t\in T}\mks(t)$ denotes the set of marks that appear on
+  transitions in $T$,
+\item for a run $\pi$, $\mks(\pi)=\mks(\minf(\pi))$ denotes the set of
+  marks that occur in infinitely many transitions of run $\pi$.
+\end{itemize}
+%
+Run $\pi$ is \emph{accepting} iff $\mks(\pi)$ satisfies the formula
+$\varphi$, where a set of marks $M'\subseteq M$ satisfies $\Inf m$ iff
+$m\in M'$ and it satisfies $\Fin m$ iff $m\not\in M'$. The
+\emph{language} of automaton $\mA$ is the set
 $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
 }\mA\textrm{ over }u\}$. Two automata $\mA,\mB$ are \emph{equivalent}
 if $L(\mA)=L(\mB)$.
@@ -347,17 +356,18 @@ same (modulo changed acceptance marks on transitions).
 We start with the several simple observations. Acceptance of a run
 $\pi$ is fully determined by the set $M(\pi)$ of acceptance marks that
 appear infinitely often on $\pi$, which is in turn fully determined by
-the set $\inf(\pi)$ of transitions appearing infinitely often in
+the set $\minf(\pi)$ of transitions appearing infinitely often in
 $\pi$.
 % \[
 %   M(\pi)=\bigcup_{(q_i,u_i,M_i,q_{i+1})\in\minf(\pi)}M_i
 % \]
-Further, each set of the form $\inf(\pi)$ is a cycle and vice versa.
-Hence, our reduction methods is looking for 
+Further, each set of the form $\minf(\pi)$ is a cycle and vice versa.
+Hence, our reduction methods is looking for a new acceptance formula
+$\psi$ with less accceptance marks than the original acceptance
+formula $\varphi$ and for new placement of the marks on transitions
+such that for each cycle $C\subseteq\delta$ it holds that the marks $M(C)$
+satisfies $\varphi$ if and only if $M(C)$ satisfies $\psi$.
 
-
-
-following simple observation. Definovat $inf(\varphi)$?
 
 
 \textbf{Jan is here!}
