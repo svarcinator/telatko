@@ -34,6 +34,11 @@
 \DeclareMathOperator{\Fin}{\mathsf{Fin}}
 \newcommand{\minf}{\mathit{inf}}
 \newcommand{\mks}{\mathit{mks}}
+%\newcommand{\oM}{\widehat{M}}
+\newcommand{\oM}{N}
+\newcommand{\rem}{\mathit{nm}}
+\newcommand{\mcycle}{\mathit{cycle}}
+\newcommand{\msat}{\mathit{satisfies}}
 \def\false{\mathit{false}}
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
@@ -242,29 +247,30 @@ In this section we recall the basic terms around TELA and QBF.
 \end{definition}
 
 A tuple $t=(p,a,M',q)\in\delta$ is the \emph{transition} leading from
-state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$.  A
-run $\pi$ of $\mA$ over an infinite word
+state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$.
+The set $M'$ is also refered by $\mks(t)$. For a set of transitions
+$T\subseteq\delta$, let $\mks(T)=\bigcup_{t\in T}\mks(t)$ denote the
+set of marks that appear on transitions in $T$.
+% of various objects:
+% \begin{itemize}
+% \item for a transition $t=(p,a,M',q)\in\delta$, $\mks(t)$ denotes the set $M'$,
+% \item for a set $T\subseteq\delta$ of transitions,
+%   $\mks(T)=\bigcup_{t\in T}\mks(t)$ denotes the set of marks that appear on
+%   transitions in $T$,
+% \item for a run $\pi$, $\mks(\pi)=\mks(\minf(\pi))$ denotes the set of
+%   marks that occur in infinitely many transitions of run $\pi$.
+% \end{itemize}
+
+A run $\pi$ of $\mA$ over an infinite word
 $u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
 of adjacent transitions
 $\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
 $q_0=q_I$. Let $\minf(\pi)$ denote the set of transitions that appear
-infinitely many times in $\pi$.
-%
-We use $\mks(\cdot)$ to denote the set of acceptance
-marks of various objects:
-\begin{itemize}
-\item for a transitions $t=(p,a,M',q)\in\delta$, $\mks(t)$ denotes the set $M'$,
-\item for a set $T\subseteq\delta$ of transitions,
-  $\mks(T)=\bigcup_{t\in T}\mks(t)$ denotes the set of marks that appear on
-  transitions in $T$,
-\item for a run $\pi$, $\mks(\pi)=\mks(\minf(\pi))$ denotes the set of
-  marks that occur in infinitely many transitions of run $\pi$.
-\end{itemize}
-%
-Run $\pi$ is \emph{accepting} iff $\mks(\pi)$ satisfies the formula
-$\varphi$, where a set of marks $M'\subseteq M$ satisfies $\Inf m$ iff
-$m\in M'$ and it satisfies $\Fin m$ iff $m\not\in M'$. The
-\emph{language} of automaton $\mA$ is the set
+infinitely many times in $\pi$. Run $\pi$ is \emph{accepting} iff
+$\minf(\pi)$ satisfies the formula $\varphi$, where a set of $T$ of
+transitions satisfies $\Inf m$ iff $m\in\mks(T)$ and it satisfies
+$\Fin m$ iff $m\not\in\mks(T)$. The \emph{language} of automaton $\mA$ is
+the set
 $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
 }\mA\textrm{ over }u\}$. Two automata $\mA,\mB$ are \emph{equivalent}
 if $L(\mA)=L(\mB)$.
@@ -281,25 +287,25 @@ formula can be transformed into an equivalent formula in DNF.
 A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
 adjacent transitions of the form
 $(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
-such that $p=q_0$ and $q=q_n$. We assume that each state $q$ is
-reachable from the initial state $q_I$ (i.e., $q=q_I$ or there is a
-path from $q_I$ to $q$) as states that are not reachable from $q_I$
-can be eliminated without any impact on $L(\mA)$. A nonempty set of
-states $S\subseteq Q$ is called a nontrivial \emph{strongly connected
-  component (SCC)} if for each $p,q\in S$ there is a path from $p$ to
-$q$. An SCC S is \emph{maximal} if there is no SCC $S'$ satisfying
-$S\subsetneq S'$. In the rest of this paper, SCC always refers to a
-maximal SCC. Given an SCC $S$,
-$\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$ denotes the
-set of all transitions between states in $S$. Further, for each mark
-$m\in M$, let $\delta_m$ denotes the set of all transitions marked
-with $m$, i.e., $\delta_m=\{(p,a,M',q)\in\delta\mid m\in M'\}$. The
-sets $\delta_m$ are called \emph{acceptance sets}.  Given an SCC $S$
-and a mark $m\in M$, by $\delta_{S,m}$ we denote the set
-$\delta_{S,m}=\delta_S\cap\delta_m$. Finally, a set of transitions
-$C\subseteq\delta$ is called a \emph{cycle} is there exists a path
-from a state $p$ to the same state containing all transitions of $C$
-and no transition outside $C$.
+such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
+is called a nontrivial \emph{strongly connected component (SCC)} if
+for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
+\emph{maximal} if there is no SCC $S'$ satisfying $S\subsetneq S'$. In
+the rest of this paper, SCC always refers to a maximal SCC. Given an
+SCC $S$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
+denotes the set of all transitions between states in $S$. Further, for
+each mark $m\in M$, let $\delta_m$ denotes the set of all transitions
+marked with $m$, i.e., $\delta_m=\{t\in\delta\mid m\in
+\mks(t)\}$. \todo{The sets $\delta_m$ are called \emph{acceptance
+    sets}. Given an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we
+  denote the set $\delta_{S,m}=\delta_S\cap\delta_m$.} A set of
+transitions $T\subseteq\delta$ is called a \emph{cycle} is there
+exists a path from a state $p$ to the same state containing all
+transitions of $T$ and no transition outside $T$. Finally, we assume
+that each TELA $\mA$ contains only states $q$ that are reachable from
+the initial state $q_I$ (i.e., $q=q_I$ or there is a path from $q_I$
+to $q$) as states that are not reachable from $q_I$ can be eliminated
+without any impact on $L(\mA)$.
 
 In graphical representation of automata, we often use acceptance marks
 $\tacc{1}{1},\tacc{2}{2},\ldots\in M$. An edge 
@@ -346,27 +352,34 @@ assignment of the equivalent Boolean formula. A QBF formula is
 
 Recall that we aim to reduce the number of acceptance marks in a given
 TELA $\mA =(Q,M,\Sigma,q_I,\delta,\varphi)$ without altering its
-structure and language. In other words, we change only the acceptance
-marks on individual transitions and we replace the acceptance formula
-by a new one with less acceptance marks. To ensure that the modified
-automaton is equivalent to the original one, we actually construct the
-new acceptance formula such that the set of acceptance runs stays the
-same (modulo changed acceptance marks on transitions).
+structure and language. In other words, we are looking for a set $\oM$
+of acceptance marks, an accepance formula $\psi$ over $\oM$, and a
+function
+$\rem:\delta\rightarrow Q \times \Sigma \times 2^{\oM}\times Q$
+assigning new marks to transitions (i.e., for each
+$t=(p,a,M',q)\in\delta$, we assume that $\rem(t)=(p,a,\oM',q)$ for
+some $\oM'\subseteq\oM$) such that $|\oM|<|M|$ and the automaton
+$\mB=(Q,\oM,\Sigma,q_I,\rem(\delta),\psi)$ is equivalent to $\mA$. To
+ensure that the modified automaton is equivalent to the original one,
+we actually look for $\psi$ and $\rem$ such that each run
+$\pi=t_0t_1t_2\ldots$ of $\mA$ is accepting if and only if the run
+$\rem(t_0)\rem(t_1)\rem(t_2)\ldots$ of $\mB$ is accepting.
 
-We start with the several simple observations. Acceptance of a run
-$\pi$ is fully determined by the set $M(\pi)$ of acceptance marks that
-appear infinitely often on $\pi$, which is in turn fully determined by
-the set $\minf(\pi)$ of transitions appearing infinitely often in
-$\pi$.
-% \[
-%   M(\pi)=\bigcup_{(q_i,u_i,M_i,q_{i+1})\in\minf(\pi)}M_i
-% \]
-Further, each set of the form $\minf(\pi)$ is a cycle and vice versa.
-Hence, our reduction methods is looking for a new acceptance formula
-$\psi$ with less accceptance marks than the original acceptance
-formula $\varphi$ and for new placement of the marks on transitions
-such that for each cycle $C\subseteq\delta$ it holds that the marks $M(C)$
-satisfies $\varphi$ if and only if $M(C)$ satisfies $\psi$.
+We start with several simple observations. Acceptance of a run $\pi$
+is fully determined by the set $\minf(\pi)$.
+% of acceptance marks that
+% appear infinitely often on $\pi$, which is in turn fully determined by
+% the set $\minf(\pi)$ of transitions appearing infinitely often in
+% $\pi$.
+Further, each set $\minf(\pi)$ for a run $\pi$ is a cycle and
+vice versa. Hence, our reduction methods is looking for a new
+acceptance formula $\psi$ and function $\rem$ such that for each cycle
+$T\subseteq\delta$, it holds that $T$ satisfies $\varphi$ if and
+only if $\rem(T))$ satisifes $\psi$. This can be formally written
+by the formula
+\[
+  \forall T\subseteq\delta~.~\mcycle(T)\implies(T~\msat~\varphi ~\iff~ \rem(T)~\msat~\psi).
+\]
 
 
 
