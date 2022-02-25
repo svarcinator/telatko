@@ -54,11 +54,12 @@ def main(argv):
     for a in aut:
 
         origin = spot.automaton(a.to_str())
+        #tmp_a = spot.automaton(a.to_str())
         print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
 
-            a = process_automaton(a)
+            #a_tele = process_automaton(tmp_a)
 
             acc_sets_count = a.get_acceptance().used_sets().count()
             clauses_count = len(
@@ -66,29 +67,19 @@ def main(argv):
             if args.level > 3:
                 args.level = 3
 
-            if args.level >= 2 and args.level <= 4:
-                """
-                acc_sets_count = a.get_acceptance().used_sets().count()
-                clauses_count = len(
-                    a.get_acceptance().to_dnf().top_disjuncts())
-                """
+            if args.level >= 1 and args.level <= 4:
 
                 if acc_sets_count == 0:
                     auto = a
                 else:
-                    """
+
                     auto = play(
                         a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
                     """
-                    auto_z = play(
-                        a, clauses_count, acc_sets_count,2, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
+                    if a_tele.get_acceptance().used_sets().count() < auto.get_acceptance().used_sets().count():
+                        print_aut(origin, "better_tele_l1.hoa", "a")
+                    """
 
-                    auto_l = play(
-                        a, clauses_count, acc_sets_count, 2, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
-                    print(auto_l.get_acceptance().used_sets().count(), auto_z.get_acceptance().used_sets().count())
-                    if auto_l.get_acceptance().used_sets().count() < auto_z.get_acceptance().used_sets().count():
-                        print_aut(origin, "better_limboole.hoa", "a")
-                    auto = a
             else:
                 auto = a
 

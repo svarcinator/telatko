@@ -138,9 +138,11 @@ def process_f_variables(aut, acc_set_vars):
     clear_aut_edges(aut)
     # creates dictionary {edge number : [acceptance set number]}
     f_dict = parse_dict(acc_set_vars)
+    #print("f_dict: ", f_dict)
 
     # puts marks corresponding to dict on edges
     marks_on_edges(aut, f_dict)
+    return f_dict
 
 
 def max_set_num(acc):
@@ -171,7 +173,6 @@ def parse_limboole(model):
     return condition_vars, acc_set_vars
 
 def parse_z3(model):
-    #TO DO TOMMOROW
 
     condition_vars = []
     acc_set_vars = []
@@ -186,7 +187,15 @@ def parse_z3(model):
     return condition_vars, acc_set_vars
 
 
-def process_variables(aut, model, qbf_solver):
+def clone_to_representant(aut, f_dict, scc_equiv_edges):
+    for scc_dict in scc_equiv_edges:
+        for val in scc_dict.values():
+            if aut.edge_number(val[0]) in f_dict:
+                for m in f_dict[aut.edge_number(val[0])]:
+                    for e in val[1:]:
+                        e.acc.set(m)
+
+def process_variables(aut, model, qbf_solver, scc_equiv_edges, mode):
     """
     Filters SAT-variables that are true and splits them. Then calls functions to process these variables.
     Args:
@@ -206,11 +215,18 @@ def process_variables(aut, model, qbf_solver):
     acc = create_acc(prepare_acc_vars(condition_vars))
 
     # puts new acceptance marks on edges and removes old acc. marks
-    process_f_variables(aut, acc_set_vars)
+    f_dict = process_f_variables(aut, acc_set_vars)
+    if mode == 1:
+        clone_to_representant(aut, f_dict, scc_equiv_edges)
+
     max_num = max_set_num(acc)
+    
     aut.set_acceptance(max_num + 3, spot.acc_code(string_formula(acc)))
 
     spot.cleanup_acceptance_here(aut)
+
+
+
 
 
 def print_aut(aut, output, m):

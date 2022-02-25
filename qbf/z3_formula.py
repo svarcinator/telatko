@@ -2,16 +2,7 @@ from telatko2.classes import *
 from z3 import *
 from qbf.q_main import FormulaCreator
 
-def foo():
-    p1 = Bool('p1')
-    p2 = Bool('p1')
 
-    #q = Bool('q')
-    F = ForAll([p1, p2], Or(And(Not(p1),Not(p2)), And(p1,p2)))
-    #solver = Solver()
-    #solver.add(F)
-    result = solver.check()
-    print(F, result, solver.model())
 
 class Z3_f_ctor(FormulaCreator):
     def __init__(self,  edge_dict, scc_edg, scc_state_info
@@ -25,15 +16,58 @@ class Z3_f_ctor(FormulaCreator):
         self.exist_vars = []
 
 
+    def foo(self):
+        var1 = Bool('a')
+        var2 = Bool('b')
+        var3 = Bool('c')
+        f = Or(var1, var2)
+        f = And(var3, f)
+        f = Exists(var1, f)
+        s = Solver()
+        s.add(f)
+        if s.check() == sat:
+            print("--satisfiable--")
+            s = s.model()
+            print(s)
+
+    def prune_scc_edg(self, representants):
+        tmp = []
+        for alist in self.scc_edg:
+            tmp.append(list(filter(lambda e: e in representants,  alist)))
+        self.scc_edg = tmp
+
+    def get_level1(self, aut, representants ):
+        self.quant_all()
+
+        self.prune_scc_edg(representants)
+        laso = self.one_scc_f()
+        old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
+        self.inner_edges_nums = representants
+        new = self.new_formula()
+        old = simplify(old)
+        new = simplify(new)
+        eq = self.equivalence_f(old, new)
+        impl = Implies(laso, eq)
+        inf_not_fin = self.inf_is_not_fin_clause()
+        inf_or_fin = self.inf_or_fin_f()
+        inf_not_fin = simplify(inf_not_fin)
+        inf_or_fin = simplify(inf_or_fin)
+        formula = And(impl, inf_not_fin, inf_or_fin)
+        formula = ForAll(self.univ_vars, formula)
+
+        return formula
 
     def get_qbf_formula(self, aut):
         # adds unif. quantified variables to
+        #self.foo()
+        #assert(False)
         self.quant_all()
         if self.mode > 2:
 
             self.w_quant(aut)
 
-        if self.mode == 4:
+
+        if self.mode == 3:
 
             laso = self.laso_cycles(aut)
             laso = simplify(laso)
@@ -45,7 +79,9 @@ class Z3_f_ctor(FormulaCreator):
             laso = self.laso_f(aut)
 
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
+
         new = self.new_formula()
+        #print(new)
         old = simplify(old)
         #print(new)
         new = simplify(new)
@@ -53,6 +89,7 @@ class Z3_f_ctor(FormulaCreator):
         laso = simplify(laso)
 
         eq = self.equivalence_f(old, new)
+        #print(eq)
         impl = Implies(laso, eq)
         inf_not_fin = self.inf_is_not_fin_clause()
         inf_or_fin = self.inf_or_fin_f()
@@ -63,7 +100,7 @@ class Z3_f_ctor(FormulaCreator):
 
         formula = And(impl, inf_not_fin, inf_or_fin)
         if self.exist_vars:
-            formula = ForAll(self.exist_vars, formula)
+            formula = Exists(self.exist_vars, formula)
 
         formula = ForAll(self.univ_vars, formula)
 
@@ -82,16 +119,16 @@ class Z3_f_ctor(FormulaCreator):
             con1.append(impl)
 
             # part two
-            c1 =And(Bool("!w_" + src), Bool("!w_" + dst))
+            c1 =And(Not(Bool("w_" + src)), Not(Bool("w_" + dst)))
             con2.append(Implies(Bool("e_" + str(aut.edge_number(e))),c1 ))
 
             # part three
             #dis1
-            c2 = And(Bool("e_" + str(aut.edge_number(e))), Bool("w_" + src), Bool("!w_" + dst))
+            c2 = And(Bool("e_" + str(aut.edge_number(e))), Bool("w_" + src), Not(Bool("w_" + dst)))
             dis1.append(c2)
 
             #dis2
-            c3 = And(Bool("e_" + str(aut.edge_number(e))), Bool("!w_" + src), Bool("w_" + dst))
+            c3 = And(Bool("e_" + str(aut.edge_number(e))), Not(Bool("w_" + src)), Bool("w_" + dst))
             dis2.append(c3)
         con3.append(Or(dis1))
         con3.append(Or(dis2))
@@ -102,7 +139,6 @@ class Z3_f_ctor(FormulaCreator):
         #print("main dis: ", main_dis)
         one_scc = self.one_scc_f()
         laso = And(Or(main_dis), one_scc)
-
 
         return laso
 
@@ -126,8 +162,8 @@ class Z3_f_ctor(FormulaCreator):
         for c in range(1, self.C + 1):
             set_con = []
             for k in range(1, self.K + 1):
-                p = Bool('!p_' + str(c) + '_' + str(k))
-                n = Bool('!n_' + str(c) + '_' + str(k))
+                p = Not(Bool('p_' + str(c) + '_' + str(k)))
+                n = Not(Bool('n_' + str(c) + '_' + str(k)))
                 set_con.append(Or(p, n))
             clauses_con.append(And(set_con))
         return And(clauses_con)
@@ -175,19 +211,23 @@ class Z3_f_ctor(FormulaCreator):
 
     def old_formula(self, acc):
         # top disjunct
+
         top_disjuncts = []
         for dis in acc.formula:
             conjuncts = []
             for con in dis:
                 edges_vars = []
-                for e in self.edge_dict[con.num]:
-                    var = Bool("e_" + str(e))
-                    edges_vars.append(var)
-                literal_formula = Or(edges_vars)
-                if con.type == MarkType.Fin:
-                    literal_formula = Not(literal_formula)
-                conjuncts.append(literal_formula)
+                if con.num in self.edge_dict:
+                    for e in self.edge_dict[con.num]:
+                        var = Bool("e_" + str(e))
+                        edges_vars.append(var)
+                    literal_formula = Or(edges_vars)
+                    if con.type == MarkType.Fin:
+                        literal_formula = Not(literal_formula)
+                    conjuncts.append(literal_formula)
             top_disjuncts.append(And(conjuncts))
+        if len(top_disjuncts) == 1:
+            return top_disjuncts[0]
         return Or(top_disjuncts)
 
 
@@ -232,58 +272,6 @@ class Z3_f_ctor(FormulaCreator):
             dis.append(And(con))
         return Or(dis)
 
-    def connection(self, aut):
-        con = []
-        for e in self.inner_edges:
-            src = e.src
-            dst = e.dst
-            if src != dst:
-                eq = equivalence_f(Bool("w_" + str(src)), Bool("w_" + str(dst)))
-                impl = Implies(Bool("e_" + str(edges_translator[aut.edge_number(e)])), eq)
-                impl = SATformula("->")
-
-                con.append(impl)
-        if len(con) == 0:
-            return None
-        return And(con)
-
-    def positive(self, aut):
-        dis = []
-        for e in self.inner_edges:
-            con = And(Bool("e_" + str(edges_translator[aut.edge_number(e)])), Bool("w_" + str(e.src)))
-            dis.append(con)
-        if len(dis) == 0:
-            return None
-        return Or(dis)
-
-    def negative(self, aut):
-        dis = []
-        for e in self.inner_edges:
-            con = And(Bool("e_" + str(self.edges_translator[aut.edge_number(e)])), Bool("!w_" + str(e.src)))
-            dis.append(con)
-        if len(dis) == 0:
-            return None
-        return Or(dis)
-
-    def negate_part(self, aut):
-        connect = self.connection(aut)
-        pos = self.positive(aut)
-        neg = self.negative(aut)
-        con_list = []
-        if connect:
-            con_list.append(connect)
-        if pos:
-            con_list.append(pos)
-        if neg:
-            con_list.append(neg)
-        if not con_list:
-            return None
-        con = And(con_list)
-        return Not(con)
-
-
-
-
     def laso_f(self, aut):
 
         in_out = self.in_n_out()
@@ -293,15 +281,7 @@ class Z3_f_ctor(FormulaCreator):
         # true
         one_scc = self.one_scc_f()
 
-        laso = And(in_out, one_scc)
-
-
-        # this part makes sure, that the edges are connected tzn QBF CONNECTED
-        if self.mode == 3:
-            # THIS IS NOT USED ANY MORE
-            print("Mode  == 3")
-            neg = self.negate_part(aut)
-            laso = And(laso, neg)
+        laso = And(in_out, one_scc)s
         return laso
 
 
