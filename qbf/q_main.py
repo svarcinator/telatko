@@ -5,8 +5,13 @@ from qbf.formula import *
 from qbf.optimization import *
 from qbf.z3_formula import *
 
+def add_or_append(dict, key, value):
+    if key in dict:
+        dict[key].append(value)
+    else:
+        dict[key] = [value]
 
-def edge_dictionary(aut):
+def edge_dictionary(aut, mode):
     """
 
     Args:
@@ -15,14 +20,36 @@ def edge_dictionary(aut):
     Returns: Dictionary {acceptance set number : [numbers of edges in this set]}
 
     """
-    list_of_all_edges = aut.edges()
+    #list_of_all_edges = aut.edges()
     edge_dict = {}
-    set_nums = aut.get_acceptance().used_sets()
+    scc_equiv_edges = []
+    representants = []
+    #set_nums = aut.get_acceptance().used_sets()
 
-    for acc_set in set_nums.sets():
-        edge_dict[acc_set] = list(map(aut.edge_number, list(
-            filter(lambda edg: edg.acc.has(acc_set), list_of_all_edges))))
-    return edge_dict
+    si = spot.scc_info(aut)
+    for scc in range(si.scc_count()):
+        marks_edges = {}
+        edges = si.inner_edges_of(scc)
+        for e in edges:
+            # edge_dict
+            if mode != 1:
+                for m in e.acc.sets():
+                    add_or_append(edge_dict, m, aut.edge_number(e))
+            if tuple( e.acc.sets()) in marks_edges:
+                marks_edges[tuple( e.acc.sets())].append(e)
+                # one num representant is enough to create formula
+            else:
+                marks_edges[tuple( e.acc.sets())] = [e]
+                representants.append(aut.edge_number(e))
+                if mode == 1:
+                    for m in e.acc.sets():
+                        add_or_append(edge_dict, m, aut.edge_number(e))
+
+        scc_equiv_edges.append(marks_edges)
+    #print(scc_equiv_edges)
+    return edge_dict, scc_equiv_edges, representants
+
+
 
 
 def get_edges(aut):
@@ -93,7 +120,7 @@ def create_formula(
         C,
         K,
         inner_edges,
-        mode, qbf_solver):
+        mode, qbf_solver, representants):
     """
 
     :param aut:
@@ -115,10 +142,14 @@ def create_formula(
         return None
     else:
 
+
         f_creator = Z3_f_ctor(edge_dict, scc_edg, scc_state_info
                       ,inner_edges_nums,C, K, inner_edges
                       , mode, qbf_solver)
-        z3_formula = f_creator.get_qbf_formula(aut)
+        if mode == 1:
+            z3_formula = f_creator.get_level1(aut, representants)
+        else:
+            z3_formula = f_creator.get_qbf_formula(aut)
 
         return z3_formula
 
@@ -132,7 +163,7 @@ def create_formula(
 
     # edges that are true create continuous cycle of edges aka laso
 
-    if mode == 4:
+    if mode == 3:
         laso = laso2(aut, inner_edges, scc_edg)
         in_out = in_n_out(scc_state_info)
         laso.add_subf(in_out)
@@ -210,15 +241,14 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     counter = 0
     scc_counter = 0
 
+
     for scc in (si):
-        #print("scc: ",  si.states_of(scc_counter))
-        #print("marks: ", si.marks_of(scc))
-        #print("used_acc_of: ", si.used_acc_of(scc))
-        #print("acc_sets_of: ", si.acc_sets_of(scc))
+
         if si.is_trivial(scc_counter):
             #print("trivial", si.states_of(scc_counter))
             scc_counter += 1
             continue
+
         scc_inner_edges = si.inner_edges_of(scc_counter)
         edges_translator = {}
         mark_edg_dict = get_mark_edg(aut, scc_inner_edges, edges_translator)
@@ -264,7 +294,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
             L,
             scc_inner_edges,
             aut)
-        if L == 4:
+        if L == 3:
             laso = laso_scc_optimized(
                 aut,
                 scc_inner_edges,
@@ -315,7 +345,7 @@ def play(aut, C, K, mode, timeout, timeouted,
     scc_state_info, scc_edg = scc_info(aut)
 
     # K = K - 1  # we dont want to try what we already know
-    tmp_mode = 2
+    tmp_mode = 1
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
     if currently_reduced == FormulaAtribute.K:
@@ -330,12 +360,17 @@ def play(aut, C, K, mode, timeout, timeouted,
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
 
             return aut
+        """
+        if K == 0 and currently_reduced == FormulaAtribute.K:
+            return try_evaluate0(aut, original)
+        """
 
-        # dictionary {edge_num : [num of acceptance set]}
-        edge_dict = edge_dictionary(aut)
+
+        # dictionary {acc_set_num : [edge_nums]}
+        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, mode)
 
         # QBF formula is written into ./sat_file
-
+        formula = None
         if (optimized_scc):
             acc = ACC_DNF(aut.get_acceptance().to_dnf())
             # print("scc")
@@ -352,7 +387,7 @@ def play(aut, C, K, mode, timeout, timeouted,
                 C,
                 K,
                 inner_edges,
-                tmp_mode, qbf_solver)
+                tmp_mode, qbf_solver, representants)
 
         if formula != None:
             # QBF SOLVER
@@ -360,22 +395,24 @@ def play(aut, C, K, mode, timeout, timeouted,
             #print("z3 formula: ", formula)
             solver = Solver()
             solver.add(formula)
+            solver.set("timeout",1000* timeout)
             solver.push()
-            solver.set("timeout", timeout)
+
             #print("solver check: ", solver.check())
 
             if solver.check() == sat:
-                #print("--satisfiable--")
+                print("--satisfiable--")
                 s = solver.model()
+                #print(s)
 
-                process_variables(aut, s, qbf_solver)
+                process_variables(aut, s, qbf_solver, scc_equiv_edges, mode)
 
                 #parse_model(solver.model())
             else:
                 # code repetition, necessary to rewrite
-                #print("unsatisfiable", "mode:", mode, "tmp_mode: ", tmp_mode)
+                print("unsatisfiable")
                 if (tmp_mode < mode):
-                    tmp_mode = 4
+                    tmp_mode += 1
                     print("new level of simplification:", tmp_mode)
                     continue
                 else:
@@ -413,7 +450,7 @@ def play(aut, C, K, mode, timeout, timeouted,
                 print("unsatisfiable")
                 if (tmp_mode < mode):
 
-                    tmp_mode = 4
+                    tmp_mode += 1
                     print("new level of simplification:", tmp_mode)
                     continue
                 else:
@@ -430,7 +467,15 @@ def play(aut, C, K, mode, timeout, timeouted,
                 return aut
             variables = out[1:]
             print("satisfiable")
-            process_variables(aut, variables, qbf_solver)
+
+            process_variables(aut, variables, qbf_solver, scc_equiv_edges, mode)
+
+        if aut.get_acceptance().used_sets().count() == 0:
+            print("used sets = 0, setting acc to t")
+            aut.set_acceptance(0, spot.acc_code.t())
+            if not spot.are_equivalent(original, aut):
+                print("setting acc to f")
+                aut.set_acceptance(0, spot.acc_code.f())
 
         if currently_reduced == FormulaAtribute.K:
             K = K - 1

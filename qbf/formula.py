@@ -56,7 +56,7 @@ class Limboole_f_ctor(FormulaCreator):
 
         # edges that are true create continuous cycle of edges aka laso
 
-        if self.mode == 4:
+        if self.mode == 3:
             laso = laso2(aut, self.inner_edges, self.scc_edg)
             in_out = in_n_out(self.scc_state_info)
             laso.add_subf(in_out)
@@ -355,10 +355,6 @@ def laso_f(aut, inner_edges_nums, scc_state_info, scc_edg, inner_edges, mode):
     laso.add_subf(one_scc)
 
     # this part makes sure, that the edges are connected tzn QBF CONNECTED
-    if mode == 3:
-        neg = negate_part(aut, inner_edges, edges_translator)
-        laso.add_subf(neg)
-    return laso
 
 
 def equiv_f(old, new):
