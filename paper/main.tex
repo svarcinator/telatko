@@ -422,13 +422,13 @@ formulas.
   clause of $\psi$ contains terms $\Inf k$ or $\Fin k$, respectively.
   \[i_{c,k}=\left\{
       \begin{array}{ll}
-        1 & \textrm{if $c^\textrm{th}$ clause of $\psi$ contains $\Inf k$}\\
+        1 & \textrm{if the $c^\textrm{th}$ clause of $\psi$ contains $\Inf k$}\\
         0 & \textrm{otherwise}    
       \end{array}\right.
   \]
   \[f_{c,k}=\left\{
       \begin{array}{ll}
-        1 & \textrm{if $c^\textrm{th}$ clause of $\psi$ contains $\Fin k$}\\
+        1 & \textrm{if the $c^\textrm{th}$ clause of $\psi$ contains $\Fin k$}\\
         0 & \textrm{otherwise}    
       \end{array}\right.
   \]
@@ -486,33 +486,48 @@ It remains to define the subformula $\mcycle(\vec{e})$ with the intended meaning
 \[
   \vec{e}\textrm{ represents a cycle} \iff \mcycle(\vec{e}).
 \]
-In fact, our reduction methods remains correct whenever ``implies'' holds.
-If $\mcycle(\vec{e})$
+In fact, only the direction ``$\Longrightarrow$'' is required for
+correctness of our reduction method. If $\mcycle(\vec{e})$ holds for
+some valuation of $\vec{e}$ that does not represent a cycle, then the
+required equivalence
+$\msat_\varphi(\vec{e}) \iff
+\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ on this valuation of
+$\vec{e}$ adds a superfluous constraint on $\psi$ represented by
+$\vec{i},\vec{f}$ and $\rem$ represented by $\vec{n}$. These
+superfluous constraints can lead to loss of reduction opportunities,
+but not to incorrectness. This observation allows us to trade the
+precision of $\mcycle(\vec{e})$ for simplicity of the formula.
+
+In the following, we define three versions of $\mcycle(\vec{e})$:
+\begin{itemize}
+\item $\mcycle_1(\vec{e})$ is a lightweight version, which puts
+  only minimal requirements on $\vec{e}$. It does not use the
+  information about automaton structure, but it comes with an
+  interesting simplification of the whole formula $\Phi_{C,K}$.
+\item $\mcycle_2(\vec{e})$ is a balanced version. It uses the
+  information about the automaton structure to identify many
+  valuations of $\vec{e}$ that are not cycles. It is relatively
+  simple, but it is still satisfied by some valuations of $\vec{e}$
+  not corresponding to cycles.
+\item $\mcycle_3(\vec{e})$ is a strict version satisfied only by
+  the valuations of $\vec{e}$ representing cycles. Unfortunately,
+  it uses additional quantified variables. 
+\end{itemize}
+
+\subsection{Lightweight version $\mcycle_1(\vec{e})$}
+The lightweight version is based on the fact that every cycle is nonempty.
+Indeed, the only restriction imposed by
+\[
+  \mcycle_1(\vec{e})=\bigvee_{t\in\delta}e_t
+\]
+is that $\vec{e}$ represents a nonempty set.
+
+The fact that this version do 
+
+\subsection{Balanced version $\mcycle_2(\vec{e})$}
 
 
-  $\vec{e}$ represents a cycle. In fact, $\mcycle(\vec{e})$ needs to be
-satisfied by all cycles, but our reduction technique remains correct
-even if it is satisfied also by some sets $T\subseteq\delta$ that are
-not cycles. The only consequence is that
-
-
-
-Note that our reduction method remains
-correct even if $\mcycle(\vec{e})$ isAs we will see, However, our reduction method remains
-correct.
-
-The intended meaning
-of this formula is We offer three definitions:
-
-\todo{Jan is here!}
-
-\subsection{Lightweight version of $\mcycle(\vec{e})$ (level 1)}
-
-
-\subsection{Balanced version of $\mcycle(\vec{e})$ (level 2)}
-
-
-\subsection{Strict version of  $\mcycle(\vec{e})$ (level 3)}
+\subsection{Strict version $\mcycle_3(\vec{e})$}
 
 \subsection{Optimizations}
 
