@@ -153,58 +153,6 @@ def create_formula(
 
         return z3_formula
 
-    # quantified edges #e_1 ... #e_n
-    quant_edges = quant_all(inner_edges_nums)
-    # quantified variables ?w_1 ?w_2 ... ?w_n
-
-    # quant_edges += w_quant(aut)
-    if mode > 2:
-        quant_edges += w_quant(aut)
-
-    # edges that are true create continuous cycle of edges aka laso
-
-    if mode == 3:
-        laso = laso2(aut, inner_edges, scc_edg)
-        in_out = in_n_out(scc_state_info)
-        laso.add_subf(in_out)
-    else:
-        laso = laso_f(
-            aut,
-            inner_edges_nums,
-            scc_state_info,
-            scc_edg,
-            inner_edges,
-            mode)
-
-    # reqiurements on old acceptance formula
-    old = old_formula(aut.get_acceptance(), edge_dict)
-
-    # assignment of variables to create new acceptance formula
-    new = new_formula(inner_edges_nums, C, K)
-    # old and new need to be equivalent
-    eq = SATformula('<->')
-    eq.add_subf(old)
-    eq.add_subf(new)
-
-    impl = SATformula("->")
-    impl.add_subf(laso)
-    impl.add_subf(eq)
-
-    # root of QBFformula
-    con = SATformula("&")
-    con.add_subf(impl)
-
-    # not (Inf1 & Fin1)
-    inf_not_fin = inf_is_not_fin_clause(C, K)
-
-    # (Fin1 | Inf1) - we need control over formula
-    inf_or_fin = inf_or_fin_f(C, K)
-    con.add_subf(inf_not_fin)
-    con.add_subf(inf_or_fin)
-    # prints our formula into text file
-    SAT_output("sat_file", quant_edges, con)
-
-
 def try_evaluate0(aut, orig):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
@@ -326,7 +274,7 @@ def resolve_formula_atributes(minimized_atribute, C, K):
 
 
 def play(aut, C, K, mode, timeout, timeouted,
-         optimized_scc, minimized_atribute, qbf_solver):
+         optimized_scc, minimized_atribute, qbf_solver, tmp_mode):
 
     spot.cleanup_acceptance_here(aut)
 
@@ -345,7 +293,7 @@ def play(aut, C, K, mode, timeout, timeouted,
     scc_state_info, scc_edg = scc_info(aut)
 
     # K = K - 1  # we dont want to try what we already know
-    tmp_mode = 1
+
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
     if currently_reduced == FormulaAtribute.K:
@@ -360,14 +308,9 @@ def play(aut, C, K, mode, timeout, timeouted,
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
 
             return aut
-        """
-        if K == 0 and currently_reduced == FormulaAtribute.K:
-            return try_evaluate0(aut, original)
-        """
-
 
         # dictionary {acc_set_num : [edge_nums]}
-        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, mode)
+        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
 
         # QBF formula is written into ./sat_file
         formula = None
@@ -405,7 +348,7 @@ def play(aut, C, K, mode, timeout, timeouted,
                 s = solver.model()
                 #print(s)
 
-                process_variables(aut, s, qbf_solver, scc_equiv_edges, mode)
+                process_variables(aut, s, qbf_solver, scc_equiv_edges, tmp_mode)
 
                 #parse_model(solver.model())
             else:
@@ -468,15 +411,22 @@ def play(aut, C, K, mode, timeout, timeouted,
             variables = out[1:]
             print("satisfiable")
 
-            process_variables(aut, variables, qbf_solver, scc_equiv_edges, mode)
+            process_variables(aut, variables, qbf_solver, scc_equiv_edges, tmp_mode)
 
-        if aut.get_acceptance().used_sets().count() == 0:
+        if aut.get_acceptance().used_sets().count() < 1:
+            clear_aut_edges(aut)
             print("used sets = 0, setting acc to t")
             aut.set_acceptance(0, spot.acc_code.t())
             if not spot.are_equivalent(original, aut):
                 print("setting acc to f")
                 aut.set_acceptance(0, spot.acc_code.f())
+            return aut
 
+        if not spot.are_equivalent(original, aut):
+            print("not equivalent")
+            assert(False)
+        else:
+            print("equivalent")
         if currently_reduced == FormulaAtribute.K:
             K = K - 1
         else:

@@ -281,7 +281,7 @@ class Z3_f_ctor(FormulaCreator):
         # true
         one_scc = self.one_scc_f()
 
-        laso = And(in_out, one_scc)s
+        laso = And(in_out, one_scc)
         return laso
 
 
