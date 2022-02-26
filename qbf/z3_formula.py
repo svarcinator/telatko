@@ -26,9 +26,7 @@ class Z3_f_ctor(FormulaCreator):
         s = Solver()
         s.add(f)
         if s.check() == sat:
-            print("--satisfiable--")
             s = s.model()
-            print(s)
 
     def prune_scc_edg(self, representants):
         tmp = []
@@ -81,21 +79,17 @@ class Z3_f_ctor(FormulaCreator):
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
 
         new = self.new_formula()
-        #print(new)
         old = simplify(old)
-        #print(new)
         new = simplify(new)
 
         laso = simplify(laso)
 
         eq = self.equivalence_f(old, new)
-        #print(eq)
         impl = Implies(laso, eq)
         inf_not_fin = self.inf_is_not_fin_clause()
         inf_or_fin = self.inf_or_fin_f()
         inf_not_fin = simplify(inf_not_fin)
         inf_or_fin = simplify(inf_or_fin)
-        #print(inf_not_fin, inf_or_fin)
         #assert(False)
 
         formula = And(impl, inf_not_fin, inf_or_fin)
@@ -136,7 +130,6 @@ class Z3_f_ctor(FormulaCreator):
         main_dis.append(And(con1))
         main_dis.append(And(con2))
         main_dis.append(And(con3))
-        #print("main dis: ", main_dis)
         one_scc = self.one_scc_f()
         laso = And(Or(main_dis), one_scc)
 
@@ -281,7 +274,7 @@ class Z3_f_ctor(FormulaCreator):
         # true
         one_scc = self.one_scc_f()
 
-        laso = And(in_out, one_scc)s
+        laso = And(in_out, one_scc)
         return laso
 
 

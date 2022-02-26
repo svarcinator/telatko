@@ -40,13 +40,19 @@ def main(argv):
     parser.add_argument(
         "-Q",
         "--qbf_solver",
-        help="Choose wchich solver is going to be used.", choices=['limboole', 'z3'], default='limboole')
+        help="Choose wchich solver is going to be used.", choices=['limboole', 'z3'], default='z3')
+    parser.add_argument(
+        "-B",
+        "--base_level",
+        help="Choose whether qbf level 1 or standard level 1(original TELAtko).", choices=['telatko', 'z3'], default='z3')
 
     args = parser.parse_args()
 
 
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
+    if args.level > 3:
+        args.level = 3
 
     aut = spot.automata(args.autfile)
     timeouted = [0]
@@ -58,30 +64,24 @@ def main(argv):
         print_aut(origin, "problem", "w")
         try:
             spot.cleanup_acceptance_here(a)
-
-            #a_tele = process_automaton(tmp_a)
-
             acc_sets_count = a.get_acceptance().used_sets().count()
             clauses_count = len(
                 a.get_acceptance().to_dnf().top_disjuncts())
-            if args.level > 3:
-                args.level = 3
 
-            if args.level >= 1 and args.level <= 4:
+            if args.base_level == "telatko":
+                a = process_automaton(a)
+                if args.level > 1 and acc_sets_count != 0:
 
+                    auto = play(
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver, 2)
+                else:
+                    auto = a
+            else:
                 if acc_sets_count == 0:
                     auto = a
                 else:
-
                     auto = play(
-                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver)
-                    """
-                    if a_tele.get_acceptance().used_sets().count() < auto.get_acceptance().used_sets().count():
-                        print_aut(origin, "better_tele_l1.hoa", "a")
-                    """
-
-            else:
-                auto = a
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver, 1)
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
@@ -89,12 +89,8 @@ def main(argv):
                 print_aut(auto, None, " ")
 
             if not spot.are_equivalent(origin, auto):
-                print("not equivalent")
                 print_aut(origin, "not_eq", "w")
-                print("timeouted:", timeouted[0])
                 return
-            else:
-                print("equivalent")
 
             acc_sets_count2 = auto.get_acceptance().used_sets().count()
 
@@ -106,7 +102,6 @@ def main(argv):
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
 
-    print("timeouted:", timeouted[0])
 
 
 if __name__ == "__main__":

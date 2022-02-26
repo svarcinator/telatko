@@ -46,7 +46,6 @@ def edge_dictionary(aut, mode):
                         add_or_append(edge_dict, m, aut.edge_number(e))
 
         scc_equiv_edges.append(marks_edges)
-    #print(scc_equiv_edges)
     return edge_dict, scc_equiv_edges, representants
 
 
@@ -90,9 +89,7 @@ def scc_info(aut):
     for i in range(si.scc_count()):
         states = si.states_of(i)
         if si.is_trivial(i):
-            #print("trivial before", i)
             continue
-        #print("i: ", i)
         state_dict = {}
         for s in states:
             state_dict[s] = [[], []]
@@ -153,68 +150,19 @@ def create_formula(
 
         return z3_formula
 
-    # quantified edges #e_1 ... #e_n
-    quant_edges = quant_all(inner_edges_nums)
-    # quantified variables ?w_1 ?w_2 ... ?w_n
-
-    # quant_edges += w_quant(aut)
-    if mode > 2:
-        quant_edges += w_quant(aut)
-
-    # edges that are true create continuous cycle of edges aka laso
-
-    if mode == 3:
-        laso = laso2(aut, inner_edges, scc_edg)
-        in_out = in_n_out(scc_state_info)
-        laso.add_subf(in_out)
-    else:
-        laso = laso_f(
-            aut,
-            inner_edges_nums,
-            scc_state_info,
-            scc_edg,
-            inner_edges,
-            mode)
-
-    # reqiurements on old acceptance formula
-    old = old_formula(aut.get_acceptance(), edge_dict)
-
-    # assignment of variables to create new acceptance formula
-    new = new_formula(inner_edges_nums, C, K)
-    # old and new need to be equivalent
-    eq = SATformula('<->')
-    eq.add_subf(old)
-    eq.add_subf(new)
-
-    impl = SATformula("->")
-    impl.add_subf(laso)
-    impl.add_subf(eq)
-
-    # root of QBFformula
-    con = SATformula("&")
-    con.add_subf(impl)
-
-    # not (Inf1 & Fin1)
-    inf_not_fin = inf_is_not_fin_clause(C, K)
-
-    # (Fin1 | Inf1) - we need control over formula
-    inf_or_fin = inf_or_fin_f(C, K)
-    con.add_subf(inf_not_fin)
-    con.add_subf(inf_or_fin)
-    # prints our formula into text file
-    SAT_output("sat_file", quant_edges, con)
-
-
-def try_evaluate0(aut, orig):
+def try_evaluate0(aut, orig, qbf_run_info):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
     :param aut: spot::automaton
     :return: potentionally zero acceptance spot::automaton
     """
     last_eq_aut = spot.automaton(aut.to_str())
+    aut.set_name(qbf_run_info + "F_0_S")
+    last_eq_aut.set_name(qbf_run_info + "F_0_U")
     clear_aut_edges(aut)
     aut.set_acceptance(0, spot.acc_code.t())
     if spot.are_equivalent(orig, aut):
+
         return aut
 
     aut.set_acceptance(0, spot.acc_code.f())
@@ -232,7 +180,6 @@ def count_sets(sets):
 
 def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     formula = SATformula('&')
-    #print("scc state info:" , scc_state_info)
     weak = spot.scc_info(aut).weak_sccs()
 
     si = spot.scc_info(aut)
@@ -245,7 +192,6 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     for scc in (si):
 
         if si.is_trivial(scc_counter):
-            #print("trivial", si.states_of(scc_counter))
             scc_counter += 1
             continue
 
@@ -257,9 +203,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         eq = SATformula('<->')
         #old = old_formula_scc(aut.get_acceptance(), mark_edg_dict, edges_translator, si.acc_sets_of(scc))
 
-        # print(si.used_acc_of(scc_counter))
         if si.is_rejecting_scc(scc_counter):
-            # print("rejecting")
             # old je False
             old = SATformula("&")
             old.add_subf("t")
@@ -270,7 +214,6 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
 
         elif weak[scc_counter] and si.is_accepting_scc(scc_counter):
 
-            #print("weak accepting", si.states_of(scc_counter))
             old = SATformula("|")
             old.add_subf("t")
             old.add_subf("!t")
@@ -317,16 +260,23 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
 
 def resolve_formula_atributes(minimized_atribute, C, K):
     if minimized_atribute == 'clauses':
-        #print("reducing clauses")
 
         return FormulaAtribute.C
     else:
 
         return FormulaAtribute.K
 
+def update_run_info(K, res, tmp_mode):
+    if res == z3.unknown:
+        str_res = "T"
+    if res == unsat:
+        str_res = "U"
+    assert(str_res != "")
+    return "L_{0}_{1}_{2} ".format(str(tmp_mode), str(K), str_res)
+
 
 def play(aut, C, K, mode, timeout, timeouted,
-         optimized_scc, minimized_atribute, qbf_solver):
+         optimized_scc, minimized_atribute, qbf_solver, tmp_mode):
 
     spot.cleanup_acceptance_here(aut)
 
@@ -345,7 +295,8 @@ def play(aut, C, K, mode, timeout, timeouted,
     scc_state_info, scc_edg = scc_info(aut)
 
     # K = K - 1  # we dont want to try what we already know
-    tmp_mode = 1
+    qbf_run_info = ""
+
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
     if currently_reduced == FormulaAtribute.K:
@@ -354,29 +305,22 @@ def play(aut, C, K, mode, timeout, timeouted,
         C -= 1
 
     while C > 0 and K > 0:
-        #print("C: ", C, ", K: ", K)
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
 
             return aut
-        """
-        if K == 0 and currently_reduced == FormulaAtribute.K:
-            return try_evaluate0(aut, original)
-        """
-
 
         # dictionary {acc_set_num : [edge_nums]}
-        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, mode)
+        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
 
         # QBF formula is written into ./sat_file
         formula = None
         if (optimized_scc):
+            # tohle pujde dopryc ?
             acc = ACC_DNF(aut.get_acceptance().to_dnf())
-            # print("scc")
             scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
         else:
-            # print("not scc")
 
             formula = create_formula(
                 aut,
@@ -392,28 +336,21 @@ def play(aut, C, K, mode, timeout, timeouted,
         if formula != None:
             # QBF SOLVER
             assert(qbf_solver == "z3")
-            #print("z3 formula: ", formula)
             solver = Solver()
             solver.add(formula)
             solver.set("timeout",1000* timeout)
             solver.push()
+            res = solver.check()
 
-            #print("solver check: ", solver.check())
-
-            if solver.check() == sat:
-                print("--satisfiable--")
+            if  res == sat:
                 s = solver.model()
-                #print(s)
+                process_variables(aut, s, qbf_solver, scc_equiv_edges, tmp_mode)
 
-                process_variables(aut, s, qbf_solver, scc_equiv_edges, mode)
-
-                #parse_model(solver.model())
             else:
-                # code repetition, necessary to rewrite
-                print("unsatisfiable")
+                qbf_run_info += update_run_info(K, res, tmp_mode)
+
                 if (tmp_mode < mode):
                     tmp_mode += 1
-                    print("new level of simplification:", tmp_mode)
                     continue
                 else:
 
@@ -423,65 +360,26 @@ def play(aut, C, K, mode, timeout, timeouted,
                         C = C - 1
                         continue
                     else:
+                        aut.set_name(qbf_run_info)
                         return aut
 
-        else:
-            assert(qbf_solver == "limboole")
-            # LIMBOOLE SOLVER
-            try:
-                cp = subprocess.run(["./qbf/limboole1.2/limboole",
-                                     "./sat_file"],
-                                    universal_newlines=True,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    timeout=int(timeout))
 
-            except subprocess.TimeoutExpired:
-                print("expired")
-                timeouted[0] += 1
-                return aut
-
-            out = cp.stdout.splitlines()
-            f = open("sat_evaluation", "w")
-            f.write(cp.stdout)
-            f.close()
-
-            if len(out) == 1:
-                print("unsatisfiable")
-                if (tmp_mode < mode):
-
-                    tmp_mode += 1
-                    print("new level of simplification:", tmp_mode)
-                    continue
-                else:
-                    if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
-                        currently_reduced = FormulaAtribute.C
-                        K = K + 1
-                        C = C - 1
-                        continue
-                    else:
-                        return aut
-
-            if len(out) == 0:
-                print("sat error")
-                return aut
-            variables = out[1:]
-            print("satisfiable")
-
-            process_variables(aut, variables, qbf_solver, scc_equiv_edges, mode)
-
-        if aut.get_acceptance().used_sets().count() == 0:
-            print("used sets = 0, setting acc to t")
+        if aut.get_acceptance().used_sets().count() < 1:
+            clear_aut_edges(aut)
             aut.set_acceptance(0, spot.acc_code.t())
             if not spot.are_equivalent(original, aut):
-                print("setting acc to f")
                 aut.set_acceptance(0, spot.acc_code.f())
+            aut.set_name(qbf_run_info)
+            return aut
 
+        if not spot.are_equivalent(original, aut):
+            assert(False)
         if currently_reduced == FormulaAtribute.K:
             K = K - 1
         else:
             C = C - 1
-    return aut
+
+    return try_evaluate0(aut, original, qbf_run_info)
 
 
 def test_aut(a1, a2):
