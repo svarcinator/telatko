@@ -46,7 +46,6 @@ def edge_dictionary(aut, mode):
                         add_or_append(edge_dict, m, aut.edge_number(e))
 
         scc_equiv_edges.append(marks_edges)
-    #print(scc_equiv_edges)
     return edge_dict, scc_equiv_edges, representants
 
 
@@ -90,9 +89,7 @@ def scc_info(aut):
     for i in range(si.scc_count()):
         states = si.states_of(i)
         if si.is_trivial(i):
-            #print("trivial before", i)
             continue
-        #print("i: ", i)
         state_dict = {}
         for s in states:
             state_dict[s] = [[], []]
@@ -180,7 +177,6 @@ def count_sets(sets):
 
 def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     formula = SATformula('&')
-    #print("scc state info:" , scc_state_info)
     weak = spot.scc_info(aut).weak_sccs()
 
     si = spot.scc_info(aut)
@@ -193,7 +189,6 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
     for scc in (si):
 
         if si.is_trivial(scc_counter):
-            #print("trivial", si.states_of(scc_counter))
             scc_counter += 1
             continue
 
@@ -205,9 +200,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
         eq = SATformula('<->')
         #old = old_formula_scc(aut.get_acceptance(), mark_edg_dict, edges_translator, si.acc_sets_of(scc))
 
-        # print(si.used_acc_of(scc_counter))
         if si.is_rejecting_scc(scc_counter):
-            # print("rejecting")
             # old je False
             old = SATformula("&")
             old.add_subf("t")
@@ -218,7 +211,6 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
 
         elif weak[scc_counter] and si.is_accepting_scc(scc_counter):
 
-            #print("weak accepting", si.states_of(scc_counter))
             old = SATformula("|")
             old.add_subf("t")
             old.add_subf("!t")
@@ -265,7 +257,6 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
 
 def resolve_formula_atributes(minimized_atribute, C, K):
     if minimized_atribute == 'clauses':
-        #print("reducing clauses")
 
         return FormulaAtribute.C
     else:
@@ -302,7 +293,6 @@ def play(aut, C, K, mode, timeout, timeouted,
         C -= 1
 
     while C > 0 and K > 0:
-        #print("C: ", C, ", K: ", K)
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
@@ -316,10 +306,8 @@ def play(aut, C, K, mode, timeout, timeouted,
         formula = None
         if (optimized_scc):
             acc = ACC_DNF(aut.get_acceptance().to_dnf())
-            # print("scc")
             scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
         else:
-            # print("not scc")
 
             formula = create_formula(
                 aut,
@@ -335,28 +323,22 @@ def play(aut, C, K, mode, timeout, timeouted,
         if formula != None:
             # QBF SOLVER
             assert(qbf_solver == "z3")
-            #print("z3 formula: ", formula)
             solver = Solver()
             solver.add(formula)
             solver.set("timeout",1000* timeout)
             solver.push()
 
-            #print("solver check: ", solver.check())
 
             if solver.check() == sat:
-                print("--satisfiable--")
                 s = solver.model()
-                #print(s)
 
                 process_variables(aut, s, qbf_solver, scc_equiv_edges, tmp_mode)
 
                 #parse_model(solver.model())
             else:
                 # code repetition, necessary to rewrite
-                print("unsatisfiable")
                 if (tmp_mode < mode):
                     tmp_mode += 1
-                    print("new level of simplification:", tmp_mode)
                     continue
                 else:
 
@@ -380,7 +362,6 @@ def play(aut, C, K, mode, timeout, timeouted,
                                     timeout=int(timeout))
 
             except subprocess.TimeoutExpired:
-                print("expired")
                 timeouted[0] += 1
                 return aut
 
@@ -390,11 +371,9 @@ def play(aut, C, K, mode, timeout, timeouted,
             f.close()
 
             if len(out) == 1:
-                print("unsatisfiable")
                 if (tmp_mode < mode):
 
                     tmp_mode += 1
-                    print("new level of simplification:", tmp_mode)
                     continue
                 else:
                     if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
@@ -406,27 +385,20 @@ def play(aut, C, K, mode, timeout, timeouted,
                         return aut
 
             if len(out) == 0:
-                print("sat error")
                 return aut
             variables = out[1:]
-            print("satisfiable")
 
             process_variables(aut, variables, qbf_solver, scc_equiv_edges, tmp_mode)
 
         if aut.get_acceptance().used_sets().count() < 1:
             clear_aut_edges(aut)
-            print("used sets = 0, setting acc to t")
             aut.set_acceptance(0, spot.acc_code.t())
             if not spot.are_equivalent(original, aut):
-                print("setting acc to f")
                 aut.set_acceptance(0, spot.acc_code.f())
             return aut
 
         if not spot.are_equivalent(original, aut):
-            print("not equivalent")
             assert(False)
-        else:
-            print("equivalent")
         if currently_reduced == FormulaAtribute.K:
             K = K - 1
         else:

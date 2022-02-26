@@ -89,12 +89,8 @@ def main(argv):
                 print_aut(auto, None, " ")
 
             if not spot.are_equivalent(origin, auto):
-                print("not equivalent")
                 print_aut(origin, "not_eq", "w")
-                print("timeouted:", timeouted[0])
                 return
-            else:
-                print("equivalent")
 
             acc_sets_count2 = auto.get_acceptance().used_sets().count()
 
@@ -106,7 +102,6 @@ def main(argv):
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
 
-    print("timeouted:", timeouted[0])
 
 
 if __name__ == "__main__":
