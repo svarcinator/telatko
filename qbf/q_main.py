@@ -150,16 +150,19 @@ def create_formula(
 
         return z3_formula
 
-def try_evaluate0(aut, orig):
+def try_evaluate0(aut, orig, qbf_run_info):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
     :param aut: spot::automaton
     :return: potentionally zero acceptance spot::automaton
     """
     last_eq_aut = spot.automaton(aut.to_str())
+    aut.set_name(qbf_run_info + "F_0_S")
+    last_eq_aut.set_name(qbf_run_info + "F_0_U")
     clear_aut_edges(aut)
     aut.set_acceptance(0, spot.acc_code.t())
     if spot.are_equivalent(orig, aut):
+
         return aut
 
     aut.set_acceptance(0, spot.acc_code.f())
@@ -263,6 +266,14 @@ def resolve_formula_atributes(minimized_atribute, C, K):
 
         return FormulaAtribute.K
 
+def update_run_info(K, res, tmp_mode):
+    if res == z3.unknown:
+        str_res = "T"
+    if res == unsat:
+        str_res = "U"
+    assert(str_res != "")
+    return "L_{0}_{1}_{2} ".format(str(tmp_mode), str(K), str_res)
+
 
 def play(aut, C, K, mode, timeout, timeouted,
          optimized_scc, minimized_atribute, qbf_solver, tmp_mode):
@@ -284,6 +295,7 @@ def play(aut, C, K, mode, timeout, timeouted,
     scc_state_info, scc_edg = scc_info(aut)
 
     # K = K - 1  # we dont want to try what we already know
+    qbf_run_info = ""
 
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
@@ -305,6 +317,7 @@ def play(aut, C, K, mode, timeout, timeouted,
         # QBF formula is written into ./sat_file
         formula = None
         if (optimized_scc):
+            # tohle pujde dopryc ?
             acc = ACC_DNF(aut.get_acceptance().to_dnf())
             scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
         else:
@@ -327,16 +340,15 @@ def play(aut, C, K, mode, timeout, timeouted,
             solver.add(formula)
             solver.set("timeout",1000* timeout)
             solver.push()
+            res = solver.check()
 
-
-            if solver.check() == sat:
+            if  res == sat:
                 s = solver.model()
-
                 process_variables(aut, s, qbf_solver, scc_equiv_edges, tmp_mode)
 
-                #parse_model(solver.model())
             else:
-                # code repetition, necessary to rewrite
+                qbf_run_info += update_run_info(K, res, tmp_mode)
+
                 if (tmp_mode < mode):
                     tmp_mode += 1
                     continue
@@ -348,53 +360,16 @@ def play(aut, C, K, mode, timeout, timeouted,
                         C = C - 1
                         continue
                     else:
+                        aut.set_name(qbf_run_info)
                         return aut
 
-        else:
-            assert(qbf_solver == "limboole")
-            # LIMBOOLE SOLVER
-            try:
-                cp = subprocess.run(["./qbf/limboole1.2/limboole",
-                                     "./sat_file"],
-                                    universal_newlines=True,
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    timeout=int(timeout))
-
-            except subprocess.TimeoutExpired:
-                timeouted[0] += 1
-                return aut
-
-            out = cp.stdout.splitlines()
-            f = open("sat_evaluation", "w")
-            f.write(cp.stdout)
-            f.close()
-
-            if len(out) == 1:
-                if (tmp_mode < mode):
-
-                    tmp_mode += 1
-                    continue
-                else:
-                    if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
-                        currently_reduced = FormulaAtribute.C
-                        K = K + 1
-                        C = C - 1
-                        continue
-                    else:
-                        return aut
-
-            if len(out) == 0:
-                return aut
-            variables = out[1:]
-
-            process_variables(aut, variables, qbf_solver, scc_equiv_edges, tmp_mode)
 
         if aut.get_acceptance().used_sets().count() < 1:
             clear_aut_edges(aut)
             aut.set_acceptance(0, spot.acc_code.t())
             if not spot.are_equivalent(original, aut):
                 aut.set_acceptance(0, spot.acc_code.f())
+            aut.set_name(qbf_run_info)
             return aut
 
         if not spot.are_equivalent(original, aut):
@@ -403,7 +378,8 @@ def play(aut, C, K, mode, timeout, timeouted,
             K = K - 1
         else:
             C = C - 1
-    return aut
+
+    return try_evaluate0(aut, original, qbf_run_info)
 
 
 def test_aut(a1, a2):
