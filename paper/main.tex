@@ -394,23 +394,117 @@ Now we describe the construction of QBF formulas in detail. The
 construction is parametrized by two integers $C,K\ge 0$, where $K$ is
 the desired number of acceptance marks and $C$ is the number of
 clauses of $\psi$. For simplicity, we assume that the reduced
-automaton will use the acceptance marks $N_K=\{1,2,\ldots,K\}$. First
-we desribe Boolean variables used in the constructed QBF formulas.
+automaton will use the acceptance marks $N_K=\{1,2,\ldots,K\}$.
+%Further, we consider only subsets $T\subseteq\bigcup_{\textrm{SCC}~S}\delta_S$
+First we describe Boolean variables used in the constructed QBF
+formulas.
 \begin{itemize}
-\item The fact whether a transition $t$ is in the set $T$ is
-  represented by a boolean variable $e_t$. By $\vec{e}$ we denote the vector
-  of length $|\delta|$ of all variables $e_t$.
-\item 
+\item For each transition $t\in\delta$, variable $e_t$ says whether
+  $t$ is in the current set $T$ or not.
+  \[e_t=\left\{
+      \begin{array}{ll}
+        1 & \textrm{if }t\in T\\
+        0 & \textrm{otherwise}    
+      \end{array}\right.
+  \]
+%  In fact, we consider variables 
+\item For each transition $t\in\delta$ and acceptance mark $k\in N_K$,
+  variable $n_{t,k}$ says whether $k$ is on the transition
+  $\rem(t)$ or not.
+  \[n_{t,k}=\left\{
+      \begin{array}{ll}
+        1 & \textrm{if }k\in\mks(\rem(t))\\
+        0 & \textrm{otherwise}    
+      \end{array}\right.
+  \]
+\item For each $c\in\{1,2,\ldots,C\}$ and acceptance mark $k\in N_K$,
+  variables $i_{c,k}$ and $f_{c,k}$ say whether the $c^\textrm{th}$
+  clause of $\psi$ contains terms $\Inf k$ or $\Fin k$, respectively.
+  \[i_{c,k}=\left\{
+      \begin{array}{ll}
+        1 & \textrm{if $c^\textrm{th}$ clause of $\psi$ contains $\Inf k$}\\
+        0 & \textrm{otherwise}    
+      \end{array}\right.
+  \]
+  \[f_{c,k}=\left\{
+      \begin{array}{ll}
+        1 & \textrm{if $c^\textrm{th}$ clause of $\psi$ contains $\Fin k$}\\
+        0 & \textrm{otherwise}    
+      \end{array}\right.
+  \]
+
+\end{itemize}
+By $\vec{e},\vec{n},\vec{i},\vec{f}$ we denote the vectors of all
+variables of the form $e_t$, $n_{t,k}$, $i_{c,k}$, and $f_{c,k}$,
+respectively. The constructed QBF formulas have the form 
+\[
+  \Phi_{C,K}(\vec{n},\vec{i},\vec{f})~~=~~\forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) \iff \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})\big).
+\]
+It remains to describe the subformulas $\mcycle(\vec{e})$,
+$\msat_\varphi(\vec{e})$, and
+$\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$. The subformula
+$\mcycle(\vec{e})$ will be defined as the last one and we present
+three versions of it.
+
+The subformula $\msat_\varphi(\vec{e})$ says whether $T$ satisfies the
+original acceptance formula $\varphi$ and it is derived directly from
+$\varphi$. Recall that $T$ satisfies $\Inf m$ iff $m\in\mks(T)$, which
+means that $T$ contains some transition with mark $m$. As the
+transitions with mark $m$ form the set $\delta_m$, $\Inf m$ can be
+expresses by $\bigvee_{t\in\delta_m}e_t$. Similarly, $T$ satisfies
+$\Fin m$ iff $m\not\in\mks(T)$, which can be expresses by
+$\bigwedge_{t\in\delta_m}\neg e_t$. Hence, $\msat_\varphi(\vec{e})$
+arises from $\varphi$ by replacing
+\begin{itemize}
+\item all terms of the form $\Inf m$ by $\bigvee_{t\in\delta_m}e_t$ and
+\item all terms of the form $\Fin m$ by $\bigwedge_{t\in\delta_m}\neg e_t$.
 \end{itemize}
 
-
-
+Now we construct the subformula
+$\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ that evaluates to true
+iff $\rem(T)$ satisfies~$\psi$. The subformula reflects the basic
+structure of $\psi$. As we assume that $\psi$ is a disjunction of $C$
+clauses, we have
 \[
-  \forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) ~\iff~ \msat(\vec{e},\vec{k},\vec{p})\big).
+  \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})=\bigvee_{c\in\{1,2,\ldots,C\}}\xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})
+\]
+where each $\xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ corresponds to
+one clause. Recall that the presence of terms $\Inf k$ and $\Fin k$ in
+the $c^\textrm{th}$ clause is given by variables $i_{c,k}$ and
+$f_{c,k}$, respecively. $\Inf k$ is satisfied by $\rem(T)$ iff $T$
+contains a transition $t$ such that $k\in\mks(\rem(t))$, which can be
+expressed as $\bigvee_{t\in\delta}(e_t\wedge n_{t,k})$. Similarly,
+$\Fin k$ is satisfied by $\rem(T)$ iff there is no transition $t\in T$
+such that $k\in\mks(\rem(t))$, which can be expressed as
+$\bigwedge_{t\in\delta}\neg(e_t\wedge n_{t,k})$. Hence, we set
+\[
+  \xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})=
+  \bigwedge_{k\in N_K}\Big(i_{c,k}\implies\bigvee_{t\in\delta}(e_t\wedge n_{t,k})\Big)\wedge\Big(f_{c,k}\implies\bigwedge_{t\in\delta}\neg(e_t\wedge n_{t,k})\Big).
 \]
 
+It remains to define the subformula $\mcycle(\vec{e})$ with the intended meaning
+\[
+  \vec{e}\textrm{ represents a cycle} \iff \mcycle(\vec{e}).
+\]
+In fact, our reduction methods remains correct whenever ``implies'' holds.
+If $\mcycle(\vec{e})$
 
-\textbf{Jan is here!}
+
+  $\vec{e}$ represents a cycle. In fact, $\mcycle(\vec{e})$ needs to be
+satisfied by all cycles, but our reduction technique remains correct
+even if it is satisfied also by some sets $T\subseteq\delta$ that are
+not cycles. The only consequence is that
+
+
+
+Note that our reduction method remains
+correct even if $\mcycle(\vec{e})$ isAs we will see, However, our reduction method remains
+correct.
+
+The intended meaning
+of this formula is We offer three definitions:
+
+\todo{Jan is here!}
 
 \subsection{Lightweight version of $\mcycle(\vec{e})$ (level 1)}
 
@@ -419,6 +513,18 @@ we desribe Boolean variables used in the constructed QBF formulas.
 
 
 \subsection{Strict version of  $\mcycle(\vec{e})$ (level 3)}
+
+\subsection{Optimizations}
+
+SCC-based approach
+
+Its first part $\xi_1(\vec{i},\vec{f})$ says that any clause does not
+contain both $\Inf k$ and $\Fin k$ for the same mark $k$ as a clause
+with both such terms is always unsatisfiable. Note that the subformula
+$\xi_1(\vec{i},\vec{f})$ can be safely omitted, but it speeds up the QBF solving.
+
+
+\todo{Zbytek je stary text!}
 
 
 Recall that our goal is to reduce the number of acceptance marks in a
