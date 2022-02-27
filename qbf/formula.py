@@ -38,13 +38,11 @@ class FormulaCreator:
 
 
 # how can I write this more pretty?
-class Limboole_f_ctor(FormulaCreator):
+class Limboole_f_ctor():
     def __init__(self,  edge_dict, scc_edg, scc_state_info
                   ,inner_edges_nums,C, K, inner_edges
-                  , mode, qbf_solver):
-        super().__init__( edge_dict, scc_edg, scc_state_info
-                      ,inner_edges_nums,C, K, inner_edges
-                      , mode, qbf_solver)
+                  , mode)
+
     def get_qbf_formula(self, aut):
         # quantified edges #e_1 ... #e_n
         quant_edges = quant_all(self.inner_edges_nums)

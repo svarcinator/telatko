@@ -89,8 +89,10 @@ def main(argv):
                 print_aut(auto, None, " ")
 
             if not spot.are_equivalent(origin, auto):
+                assert(False)
                 print_aut(origin, "not_eq", "w")
                 return
+
 
             acc_sets_count2 = auto.get_acceptance().used_sets().count()
 
