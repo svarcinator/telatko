@@ -39,6 +39,7 @@
 \newcommand{\rem}{\mathit{nm}}
 \newcommand{\mcycle}{\mathit{cycle}}
 \newcommand{\msat}{\mathit{satisfies}}
+\newcommand{\Te}{T_{\vec{e}}}
 \def\false{\mathit{false}}
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
@@ -482,14 +483,15 @@ $\bigwedge_{t\in\delta}\neg(e_t\wedge n_{t,k})$. Hence, we set
   \bigwedge_{k\in N_K}\Big(i_{c,k}\implies\bigvee_{t\in\delta}(e_t\wedge n_{t,k})\Big)\wedge\Big(f_{c,k}\implies\bigwedge_{t\in\delta}\neg(e_t\wedge n_{t,k})\Big).
 \]
 
-It remains to define the subformula $\mcycle(\vec{e})$ with the intended meaning
+It remains to define the subformula $\mcycle(\vec{e})$. Let $\Te$
+denote the set of transitions represented by $\vec{e}$. The original
+intended meaning of $\mcycle(\vec{e})$ is
 \[
-  \vec{e}\textrm{ represents a cycle} \iff \mcycle(\vec{e}).
+  \mcycle(\vec{e}) \iff \Te\textrm{ is a cycle}.
 \]
-In fact, only the direction ``$\Longrightarrow$'' is required for
-correctness of our reduction method. If $\mcycle(\vec{e})$ holds for
-some valuation of $\vec{e}$ that does not represent a cycle, then the
-required equivalence
+In fact, only the direction ``$\Longleftarrow$'' is required for the
+correctness of our reduction method. If $\Te$ is not a cycle and
+$\mcycle(\vec{e})$ holds, then the required equivalence
 $\msat_\varphi(\vec{e}) \iff
 \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ on this valuation of
 $\vec{e}$ adds a superfluous constraint on $\psi$ represented by
@@ -501,17 +503,18 @@ precision of $\mcycle(\vec{e})$ for simplicity of the formula.
 In the following, we define three versions of $\mcycle(\vec{e})$:
 \begin{itemize}
 \item $\mcycle_1(\vec{e})$ is a lightweight version, which puts
-  only minimal requirements on $\vec{e}$. It does not use the
+  only minimal requirements on $\Te$. It does not use the
   information about automaton structure, but it comes with an
   interesting simplification of the whole formula $\Phi_{C,K}$.
-\item $\mcycle_2(\vec{e})$ is a balanced version. It uses the
-  information about the automaton structure to identify many
-  valuations of $\vec{e}$ that are not cycles. It is relatively
-  simple, but it is still satisfied by some valuations of $\vec{e}$
-  not corresponding to cycles.
-\item $\mcycle_3(\vec{e})$ is a strict version satisfied only by
-  the valuations of $\vec{e}$ representing cycles. Unfortunately,
-  it uses additional quantified variables. 
+\item $\mcycle_2(\vec{e})$ is a balanced version. It says that every
+  transition in $\Te$ has to have a preceding and a succeeding
+  transition in $\Te$, which is a necessary condition on cycles, but
+  not a sufficient one.
+\item $\mcycle_3(\vec{e})$ is a strict version saying that $\Te$ is a
+  cycle. Unfortunately, it uses additional universally quantified
+  variables corresponding to automata states. Transformation to prenex
+  normal form turns the quantifiers to existential ones and the
+  resulting formula thus contains quantifier alternation.
 \end{itemize}
 
 \subsection{Lightweight version $\mcycle_1(\vec{e})$}
@@ -520,9 +523,48 @@ Indeed, the only restriction imposed by
 \[
   \mcycle_1(\vec{e})=\bigvee_{t\in\delta}e_t
 \]
-is that $\vec{e}$ represents a nonempty set.
+is that $\Te$ is nonempty.
 
-The fact that this version do 
+With this lightweight version of $\mcycle(\vec{e})$, the formula
+$\Phi_{C,K}$ actually says that
+for every nonempty set
+$T\subseteq\delta$, $T$ satisfies $\varphi$ if and only if $\rem(T)$ satisfies
+$\psi$. Note that the formula is not affected by the placement of
+transitions in the automaton. The only aspect of a transition $t$
+reflected by the formula is its set of marks $\mks(t)$. Hence, we do
+not have to distinguish between transitions with the same sets of
+marks. 
+
+Formally, we define an equivalence on transitions such that for each
+$t_1,t_2\in\delta$ we write $t_1\sim t_2$ whenever
+$\mks(t_1)=\mks(t_2)$.
+%This relation is clearly an equivalence.
+We prove the following statement. 
+\begin{lemma}
+  Assume that there is a function $\rem$ and a formula $\psi$ such
+  that for every nonempty set $T\subseteq\delta$ it holds that $T$
+  satisfies $\varphi$ iff $\rem(T)$ satisfies $\psi$. Then we can
+  safely assume that $\rem$ respects the quivalence $\sim$, that is
+  $t_1\sim t_2\implies\rem(t_1)=\rem(t_2)$.
+\end{lemma}
+\begin{proof}
+  \todo{Jan is here!}
+\end{proof}
+
+Formally, for each pair of transitions $t_1,t_2\in\delta$, we write
+$t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$. This relation is clearly an equivalence.
+Further, let us say that 
+
+
+
+
+
+We show that if this formula holds for some $\rem$ and $\psi$,
+then it also holds for some $\rem'$ and $\psi$ such that $\rem'$
+assigns the same sets of acceptance marks to transitions originally
+marked by the same sets of marks.
+
+
 
 \subsection{Balanced version $\mcycle_2(\vec{e})$}
 
