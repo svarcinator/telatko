@@ -584,8 +584,17 @@ on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
   which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$. 
 \end{proof}
 
-The previous lemma and its proof suggest implies that it is sufficient to 
-
+The lemma suggests the following simplification of the whole formula
+$\Phi_{C,K}$ built with $\mcycle_1(\vec{e})$. Before we build the
+formula, we compute the equivalence $\sim$ on automata transitions and
+remove all transitions except one of each class. Then we build the
+formula for this pruned automaton as described above. The more
+transitions we removed, the shorter formula with less $e_t$ variables
+we obtain. If the formula $\Phi_{C,K}$ for the pruned automaton is
+satisfiable and we derive $\rem$ and $\psi$ from its model, we can use
+safely them also on the original automaton. We only need to extend
+$\rem$ to all transitions such that it changes the acceptance marks on
+all equivalent transitions in the same way.
 
 \subsection{Balanced version $\mcycle_2(\vec{e})$}
 
