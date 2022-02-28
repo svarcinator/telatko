@@ -1,8 +1,7 @@
 import random
 # from classes import *
 from qbf.parser import *
-from qbf.formula import *
-from qbf.optimization import *
+#from qbf.optimization import *
 from qbf.z3_formula import *
 
 def add_or_append(dict, key, value):
@@ -41,6 +40,7 @@ def edge_dictionary(aut, mode):
             else:
                 marks_edges[tuple( e.acc.sets())] = [e]
                 representants.append(aut.edge_number(e))
+
                 if mode == 1:
                     for m in e.acc.sets():
                         add_or_append(edge_dict, m, aut.edge_number(e))
@@ -130,25 +130,21 @@ def create_formula(
     :param K: :: int - acceptance sets count
     :return:
     """
-    if qbf_solver == "limboole":
-        f_creator = Limboole_f_ctor(edge_dict, scc_edg, scc_state_info
+
+
+    if mode == 1:
+        f_creator = Z3_f_ctor(edge_dict, scc_edg, None
                       ,inner_edges_nums,C, K, inner_edges
-                      , mode, qbf_solver)
-        f_creator.get_qbf_formula(aut)
+                      , mode)
 
-        return None
+        z3_formula = f_creator.get_level1(aut, representants)
     else:
-
-
         f_creator = Z3_f_ctor(edge_dict, scc_edg, scc_state_info
                       ,inner_edges_nums,C, K, inner_edges
-                      , mode, qbf_solver)
-        if mode == 1:
-            z3_formula = f_creator.get_level1(aut, representants)
-        else:
-            z3_formula = f_creator.get_qbf_formula(aut)
+                      , mode)
+        z3_formula = f_creator.get_qbf_formula(aut)
 
-        return z3_formula
+    return z3_formula
 
 def try_evaluate0(aut, orig, qbf_run_info):
     """
@@ -177,15 +173,21 @@ def count_sets(sets):
         counter += 1
     return counter
 
+def remove_edges(edge_dict, edges):
+    new_dict = {}
 
-def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
-    formula = SATformula('&')
+    for key in edge_dict:
+        new_dict[key] = list(set(edge_dict[key]) & set(edges))
+
+    return new_dict
+
+
+def scc_optimized_formula(aut, acc, scc_state_info, C, K, mode, edge_dict, scc_edg, representants):
+    formula = []
     weak = spot.scc_info(aut).weak_sccs()
 
     si = spot.scc_info(aut)
-    max_T = 0
-    max_states = 0
-    counter = 0
+    relevant_scc_counter = 0
     scc_counter = 0
 
 
@@ -196,66 +198,51 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, L):
             continue
 
         scc_inner_edges = si.inner_edges_of(scc_counter)
-        edges_translator = {}
-        mark_edg_dict = get_mark_edg(aut, scc_inner_edges, edges_translator)
-        max_T = max(max_T, len(edges_translator))
+        scc_inner_edges_nums = list(map(lambda e: aut.edge_number(e), scc_inner_edges))
 
-        eq = SATformula('<->')
-        #old = old_formula_scc(aut.get_acceptance(), mark_edg_dict, edges_translator, si.acc_sets_of(scc))
+        scc_edge_dict = remove_edges(edge_dict, scc_inner_edges_nums)
 
-        if si.is_rejecting_scc(scc_counter):
-            # old je False
-            old = SATformula("&")
-            old.add_subf("t")
-            old.add_subf("!t")
-            eq = new_formula2(edges_translator, C, K)
-            eq.negate()
-            eq.imper()
 
-        elif weak[scc_counter] and si.is_accepting_scc(scc_counter):
+        if mode == 1:
+            scc_representants = list(set(representants) & set(scc_inner_edges_nums))
+            f_creator = Z3_f_ctor(scc_edge_dict, [scc_inner_edges_nums], None
+                          ,scc_inner_edges_nums,C, K, scc_inner_edges
+                          , mode)
 
-            old = SATformula("|")
-            old.add_subf("t")
-            old.add_subf("!t")
-            eq = new_formula2(edges_translator, C, K)
+            if si.is_rejecting_scc(scc_counter):
+
+                z3_f = f_creator.rejecting_scc(scc_representants)
+                formula.append(z3_f)
+
+            elif weak[scc_counter] and si.is_accepting_scc(scc_counter):
+
+                z3_f = f_creator.accepting_scc(scc_representants)
+                formula.append(z3_f)
+
+            else:
+
+                formula.append(f_creator.get_level1(aut, scc_representants))
+            #z3_f = f_creator.get_level1(aut, scc_representants)
+
+            #assert(False)
         else:
-            old = old_formula2(
-                acc,
-                mark_edg_dict,
-                edges_translator,
-                si.acc_sets_of(scc_counter),
-                aut,
-                scc)
-            new = new_formula2(edges_translator, C, K)
-            eq.add_subf(old)
-            eq.add_subf(new)
 
-        impl = SATformula('->')
-        laso = laso_part(
-            scc_state_info[counter],
-            edges_translator,
-            L,
-            scc_inner_edges,
-            aut)
-        if L == 3:
-            laso = laso_scc_optimized(
-                aut,
-                scc_inner_edges,
-                scc_state_info[counter],
-                edges_translator)
-        impl.add_subf(laso)
-        impl.add_subf(eq)
-        formula.add_subf(impl)
-        counter += 1
+            f_creator = Z3_f_ctor(scc_edge_dict,  [scc_inner_edges_nums], [scc_state_info[relevant_scc_counter]]
+                          ,scc_inner_edges_nums,C, K, scc_inner_edges
+                          , mode)
+            if si.is_rejecting_scc(scc_counter):
+
+                z3_f = f_creator.rejecting_scc_l23(aut)
+                formula.append(z3_f)
+            else:
+                formula.append(f_creator.get_qbf_formula(aut))
+
+        relevant_scc_counter += 1
         scc_counter += 1
-    formula.add_subf(inf_or_fin_f(C, K))
-    formula.add_subf(inf_is_not_fin_clause(C, K))
-    # formula.add_subf(least_one(max_T))
 
-    q = quantify_e(max_T)
-    if L > 2:
-        q += w_quant(aut)
-    SAT_output("sat_file", q, formula)
+    return And(formula)
+
+
 
 
 def resolve_formula_atributes(minimized_atribute, C, K):
@@ -319,7 +306,7 @@ def play(aut, C, K, mode, timeout, timeouted,
         if (optimized_scc):
             # tohle pujde dopryc ?
             acc = ACC_DNF(aut.get_acceptance().to_dnf())
-            scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode)
+            formula = scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants)
         else:
 
             formula = create_formula(
@@ -344,6 +331,7 @@ def play(aut, C, K, mode, timeout, timeouted,
 
             if  res == sat:
                 s = solver.model()
+
                 process_variables(aut, s, qbf_solver, scc_equiv_edges, tmp_mode)
 
             else:
@@ -372,8 +360,6 @@ def play(aut, C, K, mode, timeout, timeouted,
             aut.set_name(qbf_run_info)
             return aut
 
-        if not spot.are_equivalent(original, aut):
-            assert(False)
         if currently_reduced == FormulaAtribute.K:
             K = K - 1
         else:

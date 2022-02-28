@@ -67,11 +67,11 @@ def get_acc(aut):
 
     if (dnf_acc.acc_len() < cnf_acc.acc_len()) or (dnf_acc.acc_len()
                                                    == cnf_acc.acc_len() and len(dnf_acc) <= len(cnf_acc)):
-        print("DNF")
+        #print("DNF")
         return dnf_acc
     else:
         #acc = PACC_CNF(cnf_acc)
-        print("CNF")
+        #print("CNF")
         return cnf_acc
 
 
@@ -262,7 +262,6 @@ def process_automaton(aut):
     # conflict
     shift_first_acc(merged_f, m)
     merged_f.get_dependencies()
-    #print(merged_f, merged_f.dependencies)
 
     # rename to merge_logs
 
@@ -273,56 +272,7 @@ def process_automaton(aut):
 
     merge_accs(aut, merged_f, short_accs, sccs)
 
-    #print("unused clauses dependent literals: ", unused_clauses_depend)
 
-    # return aut
-    """
-    # list of numbers of acc sets with more than one occurance
-    dependence = get_dependencies(merged_f)
-    print("dependencies:", dependence)
-
-
-    #[{ACCMark.num : ACCMark.num}]
-    list_of_logs = []
-    list_of_logs = []
-    # numbers of dependent acc sets that are not mapped
-    # these acc sets occur only in unused clauses of merged_f
-    # [{index of expr in merged_f : ACCMark.num}]
-    list_of_unmapped_dependencies = []
-
-    for i in range(len(short_accs)):
-        if short_accs[i].sat is not None or not short_accs[i].formula:
-            # to maintain correspondency of sccs and accs in logs
-            list_of_logs.append({})
-            list_of_unmapped_dependencies.append({})
-            continue
-
-        # linear sum assignment decides what maps on what
-        # pairing_log = {acc_index : merged_f index}
-        pairing_log = mergeable(merged_f, short_accs[i])
-        print("merged_f ", merged_f)
-        print("short accs ", short_accs[i])
-        print("pairing log ", pairing_log)
-        print("sccs: ", sccs[i].states())
-
-        # does the heavy lifting - merges it
-        list_of_logs.append(
-            new_merge(
-                aut,
-                merged_f,
-                short_accs[i],
-                pairing_log,
-                sccs[i],
-                nempty_sccs[0],
-                dependence,
-                list_of_unmapped_dependencies, sccs))
-
-    #list_of_logs[0][2]=8
-    #add_dupl_marks(aut, sccs[0], 5, 8)
-    print("merged_f: ", merged_f)
-    print("lol: ",list_of_logs)
-    print("list of unmapped dependencies: ", list_of_unmapped_dependencies)
-    """
     # make aut equivalent with acceptance formula
     new_make_equiv(
         aut,
@@ -333,7 +283,8 @@ def process_automaton(aut):
     aut.set_acceptance(merged_f.max() + 1, spot.acc_code(str(merged_f)))
     spot.cleanup_acceptance_here(aut)
     if not spot.are_equivalent(aut, orig):
-        print("telatko not equivalent")
+
+        #assert(False)
         # precaution
         return orig
     else:

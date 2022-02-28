@@ -52,7 +52,7 @@ class SATformula:
 
         elif len(self.subformula) == 1:
             if self.negation and self.imperativ:
-                # print("tuna")
+
                 return ''.join('!(' + str(self.subformula[0]) + ')')
             return ''.join('(' + str(self.subformula[0]) + ')')
 
@@ -393,6 +393,7 @@ class ACC_DNF(ACC):
             clean_dis = []
             add_disj = True
             for con in dis:
+
                 if con.num in scc_sets:
                     clean_dis.append(con)
                 else:
@@ -400,10 +401,18 @@ class ACC_DNF(ACC):
                         # inf mark not present in scc
                         # whole conjunct is false
                         add_disj = False
+
             if clean_dis and add_disj:
                 clean_f.append(clean_dis)
+
+            if not clean_dis and add_disj:
+                self.formula = clean_f
+                self.sat = True
+                return
+
+
         self.formula = clean_f
-        self.resolve_redundancy()
+
 
 
 class ACC_CNF(ACC):
@@ -448,7 +457,7 @@ class ACC_CNF(ACC):
                     marks_on_some_edges,
                     marks__on_all_edges)
                 if val is None:
-                    #print("val is none")
+                    
                     clean_con.append(dis)
 
                 elif val == True:

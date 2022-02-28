@@ -501,7 +501,7 @@ def simplify(aut, acc, scc, scc_index, acc_type):
 
         scc_clean_up_edges(aut, acc, scc)
         acc.clean_up(aut, scc)
-        # print(acc)
+    
 
         unique_m = acc.count_total_unique_m()
         if acc_l == unique_m:

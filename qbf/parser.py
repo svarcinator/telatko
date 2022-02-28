@@ -138,7 +138,7 @@ def process_f_variables(aut, acc_set_vars):
     clear_aut_edges(aut)
     # creates dictionary {edge number : [acceptance set number]}
     f_dict = parse_dict(acc_set_vars)
-    #print("f_dict: ", f_dict)
+
 
     # puts marks corresponding to dict on edges
     marks_on_edges(aut, f_dict)
@@ -169,7 +169,7 @@ def parse_limboole(model):
     # list of variables that are true and denoted as f - acceptance sets
     acc_set_vars = list(
         filter(lambda var: var[0] == "f" and var[-1] == '1', model))
-    #print("cond vars: ", condition_vars)
+
     return condition_vars, acc_set_vars
 
 def parse_z3(model):
@@ -182,8 +182,7 @@ def parse_z3(model):
                 condition_vars.append(str(t))
             elif str(t)[0] == 'f':
                 acc_set_vars.append(str(t))
-    #print("cond vars: ", condition_vars)
-    #print("acc set vars: ", acc_set_vars )
+
     return condition_vars, acc_set_vars
 
 
@@ -220,7 +219,7 @@ def process_variables(aut, model, qbf_solver, scc_equiv_edges, mode):
         clone_to_representant(aut, f_dict, scc_equiv_edges)
 
     max_num = max_set_num(acc)
-    
+
     aut.set_acceptance(max_num + 3, spot.acc_code(string_formula(acc)))
 
     spot.cleanup_acceptance_here(aut)
