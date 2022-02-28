@@ -506,10 +506,10 @@ In the following, we define three versions of $\mcycle(\vec{e})$:
   only minimal requirements on $\Te$. It does not use the
   information about automaton structure, but it comes with an
   interesting simplification of the whole formula $\Phi_{C,K}$.
-\item $\mcycle_2(\vec{e})$ is a balanced version. It says that every
-  transition in $\Te$ has to have a preceding and a succeeding
-  transition in $\Te$, which is a necessary condition on cycles, but
-  not a sufficient one.
+\item $\mcycle_2(\vec{e})$ is a balanced version. It says that $\Te$
+  is nonempty and every transition in $\Te$ has to have a preceding
+  and a succeeding transition in $\Te$, which is a necessary condition
+  for being a cycle, but not a sufficient one.
 \item $\mcycle_3(\vec{e})$ is a strict version saying that $\Te$ is a
   cycle. Unfortunately, it uses additional universally quantified
   variables corresponding to automata states. Transformation to prenex
@@ -518,12 +518,12 @@ In the following, we define three versions of $\mcycle(\vec{e})$:
 \end{itemize}
 
 \subsection{Lightweight version $\mcycle_1(\vec{e})$}
-The lightweight version is based on the fact that every cycle is nonempty.
-Indeed, the only restriction imposed by
+The lightweight version is defined as
 \[
   \mcycle_1(\vec{e})=\bigvee_{t\in\delta}e_t
 \]
-is that $\Te$ is nonempty.
+which means only that $\Te$ is nonempty. This condition is satisfied by
+every cycle.
 
 With this lightweight version of $\mcycle(\vec{e})$, the formula
 $\Phi_{C,K}$ actually says that
@@ -535,35 +535,56 @@ reflected by the formula is its set of marks $\mks(t)$. Hence, we do
 not have to distinguish between transitions with the same sets of
 marks. 
 
-Formally, we define an equivalence on transitions such that for each
-$t_1,t_2\in\delta$ we write $t_1\sim t_2$ whenever
-$\mks(t_1)=\mks(t_2)$.
-%This relation is clearly an equivalence.
-We prove the following statement. 
+Formally, we define an equivalence $\sim\subseteq\delta\times\delta$
+on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
 \begin{lemma}
-  Assume that there is a function $\rem$ and a formula $\psi$ such
-  that for every nonempty set $T\subseteq\delta$ it holds that $T$
-  satisfies $\varphi$ iff $\rem(T)$ satisfies $\psi$. Then we can
-  safely assume that $\rem$ respects the quivalence $\sim$, that is
-  $t_1\sim t_2\implies\rem(t_1)=\rem(t_2)$.
+  Assume that there is a function $\rem$ and a formula $\psi$ such that 
+  \[
+    \textrm{for every nonempty set $T\subseteq\delta$ it holds }
+      (T~\msat~\varphi~\iff~\rem(T)~\msat~\psi).\tag{$1$}\label{eq:lem1} 
+  \]  
+  Then there exists a function $\rem'$ that respects % the equivalence
+  $\sim$ (i.e.,
+  if $t_1\sim t_2$ then $\rem'(t_1)=\rem'(t_2)$) and
+  \[
+    \textrm{for every nonempty set $T\subseteq\delta$ it holds }
+    (T~\msat~\varphi~\iff~\rem'(T)~\msat~\psi).\tag{$2$}\label{eq:lem2} 
+  \]  
 \end{lemma}
 \begin{proof}
-  \todo{Jan is here!}
+  Let $\rem$ be a function and $\psi$ a formula such that
+  \eqref{eq:lem1} holds. To construct the function $\rem'$, we first
+  select one transition from each equivalence class of $\sim$. For
+  every transition $t\in\delta$, by $\overline{t}$ we denote the
+  selected transition equivalent to $t$. We define the function
+  $\rem'$ as $\rem'(t)=\rem(\overline{t})$. Clearly, $\rem'$ respects
+  the equivalence $\sim$. It remains to show that \eqref{eq:lem2}
+  holds for $\rem'$ and $\psi$.
+
+  Let $T\subseteq\delta$ be an arbitrary nonempty set. We construct
+  the set $\overline{T}=\{\overline{t}\mid t\in T\}$. As
+  $\mks(t)=\mks(\overline{t})$ holds for all transitions, we get
+  $\mks(T)=\mks(\overline{T})$ and thus
+  \[
+    T~\msat~\varphi~\iff~\overline{T}~\msat~\varphi.
+  \]
+  Now we apply $\eqref{eq:lem1}$ on $\overline{T}$ to get that
+  \[
+    \overline{T}~\msat~\varphi~\iff~\rem(\overline{T})~\msat~\psi.
+  \]
+  Finally, the definition of $\rem'$ implies that
+  $\rem'(T)=\rem(\overline{T})$ and thus
+  \[
+    \rem(\overline{T})~\msat~\psi~\iff~\rem'(T)~\msat~\psi.
+  \]
+  Altogether, we obtain
+  \[
+    T~\msat~\varphi~\iff~\overline{T}~\msat~\varphi~\iff~\rem(\overline{T})~\msat~\psi~\iff~\rem'(T)~\msat~\psi
+  \]
+  which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$. 
 \end{proof}
 
-Formally, for each pair of transitions $t_1,t_2\in\delta$, we write
-$t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$. This relation is clearly an equivalence.
-Further, let us say that 
-
-
-
-
-
-We show that if this formula holds for some $\rem$ and $\psi$,
-then it also holds for some $\rem'$ and $\psi$ such that $\rem'$
-assigns the same sets of acceptance marks to transitions originally
-marked by the same sets of marks.
-
+The previous lemma and its proof suggest implies that it is sufficient to 
 
 
 \subsection{Balanced version $\mcycle_2(\vec{e})$}
