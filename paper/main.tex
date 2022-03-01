@@ -302,11 +302,11 @@ marked with $m$, i.e., $\delta_m=\{t\in\delta\mid m\in
   denote the set $\delta_{S,m}=\delta_S\cap\delta_m$.} A set of
 transitions $T\subseteq\delta$ is called a \emph{cycle} is there
 exists a path from a state $p$ to the same state containing all
-transitions of $T$ and no transition outside $T$. Finally, we assume
-that each TELA $\mA$ contains only states $q$ that are reachable from
-the initial state $q_I$ (i.e., $q=q_I$ or there is a path from $q_I$
-to $q$) as states that are not reachable from $q_I$ can be eliminated
-without any impact on $L(\mA)$.
+transitions of $T$ (potentially multiple times) and no transition
+outside $T$. Finally, we assume that each TELA $\mA$ contains only
+states $q$ that are reachable from the initial state $q_I$ (i.e.,
+$q=q_I$ or there is a path from $q_I$ to $q$) as states that are not
+reachable from $q_I$ can be eliminated without any impact on $L(\mA)$.
 
 In graphical representation of automata, we often use acceptance marks
 $\tacc{1}{1},\tacc{2}{2},\ldots\in M$. Further, an edge 
@@ -656,18 +656,35 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
 Before we give the definition of $\mcycle_3(\vec{e})$, we prove that
 cycles can be characterised in the following way.
 \begin{lemma}
-  A set $T\subseteq\delta$ is a cycle if for each set of
+  A set $T\subseteq\delta$ is a cycle if and only if for each set of
   states $S\subseteq Q$ it holds that
-  \[
-    \begin{split}
-    \textrm{if $T$ contains a transition leading from a state in $S$ to a state outside $S$,~~~~}\\[-.5ex]
-    \textrm{then it also contains a transition leading from a state outside $S$ to a state in $S$.}
-    \end{split}
+  \begin{equation}
+    \begin{minipage}{0.85\linewidth}
+      \centering
+      if $T$ contains a transition leading from a state in $S$ to a state outside $S$,\\
+      then it also contains a transition leading from a state outside $S$ to a state in $S$.
+    \end{minipage}
+    % \begin{split}
+    % \textrm{if $T$ contains a transition leading from a state in $S$ to a state outside $S$,}\\[-.5ex]
+    % \textrm{then it also contains a transition leading from a state outside $S$ to a state in $S$.}
+    % \end{split}
     \tag{$3$}\label{eq:lem3} 
-  \]  
+  \end{equation}
 \end{lemma}
 \begin{proof}
-  \todo{Ted to musim dokazat.}
+  We first prove direction ``$\Longrightarrow$''. Let $T$ be a cycle
+  and $S\subseteq Q$ be a set of states such that there exists a
+  transition $t\in T$ leading from a state $p\in S$ to a state
+  $q\not\in S$. The definition of a cycle says that there exists a
+  path $t_1t_2\ldots t_n\in T^+$ from a state $p'$ back to $p'$ using
+  all transitions of $T$. Hence, $t=t_i$ for some $1\le i\le n$. Then
+  $t_{i+1}\ldots t_nt_1t_2\ldots t_{i-1}\in T^+$ is a path leading
+  from the state $q\not\in S$ to the state $p\in S$. This path has to
+  contain a transition $t'\in T$ leading from a state outside $S$ to a
+  state in $S$.
+
+  Now we prove the opposite direction ``$\Longleftarrow$''.
+
 \end{proof}
 
 
