@@ -117,7 +117,7 @@ def create_formula(
         C,
         K,
         inner_edges,
-        mode, qbf_solver, representants):
+        mode, representants):
     """
 
     :param aut:
@@ -222,9 +222,7 @@ def scc_optimized_formula(aut, acc, scc_state_info, C, K, mode, edge_dict, scc_e
             else:
 
                 formula.append(f_creator.get_level1(aut, scc_representants))
-            #z3_f = f_creator.get_level1(aut, scc_representants)
 
-            #assert(False)
         else:
 
             f_creator = Z3_f_ctor(scc_edge_dict,  [scc_inner_edges_nums], [scc_state_info[relevant_scc_counter]]
@@ -261,16 +259,90 @@ def update_run_info(K, res, tmp_mode):
     assert(str_res != "")
     return "L_{0}_{1}_{2} ".format(str(tmp_mode), str(K), str_res)
 
+def get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges):
+    if (optimized_scc):
+
+        acc = ACC_DNF(aut.get_acceptance().to_dnf())
+        formula = scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants)
+    else:
+
+        formula = create_formula(
+            aut,
+            edge_dict,
+            scc_edg,
+            scc_state_info,
+            inner_edges_nums,
+            C,
+            K,
+            inner_edges,
+            tmp_mode, representants)
+    return formula
+
+def solver_init(formula, timeout):
+    solver = Solver()
+    #solver.push()
+    solver.add(formula)
+    solver.set("timeout",1000* timeout)
+    solver.push()
+    return solver
+
+def restrict_f_vars(K, inner_edges_nums):
+    formula = []
+    for e in inner_edges_nums:
+        # these two are not equivalent?
+        #var1 = Bool("f_{0}_{1} ".format(str(e), str(K)))
+        var = Bool("f_" + str(e) + "_" +str(K))
+        #assert("f_{0}_{1} ".format(str(e), str(K)) == "f_" + str(e) + "_" +str(K) )
+        #assert(var == var1)
+        formula.append(Not(var))
+    return And(formula)
+
+def restrict_pn_vars(C, K):
+    formula = []
+    for i in range(1, C + 1):
+        #p = Bool("p_{0}_{1} ".format(str(i), str(K)))
+        #n = Bool("n_{0}_{1} ".format(str(i), str(K)))
+
+        p = Bool("p_" + str(i) + "_" + str(K))
+        n = Bool("n_" + str(i) + "_" + str(K))
+        formula.append(Not(p))
+        formula.append(Not(n))
+    #print(formula)
+    return And(formula)
+
+
+def update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums):
+    if currently_reduced == FormulaAtribute.K:
+        solver.add(restrict_f_vars(K, inner_edges_nums))
+        solver.add(restrict_pn_vars(C, K))
+        solver.push()
+        return solver
+    else:
+        print("TBD")
+    assert(False)
+
+def empty_aut(aut, original, qbf_run_info):
+    clear_aut_edges(aut)
+    aut.set_acceptance(0, spot.acc_code.t())
+    if not spot.are_equivalent(original, aut):
+        aut.set_acceptance(0, spot.acc_code.f())
+    aut.set_name(qbf_run_info)
+    return aut
+
+def model_assert(model, K):
+    for t in model.decls():
+        if str(t)[0] == 'f' and str(t)[-1] == str(K):
+            assert(is_false(model[t]))
 
 def play(aut, C, K, mode, timeout, timeouted,
-         optimized_scc, minimized_atribute, qbf_solver, tmp_mode):
+         optimized_scc, minimized_atribute, tmp_mode, inc_solving):
 
     spot.cleanup_acceptance_here(aut)
 
     if aut.get_acceptance().used_sets().count(
     ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-
         return aut
+
     original = spot.automaton(aut.to_str())
 
     # [int] - all nums of inner edges of SCCs
@@ -280,59 +352,86 @@ def play(aut, C, K, mode, timeout, timeouted,
     # scc state info [{state num : [[num of edge of which is the state source
     # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
+    if inc_solving:
+        tmp_mode = mode
+    # dictionary {acc_set_num : [edge_nums]}
+    edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
 
-    # K = K - 1  # we dont want to try what we already know
     qbf_run_info = ""
-
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
     if currently_reduced == FormulaAtribute.K:
         K -= 1
     else:
         C -= 1
+    print("K: ", K)
+    if inc_solving:
+        formula = get_formula(aut, scc_state_info, C, K, mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+    else:
+        formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+
+
+    solver = solver_init(formula, timeout)
+    model = None
 
     while C > 0 and K > 0:
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-
             return aut
 
-        # dictionary {acc_set_num : [edge_nums]}
-        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
+        res = solver.check()
 
-        # QBF formula is written into ./sat_file
-        formula = None
-        if (optimized_scc):
-            # tohle pujde dopryc ?
-            acc = ACC_DNF(aut.get_acceptance().to_dnf())
-            formula = scc_optimized_formula(aut, acc, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants)
+        if res == sat:
+            model = solver.model()
+            #print("sat ", K)
+            #model_assert(model, K + 1)
+
+            if inc_solving:
+
+                if mode == 1:
+                    solver  = update_inc_solver(solver, currently_reduced, C, K, representants)
+                else:
+
+                    solver  = update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums)
+                if K == 1:
+                    process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                    return try_evaluate0(aut, original, qbf_run_info)
+
+
+                if currently_reduced == FormulaAtribute.K:
+                    K = K - 1
+                else:
+                    C = C - 1
+
+            else:
+                if currently_reduced == FormulaAtribute.K:
+                    K = K - 1
+                else:
+                    C = C - 1
+                process_variables(aut, solver.model(), scc_equiv_edges, tmp_mode)
+
+                if aut.get_acceptance().used_sets().count() <= 1:
+                    #return empty_aut(aut, original, qbf_run_info)
+                    return try_evaluate0(aut, original, qbf_run_info)
+
+
+                edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
+                formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+                solver = solver_init(formula, timeout)
         else:
-
-            formula = create_formula(
-                aut,
-                edge_dict,
-                scc_edg,
-                scc_state_info,
-                inner_edges_nums,
-                C,
-                K,
-                inner_edges,
-                tmp_mode, qbf_solver, representants)
-
-        if formula != None:
-            # QBF SOLVER
-            assert(qbf_solver == "z3")
-            solver = Solver()
-            solver.add(formula)
-            solver.set("timeout",1000* timeout)
-            solver.push()
-            res = solver.check()
-
-            if  res == sat:
-                s = solver.model()
-
-                process_variables(aut, s, qbf_solver, scc_equiv_edges, tmp_mode)
+            #print("unsat", K)
+            if inc_solving:
+                if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
+                    currently_reduced = FormulaAtribute.C
+                    K = K + 1
+                    C = C - 1
+                    continue
+                else:
+                    if model != None:
+                        process_variables(aut, model, scc_equiv_edges, mode)
+                    aut.set_name(qbf_run_info)
+                    return try_evaluate0(aut, original, qbf_run_info)
 
             else:
                 qbf_run_info += update_run_info(K, res, tmp_mode)
@@ -349,21 +448,8 @@ def play(aut, C, K, mode, timeout, timeouted,
                         continue
                     else:
                         aut.set_name(qbf_run_info)
-                        return aut
+                        return try_evaluate0(aut, original, qbf_run_info)
 
-
-        if aut.get_acceptance().used_sets().count() < 1:
-            clear_aut_edges(aut)
-            aut.set_acceptance(0, spot.acc_code.t())
-            if not spot.are_equivalent(original, aut):
-                aut.set_acceptance(0, spot.acc_code.f())
-            aut.set_name(qbf_run_info)
-            return aut
-
-        if currently_reduced == FormulaAtribute.K:
-            K = K - 1
-        else:
-            C = C - 1
 
     return try_evaluate0(aut, original, qbf_run_info)
 

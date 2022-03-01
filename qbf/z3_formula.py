@@ -136,14 +136,12 @@ class Z3_f_ctor():
 
             self.w_quant(aut)
 
-
         if self.mode == 3:
 
             laso = self.laso_cycles(aut)
             laso = simplify(laso)
             in_out = self.in_n_out()
             laso = And(laso, in_out)
-            #assert(False)
 
         else:
             laso = self.laso_f(aut)
@@ -151,6 +149,7 @@ class Z3_f_ctor():
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
 
         new = self.new_formula()
+
         new = simplify(new)
 
         laso = simplify(laso)
@@ -225,8 +224,8 @@ class Z3_f_ctor():
         for c in range(1, self.C + 1):
             set_con = []
             for k in range(1, self.K + 1):
-                p = Not(Bool('p_' + str(c) + '_' + str(k)))
-                n = Not(Bool('n_' + str(c) + '_' + str(k)))
+                p = Not(Bool("p_" + str(c) + "_" + str(k)))
+                n = Not(Bool("n_" + str(c) + "_" + str(k)))
                 set_con.append(Or(p, n))
             clauses_con.append(And(set_con))
         return And(clauses_con)

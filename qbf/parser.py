@@ -194,7 +194,7 @@ def clone_to_representant(aut, f_dict, scc_equiv_edges):
                     for e in val[1:]:
                         e.acc.set(m)
 
-def process_variables(aut, model, qbf_solver, scc_equiv_edges, mode):
+def process_variables(aut, model, scc_equiv_edges, mode):
     """
     Filters SAT-variables that are true and splits them. Then calls functions to process these variables.
     Args:
@@ -205,11 +205,8 @@ def process_variables(aut, model, qbf_solver, scc_equiv_edges, mode):
     Returns:
 
     """
-    if qbf_solver == 'limboole':
-        condition_vars, acc_set_vars = parse_limboole(model)
-    else:
-        condition_vars, acc_set_vars = parse_z3(model)
 
+    condition_vars, acc_set_vars = parse_z3(model)
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))
 
