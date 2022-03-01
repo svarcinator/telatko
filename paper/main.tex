@@ -309,13 +309,13 @@ to $q$) as states that are not reachable from $q_I$ can be eliminated
 without any impact on $L(\mA)$.
 
 In graphical representation of automata, we often use acceptance marks
-$\tacc{1}{1},\tacc{2}{2},\ldots\in M$. An edge 
+$\tacc{1}{1},\tacc{2}{2},\ldots\in M$. Further, an edge 
 \begin{tikzpicture}[smallautomaton,baseline=-2pt]
   \node[state] (p) at (0,0) {$p$};
   \node[state] (q) at (1.8,0) {$q$};
   \path [->] (p) edge node[above,pos=.5,overlay] {$a$} node[accset,collacc8, pos=0.65] {k} node[accset,collacc4, pos=0.3] {j} (q);
 \end{tikzpicture}
-denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$.
+denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$. 
 
 \bigskip
 
@@ -502,20 +502,23 @@ precision of $\mcycle(\vec{e})$ for simplicity of the formula.
 
 In the following, we define three versions of $\mcycle(\vec{e})$:
 \begin{itemize}
-\item $\mcycle_1(\vec{e})$ is a lightweight version, which puts
-  only minimal requirements on $\Te$. It does not use the
-  information about automaton structure, but it comes with an
-  interesting simplification of the whole formula $\Phi_{C,K}$.
-\item $\mcycle_2(\vec{e})$ is a balanced version. It says that $\Te$
+\item $\mcycle_1(\vec{e})$ is a lightweight version, which only says
+  that $\Te$ is nonempty. It does not use the information about
+  automaton structure, but it comes with an interesting simplification
+  of the whole formula $\Phi_{C,K}$.
+\item $\mcycle_2(\vec{e})$ is an intermediate version. It says that $\Te$
   is nonempty and every transition in $\Te$ has to have a preceding
   and a succeeding transition in $\Te$, which is a necessary condition
   for being a cycle, but not a sufficient one.
 \item $\mcycle_3(\vec{e})$ is a strict version saying that $\Te$ is a
   cycle. Unfortunately, it uses additional universally quantified
-  variables corresponding to automata states. Transformation to prenex
-  normal form turns the quantifiers to existential ones and the
-  resulting formula thus contains quantifier alternation.
+  variables corresponding to automata states. Transformation of
+  $\Phi_{C,K}$ to prenex normal form turns the quantifiers to
+  existential ones and the resulting formula thus contains quantifier
+  alternation.
 \end{itemize}
+We write $\Phi_{i,C,K}$ when we want to emphasize that the particular
+formula $\Phi_{C,K}$ contains the version $\mcycle_i(\vec{e})$.
 
 \subsection{Lightweight version $\mcycle_1(\vec{e})$}
 The lightweight version is defined as
@@ -596,10 +599,140 @@ safely them also on the original automaton. We only need to extend
 $\rem$ to all transitions such that it changes the acceptance marks on
 all equivalent transitions in the same way.
 
-\subsection{Balanced version $\mcycle_2(\vec{e})$}
+\subsection{Intermediate version $\mcycle_2(\vec{e})$}
+The intermediate version says that $\Te$ is nonempty and for each state
+$q\in Q$ it holds that $\Te$ contains a transition leading to $q$ if
+and only if it contains a transition leading from $q$.
+Formally,
+\[
+  \mcycle_2(\vec{e})=\bigvee_{t\in\delta}e_t~\wedge~
+  \bigwedge_{q\in Q}\Big(\bigvee_{t'\in\delta~\cap~Q\times\Sigma\times 2^M\times\{q\}}\hspace{-1cm}e_{t'}\hspace{1cm}\iff
+  \bigvee_{t''\in\delta~\cap~\{q\}\times\Sigma\times 2^M\times Q}\hspace{-1cm}e_{t''}\hspace{6mm}\Big).
+\]
+This condition is satisfied by every cycle, but also by some sets of
+transitions that are not cycles. Some examples of such sets are provided in Figure~\ref{fig:inter}.
 
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[smallautomaton]
+    \begin{scope}[initial angle=90,xshift=-5cm]
+      \node[state,initial] (p) at (0,0) {};
+      \node[state] (q) at (1.8,0) {};
+      \path[->,auto]
+      (p) edge[out=-150,in=150,looseness=10] (p)
+      (p) edge[out=30,in=150] (q)
+      (q) edge[out=30,in=-30,looseness=10] (q)
+      (q) edge[out=-150,in=-30] (p);
+    \end{scope}
+
+    \begin{scope}[initial angle=90,densely dotted,black!20]
+      \node[state,initial,solid,draw=black] (p) at (0,0) {};
+      \node[state,solid,draw=black] (q) at (1.8,0) {};
+      \path[->,auto]
+      (p) edge[out=-150,in=150,looseness=10,black,solid] (p)
+      (p) edge[out=30,in=150,black,solid] (q)
+      (q) edge[out=30,in=-30,looseness=10,black,solid] (q)
+      (q) edge[out=-150,in=-30] (p);
+    \end{scope}
+
+    \begin{scope}[initial angle=90,densely dotted,black!20,xshift=5cm]
+      \node[state,initial,solid,draw=black] (p) at (0,0) {};
+      \node[state,solid,draw=black] (q) at (1.8,0) {};
+      \path[->,auto]
+      (p) edge[out=-150,in=150,looseness=10,black,solid] (p)
+      (p) edge[out=30,in=150] (q)
+      (q) edge[out=30,in=-30,looseness=10,black,solid] (q)
+      (q) edge[out=-150,in=-30] (p);
+    \end{scope}
+  \end{tikzpicture}
+  \caption{An automaton structure where transition labels and
+    acceptance marks are not depicted (left) and two sets $\Te$ that
+    are not cycles even if $\mcycle_2(\vec{e})$ holds (middle and
+    right)}
+  \label{fig:inter}
+\end{figure}
 
 \subsection{Strict version $\mcycle_3(\vec{e})$}
+Before we give a definition of $\mcycle_3(\vec{e})$, we prove that
+cycles can be characterised in the following way.
+\begin{lemma}
+  A set $T\subseteq\delta$ is not a cycle if and only if there exists a set of
+  states $S\subseteq Q$ such that 
+  \begin{enumerate}
+  \item some transition $t\in T$ leads from a state in $S$ to a state
+    outside $S$ and
+  \item there is no transition in $T$ leading from a state outside $S$
+    to a state in $S$.
+  \end{enumerate}
+  \todo{Nebo neprazdna cast $T$ vede z $S$ do $S$ a jina neprazdna
+    cast $T$ vede z doplňu $S$ do doplňku $S$ a žádná hrana to
+    nekrosí.}
+\end{lemma}
+
+
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[smallautomaton]
+    \begin{scope}[initial angle=90]
+      \node[state,initial] (p) at (0,0) {};
+      \node[state] (q) at (2,0) {};
+      \path[->,auto]
+      (p) edge[out=-150,in=150,looseness=10] pic {acc={0}{0}} pic {l=$1$} (p)
+      (p) edge[out=30,in=150] pic {acc={1}{1}} pic {l=$2$} (q)
+      (q) edge[out=30,in=-30,looseness=10] pic[pos=.33] {acc={2}{2}} pic[pos=.67] {acc={3}{3}} pic {l=$3$} (q)
+      (q) edge[out=-150,in=-30] pic {acc={3}{3}} pic {l=$4$} (p);
+
+      \node[acclabel] at (1,-1.5)
+      {$(\Fin\tacc{1}{1}\wedge\Inf\tacc{2}{2})\vee(\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Inf\tacc{3}{3})$};
+    \end{scope}
+
+% \begin{scope}[initial angle=90]
+% \node[state,initial] (phi) at (0,0) {$\varphi\vphantom{\G}$};
+% \node[state] (Fb) at (1.5,-1.5) {$\F b$};
+% \path[->,auto]
+% (phi) edge[loop left]
+%   pic {acc={3}{1}} pic {l=$\true$} (phi)
+% (phi) edge[loop right]
+%   pic {acc={1}{3}} pic {l=$a$} (phi)
+% (phi) edge[out=-135,in=-105,looseness=10]
+%   pic[pos=.12] {acc={2}{2}} pic[pos=.3,left] {l=$b$} (phi)
+% %(phi) edge[out=-45,in=45] (Fb)
+% (phi) edge[out=-45,in=105]
+%   node[above right,inner sep=.3,pos=.45] {$\bar{b}$} (Fb)
+% (phi) edge[out=-45,in=-75,looseness=10]
+%   pic[pos=.12] {acc={2}{2}} (phi)
+% (Fb) edge[loop right]
+%   pic {acc={3}{1}} pic {l=$\bar{b}$} (phi)
+% (Fb) edge node {$b$} + (0,-1.1)
+% ;
+% \node[acclabel] at (.75,-3.2)
+%   {$\Fin\tacc{3}{1}\wedge(\Fin\tacc{2}{2}\vee\Fin\tacc{1}{3})$};
+% \end{scope}
+
+% \begin{scope}[xshift=4.8cm,initial angle=90]
+% \node[state,initial] (phi) at (0,-.7) {$\varphi\vphantom{\G}$};
+% \path[->,auto]
+% (phi) edge[loop left] 
+%   pic {acc={3}{1}} pic {l=$\true$} (phi)
+% (phi) edge[loop right]
+%   pic {acc={1}{3}} pic {l=$a$} (phi)
+% (phi) edge[out=-135,in=-105,looseness=10]
+%   pic[pos=.75] {accsq={0}{5}} pic[pos=.15] {acc={2}{2}}
+%   pic[left] {l=$b$} (phi)
+% (phi) edge[out=-45,in=-75,looseness=10]
+%   pic[pos=.15] {acc={2}{2}} pic[pos=.75] {acc={4}{4}}
+%   pic[right] {l=$\bar{b}$} (phi)
+% ;
+% \node[acclabel,align=center] at (0,-2.8)
+%   {$\Fin\tacc{3}{1}\wedge{}$\\$(\Fin\tacc{2}{2}\vee\Fin\tacc{1}{3})
+%    \wedge{}$\\$(\Fin\tacc{4}{4}\vee\Inf\taccsq{0}{5})$};
+% \end{scope}
+
+  \end{tikzpicture}
+  \caption{An automaton showing different reduction result for various reduction levels. \todo{Overit a dodelat!}}
+  \label{fig:levels}
+\end{figure}
 
 \subsection{Optimizations}
 
@@ -640,6 +773,8 @@ there exists an acceptance formula in DNF with $C$ clauses and $K$
 acceptance marks and a placement of these marks on automata
 transitions such that $\mA$ with this acceptance formula and
 acceptance marks and acceptance formula
+
+
 
 
 
