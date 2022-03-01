@@ -457,7 +457,7 @@ class ACC_CNF(ACC):
                     marks_on_some_edges,
                     marks__on_all_edges)
                 if val is None:
-                    
+
                     clean_con.append(dis)
 
                 elif val == True:
@@ -532,6 +532,7 @@ def parse_dnf_acc(acc):
             for c in con:
                 if c.isdigit():
                     num.append(c)
+            
             new_dis.append(ACCMark(mtype, int(''.join(num))))
         formula.append(new_dis)
     return formula

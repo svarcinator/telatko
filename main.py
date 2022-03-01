@@ -45,7 +45,10 @@ def main(argv):
         "-B",
         "--base_level",
         help="Choose whether qbf level 1 or standard level 1(original TELAtko).", choices=['telatko', 'z3'], default='z3')
-
+    parser.add_argument(
+        "-I",
+        "--incremental",
+        help="Use incremental solving.", action='store_true')
     args = parser.parse_args()
 
 
@@ -73,7 +76,7 @@ def main(argv):
                 if args.level > 1 and acc_sets_count != 0:
 
                     auto = play(
-                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver, 2)
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut,  2, args.incremental)
                 else:
                     auto = a
             else:
@@ -81,7 +84,7 @@ def main(argv):
                     auto = a
                 else:
                     auto = play(
-                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, args.qbf_solver, 1)
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, 1, args.incremental)
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
@@ -90,7 +93,7 @@ def main(argv):
 
             if not spot.are_equivalent(origin, auto):
                 assert(False)
-                print_aut(origin, "not_eq", "w")
+                
                 return
 
 
