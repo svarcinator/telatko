@@ -257,7 +257,7 @@ def update_run_info(K, res, tmp_mode):
     if res == unsat:
         str_res = "U"
     assert(str_res != "")
-    return "L_{0}_{1}_{2} ".format(str(tmp_mode), str(K), str_res)
+    return "L{0}_{1}_{2} ".format(str(tmp_mode), str(K), str_res)
 
 def get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges):
     if (optimized_scc):
@@ -313,9 +313,10 @@ def restrict_pn_vars(C, K):
 
 def update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums):
     if currently_reduced == FormulaAtribute.K:
+        solver.push()
         solver.add(restrict_f_vars(K, inner_edges_nums))
         solver.add(restrict_pn_vars(C, K))
-        solver.push()
+
         return solver
     else:
         print("TBD")
@@ -334,7 +335,81 @@ def model_assert(model, K):
         if str(t)[0] == 'f' and str(t)[-1] == str(K):
             assert(is_false(model[t]))
 
-def play(aut, C, K, mode, timeout, timeouted,
+def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K,  scc_edg, optimized_scc, timeout, minimized_atribute):
+    currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
+
+    original = spot.automaton(aut.to_str())
+    qbf_run_info = ""
+    # dictionary {acc_set_num : [edge_nums]}
+    edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
+    formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+    solver = solver_init(formula, timeout)
+    model = None
+    if currently_reduced == FormulaAtribute.K:
+        K += 1
+    else:
+        C += 1
+
+    while C > 0 and K > 0:
+
+        if aut.get_acceptance().used_sets().count(
+        ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
+            return aut
+
+        res = solver.check()
+
+        if res == sat:
+            model = solver.model()
+
+            if K == 1:
+                # does automaton with one mark exist? --the solver asks, answer was yes
+                # therefore my question is if 0 marks can be used
+                # aut with one acc mark is SAT -- rozmysli si tohle jeste
+                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                return try_evaluate0(aut, original, qbf_run_info)
+
+
+            if mode == 1:
+                solver  = update_inc_solver(solver, currently_reduced, C, K, representants)
+            else:
+                solver  = update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums)
+
+            if currently_reduced == FormulaAtribute.K:
+                K = K - 1
+            else:
+                C = C - 1
+        else:
+
+            qbf_run_info += update_run_info(K, res, tmp_mode)
+            if (tmp_mode < mode):
+                if model != None:
+                    process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                    #assert(spot.are_equivalent(original, aut)
+                tmp_mode += 1
+                # exists formula with K marks
+                edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
+                formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+                solver = solver_init(formula, timeout)
+                model = None
+                continue
+
+            if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
+                currently_reduced = FormulaAtribute.C
+                K = K + 1
+                C = C - 1
+                # prindat solver.pop() - tim odstranim posledni omezeni pro K
+                # a solver.add( " formule zakazujici cokoliv v klauzuli C " )
+                continue
+            else:
+                #qbf_run_info += update_run_info(K, res, tmp_mode)
+                if model != None:
+                    process_variables(aut, model, scc_equiv_edges, mode)
+                aut.set_name(qbf_run_info)
+                return aut
+    return try_evaluate0(aut, original, qbf_run_info)
+
+
+def play(aut, C, K, mode, timeout,
          optimized_scc, minimized_atribute, tmp_mode, inc_solving):
 
     spot.cleanup_acceptance_here(aut)
@@ -347,32 +422,21 @@ def play(aut, C, K, mode, timeout, timeouted,
 
     # [int] - all nums of inner edges of SCCs
     inner_edges_nums, inner_edges = get_edges(aut)
+    qbf_run_info = ""
 
     # scc_edg [[nums of edges of one scc]]
     # scc state info [{state num : [[num of edge of which is the state source
     # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
-    if inc_solving:
-        tmp_mode = mode
-    # dictionary {acc_set_num : [edge_nums]}
-    edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
-
-    qbf_run_info = ""
 
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
     if currently_reduced == FormulaAtribute.K:
         K -= 1
     else:
         C -= 1
-    print("K: ", K)
     if inc_solving:
-        formula = get_formula(aut, scc_state_info, C, K, mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
-    else:
-        formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+        return inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute)
 
-
-    solver = solver_init(formula, timeout)
-    model = None
 
     while C > 0 and K > 0:
 
@@ -380,75 +444,41 @@ def play(aut, C, K, mode, timeout, timeouted,
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
             return aut
 
+        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
+        formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
+
+        solver = Solver()
+        solver.add(formula)
+        solver.set("timeout",1000* timeout)
+        solver.push()
         res = solver.check()
 
         if res == sat:
-            model = solver.model()
-            #print("sat ", K)
-            #model_assert(model, K + 1)
-
-            if inc_solving:
-
-                if mode == 1:
-                    solver  = update_inc_solver(solver, currently_reduced, C, K, representants)
-                else:
-
-                    solver  = update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums)
-                if K == 1:
-                    process_variables(aut, model, scc_equiv_edges, tmp_mode)
-                    return try_evaluate0(aut, original, qbf_run_info)
-
-
-                if currently_reduced == FormulaAtribute.K:
-                    K = K - 1
-                else:
-                    C = C - 1
-
-            else:
-                if currently_reduced == FormulaAtribute.K:
-                    K = K - 1
-                else:
-                    C = C - 1
-                process_variables(aut, solver.model(), scc_equiv_edges, tmp_mode)
-
-                if aut.get_acceptance().used_sets().count() <= 1:
-                    #return empty_aut(aut, original, qbf_run_info)
-                    return try_evaluate0(aut, original, qbf_run_info)
-
-
-                edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
-                formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
-                solver = solver_init(formula, timeout)
+            s = solver.model()
+            process_variables(aut, s, scc_equiv_edges, tmp_mode)
         else:
-            #print("unsat", K)
-            if inc_solving:
+            qbf_run_info += update_run_info(K, res, tmp_mode)
+            if (tmp_mode < mode):
+                tmp_mode += 1
+                continue
+            else:
                 if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
                     currently_reduced = FormulaAtribute.C
                     K = K + 1
                     C = C - 1
                     continue
                 else:
-                    if model != None:
-                        process_variables(aut, model, scc_equiv_edges, mode)
                     aut.set_name(qbf_run_info)
-                    return try_evaluate0(aut, original, qbf_run_info)
+                    return aut
 
-            else:
-                qbf_run_info += update_run_info(K, res, tmp_mode)
+        if aut.get_acceptance().used_sets().count() < 1:
+            return empty_aut(aut, original, qbf_run_info)
 
-                if (tmp_mode < mode):
-                    tmp_mode += 1
-                    continue
-                else:
 
-                    if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
-                        currently_reduced = FormulaAtribute.C
-                        K = K + 1
-                        C = C - 1
-                        continue
-                    else:
-                        aut.set_name(qbf_run_info)
-                        return try_evaluate0(aut, original, qbf_run_info)
+        if currently_reduced == FormulaAtribute.K:
+            K = K - 1
+        else:
+            C = C - 1
 
 
     return try_evaluate0(aut, original, qbf_run_info)

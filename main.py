@@ -49,6 +49,10 @@ def main(argv):
         "-I",
         "--incremental",
         help="Use incremental solving.", action='store_true')
+    parser.add_argument(
+        "-G",
+        "--gradual",
+        help="Levels will gradually grow from L1 up to specified level.", action='store_true')
     args = parser.parse_args()
 
 
@@ -58,7 +62,9 @@ def main(argv):
         args.level = 3
 
     aut = spot.automata(args.autfile)
-    timeouted = [0]
+    tmp_mode = args.level
+    if args.gradual:
+        tmp_mode = 1
 
     for a in aut:
 
@@ -74,9 +80,11 @@ def main(argv):
             if args.base_level == "telatko":
                 a = process_automaton(a)
                 if args.level > 1 and acc_sets_count != 0:
+                    if tmp_mode != args.level:
+                        tmp_mode = 2
 
                     auto = play(
-                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut,  2, args.incremental)
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, args.scc, args.minimized_atribut,  tmp_mode, args.incremental)
                 else:
                     auto = a
             else:
@@ -84,7 +92,7 @@ def main(argv):
                     auto = a
                 else:
                     auto = play(
-                        a, clauses_count, acc_sets_count, args.level, args.timeout, timeouted, args.scc, args.minimized_atribut, 1, args.incremental)
+                        a, clauses_count, acc_sets_count, args.level, args.timeout, args.scc, args.minimized_atribut, tmp_mode, args.incremental)
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
@@ -93,8 +101,7 @@ def main(argv):
 
             if not spot.are_equivalent(origin, auto):
                 assert(False)
-                
-                return
+
 
 
             acc_sets_count2 = auto.get_acceptance().used_sets().count()

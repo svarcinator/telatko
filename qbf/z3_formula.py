@@ -149,7 +149,7 @@ class Z3_f_ctor():
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
 
         new = self.new_formula()
-
+        
         new = simplify(new)
 
         laso = simplify(laso)
