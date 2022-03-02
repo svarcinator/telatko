@@ -40,6 +40,8 @@
 \newcommand{\mcycle}{\mathit{cycle}}
 \newcommand{\msat}{\mathit{satisfies}}
 \newcommand{\Te}{T_{\vec{e}}}
+\newcommand{\pre}{S_\mathit{pre}}
+\newcommand{\post}{S_\mathit{post}}
 \def\false{\mathit{false}}
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
@@ -292,16 +294,17 @@ such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
 is called a nontrivial \emph{strongly connected component (SCC)} if
 for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
 \emph{maximal} if there is no SCC $S'$ satisfying $S\subsetneq S'$. In
-the rest of this paper, SCC always refers to a maximal SCC. Given an
-SCC $S$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
+the rest of this paper, SCC always refers to a maximal SCC. Given a
+set of states $S\subseteq Q$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
 denotes the set of all transitions between states in $S$. Further, for
 each mark $m\in M$, let $\delta_m$ denotes the set of all transitions
 marked with $m$, i.e., $\delta_m=\{t\in\delta\mid m\in
-\mks(t)\}$. \todo{The sets $\delta_m$ are called \emph{acceptance
-    sets}. Given an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we
-  denote the set $\delta_{S,m}=\delta_S\cap\delta_m$.} A set of
-transitions $T\subseteq\delta$ is called a \emph{cycle} is there
-exists a path from a state $p$ to the same state containing all
+\mks(t)\}$.
+% \todo{The sets $\delta_m$ are called \emph{acceptance sets}. Given
+% an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we denote the set
+% $\delta_{S,m}=\delta_S\cap\delta_m$.}
+A set of transitions $T\subseteq\delta$ is called a \emph{cycle} is
+there exists a path from a state $p$ to the same state containing all
 transitions of $T$ (potentially multiple times) and no transition
 outside $T$. Finally, we assume that each TELA $\mA$ contains only
 states $q$ that are reachable from the initial state $q_I$ (i.e.,
@@ -656,35 +659,65 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
 Before we give the definition of $\mcycle_3(\vec{e})$, we prove that
 cycles can be characterised in the following way.
 \begin{lemma}
-  A set $T\subseteq\delta$ is a cycle if and only if for each set of
+  A nonempty set $T\subseteq\delta$ is a cycle if and only if for each set of
   states $S\subseteq Q$ it holds that
-  \begin{equation}
-    \begin{minipage}{0.85\linewidth}
-      \centering
-      if $T$ contains a transition leading from a state in $S$ to a state outside $S$,\\
-      then it also contains a transition leading from a state outside $S$ to a state in $S$.
-    \end{minipage}
-    % \begin{split}
-    % \textrm{if $T$ contains a transition leading from a state in $S$ to a state outside $S$,}\\[-.5ex]
-    % \textrm{then it also contains a transition leading from a state outside $S$ to a state in $S$.}
-    % \end{split}
-    \tag{$3$}\label{eq:lem3} 
-  \end{equation}
+  \begin{enumerate}
+  \item\label{en:1} all transitions in $T$ lead from a state in $S$ to a state in $S$ (i.e., $T\subseteq\delta_S$) or
+  \item\label{en:2} all transitions in $T$ lead from a state outside $S$ to a state outside $S$ (i.e., $T\subseteq\delta_{Q\smallsetminus S}$) or
+  \item\label{en:3} $T$ contains a transition leading from a state in $S$ to a state outside $S$ and a transition leading from a state outside
+    $S$ to a state in $S$.
+  \end{enumerate}
 \end{lemma}
 \begin{proof}
-  We first prove direction ``$\Longrightarrow$''. Let $T$ be a cycle
-  and $S\subseteq Q$ be a set of states such that there exists a
-  transition $t\in T$ leading from a state $p\in S$ to a state
-  $q\not\in S$. The definition of a cycle says that there exists a
-  path $t_1t_2\ldots t_n\in T^+$ from a state $p'$ back to $p'$ using
-  all transitions of $T$. Hence, $t=t_i$ for some $1\le i\le n$. Then
-  $t_{i+1}\ldots t_nt_1t_2\ldots t_{i-1}\in T^+$ is a path leading
-  from the state $q\not\in S$ to the state $p\in S$. This path has to
-  contain a transition $t'\in T$ leading from a state outside $S$ to a
-  state in $S$.
+  We first prove the direction ``$\Longrightarrow$''. Let $T$ be a
+  cycle and $S\subseteq Q$ be an arbitrary set of states. We show that
+  if (\ref{en:1}) and (\ref{en:2}) do not hold, then (\ref{en:3}) has
+  to hold. Hence, assume that $T\not\subseteq\delta_S$ and
+  $T\not\subseteq\delta_{Q\smallsetminus S}$. Then there are two
+  cases.
+  \begin{itemize}
+  \item $T$ contains a transtition $t\in\delta_S$ and a transition
+    $t'\in\delta_{Q\smallsetminus S}$. The definition of a cycle
+    implies that there exists a path $t_1t_2\ldots t_n\in T^+$ from a
+    state $p$ back to $p$ containing both $t$ and $t'$. However, this
+    implies that $T$ contains a transtion leading from a state in $S$
+    to a state outside $S$ and a transtion leading from a state outside $S$
+    to a state in $S$.
+  \item $T$ contains a transition $t$ leading from a state in $S$ to a
+    state outside $S$ (or vice versa). However, as $T$ is a cycle,
+    there exists a path $t_1t_2\ldots t_n\in T^+$ that leads from a
+    state $p$ to the same state and contains $t$. Hence, $T$ has to
+    contain also a transition leading from a state outside $S$ to a
+    state in $S$ (or vice versa).
+  \end{itemize}
+  In both cases, $\ref{en:3}$ holds.
 
-  Now we prove the opposite direction ``$\Longleftarrow$''.
+  Now we prove the opposite direction ``$\Longleftarrow$''. As $T$ is
+  nonempty, there exists a transition $t\in T$ leading from a state $p$.
+  We use this state to define the sets $\post,\pre\subseteq Q$ of states as 
+  \begin{align}\notag
+    \post&=\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }p\textrm{ to }q\}\\
+    \pre &=\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }q\textrm{ to }p\}
+  \end{align}
+  Note that each transition $t'\in T$ leading from a state in
+  $q\in\post$ leads also to a state in $\post$ as the path in $T^+$
+  leading form $p$ to $q$ can be prolonged by this transition. In
+  other words, there is no transtition in $T$ leading from a state
+  in $\post$ to a state outside $\post$. Similarly, one can show that
+  there is no transition in $T$ leadning from outside $\pre$ to $\pre$.
 
+  \todo{Jan is here}
+  
+  us we
+  choose Let us fix
+  a transition $t\in T$ leading from a state $p$ to a state $q$. Let
+  $\post$ be the set of all states reachable from $q$ using
+  transitions in $T$ and $\pre$ be the set of all states from which
+
+
+  
+  that $T\subseteq\delta$ is a nonemtpy set such that~\eqref{eq:lem3}
+  holds for each set $S\subset Q$.
 \end{proof}
 
 
