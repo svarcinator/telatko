@@ -40,8 +40,10 @@
 \newcommand{\mcycle}{\mathit{cycle}}
 \newcommand{\msat}{\mathit{satisfies}}
 \newcommand{\Te}{T_{\vec{e}}}
-\newcommand{\pre}{S_\mathit{pre}}
-\newcommand{\post}{S_\mathit{post}}
+% \newcommand{\pre}{{\leftarrow\!\!S}}
+% \newcommand{\post}{{S\!\!\rightarrow}}
+\newcommand{\pre}{{S_\mathit{pre}}}
+\newcommand{\post}{{S_\mathit{post}}}
 \def\false{\mathit{false}}
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
@@ -289,7 +291,7 @@ formula can be transformed into an equivalent formula in DNF.
 
 A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
 adjacent transitions of the form
-$(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
+$\rho=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
 such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
 is called a nontrivial \emph{strongly connected component (SCC)} if
 for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
@@ -661,7 +663,7 @@ cycles can be characterised in the following way.
 \begin{lemma}
   A nonempty set $T\subseteq\delta$ is a cycle if and only if for each set of
   states $S\subseteq Q$ it holds that
-  \begin{enumerate}
+  \begin{enumerate}[A.]
   \item\label{en:1} all transitions in $T$ lead from a state in $S$ to a state in $S$ (i.e., $T\subseteq\delta_S$) or
   \item\label{en:2} all transitions in $T$ lead from a state outside $S$ to a state outside $S$ (i.e., $T\subseteq\delta_{Q\smallsetminus S}$) or
   \item\label{en:3} $T$ contains a transition leading from a state in $S$ to a state outside $S$ and a transition leading from a state outside
@@ -690,36 +692,64 @@ cycles can be characterised in the following way.
     contain also a transition leading from a state outside $S$ to a
     state in $S$ (or vice versa).
   \end{itemize}
-  In both cases, $\ref{en:3}$ holds.
+  In both cases, (\ref{en:3}) holds.
 
-  Now we prove the opposite direction ``$\Longleftarrow$''. As $T$ is
-  nonempty, there exists a transition $t\in T$ leading from a state $p$.
-  We use this state to define the sets $\post,\pre\subseteq Q$ of states as 
-  \begin{align}\notag
-    \post&=\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }p\textrm{ to }q\}\\
-    \pre &=\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }q\textrm{ to }p\}
-  \end{align}
-  Note that each transition $t'\in T$ leading from a state in
-  $q\in\post$ leads also to a state in $\post$ as the path in $T^+$
-  leading form $p$ to $q$ can be prolonged by this transition. In
-  other words, there is no transtition in $T$ leading from a state
-  in $\post$ to a state outside $\post$. Similarly, one can show that
-  there is no transition in $T$ leadning from outside $\pre$ to $\pre$.
-
-  \todo{Jan is here}
-  
-  us we
-  choose Let us fix
-  a transition $t\in T$ leading from a state $p$ to a state $q$. Let
-  $\post$ be the set of all states reachable from $q$ using
-  transitions in $T$ and $\pre$ be the set of all states from which
-
-
-  
-  that $T\subseteq\delta$ is a nonemtpy set such that~\eqref{eq:lem3}
-  holds for each set $S\subset Q$.
+  Now we prove the opposite direction ``$\Longleftarrow$'' by
+  contraposition. Assume that a nonempty set $T$ is not a cycle. We
+  show that there is a set $S\subseteq Q$ such neither (\ref{en:1})
+  nor (\ref{en:2}) nor (\ref{en:3}) holds. Let $p$ be a state such
+  that some transition of $T$ leads from $p$. We define the set
+  \[
+    \post=\{p\}\cup\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }p\textrm{ to }q\}
+  \]
+  of states reachable from $p$ via transitions in $T$ and the set
+  \[
+    \pre=\{p\}\cup\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }q\textrm{ to }p\}
+  \]  
+  of states from which $p$ is reachable via transtitions of $T$. As
+  there is a transition of $T$ leading from $p$, we have that
+  $T\not\subseteq\delta_{Q\smallsetminus\post}$ and
+  $T\not\subseteq\delta_{Q\smallsetminus\pre}$, i.e., (\ref{en:2})
+  does not holds for $\post$ and $\pre$. Further, the definition of
+  $\post$ implies that there is no transition of $T$ leading from a
+  state in $\post$ to a state outside $\post$, which means that
+  (\ref{en:3}) does not hold for $\post$. Similarly, $T$ contains no
+  transition leading from a state outside $\pre$ to a state in $\pre$,
+  which means that (\ref{en:3}) does not hold for $\pre$. Now we prove
+  by contradition that (\ref{en:1}) does not hold for at least one of
+  $\post,\pre$. Hence, let us assume that $T\subseteq\delta_\post$ and
+  $T\subseteq\delta_\pre$. Then for each $t_i\in T$ leading from $p_i$
+  to $q_i$ we have that $p_i\in\post$ and $q_i\in\pre$, which implies
+  that there is a path $\rho_i\in T^+$ containing $t_i$ and leading
+  from $p$ back to $p$. If we concatenate all these paths, we get the
+  path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that contains all transitions of
+  $T$ and leads from $p$ back to $p$, which means that $T$ is a cycle.
+  This is a contradiction.
 \end{proof}
 
+The formula $\mcycle_3(\vec{e})$ says that $\Te$ is nonempty and each
+set $S\subseteq Q$ satisfies (\ref{en:1}) or (\ref{en:2}) or
+(\ref{en:3}).  For each state $q\in Q$, variable $s_q$ says whether
+$q$ is in the current set $S$ or not.
+\[s_q=\left\{
+    \begin{array}{ll}
+      1 & \textrm{if }q\in S\\
+      0 & \textrm{otherwise}    
+    \end{array}\right.
+\]
+By $\vec{s}$ we denote the vectors of all variables of the form $s_q$.
+The formula $\mcycle_3(\vec{e})$ is defined as follows.
+\begin{align*}
+  \mcycle_3(\vec{e})
+  &=\bigvee_{t\in\delta}e_t~\wedge~\forall\vec{s}~.~\zeta_{\ref{en:1}}(\vec{e},\vec{s})\,\vee\,
+    \zeta_{\ref{en:2}}(\vec{e},\vec{s})\,\vee\,
+    \zeta_{\ref{en:3}}(\vec{e},\vec{s})\\ %\qquad\textrm{where}\\
+  \zeta_{\ref{en:1}}(\vec{e},\vec{s}) &= \bigwedge_{t=(p,a,M',q)\in\delta}\hspace{-5mm}\big(e_t\implies (s_p\wedge s_q)\big)\\
+  \zeta_{\ref{en:2}}(\vec{e},\vec{s}) &= \bigwedge_{t=(p,a,M',q)\in\delta}\hspace{-5mm}\big(e_t\implies (\neg s_p\wedge \neg s_q)\big)\\
+  \zeta_{\ref{en:3}}(\vec{e},\vec{s}) &= \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge s_p\wedge \neg s_q\big) ~\wedge~
+  \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge \neg s_p\wedge s_q\big)
+\end{align*}
+\todo{Zminit, ze z univerzalniho kvantifikatoru se stane existencni.}
 
 \subsection{Optimizations}
 
