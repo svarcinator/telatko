@@ -18,11 +18,22 @@
 
 \bibliographystyle{plainurl}% the mandatory bibstyle
 
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{xspace}
+\usepackage{makecell}
+\usepackage[table]{xcolor}
+%\usepackage{arydshln}
+%\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+
 \usepackage{tikz}
 % TikZ libraries
 \usetikzlibrary{myautomata}
 \usetikzlibrary{fit, backgrounds}
 \usetikzlibrary{extshapes}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 
 %{{{ (La)TeX definitions
 
@@ -48,6 +59,8 @@
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
 \newcommand{\mB}{\mathcal{B}}
+
+\newcommand{\telatko}{\texttt{telatko}\xspace}
 
 %}}}
 
@@ -181,7 +194,7 @@ acceptance marks, and the same set of accepting runs, but not vice
 versa.
 
 We have implemented our reduction technique in a tool called
-\texttt{telatko}. We show that the tool can reduce acceptance marks in
+\telatko. We show that the tool can reduce acceptance marks in
 automata produced by Delag~\cite{muller.17.gandalf},
 ltl3tela~\cite{major.19.atva}, Rabinizer~4~\cite{kretinsky.18.cav},
 and Spot~\cite{duret.16.atva2}.  While the reduction is relatively
@@ -864,11 +877,115 @@ For simplicity, we do not display letters on the edges of the automata in Figure
     \todo{Pozor, prvni klauzule v levelu 2 je trash!}}
   \label{fig:example}
 \end{figure}
+%}}}
+%{{{ algorithm and implementation
+
+\section{Reduction algorithm and its implementation}\label{sec:algimpl}
+
+The presented reduction algorithms have been implemented in a tool called
+\telatko. It uses the Spot library~\cite{duret.16.atva2} for automata parsing
+and manipulation, and the Z3 Theorem Prover~\cite{demoura.08.tacas} to solve
+the satisfiability of QBF formulas. Moreover, in the experimental evaluation
+we use several tools from the Spot library, i.e. \texttt{genltl},
+\texttt{ltlfilt}, \texttt{ltl2tgba}, \texttt{autcross} and \texttt{autfilt},
+to generate, simplify and translate LTL formulas and to compare and simplify
+automata. \telatko is implemented in Python.
+
+Jak se nastavuji inicialni parametry a jak postupne klesaji.
+Jak prechazim od nizsich levelu k vyssim.
+Vyuzivame incremental QBF solving?
 
 %}}}
 %{{{ experimental evaluation 
 
 \section{Experimental evaluation}\label{sec:experiments}
+
+We have used the tool \texttt{genltl} from Spot to generate LTL formulas
+from literature and from scalable patterns. Using the values from 1 to 5 for
+the parametrized formulas, we have generated 407 unique LTL formulas. These
+have been translated to deterministic or nondeterministic TELA using four
+state-of-the-art translators \texttt{ltl2tgba} (from the Spot library),
+\texttt{ltl3tela}, \texttt{ltl2dela} (known as Delag), and \texttt{ltl2dgra}
+(known as Rabinizer 4). The generated automata sets contain less than 407
+automata as not all of the formulas are successfully translated due to timeouts.
+Table \ref{tab:ltltranslators} shows the exact versions, the homepage of the
+used tools and the number of input automata produced by the given tool from
+the LTL formulas.
+
+Spot version 2.10.4 and Z3 version 4.8.13 have been used in the experimental
+evaluation.
+
+\begin{table}
+\caption{LTL to automata translators used for the experimental evaluation
+and the number of successfully translated formulas.}
+\label{tab:ltltranslators}
+\centering
+\begin{tabular}{lr@{~~~}lr}
+\toprule
+tool        & version&homepage & \# formulas \\
+\midrule
+\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 404\\
+\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} \todo{RELEASE} & 376\\
+Delag & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 397\\
+Rabinizer & \todo ? & & 386\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\caption{Test: heatmap}
+\centering
+\begin{tabular}{c|ccccc|}
+\multicolumn{1}{c}{} & 3 & 4 & 5 & 6 & \multicolumn{1}{c}{7} \\
+%\specialrule{2pt}{0pt}{0pt}
+\cline{2-6}
+3 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \cellcolor{blue!25}\makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+4 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+5 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+6 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+7 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+\cline{2-6}
+\end{tabular}
+\end{table}
+
+\begin{table}
+\caption{Test: Data}
+\centering
+\begin{tabular}{cccccc}
+\toprule
+& & marks & \% red. & time & timeouts \\
+\midrule
+\multirow{4}{*}{\rotatebox[origin=c]{90}{\makecell{Delag \\ (420 marks)}}} & level 1 & 240 & 12.3 & 133.7 & 42 \\
+& level 2 & 240 & 12.3 & 133.7 & 42 \\
+& level 3 & 240 & 12.3 & 133.7 & 42 \\
+& multilevel & 240 & 12.3 & 133.7 & 42 \\
+\midrule
+\multirow{4}{*}{\rotatebox[origin=c]{90}{\makecell{Rabinizer 4 \\ (420 marks)}}} & level 1 & 240 & 12.3 & 133.7 & 42 \\
+& level 2 & 240 & 12.3 & 133.7 & 42 \\
+& level 3 & 240 & 12.3 & 133.7 & 42 \\
+& multilevel & 240 & 12.3 & 133.7 & 42 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{tikzpicture}
+\begin{axis}[
+	ymode=log,
+	height=5cm,
+	width=10cm,
+	grid=major,
+]
+\addplot coordinates {
+	(1, 0.3)
+	(2, 0.8)
+	(3, 1.5)
+	(4, 2.7)
+	(5, 3.9)
+	(6, 4.1)
+};
+\addlegendentry{Delag}
+\end{axis}
+\end{tikzpicture}
 
 Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
 automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
