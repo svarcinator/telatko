@@ -153,8 +153,8 @@ def try_evaluate0(aut, orig, qbf_run_info):
     :return: potentionally zero acceptance spot::automaton
     """
     last_eq_aut = spot.automaton(aut.to_str())
-    aut.set_name(qbf_run_info + "F_0_S")
-    last_eq_aut.set_name(qbf_run_info + "F_0_U")
+    aut.set_name(aut.get_name() + "F_0_S")
+    last_eq_aut.set_name(last_eq_aut.get_name() + "F_0_U")
     clear_aut_edges(aut)
     aut.set_acceptance(0, spot.acc_code.t())
     if spot.are_equivalent(orig, aut):
@@ -337,7 +337,8 @@ def model_assert(model, K):
 
 def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K,  scc_edg, optimized_scc, timeout, minimized_atribute):
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
-
+    K = aut.get_acceptance().used_sets().count()
+    K -= 1
     original = spot.automaton(aut.to_str())
     qbf_run_info = ""
     # dictionary {acc_set_num : [edge_nums]}
@@ -359,17 +360,24 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
         res = solver.check()
 
         if res == sat:
+            print("sat, ", K)
             model = solver.model()
+            if aut.get_acceptance().used_sets().count() <= 1:
+                print(aut.get_acceptance(), aut.get_acceptance().used_sets().count())
+                return try_evaluate0(aut, original, qbf_run_info)
 
+            """
             if K == 1:
+                continue
                 # does automaton with one mark exist? --the solver asks, answer was yes
                 # therefore my question is if 0 marks can be used
                 # aut with one acc mark is SAT -- rozmysli si tohle jeste
                 process_variables(aut, model, scc_equiv_edges, tmp_mode)
-                return try_evaluate0(aut, original, qbf_run_info)
+
+            """
 
 
-            if mode == 1:
+            if tmp_mode == 1:
                 solver  = update_inc_solver(solver, currently_reduced, C, K, representants)
             else:
                 solver  = update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums)
@@ -379,11 +387,17 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
             else:
                 C = C - 1
         else:
-
-            qbf_run_info += update_run_info(K, res, tmp_mode)
+            print("tmp_mode: ", tmp_mode, " unsat, K=", K)
+            #qbf_run_info += update_run_info(K, res, tmp_mode)
+            aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode))
+            """
             if (tmp_mode < mode):
                 if model != None:
                     process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                    if aut.get_acceptance().used_sets().count() <= 1:
+                        #return empty_aut(aut, original, qbf_run_info)
+                        return try_evaluate0(aut, original, qbf_run_info)
+
                     #assert(spot.are_equivalent(original, aut)
                 tmp_mode += 1
                 # exists formula with K marks
@@ -392,6 +406,7 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
                 solver = solver_init(formula, timeout)
                 model = None
                 continue
+            """
 
             if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
                 currently_reduced = FormulaAtribute.C
@@ -403,14 +418,22 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
             else:
                 #qbf_run_info += update_run_info(K, res, tmp_mode)
                 if model != None:
-                    process_variables(aut, model, scc_equiv_edges, mode)
-                aut.set_name(qbf_run_info)
+                    process_variables(aut, model, scc_equiv_edges, tmp_mode)
+
+                #aut.set_name(qbf_run_info)
+                if aut.get_acceptance().used_sets().count() <= 1:
+
+                    return try_evaluate0(aut, original, qbf_run_info)
+
+                if not spot.are_equivalent(original, aut):
+                    print("tmp mode: ", tmp_mode, " not eq")
                 return aut
     return try_evaluate0(aut, original, qbf_run_info)
 
 
 def play(aut, C, K, mode, timeout,
          optimized_scc, minimized_atribute, tmp_mode, inc_solving):
+    aut.set_name("")
 
     spot.cleanup_acceptance_here(aut)
 
@@ -435,8 +458,15 @@ def play(aut, C, K, mode, timeout,
     else:
         C -= 1
     if inc_solving:
-        return inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute)
-
+        print("tmp_mode: ", tmp_mode, " mode: ", mode, aut.get_name())
+        for i in range(tmp_mode, mode + 1):
+            print(i)
+            if aut.get_acceptance().used_sets().count() <= 1:
+                return try_evaluate0(aut, original, qbf_run_info)
+            aut = inc_loop(original, inner_edges_nums, inner_edges, mode, i, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute)
+            #assert(spot.are_equivalent(original, aut))
+            print(aut.get_name())
+        return aut
 
     while C > 0 and K > 0:
 
@@ -457,7 +487,8 @@ def play(aut, C, K, mode, timeout,
             s = solver.model()
             process_variables(aut, s, scc_equiv_edges, tmp_mode)
         else:
-            qbf_run_info += update_run_info(K, res, tmp_mode)
+
+            aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode) )
             if (tmp_mode < mode):
                 tmp_mode += 1
                 continue
@@ -468,7 +499,7 @@ def play(aut, C, K, mode, timeout,
                     C = C - 1
                     continue
                 else:
-                    aut.set_name(qbf_run_info)
+                    #aut.set_name(qbf_run_info)
                     return aut
 
         if aut.get_acceptance().used_sets().count() < 1:
