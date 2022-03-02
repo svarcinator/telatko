@@ -2404,7 +2404,25 @@ State: 0
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: very-weak
+--BODY--
+State: 0
+[!0] 0
+State: 1
+[t] 1
+State: 2
+[!0&1] 0
+[0] 1
+[!0&!1] 2
+--END--
+HOA: v1
+States: 2
+Start: 1
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2413,61 +2431,43 @@ properties: very-weak
 State: 0
 [!1] 0
 State: 1
-[t] 1
-State: 2
 [0&!1] 0
-[1] 1
-[!0&!1] 2
---END--
-HOA: v1
-States: 2
-Start: 1
-AP: 2 "p1" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: very-weak
---BODY--
-State: 0
-[!0] 0
-State: 1
-[!0&1] 0
-[!1] 1
+[!0] 1
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0
-[!0] 0
+[!1] 0
 State: 1
-[!0&1&2] 0
-[0 | !2] 1
-[!0&!1&2] 2
+[0&!1&2] 0
+[!0 | 1] 1
+[0&!1&!2] 2
 State: 2
-[!0&1] 0
-[0] 1
-[!0&!1] 2
+[!1&2] 0
+[1] 1
+[!1&!2] 2
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1] 0
-[0] 1
+[!1&!2] 0
+[1] 1
 State: 1
-[!0&!1&2] 0
-[0 | !2] 1
+[0&!1&!2] 0
+[!0 | 1] 1
 --END--
 HOA: v1
 States: 2
@@ -2487,7 +2487,7 @@ State: 1
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2496,57 +2496,57 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[0&!1] 0
+[!0&1] 0
 [!0&!1] 1
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic very-weak
 --BODY--
 State: 0
-[!0] 0
-[0] 1
+[!1] 0
+[1] 1
 State: 1 {0}
 [t] 1
 State: 2 {0}
-[!0&1] 0
+[0&!1] 0
 [0&1] 1
-[!1] 2
+[!0] 2
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[0 | 1 | !2] 0
-[!0&!1&2] 1
+[!0 | 1 | 2] 0
+[0&!1&!2] 1
 State: 1
-[!0&1] 0
-[!0&!1] 1
+[!1&2] 0
+[!1&!2] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0 | 1 | !2] 0 {0}
-[!0&!1&2] 1
+[!0 | 1 | 2] 0 {0}
+[0&!1&!2] 1
 State: 1
-[!0&1] 0 {0}
-[!0&!1] 1
+[!1&2] 0 {0}
+[!1&!2] 1
 --END--
 HOA: v1
 States: 5
@@ -2575,73 +2575,11 @@ State: 4
 HOA: v1
 States: 7
 Start: 6
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
---BODY--
-State: 0
-[!1] 0
-State: 1
-[0&!1] 0
-[!0&!1] 1
-[1] 5
-State: 2
-[!0&!1] 1
-[0&!1] 2
-[1] 5
-State: 3
-[0&!1] 2
-[!0&!1] 3
-[1] 5
-State: 4
-[!0&!1] 3
-[0&!1] 4
-[1] 5
-State: 5
-[t] 5
-State: 6
-[0&!1] 4
-[1] 5
-[!0&!1] 6
---END--
-HOA: v1
-States: 6
-Start: 5
-AP: 2 "p1" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: very-weak
---BODY--
-State: 0
-[!0] 0
-State: 1
-[!0] 0
-[0] 1
-State: 2
-[0] 1
-[!0] 2
-State: 3
-[!0] 2
-[0] 3
-State: 4
-[0] 3
-[!0] 4
-State: 5
-[0&1] 3
-[!0&1] 4
-[!1] 5
---END--
-HOA: v1
-States: 7
-Start: 5
-AP: 3 "p1" "p2" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: stutter-invariant weak
 --BODY--
 State: 0
 [!0] 0
@@ -2662,9 +2600,7 @@ State: 4
 [!0&1] 4
 [0] 5
 State: 5
-[!0&1&2] 4
-[0 | !2] 5
-[!0&!1&2] 6
+[t] 5
 State: 6
 [!0&1] 4
 [0] 5
@@ -2673,35 +2609,99 @@ State: 6
 HOA: v1
 States: 6
 Start: 5
-AP: 3 "p1" "p2" "p0"
+AP: 2 "p0" "p1"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: very-weak
+--BODY--
+State: 0
+[!1] 0
+State: 1
+[!1] 0
+[1] 1
+State: 2
+[1] 1
+[!1] 2
+State: 3
+[!1] 2
+[1] 3
+State: 4
+[1] 3
+[!1] 4
+State: 5
+[0&1] 3
+[0&!1] 4
+[!0] 5
+--END--
+HOA: v1
+States: 7
+Start: 5
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0
-[!0&!1] 0
-[1] 5
+[!1] 0
 State: 1
-[!0&!1] 0
-[0&!1] 1
+[!1&2] 0
+[!1&!2] 1
 [1] 5
 State: 2
-[0&!1] 1
-[!0&!1] 2
+[!1&!2] 1
+[!1&2] 2
 [1] 5
 State: 3
-[!0&!1] 2
-[0&!1] 3
+[!1&2] 2
+[!1&!2] 3
 [1] 5
 State: 4
-[0&!1] 3
-[!0&!1] 4
+[!1&!2] 3
+[!1&2] 4
 [1] 5
 State: 5
-[0&!1&2] 3
-[!0&!1&2] 4
-[1 | !2] 5
+[0&!1&2] 4
+[!0 | 1] 5
+[0&!1&!2] 6
+State: 6
+[!1&2] 4
+[1] 5
+[!1&!2] 6
+--END--
+HOA: v1
+States: 6
+Start: 5
+AP: 3 "p0" "p1" "p2"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: stutter-invariant weak
+--BODY--
+State: 0
+[!1&!2] 0
+[2] 5
+State: 1
+[!1&!2] 0
+[1&!2] 1
+[2] 5
+State: 2
+[1&!2] 1
+[!1&!2] 2
+[2] 5
+State: 3
+[!1&!2] 2
+[1&!2] 3
+[2] 5
+State: 4
+[1&!2] 3
+[!1&!2] 4
+[2] 5
+State: 5
+[0&1&!2] 3
+[0&!1&!2] 4
+[!0 | 2] 5
 --END--
 HOA: v1
 States: 1
@@ -2718,51 +2718,16 @@ State: 0
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
---BODY--
-State: 0
-[!1] 0
-State: 1
-[t] 1
-State: 2
-[!0&!1] 0
-[1] 1
-[0&!1] 2
---END--
-HOA: v1
-States: 2
-Start: 1
-AP: 2 "p1" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: very-weak
---BODY--
-State: 0
-[0] 0
-State: 1
-[0&1] 0
-[!1] 1
---END--
-HOA: v1
-States: 3
-Start: 1
-AP: 3 "p1" "p2" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: stutter-invariant weak
 --BODY--
 State: 0
 [!0] 0
 State: 1
-[!0&!1&2] 0
-[0 | !2] 1
-[!0&1&2] 2
+[t] 1
 State: 2
 [!0&!1] 0
 [0] 1
@@ -2771,22 +2736,57 @@ State: 2
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 2 "p0" "p1"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: very-weak
+--BODY--
+State: 0
+[1] 0
+State: 1
+[0&1] 0
+[!0] 1
+--END--
+HOA: v1
+States: 3
+Start: 1
+AP: 3 "p0" "p1" "p2"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: stutter-invariant weak
+--BODY--
+State: 0
+[!1] 0
+State: 1
+[0&!1&!2] 0
+[!0 | 1] 1
+[0&!1&2] 2
+State: 2
+[!1&!2] 0
+[1] 1
+[!1&2] 2
+--END--
+HOA: v1
+States: 2
+Start: 1
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&1] 0
-[0] 1
+[!1&2] 0
+[1] 1
 State: 1
-[!0&1&2] 0
-[0 | !2] 1
+[0&!1&2] 0
+[!0 | 1] 1
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2795,187 +2795,187 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[0] 0
+[1] 0
 [!0&!1] 1
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!2] 0
-State: 1
-[t] 1
-State: 2
-[0&!1&!2] 0
-[1 | 2] 1
-[!0&!1&!2] 2
---END--
-HOA: v1
-States: 4
-Start: 0
-AP: 3 "p1" "p2" "p0"
-acc-name: co-Buchi
-Acceptance: 1 Fin(0)
-properties: trans-labels explicit-labels trans-acc complete
-properties: deterministic
---BODY--
-State: 0
-[!2] 0
-[0&!1&2] 1
-[!0&!1&2] 2
-[1&2] 3
-State: 1
-[0&!1 | !2] 1 {0}
-[!0&!1&2] 2
-[1&2] 3
-State: 2
-[0&!1] 1 {0}
-[!0&!1] 2
-[1] 3
-State: 3
-[t] 3
---END--
-HOA: v1
-States: 3
-Start: 1
-AP: 4 "p1" "p2" "p3" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: stutter-invariant weak
---BODY--
-State: 0
 [!0] 0
 State: 1
-[!0&1&!2&3] 0
-[0 | 2 | !3] 1
-[!0&!1&!2&3] 2
+[t] 1
 State: 2
 [!0&1&!2] 0
 [0 | 2] 1
 [!0&!1&!2] 2
 --END--
 HOA: v1
+States: 4
+Start: 0
+AP: 3 "p0" "p1" "p2"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!0] 0
+[0&1&!2] 1
+[0&!1&!2] 2
+[0&2] 3
+State: 1
+[!0 | 1&!2] 1 {0}
+[0&!1&!2] 2
+[0&2] 3
+State: 2
+[1&!2] 1 {0}
+[!1&!2] 2
+[2] 3
+State: 3
+[t] 3
+--END--
+HOA: v1
+States: 3
+Start: 1
+AP: 4 "p0" "p1" "p2" "p3"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: stutter-invariant weak
+--BODY--
+State: 0
+[!1] 0
+State: 1
+[0&!1&2&!3] 0
+[!0 | 1 | 3] 1
+[0&!1&!2&!3] 2
+State: 2
+[!1&2&!3] 0
+[1 | 3] 1
+[!1&!2&!3] 2
+--END--
+HOA: v1
 States: 2
 Start: 1
-AP: 4 "p1" "p2" "p3" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1&!2] 0
-[0 | 2] 1
+[!1&!2&!3] 0
+[1 | 3] 1
 State: 1
-[!0&!1&!2&3] 0
-[0 | 2 | !3] 1
+[0&!1&!2&!3] 0
+[!0 | 1 | 3] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0 | !1] 0 {0}
-[!0&1] 1
+[!0 | 1] 0 {0}
+[0&!1] 1
 State: 1
-[0] 0 {0}
-[!0] 1
+[1] 0 {0}
+[!1] 1
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0
-[!1&!2] 0
-[1&!2] 2
+[!0&!2] 0
+[!0&2] 2
 State: 1
 [t] 1
 State: 2
-[0&!1&!2] 0
-[2] 1
-[!0&!2 | 1&!2] 2
+[!0&1&!2] 0
+[0] 1
+[!0&!1 | !0&2] 2
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!2] 0 {0}
-[!0&2 | 1&2] 1
-[0&!1&2] 2
+[!0] 0 {0}
+[0&!1 | 0&2] 1
+[0&1&!2] 2
 State: 1
-[!0 | 1] 1 {0}
-[0&!1] 2
+[!1 | 2] 1 {0}
+[1&!2] 2
 State: 2
-[1] 1 {0}
-[!1] 2
+[2] 1 {0}
+[!2] 2
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0
-[!0&!3] 0
-[!0&3] 2
+[!1&!3] 0
+[!1&3] 2
 State: 1
-[!0&1&2&!3] 0
-[0 | !2] 1
-[!0&!1&2 | !0&2&3] 2
+[0&!1&2&!3] 0
+[!0 | 1] 1
+[0&!1&!2 | 0&!1&3] 2
 State: 2
-[!0&1&!3] 0
-[0] 1
-[!0&!1 | !0&3] 2
+[!1&2&!3] 0
+[1] 1
+[!1&!2 | !1&3] 2
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0 | !2] 0 {0}
-[!0&!1&2 | !0&2&3] 1 {0}
-[!0&1&2&!3] 2
+[!0 | 1] 0 {0}
+[0&!1&!2 | 0&!1&3] 1 {0}
+[0&!1&2&!3] 2
 State: 1
-[0] 0 {0}
-[!0&!1 | !0&3] 1 {0}
-[!0&1&!3] 2
+[1] 0 {0}
+[!1&!2 | !1&3] 1 {0}
+[!1&2&!3] 2
 State: 2
-[!0&3] 1 {0}
-[!0&!3] 2
+[!1&3] 1 {0}
+[!1&!3] 2
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -2984,39 +2984,39 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[!0&!2] 1
-[0&!2] 2
+[!0&!1] 1
+[!0&1] 2
 State: 2
-[1] 0
-[!1&!2] 2
+[2] 0
+[!0&!2] 2
 --END--
 HOA: v1
 States: 4
 Start: 3
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!2] 0
+[!0] 0
 State: 1
 [t] 1
 State: 2
-[0&!2&!3] 0
-[2 | 3] 1
-[!0&!2&!3] 2
+[!0&1&!3] 0
+[0 | 3] 1
+[!0&!1&!3] 2
 State: 3
-[0&!2] 0
-[2] 1
-[!0&1&!2] 2
+[!0&1] 0
+[0] 1
+[!0&!1&2] 2
 [!0&!1&!2] 3
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -3025,107 +3025,67 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[!0&!1] 1
-[!0&1] 3
+[!1&!2] 1
+[!1&2] 3
 State: 2
-[!2] 0
-[!0&!1&2] 1
-[!0&1&2] 3
+[!0] 0
+[0&!1&!2] 1
+[0&!1&2] 3
 State: 3 {0}
 [3] 0
-[!0&!3] 3
+[!1&!3] 3
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 5 "p1" "p2" "p3" "p0" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0] 0
+[!1] 0
 State: 1
-[!0&1&3 | !0&1&!4] 0
-[!0&!1&2&3 | !0&!1&!3&!4] 1
-[0 | !3&4] 2
-[!0&!1&!2&3] 3
+[0&!1&2 | !1&2&!4] 0
+[!0&!1&!2&!4 | 0&!1&!2&3] 1
+[!0&4 | 1] 2
+[0&!1&!2&!3] 3
 State: 2
-[!0&1&3] 0
-[!0&!1&2&3] 1
-[0 | !3] 2
-[!0&!1&!2&3] 3
+[0&!1&2] 0
+[0&!1&!2&3] 1
+[!0 | 1] 2
+[0&!1&!2&!3] 3
 State: 3
-[!0&1] 0
-[!0&!1&2] 1
-[0] 2
-[!0&!1&!2] 3
+[!1&2] 0
+[!1&!2&3] 1
+[1] 2
+[!1&!2&!3] 3
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 5 "p1" "p2" "p3" "p0" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1&2&3 | !0&!1&!3&!4] 0
-[1 | !3&4] 1
-[!0&!1&!2&3] 2
+[!0&!1&!2&!4 | 0&!1&!2&3] 0
+[!0&4 | 2] 1
+[0&!1&!2&!3] 2
 State: 1
-[!0&!1&2&3] 0
-[1 | !3] 1
-[!0&!1&!2&3] 2
+[0&!1&!2&3] 0
+[!0 | 2] 1
+[0&!1&!2&!3] 2
 State: 2
-[!0&!1&2] 0
-[1] 1
-[!0&!1&!2] 2
+[!1&!2&3] 0
+[2] 1
+[!1&!2&!3] 2
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p1" "p2" "p0"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: very-weak
---BODY--
-State: 0
-[!0] 0
-State: 1
-[t] 1
-State: 2
-[!1&2] 0
-[1] 1
-[!1&!2] 2
---END--
-HOA: v1
-States: 4
-Start: 2
-AP: 4 "p1" "p2" "p0" "p3"
-acc-name: all
-Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic
-properties: very-weak
---BODY--
-State: 0
-[!2] 0
-State: 1
-[t] 1
-State: 2
-[2 | 3] 1
-[!0&!2&!3] 2
-[0&!2&!3] 3
-State: 3
-[1&!2] 0
-[2] 1
-[!1&!2] 3
---END--
-HOA: v1
-States: 4
-Start: 3
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -3136,90 +3096,130 @@ State: 0
 State: 1
 [t] 1
 State: 2
-[0&!3] 0
-[3] 1
-[!0&!3] 2
-State: 3
-[0&2&!3] 0
-[2&3] 1
-[!0&2&!3] 2
-[!2] 3
+[0&!2] 0
+[2] 1
+[!0&!2] 2
 --END--
 HOA: v1
 States: 4
-Start: 3
-AP: 5 "p1" "p2" "p3" "p4" "p0"
+Start: 2
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
-properties: trans-labels explicit-labels state-acc deterministic weak
+properties: trans-labels explicit-labels state-acc deterministic
+properties: very-weak
 --BODY--
 State: 0
 [!0] 0
 State: 1
-[!0&2] 0
-[!0&!2] 1
-[0] 3
+[t] 1
 State: 2
-[!0&1&!3] 1
+[0 | 3] 1
 [!0&!1&!3] 2
-[0 | 3] 3
+[!0&1&!3] 3
 State: 3
-[!0&1&!3&4] 1
-[!0&!1&!3&4] 2
-[0 | 3 | !4] 3
+[!0&2] 0
+[0] 1
+[!0&!2] 3
 --END--
 HOA: v1
-States: 3
-Start: 1
-AP: 5 "p1" "p2" "p3" "p4" "p0"
+States: 4
+Start: 3
+AP: 4 "p0" "p1" "p2" "p3"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: very-weak
+--BODY--
+State: 0
+[!2] 0
+State: 1
+[t] 1
+State: 2
+[1&!3] 0
+[3] 1
+[!1&!3] 2
+State: 3
+[0&1&!3] 0
+[0&3] 1
+[0&!1&!3] 2
+[!0] 3
+--END--
+HOA: v1
+States: 4
+Start: 3
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!2] 0
-[0] 1
+[!1] 0
 State: 1
-[!0&1&!3&4] 0
-[0 | 3 | !4] 1
-[!0&!1&!3&4] 2
+[!1&3] 0
+[!1&!3] 1
+[1] 3
 State: 2
-[!0&1&!3] 0
-[0 | 3] 1
-[!0&!1&!3] 2
+[!1&2&!4] 1
+[!1&!2&!4] 2
+[1 | 4] 3
+State: 3
+[0&!1&2&!4] 1
+[0&!1&!2&!4] 2
+[!0 | 1 | 4] 3
+--END--
+HOA: v1
+States: 3
+Start: 1
+AP: 5 "p0" "p1" "p2" "p3" "p4"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic weak
+--BODY--
+State: 0
+[!1&!3] 0
+[1] 1
+State: 1
+[0&!1&2&!4] 0
+[!0 | 1 | 4] 1
+[0&!1&!2&!4] 2
+State: 2
+[!1&2&!4] 0
+[1 | 4] 1
+[!1&!2&!4] 2
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!2] 0 {0}
-[2] 1 {0}
+[!0] 0 {0}
+[0] 1 {0}
 State: 1
-[0&1&!2] 0 {0}
-[!0 | 1&2] 1 {0}
-[0&!1&!2] 2
-[0&!1&2] 3
+[!0&1&2] 0 {0}
+[0&2 | !1] 1 {0}
+[!0&1&!2] 2
+[0&1&!2] 3
 State: 2
-[1&!2] 0 {0}
-[1&2] 1 {0}
-[!1&!2] 2
-[!1&2] 3
+[!0&2] 0 {0}
+[0&2] 1 {0}
+[!0&!2] 2
+[0&!2] 3
 State: 3
-[0&1&!2] 0 {0}
-[!0&1 | 1&2] 1 {0}
-[0&!1&!2] 2
-[!0&!1 | !1&2] 3
+[!0&1&2] 0 {0}
+[0&2 | !1&2] 1 {0}
+[!0&1&!2] 2
+[0&!2 | !1&!2] 3
 --END--
 HOA: v1
 States: 6
 Start: 3
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -3229,499 +3229,499 @@ State: 0
 [!3] 0
 [3] 2
 State: 1 {0}
-[1&2&!3] 0
-[0&!2&3 | !1&!2] 1
-[!1&2 | 2&3] 2
-[!0&1&!2&3] 3
-[!0&1&!2&!3] 4
-[0&1&!2&!3] 5
+[0&2&!3] 0
+[!0&1&3 | !0&!2] 1
+[0&!2 | 0&3] 2
+[!0&!1&2&3] 3
+[!0&!1&2&!3] 4
+[!0&1&2&!3] 5
 State: 2 {0}
 [t] 2
 State: 3 {0}
-[0&!2] 1
-[2] 2
-[!0&!2] 3
+[!0&1] 1
+[0] 2
+[!0&!1] 3
 State: 4 {0}
-[2&!3] 0
-[0&!2&3] 1
-[2&3] 2
-[!0&!2&3] 3
-[!0&!2&!3] 4
-[0&!2&!3] 5
+[0&!3] 0
+[!0&1&3] 1
+[0&3] 2
+[!0&!1&3] 3
+[!0&!1&!3] 4
+[!0&1&!3] 5
 State: 5 {0}
-[2&!3] 0
-[0&!2&3 | !1&!2&3] 1
-[2&3] 2
-[!0&1&!2&3] 3
-[!0&1&!2&!3] 4
-[0&!2&!3 | !1&!2&!3] 5
+[0&!3] 0
+[!0&1&3 | !0&!2&3] 1
+[0&3] 2
+[!0&!1&2&3] 3
+[!0&!1&2&!3] 4
+[!0&1&!3 | !0&!2&!3] 5
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!2] 0 {0}
-[!0&2] 1
-[0&2] 2
+[!0] 0 {0}
+[0&!1] 1
+[0&1] 2
 State: 1
-[!0] 1 {0}
-[0] 2 {0}
+[!1] 1 {0}
+[1] 2 {0}
 State: 2
-[!0&1&3] 1 {0}
-[0&3 | !1] 2 {0}
-[!0&1&!3] 3
-[0&1&!3] 4
+[!1&2&3] 1 {0}
+[1&3 | !2] 2 {0}
+[!1&2&!3] 3
+[1&2&!3] 4
 State: 3
-[!0&3] 1 {0}
-[0&3] 2 {0}
-[!0&!3] 3
-[0&!3] 4
+[!1&3] 1 {0}
+[1&3] 2 {0}
+[!1&!3] 3
+[1&!3] 4
 State: 4
-[!0&1&3] 1 {0}
-[0&3 | !1&3] 2 {0}
-[!0&1&!3] 3
-[0&!3 | !1&!3] 4
+[!1&2&3] 1 {0}
+[1&3 | !2&3] 2 {0}
+[!1&2&!3] 3
+[1&!3 | !2&!3] 4
 --END--
 HOA: v1
 States: 10
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[0 | !2] 0 {0 1}
-[!0&2] 1
-[!0&!1&2] 2 {1}
-[!0&1&2] 3 {1}
+[!0 | 1] 0 {0 1}
+[0&!1] 1
+[0&!1&!2] 2 {1}
+[0&!1&2] 3 {1}
 State: 1
-[!0] 1 {0 1}
+[!1] 1 {0 1}
 State: 2
-[0] 0 {0 1}
-[!0&!1] 2 {1}
-[!0&1] 3 {1}
+[1] 0 {0 1}
+[!1&!2] 2 {1}
+[!1&2] 3 {1}
 State: 3
-[0&!3 | 0&4] 0 {0 1}
-[!0&!1&3&4] 2 {1}
-[!0&1&3&4] 3 {1}
-[!0&!3 | !0&!4] 4 {1}
-[!0&!3] 5 {1}
-[!0&!1&3&!4] 6
-[!0&1&3&!4] 7
-[0&3&!4] 8 {0}
+[1&!3 | 1&4] 0 {0 1}
+[!1&!2&3&4] 2 {1}
+[!1&2&3&4] 3 {1}
+[!1&!3 | !1&!4] 4 {1}
+[!1&!3] 5 {1}
+[!1&!2&3&!4] 6
+[!1&2&3&!4] 7
+[1&3&!4] 8 {0}
 State: 4
-[0&3&4] 0 {0 1}
-[!0&!1&3&4] 2 {1}
-[!0&1&3&4] 3 {1}
-[!0&!3 | !0&!4] 4 {1}
-[!0&!1&3&!4] 6
-[!0&1&3&!4] 7
-[0&3&!4] 8 {0}
+[1&3&4] 0 {0 1}
+[!1&!2&3&4] 2 {1}
+[!1&2&3&4] 3 {1}
+[!1&!3 | !1&!4] 4 {1}
+[!1&!2&3&!4] 6
+[!1&2&3&!4] 7
+[1&3&!4] 8 {0}
 State: 5
-[0&!3] 0 {0 1}
-[!0&!3] 5 {1}
+[1&!3] 0 {0 1}
+[!1&!3] 5 {1}
 State: 6
-[0&4] 0 {0 1}
-[!0&!1&4] 2 {1}
-[!0&1&4] 3 {1}
-[!0&!1&!4] 6
-[!0&1&!4] 7
-[0&!4] 8 {0}
+[1&4] 0 {0 1}
+[!1&!2&4] 2 {1}
+[!1&2&4] 3 {1}
+[!1&!2&!4] 6
+[!1&2&!4] 7
+[1&!4] 8 {0}
 State: 7
-[0&4] 0 {0 1}
-[!0&!1&3&4] 2 {1}
-[!0&1&3&4] 3 {1}
-[!0&!3&4] 4 {1}
-[!0&!3&4] 5 {1}
-[!0&!1&3&!4] 6
-[!0&1&!4 | !0&!3&!4] 7
-[0&!4] 8 {0}
+[1&4] 0 {0 1}
+[!1&!2&3&4] 2 {1}
+[!1&2&3&4] 3 {1}
+[!1&!3&4] 4 {1}
+[!1&!3&4] 5 {1}
+[!1&!2&3&!4] 6
+[!1&2&!4 | !1&!3&!4] 7
+[1&!4] 8 {0}
 State: 8
-[0&4 | !2&4] 0 {0 1}
-[!0&2&4] 1
-[!0&!1&2&4] 2 {1}
-[!0&1&2&4] 3 {1}
-[!0&!1&2&!4] 6
-[!0&1&2&!4] 7
-[0&!4 | !2&!4] 8 {0}
-[!0&2&!4] 9
+[!0&4 | 1&4] 0 {0 1}
+[0&!1&4] 1
+[0&!1&!2&4] 2 {1}
+[0&!1&2&4] 3 {1}
+[0&!1&!2&!4] 6
+[0&!1&2&!4] 7
+[!0&!4 | 1&!4] 8 {0}
+[0&!1&!4] 9
 State: 9
-[!0&4] 1
-[!0&!4] 9
+[!1&4] 1
+[!1&!4] 9
 --END--
 HOA: v1
 States: 8
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1 | !2] 0 {0 1}
-[!0&!1&2] 1 {0 1}
-[0&!1&2] 2 {0 1}
-[0&!1&2] 3 {1}
+[!0 | 2] 0 {0 1}
+[0&!1&!2] 1 {0 1}
+[0&1&!2] 2 {0 1}
+[0&1&!2] 3 {1}
 State: 1
-[1] 0 {0 1}
-[!0&!1] 1 {0 1}
-[0&!1] 2 {0 1}
-[0&!1] 3 {1}
+[2] 0 {0 1}
+[!1&!2] 1 {0 1}
+[1&!2] 2 {0 1}
+[1&!2] 3 {1}
 State: 2
-[1&!3] 0 {0 1}
-[!1&!3] 2 {0 1}
+[2&!3] 0 {0 1}
+[!2&!3] 2 {0 1}
 State: 3
-[1&3&4] 0 {0 1}
-[!0&!1&3&4] 1 {0 1}
-[0&!1&3&4] 2 {0 1}
-[!1&!3 | !1&!4] 3 {1}
-[0&!1&3&4] 3 {0 1}
-[1&3&!4] 4 {0}
-[!0&!1&3&!4] 5 {0}
-[0&!1&3&!4] 6 {0}
-[0&!1&3&!4] 7 {0}
+[2&3&4] 0 {0 1}
+[!1&!2&3&4] 1 {0 1}
+[1&!2&3&4] 2 {0 1}
+[!2&!3 | !2&!4] 3 {1}
+[1&!2&3&4] 3 {0 1}
+[2&3&!4] 4 {0}
+[!1&!2&3&!4] 5 {0}
+[1&!2&3&!4] 6 {0}
+[1&!2&3&!4] 7 {0}
 State: 4
-[1&4 | !2&4] 0 {0 1}
-[!0&!1&2&4] 1 {0 1}
-[0&!1&2&4] 2 {0 1}
-[0&!1&2&4] 3 {1}
-[1&!4 | !2&!4] 4 {0}
-[!0&!1&2&!4] 5 {0}
-[0&!1&2&!4] 6 {0}
-[0&!1&2&!4] 7
+[!0&4 | 2&4] 0 {0 1}
+[0&!1&!2&4] 1 {0 1}
+[0&1&!2&4] 2 {0 1}
+[0&1&!2&4] 3 {1}
+[!0&!4 | 2&!4] 4 {0}
+[0&!1&!2&!4] 5 {0}
+[0&1&!2&!4] 6 {0}
+[0&1&!2&!4] 7
 State: 5
-[1&4] 0 {0 1}
-[!0&!1&4] 1 {0 1}
-[0&!1&4] 2 {0 1}
-[0&!1&4] 3 {1}
-[1&!4] 4 {0}
-[!0&!1&!4] 5 {0}
-[0&!1&!4] 6 {0}
-[0&!1&!4] 7
+[2&4] 0 {0 1}
+[!1&!2&4] 1 {0 1}
+[1&!2&4] 2 {0 1}
+[1&!2&4] 3 {1}
+[2&!4] 4 {0}
+[!1&!2&!4] 5 {0}
+[1&!2&!4] 6 {0}
+[1&!2&!4] 7
 State: 6
-[1&!3&4] 0 {0 1}
-[!1&!3&4] 2 {0 1}
-[1&!3&!4] 4 {0}
-[!1&!3&!4] 6 {0}
+[2&!3&4] 0 {0 1}
+[!2&!3&4] 2 {0 1}
+[2&!3&!4] 4 {0}
+[!2&!3&!4] 6 {0}
 State: 7
-[1&3&4] 0 {0 1}
-[!0&!1&3&4] 1 {0 1}
-[0&!1&3&4] 2 {0 1}
-[!1&!3&4] 3 {1}
-[0&!1&3&4] 3 {0 1}
-[1&3&!4] 4 {0}
-[!0&!1&3&!4] 5 {0}
-[0&!1&3&!4] 6 {0}
-[!0&!1&!4 | !1&!3&!4] 7
-[0&!1&3&!4] 7 {0}
+[2&3&4] 0 {0 1}
+[!1&!2&3&4] 1 {0 1}
+[1&!2&3&4] 2 {0 1}
+[!2&!3&4] 3 {1}
+[1&!2&3&4] 3 {0 1}
+[2&3&!4] 4 {0}
+[!1&!2&3&!4] 5 {0}
+[1&!2&3&!4] 6 {0}
+[!1&!2&!4 | !2&!3&!4] 7
+[1&!2&3&!4] 7 {0}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 --BODY--
 State: 0
-[!2] 0 {0 1}
-[2] 1 {1}
-[0&2] 2 {0}
+[!0] 0 {0 1}
+[0] 1 {1}
+[0&1] 2 {0}
 State: 1
 [t] 1 {1}
-[0] 2 {0}
+[1] 2 {0}
 State: 2
-[1&!2] 0 {0 1}
-[1&2] 1 {1}
-[0&!1 | !1&!2] 2 {0}
+[!0&2] 0 {0 1}
+[0&2] 1 {1}
+[!0&!2 | 1&!2] 2 {0}
 [0&1&2] 2 {0 1}
-[!1&2] 3
+[0&!2] 3
 State: 3
-[1] 1 {1}
-[0&!1] 2 {0}
-[0&1] 2 {0 1}
-[!1] 3
+[2] 1 {1}
+[1&!2] 2 {0}
+[1&2] 2 {0 1}
+[!2] 3
 --END--
 HOA: v1
 States: 4
 Start: 3
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!2&!3 | 0&1&!2] 0
-[0&!1&!2] 1
-[2&3] 2
-[!0&!2&3] 3
+[!0&!1&!3 | !0&1&2] 0
+[!0&1&!2] 1
+[0&3] 2
+[!0&!1&3] 3
 State: 1
-[1&!2] 0
-[!1&!2] 1
+[!0&2] 0
+[!0&!2] 1
 State: 2
 [t] 2
 State: 3
-[0&1&!2] 0
-[0&!1&!2] 1
-[2] 2
-[!0&!2] 3
+[!0&1&2] 0
+[!0&1&!2] 1
+[0] 2
+[!0&!1] 3
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!2] 0 {0}
-[!0&2] 1
+[!0] 0 {0}
+[0&!1] 1
 [0&1&2] 2
 State: 1
-[!0] 1 {0}
-[0&1] 2
+[!1] 1 {0}
+[1&2] 2
 State: 2
-[!0&3] 1 {0}
-[!0&!3 | 1&!3] 2
-[0&1&3] 2 {0}
+[!1&3] 1 {0}
+[!1&!3 | 2&!3] 2
+[1&2&3] 2 {0}
 --END--
 HOA: v1
 States: 4
 Start: 3
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1&!4 | !0&1&3] 0
-[!0&1&!3] 1
-[!0&!1&4] 2
-[0&4] 3
+[!1&!2&!4 | !1&2&3] 0
+[!1&2&!3] 1
+[!1&!2&4] 2
+[1&4] 3
 State: 1
-[!0&3] 0
-[!0&!3] 1
+[!1&3] 0
+[!1&!3] 1
 State: 2
-[!0&1&3] 0
-[!0&1&!3] 1
-[!0&!1] 2
-[0] 3
+[!1&2&3] 0
+[!1&2&!3] 1
+[!1&!2] 2
+[1] 3
 State: 3
-[!0&1&2&3] 0
-[!0&1&2&!3] 1
-[!0&!1&2] 2
-[0 | !2] 3
+[0&!1&2&3] 0
+[0&!1&2&!3] 1
+[0&!1&!2] 2
+[!0 | 1] 3
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1 | !2] 0 {0}
-[!0&!1&2] 1
-[!0&!1&2] 2
-[0&!1&2&!3] 3
-[0&!1&2&3] 4
-[0&!1&2&3] 5
+[!0 | 2] 0 {0}
+[0&!1&!2] 1
+[0&!1&!2] 2
+[0&1&!2&!3] 3
+[0&1&!2&3] 4
+[0&1&!2&3] 5
 State: 1
-[!0] 1 {0}
-[0&3] 5 {0}
+[!1] 1 {0}
+[1&3] 5 {0}
 State: 2
-[1] 0 {0}
-[!0&!1] 2
-[0&!1&!3] 3
-[0&!1&3] 4
+[2] 0 {0}
+[!1&!2] 2
+[1&!2&!3] 3
+[1&!2&3] 4
 State: 3
-[!1&!3] 3
-[!1&3] 4
+[!2&!3] 3
+[!2&3] 4
 State: 4
-[1&4] 0 {0}
-[!0&!1&4] 1
-[!0&!1&4] 2
-[0&!1&!3] 3
-[!0&!1&!4 | 0&!1&3] 4
-[0&!1&3&4] 5
+[2&4] 0 {0}
+[!1&!2&4] 1
+[!1&!2&4] 2
+[1&!2&!3] 3
+[!1&!2&!4 | 1&!2&3] 4
+[1&!2&3&4] 5
 State: 5
-[!0&4] 1 {0}
-[!0&!4 | 3&!4] 5
-[0&3&4] 5 {0}
+[!1&4] 1 {0}
+[!1&!4 | 3&!4] 5
+[1&3&4] 5 {0}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!2] 0 {0 1}
-[2] 1 {1}
-[0&!1&2] 2 {0}
+[!0] 0 {0 1}
+[0] 1 {1}
+[0&1&!2] 2 {0}
 State: 1
 [t] 1 {1}
-[0&!1] 2 {0}
+[1&!2] 2 {0}
 State: 2
-[!2&3] 0 {0 1}
-[2&3] 1 {1}
-[0&!1&!3 | !1&!2&!3] 2 {0}
-[0&!1&2&3] 2 {0 1}
-[!1&2&!3] 3
+[!0&3] 0 {0 1}
+[0&3] 1 {1}
+[!0&!2&!3 | 1&!2&!3] 2 {0}
+[0&1&!2&3] 2 {0 1}
+[0&!2&!3] 3
 State: 3
 [3] 1 {1}
-[0&!1&!3] 2 {0}
-[0&!1&3] 2 {0 1}
-[!1&!3] 3
+[1&!2&!3] 2 {0}
+[1&!2&3] 2 {0 1}
+[!2&!3] 3
 --END--
 HOA: v1
 States: 4
 Start: 3
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!2&!3&!4 | 0&1&!2&!3] 0
-[0&!1&!2 | 0&!2&3 | !2&3&!4] 1
-[2&4] 2
-[!0&!2&4] 3
+[!0&!1&!3&!4 | !0&1&2&!3] 0
+[!0&1&!2 | !0&1&3 | !0&3&!4] 1
+[0&4] 2
+[!0&!1&4] 3
 State: 1
-[1&!2&!3] 0
-[!1&!2 | !2&3] 1
+[!0&2&!3] 0
+[!0&!2 | !0&3] 1
 State: 2
 [t] 2
 State: 3
-[0&1&!2&!3] 0
-[0&!1&!2 | 0&!2&3] 1
-[2] 2
-[!0&!2] 3
+[!0&1&2&!3] 0
+[!0&1&!2 | !0&1&3] 1
+[0] 2
+[!0&!1] 3
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 5 "p1" "p2" "p3" "p0" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!3] 0 {0}
-[!0&3] 1
-[0&1&!2&3] 2
+[!0] 0 {0}
+[0&!1] 1
+[0&1&2&!3] 2
 State: 1
-[!0] 1 {0}
-[0&1&!2] 2
+[!1] 1 {0}
+[1&2&!3] 2
 State: 2
-[!0&4] 1 {0}
-[!0&!2&!4 | 1&!2&!4] 2
-[0&1&!2&4] 2 {0}
+[!1&4] 1 {0}
+[!1&!3&!4 | 2&!3&!4] 2
+[1&2&!3&4] 2 {0}
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 6 "p1" "p2" "p4" "p5" "p3" "p0"
+AP: 6 "p0" "p1" "p2" "p4" "p5" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1&!2&!3 | !0&1&!2&4] 0
-[!0&1&2 | !0&1&!4 | !0&2&!3] 1
-[0&3] 2
-[!0&!1&3] 3
+[!1&!2&!3&!4 | !1&2&!3&5] 0
+[!1&2&3 | !1&2&!5 | !1&3&!4] 1
+[1&4] 2
+[!1&!2&4] 3
 State: 1
-[!0&!2&4] 0
-[!0&2 | !0&!4] 1
+[!1&!3&5] 0
+[!1&3 | !1&!5] 1
 State: 2
-[!0&1&!2&4&5] 0
-[!0&1&2&5 | !0&1&!4&5] 1
-[0 | !5] 2
-[!0&!1&5] 3
+[0&!1&2&!3&5] 0
+[0&!1&2&3 | 0&!1&2&!5] 1
+[!0 | 1] 2
+[0&!1&!2] 3
 State: 3
-[!0&1&!2&4] 0
-[!0&1&2 | !0&1&!4] 1
-[0] 2
-[!0&!1] 3
+[!1&2&!3&5] 0
+[!1&2&3 | !1&2&!5] 1
+[1] 2
+[!1&!2] 3
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 6 "p1" "p2" "p4" "p5" "p3" "p0"
+AP: 6 "p0" "p1" "p2" "p4" "p5" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1 | !5] 0 {0}
-[!0&!1&5] 1
-[!0&!1&5] 2
-[0&!1&5] 3
-[0&!1&!2&4&5] 4
-[0&!1&!2&4&5] 5
+[!0 | 2] 0 {0}
+[0&!1&!2] 1
+[0&!1&!2] 2
+[0&1&!2] 3
+[0&1&!2&!3&5] 4
+[0&1&!2&!3&5] 5
 State: 1
-[!0] 1 {0}
-[0&!2&4] 5 {0}
+[!1] 1 {0}
+[1&!3&5] 5 {0}
 State: 2
-[1] 0 {0}
-[!0&!1] 2
-[0&!1] 3
-[0&!1&!2&4] 4
+[2] 0 {0}
+[!1&!2] 2
+[1&!2] 3
+[1&!2&!3&5] 4
 State: 3
-[!1] 3
-[!1&!2&4] 4
+[!2] 3
+[!2&!3&5] 4
 State: 4
-[1&3] 0 {0}
-[!0&!1&3] 1
-[!0&!1&3] 2
-[!0&!1&!2&!3&!4] 4
-[0&!1&!2&3&4] 5
+[2&4] 0 {0}
+[!1&!2&4] 1
+[!1&!2&4] 2
+[!1&!2&!3&!4&!5] 4
+[1&!2&!3&4&5] 5
 State: 5
-[!0&3] 1 {0}
-[!0&!2&!3 | !2&!3&4] 5
-[0&!2&3&4] 5 {0}
+[!1&4] 1 {0}
+[!1&!3&!4 | !3&!4&5] 5
+[1&!3&4&5] 5 {0}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[2] 0
-[0&1] 1
+[0] 0
+[1&2] 1
 State: 1 {0}
-[1] 1
+[2] 1
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: terminal
 --BODY--
 State: 0
-[2] 0
-[0] 1
+[0] 0
+[1] 1
 State: 1
-[1&!3] 1
+[2&!3] 1
 [3] 2
 State: 2 {0}
 [t] 2
@@ -3729,18 +3729,18 @@ State: 2 {0}
 HOA: v1
 States: 7
 Start: 0
-AP: 7 "p1" "p2" "p0" "p3" "p4" "p5" "p6"
+AP: 7 "p0" "p1" "p2" "p3" "p4" "p5" "p6"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: terminal
 --BODY--
 State: 0
-[2] 0
-[0] 1
+[0] 0
+[1] 1
 State: 1
-[1&!3] 2
-[1&3] 3
+[2&!3] 2
+[2&3] 3
 State: 2
 [!3] 2
 [3] 3
@@ -3759,24 +3759,24 @@ State: 6 {0}
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!1] 0 {0}
-[1] 1
+[!0] 0 {0}
+[0] 1
 State: 1
 [!0&!1] 0 {0}
-[0] 1
-[!0&1] 1 {0}
+[1] 1
+[0&!1] 1 {0}
 --END--
 HOA: v1
 States: 4
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -3785,20 +3785,20 @@ properties: deterministic terminal
 State: 0 {0}
 [t] 0
 State: 1
-[!2] 1
-[2] 2
+[!0] 1
+[0] 2
 State: 2
-[!0&!2] 1
-[!0&2] 2
-[0] 3
+[!0&!1] 1
+[0&!1] 2
+[1] 3
 State: 3
-[1] 0
-[!1] 3
+[2] 0
+[!2] 3
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -3807,63 +3807,63 @@ properties: deterministic terminal
 State: 0 {0}
 [t] 0
 State: 1
-[!2] 1
-[2] 2
+[!0] 1
+[0] 2
 State: 2
-[1] 0
+[2] 0
 [!0&!1&!2] 1
-[0&!1 | !1&2] 2
+[0&!2 | 1&!2] 2
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 Acceptance: 2 Fin(1) | Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0&1] 0
-[0] 0 {0}
+[0&!1] 0
+[1] 0 {0}
 [!0&!1] 0 {1}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[1 | !2] 0 {0}
-[0&!1&2] 1
+[!0 | 2] 0 {0}
+[0&1&!2] 1
 State: 1
-[1] 0 {0}
-[0&!1] 1
+[2] 0 {0}
+[1&!2] 1
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 4 "p1" "p2" "p3" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: generalized-Buchi 3
 Acceptance: 3 Inf(0)&Inf(1)&Inf(2)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&!1&!2&3] 0
-[!0&!1&2&3] 0 {0}
-[0&!1&!2&3] 0 {1}
-[0&!1&2&3] 0 {0 1}
-[!0&1&!2&3] 0 {2}
-[!0&1&2&3] 0 {0 2}
-[0&1&!2&3] 0 {1 2}
+[0&!1&!2&!3] 0
+[0&!1&!2&3] 0 {0}
+[0&1&!2&!3] 0 {1}
+[0&1&!2&3] 0 {0 1}
+[0&!1&2&!3] 0 {2}
+[0&!1&2&3] 0 {0 2}
+[0&1&2&!3] 0 {1 2}
 [0&1&2&3] 0 {0 1 2}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 5 "p1" "p2" "p3" "p4" "p0"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: generalized-Buchi 5
 Acceptance: 5 Inf(0)&Inf(1)&Inf(2)&Inf(3)&Inf(4)
 properties: trans-labels explicit-labels trans-acc complete
@@ -3871,42 +3871,42 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1&!2&!3&!4] 0
-[0&!1&!2&!3&!4] 0 {0}
-[!0&1&!2&!3&!4] 0 {1}
-[0&1&!2&!3&!4] 0 {0 1}
-[!0&!1&2&!3&!4] 0 {2}
-[0&!1&2&!3&!4] 0 {0 2}
-[!0&1&2&!3&!4] 0 {1 2}
-[0&1&2&!3&!4] 0 {0 1 2}
-[!0&!1&!2&3&!4] 0 {3}
-[0&!1&!2&3&!4] 0 {0 3}
-[!0&1&!2&3&!4] 0 {1 3}
-[0&1&!2&3&!4] 0 {0 1 3}
-[!0&!1&2&3&!4] 0 {2 3}
-[0&!1&2&3&!4] 0 {0 2 3}
-[!0&1&2&3&!4] 0 {1 2 3}
-[0&1&2&3&!4] 0 {0 1 2 3}
-[!0&!1&!2&!3&4] 0 {4}
-[0&!1&!2&!3&4] 0 {0 4}
-[!0&1&!2&!3&4] 0 {1 4}
-[0&1&!2&!3&4] 0 {0 1 4}
-[!0&!1&2&!3&4] 0 {2 4}
-[0&!1&2&!3&4] 0 {0 2 4}
-[!0&1&2&!3&4] 0 {1 2 4}
-[0&1&2&!3&4] 0 {0 1 2 4}
-[!0&!1&!2&3&4] 0 {3 4}
-[0&!1&!2&3&4] 0 {0 3 4}
-[!0&1&!2&3&4] 0 {1 3 4}
-[0&1&!2&3&4] 0 {0 1 3 4}
-[!0&!1&2&3&4] 0 {2 3 4}
-[0&!1&2&3&4] 0 {0 2 3 4}
-[!0&1&2&3&4] 0 {1 2 3 4}
+[!0&1&!2&!3&!4] 0 {0}
+[!0&!1&2&!3&!4] 0 {1}
+[!0&1&2&!3&!4] 0 {0 1}
+[!0&!1&!2&3&!4] 0 {2}
+[!0&1&!2&3&!4] 0 {0 2}
+[!0&!1&2&3&!4] 0 {1 2}
+[!0&1&2&3&!4] 0 {0 1 2}
+[!0&!1&!2&!3&4] 0 {3}
+[!0&1&!2&!3&4] 0 {0 3}
+[!0&!1&2&!3&4] 0 {1 3}
+[!0&1&2&!3&4] 0 {0 1 3}
+[!0&!1&!2&3&4] 0 {2 3}
+[!0&1&!2&3&4] 0 {0 2 3}
+[!0&!1&2&3&4] 0 {1 2 3}
+[!0&1&2&3&4] 0 {0 1 2 3}
+[0&!1&!2&!3&!4] 0 {4}
+[0&1&!2&!3&!4] 0 {0 4}
+[0&!1&2&!3&!4] 0 {1 4}
+[0&1&2&!3&!4] 0 {0 1 4}
+[0&!1&!2&3&!4] 0 {2 4}
+[0&1&!2&3&!4] 0 {0 2 4}
+[0&!1&2&3&!4] 0 {1 2 4}
+[0&1&2&3&!4] 0 {0 1 2 4}
+[0&!1&!2&!3&4] 0 {3 4}
+[0&1&!2&!3&4] 0 {0 3 4}
+[0&!1&2&!3&4] 0 {1 3 4}
+[0&1&2&!3&4] 0 {0 1 3 4}
+[0&!1&!2&3&4] 0 {2 3 4}
+[0&1&!2&3&4] 0 {0 2 3 4}
+[0&!1&2&3&4] 0 {1 2 3 4}
 [0&1&2&3&4] 0 {0 1 2 3 4}
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -3920,154 +3920,154 @@ State: 1
 HOA: v1
 States: 4
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc very-weak
 --BODY--
 State: 0 {0}
-[!2] 0
-[1&2] 1
-[2&3] 2
-[0&2] 3
+[!0] 0
+[0&2] 1
+[0&3] 2
+[0&1] 3
 State: 1 {0}
-[1] 1
+[2] 1
 State: 2 {0}
 [3] 2
 State: 3
-[1] 1
+[2] 1
 [3] 2
-[0] 3
+[1] 3
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: co-Buchi
 Acceptance: 1 Fin(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1] 0
+[!0&1] 0
 [!0&!1] 0 {0}
-[1] 1
+[0] 1
 State: 1
 [t] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: generalized-co-Buchi 2
 Acceptance: 2 Fin(0)|Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&1&!2] 0
-[0&!1&!2] 0 {0}
-[!0&1&!2] 0 {1}
+[!0&1&2] 0
+[!0&1&!2] 0 {0}
+[!0&!1&2] 0 {1}
 [!0&!1&!2] 0 {0 1}
-[2] 1
+[0] 1
 State: 1
 [t] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: generalized-co-Buchi 3
 Acceptance: 3 Fin(0)|Fin(1)|Fin(2)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&1&!2&3] 0
-[0&1&!2&!3] 0 {0}
-[!0&1&!2&3] 0 {1}
-[!0&1&!2&!3] 0 {0 1}
-[0&!1&!2&3] 0 {2}
-[0&!1&!2&!3] 0 {0 2}
+[!0&1&2&3] 0
+[!0&1&2&!3] 0 {0}
+[!0&!1&2&3] 0 {1}
+[!0&!1&2&!3] 0 {0 1}
+[!0&1&!2&3] 0 {2}
+[!0&1&!2&!3] 0 {0 2}
 [!0&!1&!2&3] 0 {1 2}
 [!0&!1&!2&!3] 0 {0 1 2}
-[2] 1
+[0] 1
 State: 1
 [t] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 5 "p1" "p2" "p0" "p4" "p3"
+AP: 5 "p0" "p1" "p2" "p4" "p3"
 acc-name: generalized-co-Buchi 4
 Acceptance: 4 Fin(0)|Fin(1)|Fin(2)|Fin(3)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&1&!2&3&4] 0
-[0&1&!2&!3&4] 0 {0}
-[!0&1&!2&3&4] 0 {1}
-[!0&1&!2&!3&4] 0 {0 1}
-[0&!1&!2&3&4] 0 {2}
-[0&!1&!2&!3&4] 0 {0 2}
+[!0&1&2&3&4] 0
+[!0&1&2&!3&4] 0 {0}
+[!0&!1&2&3&4] 0 {1}
+[!0&!1&2&!3&4] 0 {0 1}
+[!0&1&!2&3&4] 0 {2}
+[!0&1&!2&!3&4] 0 {0 2}
 [!0&!1&!2&3&4] 0 {1 2}
 [!0&!1&!2&!3&4] 0 {0 1 2}
-[0&1&!2&3&!4] 0 {3}
-[0&1&!2&!3&!4] 0 {0 3}
-[!0&1&!2&3&!4] 0 {1 3}
-[!0&1&!2&!3&!4] 0 {0 1 3}
-[0&!1&!2&3&!4] 0 {2 3}
-[0&!1&!2&!3&!4] 0 {0 2 3}
+[!0&1&2&3&!4] 0 {3}
+[!0&1&2&!3&!4] 0 {0 3}
+[!0&!1&2&3&!4] 0 {1 3}
+[!0&!1&2&!3&!4] 0 {0 1 3}
+[!0&1&!2&3&!4] 0 {2 3}
+[!0&1&!2&!3&!4] 0 {0 2 3}
 [!0&!1&!2&3&!4] 0 {1 2 3}
 [!0&!1&!2&!3&!4] 0 {0 1 2 3}
-[2] 1
+[0] 1
 State: 1
 [t] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 6 "p1" "p2" "p0" "p5" "p3" "p4"
+AP: 6 "p0" "p1" "p2" "p5" "p3" "p4"
 acc-name: generalized-co-Buchi 5
 Acceptance: 5 Fin(0)|Fin(1)|Fin(2)|Fin(3)|Fin(4)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&1&!2&3&4&5] 0
-[0&1&!2&!3&4&5] 0 {0}
-[!0&1&!2&3&4&5] 0 {1}
-[!0&1&!2&!3&4&5] 0 {0 1}
-[0&!1&!2&3&4&5] 0 {2}
-[0&!1&!2&!3&4&5] 0 {0 2}
+[!0&1&2&3&4&5] 0
+[!0&1&2&!3&4&5] 0 {0}
+[!0&!1&2&3&4&5] 0 {1}
+[!0&!1&2&!3&4&5] 0 {0 1}
+[!0&1&!2&3&4&5] 0 {2}
+[!0&1&!2&!3&4&5] 0 {0 2}
 [!0&!1&!2&3&4&5] 0 {1 2}
 [!0&!1&!2&!3&4&5] 0 {0 1 2}
-[0&1&!2&3&!4&5] 0 {3}
-[0&1&!2&!3&!4&5] 0 {0 3}
-[!0&1&!2&3&!4&5] 0 {1 3}
-[!0&1&!2&!3&!4&5] 0 {0 1 3}
-[0&!1&!2&3&!4&5] 0 {2 3}
-[0&!1&!2&!3&!4&5] 0 {0 2 3}
+[!0&1&2&3&!4&5] 0 {3}
+[!0&1&2&!3&!4&5] 0 {0 3}
+[!0&!1&2&3&!4&5] 0 {1 3}
+[!0&!1&2&!3&!4&5] 0 {0 1 3}
+[!0&1&!2&3&!4&5] 0 {2 3}
+[!0&1&!2&!3&!4&5] 0 {0 2 3}
 [!0&!1&!2&3&!4&5] 0 {1 2 3}
 [!0&!1&!2&!3&!4&5] 0 {0 1 2 3}
-[0&1&!2&3&4&!5] 0 {4}
-[0&1&!2&!3&4&!5] 0 {0 4}
-[!0&1&!2&3&4&!5] 0 {1 4}
-[!0&1&!2&!3&4&!5] 0 {0 1 4}
-[0&!1&!2&3&4&!5] 0 {2 4}
-[0&!1&!2&!3&4&!5] 0 {0 2 4}
+[!0&1&2&3&4&!5] 0 {4}
+[!0&1&2&!3&4&!5] 0 {0 4}
+[!0&!1&2&3&4&!5] 0 {1 4}
+[!0&!1&2&!3&4&!5] 0 {0 1 4}
+[!0&1&!2&3&4&!5] 0 {2 4}
+[!0&1&!2&!3&4&!5] 0 {0 2 4}
 [!0&!1&!2&3&4&!5] 0 {1 2 4}
 [!0&!1&!2&!3&4&!5] 0 {0 1 2 4}
-[0&1&!2&3&!4&!5] 0 {3 4}
-[0&1&!2&!3&!4&!5] 0 {0 3 4}
-[!0&1&!2&3&!4&!5] 0 {1 3 4}
-[!0&1&!2&!3&!4&!5] 0 {0 1 3 4}
-[0&!1&!2&3&!4&!5] 0 {2 3 4}
-[0&!1&!2&!3&!4&!5] 0 {0 2 3 4}
+[!0&1&2&3&!4&!5] 0 {3 4}
+[!0&1&2&!3&!4&!5] 0 {0 3 4}
+[!0&!1&2&3&!4&!5] 0 {1 3 4}
+[!0&!1&2&!3&!4&!5] 0 {0 1 3 4}
+[!0&1&!2&3&!4&!5] 0 {2 3 4}
+[!0&1&!2&!3&!4&!5] 0 {0 2 3 4}
 [!0&!1&!2&3&!4&!5] 0 {1 2 3 4}
 [!0&!1&!2&!3&!4&!5] 0 {0 1 2 3 4}
-[2] 1
+[0] 1
 State: 1
 [t] 1
 --END--
@@ -6524,6 +6524,64 @@ State: 0
 [0&1&2&3] 0 {1 3 5 7}
 --END--
 HOA: v1
+States: 1
+Start: 0
+AP: 6 "p1" "p2" "p3" "p4" "p5" "p6"
+Acceptance: 10 (Fin(0) | Inf(1)) & (Fin(2) | Inf(3)) & (Fin(4) | Inf(5)) & (Fin(6) | Inf(7)) & (Inf(8) | Fin(9))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic stutter-invariant
+--BODY--
+State: 0
+[!0&!1&!2&!3&!4&5] 0 {0 2 4 6}
+[0&!1&!2&!3&!4&5] 0 {1 2 4 6}
+[!0&1&!2&!3&!4&5] 0 {3 4 6}
+[0&1&!2&!3&!4&5] 0 {1 3 4 6}
+[!0&!1&2&!3&!4&5] 0 {0 5 6}
+[0&!1&2&!3&!4&5] 0 {1 5 6}
+[!0&1&2&!3&!4&5] 0 {3 5 6}
+[0&1&2&!3&!4&5] 0 {1 3 5 6}
+[!0&!1&!2&3&!4&5] 0 {0 2 7}
+[0&!1&!2&3&!4&5] 0 {1 2 7}
+[!0&1&!2&3&!4&5] 0 {3 7}
+[0&1&!2&3&!4&5] 0 {1 3 7}
+[!0&!1&2&3&!4&5] 0 {0 5 7}
+[0&!1&2&3&!4&5] 0 {1 5 7}
+[!0&1&2&3&!4&5] 0 {3 5 7}
+[0&1&2&3&!4&5] 0 {1 3 5 7}
+[!0&!1&!2&!3&4] 0 {0 2 4 8}
+[0&!1&!2&!3&4] 0 {1 2 4 8}
+[!0&1&!2&!3&4] 0 {3 4 8}
+[0&1&!2&!3&4] 0 {1 3 4 8}
+[!0&!1&2&!3&4] 0 {0 5 8}
+[0&!1&2&!3&4] 0 {1 5 8}
+[!0&1&2&!3&4] 0 {3 5 8}
+[0&1&2&!3&4] 0 {1 3 5 8}
+[!0&!1&!2&3&4] 0 {0 2 7 8}
+[0&!1&!2&3&4] 0 {1 2 7 8}
+[!0&1&!2&3&4] 0 {3 7 8}
+[0&1&!2&3&4] 0 {1 3 7 8}
+[!0&!1&2&3&4] 0 {0 5 7 8}
+[0&!1&2&3&4] 0 {1 5 7 8}
+[!0&1&2&3&4] 0 {3 5 7 8}
+[0&1&2&3&4] 0 {1 3 5 7 8}
+[!0&!1&!2&!3&!4&!5] 0 {0 2 4 6 9}
+[0&!1&!2&!3&!4&!5] 0 {1 2 4 6 9}
+[!0&1&!2&!3&!4&!5] 0 {3 4 6 9}
+[0&1&!2&!3&!4&!5] 0 {1 3 4 6 9}
+[!0&!1&2&!3&!4&!5] 0 {0 5 6 9}
+[0&!1&2&!3&!4&!5] 0 {1 5 6 9}
+[!0&1&2&!3&!4&!5] 0 {3 5 6 9}
+[0&1&2&!3&!4&!5] 0 {1 3 5 6 9}
+[!0&!1&!2&3&!4&!5] 0 {0 2 7 9}
+[0&!1&!2&3&!4&!5] 0 {1 2 7 9}
+[!0&1&!2&3&!4&!5] 0 {3 7 9}
+[0&1&!2&3&!4&!5] 0 {1 3 7 9}
+[!0&!1&2&3&!4&!5] 0 {0 5 7 9}
+[0&!1&2&3&!4&!5] 0 {1 5 7 9}
+[!0&1&2&3&!4&!5] 0 {3 5 7 9}
+[0&1&2&3&!4&!5] 0 {1 3 5 7 9}
+--END--
+HOA: v1
 States: 2
 Start: 0
 AP: 3 "p1" "q" "r"
@@ -6719,95 +6777,95 @@ State: 1
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&1] 0
+[0&!1] 0
 [0&1] 0 {0}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&!1&2] 0
-[!0&1&2] 0 {0}
-[0&!1&2] 0 {1}
+[0&!1&!2] 0
+[0&!1&2] 0 {0}
+[0&1&!2] 0 {1}
 [0&1&2] 0 {0 1}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 5 "p1" "p2" "p4" "p0" "p3"
+AP: 5 "p0" "p1" "p2" "p4" "p3"
 acc-name: generalized-Buchi 4
 Acceptance: 4 Inf(0)&Inf(1)&Inf(2)&Inf(3)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&!1&!2&3&!4] 0
-[!0&!1&2&3&!4] 0 {0}
-[0&!1&!2&3&!4] 0 {1}
-[0&!1&2&3&!4] 0 {0 1}
-[!0&1&!2&3&!4] 0 {2}
-[!0&1&2&3&!4] 0 {0 2}
-[0&1&!2&3&!4] 0 {1 2}
+[0&!1&!2&!3&!4] 0
+[0&!1&!2&3&!4] 0 {0}
+[0&1&!2&!3&!4] 0 {1}
+[0&1&!2&3&!4] 0 {0 1}
+[0&!1&2&!3&!4] 0 {2}
+[0&!1&2&3&!4] 0 {0 2}
+[0&1&2&!3&!4] 0 {1 2}
 [0&1&2&3&!4] 0 {0 1 2}
-[!0&!1&!2&3&4] 0 {3}
-[!0&!1&2&3&4] 0 {0 3}
-[0&!1&!2&3&4] 0 {1 3}
-[0&!1&2&3&4] 0 {0 1 3}
-[!0&1&!2&3&4] 0 {2 3}
-[!0&1&2&3&4] 0 {0 2 3}
-[0&1&!2&3&4] 0 {1 2 3}
+[0&!1&!2&!3&4] 0 {3}
+[0&!1&!2&3&4] 0 {0 3}
+[0&1&!2&!3&4] 0 {1 3}
+[0&1&!2&3&4] 0 {0 1 3}
+[0&!1&2&!3&4] 0 {2 3}
+[0&!1&2&3&4] 0 {0 2 3}
+[0&1&2&!3&4] 0 {1 2 3}
 [0&1&2&3&4] 0 {0 1 2 3}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 6 "p1" "p2" "p5" "p0" "p3" "p4"
+AP: 6 "p0" "p1" "p2" "p5" "p3" "p4"
 acc-name: generalized-Buchi 5
 Acceptance: 5 Inf(0)&Inf(1)&Inf(2)&Inf(3)&Inf(4)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0&!1&!2&3&!4&!5] 0
-[!0&!1&2&3&!4&!5] 0 {0}
-[0&!1&!2&3&!4&!5] 0 {1}
-[0&!1&2&3&!4&!5] 0 {0 1}
-[!0&1&!2&3&!4&!5] 0 {2}
-[!0&1&2&3&!4&!5] 0 {0 2}
-[0&1&!2&3&!4&!5] 0 {1 2}
+[0&!1&!2&!3&!4&!5] 0
+[0&!1&!2&3&!4&!5] 0 {0}
+[0&1&!2&!3&!4&!5] 0 {1}
+[0&1&!2&3&!4&!5] 0 {0 1}
+[0&!1&2&!3&!4&!5] 0 {2}
+[0&!1&2&3&!4&!5] 0 {0 2}
+[0&1&2&!3&!4&!5] 0 {1 2}
 [0&1&2&3&!4&!5] 0 {0 1 2}
-[!0&!1&!2&3&4&!5] 0 {3}
-[!0&!1&2&3&4&!5] 0 {0 3}
-[0&!1&!2&3&4&!5] 0 {1 3}
-[0&!1&2&3&4&!5] 0 {0 1 3}
-[!0&1&!2&3&4&!5] 0 {2 3}
-[!0&1&2&3&4&!5] 0 {0 2 3}
-[0&1&!2&3&4&!5] 0 {1 2 3}
+[0&!1&!2&!3&4&!5] 0 {3}
+[0&!1&!2&3&4&!5] 0 {0 3}
+[0&1&!2&!3&4&!5] 0 {1 3}
+[0&1&!2&3&4&!5] 0 {0 1 3}
+[0&!1&2&!3&4&!5] 0 {2 3}
+[0&!1&2&3&4&!5] 0 {0 2 3}
+[0&1&2&!3&4&!5] 0 {1 2 3}
 [0&1&2&3&4&!5] 0 {0 1 2 3}
-[!0&!1&!2&3&!4&5] 0 {4}
-[!0&!1&2&3&!4&5] 0 {0 4}
-[0&!1&!2&3&!4&5] 0 {1 4}
-[0&!1&2&3&!4&5] 0 {0 1 4}
-[!0&1&!2&3&!4&5] 0 {2 4}
-[!0&1&2&3&!4&5] 0 {0 2 4}
-[0&1&!2&3&!4&5] 0 {1 2 4}
+[0&!1&!2&!3&!4&5] 0 {4}
+[0&!1&!2&3&!4&5] 0 {0 4}
+[0&1&!2&!3&!4&5] 0 {1 4}
+[0&1&!2&3&!4&5] 0 {0 1 4}
+[0&!1&2&!3&!4&5] 0 {2 4}
+[0&!1&2&3&!4&5] 0 {0 2 4}
+[0&1&2&!3&!4&5] 0 {1 2 4}
 [0&1&2&3&!4&5] 0 {0 1 2 4}
-[!0&!1&!2&3&4&5] 0 {3 4}
-[!0&!1&2&3&4&5] 0 {0 3 4}
-[0&!1&!2&3&4&5] 0 {1 3 4}
-[0&!1&2&3&4&5] 0 {0 1 3 4}
-[!0&1&!2&3&4&5] 0 {2 3 4}
-[!0&1&2&3&4&5] 0 {0 2 3 4}
-[0&1&!2&3&4&5] 0 {1 2 3 4}
+[0&!1&!2&!3&4&5] 0 {3 4}
+[0&!1&!2&3&4&5] 0 {0 3 4}
+[0&1&!2&!3&4&5] 0 {1 3 4}
+[0&1&!2&3&4&5] 0 {0 1 3 4}
+[0&!1&2&!3&4&5] 0 {2 3 4}
+[0&!1&2&3&4&5] 0 {0 2 3 4}
+[0&1&2&!3&4&5] 0 {1 2 3 4}
 [0&1&2&3&4&5] 0 {0 1 2 3 4}
 --END--
 HOA: v1
@@ -6839,7 +6897,7 @@ State: 0
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -6847,114 +6905,114 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1] 0
-[!0&1] 1 {0}
-[0&!1] 2 {0}
+[0&!1] 1 {0}
+[!0&1] 2 {0}
 [0&1] 3 {0}
 State: 1
 [!0&!1] 0 {0}
-[!0&1] 1
-[0&!1] 2 {0}
+[0&!1] 1
+[!0&1] 2 {0}
 [0&1] 3 {0}
 State: 2
 [!0&!1] 0 {0}
-[!0&1] 1 {0}
-[0&!1] 2
+[0&!1] 1 {0}
+[!0&1] 2
 [0&1] 3 {0}
 State: 3
 [!0&!1] 0 {0}
-[!0&1] 1 {0}
-[0&!1] 2 {0}
+[0&!1] 1 {0}
+[!0&1] 2 {0}
 [0&1] 3
 --END--
 HOA: v1
 States: 9
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
 [t] 0
-[0] 1 {0}
-[!0] 2 {0}
-[2] 3 {0}
-[!2] 4 {0}
-[1] 5 {0}
-[!1] 6 {0}
+[1] 1 {0}
+[!1] 2 {0}
+[0] 3 {0}
+[!0] 4 {0}
+[2] 5 {0}
+[!2] 6 {0}
 [3] 7 {0}
 [!3] 8 {0}
 State: 1
-[!0] 0
-[!0] 2 {0}
-[!0&2] 3 {0}
-[!0&!2] 4 {0}
-[!0&1] 5 {0}
-[!0&!1] 6 {0}
-[!0&3] 7 {0}
-[!0&!3] 8 {0}
-State: 2
-[0] 0
-[0] 1 {0}
-[0&2] 3 {0}
-[0&!2] 4 {0}
-[0&1] 5 {0}
-[0&!1] 6 {0}
-[0&3] 7 {0}
-[0&!3] 8 {0}
-State: 3
-[!2] 0
-[0&!2] 1 {0}
-[!0&!2] 2 {0}
-[!2] 4 {0}
-[1&!2] 5 {0}
-[!1&!2] 6 {0}
-[!2&3] 7 {0}
-[!2&!3] 8 {0}
-State: 4
-[2] 0
-[0&2] 1 {0}
-[!0&2] 2 {0}
-[2] 3 {0}
-[1&2] 5 {0}
-[!1&2] 6 {0}
-[2&3] 7 {0}
-[2&!3] 8 {0}
-State: 5
 [!1] 0
-[0&!1] 1 {0}
-[!0&!1] 2 {0}
-[!1&2] 3 {0}
-[!1&!2] 4 {0}
-[!1] 6 {0}
+[!1] 2 {0}
+[0&!1] 3 {0}
+[!0&!1] 4 {0}
+[!1&2] 5 {0}
+[!1&!2] 6 {0}
 [!1&3] 7 {0}
 [!1&!3] 8 {0}
-State: 6
+State: 2
 [1] 0
-[0&1] 1 {0}
-[!0&1] 2 {0}
-[1&2] 3 {0}
-[1&!2] 4 {0}
-[1] 5 {0}
+[1] 1 {0}
+[0&1] 3 {0}
+[!0&1] 4 {0}
+[1&2] 5 {0}
+[1&!2] 6 {0}
 [1&3] 7 {0}
 [1&!3] 8 {0}
+State: 3
+[!0] 0
+[!0&1] 1 {0}
+[!0&!1] 2 {0}
+[!0] 4 {0}
+[!0&2] 5 {0}
+[!0&!2] 6 {0}
+[!0&3] 7 {0}
+[!0&!3] 8 {0}
+State: 4
+[0] 0
+[0&1] 1 {0}
+[0&!1] 2 {0}
+[0] 3 {0}
+[0&2] 5 {0}
+[0&!2] 6 {0}
+[0&3] 7 {0}
+[0&!3] 8 {0}
+State: 5
+[!2] 0
+[1&!2] 1 {0}
+[!1&!2] 2 {0}
+[0&!2] 3 {0}
+[!0&!2] 4 {0}
+[!2] 6 {0}
+[!2&3] 7 {0}
+[!2&!3] 8 {0}
+State: 6
+[2] 0
+[1&2] 1 {0}
+[!1&2] 2 {0}
+[0&2] 3 {0}
+[!0&2] 4 {0}
+[2] 5 {0}
+[2&3] 7 {0}
+[2&!3] 8 {0}
 State: 7
 [!3] 0
-[0&!3] 1 {0}
-[!0&!3] 2 {0}
-[2&!3] 3 {0}
-[!2&!3] 4 {0}
-[1&!3] 5 {0}
-[!1&!3] 6 {0}
+[1&!3] 1 {0}
+[!1&!3] 2 {0}
+[0&!3] 3 {0}
+[!0&!3] 4 {0}
+[2&!3] 5 {0}
+[!2&!3] 6 {0}
 [!3] 8 {0}
 State: 8
 [3] 0
-[0&3] 1 {0}
-[!0&3] 2 {0}
-[2&3] 3 {0}
-[!2&3] 4 {0}
-[1&3] 5 {0}
-[!1&3] 6 {0}
+[1&3] 1 {0}
+[!1&3] 2 {0}
+[0&3] 3 {0}
+[!0&3] 4 {0}
+[2&3] 5 {0}
+[!2&3] 6 {0}
 [3] 7 {0}
 --END--
 HOA: v1
@@ -6973,15 +7031,15 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0 | !1] 0 {0}
-[!0&1] 1
+[!0 | 1] 0 {0}
+[0&!1] 1
 State: 1
 [0&1] 0 {0}
 [!0 | !1] 1
@@ -7001,7 +7059,7 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -7011,45 +7069,327 @@ State: 0
 [!0 | !1] 0 {0}
 [0&1] 1
 State: 1
-[!0] 0 {0}
-[0] 1
+[!1] 0 {0}
+[1] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0 | 1 | !2] 0 {0}
-[0&!1&2] 1
-State: 1
-[!0 | 1] 0 {0}
-[0&!1] 1
---END--
-HOA: v1
-States: 2
-Start: 0
-AP: 4 "p1" "p2" "p3" "p0"
-acc-name: Buchi
-Acceptance: 1 Inf(0)
-properties: trans-labels explicit-labels trans-acc complete
-properties: deterministic
---BODY--
-State: 0
-[!0 | !1 | 2 | !3] 0 {0}
-[0&1&!2&3] 1
-State: 1
 [!0 | !1 | 2] 0 {0}
 [0&1&!2] 1
+State: 1
+[!1 | 2] 0 {0}
+[1&!2] 1
+--END--
+HOA: v1
+States: 2
+Start: 0
+AP: 4 "p0" "p1" "p2" "p3"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!0 | !1 | !2 | 3] 0 {0}
+[0&1&2&!3] 1
+State: 1
+[!1 | !2 | 3] 0 {0}
+[1&2&!3] 1
+--END--
+HOA: v1
+States: 16
+Start: 0
+AP: 8 "p0" "p1" "p2" "p3" "p4" "p5" "p6" "p7"
+acc-name: generalized-Buchi 4
+Acceptance: 4 Inf(0)&Inf(1)&Inf(2)&Inf(3)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!0&!2&!4&!6 | !0&!2&!4&7 | !0&!2&5&!6 | !0&!2&5&7 | !0&3&!4&!6 | !0&3&!4&7 | !0&3&5&!6 | !0&3&5&7 | 1&!2&!4&!6 | 1&!2&!4&7 | 1&!2&5&!6 | 1&!2&5&7 | 1&3&!4&!6 | 1&3&!4&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[!0&!2&!4&6&!7 | !0&!2&5&6&!7 | !0&3&!4&6&!7 | !0&3&5&6&!7 | 1&!2&!4&6&!7 | 1&!2&5&6&!7 | 1&3&!4&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[!0&!2&4&!5&!6 | !0&!2&4&!5&7 | !0&3&4&!5&!6 | !0&3&4&!5&7 | 1&!2&4&!5&!6 | 1&!2&4&!5&7 | 1&3&4&!5&!6 | 1&3&4&!5&7] 2 {0 2 3}
+[!0&!2&4&!5&6&!7 | !0&3&4&!5&6&!7 | 1&!2&4&!5&6&!7 | 1&3&4&!5&6&!7] 3 {2 3}
+[!0&2&!3&!4&!6 | !0&2&!3&!4&7 | !0&2&!3&5&!6 | !0&2&!3&5&7 | 1&2&!3&!4&!6 | 1&2&!3&!4&7 | 1&2&!3&5&!6 | 1&2&!3&5&7] 4 {0 1 3}
+[!0&2&!3&!4&6&!7 | !0&2&!3&5&6&!7 | 1&2&!3&!4&6&!7 | 1&2&!3&5&6&!7] 5 {1 3}
+[!0&2&!3&4&!5&!6 | !0&2&!3&4&!5&7 | 1&2&!3&4&!5&!6 | 1&2&!3&4&!5&7] 6 {0 3}
+[!0&2&!3&4&!5&6&!7 | 1&2&!3&4&!5&6&!7] 7 {3}
+[0&!1&!2&!4&!6 | 0&!1&!2&!4&7 | 0&!1&!2&5&!6 | 0&!1&!2&5&7 | 0&!1&3&!4&!6 | 0&!1&3&!4&7 | 0&!1&3&5&!6 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&!2&!4&6&!7 | 0&!1&!2&5&6&!7 | 0&!1&3&!4&6&!7 | 0&!1&3&5&6&!7] 9 {1 2}
+[0&!1&!2&4&!5&!6 | 0&!1&!2&4&!5&7 | 0&!1&3&4&!5&!6 | 0&!1&3&4&!5&7] 10 {0 2}
+[0&!1&!2&4&!5&6&!7 | 0&!1&3&4&!5&6&!7] 11 {2}
+[0&!1&2&!3&!4&!6 | 0&!1&2&!3&!4&7 | 0&!1&2&!3&5&!6 | 0&!1&2&!3&5&7] 12 {0 1}
+[0&!1&2&!3&!4&6&!7 | 0&!1&2&!3&5&6&!7] 13 {1}
+[0&!1&2&!3&4&!5&!6 | 0&!1&2&!3&4&!5&7] 14 {0}
+[0&!1&2&!3&4&!5&6&!7] 15
+State: 1
+[!0&!2&!4&7 | !0&!2&5&7 | !0&3&!4&7 | !0&3&5&7 | 1&!2&!4&7 | 1&!2&5&7 | 1&3&!4&7 | 1&3&5&7] 0 {0 1 2 3}
+[!0&!2&!4&!7 | !0&!2&5&!7 | !0&3&!4&!7 | !0&3&5&!7 | 1&!2&!4&!7 | 1&!2&5&!7 | 1&3&!4&!7 | 1&3&5&!7] 1 {1 2 3}
+[!0&!2&4&!5&7 | !0&3&4&!5&7 | 1&!2&4&!5&7 | 1&3&4&!5&7] 2 {0 2 3}
+[!0&!2&4&!5&!7 | !0&3&4&!5&!7 | 1&!2&4&!5&!7 | 1&3&4&!5&!7] 3 {2 3}
+[!0&2&!3&!4&7 | !0&2&!3&5&7 | 1&2&!3&!4&7 | 1&2&!3&5&7] 4 {0 1 3}
+[!0&2&!3&!4&!7 | !0&2&!3&5&!7 | 1&2&!3&!4&!7 | 1&2&!3&5&!7] 5 {1 3}
+[!0&2&!3&4&!5&7 | 1&2&!3&4&!5&7] 6 {0 3}
+[!0&2&!3&4&!5&!7 | 1&2&!3&4&!5&!7] 7 {3}
+[0&!1&!2&!4&7 | 0&!1&!2&5&7 | 0&!1&3&!4&7 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&!2&!4&!7 | 0&!1&!2&5&!7 | 0&!1&3&!4&!7 | 0&!1&3&5&!7] 9 {1 2}
+[0&!1&!2&4&!5&7 | 0&!1&3&4&!5&7] 10 {0 2}
+[0&!1&!2&4&!5&!7 | 0&!1&3&4&!5&!7] 11 {2}
+[0&!1&2&!3&!4&7 | 0&!1&2&!3&5&7] 12 {0 1}
+[0&!1&2&!3&!4&!7 | 0&!1&2&!3&5&!7] 13 {1}
+[0&!1&2&!3&4&!5&7] 14 {0}
+[0&!1&2&!3&4&!5&!7] 15
+State: 2
+[!0&!2&5&!6 | !0&!2&5&7 | !0&3&5&!6 | !0&3&5&7 | 1&!2&5&!6 | 1&!2&5&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[!0&!2&5&6&!7 | !0&3&5&6&!7 | 1&!2&5&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[!0&!2&!5&!6 | !0&!2&!5&7 | !0&3&!5&!6 | !0&3&!5&7 | 1&!2&!5&!6 | 1&!2&!5&7 | 1&3&!5&!6 | 1&3&!5&7] 2 {0 2 3}
+[!0&!2&!5&6&!7 | !0&3&!5&6&!7 | 1&!2&!5&6&!7 | 1&3&!5&6&!7] 3 {2 3}
+[!0&2&!3&5&!6 | !0&2&!3&5&7 | 1&2&!3&5&!6 | 1&2&!3&5&7] 4 {0 1 3}
+[!0&2&!3&5&6&!7 | 1&2&!3&5&6&!7] 5 {1 3}
+[!0&2&!3&!5&!6 | !0&2&!3&!5&7 | 1&2&!3&!5&!6 | 1&2&!3&!5&7] 6 {0 3}
+[!0&2&!3&!5&6&!7 | 1&2&!3&!5&6&!7] 7 {3}
+[0&!1&!2&5&!6 | 0&!1&!2&5&7 | 0&!1&3&5&!6 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&!2&5&6&!7 | 0&!1&3&5&6&!7] 9 {1 2}
+[0&!1&!2&!5&!6 | 0&!1&!2&!5&7 | 0&!1&3&!5&!6 | 0&!1&3&!5&7] 10 {0 2}
+[0&!1&!2&!5&6&!7 | 0&!1&3&!5&6&!7] 11 {2}
+[0&!1&2&!3&5&!6 | 0&!1&2&!3&5&7] 12 {0 1}
+[0&!1&2&!3&5&6&!7] 13 {1}
+[0&!1&2&!3&!5&!6 | 0&!1&2&!3&!5&7] 14 {0}
+[0&!1&2&!3&!5&6&!7] 15
+State: 3
+[!0&!2&5&7 | !0&3&5&7 | 1&!2&5&7 | 1&3&5&7] 0 {0 1 2 3}
+[!0&!2&5&!7 | !0&3&5&!7 | 1&!2&5&!7 | 1&3&5&!7] 1 {1 2 3}
+[!0&!2&!5&7 | !0&3&!5&7 | 1&!2&!5&7 | 1&3&!5&7] 2 {0 2 3}
+[!0&!2&!5&!7 | !0&3&!5&!7 | 1&!2&!5&!7 | 1&3&!5&!7] 3 {2 3}
+[!0&2&!3&5&7 | 1&2&!3&5&7] 4 {0 1 3}
+[!0&2&!3&5&!7 | 1&2&!3&5&!7] 5 {1 3}
+[!0&2&!3&!5&7 | 1&2&!3&!5&7] 6 {0 3}
+[!0&2&!3&!5&!7 | 1&2&!3&!5&!7] 7 {3}
+[0&!1&!2&5&7 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&!2&5&!7 | 0&!1&3&5&!7] 9 {1 2}
+[0&!1&!2&!5&7 | 0&!1&3&!5&7] 10 {0 2}
+[0&!1&!2&!5&!7 | 0&!1&3&!5&!7] 11 {2}
+[0&!1&2&!3&5&7] 12 {0 1}
+[0&!1&2&!3&5&!7] 13 {1}
+[0&!1&2&!3&!5&7] 14 {0}
+[0&!1&2&!3&!5&!7] 15
+State: 4
+[!0&3&!4&!6 | !0&3&!4&7 | !0&3&5&!6 | !0&3&5&7 | 1&3&!4&!6 | 1&3&!4&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[!0&3&!4&6&!7 | !0&3&5&6&!7 | 1&3&!4&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[!0&3&4&!5&!6 | !0&3&4&!5&7 | 1&3&4&!5&!6 | 1&3&4&!5&7] 2 {0 2 3}
+[!0&3&4&!5&6&!7 | 1&3&4&!5&6&!7] 3 {2 3}
+[!0&!3&!4&!6 | !0&!3&!4&7 | !0&!3&5&!6 | !0&!3&5&7 | 1&!3&!4&!6 | 1&!3&!4&7 | 1&!3&5&!6 | 1&!3&5&7] 4 {0 1 3}
+[!0&!3&!4&6&!7 | !0&!3&5&6&!7 | 1&!3&!4&6&!7 | 1&!3&5&6&!7] 5 {1 3}
+[!0&!3&4&!5&!6 | !0&!3&4&!5&7 | 1&!3&4&!5&!6 | 1&!3&4&!5&7] 6 {0 3}
+[!0&!3&4&!5&6&!7 | 1&!3&4&!5&6&!7] 7 {3}
+[0&!1&3&!4&!6 | 0&!1&3&!4&7 | 0&!1&3&5&!6 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&3&!4&6&!7 | 0&!1&3&5&6&!7] 9 {1 2}
+[0&!1&3&4&!5&!6 | 0&!1&3&4&!5&7] 10 {0 2}
+[0&!1&3&4&!5&6&!7] 11 {2}
+[0&!1&!3&!4&!6 | 0&!1&!3&!4&7 | 0&!1&!3&5&!6 | 0&!1&!3&5&7] 12 {0 1}
+[0&!1&!3&!4&6&!7 | 0&!1&!3&5&6&!7] 13 {1}
+[0&!1&!3&4&!5&!6 | 0&!1&!3&4&!5&7] 14 {0}
+[0&!1&!3&4&!5&6&!7] 15
+State: 5
+[!0&3&!4&7 | !0&3&5&7 | 1&3&!4&7 | 1&3&5&7] 0 {0 1 2 3}
+[!0&3&!4&!7 | !0&3&5&!7 | 1&3&!4&!7 | 1&3&5&!7] 1 {1 2 3}
+[!0&3&4&!5&7 | 1&3&4&!5&7] 2 {0 2 3}
+[!0&3&4&!5&!7 | 1&3&4&!5&!7] 3 {2 3}
+[!0&!3&!4&7 | !0&!3&5&7 | 1&!3&!4&7 | 1&!3&5&7] 4 {0 1 3}
+[!0&!3&!4&!7 | !0&!3&5&!7 | 1&!3&!4&!7 | 1&!3&5&!7] 5 {1 3}
+[!0&!3&4&!5&7 | 1&!3&4&!5&7] 6 {0 3}
+[!0&!3&4&!5&!7 | 1&!3&4&!5&!7] 7 {3}
+[0&!1&3&!4&7 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&3&!4&!7 | 0&!1&3&5&!7] 9 {1 2}
+[0&!1&3&4&!5&7] 10 {0 2}
+[0&!1&3&4&!5&!7] 11 {2}
+[0&!1&!3&!4&7 | 0&!1&!3&5&7] 12 {0 1}
+[0&!1&!3&!4&!7 | 0&!1&!3&5&!7] 13 {1}
+[0&!1&!3&4&!5&7] 14 {0}
+[0&!1&!3&4&!5&!7] 15
+State: 6
+[!0&3&5&!6 | !0&3&5&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[!0&3&5&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[!0&3&!5&!6 | !0&3&!5&7 | 1&3&!5&!6 | 1&3&!5&7] 2 {0 2 3}
+[!0&3&!5&6&!7 | 1&3&!5&6&!7] 3 {2 3}
+[!0&!3&5&!6 | !0&!3&5&7 | 1&!3&5&!6 | 1&!3&5&7] 4 {0 1 3}
+[!0&!3&5&6&!7 | 1&!3&5&6&!7] 5 {1 3}
+[!0&!3&!5&!6 | !0&!3&!5&7 | 1&!3&!5&!6 | 1&!3&!5&7] 6 {0 3}
+[!0&!3&!5&6&!7 | 1&!3&!5&6&!7] 7 {3}
+[0&!1&3&5&!6 | 0&!1&3&5&7] 8 {0 1 2}
+[0&!1&3&5&6&!7] 9 {1 2}
+[0&!1&3&!5&!6 | 0&!1&3&!5&7] 10 {0 2}
+[0&!1&3&!5&6&!7] 11 {2}
+[0&!1&!3&5&!6 | 0&!1&!3&5&7] 12 {0 1}
+[0&!1&!3&5&6&!7] 13 {1}
+[0&!1&!3&!5&!6 | 0&!1&!3&!5&7] 14 {0}
+[0&!1&!3&!5&6&!7] 15
+State: 7
+[!0&3&5&7 | 1&3&5&7] 0 {0 1 2 3}
+[!0&3&5&!7 | 1&3&5&!7] 1 {1 2 3}
+[!0&3&!5&7 | 1&3&!5&7] 2 {0 2 3}
+[!0&3&!5&!7 | 1&3&!5&!7] 3 {2 3}
+[!0&!3&5&7 | 1&!3&5&7] 4 {0 1 3}
+[!0&!3&5&!7 | 1&!3&5&!7] 5 {1 3}
+[!0&!3&!5&7 | 1&!3&!5&7] 6 {0 3}
+[!0&!3&!5&!7 | 1&!3&!5&!7] 7 {3}
+[0&!1&3&5&7] 8 {0 1 2}
+[0&!1&3&5&!7] 9 {1 2}
+[0&!1&3&!5&7] 10 {0 2}
+[0&!1&3&!5&!7] 11 {2}
+[0&!1&!3&5&7] 12 {0 1}
+[0&!1&!3&5&!7] 13 {1}
+[0&!1&!3&!5&7] 14 {0}
+[0&!1&!3&!5&!7] 15
+State: 8
+[1&!2&!4&!6 | 1&!2&!4&7 | 1&!2&5&!6 | 1&!2&5&7 | 1&3&!4&!6 | 1&3&!4&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[1&!2&!4&6&!7 | 1&!2&5&6&!7 | 1&3&!4&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[1&!2&4&!5&!6 | 1&!2&4&!5&7 | 1&3&4&!5&!6 | 1&3&4&!5&7] 2 {0 2 3}
+[1&!2&4&!5&6&!7 | 1&3&4&!5&6&!7] 3 {2 3}
+[1&2&!3&!4&!6 | 1&2&!3&!4&7 | 1&2&!3&5&!6 | 1&2&!3&5&7] 4 {0 1 3}
+[1&2&!3&!4&6&!7 | 1&2&!3&5&6&!7] 5 {1 3}
+[1&2&!3&4&!5&!6 | 1&2&!3&4&!5&7] 6 {0 3}
+[1&2&!3&4&!5&6&!7] 7 {3}
+[!1&!2&!4&!6 | !1&!2&!4&7 | !1&!2&5&!6 | !1&!2&5&7 | !1&3&!4&!6 | !1&3&!4&7 | !1&3&5&!6 | !1&3&5&7] 8 {0 1 2}
+[!1&!2&!4&6&!7 | !1&!2&5&6&!7 | !1&3&!4&6&!7 | !1&3&5&6&!7] 9 {1 2}
+[!1&!2&4&!5&!6 | !1&!2&4&!5&7 | !1&3&4&!5&!6 | !1&3&4&!5&7] 10 {0 2}
+[!1&!2&4&!5&6&!7 | !1&3&4&!5&6&!7] 11 {2}
+[!1&2&!3&!4&!6 | !1&2&!3&!4&7 | !1&2&!3&5&!6 | !1&2&!3&5&7] 12 {0 1}
+[!1&2&!3&!4&6&!7 | !1&2&!3&5&6&!7] 13 {1}
+[!1&2&!3&4&!5&!6 | !1&2&!3&4&!5&7] 14 {0}
+[!1&2&!3&4&!5&6&!7] 15
+State: 9
+[1&!2&!4&7 | 1&!2&5&7 | 1&3&!4&7 | 1&3&5&7] 0 {0 1 2 3}
+[1&!2&!4&!7 | 1&!2&5&!7 | 1&3&!4&!7 | 1&3&5&!7] 1 {1 2 3}
+[1&!2&4&!5&7 | 1&3&4&!5&7] 2 {0 2 3}
+[1&!2&4&!5&!7 | 1&3&4&!5&!7] 3 {2 3}
+[1&2&!3&!4&7 | 1&2&!3&5&7] 4 {0 1 3}
+[1&2&!3&!4&!7 | 1&2&!3&5&!7] 5 {1 3}
+[1&2&!3&4&!5&7] 6 {0 3}
+[1&2&!3&4&!5&!7] 7 {3}
+[!1&!2&!4&7 | !1&!2&5&7 | !1&3&!4&7 | !1&3&5&7] 8 {0 1 2}
+[!1&!2&!4&!7 | !1&!2&5&!7 | !1&3&!4&!7 | !1&3&5&!7] 9 {1 2}
+[!1&!2&4&!5&7 | !1&3&4&!5&7] 10 {0 2}
+[!1&!2&4&!5&!7 | !1&3&4&!5&!7] 11 {2}
+[!1&2&!3&!4&7 | !1&2&!3&5&7] 12 {0 1}
+[!1&2&!3&!4&!7 | !1&2&!3&5&!7] 13 {1}
+[!1&2&!3&4&!5&7] 14 {0}
+[!1&2&!3&4&!5&!7] 15
+State: 10
+[1&!2&5&!6 | 1&!2&5&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[1&!2&5&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[1&!2&!5&!6 | 1&!2&!5&7 | 1&3&!5&!6 | 1&3&!5&7] 2 {0 2 3}
+[1&!2&!5&6&!7 | 1&3&!5&6&!7] 3 {2 3}
+[1&2&!3&5&!6 | 1&2&!3&5&7] 4 {0 1 3}
+[1&2&!3&5&6&!7] 5 {1 3}
+[1&2&!3&!5&!6 | 1&2&!3&!5&7] 6 {0 3}
+[1&2&!3&!5&6&!7] 7 {3}
+[!1&!2&5&!6 | !1&!2&5&7 | !1&3&5&!6 | !1&3&5&7] 8 {0 1 2}
+[!1&!2&5&6&!7 | !1&3&5&6&!7] 9 {1 2}
+[!1&!2&!5&!6 | !1&!2&!5&7 | !1&3&!5&!6 | !1&3&!5&7] 10 {0 2}
+[!1&!2&!5&6&!7 | !1&3&!5&6&!7] 11 {2}
+[!1&2&!3&5&!6 | !1&2&!3&5&7] 12 {0 1}
+[!1&2&!3&5&6&!7] 13 {1}
+[!1&2&!3&!5&!6 | !1&2&!3&!5&7] 14 {0}
+[!1&2&!3&!5&6&!7] 15
+State: 11
+[1&!2&5&7 | 1&3&5&7] 0 {0 1 2 3}
+[1&!2&5&!7 | 1&3&5&!7] 1 {1 2 3}
+[1&!2&!5&7 | 1&3&!5&7] 2 {0 2 3}
+[1&!2&!5&!7 | 1&3&!5&!7] 3 {2 3}
+[1&2&!3&5&7] 4 {0 1 3}
+[1&2&!3&5&!7] 5 {1 3}
+[1&2&!3&!5&7] 6 {0 3}
+[1&2&!3&!5&!7] 7 {3}
+[!1&!2&5&7 | !1&3&5&7] 8 {0 1 2}
+[!1&!2&5&!7 | !1&3&5&!7] 9 {1 2}
+[!1&!2&!5&7 | !1&3&!5&7] 10 {0 2}
+[!1&!2&!5&!7 | !1&3&!5&!7] 11 {2}
+[!1&2&!3&5&7] 12 {0 1}
+[!1&2&!3&5&!7] 13 {1}
+[!1&2&!3&!5&7] 14 {0}
+[!1&2&!3&!5&!7] 15
+State: 12
+[1&3&!4&!6 | 1&3&!4&7 | 1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[1&3&!4&6&!7 | 1&3&5&6&!7] 1 {1 2 3}
+[1&3&4&!5&!6 | 1&3&4&!5&7] 2 {0 2 3}
+[1&3&4&!5&6&!7] 3 {2 3}
+[1&!3&!4&!6 | 1&!3&!4&7 | 1&!3&5&!6 | 1&!3&5&7] 4 {0 1 3}
+[1&!3&!4&6&!7 | 1&!3&5&6&!7] 5 {1 3}
+[1&!3&4&!5&!6 | 1&!3&4&!5&7] 6 {0 3}
+[1&!3&4&!5&6&!7] 7 {3}
+[!1&3&!4&!6 | !1&3&!4&7 | !1&3&5&!6 | !1&3&5&7] 8 {0 1 2}
+[!1&3&!4&6&!7 | !1&3&5&6&!7] 9 {1 2}
+[!1&3&4&!5&!6 | !1&3&4&!5&7] 10 {0 2}
+[!1&3&4&!5&6&!7] 11 {2}
+[!1&!3&!4&!6 | !1&!3&!4&7 | !1&!3&5&!6 | !1&!3&5&7] 12 {0 1}
+[!1&!3&!4&6&!7 | !1&!3&5&6&!7] 13 {1}
+[!1&!3&4&!5&!6 | !1&!3&4&!5&7] 14 {0}
+[!1&!3&4&!5&6&!7] 15
+State: 13
+[1&3&!4&7 | 1&3&5&7] 0 {0 1 2 3}
+[1&3&!4&!7 | 1&3&5&!7] 1 {1 2 3}
+[1&3&4&!5&7] 2 {0 2 3}
+[1&3&4&!5&!7] 3 {2 3}
+[1&!3&!4&7 | 1&!3&5&7] 4 {0 1 3}
+[1&!3&!4&!7 | 1&!3&5&!7] 5 {1 3}
+[1&!3&4&!5&7] 6 {0 3}
+[1&!3&4&!5&!7] 7 {3}
+[!1&3&!4&7 | !1&3&5&7] 8 {0 1 2}
+[!1&3&!4&!7 | !1&3&5&!7] 9 {1 2}
+[!1&3&4&!5&7] 10 {0 2}
+[!1&3&4&!5&!7] 11 {2}
+[!1&!3&!4&7 | !1&!3&5&7] 12 {0 1}
+[!1&!3&!4&!7 | !1&!3&5&!7] 13 {1}
+[!1&!3&4&!5&7] 14 {0}
+[!1&!3&4&!5&!7] 15
+State: 14
+[1&3&5&!6 | 1&3&5&7] 0 {0 1 2 3}
+[1&3&5&6&!7] 1 {1 2 3}
+[1&3&!5&!6 | 1&3&!5&7] 2 {0 2 3}
+[1&3&!5&6&!7] 3 {2 3}
+[1&!3&5&!6 | 1&!3&5&7] 4 {0 1 3}
+[1&!3&5&6&!7] 5 {1 3}
+[1&!3&!5&!6 | 1&!3&!5&7] 6 {0 3}
+[1&!3&!5&6&!7] 7 {3}
+[!1&3&5&!6 | !1&3&5&7] 8 {0 1 2}
+[!1&3&5&6&!7] 9 {1 2}
+[!1&3&!5&!6 | !1&3&!5&7] 10 {0 2}
+[!1&3&!5&6&!7] 11 {2}
+[!1&!3&5&!6 | !1&!3&5&7] 12 {0 1}
+[!1&!3&5&6&!7] 13 {1}
+[!1&!3&!5&!6 | !1&!3&!5&7] 14 {0}
+[!1&!3&!5&6&!7] 15
+State: 15
+[1&3&5&7] 0 {0 1 2 3}
+[1&3&5&!7] 1 {1 2 3}
+[1&3&!5&7] 2 {0 2 3}
+[1&3&!5&!7] 3 {2 3}
+[1&!3&5&7] 4 {0 1 3}
+[1&!3&5&!7] 5 {1 3}
+[1&!3&!5&7] 6 {0 3}
+[1&!3&!5&!7] 7 {3}
+[!1&3&5&7] 8 {0 1 2}
+[!1&3&5&!7] 9 {1 2}
+[!1&3&!5&7] 10 {0 2}
+[!1&3&!5&!7] 11 {2}
+[!1&!3&5&7] 12 {0 1}
+[!1&!3&5&!7] 13 {1}
+[!1&!3&!5&7] 14 {0}
+[!1&!3&!5&!7] 15
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7061,7 +7401,7 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7073,19 +7413,19 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[0 | !1] 0
+[!0 | 1] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7097,51 +7437,51 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0&1 | 0&!1 | 2] 0
+[0 | !1&2 | 1&!2] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0&!1&!3 | 2 | 4] 0
+[0 | !1&!2&!3 | 4] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0 | 1 | !2 | !3 | !4] 0
+[!0 | !1 | 2 | !3 | !4] 0
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 9 "p1" "p2" "p0" "p3" "p4" "p5" "p6" "p7" "p8"
+AP: 9 "p0" "p1" "p2" "p3" "p4" "p5" "p6" "p7" "p8"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0 | 1 | 2 | 3 | 4 | !5&!6&!7&!8] 0 {0}
-[0&!1&!2&!3&!4&5 | 0&!1&!2&!3&!4&6 | 0&!1&!2&!3&!4&7 | 0&!1&!2&!3&!4&8] 1
+[0 | !1 | 2 | 3 | 4 | !5&!6&!7&!8] 0 {0}
+[!0&1&!2&!3&!4&5 | !0&1&!2&!3&!4&6 | !0&1&!2&!3&!4&7 | !0&1&!2&!3&!4&8] 1
 State: 1
 [!5&!6&!7&!8] 0 {0}
 [5 | 6 | 7 | 8] 1
@@ -7149,15 +7489,15 @@ State: 1
 HOA: v1
 States: 2
 Start: 0
-AP: 9 "p1" "p2" "p0" "p3" "p4" "p5" "p6" "p7" "p8"
+AP: 9 "p0" "p1" "p2" "p3" "p4" "p5" "p6" "p7" "p8"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[!0 | 1 | !2 | 3 | 4 | 5&!6&!7&!8] 0 {0}
-[0&!1&2&!3&!4&!5 | 0&!1&2&!3&!4&6 | 0&!1&2&!3&!4&7 | 0&!1&2&!3&!4&8] 1
+[!0 | !1 | 2 | 3 | 4 | 5&!6&!7&!8] 0 {0}
+[0&1&!2&!3&!4&!5 | 0&1&!2&!3&!4&6 | 0&1&!2&!3&!4&7 | 0&1&!2&!3&!4&8] 1
 State: 1
 [5&!6&!7&!8] 0 {0}
 [!5 | 6 | 7 | 8] 1
@@ -7165,123 +7505,123 @@ State: 1
 HOA: v1
 States: 1
 Start: 0
-AP: 6 "p1" "p2" "p0" "p3" "p4" "p5"
+AP: 6 "p0" "p1" "p2" "p3" "p4" "p5"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0 | !1 | 2 | !3 | !4 | !5] 0
+[0 | !1 | !2 | !3 | !4 | !5] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 6 "p1" "p2" "p0" "p3" "p4" "p5"
+AP: 6 "p0" "p1" "p2" "p3" "p4" "p5"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0 | !1 | 2 | !3 | !4 | !5] 0
+[0 | !1 | !2 | !3 | !4 | !5] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 6 "p1" "p2" "p0" "p3" "p4" "p5"
+AP: 6 "p0" "p1" "p2" "p3" "p4" "p5"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0 | 1 | !2 | 3 | !4 | !5] 0
+[!0 | !1 | 2 | 3 | !4 | !5] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 7 "p1" "p2" "p0" "p3" "p4" "p5" "p6"
+AP: 7 "p0" "p1" "p2" "p3" "p4" "p5" "p6"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0&!1&!3&!4 | 2 | !5&6 | 5&!6] 0
+[0 | !1&!2&!3&!4 | !5&6 | 5&!6] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 7 "p1" "p2" "p0" "p3" "p4" "p5" "p6"
+AP: 7 "p0" "p1" "p2" "p3" "p4" "p5" "p6"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0 | 1 | !2 | 3 | 4 | !5 | !6] 0
+[!0 | !1 | 2 | 3 | 4 | !5 | !6] 0
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 8 "p1" "p2" "p0" "p3" "p4" "p5" "p6" "p7"
+AP: 8 "p0" "p1" "p2" "p3" "p4" "p5" "p6" "p7"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!0 | 1 | !2 | 3 | 4 | 5 | !6 | !7] 0
+[!0 | !1 | 2 | 3 | 4 | 5 | !6 | !7] 0
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0 | 1&3 | !2&3] 1
-[0&!1&2&3] 2
+[!0&3 | !1 | 2&3] 1
+[0&1&!2&3] 2
 State: 1
-[!0 | 1 | !2] 1
-[0&!1&2] 2
+[!0 | !1 | 2] 1
+[0&1&!2] 2
 State: 2
-[1&!3] 0
-[!0&!1 | !1&!2 | 1&3] 1
-[0&!1&2] 2
+[2&!3] 0
+[!0&!2 | !1&!2 | 2&3] 1
+[0&1&!2] 2
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 4 "p1" "p2" "p3" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!0 | 1 | !3] 0 {0}
-[0&!1&3] 1 {0}
+[!0 | !1 | 2] 0 {0}
+[0&1&!2] 1 {0}
 State: 1
-[!0 | !1&!3 | 1&2] 0 {0}
-[0&!1&3] 1 {0}
-[0&1&!2] 3
+[!0&!2 | !1 | 2&3] 0 {0}
+[0&1&!2] 1 {0}
+[1&2&!3] 3
 State: 2
-[!0 | 1&2 | 2&!3] 0 {0}
-[0&!1&2&3] 1 {0}
-[0&1&!2] 2
+[!0&3 | !1 | 2&3] 0 {0}
+[0&1&!2&3] 1 {0}
+[1&2&!3] 2
 State: 3
-[!0 | 1&2 | 2&!3] 0 {0}
-[0&!1&2&3] 1 {0}
-[0&1&!2] 3
-[0&!1&!2] 4
+[!0&3 | !1 | 2&3] 0 {0}
+[0&1&!2&3] 1 {0}
+[1&2&!3] 3
+[1&!2&!3] 4
 State: 4
-[!0 | 1&2 | 2&!3] 0 {0}
-[0&!1&2&3] 1 {0}
-[0&1&!2] 2
-[0&!1&!2] 4
+[!0&3 | !1 | 2&3] 0 {0}
+[0&1&!2&3] 1 {0}
+[1&2&!3] 2
+[1&!2&!3] 4
 --END--
 HOA: v1
 States: 1
@@ -7298,79 +7638,79 @@ State: 0
 HOA: v1
 States: 3
 Start: 0
-AP: 4 "p1" "p2" "p3" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 properties: stutter-invariant
 --BODY--
 State: 0
-[!1 | 2 | !3] 0 {0}
-[!0&1&!2&3] 1
-[0&1&!2&3] 2
+[!0 | !2 | 3] 0 {0}
+[0&!1&2&!3] 1
+[0&1&2&!3] 2
 State: 1
-[!1 | 2] 0 {0}
-[!0&1&!2] 1
+[!2 | 3] 0 {0}
+[!1&2&!3] 1
 State: 2
-[!1 | 2] 0 {0}
-[!0&1&!2] 1
-[0&1&!2] 2
+[!2 | 3] 0 {0}
+[!1&2&!3] 1
+[1&2&!3] 2
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 4 "p1" "p2" "p3" "p0"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 properties: stutter-invariant
 --BODY--
 State: 0
-[1 | 2 | !3] 0 {0}
-[!0&!1&!2&3] 1
-[0&!1&!2&3] 2
+[!0 | 2 | 3] 0 {0}
+[0&!1&!2&!3] 1
+[0&1&!2&!3] 2
 State: 1
-[1 | 2] 0 {0}
-[!0&!1&!2] 1
+[2 | 3] 0 {0}
+[!1&!2&!3] 1
 State: 2
-[1 | 2] 0 {0}
-[!0&!1&!2] 1
-[0&!1&!2] 2
+[2 | 3] 0 {0}
+[!1&!2&!3] 1
+[1&!2&!3] 2
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0 | 2] 0
-[0&!2] 1
+[0 | !1] 0
+[!0&1] 1
 State: 1
-[!0&1 | 1&2] 0
-[0&1&!2] 1
+[0&2 | !1&2] 0
+[!0&1&2] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!1] 0
-[1] 1
+[!0] 0
+[0] 1
 State: 1
-[0&!1] 0
-[1] 1
+[!0&1] 0
+[0] 1
 --END--
 HOA: v1
 States: 34
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -7378,18 +7718,18 @@ properties: trans-labels explicit-labels trans-acc
 State: 0
 [0&1&2&3] 1
 [0&1&2&!3] 2
-[0&!1&2&3] 3
-[0&!1&2&!3] 4
-[0&1&!2&3] 5
-[0&1&!2&!3] 6
-[0&!1&!2&3] 7
-[0&!1&!2&!3] 8
-[!0&1&2&3] 9
-[!0&1&2&!3] 10
-[!0&!1&2&3] 11
-[!0&!1&2&!3] 12
-[!0&1&!2&3] 13
-[!0&1&!2&!3] 14
+[0&1&!2&3] 3
+[0&1&!2&!3] 4
+[!0&1&2&3] 5
+[!0&1&2&!3] 6
+[!0&1&!2&3] 7
+[!0&1&!2&!3] 8
+[0&!1&2&3] 9
+[0&!1&2&!3] 10
+[0&!1&!2&3] 11
+[0&!1&!2&!3] 12
+[!0&!1&2&3] 13
+[!0&!1&2&!3] 14
 [!0&!1&!2&3] 15
 [!0&!1&!2&!3] 16
 [t] 17
@@ -7400,41 +7740,41 @@ State: 2
 [0&1&2&!3] 2 {0}
 [0&1&2&!3] 17
 State: 3
-[0&!1&2&3] 3 {0}
-[0&!1&2&3] 17
-State: 4
-[0&!1&2&!3] 4 {0}
-[0&!1&2&!3] 17
-State: 5
-[0&1&!2&3] 5 {0}
+[0&1&!2&3] 3 {0}
 [0&1&!2&3] 17
-State: 6
-[0&1&!2&!3] 6 {0}
+State: 4
+[0&1&!2&!3] 4 {0}
 [0&1&!2&!3] 17
-State: 7
-[0&!1&!2&3] 7 {0}
-[0&!1&!2&3] 17
-State: 8
-[0&!1&!2&!3] 8 {0}
-[0&!1&!2&!3] 17
-State: 9
-[!0&1&2&3] 9 {0}
+State: 5
+[!0&1&2&3] 5 {0}
 [!0&1&2&3] 17
-State: 10
-[!0&1&2&!3] 10 {0}
+State: 6
+[!0&1&2&!3] 6 {0}
 [!0&1&2&!3] 17
-State: 11
-[!0&!1&2&3] 11 {0}
-[!0&!1&2&3] 17
-State: 12
-[!0&!1&2&!3] 12 {0}
-[!0&!1&2&!3] 17
-State: 13
-[!0&1&!2&3] 13 {0}
+State: 7
+[!0&1&!2&3] 7 {0}
 [!0&1&!2&3] 17
-State: 14
-[!0&1&!2&!3] 14 {0}
+State: 8
+[!0&1&!2&!3] 8 {0}
 [!0&1&!2&!3] 17
+State: 9
+[0&!1&2&3] 9 {0}
+[0&!1&2&3] 17
+State: 10
+[0&!1&2&!3] 10 {0}
+[0&!1&2&!3] 17
+State: 11
+[0&!1&!2&3] 11 {0}
+[0&!1&!2&3] 17
+State: 12
+[0&!1&!2&!3] 12 {0}
+[0&!1&!2&!3] 17
+State: 13
+[!0&!1&2&3] 13 {0}
+[!0&!1&2&3] 17
+State: 14
+[!0&!1&2&!3] 14 {0}
+[!0&!1&2&!3] 17
 State: 15
 [!0&!1&!2&3] 15 {0}
 [!0&!1&!2&3] 17
@@ -7444,18 +7784,18 @@ State: 16
 State: 17
 [0&1&2&3&!4] 18
 [0&1&2&!3&!4] 19
-[0&!1&2&3&!4] 20
-[0&!1&2&!3&!4] 21
-[0&1&!2&3&!4] 22
-[0&1&!2&!3&!4] 23
-[0&!1&!2&3&!4] 24
-[0&!1&!2&!3&!4] 25
-[!0&1&2&3&!4] 26
-[!0&1&2&!3&!4] 27
-[!0&!1&2&3&!4] 28
-[!0&!1&2&!3&!4] 29
-[!0&1&!2&3&!4] 30
-[!0&1&!2&!3&!4] 31
+[0&1&!2&3&!4] 20
+[0&1&!2&!3&!4] 21
+[!0&1&2&3&!4] 22
+[!0&1&2&!3&!4] 23
+[!0&1&!2&3&!4] 24
+[!0&1&!2&!3&!4] 25
+[0&!1&2&3&!4] 26
+[0&!1&2&!3&!4] 27
+[0&!1&!2&3&!4] 28
+[0&!1&!2&!3&!4] 29
+[!0&!1&2&3&!4] 30
+[!0&!1&2&!3&!4] 31
 [!0&!1&!2&3&!4] 32
 [!0&!1&!2&!3&!4] 33
 State: 18
@@ -7467,53 +7807,53 @@ State: 19
 [0&1&2&!3&4] 17 {0}
 [0&1&2&!3&!4] 19
 State: 20
-[0&!1&2&3&4] 3 {0}
-[0&!1&2&3&4] 17 {0}
-[0&!1&2&3&!4] 20
-State: 21
-[0&!1&2&!3&4] 4 {0}
-[0&!1&2&!3&4] 17 {0}
-[0&!1&2&!3&!4] 21
-State: 22
-[0&1&!2&3&4] 5 {0}
+[0&1&!2&3&4] 3 {0}
 [0&1&!2&3&4] 17 {0}
-[0&1&!2&3&!4] 22
-State: 23
-[0&1&!2&!3&4] 6 {0}
+[0&1&!2&3&!4] 20
+State: 21
+[0&1&!2&!3&4] 4 {0}
 [0&1&!2&!3&4] 17 {0}
-[0&1&!2&!3&!4] 23
-State: 24
-[0&!1&!2&3&4] 7 {0}
-[0&!1&!2&3&4] 17 {0}
-[0&!1&!2&3&!4] 24
-State: 25
-[0&!1&!2&!3&4] 8 {0}
-[0&!1&!2&!3&4] 17 {0}
-[0&!1&!2&!3&!4] 25
-State: 26
-[!0&1&2&3&4] 9 {0}
+[0&1&!2&!3&!4] 21
+State: 22
+[!0&1&2&3&4] 5 {0}
 [!0&1&2&3&4] 17 {0}
-[!0&1&2&3&!4] 26
-State: 27
-[!0&1&2&!3&4] 10 {0}
+[!0&1&2&3&!4] 22
+State: 23
+[!0&1&2&!3&4] 6 {0}
 [!0&1&2&!3&4] 17 {0}
-[!0&1&2&!3&!4] 27
-State: 28
-[!0&!1&2&3&4] 11 {0}
-[!0&!1&2&3&4] 17 {0}
-[!0&!1&2&3&!4] 28
-State: 29
-[!0&!1&2&!3&4] 12 {0}
-[!0&!1&2&!3&4] 17 {0}
-[!0&!1&2&!3&!4] 29
-State: 30
-[!0&1&!2&3&4] 13 {0}
+[!0&1&2&!3&!4] 23
+State: 24
+[!0&1&!2&3&4] 7 {0}
 [!0&1&!2&3&4] 17 {0}
-[!0&1&!2&3&!4] 30
-State: 31
-[!0&1&!2&!3&4] 14 {0}
+[!0&1&!2&3&!4] 24
+State: 25
+[!0&1&!2&!3&4] 8 {0}
 [!0&1&!2&!3&4] 17 {0}
-[!0&1&!2&!3&!4] 31
+[!0&1&!2&!3&!4] 25
+State: 26
+[0&!1&2&3&4] 9 {0}
+[0&!1&2&3&4] 17 {0}
+[0&!1&2&3&!4] 26
+State: 27
+[0&!1&2&!3&4] 10 {0}
+[0&!1&2&!3&4] 17 {0}
+[0&!1&2&!3&!4] 27
+State: 28
+[0&!1&!2&3&4] 11 {0}
+[0&!1&!2&3&4] 17 {0}
+[0&!1&!2&3&!4] 28
+State: 29
+[0&!1&!2&!3&4] 12 {0}
+[0&!1&!2&!3&4] 17 {0}
+[0&!1&!2&!3&!4] 29
+State: 30
+[!0&!1&2&3&4] 13 {0}
+[!0&!1&2&3&4] 17 {0}
+[!0&!1&2&3&!4] 30
+State: 31
+[!0&!1&2&!3&4] 14 {0}
+[!0&!1&2&!3&4] 17 {0}
+[!0&!1&2&!3&!4] 31
 State: 32
 [!0&!1&!2&3&4] 15 {0}
 [!0&!1&!2&3&4] 17 {0}
@@ -7526,251 +7866,251 @@ State: 33
 HOA: v1
 States: 2
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[0 | !1 | !2] 0
-[!0&1&2] 1
+[!0 | 1 | !2] 0
+[0&!1&2] 1
 State: 1
-[!0&!1 | 0&3 | !2] 0
-[!0&1&2] 1
+[!0 | !1&!2 | 1&3] 0
+[0&!1&2] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[!1] 0 {0}
-[1] 1
+[!0] 0 {0}
+[0] 1
 State: 1
-[0&!1] 0 {0}
+[!0&1] 0 {0}
 [!0&!1] 1
 [0&1] 1 {0}
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&1] 0
+[0&!1] 0
 [0&1] 1
-[0&!1] 2
+[!0&1] 2
 State: 1
-[1] 1
-[!1] 2
+[0] 1
+[!0] 2
 State: 2
-[!0&1] 0
+[0&!1] 0
 [0&1] 1
-[!1] 2
+[!0] 2
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1] 0 {0}
-[!1] 1 {0}
-[!1] 2
+[0] 0 {0}
+[!0] 1 {0}
+[!0] 2
 State: 1
-[!1] 1 {0}
-[!1] 2
+[!0] 1 {0}
+[!0] 2
 State: 2
-[1] 2
-[!0&1] 3 {0}
+[0] 2
+[0&!1] 3 {0}
 State: 3
 [0&1] 0 {0}
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1] 0 {0 1}
-[!1] 1 {0 1}
-[!1] 2 {1}
+[0] 0 {0 1}
+[!0] 1 {0 1}
+[!0] 2 {1}
 State: 1
-[!1] 1 {0 1}
-[!1] 2 {1}
+[!0] 1 {0 1}
+[!0] 2 {1}
 State: 2
-[1] 2 {1}
-[!0&1] 3 {0}
+[0] 2 {1}
+[0&!1] 3 {0}
 State: 3
 [0&1] 4 {0}
 State: 4
-[1] 4 {0}
-[!0&1] 5 {0 1}
+[0] 4 {0}
+[0&!1] 5 {0 1}
 State: 5
 [0&1] 0 {0 1}
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!1] 0 {0 1}
-[1] 1 {0 1}
-[1] 2 {1}
+[!0] 0 {0 1}
+[0] 1 {0 1}
+[0] 2 {1}
 State: 1
-[1] 1 {0 1}
-[1] 2 {1}
+[0] 1 {0 1}
+[0] 2 {1}
 State: 2
-[!1] 2 {1}
+[!0] 2 {1}
 [!0&!1] 3 {0}
 State: 3
-[0&!1] 4 {0}
+[!0&1] 4 {0}
 State: 4
-[!1] 4 {0}
+[!0] 4 {0}
 [!0&!1] 5 {0 1}
 State: 5
-[0&!1] 0 {0 1}
+[!0&1] 0 {0 1}
 --END--
 HOA: v1
 States: 8
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: generalized-Buchi 3
 Acceptance: 3 Inf(0)&Inf(1)&Inf(2)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[!1] 0 {0 1 2}
-[1] 1 {0 1 2}
-[1] 2 {1 2}
+[!0] 0 {0 1 2}
+[0] 1 {0 1 2}
+[0] 2 {1 2}
 State: 1
-[1] 1 {0 1 2}
-[1] 2 {1 2}
+[0] 1 {0 1 2}
+[0] 2 {1 2}
 State: 2
-[!1] 2 {1 2}
+[!0] 2 {1 2}
 [!0&!1] 3 {0 2}
 State: 3
-[0&!1] 4 {0 2}
+[!0&1] 4 {0 2}
 State: 4
-[!1] 4 {0 2}
+[!0] 4 {0 2}
 [!0&!1] 5 {0 1}
 State: 5
-[0&!1] 6 {0 1}
+[!0&1] 6 {0 1}
 State: 6
-[!1] 6 {0 1}
+[!0] 6 {0 1}
 [!0&!1] 7 {0 1 2}
 State: 7
-[0&!1] 0 {0 1 2}
+[!0&1] 0 {0 1 2}
 --END--
 HOA: v1
 States: 6
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
 --BODY--
 State: 0
-[1] 0 {0}
-[!1] 1 {0}
+[0] 0 {0}
+[!0] 1 {0}
 State: 1
-[!1] 1 {0}
-[!0&1] 2 {0}
-[1] 3
+[!0] 1 {0}
+[0&!1] 2 {0}
+[0] 3
 State: 2
 [0&1] 0 {0}
-[0&!1] 1 {0}
+[!0&1] 1 {0}
 State: 3
-[!0&1] 2 {0}
-[1] 3
-[!1] 4
+[0&!1] 2 {0}
+[0] 3
+[!0] 4
 [!0&!1] 5 {0}
 State: 4
-[!1] 4
+[!0] 4
 [!0&!1] 5 {0}
 State: 5
-[0&!1] 1 {0}
+[!0&1] 1 {0}
 [0&1] 3
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc weak
 --BODY--
 State: 0
-[0] 1
-[!0] 2
-[!1] 3
+[1] 1
+[!1] 2
+[!0] 3
 State: 1
-[0] 1
-[0&!1] 3
+[1] 1
+[!0&1] 3
 State: 2
-[!0] 2
+[!1] 2
 [!0&!1] 3
 State: 3
 [0&1] 1
-[!0&1] 2
+[0&!1] 2
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc weak
 --BODY--
 State: 0
-[!0] 1
-[0] 2
-[!1] 3
+[!1] 1
+[1] 2
+[!0] 3
 State: 1
-[!0] 1
+[!1] 1
 [!0&!1] 3
 State: 2
-[0] 2
-[0&!1] 3
+[1] 2
+[!0&1] 3
 State: 3
-[!0&1] 1
+[0&!1] 1
 [0&1] 2
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 5 "p1" "p2" "p0" "p3" "p4"
+AP: 5 "p0" "p1" "p2" "p3" "p4"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!2] 0
-[!0&!1&!3 | !0&!1&!4 | !0&!3&!4 | !1&!3&!4] 1
+[!0] 0
+[!1&!2&!3 | !1&!2&!4 | !1&!3&!4 | !2&!3&!4] 1
 State: 1 {0}
-[!0&!1&!3 | !0&!1&!4 | !0&!3&!4 | !1&!3&!4] 1
+[!1&!2&!3 | !1&!2&!4 | !1&!3&!4 | !2&!3&!4] 1
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7779,13 +8119,13 @@ properties: terminal
 State: 0 {0}
 [t] 0
 State: 1
-[0] 0
+[1] 0
 [!0&!1] 1
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7794,8 +8134,8 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[0] 0
-[!0&1] 1
+[1] 0
+[0&!1] 1
 --END--
 HOA: v1
 States: 2
@@ -7813,7 +8153,7 @@ State: 1 "{2}"
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc
@@ -7821,19 +8161,19 @@ properties: trans-labels explicit-labels trans-acc
 State: 0
 [t] 1
 State: 1
-[1 | !2] 1 {0}
-[!0&!1&2] 2
-[!1&2] 3
+[!0 | 2] 1 {0}
+[0&!1&!2] 2
+[0&!2] 3
 State: 2
-[!0] 2 {0}
+[!1] 2 {0}
 State: 3
-[!0&1] 1 {0}
-[!0&!1] 3
+[!1&2] 1 {0}
+[!1&!2] 3
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7841,16 +8181,16 @@ properties: trans-labels explicit-labels state-acc deterministic
 State: 0 "{0}"
 [t] 1
 State: 1 "{1}"
-[0 | 1 | !2] 1
-[!0&!1&2] 2
+[!0 | 1 | 2] 1
+[0&!1&!2] 2
 State: 2 "{1,2}"
-[1] 1
-[!0&!1] 2
+[2] 1
+[!1&!2] 2
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -7858,11 +8198,11 @@ properties: trans-labels explicit-labels state-acc deterministic
 State: 0 "{0}"
 [t] 1
 State: 1 "{1}"
-[!0 | 1 | !2] 1
-[0&!1&2] 2
+[!0 | !1 | 2] 1
+[0&1&!2] 2
 State: 2 "{1,2}"
-[1] 1
-[0&!1] 2
+[2] 1
+[1&!2] 2
 --END--
 HOA: v1
 States: 5
@@ -9465,6 +9805,583 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
+AP: 12 "a5" "b5" "a3" "b3" "a0" "b0" "a1" "b1" "a2" "b2" "a4" "b4"
+Acceptance: 12 (Fin(0) & Inf(1)) | (((Fin(2) & Inf(3)) | ((Fin(4) | Inf(5) | (Fin(6) & Inf(7))) & (Fin(8) | Inf(9)))) & (Fin(10) | Inf(11)))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic stutter-invariant
+--BODY--
+State: 0
+[0&!1&2&!3&4&!5&6&!7&8&!9&10&!11] 0
+[!0&2&!3&4&!5&6&!7&8&!9&10&!11] 0 {0}
+[0&1&2&!3&4&!5&6&!7&8&!9&10&!11] 0 {1}
+[0&!1&!2&4&!5&6&!7&8&!9&10&!11] 0 {2}
+[!0&!2&4&!5&6&!7&8&!9&10&!11] 0 {0 2}
+[0&1&!2&4&!5&6&!7&8&!9&10&!11] 0 {1 2}
+[0&!1&2&3&4&!5&6&!7&8&!9&10&!11] 0 {3}
+[!0&2&3&4&!5&6&!7&8&!9&10&!11] 0 {0 3}
+[0&1&2&3&4&!5&6&!7&8&!9&10&!11] 0 {1 3}
+[0&!1&2&!3&!4&!5&6&!7&8&!9&10&!11] 0 {4}
+[!0&2&!3&!4&!5&6&!7&8&!9&10&!11] 0 {0 4}
+[0&1&2&!3&!4&!5&6&!7&8&!9&10&!11] 0 {1 4}
+[0&!1&!2&!4&!5&6&!7&8&!9&10&!11] 0 {2 4}
+[!0&!2&!4&!5&6&!7&8&!9&10&!11] 0 {0 2 4}
+[0&1&!2&!4&!5&6&!7&8&!9&10&!11] 0 {1 2 4}
+[0&!1&2&3&!4&!5&6&!7&8&!9&10&!11] 0 {3 4}
+[!0&2&3&!4&!5&6&!7&8&!9&10&!11] 0 {0 3 4}
+[0&1&2&3&!4&!5&6&!7&8&!9&10&!11] 0 {1 3 4}
+[0&!1&2&!3&5&8&!9&10&!11] 0 {5}
+[!0&2&!3&5&8&!9&10&!11] 0 {0 5}
+[0&1&2&!3&5&8&!9&10&!11] 0 {1 5}
+[0&!1&!2&5&8&!9&10&!11] 0 {2 5}
+[!0&!2&5&8&!9&10&!11] 0 {0 2 5}
+[0&1&!2&5&8&!9&10&!11] 0 {1 2 5}
+[0&!1&2&3&5&8&!9&10&!11] 0 {3 5}
+[!0&2&3&5&8&!9&10&!11] 0 {0 3 5}
+[0&1&2&3&5&8&!9&10&!11] 0 {1 3 5}
+[0&!1&2&!3&4&!5&!6&8&!9&10&!11] 0 {6}
+[!0&2&!3&4&!5&!6&8&!9&10&!11] 0 {0 6}
+[0&1&2&!3&4&!5&!6&8&!9&10&!11] 0 {1 6}
+[0&!1&!2&4&!5&!6&8&!9&10&!11] 0 {2 6}
+[!0&!2&4&!5&!6&8&!9&10&!11] 0 {0 2 6}
+[0&1&!2&4&!5&!6&8&!9&10&!11] 0 {1 2 6}
+[0&!1&2&3&4&!5&!6&8&!9&10&!11] 0 {3 6}
+[!0&2&3&4&!5&!6&8&!9&10&!11] 0 {0 3 6}
+[0&1&2&3&4&!5&!6&8&!9&10&!11] 0 {1 3 6}
+[0&!1&2&!3&!4&!5&!6&8&!9&10&!11] 0 {4 6}
+[!0&2&!3&!4&!5&!6&8&!9&10&!11] 0 {0 4 6}
+[0&1&2&!3&!4&!5&!6&8&!9&10&!11] 0 {1 4 6}
+[0&!1&!2&!4&!5&!6&8&!9&10&!11] 0 {2 4 6}
+[!0&!2&!4&!5&!6&8&!9&10&!11] 0 {0 2 4 6}
+[0&1&!2&!4&!5&!6&8&!9&10&!11] 0 {1 2 4 6}
+[0&!1&2&3&!4&!5&!6&8&!9&10&!11] 0 {3 4 6}
+[!0&2&3&!4&!5&!6&8&!9&10&!11] 0 {0 3 4 6}
+[0&1&2&3&!4&!5&!6&8&!9&10&!11] 0 {1 3 4 6}
+[0&!1&2&!3&4&!5&6&7&8&!9&10&!11] 0 {7}
+[!0&2&!3&4&!5&6&7&8&!9&10&!11] 0 {0 7}
+[0&1&2&!3&4&!5&6&7&8&!9&10&!11] 0 {1 7}
+[0&!1&!2&4&!5&6&7&8&!9&10&!11] 0 {2 7}
+[!0&!2&4&!5&6&7&8&!9&10&!11] 0 {0 2 7}
+[0&1&!2&4&!5&6&7&8&!9&10&!11] 0 {1 2 7}
+[0&!1&2&3&4&!5&6&7&8&!9&10&!11] 0 {3 7}
+[!0&2&3&4&!5&6&7&8&!9&10&!11] 0 {0 3 7}
+[0&1&2&3&4&!5&6&7&8&!9&10&!11] 0 {1 3 7}
+[0&!1&2&!3&!4&!5&6&7&8&!9&10&!11] 0 {4 7}
+[!0&2&!3&!4&!5&6&7&8&!9&10&!11] 0 {0 4 7}
+[0&1&2&!3&!4&!5&6&7&8&!9&10&!11] 0 {1 4 7}
+[0&!1&!2&!4&!5&6&7&8&!9&10&!11] 0 {2 4 7}
+[!0&!2&!4&!5&6&7&8&!9&10&!11] 0 {0 2 4 7}
+[0&1&!2&!4&!5&6&7&8&!9&10&!11] 0 {1 2 4 7}
+[0&!1&2&3&!4&!5&6&7&8&!9&10&!11] 0 {3 4 7}
+[!0&2&3&!4&!5&6&7&8&!9&10&!11] 0 {0 3 4 7}
+[0&1&2&3&!4&!5&6&7&8&!9&10&!11] 0 {1 3 4 7}
+[0&!1&2&!3&4&!5&6&!7&!8&!9&10&!11] 0 {8}
+[!0&2&!3&4&!5&6&!7&!8&!9&10&!11] 0 {0 8}
+[0&1&2&!3&4&!5&6&!7&!8&!9&10&!11] 0 {1 8}
+[0&!1&!2&4&!5&6&!7&!8&!9&10&!11] 0 {2 8}
+[!0&!2&4&!5&6&!7&!8&!9&10&!11] 0 {0 2 8}
+[0&1&!2&4&!5&6&!7&!8&!9&10&!11] 0 {1 2 8}
+[0&!1&2&3&4&!5&6&!7&!8&!9&10&!11] 0 {3 8}
+[!0&2&3&4&!5&6&!7&!8&!9&10&!11] 0 {0 3 8}
+[0&1&2&3&4&!5&6&!7&!8&!9&10&!11] 0 {1 3 8}
+[0&!1&2&!3&!4&!5&6&!7&!8&!9&10&!11] 0 {4 8}
+[!0&2&!3&!4&!5&6&!7&!8&!9&10&!11] 0 {0 4 8}
+[0&1&2&!3&!4&!5&6&!7&!8&!9&10&!11] 0 {1 4 8}
+[0&!1&!2&!4&!5&6&!7&!8&!9&10&!11] 0 {2 4 8}
+[!0&!2&!4&!5&6&!7&!8&!9&10&!11] 0 {0 2 4 8}
+[0&1&!2&!4&!5&6&!7&!8&!9&10&!11] 0 {1 2 4 8}
+[0&!1&2&3&!4&!5&6&!7&!8&!9&10&!11] 0 {3 4 8}
+[!0&2&3&!4&!5&6&!7&!8&!9&10&!11] 0 {0 3 4 8}
+[0&1&2&3&!4&!5&6&!7&!8&!9&10&!11] 0 {1 3 4 8}
+[0&!1&2&!3&5&!8&!9&10&!11] 0 {5 8}
+[!0&2&!3&5&!8&!9&10&!11] 0 {0 5 8}
+[0&1&2&!3&5&!8&!9&10&!11] 0 {1 5 8}
+[0&!1&!2&5&!8&!9&10&!11] 0 {2 5 8}
+[!0&!2&5&!8&!9&10&!11] 0 {0 2 5 8}
+[0&1&!2&5&!8&!9&10&!11] 0 {1 2 5 8}
+[0&!1&2&3&5&!8&!9&10&!11] 0 {3 5 8}
+[!0&2&3&5&!8&!9&10&!11] 0 {0 3 5 8}
+[0&1&2&3&5&!8&!9&10&!11] 0 {1 3 5 8}
+[0&!1&2&!3&4&!5&!6&!8&!9&10&!11] 0 {6 8}
+[!0&2&!3&4&!5&!6&!8&!9&10&!11] 0 {0 6 8}
+[0&1&2&!3&4&!5&!6&!8&!9&10&!11] 0 {1 6 8}
+[0&!1&!2&4&!5&!6&!8&!9&10&!11] 0 {2 6 8}
+[!0&!2&4&!5&!6&!8&!9&10&!11] 0 {0 2 6 8}
+[0&1&!2&4&!5&!6&!8&!9&10&!11] 0 {1 2 6 8}
+[0&!1&2&3&4&!5&!6&!8&!9&10&!11] 0 {3 6 8}
+[!0&2&3&4&!5&!6&!8&!9&10&!11] 0 {0 3 6 8}
+[0&1&2&3&4&!5&!6&!8&!9&10&!11] 0 {1 3 6 8}
+[0&!1&2&!3&!4&!5&!6&!8&!9&10&!11] 0 {4 6 8}
+[!0&2&!3&!4&!5&!6&!8&!9&10&!11] 0 {0 4 6 8}
+[0&1&2&!3&!4&!5&!6&!8&!9&10&!11] 0 {1 4 6 8}
+[0&!1&!2&!4&!5&!6&!8&!9&10&!11] 0 {2 4 6 8}
+[!0&!2&!4&!5&!6&!8&!9&10&!11] 0 {0 2 4 6 8}
+[0&1&!2&!4&!5&!6&!8&!9&10&!11] 0 {1 2 4 6 8}
+[0&!1&2&3&!4&!5&!6&!8&!9&10&!11] 0 {3 4 6 8}
+[!0&2&3&!4&!5&!6&!8&!9&10&!11] 0 {0 3 4 6 8}
+[0&1&2&3&!4&!5&!6&!8&!9&10&!11] 0 {1 3 4 6 8}
+[0&!1&2&!3&4&!5&6&7&!8&!9&10&!11] 0 {7 8}
+[!0&2&!3&4&!5&6&7&!8&!9&10&!11] 0 {0 7 8}
+[0&1&2&!3&4&!5&6&7&!8&!9&10&!11] 0 {1 7 8}
+[0&!1&!2&4&!5&6&7&!8&!9&10&!11] 0 {2 7 8}
+[!0&!2&4&!5&6&7&!8&!9&10&!11] 0 {0 2 7 8}
+[0&1&!2&4&!5&6&7&!8&!9&10&!11] 0 {1 2 7 8}
+[0&!1&2&3&4&!5&6&7&!8&!9&10&!11] 0 {3 7 8}
+[!0&2&3&4&!5&6&7&!8&!9&10&!11] 0 {0 3 7 8}
+[0&1&2&3&4&!5&6&7&!8&!9&10&!11] 0 {1 3 7 8}
+[0&!1&2&!3&!4&!5&6&7&!8&!9&10&!11] 0 {4 7 8}
+[!0&2&!3&!4&!5&6&7&!8&!9&10&!11] 0 {0 4 7 8}
+[0&1&2&!3&!4&!5&6&7&!8&!9&10&!11] 0 {1 4 7 8}
+[0&!1&!2&!4&!5&6&7&!8&!9&10&!11] 0 {2 4 7 8}
+[!0&!2&!4&!5&6&7&!8&!9&10&!11] 0 {0 2 4 7 8}
+[0&1&!2&!4&!5&6&7&!8&!9&10&!11] 0 {1 2 4 7 8}
+[0&!1&2&3&!4&!5&6&7&!8&!9&10&!11] 0 {3 4 7 8}
+[!0&2&3&!4&!5&6&7&!8&!9&10&!11] 0 {0 3 4 7 8}
+[0&1&2&3&!4&!5&6&7&!8&!9&10&!11] 0 {1 3 4 7 8}
+[0&!1&2&!3&4&!5&6&!7&9&10&!11] 0 {9}
+[!0&2&!3&4&!5&6&!7&9&10&!11] 0 {0 9}
+[0&1&2&!3&4&!5&6&!7&9&10&!11] 0 {1 9}
+[0&!1&!2&4&!5&6&!7&9&10&!11] 0 {2 9}
+[!0&!2&4&!5&6&!7&9&10&!11] 0 {0 2 9}
+[0&1&!2&4&!5&6&!7&9&10&!11] 0 {1 2 9}
+[0&!1&2&3&4&!5&6&!7&9&10&!11] 0 {3 9}
+[!0&2&3&4&!5&6&!7&9&10&!11] 0 {0 3 9}
+[0&1&2&3&4&!5&6&!7&9&10&!11] 0 {1 3 9}
+[0&!1&2&!3&!4&!5&6&!7&9&10&!11] 0 {4 9}
+[!0&2&!3&!4&!5&6&!7&9&10&!11] 0 {0 4 9}
+[0&1&2&!3&!4&!5&6&!7&9&10&!11] 0 {1 4 9}
+[0&!1&!2&!4&!5&6&!7&9&10&!11] 0 {2 4 9}
+[!0&!2&!4&!5&6&!7&9&10&!11] 0 {0 2 4 9}
+[0&1&!2&!4&!5&6&!7&9&10&!11] 0 {1 2 4 9}
+[0&!1&2&3&!4&!5&6&!7&9&10&!11] 0 {3 4 9}
+[!0&2&3&!4&!5&6&!7&9&10&!11] 0 {0 3 4 9}
+[0&1&2&3&!4&!5&6&!7&9&10&!11] 0 {1 3 4 9}
+[0&!1&2&!3&5&9&10&!11] 0 {5 9}
+[!0&2&!3&5&9&10&!11] 0 {0 5 9}
+[0&1&2&!3&5&9&10&!11] 0 {1 5 9}
+[0&!1&!2&5&9&10&!11] 0 {2 5 9}
+[!0&!2&5&9&10&!11] 0 {0 2 5 9}
+[0&1&!2&5&9&10&!11] 0 {1 2 5 9}
+[0&!1&2&3&5&9&10&!11] 0 {3 5 9}
+[!0&2&3&5&9&10&!11] 0 {0 3 5 9}
+[0&1&2&3&5&9&10&!11] 0 {1 3 5 9}
+[0&!1&2&!3&4&!5&!6&9&10&!11] 0 {6 9}
+[!0&2&!3&4&!5&!6&9&10&!11] 0 {0 6 9}
+[0&1&2&!3&4&!5&!6&9&10&!11] 0 {1 6 9}
+[0&!1&!2&4&!5&!6&9&10&!11] 0 {2 6 9}
+[!0&!2&4&!5&!6&9&10&!11] 0 {0 2 6 9}
+[0&1&!2&4&!5&!6&9&10&!11] 0 {1 2 6 9}
+[0&!1&2&3&4&!5&!6&9&10&!11] 0 {3 6 9}
+[!0&2&3&4&!5&!6&9&10&!11] 0 {0 3 6 9}
+[0&1&2&3&4&!5&!6&9&10&!11] 0 {1 3 6 9}
+[0&!1&2&!3&!4&!5&!6&9&10&!11] 0 {4 6 9}
+[!0&2&!3&!4&!5&!6&9&10&!11] 0 {0 4 6 9}
+[0&1&2&!3&!4&!5&!6&9&10&!11] 0 {1 4 6 9}
+[0&!1&!2&!4&!5&!6&9&10&!11] 0 {2 4 6 9}
+[!0&!2&!4&!5&!6&9&10&!11] 0 {0 2 4 6 9}
+[0&1&!2&!4&!5&!6&9&10&!11] 0 {1 2 4 6 9}
+[0&!1&2&3&!4&!5&!6&9&10&!11] 0 {3 4 6 9}
+[!0&2&3&!4&!5&!6&9&10&!11] 0 {0 3 4 6 9}
+[0&1&2&3&!4&!5&!6&9&10&!11] 0 {1 3 4 6 9}
+[0&!1&2&!3&4&!5&6&7&9&10&!11] 0 {7 9}
+[!0&2&!3&4&!5&6&7&9&10&!11] 0 {0 7 9}
+[0&1&2&!3&4&!5&6&7&9&10&!11] 0 {1 7 9}
+[0&!1&!2&4&!5&6&7&9&10&!11] 0 {2 7 9}
+[!0&!2&4&!5&6&7&9&10&!11] 0 {0 2 7 9}
+[0&1&!2&4&!5&6&7&9&10&!11] 0 {1 2 7 9}
+[0&!1&2&3&4&!5&6&7&9&10&!11] 0 {3 7 9}
+[!0&2&3&4&!5&6&7&9&10&!11] 0 {0 3 7 9}
+[0&1&2&3&4&!5&6&7&9&10&!11] 0 {1 3 7 9}
+[0&!1&2&!3&!4&!5&6&7&9&10&!11] 0 {4 7 9}
+[!0&2&!3&!4&!5&6&7&9&10&!11] 0 {0 4 7 9}
+[0&1&2&!3&!4&!5&6&7&9&10&!11] 0 {1 4 7 9}
+[0&!1&!2&!4&!5&6&7&9&10&!11] 0 {2 4 7 9}
+[!0&!2&!4&!5&6&7&9&10&!11] 0 {0 2 4 7 9}
+[0&1&!2&!4&!5&6&7&9&10&!11] 0 {1 2 4 7 9}
+[0&!1&2&3&!4&!5&6&7&9&10&!11] 0 {3 4 7 9}
+[!0&2&3&!4&!5&6&7&9&10&!11] 0 {0 3 4 7 9}
+[0&1&2&3&!4&!5&6&7&9&10&!11] 0 {1 3 4 7 9}
+[0&!1&2&!3&4&!5&6&!7&8&!9&!10&!11] 0 {10}
+[!0&2&!3&4&!5&6&!7&8&!9&!10&!11] 0 {0 10}
+[0&1&2&!3&4&!5&6&!7&8&!9&!10&!11] 0 {1 10}
+[0&!1&!2&4&!5&6&!7&8&!9&!10&!11] 0 {2 10}
+[!0&!2&4&!5&6&!7&8&!9&!10&!11] 0 {0 2 10}
+[0&1&!2&4&!5&6&!7&8&!9&!10&!11] 0 {1 2 10}
+[0&!1&2&3&4&!5&6&!7&8&!9&!10&!11] 0 {3 10}
+[!0&2&3&4&!5&6&!7&8&!9&!10&!11] 0 {0 3 10}
+[0&1&2&3&4&!5&6&!7&8&!9&!10&!11] 0 {1 3 10}
+[0&!1&2&!3&!4&!5&6&!7&8&!9&!10&!11] 0 {4 10}
+[!0&2&!3&!4&!5&6&!7&8&!9&!10&!11] 0 {0 4 10}
+[0&1&2&!3&!4&!5&6&!7&8&!9&!10&!11] 0 {1 4 10}
+[0&!1&!2&!4&!5&6&!7&8&!9&!10&!11] 0 {2 4 10}
+[!0&!2&!4&!5&6&!7&8&!9&!10&!11] 0 {0 2 4 10}
+[0&1&!2&!4&!5&6&!7&8&!9&!10&!11] 0 {1 2 4 10}
+[0&!1&2&3&!4&!5&6&!7&8&!9&!10&!11] 0 {3 4 10}
+[!0&2&3&!4&!5&6&!7&8&!9&!10&!11] 0 {0 3 4 10}
+[0&1&2&3&!4&!5&6&!7&8&!9&!10&!11] 0 {1 3 4 10}
+[0&!1&2&!3&5&8&!9&!10&!11] 0 {5 10}
+[!0&2&!3&5&8&!9&!10&!11] 0 {0 5 10}
+[0&1&2&!3&5&8&!9&!10&!11] 0 {1 5 10}
+[0&!1&!2&5&8&!9&!10&!11] 0 {2 5 10}
+[!0&!2&5&8&!9&!10&!11] 0 {0 2 5 10}
+[0&1&!2&5&8&!9&!10&!11] 0 {1 2 5 10}
+[0&!1&2&3&5&8&!9&!10&!11] 0 {3 5 10}
+[!0&2&3&5&8&!9&!10&!11] 0 {0 3 5 10}
+[0&1&2&3&5&8&!9&!10&!11] 0 {1 3 5 10}
+[0&!1&2&!3&4&!5&!6&8&!9&!10&!11] 0 {6 10}
+[!0&2&!3&4&!5&!6&8&!9&!10&!11] 0 {0 6 10}
+[0&1&2&!3&4&!5&!6&8&!9&!10&!11] 0 {1 6 10}
+[0&!1&!2&4&!5&!6&8&!9&!10&!11] 0 {2 6 10}
+[!0&!2&4&!5&!6&8&!9&!10&!11] 0 {0 2 6 10}
+[0&1&!2&4&!5&!6&8&!9&!10&!11] 0 {1 2 6 10}
+[0&!1&2&3&4&!5&!6&8&!9&!10&!11] 0 {3 6 10}
+[!0&2&3&4&!5&!6&8&!9&!10&!11] 0 {0 3 6 10}
+[0&1&2&3&4&!5&!6&8&!9&!10&!11] 0 {1 3 6 10}
+[0&!1&2&!3&!4&!5&!6&8&!9&!10&!11] 0 {4 6 10}
+[!0&2&!3&!4&!5&!6&8&!9&!10&!11] 0 {0 4 6 10}
+[0&1&2&!3&!4&!5&!6&8&!9&!10&!11] 0 {1 4 6 10}
+[0&!1&!2&!4&!5&!6&8&!9&!10&!11] 0 {2 4 6 10}
+[!0&!2&!4&!5&!6&8&!9&!10&!11] 0 {0 2 4 6 10}
+[0&1&!2&!4&!5&!6&8&!9&!10&!11] 0 {1 2 4 6 10}
+[0&!1&2&3&!4&!5&!6&8&!9&!10&!11] 0 {3 4 6 10}
+[!0&2&3&!4&!5&!6&8&!9&!10&!11] 0 {0 3 4 6 10}
+[0&1&2&3&!4&!5&!6&8&!9&!10&!11] 0 {1 3 4 6 10}
+[0&!1&2&!3&4&!5&6&7&8&!9&!10&!11] 0 {7 10}
+[!0&2&!3&4&!5&6&7&8&!9&!10&!11] 0 {0 7 10}
+[0&1&2&!3&4&!5&6&7&8&!9&!10&!11] 0 {1 7 10}
+[0&!1&!2&4&!5&6&7&8&!9&!10&!11] 0 {2 7 10}
+[!0&!2&4&!5&6&7&8&!9&!10&!11] 0 {0 2 7 10}
+[0&1&!2&4&!5&6&7&8&!9&!10&!11] 0 {1 2 7 10}
+[0&!1&2&3&4&!5&6&7&8&!9&!10&!11] 0 {3 7 10}
+[!0&2&3&4&!5&6&7&8&!9&!10&!11] 0 {0 3 7 10}
+[0&1&2&3&4&!5&6&7&8&!9&!10&!11] 0 {1 3 7 10}
+[0&!1&2&!3&!4&!5&6&7&8&!9&!10&!11] 0 {4 7 10}
+[!0&2&!3&!4&!5&6&7&8&!9&!10&!11] 0 {0 4 7 10}
+[0&1&2&!3&!4&!5&6&7&8&!9&!10&!11] 0 {1 4 7 10}
+[0&!1&!2&!4&!5&6&7&8&!9&!10&!11] 0 {2 4 7 10}
+[!0&!2&!4&!5&6&7&8&!9&!10&!11] 0 {0 2 4 7 10}
+[0&1&!2&!4&!5&6&7&8&!9&!10&!11] 0 {1 2 4 7 10}
+[0&!1&2&3&!4&!5&6&7&8&!9&!10&!11] 0 {3 4 7 10}
+[!0&2&3&!4&!5&6&7&8&!9&!10&!11] 0 {0 3 4 7 10}
+[0&1&2&3&!4&!5&6&7&8&!9&!10&!11] 0 {1 3 4 7 10}
+[0&!1&2&!3&4&!5&6&!7&!8&!9&!10&!11] 0 {8 10}
+[!0&2&!3&4&!5&6&!7&!8&!9&!10&!11] 0 {0 8 10}
+[0&1&2&!3&4&!5&6&!7&!8&!9&!10&!11] 0 {1 8 10}
+[0&!1&!2&4&!5&6&!7&!8&!9&!10&!11] 0 {2 8 10}
+[!0&!2&4&!5&6&!7&!8&!9&!10&!11] 0 {0 2 8 10}
+[0&1&!2&4&!5&6&!7&!8&!9&!10&!11] 0 {1 2 8 10}
+[0&!1&2&3&4&!5&6&!7&!8&!9&!10&!11] 0 {3 8 10}
+[!0&2&3&4&!5&6&!7&!8&!9&!10&!11] 0 {0 3 8 10}
+[0&1&2&3&4&!5&6&!7&!8&!9&!10&!11] 0 {1 3 8 10}
+[0&!1&2&!3&!4&!5&6&!7&!8&!9&!10&!11] 0 {4 8 10}
+[!0&2&!3&!4&!5&6&!7&!8&!9&!10&!11] 0 {0 4 8 10}
+[0&1&2&!3&!4&!5&6&!7&!8&!9&!10&!11] 0 {1 4 8 10}
+[0&!1&!2&!4&!5&6&!7&!8&!9&!10&!11] 0 {2 4 8 10}
+[!0&!2&!4&!5&6&!7&!8&!9&!10&!11] 0 {0 2 4 8 10}
+[0&1&!2&!4&!5&6&!7&!8&!9&!10&!11] 0 {1 2 4 8 10}
+[0&!1&2&3&!4&!5&6&!7&!8&!9&!10&!11] 0 {3 4 8 10}
+[!0&2&3&!4&!5&6&!7&!8&!9&!10&!11] 0 {0 3 4 8 10}
+[0&1&2&3&!4&!5&6&!7&!8&!9&!10&!11] 0 {1 3 4 8 10}
+[0&!1&2&!3&5&!8&!9&!10&!11] 0 {5 8 10}
+[!0&2&!3&5&!8&!9&!10&!11] 0 {0 5 8 10}
+[0&1&2&!3&5&!8&!9&!10&!11] 0 {1 5 8 10}
+[0&!1&!2&5&!8&!9&!10&!11] 0 {2 5 8 10}
+[!0&!2&5&!8&!9&!10&!11] 0 {0 2 5 8 10}
+[0&1&!2&5&!8&!9&!10&!11] 0 {1 2 5 8 10}
+[0&!1&2&3&5&!8&!9&!10&!11] 0 {3 5 8 10}
+[!0&2&3&5&!8&!9&!10&!11] 0 {0 3 5 8 10}
+[0&1&2&3&5&!8&!9&!10&!11] 0 {1 3 5 8 10}
+[0&!1&2&!3&4&!5&!6&!8&!9&!10&!11] 0 {6 8 10}
+[!0&2&!3&4&!5&!6&!8&!9&!10&!11] 0 {0 6 8 10}
+[0&1&2&!3&4&!5&!6&!8&!9&!10&!11] 0 {1 6 8 10}
+[0&!1&!2&4&!5&!6&!8&!9&!10&!11] 0 {2 6 8 10}
+[!0&!2&4&!5&!6&!8&!9&!10&!11] 0 {0 2 6 8 10}
+[0&1&!2&4&!5&!6&!8&!9&!10&!11] 0 {1 2 6 8 10}
+[0&!1&2&3&4&!5&!6&!8&!9&!10&!11] 0 {3 6 8 10}
+[!0&2&3&4&!5&!6&!8&!9&!10&!11] 0 {0 3 6 8 10}
+[0&1&2&3&4&!5&!6&!8&!9&!10&!11] 0 {1 3 6 8 10}
+[0&!1&2&!3&!4&!5&!6&!8&!9&!10&!11] 0 {4 6 8 10}
+[!0&2&!3&!4&!5&!6&!8&!9&!10&!11] 0 {0 4 6 8 10}
+[0&1&2&!3&!4&!5&!6&!8&!9&!10&!11] 0 {1 4 6 8 10}
+[0&!1&!2&!4&!5&!6&!8&!9&!10&!11] 0 {2 4 6 8 10}
+[!0&!2&!4&!5&!6&!8&!9&!10&!11] 0 {0 2 4 6 8 10}
+[0&1&!2&!4&!5&!6&!8&!9&!10&!11] 0 {1 2 4 6 8 10}
+[0&!1&2&3&!4&!5&!6&!8&!9&!10&!11] 0 {3 4 6 8 10}
+[!0&2&3&!4&!5&!6&!8&!9&!10&!11] 0 {0 3 4 6 8 10}
+[0&1&2&3&!4&!5&!6&!8&!9&!10&!11] 0 {1 3 4 6 8 10}
+[0&!1&2&!3&4&!5&6&7&!8&!9&!10&!11] 0 {7 8 10}
+[!0&2&!3&4&!5&6&7&!8&!9&!10&!11] 0 {0 7 8 10}
+[0&1&2&!3&4&!5&6&7&!8&!9&!10&!11] 0 {1 7 8 10}
+[0&!1&!2&4&!5&6&7&!8&!9&!10&!11] 0 {2 7 8 10}
+[!0&!2&4&!5&6&7&!8&!9&!10&!11] 0 {0 2 7 8 10}
+[0&1&!2&4&!5&6&7&!8&!9&!10&!11] 0 {1 2 7 8 10}
+[0&!1&2&3&4&!5&6&7&!8&!9&!10&!11] 0 {3 7 8 10}
+[!0&2&3&4&!5&6&7&!8&!9&!10&!11] 0 {0 3 7 8 10}
+[0&1&2&3&4&!5&6&7&!8&!9&!10&!11] 0 {1 3 7 8 10}
+[0&!1&2&!3&!4&!5&6&7&!8&!9&!10&!11] 0 {4 7 8 10}
+[!0&2&!3&!4&!5&6&7&!8&!9&!10&!11] 0 {0 4 7 8 10}
+[0&1&2&!3&!4&!5&6&7&!8&!9&!10&!11] 0 {1 4 7 8 10}
+[0&!1&!2&!4&!5&6&7&!8&!9&!10&!11] 0 {2 4 7 8 10}
+[!0&!2&!4&!5&6&7&!8&!9&!10&!11] 0 {0 2 4 7 8 10}
+[0&1&!2&!4&!5&6&7&!8&!9&!10&!11] 0 {1 2 4 7 8 10}
+[0&!1&2&3&!4&!5&6&7&!8&!9&!10&!11] 0 {3 4 7 8 10}
+[!0&2&3&!4&!5&6&7&!8&!9&!10&!11] 0 {0 3 4 7 8 10}
+[0&1&2&3&!4&!5&6&7&!8&!9&!10&!11] 0 {1 3 4 7 8 10}
+[0&!1&2&!3&4&!5&6&!7&9&!10&!11] 0 {9 10}
+[!0&2&!3&4&!5&6&!7&9&!10&!11] 0 {0 9 10}
+[0&1&2&!3&4&!5&6&!7&9&!10&!11] 0 {1 9 10}
+[0&!1&!2&4&!5&6&!7&9&!10&!11] 0 {2 9 10}
+[!0&!2&4&!5&6&!7&9&!10&!11] 0 {0 2 9 10}
+[0&1&!2&4&!5&6&!7&9&!10&!11] 0 {1 2 9 10}
+[0&!1&2&3&4&!5&6&!7&9&!10&!11] 0 {3 9 10}
+[!0&2&3&4&!5&6&!7&9&!10&!11] 0 {0 3 9 10}
+[0&1&2&3&4&!5&6&!7&9&!10&!11] 0 {1 3 9 10}
+[0&!1&2&!3&!4&!5&6&!7&9&!10&!11] 0 {4 9 10}
+[!0&2&!3&!4&!5&6&!7&9&!10&!11] 0 {0 4 9 10}
+[0&1&2&!3&!4&!5&6&!7&9&!10&!11] 0 {1 4 9 10}
+[0&!1&!2&!4&!5&6&!7&9&!10&!11] 0 {2 4 9 10}
+[!0&!2&!4&!5&6&!7&9&!10&!11] 0 {0 2 4 9 10}
+[0&1&!2&!4&!5&6&!7&9&!10&!11] 0 {1 2 4 9 10}
+[0&!1&2&3&!4&!5&6&!7&9&!10&!11] 0 {3 4 9 10}
+[!0&2&3&!4&!5&6&!7&9&!10&!11] 0 {0 3 4 9 10}
+[0&1&2&3&!4&!5&6&!7&9&!10&!11] 0 {1 3 4 9 10}
+[0&!1&2&!3&5&9&!10&!11] 0 {5 9 10}
+[!0&2&!3&5&9&!10&!11] 0 {0 5 9 10}
+[0&1&2&!3&5&9&!10&!11] 0 {1 5 9 10}
+[0&!1&!2&5&9&!10&!11] 0 {2 5 9 10}
+[!0&!2&5&9&!10&!11] 0 {0 2 5 9 10}
+[0&1&!2&5&9&!10&!11] 0 {1 2 5 9 10}
+[0&!1&2&3&5&9&!10&!11] 0 {3 5 9 10}
+[!0&2&3&5&9&!10&!11] 0 {0 3 5 9 10}
+[0&1&2&3&5&9&!10&!11] 0 {1 3 5 9 10}
+[0&!1&2&!3&4&!5&!6&9&!10&!11] 0 {6 9 10}
+[!0&2&!3&4&!5&!6&9&!10&!11] 0 {0 6 9 10}
+[0&1&2&!3&4&!5&!6&9&!10&!11] 0 {1 6 9 10}
+[0&!1&!2&4&!5&!6&9&!10&!11] 0 {2 6 9 10}
+[!0&!2&4&!5&!6&9&!10&!11] 0 {0 2 6 9 10}
+[0&1&!2&4&!5&!6&9&!10&!11] 0 {1 2 6 9 10}
+[0&!1&2&3&4&!5&!6&9&!10&!11] 0 {3 6 9 10}
+[!0&2&3&4&!5&!6&9&!10&!11] 0 {0 3 6 9 10}
+[0&1&2&3&4&!5&!6&9&!10&!11] 0 {1 3 6 9 10}
+[0&!1&2&!3&!4&!5&!6&9&!10&!11] 0 {4 6 9 10}
+[!0&2&!3&!4&!5&!6&9&!10&!11] 0 {0 4 6 9 10}
+[0&1&2&!3&!4&!5&!6&9&!10&!11] 0 {1 4 6 9 10}
+[0&!1&!2&!4&!5&!6&9&!10&!11] 0 {2 4 6 9 10}
+[!0&!2&!4&!5&!6&9&!10&!11] 0 {0 2 4 6 9 10}
+[0&1&!2&!4&!5&!6&9&!10&!11] 0 {1 2 4 6 9 10}
+[0&!1&2&3&!4&!5&!6&9&!10&!11] 0 {3 4 6 9 10}
+[!0&2&3&!4&!5&!6&9&!10&!11] 0 {0 3 4 6 9 10}
+[0&1&2&3&!4&!5&!6&9&!10&!11] 0 {1 3 4 6 9 10}
+[0&!1&2&!3&4&!5&6&7&9&!10&!11] 0 {7 9 10}
+[!0&2&!3&4&!5&6&7&9&!10&!11] 0 {0 7 9 10}
+[0&1&2&!3&4&!5&6&7&9&!10&!11] 0 {1 7 9 10}
+[0&!1&!2&4&!5&6&7&9&!10&!11] 0 {2 7 9 10}
+[!0&!2&4&!5&6&7&9&!10&!11] 0 {0 2 7 9 10}
+[0&1&!2&4&!5&6&7&9&!10&!11] 0 {1 2 7 9 10}
+[0&!1&2&3&4&!5&6&7&9&!10&!11] 0 {3 7 9 10}
+[!0&2&3&4&!5&6&7&9&!10&!11] 0 {0 3 7 9 10}
+[0&1&2&3&4&!5&6&7&9&!10&!11] 0 {1 3 7 9 10}
+[0&!1&2&!3&!4&!5&6&7&9&!10&!11] 0 {4 7 9 10}
+[!0&2&!3&!4&!5&6&7&9&!10&!11] 0 {0 4 7 9 10}
+[0&1&2&!3&!4&!5&6&7&9&!10&!11] 0 {1 4 7 9 10}
+[0&!1&!2&!4&!5&6&7&9&!10&!11] 0 {2 4 7 9 10}
+[!0&!2&!4&!5&6&7&9&!10&!11] 0 {0 2 4 7 9 10}
+[0&1&!2&!4&!5&6&7&9&!10&!11] 0 {1 2 4 7 9 10}
+[0&!1&2&3&!4&!5&6&7&9&!10&!11] 0 {3 4 7 9 10}
+[!0&2&3&!4&!5&6&7&9&!10&!11] 0 {0 3 4 7 9 10}
+[0&1&2&3&!4&!5&6&7&9&!10&!11] 0 {1 3 4 7 9 10}
+[0&!1&2&!3&4&!5&6&!7&8&!9&11] 0 {11}
+[!0&2&!3&4&!5&6&!7&8&!9&11] 0 {0 11}
+[0&1&2&!3&4&!5&6&!7&8&!9&11] 0 {1 11}
+[0&!1&!2&4&!5&6&!7&8&!9&11] 0 {2 11}
+[!0&!2&4&!5&6&!7&8&!9&11] 0 {0 2 11}
+[0&1&!2&4&!5&6&!7&8&!9&11] 0 {1 2 11}
+[0&!1&2&3&4&!5&6&!7&8&!9&11] 0 {3 11}
+[!0&2&3&4&!5&6&!7&8&!9&11] 0 {0 3 11}
+[0&1&2&3&4&!5&6&!7&8&!9&11] 0 {1 3 11}
+[0&!1&2&!3&!4&!5&6&!7&8&!9&11] 0 {4 11}
+[!0&2&!3&!4&!5&6&!7&8&!9&11] 0 {0 4 11}
+[0&1&2&!3&!4&!5&6&!7&8&!9&11] 0 {1 4 11}
+[0&!1&!2&!4&!5&6&!7&8&!9&11] 0 {2 4 11}
+[!0&!2&!4&!5&6&!7&8&!9&11] 0 {0 2 4 11}
+[0&1&!2&!4&!5&6&!7&8&!9&11] 0 {1 2 4 11}
+[0&!1&2&3&!4&!5&6&!7&8&!9&11] 0 {3 4 11}
+[!0&2&3&!4&!5&6&!7&8&!9&11] 0 {0 3 4 11}
+[0&1&2&3&!4&!5&6&!7&8&!9&11] 0 {1 3 4 11}
+[0&!1&2&!3&5&8&!9&11] 0 {5 11}
+[!0&2&!3&5&8&!9&11] 0 {0 5 11}
+[0&1&2&!3&5&8&!9&11] 0 {1 5 11}
+[0&!1&!2&5&8&!9&11] 0 {2 5 11}
+[!0&!2&5&8&!9&11] 0 {0 2 5 11}
+[0&1&!2&5&8&!9&11] 0 {1 2 5 11}
+[0&!1&2&3&5&8&!9&11] 0 {3 5 11}
+[!0&2&3&5&8&!9&11] 0 {0 3 5 11}
+[0&1&2&3&5&8&!9&11] 0 {1 3 5 11}
+[0&!1&2&!3&4&!5&!6&8&!9&11] 0 {6 11}
+[!0&2&!3&4&!5&!6&8&!9&11] 0 {0 6 11}
+[0&1&2&!3&4&!5&!6&8&!9&11] 0 {1 6 11}
+[0&!1&!2&4&!5&!6&8&!9&11] 0 {2 6 11}
+[!0&!2&4&!5&!6&8&!9&11] 0 {0 2 6 11}
+[0&1&!2&4&!5&!6&8&!9&11] 0 {1 2 6 11}
+[0&!1&2&3&4&!5&!6&8&!9&11] 0 {3 6 11}
+[!0&2&3&4&!5&!6&8&!9&11] 0 {0 3 6 11}
+[0&1&2&3&4&!5&!6&8&!9&11] 0 {1 3 6 11}
+[0&!1&2&!3&!4&!5&!6&8&!9&11] 0 {4 6 11}
+[!0&2&!3&!4&!5&!6&8&!9&11] 0 {0 4 6 11}
+[0&1&2&!3&!4&!5&!6&8&!9&11] 0 {1 4 6 11}
+[0&!1&!2&!4&!5&!6&8&!9&11] 0 {2 4 6 11}
+[!0&!2&!4&!5&!6&8&!9&11] 0 {0 2 4 6 11}
+[0&1&!2&!4&!5&!6&8&!9&11] 0 {1 2 4 6 11}
+[0&!1&2&3&!4&!5&!6&8&!9&11] 0 {3 4 6 11}
+[!0&2&3&!4&!5&!6&8&!9&11] 0 {0 3 4 6 11}
+[0&1&2&3&!4&!5&!6&8&!9&11] 0 {1 3 4 6 11}
+[0&!1&2&!3&4&!5&6&7&8&!9&11] 0 {7 11}
+[!0&2&!3&4&!5&6&7&8&!9&11] 0 {0 7 11}
+[0&1&2&!3&4&!5&6&7&8&!9&11] 0 {1 7 11}
+[0&!1&!2&4&!5&6&7&8&!9&11] 0 {2 7 11}
+[!0&!2&4&!5&6&7&8&!9&11] 0 {0 2 7 11}
+[0&1&!2&4&!5&6&7&8&!9&11] 0 {1 2 7 11}
+[0&!1&2&3&4&!5&6&7&8&!9&11] 0 {3 7 11}
+[!0&2&3&4&!5&6&7&8&!9&11] 0 {0 3 7 11}
+[0&1&2&3&4&!5&6&7&8&!9&11] 0 {1 3 7 11}
+[0&!1&2&!3&!4&!5&6&7&8&!9&11] 0 {4 7 11}
+[!0&2&!3&!4&!5&6&7&8&!9&11] 0 {0 4 7 11}
+[0&1&2&!3&!4&!5&6&7&8&!9&11] 0 {1 4 7 11}
+[0&!1&!2&!4&!5&6&7&8&!9&11] 0 {2 4 7 11}
+[!0&!2&!4&!5&6&7&8&!9&11] 0 {0 2 4 7 11}
+[0&1&!2&!4&!5&6&7&8&!9&11] 0 {1 2 4 7 11}
+[0&!1&2&3&!4&!5&6&7&8&!9&11] 0 {3 4 7 11}
+[!0&2&3&!4&!5&6&7&8&!9&11] 0 {0 3 4 7 11}
+[0&1&2&3&!4&!5&6&7&8&!9&11] 0 {1 3 4 7 11}
+[0&!1&2&!3&4&!5&6&!7&!8&!9&11] 0 {8 11}
+[!0&2&!3&4&!5&6&!7&!8&!9&11] 0 {0 8 11}
+[0&1&2&!3&4&!5&6&!7&!8&!9&11] 0 {1 8 11}
+[0&!1&!2&4&!5&6&!7&!8&!9&11] 0 {2 8 11}
+[!0&!2&4&!5&6&!7&!8&!9&11] 0 {0 2 8 11}
+[0&1&!2&4&!5&6&!7&!8&!9&11] 0 {1 2 8 11}
+[0&!1&2&3&4&!5&6&!7&!8&!9&11] 0 {3 8 11}
+[!0&2&3&4&!5&6&!7&!8&!9&11] 0 {0 3 8 11}
+[0&1&2&3&4&!5&6&!7&!8&!9&11] 0 {1 3 8 11}
+[0&!1&2&!3&!4&!5&6&!7&!8&!9&11] 0 {4 8 11}
+[!0&2&!3&!4&!5&6&!7&!8&!9&11] 0 {0 4 8 11}
+[0&1&2&!3&!4&!5&6&!7&!8&!9&11] 0 {1 4 8 11}
+[0&!1&!2&!4&!5&6&!7&!8&!9&11] 0 {2 4 8 11}
+[!0&!2&!4&!5&6&!7&!8&!9&11] 0 {0 2 4 8 11}
+[0&1&!2&!4&!5&6&!7&!8&!9&11] 0 {1 2 4 8 11}
+[0&!1&2&3&!4&!5&6&!7&!8&!9&11] 0 {3 4 8 11}
+[!0&2&3&!4&!5&6&!7&!8&!9&11] 0 {0 3 4 8 11}
+[0&1&2&3&!4&!5&6&!7&!8&!9&11] 0 {1 3 4 8 11}
+[0&!1&2&!3&5&!8&!9&11] 0 {5 8 11}
+[!0&2&!3&5&!8&!9&11] 0 {0 5 8 11}
+[0&1&2&!3&5&!8&!9&11] 0 {1 5 8 11}
+[0&!1&!2&5&!8&!9&11] 0 {2 5 8 11}
+[!0&!2&5&!8&!9&11] 0 {0 2 5 8 11}
+[0&1&!2&5&!8&!9&11] 0 {1 2 5 8 11}
+[0&!1&2&3&5&!8&!9&11] 0 {3 5 8 11}
+[!0&2&3&5&!8&!9&11] 0 {0 3 5 8 11}
+[0&1&2&3&5&!8&!9&11] 0 {1 3 5 8 11}
+[0&!1&2&!3&4&!5&!6&!8&!9&11] 0 {6 8 11}
+[!0&2&!3&4&!5&!6&!8&!9&11] 0 {0 6 8 11}
+[0&1&2&!3&4&!5&!6&!8&!9&11] 0 {1 6 8 11}
+[0&!1&!2&4&!5&!6&!8&!9&11] 0 {2 6 8 11}
+[!0&!2&4&!5&!6&!8&!9&11] 0 {0 2 6 8 11}
+[0&1&!2&4&!5&!6&!8&!9&11] 0 {1 2 6 8 11}
+[0&!1&2&3&4&!5&!6&!8&!9&11] 0 {3 6 8 11}
+[!0&2&3&4&!5&!6&!8&!9&11] 0 {0 3 6 8 11}
+[0&1&2&3&4&!5&!6&!8&!9&11] 0 {1 3 6 8 11}
+[0&!1&2&!3&!4&!5&!6&!8&!9&11] 0 {4 6 8 11}
+[!0&2&!3&!4&!5&!6&!8&!9&11] 0 {0 4 6 8 11}
+[0&1&2&!3&!4&!5&!6&!8&!9&11] 0 {1 4 6 8 11}
+[0&!1&!2&!4&!5&!6&!8&!9&11] 0 {2 4 6 8 11}
+[!0&!2&!4&!5&!6&!8&!9&11] 0 {0 2 4 6 8 11}
+[0&1&!2&!4&!5&!6&!8&!9&11] 0 {1 2 4 6 8 11}
+[0&!1&2&3&!4&!5&!6&!8&!9&11] 0 {3 4 6 8 11}
+[!0&2&3&!4&!5&!6&!8&!9&11] 0 {0 3 4 6 8 11}
+[0&1&2&3&!4&!5&!6&!8&!9&11] 0 {1 3 4 6 8 11}
+[0&!1&2&!3&4&!5&6&7&!8&!9&11] 0 {7 8 11}
+[!0&2&!3&4&!5&6&7&!8&!9&11] 0 {0 7 8 11}
+[0&1&2&!3&4&!5&6&7&!8&!9&11] 0 {1 7 8 11}
+[0&!1&!2&4&!5&6&7&!8&!9&11] 0 {2 7 8 11}
+[!0&!2&4&!5&6&7&!8&!9&11] 0 {0 2 7 8 11}
+[0&1&!2&4&!5&6&7&!8&!9&11] 0 {1 2 7 8 11}
+[0&!1&2&3&4&!5&6&7&!8&!9&11] 0 {3 7 8 11}
+[!0&2&3&4&!5&6&7&!8&!9&11] 0 {0 3 7 8 11}
+[0&1&2&3&4&!5&6&7&!8&!9&11] 0 {1 3 7 8 11}
+[0&!1&2&!3&!4&!5&6&7&!8&!9&11] 0 {4 7 8 11}
+[!0&2&!3&!4&!5&6&7&!8&!9&11] 0 {0 4 7 8 11}
+[0&1&2&!3&!4&!5&6&7&!8&!9&11] 0 {1 4 7 8 11}
+[0&!1&!2&!4&!5&6&7&!8&!9&11] 0 {2 4 7 8 11}
+[!0&!2&!4&!5&6&7&!8&!9&11] 0 {0 2 4 7 8 11}
+[0&1&!2&!4&!5&6&7&!8&!9&11] 0 {1 2 4 7 8 11}
+[0&!1&2&3&!4&!5&6&7&!8&!9&11] 0 {3 4 7 8 11}
+[!0&2&3&!4&!5&6&7&!8&!9&11] 0 {0 3 4 7 8 11}
+[0&1&2&3&!4&!5&6&7&!8&!9&11] 0 {1 3 4 7 8 11}
+[0&!1&2&!3&4&!5&6&!7&9&11] 0 {9 11}
+[!0&2&!3&4&!5&6&!7&9&11] 0 {0 9 11}
+[0&1&2&!3&4&!5&6&!7&9&11] 0 {1 9 11}
+[0&!1&!2&4&!5&6&!7&9&11] 0 {2 9 11}
+[!0&!2&4&!5&6&!7&9&11] 0 {0 2 9 11}
+[0&1&!2&4&!5&6&!7&9&11] 0 {1 2 9 11}
+[0&!1&2&3&4&!5&6&!7&9&11] 0 {3 9 11}
+[!0&2&3&4&!5&6&!7&9&11] 0 {0 3 9 11}
+[0&1&2&3&4&!5&6&!7&9&11] 0 {1 3 9 11}
+[0&!1&2&!3&!4&!5&6&!7&9&11] 0 {4 9 11}
+[!0&2&!3&!4&!5&6&!7&9&11] 0 {0 4 9 11}
+[0&1&2&!3&!4&!5&6&!7&9&11] 0 {1 4 9 11}
+[0&!1&!2&!4&!5&6&!7&9&11] 0 {2 4 9 11}
+[!0&!2&!4&!5&6&!7&9&11] 0 {0 2 4 9 11}
+[0&1&!2&!4&!5&6&!7&9&11] 0 {1 2 4 9 11}
+[0&!1&2&3&!4&!5&6&!7&9&11] 0 {3 4 9 11}
+[!0&2&3&!4&!5&6&!7&9&11] 0 {0 3 4 9 11}
+[0&1&2&3&!4&!5&6&!7&9&11] 0 {1 3 4 9 11}
+[0&!1&2&!3&5&9&11] 0 {5 9 11}
+[!0&2&!3&5&9&11] 0 {0 5 9 11}
+[0&1&2&!3&5&9&11] 0 {1 5 9 11}
+[0&!1&!2&5&9&11] 0 {2 5 9 11}
+[!0&!2&5&9&11] 0 {0 2 5 9 11}
+[0&1&!2&5&9&11] 0 {1 2 5 9 11}
+[0&!1&2&3&5&9&11] 0 {3 5 9 11}
+[!0&2&3&5&9&11] 0 {0 3 5 9 11}
+[0&1&2&3&5&9&11] 0 {1 3 5 9 11}
+[0&!1&2&!3&4&!5&!6&9&11] 0 {6 9 11}
+[!0&2&!3&4&!5&!6&9&11] 0 {0 6 9 11}
+[0&1&2&!3&4&!5&!6&9&11] 0 {1 6 9 11}
+[0&!1&!2&4&!5&!6&9&11] 0 {2 6 9 11}
+[!0&!2&4&!5&!6&9&11] 0 {0 2 6 9 11}
+[0&1&!2&4&!5&!6&9&11] 0 {1 2 6 9 11}
+[0&!1&2&3&4&!5&!6&9&11] 0 {3 6 9 11}
+[!0&2&3&4&!5&!6&9&11] 0 {0 3 6 9 11}
+[0&1&2&3&4&!5&!6&9&11] 0 {1 3 6 9 11}
+[0&!1&2&!3&!4&!5&!6&9&11] 0 {4 6 9 11}
+[!0&2&!3&!4&!5&!6&9&11] 0 {0 4 6 9 11}
+[0&1&2&!3&!4&!5&!6&9&11] 0 {1 4 6 9 11}
+[0&!1&!2&!4&!5&!6&9&11] 0 {2 4 6 9 11}
+[!0&!2&!4&!5&!6&9&11] 0 {0 2 4 6 9 11}
+[0&1&!2&!4&!5&!6&9&11] 0 {1 2 4 6 9 11}
+[0&!1&2&3&!4&!5&!6&9&11] 0 {3 4 6 9 11}
+[!0&2&3&!4&!5&!6&9&11] 0 {0 3 4 6 9 11}
+[0&1&2&3&!4&!5&!6&9&11] 0 {1 3 4 6 9 11}
+[0&!1&2&!3&4&!5&6&7&9&11] 0 {7 9 11}
+[!0&2&!3&4&!5&6&7&9&11] 0 {0 7 9 11}
+[0&1&2&!3&4&!5&6&7&9&11] 0 {1 7 9 11}
+[0&!1&!2&4&!5&6&7&9&11] 0 {2 7 9 11}
+[!0&!2&4&!5&6&7&9&11] 0 {0 2 7 9 11}
+[0&1&!2&4&!5&6&7&9&11] 0 {1 2 7 9 11}
+[0&!1&2&3&4&!5&6&7&9&11] 0 {3 7 9 11}
+[!0&2&3&4&!5&6&7&9&11] 0 {0 3 7 9 11}
+[0&1&2&3&4&!5&6&7&9&11] 0 {1 3 7 9 11}
+[0&!1&2&!3&!4&!5&6&7&9&11] 0 {4 7 9 11}
+[!0&2&!3&!4&!5&6&7&9&11] 0 {0 4 7 9 11}
+[0&1&2&!3&!4&!5&6&7&9&11] 0 {1 4 7 9 11}
+[0&!1&!2&!4&!5&6&7&9&11] 0 {2 4 7 9 11}
+[!0&!2&!4&!5&6&7&9&11] 0 {0 2 4 7 9 11}
+[0&1&!2&!4&!5&6&7&9&11] 0 {1 2 4 7 9 11}
+[0&!1&2&3&!4&!5&6&7&9&11] 0 {3 4 7 9 11}
+[!0&2&3&!4&!5&6&7&9&11] 0 {0 3 4 7 9 11}
+[0&1&2&3&!4&!5&6&7&9&11] 0 {1 3 4 7 9 11}
+--END--
+HOA: v1
+States: 1
+Start: 0
 AP: 4 "b0" "a0" "a1" "b1"
 Acceptance: 4 Fin(0) & Inf(1) & (Fin(2) | Inf(3))
 properties: trans-labels explicit-labels trans-acc complete
@@ -9582,6 +10499,782 @@ State: 0
 [0&!1&2&3&5&7] 0 {3 5 7}
 [!0&2&3&5&7] 0 {0 3 5 7}
 [0&1&2&3&5&7] 0 {1 3 5 7}
+--END--
+HOA: v1
+States: 1
+Start: 0
+AP: 10 "a3" "b3" "a0" "b0" "a1" "b1" "a2" "b2" "a4" "b4"
+Acceptance: 10 ((Fin(0) & Inf(1)) | ((Fin(2) | Inf(3) | (Fin(4) & Inf(5))) & (Fin(6) | Inf(7)))) & (Fin(8) | Inf(9))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic stutter-invariant
+--BODY--
+State: 0
+[0&!1&2&!3&4&!5&6&!7&8&!9] 0
+[!0&2&!3&4&!5&6&!7&8&!9] 0 {0}
+[0&1&2&!3&4&!5&6&!7&8&!9] 0 {1}
+[0&!1&!2&!3&4&!5&6&!7&8&!9] 0 {2}
+[!0&!2&!3&4&!5&6&!7&8&!9] 0 {0 2}
+[0&1&!2&!3&4&!5&6&!7&8&!9] 0 {1 2}
+[0&!1&3&6&!7&8&!9] 0 {3}
+[!0&3&6&!7&8&!9] 0 {0 3}
+[0&1&3&6&!7&8&!9] 0 {1 3}
+[0&!1&2&!3&!4&6&!7&8&!9] 0 {4}
+[!0&2&!3&!4&6&!7&8&!9] 0 {0 4}
+[0&1&2&!3&!4&6&!7&8&!9] 0 {1 4}
+[0&!1&!2&!3&!4&6&!7&8&!9] 0 {2 4}
+[!0&!2&!3&!4&6&!7&8&!9] 0 {0 2 4}
+[0&1&!2&!3&!4&6&!7&8&!9] 0 {1 2 4}
+[0&!1&2&!3&4&5&6&!7&8&!9] 0 {5}
+[!0&2&!3&4&5&6&!7&8&!9] 0 {0 5}
+[0&1&2&!3&4&5&6&!7&8&!9] 0 {1 5}
+[0&!1&!2&!3&4&5&6&!7&8&!9] 0 {2 5}
+[!0&!2&!3&4&5&6&!7&8&!9] 0 {0 2 5}
+[0&1&!2&!3&4&5&6&!7&8&!9] 0 {1 2 5}
+[0&!1&2&!3&4&!5&!6&!7&8&!9] 0 {6}
+[!0&2&!3&4&!5&!6&!7&8&!9] 0 {0 6}
+[0&1&2&!3&4&!5&!6&!7&8&!9] 0 {1 6}
+[0&!1&!2&!3&4&!5&!6&!7&8&!9] 0 {2 6}
+[!0&!2&!3&4&!5&!6&!7&8&!9] 0 {0 2 6}
+[0&1&!2&!3&4&!5&!6&!7&8&!9] 0 {1 2 6}
+[0&!1&3&!6&!7&8&!9] 0 {3 6}
+[!0&3&!6&!7&8&!9] 0 {0 3 6}
+[0&1&3&!6&!7&8&!9] 0 {1 3 6}
+[0&!1&2&!3&!4&!6&!7&8&!9] 0 {4 6}
+[!0&2&!3&!4&!6&!7&8&!9] 0 {0 4 6}
+[0&1&2&!3&!4&!6&!7&8&!9] 0 {1 4 6}
+[0&!1&!2&!3&!4&!6&!7&8&!9] 0 {2 4 6}
+[!0&!2&!3&!4&!6&!7&8&!9] 0 {0 2 4 6}
+[0&1&!2&!3&!4&!6&!7&8&!9] 0 {1 2 4 6}
+[0&!1&2&!3&4&5&!6&!7&8&!9] 0 {5 6}
+[!0&2&!3&4&5&!6&!7&8&!9] 0 {0 5 6}
+[0&1&2&!3&4&5&!6&!7&8&!9] 0 {1 5 6}
+[0&!1&!2&!3&4&5&!6&!7&8&!9] 0 {2 5 6}
+[!0&!2&!3&4&5&!6&!7&8&!9] 0 {0 2 5 6}
+[0&1&!2&!3&4&5&!6&!7&8&!9] 0 {1 2 5 6}
+[0&!1&2&!3&4&!5&7&8&!9] 0 {7}
+[!0&2&!3&4&!5&7&8&!9] 0 {0 7}
+[0&1&2&!3&4&!5&7&8&!9] 0 {1 7}
+[0&!1&!2&!3&4&!5&7&8&!9] 0 {2 7}
+[!0&!2&!3&4&!5&7&8&!9] 0 {0 2 7}
+[0&1&!2&!3&4&!5&7&8&!9] 0 {1 2 7}
+[0&!1&3&7&8&!9] 0 {3 7}
+[!0&3&7&8&!9] 0 {0 3 7}
+[0&1&3&7&8&!9] 0 {1 3 7}
+[0&!1&2&!3&!4&7&8&!9] 0 {4 7}
+[!0&2&!3&!4&7&8&!9] 0 {0 4 7}
+[0&1&2&!3&!4&7&8&!9] 0 {1 4 7}
+[0&!1&!2&!3&!4&7&8&!9] 0 {2 4 7}
+[!0&!2&!3&!4&7&8&!9] 0 {0 2 4 7}
+[0&1&!2&!3&!4&7&8&!9] 0 {1 2 4 7}
+[0&!1&2&!3&4&5&7&8&!9] 0 {5 7}
+[!0&2&!3&4&5&7&8&!9] 0 {0 5 7}
+[0&1&2&!3&4&5&7&8&!9] 0 {1 5 7}
+[0&!1&!2&!3&4&5&7&8&!9] 0 {2 5 7}
+[!0&!2&!3&4&5&7&8&!9] 0 {0 2 5 7}
+[0&1&!2&!3&4&5&7&8&!9] 0 {1 2 5 7}
+[0&!1&2&!3&4&!5&6&!7&!8&!9] 0 {8}
+[!0&2&!3&4&!5&6&!7&!8&!9] 0 {0 8}
+[0&1&2&!3&4&!5&6&!7&!8&!9] 0 {1 8}
+[0&!1&!2&!3&4&!5&6&!7&!8&!9] 0 {2 8}
+[!0&!2&!3&4&!5&6&!7&!8&!9] 0 {0 2 8}
+[0&1&!2&!3&4&!5&6&!7&!8&!9] 0 {1 2 8}
+[0&!1&3&6&!7&!8&!9] 0 {3 8}
+[!0&3&6&!7&!8&!9] 0 {0 3 8}
+[0&1&3&6&!7&!8&!9] 0 {1 3 8}
+[0&!1&2&!3&!4&6&!7&!8&!9] 0 {4 8}
+[!0&2&!3&!4&6&!7&!8&!9] 0 {0 4 8}
+[0&1&2&!3&!4&6&!7&!8&!9] 0 {1 4 8}
+[0&!1&!2&!3&!4&6&!7&!8&!9] 0 {2 4 8}
+[!0&!2&!3&!4&6&!7&!8&!9] 0 {0 2 4 8}
+[0&1&!2&!3&!4&6&!7&!8&!9] 0 {1 2 4 8}
+[0&!1&2&!3&4&5&6&!7&!8&!9] 0 {5 8}
+[!0&2&!3&4&5&6&!7&!8&!9] 0 {0 5 8}
+[0&1&2&!3&4&5&6&!7&!8&!9] 0 {1 5 8}
+[0&!1&!2&!3&4&5&6&!7&!8&!9] 0 {2 5 8}
+[!0&!2&!3&4&5&6&!7&!8&!9] 0 {0 2 5 8}
+[0&1&!2&!3&4&5&6&!7&!8&!9] 0 {1 2 5 8}
+[0&!1&2&!3&4&!5&!6&!7&!8&!9] 0 {6 8}
+[!0&2&!3&4&!5&!6&!7&!8&!9] 0 {0 6 8}
+[0&1&2&!3&4&!5&!6&!7&!8&!9] 0 {1 6 8}
+[0&!1&!2&!3&4&!5&!6&!7&!8&!9] 0 {2 6 8}
+[!0&!2&!3&4&!5&!6&!7&!8&!9] 0 {0 2 6 8}
+[0&1&!2&!3&4&!5&!6&!7&!8&!9] 0 {1 2 6 8}
+[0&!1&3&!6&!7&!8&!9] 0 {3 6 8}
+[!0&3&!6&!7&!8&!9] 0 {0 3 6 8}
+[0&1&3&!6&!7&!8&!9] 0 {1 3 6 8}
+[0&!1&2&!3&!4&!6&!7&!8&!9] 0 {4 6 8}
+[!0&2&!3&!4&!6&!7&!8&!9] 0 {0 4 6 8}
+[0&1&2&!3&!4&!6&!7&!8&!9] 0 {1 4 6 8}
+[0&!1&!2&!3&!4&!6&!7&!8&!9] 0 {2 4 6 8}
+[!0&!2&!3&!4&!6&!7&!8&!9] 0 {0 2 4 6 8}
+[0&1&!2&!3&!4&!6&!7&!8&!9] 0 {1 2 4 6 8}
+[0&!1&2&!3&4&5&!6&!7&!8&!9] 0 {5 6 8}
+[!0&2&!3&4&5&!6&!7&!8&!9] 0 {0 5 6 8}
+[0&1&2&!3&4&5&!6&!7&!8&!9] 0 {1 5 6 8}
+[0&!1&!2&!3&4&5&!6&!7&!8&!9] 0 {2 5 6 8}
+[!0&!2&!3&4&5&!6&!7&!8&!9] 0 {0 2 5 6 8}
+[0&1&!2&!3&4&5&!6&!7&!8&!9] 0 {1 2 5 6 8}
+[0&!1&2&!3&4&!5&7&!8&!9] 0 {7 8}
+[!0&2&!3&4&!5&7&!8&!9] 0 {0 7 8}
+[0&1&2&!3&4&!5&7&!8&!9] 0 {1 7 8}
+[0&!1&!2&!3&4&!5&7&!8&!9] 0 {2 7 8}
+[!0&!2&!3&4&!5&7&!8&!9] 0 {0 2 7 8}
+[0&1&!2&!3&4&!5&7&!8&!9] 0 {1 2 7 8}
+[0&!1&3&7&!8&!9] 0 {3 7 8}
+[!0&3&7&!8&!9] 0 {0 3 7 8}
+[0&1&3&7&!8&!9] 0 {1 3 7 8}
+[0&!1&2&!3&!4&7&!8&!9] 0 {4 7 8}
+[!0&2&!3&!4&7&!8&!9] 0 {0 4 7 8}
+[0&1&2&!3&!4&7&!8&!9] 0 {1 4 7 8}
+[0&!1&!2&!3&!4&7&!8&!9] 0 {2 4 7 8}
+[!0&!2&!3&!4&7&!8&!9] 0 {0 2 4 7 8}
+[0&1&!2&!3&!4&7&!8&!9] 0 {1 2 4 7 8}
+[0&!1&2&!3&4&5&7&!8&!9] 0 {5 7 8}
+[!0&2&!3&4&5&7&!8&!9] 0 {0 5 7 8}
+[0&1&2&!3&4&5&7&!8&!9] 0 {1 5 7 8}
+[0&!1&!2&!3&4&5&7&!8&!9] 0 {2 5 7 8}
+[!0&!2&!3&4&5&7&!8&!9] 0 {0 2 5 7 8}
+[0&1&!2&!3&4&5&7&!8&!9] 0 {1 2 5 7 8}
+[0&!1&2&!3&4&!5&6&!7&9] 0 {9}
+[!0&2&!3&4&!5&6&!7&9] 0 {0 9}
+[0&1&2&!3&4&!5&6&!7&9] 0 {1 9}
+[0&!1&!2&!3&4&!5&6&!7&9] 0 {2 9}
+[!0&!2&!3&4&!5&6&!7&9] 0 {0 2 9}
+[0&1&!2&!3&4&!5&6&!7&9] 0 {1 2 9}
+[0&!1&3&6&!7&9] 0 {3 9}
+[!0&3&6&!7&9] 0 {0 3 9}
+[0&1&3&6&!7&9] 0 {1 3 9}
+[0&!1&2&!3&!4&6&!7&9] 0 {4 9}
+[!0&2&!3&!4&6&!7&9] 0 {0 4 9}
+[0&1&2&!3&!4&6&!7&9] 0 {1 4 9}
+[0&!1&!2&!3&!4&6&!7&9] 0 {2 4 9}
+[!0&!2&!3&!4&6&!7&9] 0 {0 2 4 9}
+[0&1&!2&!3&!4&6&!7&9] 0 {1 2 4 9}
+[0&!1&2&!3&4&5&6&!7&9] 0 {5 9}
+[!0&2&!3&4&5&6&!7&9] 0 {0 5 9}
+[0&1&2&!3&4&5&6&!7&9] 0 {1 5 9}
+[0&!1&!2&!3&4&5&6&!7&9] 0 {2 5 9}
+[!0&!2&!3&4&5&6&!7&9] 0 {0 2 5 9}
+[0&1&!2&!3&4&5&6&!7&9] 0 {1 2 5 9}
+[0&!1&2&!3&4&!5&!6&!7&9] 0 {6 9}
+[!0&2&!3&4&!5&!6&!7&9] 0 {0 6 9}
+[0&1&2&!3&4&!5&!6&!7&9] 0 {1 6 9}
+[0&!1&!2&!3&4&!5&!6&!7&9] 0 {2 6 9}
+[!0&!2&!3&4&!5&!6&!7&9] 0 {0 2 6 9}
+[0&1&!2&!3&4&!5&!6&!7&9] 0 {1 2 6 9}
+[0&!1&3&!6&!7&9] 0 {3 6 9}
+[!0&3&!6&!7&9] 0 {0 3 6 9}
+[0&1&3&!6&!7&9] 0 {1 3 6 9}
+[0&!1&2&!3&!4&!6&!7&9] 0 {4 6 9}
+[!0&2&!3&!4&!6&!7&9] 0 {0 4 6 9}
+[0&1&2&!3&!4&!6&!7&9] 0 {1 4 6 9}
+[0&!1&!2&!3&!4&!6&!7&9] 0 {2 4 6 9}
+[!0&!2&!3&!4&!6&!7&9] 0 {0 2 4 6 9}
+[0&1&!2&!3&!4&!6&!7&9] 0 {1 2 4 6 9}
+[0&!1&2&!3&4&5&!6&!7&9] 0 {5 6 9}
+[!0&2&!3&4&5&!6&!7&9] 0 {0 5 6 9}
+[0&1&2&!3&4&5&!6&!7&9] 0 {1 5 6 9}
+[0&!1&!2&!3&4&5&!6&!7&9] 0 {2 5 6 9}
+[!0&!2&!3&4&5&!6&!7&9] 0 {0 2 5 6 9}
+[0&1&!2&!3&4&5&!6&!7&9] 0 {1 2 5 6 9}
+[0&!1&2&!3&4&!5&7&9] 0 {7 9}
+[!0&2&!3&4&!5&7&9] 0 {0 7 9}
+[0&1&2&!3&4&!5&7&9] 0 {1 7 9}
+[0&!1&!2&!3&4&!5&7&9] 0 {2 7 9}
+[!0&!2&!3&4&!5&7&9] 0 {0 2 7 9}
+[0&1&!2&!3&4&!5&7&9] 0 {1 2 7 9}
+[0&!1&3&7&9] 0 {3 7 9}
+[!0&3&7&9] 0 {0 3 7 9}
+[0&1&3&7&9] 0 {1 3 7 9}
+[0&!1&2&!3&!4&7&9] 0 {4 7 9}
+[!0&2&!3&!4&7&9] 0 {0 4 7 9}
+[0&1&2&!3&!4&7&9] 0 {1 4 7 9}
+[0&!1&!2&!3&!4&7&9] 0 {2 4 7 9}
+[!0&!2&!3&!4&7&9] 0 {0 2 4 7 9}
+[0&1&!2&!3&!4&7&9] 0 {1 2 4 7 9}
+[0&!1&2&!3&4&5&7&9] 0 {5 7 9}
+[!0&2&!3&4&5&7&9] 0 {0 5 7 9}
+[0&1&2&!3&4&5&7&9] 0 {1 5 7 9}
+[0&!1&!2&!3&4&5&7&9] 0 {2 5 7 9}
+[!0&!2&!3&4&5&7&9] 0 {0 2 5 7 9}
+[0&1&!2&!3&4&5&7&9] 0 {1 2 5 7 9}
+--END--
+HOA: v1
+States: 1
+Start: 0
+AP: 12 "a4" "b4" "a2" "b2" "a0" "b0" "a1" "b1" "a3" "b3" "a5" "b5"
+Acceptance: 12 ((Fin(0) & Inf(1)) | (((Fin(2) & Inf(3)) | (Fin(4) & Inf(5) & (Fin(6) | Inf(7)))) & (Fin(8) | Inf(9)))) & (Fin(10) | Inf(11))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic stutter-invariant
+--BODY--
+State: 0
+[0&!1&2&!3&4&!5&6&!7&8&!9&10&!11] 0
+[!0&2&!3&4&!5&6&!7&8&!9&10&!11] 0 {0}
+[0&1&2&!3&4&!5&6&!7&8&!9&10&!11] 0 {1}
+[0&!1&!2&4&!5&6&!7&8&!9&10&!11] 0 {2}
+[!0&!2&4&!5&6&!7&8&!9&10&!11] 0 {0 2}
+[0&1&!2&4&!5&6&!7&8&!9&10&!11] 0 {1 2}
+[0&!1&2&3&4&!5&6&!7&8&!9&10&!11] 0 {3}
+[!0&2&3&4&!5&6&!7&8&!9&10&!11] 0 {0 3}
+[0&1&2&3&4&!5&6&!7&8&!9&10&!11] 0 {1 3}
+[0&!1&2&!3&!4&8&!9&10&!11] 0 {4}
+[!0&2&!3&!4&8&!9&10&!11] 0 {0 4}
+[0&1&2&!3&!4&8&!9&10&!11] 0 {1 4}
+[0&!1&!2&!4&8&!9&10&!11] 0 {2 4}
+[!0&!2&!4&8&!9&10&!11] 0 {0 2 4}
+[0&1&!2&!4&8&!9&10&!11] 0 {1 2 4}
+[0&!1&2&3&!4&8&!9&10&!11] 0 {3 4}
+[!0&2&3&!4&8&!9&10&!11] 0 {0 3 4}
+[0&1&2&3&!4&8&!9&10&!11] 0 {1 3 4}
+[0&!1&2&!3&4&5&6&!7&8&!9&10&!11] 0 {5}
+[!0&2&!3&4&5&6&!7&8&!9&10&!11] 0 {0 5}
+[0&1&2&!3&4&5&6&!7&8&!9&10&!11] 0 {1 5}
+[0&!1&!2&4&5&6&!7&8&!9&10&!11] 0 {2 5}
+[!0&!2&4&5&6&!7&8&!9&10&!11] 0 {0 2 5}
+[0&1&!2&4&5&6&!7&8&!9&10&!11] 0 {1 2 5}
+[0&!1&2&3&4&5&6&!7&8&!9&10&!11] 0 {3 5}
+[!0&2&3&4&5&6&!7&8&!9&10&!11] 0 {0 3 5}
+[0&1&2&3&4&5&6&!7&8&!9&10&!11] 0 {1 3 5}
+[0&!1&2&!3&4&!5&!6&!7&8&!9&10&!11] 0 {6}
+[!0&2&!3&4&!5&!6&!7&8&!9&10&!11] 0 {0 6}
+[0&1&2&!3&4&!5&!6&!7&8&!9&10&!11] 0 {1 6}
+[0&!1&!2&4&!5&!6&!7&8&!9&10&!11] 0 {2 6}
+[!0&!2&4&!5&!6&!7&8&!9&10&!11] 0 {0 2 6}
+[0&1&!2&4&!5&!6&!7&8&!9&10&!11] 0 {1 2 6}
+[0&!1&2&3&4&!5&!6&!7&8&!9&10&!11] 0 {3 6}
+[!0&2&3&4&!5&!6&!7&8&!9&10&!11] 0 {0 3 6}
+[0&1&2&3&4&!5&!6&!7&8&!9&10&!11] 0 {1 3 6}
+[0&!1&2&!3&4&5&!6&!7&8&!9&10&!11] 0 {5 6}
+[!0&2&!3&4&5&!6&!7&8&!9&10&!11] 0 {0 5 6}
+[0&1&2&!3&4&5&!6&!7&8&!9&10&!11] 0 {1 5 6}
+[0&!1&!2&4&5&!6&!7&8&!9&10&!11] 0 {2 5 6}
+[!0&!2&4&5&!6&!7&8&!9&10&!11] 0 {0 2 5 6}
+[0&1&!2&4&5&!6&!7&8&!9&10&!11] 0 {1 2 5 6}
+[0&!1&2&3&4&5&!6&!7&8&!9&10&!11] 0 {3 5 6}
+[!0&2&3&4&5&!6&!7&8&!9&10&!11] 0 {0 3 5 6}
+[0&1&2&3&4&5&!6&!7&8&!9&10&!11] 0 {1 3 5 6}
+[0&!1&2&!3&4&!5&7&8&!9&10&!11] 0 {7}
+[!0&2&!3&4&!5&7&8&!9&10&!11] 0 {0 7}
+[0&1&2&!3&4&!5&7&8&!9&10&!11] 0 {1 7}
+[0&!1&!2&4&!5&7&8&!9&10&!11] 0 {2 7}
+[!0&!2&4&!5&7&8&!9&10&!11] 0 {0 2 7}
+[0&1&!2&4&!5&7&8&!9&10&!11] 0 {1 2 7}
+[0&!1&2&3&4&!5&7&8&!9&10&!11] 0 {3 7}
+[!0&2&3&4&!5&7&8&!9&10&!11] 0 {0 3 7}
+[0&1&2&3&4&!5&7&8&!9&10&!11] 0 {1 3 7}
+[0&!1&2&!3&4&5&7&8&!9&10&!11] 0 {5 7}
+[!0&2&!3&4&5&7&8&!9&10&!11] 0 {0 5 7}
+[0&1&2&!3&4&5&7&8&!9&10&!11] 0 {1 5 7}
+[0&!1&!2&4&5&7&8&!9&10&!11] 0 {2 5 7}
+[!0&!2&4&5&7&8&!9&10&!11] 0 {0 2 5 7}
+[0&1&!2&4&5&7&8&!9&10&!11] 0 {1 2 5 7}
+[0&!1&2&3&4&5&7&8&!9&10&!11] 0 {3 5 7}
+[!0&2&3&4&5&7&8&!9&10&!11] 0 {0 3 5 7}
+[0&1&2&3&4&5&7&8&!9&10&!11] 0 {1 3 5 7}
+[0&!1&2&!3&4&!5&6&!7&!8&!9&10&!11] 0 {8}
+[!0&2&!3&4&!5&6&!7&!8&!9&10&!11] 0 {0 8}
+[0&1&2&!3&4&!5&6&!7&!8&!9&10&!11] 0 {1 8}
+[0&!1&!2&4&!5&6&!7&!8&!9&10&!11] 0 {2 8}
+[!0&!2&4&!5&6&!7&!8&!9&10&!11] 0 {0 2 8}
+[0&1&!2&4&!5&6&!7&!8&!9&10&!11] 0 {1 2 8}
+[0&!1&2&3&4&!5&6&!7&!8&!9&10&!11] 0 {3 8}
+[!0&2&3&4&!5&6&!7&!8&!9&10&!11] 0 {0 3 8}
+[0&1&2&3&4&!5&6&!7&!8&!9&10&!11] 0 {1 3 8}
+[0&!1&2&!3&!4&!8&!9&10&!11] 0 {4 8}
+[!0&2&!3&!4&!8&!9&10&!11] 0 {0 4 8}
+[0&1&2&!3&!4&!8&!9&10&!11] 0 {1 4 8}
+[0&!1&!2&!4&!8&!9&10&!11] 0 {2 4 8}
+[!0&!2&!4&!8&!9&10&!11] 0 {0 2 4 8}
+[0&1&!2&!4&!8&!9&10&!11] 0 {1 2 4 8}
+[0&!1&2&3&!4&!8&!9&10&!11] 0 {3 4 8}
+[!0&2&3&!4&!8&!9&10&!11] 0 {0 3 4 8}
+[0&1&2&3&!4&!8&!9&10&!11] 0 {1 3 4 8}
+[0&!1&2&!3&4&5&6&!7&!8&!9&10&!11] 0 {5 8}
+[!0&2&!3&4&5&6&!7&!8&!9&10&!11] 0 {0 5 8}
+[0&1&2&!3&4&5&6&!7&!8&!9&10&!11] 0 {1 5 8}
+[0&!1&!2&4&5&6&!7&!8&!9&10&!11] 0 {2 5 8}
+[!0&!2&4&5&6&!7&!8&!9&10&!11] 0 {0 2 5 8}
+[0&1&!2&4&5&6&!7&!8&!9&10&!11] 0 {1 2 5 8}
+[0&!1&2&3&4&5&6&!7&!8&!9&10&!11] 0 {3 5 8}
+[!0&2&3&4&5&6&!7&!8&!9&10&!11] 0 {0 3 5 8}
+[0&1&2&3&4&5&6&!7&!8&!9&10&!11] 0 {1 3 5 8}
+[0&!1&2&!3&4&!5&!6&!7&!8&!9&10&!11] 0 {6 8}
+[!0&2&!3&4&!5&!6&!7&!8&!9&10&!11] 0 {0 6 8}
+[0&1&2&!3&4&!5&!6&!7&!8&!9&10&!11] 0 {1 6 8}
+[0&!1&!2&4&!5&!6&!7&!8&!9&10&!11] 0 {2 6 8}
+[!0&!2&4&!5&!6&!7&!8&!9&10&!11] 0 {0 2 6 8}
+[0&1&!2&4&!5&!6&!7&!8&!9&10&!11] 0 {1 2 6 8}
+[0&!1&2&3&4&!5&!6&!7&!8&!9&10&!11] 0 {3 6 8}
+[!0&2&3&4&!5&!6&!7&!8&!9&10&!11] 0 {0 3 6 8}
+[0&1&2&3&4&!5&!6&!7&!8&!9&10&!11] 0 {1 3 6 8}
+[0&!1&2&!3&4&5&!6&!7&!8&!9&10&!11] 0 {5 6 8}
+[!0&2&!3&4&5&!6&!7&!8&!9&10&!11] 0 {0 5 6 8}
+[0&1&2&!3&4&5&!6&!7&!8&!9&10&!11] 0 {1 5 6 8}
+[0&!1&!2&4&5&!6&!7&!8&!9&10&!11] 0 {2 5 6 8}
+[!0&!2&4&5&!6&!7&!8&!9&10&!11] 0 {0 2 5 6 8}
+[0&1&!2&4&5&!6&!7&!8&!9&10&!11] 0 {1 2 5 6 8}
+[0&!1&2&3&4&5&!6&!7&!8&!9&10&!11] 0 {3 5 6 8}
+[!0&2&3&4&5&!6&!7&!8&!9&10&!11] 0 {0 3 5 6 8}
+[0&1&2&3&4&5&!6&!7&!8&!9&10&!11] 0 {1 3 5 6 8}
+[0&!1&2&!3&4&!5&7&!8&!9&10&!11] 0 {7 8}
+[!0&2&!3&4&!5&7&!8&!9&10&!11] 0 {0 7 8}
+[0&1&2&!3&4&!5&7&!8&!9&10&!11] 0 {1 7 8}
+[0&!1&!2&4&!5&7&!8&!9&10&!11] 0 {2 7 8}
+[!0&!2&4&!5&7&!8&!9&10&!11] 0 {0 2 7 8}
+[0&1&!2&4&!5&7&!8&!9&10&!11] 0 {1 2 7 8}
+[0&!1&2&3&4&!5&7&!8&!9&10&!11] 0 {3 7 8}
+[!0&2&3&4&!5&7&!8&!9&10&!11] 0 {0 3 7 8}
+[0&1&2&3&4&!5&7&!8&!9&10&!11] 0 {1 3 7 8}
+[0&!1&2&!3&4&5&7&!8&!9&10&!11] 0 {5 7 8}
+[!0&2&!3&4&5&7&!8&!9&10&!11] 0 {0 5 7 8}
+[0&1&2&!3&4&5&7&!8&!9&10&!11] 0 {1 5 7 8}
+[0&!1&!2&4&5&7&!8&!9&10&!11] 0 {2 5 7 8}
+[!0&!2&4&5&7&!8&!9&10&!11] 0 {0 2 5 7 8}
+[0&1&!2&4&5&7&!8&!9&10&!11] 0 {1 2 5 7 8}
+[0&!1&2&3&4&5&7&!8&!9&10&!11] 0 {3 5 7 8}
+[!0&2&3&4&5&7&!8&!9&10&!11] 0 {0 3 5 7 8}
+[0&1&2&3&4&5&7&!8&!9&10&!11] 0 {1 3 5 7 8}
+[0&!1&2&!3&4&!5&6&!7&9&10&!11] 0 {9}
+[!0&2&!3&4&!5&6&!7&9&10&!11] 0 {0 9}
+[0&1&2&!3&4&!5&6&!7&9&10&!11] 0 {1 9}
+[0&!1&!2&4&!5&6&!7&9&10&!11] 0 {2 9}
+[!0&!2&4&!5&6&!7&9&10&!11] 0 {0 2 9}
+[0&1&!2&4&!5&6&!7&9&10&!11] 0 {1 2 9}
+[0&!1&2&3&4&!5&6&!7&9&10&!11] 0 {3 9}
+[!0&2&3&4&!5&6&!7&9&10&!11] 0 {0 3 9}
+[0&1&2&3&4&!5&6&!7&9&10&!11] 0 {1 3 9}
+[0&!1&2&!3&!4&9&10&!11] 0 {4 9}
+[!0&2&!3&!4&9&10&!11] 0 {0 4 9}
+[0&1&2&!3&!4&9&10&!11] 0 {1 4 9}
+[0&!1&!2&!4&9&10&!11] 0 {2 4 9}
+[!0&!2&!4&9&10&!11] 0 {0 2 4 9}
+[0&1&!2&!4&9&10&!11] 0 {1 2 4 9}
+[0&!1&2&3&!4&9&10&!11] 0 {3 4 9}
+[!0&2&3&!4&9&10&!11] 0 {0 3 4 9}
+[0&1&2&3&!4&9&10&!11] 0 {1 3 4 9}
+[0&!1&2&!3&4&5&6&!7&9&10&!11] 0 {5 9}
+[!0&2&!3&4&5&6&!7&9&10&!11] 0 {0 5 9}
+[0&1&2&!3&4&5&6&!7&9&10&!11] 0 {1 5 9}
+[0&!1&!2&4&5&6&!7&9&10&!11] 0 {2 5 9}
+[!0&!2&4&5&6&!7&9&10&!11] 0 {0 2 5 9}
+[0&1&!2&4&5&6&!7&9&10&!11] 0 {1 2 5 9}
+[0&!1&2&3&4&5&6&!7&9&10&!11] 0 {3 5 9}
+[!0&2&3&4&5&6&!7&9&10&!11] 0 {0 3 5 9}
+[0&1&2&3&4&5&6&!7&9&10&!11] 0 {1 3 5 9}
+[0&!1&2&!3&4&!5&!6&!7&9&10&!11] 0 {6 9}
+[!0&2&!3&4&!5&!6&!7&9&10&!11] 0 {0 6 9}
+[0&1&2&!3&4&!5&!6&!7&9&10&!11] 0 {1 6 9}
+[0&!1&!2&4&!5&!6&!7&9&10&!11] 0 {2 6 9}
+[!0&!2&4&!5&!6&!7&9&10&!11] 0 {0 2 6 9}
+[0&1&!2&4&!5&!6&!7&9&10&!11] 0 {1 2 6 9}
+[0&!1&2&3&4&!5&!6&!7&9&10&!11] 0 {3 6 9}
+[!0&2&3&4&!5&!6&!7&9&10&!11] 0 {0 3 6 9}
+[0&1&2&3&4&!5&!6&!7&9&10&!11] 0 {1 3 6 9}
+[0&!1&2&!3&4&5&!6&!7&9&10&!11] 0 {5 6 9}
+[!0&2&!3&4&5&!6&!7&9&10&!11] 0 {0 5 6 9}
+[0&1&2&!3&4&5&!6&!7&9&10&!11] 0 {1 5 6 9}
+[0&!1&!2&4&5&!6&!7&9&10&!11] 0 {2 5 6 9}
+[!0&!2&4&5&!6&!7&9&10&!11] 0 {0 2 5 6 9}
+[0&1&!2&4&5&!6&!7&9&10&!11] 0 {1 2 5 6 9}
+[0&!1&2&3&4&5&!6&!7&9&10&!11] 0 {3 5 6 9}
+[!0&2&3&4&5&!6&!7&9&10&!11] 0 {0 3 5 6 9}
+[0&1&2&3&4&5&!6&!7&9&10&!11] 0 {1 3 5 6 9}
+[0&!1&2&!3&4&!5&7&9&10&!11] 0 {7 9}
+[!0&2&!3&4&!5&7&9&10&!11] 0 {0 7 9}
+[0&1&2&!3&4&!5&7&9&10&!11] 0 {1 7 9}
+[0&!1&!2&4&!5&7&9&10&!11] 0 {2 7 9}
+[!0&!2&4&!5&7&9&10&!11] 0 {0 2 7 9}
+[0&1&!2&4&!5&7&9&10&!11] 0 {1 2 7 9}
+[0&!1&2&3&4&!5&7&9&10&!11] 0 {3 7 9}
+[!0&2&3&4&!5&7&9&10&!11] 0 {0 3 7 9}
+[0&1&2&3&4&!5&7&9&10&!11] 0 {1 3 7 9}
+[0&!1&2&!3&4&5&7&9&10&!11] 0 {5 7 9}
+[!0&2&!3&4&5&7&9&10&!11] 0 {0 5 7 9}
+[0&1&2&!3&4&5&7&9&10&!11] 0 {1 5 7 9}
+[0&!1&!2&4&5&7&9&10&!11] 0 {2 5 7 9}
+[!0&!2&4&5&7&9&10&!11] 0 {0 2 5 7 9}
+[0&1&!2&4&5&7&9&10&!11] 0 {1 2 5 7 9}
+[0&!1&2&3&4&5&7&9&10&!11] 0 {3 5 7 9}
+[!0&2&3&4&5&7&9&10&!11] 0 {0 3 5 7 9}
+[0&1&2&3&4&5&7&9&10&!11] 0 {1 3 5 7 9}
+[0&!1&2&!3&4&!5&6&!7&8&!9&!10&!11] 0 {10}
+[!0&2&!3&4&!5&6&!7&8&!9&!10&!11] 0 {0 10}
+[0&1&2&!3&4&!5&6&!7&8&!9&!10&!11] 0 {1 10}
+[0&!1&!2&4&!5&6&!7&8&!9&!10&!11] 0 {2 10}
+[!0&!2&4&!5&6&!7&8&!9&!10&!11] 0 {0 2 10}
+[0&1&!2&4&!5&6&!7&8&!9&!10&!11] 0 {1 2 10}
+[0&!1&2&3&4&!5&6&!7&8&!9&!10&!11] 0 {3 10}
+[!0&2&3&4&!5&6&!7&8&!9&!10&!11] 0 {0 3 10}
+[0&1&2&3&4&!5&6&!7&8&!9&!10&!11] 0 {1 3 10}
+[0&!1&2&!3&!4&8&!9&!10&!11] 0 {4 10}
+[!0&2&!3&!4&8&!9&!10&!11] 0 {0 4 10}
+[0&1&2&!3&!4&8&!9&!10&!11] 0 {1 4 10}
+[0&!1&!2&!4&8&!9&!10&!11] 0 {2 4 10}
+[!0&!2&!4&8&!9&!10&!11] 0 {0 2 4 10}
+[0&1&!2&!4&8&!9&!10&!11] 0 {1 2 4 10}
+[0&!1&2&3&!4&8&!9&!10&!11] 0 {3 4 10}
+[!0&2&3&!4&8&!9&!10&!11] 0 {0 3 4 10}
+[0&1&2&3&!4&8&!9&!10&!11] 0 {1 3 4 10}
+[0&!1&2&!3&4&5&6&!7&8&!9&!10&!11] 0 {5 10}
+[!0&2&!3&4&5&6&!7&8&!9&!10&!11] 0 {0 5 10}
+[0&1&2&!3&4&5&6&!7&8&!9&!10&!11] 0 {1 5 10}
+[0&!1&!2&4&5&6&!7&8&!9&!10&!11] 0 {2 5 10}
+[!0&!2&4&5&6&!7&8&!9&!10&!11] 0 {0 2 5 10}
+[0&1&!2&4&5&6&!7&8&!9&!10&!11] 0 {1 2 5 10}
+[0&!1&2&3&4&5&6&!7&8&!9&!10&!11] 0 {3 5 10}
+[!0&2&3&4&5&6&!7&8&!9&!10&!11] 0 {0 3 5 10}
+[0&1&2&3&4&5&6&!7&8&!9&!10&!11] 0 {1 3 5 10}
+[0&!1&2&!3&4&!5&!6&!7&8&!9&!10&!11] 0 {6 10}
+[!0&2&!3&4&!5&!6&!7&8&!9&!10&!11] 0 {0 6 10}
+[0&1&2&!3&4&!5&!6&!7&8&!9&!10&!11] 0 {1 6 10}
+[0&!1&!2&4&!5&!6&!7&8&!9&!10&!11] 0 {2 6 10}
+[!0&!2&4&!5&!6&!7&8&!9&!10&!11] 0 {0 2 6 10}
+[0&1&!2&4&!5&!6&!7&8&!9&!10&!11] 0 {1 2 6 10}
+[0&!1&2&3&4&!5&!6&!7&8&!9&!10&!11] 0 {3 6 10}
+[!0&2&3&4&!5&!6&!7&8&!9&!10&!11] 0 {0 3 6 10}
+[0&1&2&3&4&!5&!6&!7&8&!9&!10&!11] 0 {1 3 6 10}
+[0&!1&2&!3&4&5&!6&!7&8&!9&!10&!11] 0 {5 6 10}
+[!0&2&!3&4&5&!6&!7&8&!9&!10&!11] 0 {0 5 6 10}
+[0&1&2&!3&4&5&!6&!7&8&!9&!10&!11] 0 {1 5 6 10}
+[0&!1&!2&4&5&!6&!7&8&!9&!10&!11] 0 {2 5 6 10}
+[!0&!2&4&5&!6&!7&8&!9&!10&!11] 0 {0 2 5 6 10}
+[0&1&!2&4&5&!6&!7&8&!9&!10&!11] 0 {1 2 5 6 10}
+[0&!1&2&3&4&5&!6&!7&8&!9&!10&!11] 0 {3 5 6 10}
+[!0&2&3&4&5&!6&!7&8&!9&!10&!11] 0 {0 3 5 6 10}
+[0&1&2&3&4&5&!6&!7&8&!9&!10&!11] 0 {1 3 5 6 10}
+[0&!1&2&!3&4&!5&7&8&!9&!10&!11] 0 {7 10}
+[!0&2&!3&4&!5&7&8&!9&!10&!11] 0 {0 7 10}
+[0&1&2&!3&4&!5&7&8&!9&!10&!11] 0 {1 7 10}
+[0&!1&!2&4&!5&7&8&!9&!10&!11] 0 {2 7 10}
+[!0&!2&4&!5&7&8&!9&!10&!11] 0 {0 2 7 10}
+[0&1&!2&4&!5&7&8&!9&!10&!11] 0 {1 2 7 10}
+[0&!1&2&3&4&!5&7&8&!9&!10&!11] 0 {3 7 10}
+[!0&2&3&4&!5&7&8&!9&!10&!11] 0 {0 3 7 10}
+[0&1&2&3&4&!5&7&8&!9&!10&!11] 0 {1 3 7 10}
+[0&!1&2&!3&4&5&7&8&!9&!10&!11] 0 {5 7 10}
+[!0&2&!3&4&5&7&8&!9&!10&!11] 0 {0 5 7 10}
+[0&1&2&!3&4&5&7&8&!9&!10&!11] 0 {1 5 7 10}
+[0&!1&!2&4&5&7&8&!9&!10&!11] 0 {2 5 7 10}
+[!0&!2&4&5&7&8&!9&!10&!11] 0 {0 2 5 7 10}
+[0&1&!2&4&5&7&8&!9&!10&!11] 0 {1 2 5 7 10}
+[0&!1&2&3&4&5&7&8&!9&!10&!11] 0 {3 5 7 10}
+[!0&2&3&4&5&7&8&!9&!10&!11] 0 {0 3 5 7 10}
+[0&1&2&3&4&5&7&8&!9&!10&!11] 0 {1 3 5 7 10}
+[0&!1&2&!3&4&!5&6&!7&!8&!9&!10&!11] 0 {8 10}
+[!0&2&!3&4&!5&6&!7&!8&!9&!10&!11] 0 {0 8 10}
+[0&1&2&!3&4&!5&6&!7&!8&!9&!10&!11] 0 {1 8 10}
+[0&!1&!2&4&!5&6&!7&!8&!9&!10&!11] 0 {2 8 10}
+[!0&!2&4&!5&6&!7&!8&!9&!10&!11] 0 {0 2 8 10}
+[0&1&!2&4&!5&6&!7&!8&!9&!10&!11] 0 {1 2 8 10}
+[0&!1&2&3&4&!5&6&!7&!8&!9&!10&!11] 0 {3 8 10}
+[!0&2&3&4&!5&6&!7&!8&!9&!10&!11] 0 {0 3 8 10}
+[0&1&2&3&4&!5&6&!7&!8&!9&!10&!11] 0 {1 3 8 10}
+[0&!1&2&!3&!4&!8&!9&!10&!11] 0 {4 8 10}
+[!0&2&!3&!4&!8&!9&!10&!11] 0 {0 4 8 10}
+[0&1&2&!3&!4&!8&!9&!10&!11] 0 {1 4 8 10}
+[0&!1&!2&!4&!8&!9&!10&!11] 0 {2 4 8 10}
+[!0&!2&!4&!8&!9&!10&!11] 0 {0 2 4 8 10}
+[0&1&!2&!4&!8&!9&!10&!11] 0 {1 2 4 8 10}
+[0&!1&2&3&!4&!8&!9&!10&!11] 0 {3 4 8 10}
+[!0&2&3&!4&!8&!9&!10&!11] 0 {0 3 4 8 10}
+[0&1&2&3&!4&!8&!9&!10&!11] 0 {1 3 4 8 10}
+[0&!1&2&!3&4&5&6&!7&!8&!9&!10&!11] 0 {5 8 10}
+[!0&2&!3&4&5&6&!7&!8&!9&!10&!11] 0 {0 5 8 10}
+[0&1&2&!3&4&5&6&!7&!8&!9&!10&!11] 0 {1 5 8 10}
+[0&!1&!2&4&5&6&!7&!8&!9&!10&!11] 0 {2 5 8 10}
+[!0&!2&4&5&6&!7&!8&!9&!10&!11] 0 {0 2 5 8 10}
+[0&1&!2&4&5&6&!7&!8&!9&!10&!11] 0 {1 2 5 8 10}
+[0&!1&2&3&4&5&6&!7&!8&!9&!10&!11] 0 {3 5 8 10}
+[!0&2&3&4&5&6&!7&!8&!9&!10&!11] 0 {0 3 5 8 10}
+[0&1&2&3&4&5&6&!7&!8&!9&!10&!11] 0 {1 3 5 8 10}
+[0&!1&2&!3&4&!5&!6&!7&!8&!9&!10&!11] 0 {6 8 10}
+[!0&2&!3&4&!5&!6&!7&!8&!9&!10&!11] 0 {0 6 8 10}
+[0&1&2&!3&4&!5&!6&!7&!8&!9&!10&!11] 0 {1 6 8 10}
+[0&!1&!2&4&!5&!6&!7&!8&!9&!10&!11] 0 {2 6 8 10}
+[!0&!2&4&!5&!6&!7&!8&!9&!10&!11] 0 {0 2 6 8 10}
+[0&1&!2&4&!5&!6&!7&!8&!9&!10&!11] 0 {1 2 6 8 10}
+[0&!1&2&3&4&!5&!6&!7&!8&!9&!10&!11] 0 {3 6 8 10}
+[!0&2&3&4&!5&!6&!7&!8&!9&!10&!11] 0 {0 3 6 8 10}
+[0&1&2&3&4&!5&!6&!7&!8&!9&!10&!11] 0 {1 3 6 8 10}
+[0&!1&2&!3&4&5&!6&!7&!8&!9&!10&!11] 0 {5 6 8 10}
+[!0&2&!3&4&5&!6&!7&!8&!9&!10&!11] 0 {0 5 6 8 10}
+[0&1&2&!3&4&5&!6&!7&!8&!9&!10&!11] 0 {1 5 6 8 10}
+[0&!1&!2&4&5&!6&!7&!8&!9&!10&!11] 0 {2 5 6 8 10}
+[!0&!2&4&5&!6&!7&!8&!9&!10&!11] 0 {0 2 5 6 8 10}
+[0&1&!2&4&5&!6&!7&!8&!9&!10&!11] 0 {1 2 5 6 8 10}
+[0&!1&2&3&4&5&!6&!7&!8&!9&!10&!11] 0 {3 5 6 8 10}
+[!0&2&3&4&5&!6&!7&!8&!9&!10&!11] 0 {0 3 5 6 8 10}
+[0&1&2&3&4&5&!6&!7&!8&!9&!10&!11] 0 {1 3 5 6 8 10}
+[0&!1&2&!3&4&!5&7&!8&!9&!10&!11] 0 {7 8 10}
+[!0&2&!3&4&!5&7&!8&!9&!10&!11] 0 {0 7 8 10}
+[0&1&2&!3&4&!5&7&!8&!9&!10&!11] 0 {1 7 8 10}
+[0&!1&!2&4&!5&7&!8&!9&!10&!11] 0 {2 7 8 10}
+[!0&!2&4&!5&7&!8&!9&!10&!11] 0 {0 2 7 8 10}
+[0&1&!2&4&!5&7&!8&!9&!10&!11] 0 {1 2 7 8 10}
+[0&!1&2&3&4&!5&7&!8&!9&!10&!11] 0 {3 7 8 10}
+[!0&2&3&4&!5&7&!8&!9&!10&!11] 0 {0 3 7 8 10}
+[0&1&2&3&4&!5&7&!8&!9&!10&!11] 0 {1 3 7 8 10}
+[0&!1&2&!3&4&5&7&!8&!9&!10&!11] 0 {5 7 8 10}
+[!0&2&!3&4&5&7&!8&!9&!10&!11] 0 {0 5 7 8 10}
+[0&1&2&!3&4&5&7&!8&!9&!10&!11] 0 {1 5 7 8 10}
+[0&!1&!2&4&5&7&!8&!9&!10&!11] 0 {2 5 7 8 10}
+[!0&!2&4&5&7&!8&!9&!10&!11] 0 {0 2 5 7 8 10}
+[0&1&!2&4&5&7&!8&!9&!10&!11] 0 {1 2 5 7 8 10}
+[0&!1&2&3&4&5&7&!8&!9&!10&!11] 0 {3 5 7 8 10}
+[!0&2&3&4&5&7&!8&!9&!10&!11] 0 {0 3 5 7 8 10}
+[0&1&2&3&4&5&7&!8&!9&!10&!11] 0 {1 3 5 7 8 10}
+[0&!1&2&!3&4&!5&6&!7&9&!10&!11] 0 {9 10}
+[!0&2&!3&4&!5&6&!7&9&!10&!11] 0 {0 9 10}
+[0&1&2&!3&4&!5&6&!7&9&!10&!11] 0 {1 9 10}
+[0&!1&!2&4&!5&6&!7&9&!10&!11] 0 {2 9 10}
+[!0&!2&4&!5&6&!7&9&!10&!11] 0 {0 2 9 10}
+[0&1&!2&4&!5&6&!7&9&!10&!11] 0 {1 2 9 10}
+[0&!1&2&3&4&!5&6&!7&9&!10&!11] 0 {3 9 10}
+[!0&2&3&4&!5&6&!7&9&!10&!11] 0 {0 3 9 10}
+[0&1&2&3&4&!5&6&!7&9&!10&!11] 0 {1 3 9 10}
+[0&!1&2&!3&!4&9&!10&!11] 0 {4 9 10}
+[!0&2&!3&!4&9&!10&!11] 0 {0 4 9 10}
+[0&1&2&!3&!4&9&!10&!11] 0 {1 4 9 10}
+[0&!1&!2&!4&9&!10&!11] 0 {2 4 9 10}
+[!0&!2&!4&9&!10&!11] 0 {0 2 4 9 10}
+[0&1&!2&!4&9&!10&!11] 0 {1 2 4 9 10}
+[0&!1&2&3&!4&9&!10&!11] 0 {3 4 9 10}
+[!0&2&3&!4&9&!10&!11] 0 {0 3 4 9 10}
+[0&1&2&3&!4&9&!10&!11] 0 {1 3 4 9 10}
+[0&!1&2&!3&4&5&6&!7&9&!10&!11] 0 {5 9 10}
+[!0&2&!3&4&5&6&!7&9&!10&!11] 0 {0 5 9 10}
+[0&1&2&!3&4&5&6&!7&9&!10&!11] 0 {1 5 9 10}
+[0&!1&!2&4&5&6&!7&9&!10&!11] 0 {2 5 9 10}
+[!0&!2&4&5&6&!7&9&!10&!11] 0 {0 2 5 9 10}
+[0&1&!2&4&5&6&!7&9&!10&!11] 0 {1 2 5 9 10}
+[0&!1&2&3&4&5&6&!7&9&!10&!11] 0 {3 5 9 10}
+[!0&2&3&4&5&6&!7&9&!10&!11] 0 {0 3 5 9 10}
+[0&1&2&3&4&5&6&!7&9&!10&!11] 0 {1 3 5 9 10}
+[0&!1&2&!3&4&!5&!6&!7&9&!10&!11] 0 {6 9 10}
+[!0&2&!3&4&!5&!6&!7&9&!10&!11] 0 {0 6 9 10}
+[0&1&2&!3&4&!5&!6&!7&9&!10&!11] 0 {1 6 9 10}
+[0&!1&!2&4&!5&!6&!7&9&!10&!11] 0 {2 6 9 10}
+[!0&!2&4&!5&!6&!7&9&!10&!11] 0 {0 2 6 9 10}
+[0&1&!2&4&!5&!6&!7&9&!10&!11] 0 {1 2 6 9 10}
+[0&!1&2&3&4&!5&!6&!7&9&!10&!11] 0 {3 6 9 10}
+[!0&2&3&4&!5&!6&!7&9&!10&!11] 0 {0 3 6 9 10}
+[0&1&2&3&4&!5&!6&!7&9&!10&!11] 0 {1 3 6 9 10}
+[0&!1&2&!3&4&5&!6&!7&9&!10&!11] 0 {5 6 9 10}
+[!0&2&!3&4&5&!6&!7&9&!10&!11] 0 {0 5 6 9 10}
+[0&1&2&!3&4&5&!6&!7&9&!10&!11] 0 {1 5 6 9 10}
+[0&!1&!2&4&5&!6&!7&9&!10&!11] 0 {2 5 6 9 10}
+[!0&!2&4&5&!6&!7&9&!10&!11] 0 {0 2 5 6 9 10}
+[0&1&!2&4&5&!6&!7&9&!10&!11] 0 {1 2 5 6 9 10}
+[0&!1&2&3&4&5&!6&!7&9&!10&!11] 0 {3 5 6 9 10}
+[!0&2&3&4&5&!6&!7&9&!10&!11] 0 {0 3 5 6 9 10}
+[0&1&2&3&4&5&!6&!7&9&!10&!11] 0 {1 3 5 6 9 10}
+[0&!1&2&!3&4&!5&7&9&!10&!11] 0 {7 9 10}
+[!0&2&!3&4&!5&7&9&!10&!11] 0 {0 7 9 10}
+[0&1&2&!3&4&!5&7&9&!10&!11] 0 {1 7 9 10}
+[0&!1&!2&4&!5&7&9&!10&!11] 0 {2 7 9 10}
+[!0&!2&4&!5&7&9&!10&!11] 0 {0 2 7 9 10}
+[0&1&!2&4&!5&7&9&!10&!11] 0 {1 2 7 9 10}
+[0&!1&2&3&4&!5&7&9&!10&!11] 0 {3 7 9 10}
+[!0&2&3&4&!5&7&9&!10&!11] 0 {0 3 7 9 10}
+[0&1&2&3&4&!5&7&9&!10&!11] 0 {1 3 7 9 10}
+[0&!1&2&!3&4&5&7&9&!10&!11] 0 {5 7 9 10}
+[!0&2&!3&4&5&7&9&!10&!11] 0 {0 5 7 9 10}
+[0&1&2&!3&4&5&7&9&!10&!11] 0 {1 5 7 9 10}
+[0&!1&!2&4&5&7&9&!10&!11] 0 {2 5 7 9 10}
+[!0&!2&4&5&7&9&!10&!11] 0 {0 2 5 7 9 10}
+[0&1&!2&4&5&7&9&!10&!11] 0 {1 2 5 7 9 10}
+[0&!1&2&3&4&5&7&9&!10&!11] 0 {3 5 7 9 10}
+[!0&2&3&4&5&7&9&!10&!11] 0 {0 3 5 7 9 10}
+[0&1&2&3&4&5&7&9&!10&!11] 0 {1 3 5 7 9 10}
+[0&!1&2&!3&4&!5&6&!7&8&!9&11] 0 {11}
+[!0&2&!3&4&!5&6&!7&8&!9&11] 0 {0 11}
+[0&1&2&!3&4&!5&6&!7&8&!9&11] 0 {1 11}
+[0&!1&!2&4&!5&6&!7&8&!9&11] 0 {2 11}
+[!0&!2&4&!5&6&!7&8&!9&11] 0 {0 2 11}
+[0&1&!2&4&!5&6&!7&8&!9&11] 0 {1 2 11}
+[0&!1&2&3&4&!5&6&!7&8&!9&11] 0 {3 11}
+[!0&2&3&4&!5&6&!7&8&!9&11] 0 {0 3 11}
+[0&1&2&3&4&!5&6&!7&8&!9&11] 0 {1 3 11}
+[0&!1&2&!3&!4&8&!9&11] 0 {4 11}
+[!0&2&!3&!4&8&!9&11] 0 {0 4 11}
+[0&1&2&!3&!4&8&!9&11] 0 {1 4 11}
+[0&!1&!2&!4&8&!9&11] 0 {2 4 11}
+[!0&!2&!4&8&!9&11] 0 {0 2 4 11}
+[0&1&!2&!4&8&!9&11] 0 {1 2 4 11}
+[0&!1&2&3&!4&8&!9&11] 0 {3 4 11}
+[!0&2&3&!4&8&!9&11] 0 {0 3 4 11}
+[0&1&2&3&!4&8&!9&11] 0 {1 3 4 11}
+[0&!1&2&!3&4&5&6&!7&8&!9&11] 0 {5 11}
+[!0&2&!3&4&5&6&!7&8&!9&11] 0 {0 5 11}
+[0&1&2&!3&4&5&6&!7&8&!9&11] 0 {1 5 11}
+[0&!1&!2&4&5&6&!7&8&!9&11] 0 {2 5 11}
+[!0&!2&4&5&6&!7&8&!9&11] 0 {0 2 5 11}
+[0&1&!2&4&5&6&!7&8&!9&11] 0 {1 2 5 11}
+[0&!1&2&3&4&5&6&!7&8&!9&11] 0 {3 5 11}
+[!0&2&3&4&5&6&!7&8&!9&11] 0 {0 3 5 11}
+[0&1&2&3&4&5&6&!7&8&!9&11] 0 {1 3 5 11}
+[0&!1&2&!3&4&!5&!6&!7&8&!9&11] 0 {6 11}
+[!0&2&!3&4&!5&!6&!7&8&!9&11] 0 {0 6 11}
+[0&1&2&!3&4&!5&!6&!7&8&!9&11] 0 {1 6 11}
+[0&!1&!2&4&!5&!6&!7&8&!9&11] 0 {2 6 11}
+[!0&!2&4&!5&!6&!7&8&!9&11] 0 {0 2 6 11}
+[0&1&!2&4&!5&!6&!7&8&!9&11] 0 {1 2 6 11}
+[0&!1&2&3&4&!5&!6&!7&8&!9&11] 0 {3 6 11}
+[!0&2&3&4&!5&!6&!7&8&!9&11] 0 {0 3 6 11}
+[0&1&2&3&4&!5&!6&!7&8&!9&11] 0 {1 3 6 11}
+[0&!1&2&!3&4&5&!6&!7&8&!9&11] 0 {5 6 11}
+[!0&2&!3&4&5&!6&!7&8&!9&11] 0 {0 5 6 11}
+[0&1&2&!3&4&5&!6&!7&8&!9&11] 0 {1 5 6 11}
+[0&!1&!2&4&5&!6&!7&8&!9&11] 0 {2 5 6 11}
+[!0&!2&4&5&!6&!7&8&!9&11] 0 {0 2 5 6 11}
+[0&1&!2&4&5&!6&!7&8&!9&11] 0 {1 2 5 6 11}
+[0&!1&2&3&4&5&!6&!7&8&!9&11] 0 {3 5 6 11}
+[!0&2&3&4&5&!6&!7&8&!9&11] 0 {0 3 5 6 11}
+[0&1&2&3&4&5&!6&!7&8&!9&11] 0 {1 3 5 6 11}
+[0&!1&2&!3&4&!5&7&8&!9&11] 0 {7 11}
+[!0&2&!3&4&!5&7&8&!9&11] 0 {0 7 11}
+[0&1&2&!3&4&!5&7&8&!9&11] 0 {1 7 11}
+[0&!1&!2&4&!5&7&8&!9&11] 0 {2 7 11}
+[!0&!2&4&!5&7&8&!9&11] 0 {0 2 7 11}
+[0&1&!2&4&!5&7&8&!9&11] 0 {1 2 7 11}
+[0&!1&2&3&4&!5&7&8&!9&11] 0 {3 7 11}
+[!0&2&3&4&!5&7&8&!9&11] 0 {0 3 7 11}
+[0&1&2&3&4&!5&7&8&!9&11] 0 {1 3 7 11}
+[0&!1&2&!3&4&5&7&8&!9&11] 0 {5 7 11}
+[!0&2&!3&4&5&7&8&!9&11] 0 {0 5 7 11}
+[0&1&2&!3&4&5&7&8&!9&11] 0 {1 5 7 11}
+[0&!1&!2&4&5&7&8&!9&11] 0 {2 5 7 11}
+[!0&!2&4&5&7&8&!9&11] 0 {0 2 5 7 11}
+[0&1&!2&4&5&7&8&!9&11] 0 {1 2 5 7 11}
+[0&!1&2&3&4&5&7&8&!9&11] 0 {3 5 7 11}
+[!0&2&3&4&5&7&8&!9&11] 0 {0 3 5 7 11}
+[0&1&2&3&4&5&7&8&!9&11] 0 {1 3 5 7 11}
+[0&!1&2&!3&4&!5&6&!7&!8&!9&11] 0 {8 11}
+[!0&2&!3&4&!5&6&!7&!8&!9&11] 0 {0 8 11}
+[0&1&2&!3&4&!5&6&!7&!8&!9&11] 0 {1 8 11}
+[0&!1&!2&4&!5&6&!7&!8&!9&11] 0 {2 8 11}
+[!0&!2&4&!5&6&!7&!8&!9&11] 0 {0 2 8 11}
+[0&1&!2&4&!5&6&!7&!8&!9&11] 0 {1 2 8 11}
+[0&!1&2&3&4&!5&6&!7&!8&!9&11] 0 {3 8 11}
+[!0&2&3&4&!5&6&!7&!8&!9&11] 0 {0 3 8 11}
+[0&1&2&3&4&!5&6&!7&!8&!9&11] 0 {1 3 8 11}
+[0&!1&2&!3&!4&!8&!9&11] 0 {4 8 11}
+[!0&2&!3&!4&!8&!9&11] 0 {0 4 8 11}
+[0&1&2&!3&!4&!8&!9&11] 0 {1 4 8 11}
+[0&!1&!2&!4&!8&!9&11] 0 {2 4 8 11}
+[!0&!2&!4&!8&!9&11] 0 {0 2 4 8 11}
+[0&1&!2&!4&!8&!9&11] 0 {1 2 4 8 11}
+[0&!1&2&3&!4&!8&!9&11] 0 {3 4 8 11}
+[!0&2&3&!4&!8&!9&11] 0 {0 3 4 8 11}
+[0&1&2&3&!4&!8&!9&11] 0 {1 3 4 8 11}
+[0&!1&2&!3&4&5&6&!7&!8&!9&11] 0 {5 8 11}
+[!0&2&!3&4&5&6&!7&!8&!9&11] 0 {0 5 8 11}
+[0&1&2&!3&4&5&6&!7&!8&!9&11] 0 {1 5 8 11}
+[0&!1&!2&4&5&6&!7&!8&!9&11] 0 {2 5 8 11}
+[!0&!2&4&5&6&!7&!8&!9&11] 0 {0 2 5 8 11}
+[0&1&!2&4&5&6&!7&!8&!9&11] 0 {1 2 5 8 11}
+[0&!1&2&3&4&5&6&!7&!8&!9&11] 0 {3 5 8 11}
+[!0&2&3&4&5&6&!7&!8&!9&11] 0 {0 3 5 8 11}
+[0&1&2&3&4&5&6&!7&!8&!9&11] 0 {1 3 5 8 11}
+[0&!1&2&!3&4&!5&!6&!7&!8&!9&11] 0 {6 8 11}
+[!0&2&!3&4&!5&!6&!7&!8&!9&11] 0 {0 6 8 11}
+[0&1&2&!3&4&!5&!6&!7&!8&!9&11] 0 {1 6 8 11}
+[0&!1&!2&4&!5&!6&!7&!8&!9&11] 0 {2 6 8 11}
+[!0&!2&4&!5&!6&!7&!8&!9&11] 0 {0 2 6 8 11}
+[0&1&!2&4&!5&!6&!7&!8&!9&11] 0 {1 2 6 8 11}
+[0&!1&2&3&4&!5&!6&!7&!8&!9&11] 0 {3 6 8 11}
+[!0&2&3&4&!5&!6&!7&!8&!9&11] 0 {0 3 6 8 11}
+[0&1&2&3&4&!5&!6&!7&!8&!9&11] 0 {1 3 6 8 11}
+[0&!1&2&!3&4&5&!6&!7&!8&!9&11] 0 {5 6 8 11}
+[!0&2&!3&4&5&!6&!7&!8&!9&11] 0 {0 5 6 8 11}
+[0&1&2&!3&4&5&!6&!7&!8&!9&11] 0 {1 5 6 8 11}
+[0&!1&!2&4&5&!6&!7&!8&!9&11] 0 {2 5 6 8 11}
+[!0&!2&4&5&!6&!7&!8&!9&11] 0 {0 2 5 6 8 11}
+[0&1&!2&4&5&!6&!7&!8&!9&11] 0 {1 2 5 6 8 11}
+[0&!1&2&3&4&5&!6&!7&!8&!9&11] 0 {3 5 6 8 11}
+[!0&2&3&4&5&!6&!7&!8&!9&11] 0 {0 3 5 6 8 11}
+[0&1&2&3&4&5&!6&!7&!8&!9&11] 0 {1 3 5 6 8 11}
+[0&!1&2&!3&4&!5&7&!8&!9&11] 0 {7 8 11}
+[!0&2&!3&4&!5&7&!8&!9&11] 0 {0 7 8 11}
+[0&1&2&!3&4&!5&7&!8&!9&11] 0 {1 7 8 11}
+[0&!1&!2&4&!5&7&!8&!9&11] 0 {2 7 8 11}
+[!0&!2&4&!5&7&!8&!9&11] 0 {0 2 7 8 11}
+[0&1&!2&4&!5&7&!8&!9&11] 0 {1 2 7 8 11}
+[0&!1&2&3&4&!5&7&!8&!9&11] 0 {3 7 8 11}
+[!0&2&3&4&!5&7&!8&!9&11] 0 {0 3 7 8 11}
+[0&1&2&3&4&!5&7&!8&!9&11] 0 {1 3 7 8 11}
+[0&!1&2&!3&4&5&7&!8&!9&11] 0 {5 7 8 11}
+[!0&2&!3&4&5&7&!8&!9&11] 0 {0 5 7 8 11}
+[0&1&2&!3&4&5&7&!8&!9&11] 0 {1 5 7 8 11}
+[0&!1&!2&4&5&7&!8&!9&11] 0 {2 5 7 8 11}
+[!0&!2&4&5&7&!8&!9&11] 0 {0 2 5 7 8 11}
+[0&1&!2&4&5&7&!8&!9&11] 0 {1 2 5 7 8 11}
+[0&!1&2&3&4&5&7&!8&!9&11] 0 {3 5 7 8 11}
+[!0&2&3&4&5&7&!8&!9&11] 0 {0 3 5 7 8 11}
+[0&1&2&3&4&5&7&!8&!9&11] 0 {1 3 5 7 8 11}
+[0&!1&2&!3&4&!5&6&!7&9&11] 0 {9 11}
+[!0&2&!3&4&!5&6&!7&9&11] 0 {0 9 11}
+[0&1&2&!3&4&!5&6&!7&9&11] 0 {1 9 11}
+[0&!1&!2&4&!5&6&!7&9&11] 0 {2 9 11}
+[!0&!2&4&!5&6&!7&9&11] 0 {0 2 9 11}
+[0&1&!2&4&!5&6&!7&9&11] 0 {1 2 9 11}
+[0&!1&2&3&4&!5&6&!7&9&11] 0 {3 9 11}
+[!0&2&3&4&!5&6&!7&9&11] 0 {0 3 9 11}
+[0&1&2&3&4&!5&6&!7&9&11] 0 {1 3 9 11}
+[0&!1&2&!3&!4&9&11] 0 {4 9 11}
+[!0&2&!3&!4&9&11] 0 {0 4 9 11}
+[0&1&2&!3&!4&9&11] 0 {1 4 9 11}
+[0&!1&!2&!4&9&11] 0 {2 4 9 11}
+[!0&!2&!4&9&11] 0 {0 2 4 9 11}
+[0&1&!2&!4&9&11] 0 {1 2 4 9 11}
+[0&!1&2&3&!4&9&11] 0 {3 4 9 11}
+[!0&2&3&!4&9&11] 0 {0 3 4 9 11}
+[0&1&2&3&!4&9&11] 0 {1 3 4 9 11}
+[0&!1&2&!3&4&5&6&!7&9&11] 0 {5 9 11}
+[!0&2&!3&4&5&6&!7&9&11] 0 {0 5 9 11}
+[0&1&2&!3&4&5&6&!7&9&11] 0 {1 5 9 11}
+[0&!1&!2&4&5&6&!7&9&11] 0 {2 5 9 11}
+[!0&!2&4&5&6&!7&9&11] 0 {0 2 5 9 11}
+[0&1&!2&4&5&6&!7&9&11] 0 {1 2 5 9 11}
+[0&!1&2&3&4&5&6&!7&9&11] 0 {3 5 9 11}
+[!0&2&3&4&5&6&!7&9&11] 0 {0 3 5 9 11}
+[0&1&2&3&4&5&6&!7&9&11] 0 {1 3 5 9 11}
+[0&!1&2&!3&4&!5&!6&!7&9&11] 0 {6 9 11}
+[!0&2&!3&4&!5&!6&!7&9&11] 0 {0 6 9 11}
+[0&1&2&!3&4&!5&!6&!7&9&11] 0 {1 6 9 11}
+[0&!1&!2&4&!5&!6&!7&9&11] 0 {2 6 9 11}
+[!0&!2&4&!5&!6&!7&9&11] 0 {0 2 6 9 11}
+[0&1&!2&4&!5&!6&!7&9&11] 0 {1 2 6 9 11}
+[0&!1&2&3&4&!5&!6&!7&9&11] 0 {3 6 9 11}
+[!0&2&3&4&!5&!6&!7&9&11] 0 {0 3 6 9 11}
+[0&1&2&3&4&!5&!6&!7&9&11] 0 {1 3 6 9 11}
+[0&!1&2&!3&4&5&!6&!7&9&11] 0 {5 6 9 11}
+[!0&2&!3&4&5&!6&!7&9&11] 0 {0 5 6 9 11}
+[0&1&2&!3&4&5&!6&!7&9&11] 0 {1 5 6 9 11}
+[0&!1&!2&4&5&!6&!7&9&11] 0 {2 5 6 9 11}
+[!0&!2&4&5&!6&!7&9&11] 0 {0 2 5 6 9 11}
+[0&1&!2&4&5&!6&!7&9&11] 0 {1 2 5 6 9 11}
+[0&!1&2&3&4&5&!6&!7&9&11] 0 {3 5 6 9 11}
+[!0&2&3&4&5&!6&!7&9&11] 0 {0 3 5 6 9 11}
+[0&1&2&3&4&5&!6&!7&9&11] 0 {1 3 5 6 9 11}
+[0&!1&2&!3&4&!5&7&9&11] 0 {7 9 11}
+[!0&2&!3&4&!5&7&9&11] 0 {0 7 9 11}
+[0&1&2&!3&4&!5&7&9&11] 0 {1 7 9 11}
+[0&!1&!2&4&!5&7&9&11] 0 {2 7 9 11}
+[!0&!2&4&!5&7&9&11] 0 {0 2 7 9 11}
+[0&1&!2&4&!5&7&9&11] 0 {1 2 7 9 11}
+[0&!1&2&3&4&!5&7&9&11] 0 {3 7 9 11}
+[!0&2&3&4&!5&7&9&11] 0 {0 3 7 9 11}
+[0&1&2&3&4&!5&7&9&11] 0 {1 3 7 9 11}
+[0&!1&2&!3&4&5&7&9&11] 0 {5 7 9 11}
+[!0&2&!3&4&5&7&9&11] 0 {0 5 7 9 11}
+[0&1&2&!3&4&5&7&9&11] 0 {1 5 7 9 11}
+[0&!1&!2&4&5&7&9&11] 0 {2 5 7 9 11}
+[!0&!2&4&5&7&9&11] 0 {0 2 5 7 9 11}
+[0&1&!2&4&5&7&9&11] 0 {1 2 5 7 9 11}
+[0&!1&2&3&4&5&7&9&11] 0 {3 5 7 9 11}
+[!0&2&3&4&5&7&9&11] 0 {0 3 5 7 9 11}
+[0&1&2&3&4&5&7&9&11] 0 {1 3 5 7 9 11}
 --END--
 HOA: v1
 States: 1
@@ -9841,37 +11534,37 @@ State: 0
 HOA: v1
 States: 1
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 Acceptance: 3 Inf(0) | (Fin(1)|Fin(2))
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
 [!0&!1&!2] 0
-[1] 0 {0}
-[0&!1&!2] 0 {1}
-[!0&!1&2] 0 {2}
-[0&!1&2] 0 {1 2}
+[2] 0 {0}
+[!0&1&!2] 0 {1}
+[0&!1&!2] 0 {2}
+[0&1&!2] 0 {1 2}
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 --BODY--
 State: 0
-[0&3 | !2] 0 {0}
+[!0 | 1&3] 0 {0}
 [0&1&2&!3] 1
 State: 1
-[0&3 | !2&3] 0 {0}
-[0&1&!3 | 1&!2&!3] 1
+[!0&3 | 1&3] 0 {0}
+[!0&2&!3 | 1&2&!3] 1
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -9886,7 +11579,7 @@ State: 1
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
@@ -9899,7 +11592,7 @@ State: 0
 HOA: v1
 States: 4
 Start: 3
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -9909,54 +11602,54 @@ State: 0
 [t] 0
 State: 1
 [3] 0
-[1&!3] 1
+[2&!3] 1
 State: 2
-[!0&!2] 0
-[!0&2] 2
+[!0&!1] 0
+[0&!1] 2
 State: 3
-[!0&!2 | 3] 0
-[0&1&!3] 1
-[!0&!1&2&!3] 2
-[!0&1&2&!3] 3
+[!0&!1 | 3] 0
+[1&2&!3] 1
+[0&!1&!2&!3] 2
+[0&!1&2&!3] 3
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc stutter-invariant
 --BODY--
 State: 0
-[!0&1 | !2] 0 {0}
-[!0&!1&2] 1 {0}
-[!0&!1&2] 2
-[0&2] 3
+[!0 | !1&2] 0 {0}
+[0&!1&!2] 1 {0}
+[0&!1&!2] 2
+[0&1] 3
 State: 1
-[!0&1] 0 {0}
-[!0&!1] 1 {0}
+[!1&2] 0 {0}
+[!1&!2] 1 {0}
 State: 2
-[!0&!1] 2
-[0] 3
+[!1&!2] 2
+[1] 3
 State: 3
-[!0&1] 0 {0}
-[!0&!1] 1 {0}
-[0] 3
+[!1&2] 0 {0}
+[!1&!2] 1 {0}
+[1] 3
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1] 0
-[0&!1] 1
+[!1&!2] 0
+[1&!2] 1
 State: 1
-[!0&!1&2] 0
-[0&!1 | !2] 1
+[0&!1&!2] 0
+[!0 | 1&!2] 1
 --END--
 HOA: v1
 States: 1
@@ -9974,92 +11667,92 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0 | 1 | !2] 0 {0}
-[!0&!1&2] 1
+[!0 | 1 | 2] 0 {0}
+[0&!1&!2] 1
 State: 1
-[0 | 1] 0 {0}
-[!0&!1] 1
+[1 | 2] 0 {0}
+[!1&!2] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 4 "p1" "p2" "p0" "p3"
+AP: 4 "p0" "p1" "p2" "p3"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
 [!0&!1&!2] 0
-[0&!1 | !1&2] 1
+[0&!2 | 1&!2] 1
 State: 1
 [!0&!1&!2&3] 0
-[0&!1 | !1&2 | !3] 1
+[0&!2 | 1&!2 | !3] 1
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
 properties: deterministic very-weak
 --BODY--
 State: 0
-[!1] 0
-[1] 1
+[!0] 0
+[0] 1
 State: 1 {0}
 [t] 1
 State: 2 {0}
-[0&!1] 0
-[1] 1
+[!0&1] 0
+[0] 1
 [!0&!1] 2
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: stutter-invariant weak
 --BODY--
 State: 0
-[!0] 0
+[!1] 0
 State: 1
-[!0&1] 0
-[!0&!1] 1
-[0] 2
+[!1&2] 0
+[!1&!2] 1
+[1] 2
 State: 2
-[!0&1&2] 0
-[!0&!1&2] 1
-[0 | !2] 2
+[0&!1&2] 0
+[0&!1&!2] 1
+[!0 | 1] 2
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
 --BODY--
 State: 0
-[!0&!1] 0
-[0] 1
+[!1&!2] 0
+[1] 1
 State: 1
-[!0&!1&2] 0
-[0 | !2] 1
+[0&!1&!2] 0
+[!0 | 1] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic weak
@@ -10068,79 +11761,79 @@ State: 0
 [!0 | !1] 0
 [0&1] 1
 State: 1
-[!0] 0
+[!1] 0
 [0&1] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&1 | !2] 0 {0}
-[!0&2 | !1&2] 1
+[!0 | 1&2] 0 {0}
+[0&!1 | 0&!2] 1
 State: 1
-[0&1] 0 {0}
-[!0 | !1] 1
+[1&2] 0 {0}
+[!1 | !2] 1
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 properties: stutter-invariant
 --BODY--
 State: 0
-[0&1 | !2] 0 {0}
-[!0&2] 1
-[0&!1&2] 2
+[!0 | 1&2] 0 {0}
+[0&!1] 1
+[0&1&!2] 2
 State: 1
-[0&1] 0 {0}
-[!0] 1
-[0&!1] 2
+[1&2] 0 {0}
+[!1] 1
+[1&!2] 2
 State: 2
-[0&1] 0 {0}
-[0&!1] 2
+[1&2] 0 {0}
+[1&!2] 2
 --END--
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc deterministic
 properties: stutter-invariant
 --BODY--
 State: 0
-[0&1 | !2] 0 {0}
-[!0&2] 2
-[0&!1&2] 4
+[!0 | 1&2] 0 {0}
+[0&!1] 2
+[0&1&!2] 4
 State: 1
-[0&1] 0 {0}
-[!0] 1
-[0&!1] 3
+[1&2] 0 {0}
+[!1] 1
+[1&!2] 3
 State: 2
-[0&1] 0 {0}
-[!0] 2
-[0&!1] 4
+[1&2] 0 {0}
+[!1] 2
+[1&!2] 4
 State: 3
-[0&1] 0 {0}
-[0&!1] 3
+[1&2] 0 {0}
+[1&!2] 3
 State: 4
-[0&1] 0 {0}
-[!0] 1
-[0&!1] 4
+[1&2] 0 {0}
+[!1] 1
+[1&!2] 4
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: parity min even 2
 Acceptance: 2 Inf(0) | Fin(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -10148,13 +11841,13 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1] 0
-[0] 0 {0}
-[!0&1] 0 {1}
+[1] 0 {0}
+[0&!1] 0 {1}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -10162,9 +11855,9 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1&!2] 0
-[!0&!1&2] 0 {0}
-[!0&1&!2] 0 {1}
-[0 | 1&2] 0 {0 1}
+[0&!1&!2] 0 {0}
+[!0&!1&2] 0 {1}
+[0&2 | 1] 0 {0 1}
 --END--
 HOA: v1
 States: 8
@@ -10272,6 +11965,204 @@ State: 12
 [0&!1&!2&!3] 10 {1}
 [0&!1&2&3] 12 {0}
 [0&!1&2&!3] 12 {0 1}
+--END--
+HOA: v1
+States: 20
+Start: 0
+AP: 6 "g1" "g2" "g3" "r1" "r2" "r3"
+Acceptance: 6 (Fin(3)|Fin(4)|Fin(5)) & (Inf(0)&Inf(1)&Inf(2))
+properties: trans-labels explicit-labels trans-acc
+--BODY--
+State: 0
+[3 | 4 | 5] 1
+[!0&!1&!2&!3&!4&!5] 3
+[!0&!1&!2&!3&!4&!5] 2
+[!0&!1&!2&!3&!4&!5] 2
+[!0&!1&!2&!3&!4&!5] 2
+State: 1
+[t] 1 {0 1 2}
+State: 2
+[0&!3] 4
+[!0&3] 5
+[1&!4] 6
+[!1&4] 7
+[2&!5] 8
+[!2&5] 9
+[0&3] 2 {0 1 2 4 5}
+[0&!3] 4
+[!0&3] 5
+[1&!4] 6
+[!1&4] 7
+[2&!5] 8
+[!2&5] 9
+[1&4] 2 {0 1 2 3 5}
+[0&!3] 4
+[!0&3] 5
+[1&!4] 6
+[!1&4] 7
+[2&!5] 8
+[!2&5] 9
+[2&5] 2 {0 1 2 3 4}
+[t] 2 {3 4 5}
+State: 3
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5] 10
+[!0&!1&!2&!3&!4&5] 11 {0 1}
+[!0&!1&!2&!3&4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5] 13 {0}
+[!0&!1&!2&3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5] 15 {1}
+[!0&!1&!2&3&4&!5] 16 {2}
+State: 4
+[3] 1
+State: 5
+[!3] 1
+State: 6
+[4] 1
+State: 7
+[!4] 1
+State: 8
+[5] 1
+State: 9
+[!5] 1
+State: 10
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | !0&!1&2&3&4&!5 | !0&1&!2&3&!4&5 | 0&!1&!2&!3&4&5] 10
+[!0&!1&!2&!3&!4&5 | !0&!1&2&!3&!4&!5] 11 {0 1}
+[!0&!1&!2&!3&4&!5 | !0&1&!2&!3&!4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5 | !0&!1&2&!3&4&!5 | !0&1&!2&!3&!4&5] 13 {0}
+[!0&!1&!2&3&!4&!5 | 0&!1&!2&!3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5 | !0&!1&2&3&!4&!5 | 0&!1&!2&!3&!4&5] 15 {1}
+[!0&!1&!2&3&4&!5 | !0&1&!2&3&!4&!5 | 0&!1&!2&!3&4&!5] 16 {2}
+[!0&!1&2&3&4&5] 17 {2}
+[!0&!1&2&!3&4&5] 17 {0 2}
+[!0&!1&2&3&!4&5] 17 {1 2}
+[!0&!1&2&!3&!4&5] 17 {0 1 2}
+[!0&1&!2&3&4&5] 18 {1}
+[!0&1&!2&!3&4&5] 18 {0 1}
+[!0&1&!2&3&4&!5] 18 {1 2}
+[!0&1&!2&!3&4&!5] 18 {0 1 2}
+[0&!1&!2&3&4&5] 19 {0}
+[0&!1&!2&3&!4&5] 19 {0 1}
+[0&!1&!2&3&4&!5] 19 {0 2}
+[0&!1&!2&3&!4&!5] 19 {0 1 2}
+State: 11
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | !0&!1&2&3&4&!5] 10
+[!0&!1&!2&!3&!4&5 | !0&!1&2&!3&!4&!5] 11 {0 1}
+[!0&!1&!2&!3&4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5 | !0&!1&2&!3&4&!5] 13 {0}
+[!0&!1&!2&3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5 | !0&!1&2&3&!4&!5] 15 {1}
+[!0&!1&!2&3&4&!5] 16 {2}
+[!0&!1&2&3&4&5] 17 {2}
+[!0&!1&2&!3&4&5] 17 {0 2}
+[!0&!1&2&3&!4&5] 17 {1 2}
+[!0&!1&2&!3&!4&5] 17 {0 1 2}
+State: 12
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | !0&1&!2&3&!4&5] 10
+[!0&!1&!2&!3&!4&5] 11 {0 1}
+[!0&!1&!2&!3&4&!5 | !0&1&!2&!3&!4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5 | !0&1&!2&!3&!4&5] 13 {0}
+[!0&!1&!2&3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5] 15 {1}
+[!0&!1&!2&3&4&!5 | !0&1&!2&3&!4&!5] 16 {2}
+[!0&1&!2&3&4&5] 18 {1}
+[!0&1&!2&!3&4&5] 18 {0 1}
+[!0&1&!2&3&4&!5] 18 {1 2}
+[!0&1&!2&!3&4&!5] 18 {0 1 2}
+State: 13
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | !0&!1&2&3&4&!5 | !0&1&!2&3&!4&5] 10
+[!0&!1&!2&!3&!4&5 | !0&!1&2&!3&!4&!5] 11 {0 1}
+[!0&!1&!2&!3&4&!5 | !0&1&!2&!3&!4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5 | !0&!1&2&!3&4&!5 | !0&1&!2&!3&!4&5] 13 {0}
+[!0&!1&!2&3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5 | !0&!1&2&3&!4&!5] 15 {1}
+[!0&!1&!2&3&4&!5 | !0&1&!2&3&!4&!5] 16 {2}
+[!0&!1&2&3&4&5] 17 {2}
+[!0&!1&2&!3&4&5] 17 {0 2}
+[!0&!1&2&3&!4&5] 17 {1 2}
+[!0&!1&2&!3&!4&5] 17 {0 1 2}
+[!0&1&!2&3&4&5] 18 {1}
+[!0&1&!2&!3&4&5] 18 {0 1}
+[!0&1&!2&3&4&!5] 18 {1 2}
+[!0&1&!2&!3&4&!5] 18 {0 1 2}
+State: 14
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | 0&!1&!2&!3&4&5] 10
+[!0&!1&!2&!3&!4&5] 11 {0 1}
+[!0&!1&!2&!3&4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5] 13 {0}
+[!0&!1&!2&3&!4&!5 | 0&!1&!2&!3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5 | 0&!1&!2&!3&!4&5] 15 {1}
+[!0&!1&!2&3&4&!5 | 0&!1&!2&!3&4&!5] 16 {2}
+[0&!1&!2&3&4&5] 19 {0}
+[0&!1&!2&3&!4&5] 19 {0 1}
+[0&!1&!2&3&4&!5] 19 {0 2}
+[0&!1&!2&3&!4&!5] 19 {0 1 2}
+State: 15
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | !0&!1&2&3&4&!5 | 0&!1&!2&!3&4&5] 10
+[!0&!1&!2&!3&!4&5 | !0&!1&2&!3&!4&!5] 11 {0 1}
+[!0&!1&!2&!3&4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5 | !0&!1&2&!3&4&!5] 13 {0}
+[!0&!1&!2&3&!4&!5 | 0&!1&!2&!3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5 | !0&!1&2&3&!4&!5 | 0&!1&!2&!3&!4&5] 15 {1}
+[!0&!1&!2&3&4&!5 | 0&!1&!2&!3&4&!5] 16 {2}
+[!0&!1&2&3&4&5] 17 {2}
+[!0&!1&2&!3&4&5] 17 {0 2}
+[!0&!1&2&3&!4&5] 17 {1 2}
+[!0&!1&2&!3&!4&5] 17 {0 1 2}
+[0&!1&!2&3&4&5] 19 {0}
+[0&!1&!2&3&!4&5] 19 {0 1}
+[0&!1&!2&3&4&!5] 19 {0 2}
+[0&!1&!2&3&!4&!5] 19 {0 1 2}
+State: 16
+[!0&!1&!2&!3&!4&!5] 3 {0 1 2}
+[!0&!1&!2&3&4&5 | !0&1&!2&3&!4&5 | 0&!1&!2&!3&4&5] 10
+[!0&!1&!2&!3&!4&5] 11 {0 1}
+[!0&!1&!2&!3&4&!5 | !0&1&!2&!3&!4&!5] 12 {0 2}
+[!0&!1&!2&!3&4&5 | !0&1&!2&!3&!4&5] 13 {0}
+[!0&!1&!2&3&!4&!5 | 0&!1&!2&!3&!4&!5] 14 {1 2}
+[!0&!1&!2&3&!4&5 | 0&!1&!2&!3&!4&5] 15 {1}
+[!0&!1&!2&3&4&!5 | !0&1&!2&3&!4&!5 | 0&!1&!2&!3&4&!5] 16 {2}
+[!0&1&!2&3&4&5] 18 {1}
+[!0&1&!2&!3&4&5] 18 {0 1}
+[!0&1&!2&3&4&!5] 18 {1 2}
+[!0&1&!2&!3&4&!5] 18 {0 1 2}
+[0&!1&!2&3&4&5] 19 {0}
+[0&!1&!2&3&!4&5] 19 {0 1}
+[0&!1&!2&3&4&!5] 19 {0 2}
+[0&!1&!2&3&!4&!5] 19 {0 1 2}
+State: 17
+[!0&!1&2&3&4&!5] 10
+[!0&!1&2&!3&!4&!5] 11 {0 1}
+[!0&!1&2&!3&4&!5] 13 {0}
+[!0&!1&2&3&!4&!5] 15 {1}
+[!0&!1&2&3&4&5] 17 {2}
+[!0&!1&2&!3&4&5] 17 {0 2}
+[!0&!1&2&3&!4&5] 17 {1 2}
+[!0&!1&2&!3&!4&5] 17 {0 1 2}
+State: 18
+[!0&1&!2&3&!4&5] 10
+[!0&1&!2&!3&!4&!5] 12 {0 2}
+[!0&1&!2&!3&!4&5] 13 {0}
+[!0&1&!2&3&!4&!5] 16 {2}
+[!0&1&!2&3&4&5] 18 {1}
+[!0&1&!2&!3&4&5] 18 {0 1}
+[!0&1&!2&3&4&!5] 18 {1 2}
+[!0&1&!2&!3&4&!5] 18 {0 1 2}
+State: 19
+[0&!1&!2&!3&4&5] 10
+[0&!1&!2&!3&!4&!5] 14 {1 2}
+[0&!1&!2&!3&!4&5] 15 {1}
+[0&!1&!2&!3&4&!5] 16 {2}
+[0&!1&!2&3&4&5] 19 {0}
+[0&!1&!2&3&!4&5] 19 {0 1}
+[0&!1&!2&3&4&!5] 19 {0 2}
+[0&!1&!2&3&!4&!5] 19 {0 1 2}
 --END--
 HOA: v1
 States: 6
@@ -12266,22 +14157,7 @@ State: 159
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
-acc-name: Buchi
-Acceptance: 1 Inf(0)
-properties: trans-labels explicit-labels state-acc deterministic
-properties: terminal
---BODY--
-State: 0 {0}
-[t] 0
-State: 1
-[0] 0
-[!0&1] 1
---END--
-HOA: v1
-States: 3
-Start: 2
-AP: 3 "p1" "p2" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -12292,15 +14168,30 @@ State: 0 {0}
 State: 1
 [1] 0
 [0&!1] 1
-State: 2
-[1] 0
-[0&!1&!2] 1
-[!1&2] 2
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels state-acc deterministic
+properties: terminal
+--BODY--
+State: 0 {0}
+[t] 0
+State: 1
+[2] 0
+[1&!2] 1
+State: 2
+[2] 0
+[!0&1&!2] 1
+[0&!2] 2
+--END--
+HOA: v1
+States: 3
+Start: 2
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -12309,37 +14200,37 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[!0&!1] 0
-[0&!1] 1
+[!1&!2] 0
+[1&!2] 1
 State: 2
 [!0&!1&!2] 0
-[0&!1&!2] 1
-[!1&2] 2
+[!0&1&!2] 1
+[0&!2] 2
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc semi-deterministic
 properties: weak
 --BODY--
 State: 0
-[1] 0
-[0] 1
-[!1] 2
+[0] 0
+[1] 1
+[!0] 2
 State: 1 {0}
-[0] 1
+[1] 1
 State: 2
-[1] 0
+[0] 0
 [0&1] 1
-[!1] 2
+[!0] 2
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -12348,36 +14239,36 @@ properties: very-weak
 State: 0 {0}
 [t] 0
 State: 1 {0}
-[1] 1
+[0] 1
 State: 2
-[0] 0
-[!0&1] 3
+[1] 0
+[0&!1] 3
 State: 3
 [0&1] 1
-[!0&1] 3
+[0&!1] 3
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0 {0}
-[!0] 0
+[!1] 0
 State: 1 {0}
-[!1] 1
+[!0] 1
 State: 2
-[!0&1] 0
-[0&!1] 1
+[0&!1] 0
+[!0&1] 1
 [!0&!1] 2
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Rabin 1
 Acceptance: 2 Fin(0) & Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -12385,13 +14276,13 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1] 0
-[0] 0 {0}
-[!0&1] 0 {1}
+[1] 0 {0}
+[0&!1] 0 {1}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 Acceptance: 3 (Fin(0)|Fin(1)) & Inf(2)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic stutter-invariant
@@ -12399,13 +14290,13 @@ properties: deterministic stutter-invariant
 State: 0
 [!0&!1] 0
 [0&1] 0 {0 1}
-[0&!1] 0 {0 2}
-[!0&1] 0 {1 2}
+[!0&1] 0 {0 2}
+[0&!1] 0 {1 2}
 --END--
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
@@ -12414,8 +14305,8 @@ properties: very-weak
 State: 0
 [t] 0
 State: 1
-[1] 0
-[0&!1] 1
+[0] 0
+[!0&1] 1
 --END--
 HOA: v1
 States: 1
@@ -12432,39 +14323,39 @@ State: 0
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0 | !1] 0 {0}
-[!0&1] 1
+[!0 | 1] 0 {0}
+[0&!1] 1
 State: 1
-[0] 0 {0}
-[!0] 1
+[1] 0 {0}
+[!1] 1
 --END--
 HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0 | !1] 0 {0}
-[!0&1] 1
+[!0 | 1] 0 {0}
+[0&!1] 1
 State: 1
-[0] 0 {0}
-[!0] 1
+[1] 0 {0}
+[!1] 1
 --END--
 HOA: v1
 States: 3
 Start: 1
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -12473,17 +14364,17 @@ properties: deterministic terminal
 State: 0 {0}
 [t] 0
 State: 1
-[!2] 1
-[2] 2
+[!0] 1
+[0] 2
 State: 2
-[!1] 0
-[0&1&!2] 1
-[!0&1 | 1&2] 2
+[!2] 0
+[!0&1&2] 1
+[0&2 | !1&2] 2
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -12491,14 +14382,14 @@ properties: deterministic
 --BODY--
 State: 0
 [0&1] 0
-[!0&1] 0 {0}
-[0&!1] 0 {1}
+[0&!1] 0 {0}
+[!0&1] 0 {1}
 [!0&!1] 0 {0 1}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
@@ -12506,8 +14397,8 @@ properties: deterministic
 --BODY--
 State: 0
 [!0&!1] 0
-[0&!1] 0 {0}
-[!0&1] 0 {1}
+[!0&1] 0 {0}
+[0&!1] 0 {1}
 [0&1] 0 {0 1}
 --END--
 HOA: v1
@@ -12534,99 +14425,99 @@ State: 3
 HOA: v1
 States: 5
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[!2] 2
-[2] 3
+[!0] 2
+[0] 3
 State: 1 {0}
 [t] 1
 State: 2
-[2] 3
+[0] 3
 State: 3 {0}
 [0&1&2] 1
-[!0&2] 3
-[0&!1&2] 4
+[0&!1] 3
+[0&1&!2] 4
 State: 4 {0}
-[1&2] 1
-[!1&2] 4
+[0&2] 1
+[0&!2] 4
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: generalized-Buchi 2
 Acceptance: 2 Inf(0)&Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[1&2] 0 {0 1}
-[1&!2] 1
-[!1&2] 2
-[!1&!2] 3
+[0&2] 0 {0 1}
+[!0&2] 1
+[0&!2] 2
+[!0&!2] 3
 State: 1
-[1] 1 {0 1}
-[!1] 3
-State: 2
-[2] 2 {0 1}
+[2] 1 {0 1}
 [!2] 3
+State: 2
+[0] 2 {0 1}
+[!0] 3
 State: 3
-[0] 3 {0}
-[!0] 3 {1}
+[1] 3 {0}
+[!1] 3 {1}
 --END--
 HOA: v1
 States: 3
 Start: 2
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1] 0
+[0] 0
 State: 1
-[0] 1
+[1] 1
 State: 2
-[!0&1] 0
-[0&!1] 1
+[0&!1] 0
+[!0&1] 1
 [0&1] 2
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 Acceptance: 3 (Fin(1)|Fin(2)) & Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 --BODY--
 State: 0
-[1&2] 0
-[!1&2] 2
-[1&!2] 3
-[!1&!2] 1
-[!1&!2] 1
+[0&2] 0
+[0&!2] 2
+[!0&2] 3
+[!0&!2] 1
+[!0&!2] 1
 State: 1
-[!0] 1 {0 2}
-[0] 1 {0 1}
+[!1] 1 {0 2}
+[1] 1 {0 1}
 [t] 1 {1 2}
 State: 2
-[2] 2
-[!2] 1
-[!2] 1
+[0] 2
+[!0] 1
+[!0] 1
 State: 3
-[1] 3
-[!1] 1
-[!1] 1
+[2] 3
+[!2] 1
+[!2] 1
 --END--
 HOA: v1
 States: 4
 Start: 2
-AP: 2 "p2" "p0"
+AP: 2 "p0" "p2"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc complete
@@ -12635,34 +14526,34 @@ properties: deterministic stutter-invariant terminal
 State: 0 {0}
 [t] 0
 State: 1
-[!1] 0
-[1] 1
+[!0] 0
+[0] 1
 State: 2
 [!0&!1] 0
-[!0&1] 1
+[0&!1] 1
 [0&1] 2
-[0&!1] 3
+[!0&1] 3
 State: 3
-[!0] 0
-[0] 3
+[!1] 0
+[1] 3
 --END--
 HOA: v1
 States: 3
 Start: 0
-AP: 3 "p1" "p2" "p0"
+AP: 3 "p0" "p1" "p2"
 acc-name: all
 Acceptance: 0 t
 properties: trans-labels explicit-labels state-acc deterministic
 properties: very-weak
 --BODY--
 State: 0
-[1&2] 0
-[!1&2] 1
-[1&!2] 2
+[0&2] 0
+[0&!2] 1
+[!0&2] 2
 State: 1
-[!0&2] 1
+[0&!1] 1
 State: 2
-[0&1] 2
+[1&2] 2
 --END--
 HOA: v1
 States: 1
@@ -12679,7 +14570,7 @@ State: 0
 HOA: v1
 States: 2
 Start: 1
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels state-acc deterministic
@@ -12688,8 +14579,8 @@ properties: terminal
 State: 0 {0}
 [t] 0
 State: 1
-[1] 0
-[0&!1] 1
+[0] 0
+[!0&1] 1
 --END--
 HOA: v1
 States: 7
@@ -14979,57 +16870,401 @@ State: 0
 [!0&!1&!2&!3&!4&!5] 0 {1 3 5}
 --END--
 HOA: v1
+States: 1
+Start: 0
+AP: 8 "a1" "b1" "a2" "b2" "a3" "b3" "a4" "b4"
+Acceptance: 8 (Inf(0) | Fin(1)) & (Inf(2) | Fin(3)) & (Inf(4) | Fin(5)) & (Inf(6) | Fin(7))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic stutter-invariant
+--BODY--
+State: 0
+[!0&1&!2&3&!4&5&!6&7] 0
+[0&!2&3&!4&5&!6&7] 0 {0}
+[!0&!1&!2&3&!4&5&!6&7] 0 {1}
+[!0&1&2&!4&5&!6&7] 0 {2}
+[0&2&!4&5&!6&7] 0 {0 2}
+[!0&!1&2&!4&5&!6&7] 0 {1 2}
+[!0&1&!2&!3&!4&5&!6&7] 0 {3}
+[0&!2&!3&!4&5&!6&7] 0 {0 3}
+[!0&!1&!2&!3&!4&5&!6&7] 0 {1 3}
+[!0&1&!2&3&4&!6&7] 0 {4}
+[0&!2&3&4&!6&7] 0 {0 4}
+[!0&!1&!2&3&4&!6&7] 0 {1 4}
+[!0&1&2&4&!6&7] 0 {2 4}
+[0&2&4&!6&7] 0 {0 2 4}
+[!0&!1&2&4&!6&7] 0 {1 2 4}
+[!0&1&!2&!3&4&!6&7] 0 {3 4}
+[0&!2&!3&4&!6&7] 0 {0 3 4}
+[!0&!1&!2&!3&4&!6&7] 0 {1 3 4}
+[!0&1&!2&3&!4&!5&!6&7] 0 {5}
+[0&!2&3&!4&!5&!6&7] 0 {0 5}
+[!0&!1&!2&3&!4&!5&!6&7] 0 {1 5}
+[!0&1&2&!4&!5&!6&7] 0 {2 5}
+[0&2&!4&!5&!6&7] 0 {0 2 5}
+[!0&!1&2&!4&!5&!6&7] 0 {1 2 5}
+[!0&1&!2&!3&!4&!5&!6&7] 0 {3 5}
+[0&!2&!3&!4&!5&!6&7] 0 {0 3 5}
+[!0&!1&!2&!3&!4&!5&!6&7] 0 {1 3 5}
+[!0&1&!2&3&!4&5&6] 0 {6}
+[0&!2&3&!4&5&6] 0 {0 6}
+[!0&!1&!2&3&!4&5&6] 0 {1 6}
+[!0&1&2&!4&5&6] 0 {2 6}
+[0&2&!4&5&6] 0 {0 2 6}
+[!0&!1&2&!4&5&6] 0 {1 2 6}
+[!0&1&!2&!3&!4&5&6] 0 {3 6}
+[0&!2&!3&!4&5&6] 0 {0 3 6}
+[!0&!1&!2&!3&!4&5&6] 0 {1 3 6}
+[!0&1&!2&3&4&6] 0 {4 6}
+[0&!2&3&4&6] 0 {0 4 6}
+[!0&!1&!2&3&4&6] 0 {1 4 6}
+[!0&1&2&4&6] 0 {2 4 6}
+[0&2&4&6] 0 {0 2 4 6}
+[!0&!1&2&4&6] 0 {1 2 4 6}
+[!0&1&!2&!3&4&6] 0 {3 4 6}
+[0&!2&!3&4&6] 0 {0 3 4 6}
+[!0&!1&!2&!3&4&6] 0 {1 3 4 6}
+[!0&1&!2&3&!4&!5&6] 0 {5 6}
+[0&!2&3&!4&!5&6] 0 {0 5 6}
+[!0&!1&!2&3&!4&!5&6] 0 {1 5 6}
+[!0&1&2&!4&!5&6] 0 {2 5 6}
+[0&2&!4&!5&6] 0 {0 2 5 6}
+[!0&!1&2&!4&!5&6] 0 {1 2 5 6}
+[!0&1&!2&!3&!4&!5&6] 0 {3 5 6}
+[0&!2&!3&!4&!5&6] 0 {0 3 5 6}
+[!0&!1&!2&!3&!4&!5&6] 0 {1 3 5 6}
+[!0&1&!2&3&!4&5&!6&!7] 0 {7}
+[0&!2&3&!4&5&!6&!7] 0 {0 7}
+[!0&!1&!2&3&!4&5&!6&!7] 0 {1 7}
+[!0&1&2&!4&5&!6&!7] 0 {2 7}
+[0&2&!4&5&!6&!7] 0 {0 2 7}
+[!0&!1&2&!4&5&!6&!7] 0 {1 2 7}
+[!0&1&!2&!3&!4&5&!6&!7] 0 {3 7}
+[0&!2&!3&!4&5&!6&!7] 0 {0 3 7}
+[!0&!1&!2&!3&!4&5&!6&!7] 0 {1 3 7}
+[!0&1&!2&3&4&!6&!7] 0 {4 7}
+[0&!2&3&4&!6&!7] 0 {0 4 7}
+[!0&!1&!2&3&4&!6&!7] 0 {1 4 7}
+[!0&1&2&4&!6&!7] 0 {2 4 7}
+[0&2&4&!6&!7] 0 {0 2 4 7}
+[!0&!1&2&4&!6&!7] 0 {1 2 4 7}
+[!0&1&!2&!3&4&!6&!7] 0 {3 4 7}
+[0&!2&!3&4&!6&!7] 0 {0 3 4 7}
+[!0&!1&!2&!3&4&!6&!7] 0 {1 3 4 7}
+[!0&1&!2&3&!4&!5&!6&!7] 0 {5 7}
+[0&!2&3&!4&!5&!6&!7] 0 {0 5 7}
+[!0&!1&!2&3&!4&!5&!6&!7] 0 {1 5 7}
+[!0&1&2&!4&!5&!6&!7] 0 {2 5 7}
+[0&2&!4&!5&!6&!7] 0 {0 2 5 7}
+[!0&!1&2&!4&!5&!6&!7] 0 {1 2 5 7}
+[!0&1&!2&!3&!4&!5&!6&!7] 0 {3 5 7}
+[0&!2&!3&!4&!5&!6&!7] 0 {0 3 5 7}
+[!0&!1&!2&!3&!4&!5&!6&!7] 0 {1 3 5 7}
+--END--
+HOA: v1
+States: 1
+Start: 0
+AP: 10 "a1" "b1" "a2" "b2" "a3" "b3" "a4" "b4" "a5" "b5"
+Acceptance: 10 (Inf(0) | Fin(1)) & (Inf(2) | Fin(3)) & (Inf(4) | Fin(5)) & (Inf(6) | Fin(7)) & (Inf(8) | Fin(9))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic stutter-invariant
+--BODY--
+State: 0
+[!0&1&!2&3&!4&5&!6&7&!8&9] 0
+[0&!2&3&!4&5&!6&7&!8&9] 0 {0}
+[!0&!1&!2&3&!4&5&!6&7&!8&9] 0 {1}
+[!0&1&2&!4&5&!6&7&!8&9] 0 {2}
+[0&2&!4&5&!6&7&!8&9] 0 {0 2}
+[!0&!1&2&!4&5&!6&7&!8&9] 0 {1 2}
+[!0&1&!2&!3&!4&5&!6&7&!8&9] 0 {3}
+[0&!2&!3&!4&5&!6&7&!8&9] 0 {0 3}
+[!0&!1&!2&!3&!4&5&!6&7&!8&9] 0 {1 3}
+[!0&1&!2&3&4&!6&7&!8&9] 0 {4}
+[0&!2&3&4&!6&7&!8&9] 0 {0 4}
+[!0&!1&!2&3&4&!6&7&!8&9] 0 {1 4}
+[!0&1&2&4&!6&7&!8&9] 0 {2 4}
+[0&2&4&!6&7&!8&9] 0 {0 2 4}
+[!0&!1&2&4&!6&7&!8&9] 0 {1 2 4}
+[!0&1&!2&!3&4&!6&7&!8&9] 0 {3 4}
+[0&!2&!3&4&!6&7&!8&9] 0 {0 3 4}
+[!0&!1&!2&!3&4&!6&7&!8&9] 0 {1 3 4}
+[!0&1&!2&3&!4&!5&!6&7&!8&9] 0 {5}
+[0&!2&3&!4&!5&!6&7&!8&9] 0 {0 5}
+[!0&!1&!2&3&!4&!5&!6&7&!8&9] 0 {1 5}
+[!0&1&2&!4&!5&!6&7&!8&9] 0 {2 5}
+[0&2&!4&!5&!6&7&!8&9] 0 {0 2 5}
+[!0&!1&2&!4&!5&!6&7&!8&9] 0 {1 2 5}
+[!0&1&!2&!3&!4&!5&!6&7&!8&9] 0 {3 5}
+[0&!2&!3&!4&!5&!6&7&!8&9] 0 {0 3 5}
+[!0&!1&!2&!3&!4&!5&!6&7&!8&9] 0 {1 3 5}
+[!0&1&!2&3&!4&5&6&!8&9] 0 {6}
+[0&!2&3&!4&5&6&!8&9] 0 {0 6}
+[!0&!1&!2&3&!4&5&6&!8&9] 0 {1 6}
+[!0&1&2&!4&5&6&!8&9] 0 {2 6}
+[0&2&!4&5&6&!8&9] 0 {0 2 6}
+[!0&!1&2&!4&5&6&!8&9] 0 {1 2 6}
+[!0&1&!2&!3&!4&5&6&!8&9] 0 {3 6}
+[0&!2&!3&!4&5&6&!8&9] 0 {0 3 6}
+[!0&!1&!2&!3&!4&5&6&!8&9] 0 {1 3 6}
+[!0&1&!2&3&4&6&!8&9] 0 {4 6}
+[0&!2&3&4&6&!8&9] 0 {0 4 6}
+[!0&!1&!2&3&4&6&!8&9] 0 {1 4 6}
+[!0&1&2&4&6&!8&9] 0 {2 4 6}
+[0&2&4&6&!8&9] 0 {0 2 4 6}
+[!0&!1&2&4&6&!8&9] 0 {1 2 4 6}
+[!0&1&!2&!3&4&6&!8&9] 0 {3 4 6}
+[0&!2&!3&4&6&!8&9] 0 {0 3 4 6}
+[!0&!1&!2&!3&4&6&!8&9] 0 {1 3 4 6}
+[!0&1&!2&3&!4&!5&6&!8&9] 0 {5 6}
+[0&!2&3&!4&!5&6&!8&9] 0 {0 5 6}
+[!0&!1&!2&3&!4&!5&6&!8&9] 0 {1 5 6}
+[!0&1&2&!4&!5&6&!8&9] 0 {2 5 6}
+[0&2&!4&!5&6&!8&9] 0 {0 2 5 6}
+[!0&!1&2&!4&!5&6&!8&9] 0 {1 2 5 6}
+[!0&1&!2&!3&!4&!5&6&!8&9] 0 {3 5 6}
+[0&!2&!3&!4&!5&6&!8&9] 0 {0 3 5 6}
+[!0&!1&!2&!3&!4&!5&6&!8&9] 0 {1 3 5 6}
+[!0&1&!2&3&!4&5&!6&!7&!8&9] 0 {7}
+[0&!2&3&!4&5&!6&!7&!8&9] 0 {0 7}
+[!0&!1&!2&3&!4&5&!6&!7&!8&9] 0 {1 7}
+[!0&1&2&!4&5&!6&!7&!8&9] 0 {2 7}
+[0&2&!4&5&!6&!7&!8&9] 0 {0 2 7}
+[!0&!1&2&!4&5&!6&!7&!8&9] 0 {1 2 7}
+[!0&1&!2&!3&!4&5&!6&!7&!8&9] 0 {3 7}
+[0&!2&!3&!4&5&!6&!7&!8&9] 0 {0 3 7}
+[!0&!1&!2&!3&!4&5&!6&!7&!8&9] 0 {1 3 7}
+[!0&1&!2&3&4&!6&!7&!8&9] 0 {4 7}
+[0&!2&3&4&!6&!7&!8&9] 0 {0 4 7}
+[!0&!1&!2&3&4&!6&!7&!8&9] 0 {1 4 7}
+[!0&1&2&4&!6&!7&!8&9] 0 {2 4 7}
+[0&2&4&!6&!7&!8&9] 0 {0 2 4 7}
+[!0&!1&2&4&!6&!7&!8&9] 0 {1 2 4 7}
+[!0&1&!2&!3&4&!6&!7&!8&9] 0 {3 4 7}
+[0&!2&!3&4&!6&!7&!8&9] 0 {0 3 4 7}
+[!0&!1&!2&!3&4&!6&!7&!8&9] 0 {1 3 4 7}
+[!0&1&!2&3&!4&!5&!6&!7&!8&9] 0 {5 7}
+[0&!2&3&!4&!5&!6&!7&!8&9] 0 {0 5 7}
+[!0&!1&!2&3&!4&!5&!6&!7&!8&9] 0 {1 5 7}
+[!0&1&2&!4&!5&!6&!7&!8&9] 0 {2 5 7}
+[0&2&!4&!5&!6&!7&!8&9] 0 {0 2 5 7}
+[!0&!1&2&!4&!5&!6&!7&!8&9] 0 {1 2 5 7}
+[!0&1&!2&!3&!4&!5&!6&!7&!8&9] 0 {3 5 7}
+[0&!2&!3&!4&!5&!6&!7&!8&9] 0 {0 3 5 7}
+[!0&!1&!2&!3&!4&!5&!6&!7&!8&9] 0 {1 3 5 7}
+[!0&1&!2&3&!4&5&!6&7&8] 0 {8}
+[0&!2&3&!4&5&!6&7&8] 0 {0 8}
+[!0&!1&!2&3&!4&5&!6&7&8] 0 {1 8}
+[!0&1&2&!4&5&!6&7&8] 0 {2 8}
+[0&2&!4&5&!6&7&8] 0 {0 2 8}
+[!0&!1&2&!4&5&!6&7&8] 0 {1 2 8}
+[!0&1&!2&!3&!4&5&!6&7&8] 0 {3 8}
+[0&!2&!3&!4&5&!6&7&8] 0 {0 3 8}
+[!0&!1&!2&!3&!4&5&!6&7&8] 0 {1 3 8}
+[!0&1&!2&3&4&!6&7&8] 0 {4 8}
+[0&!2&3&4&!6&7&8] 0 {0 4 8}
+[!0&!1&!2&3&4&!6&7&8] 0 {1 4 8}
+[!0&1&2&4&!6&7&8] 0 {2 4 8}
+[0&2&4&!6&7&8] 0 {0 2 4 8}
+[!0&!1&2&4&!6&7&8] 0 {1 2 4 8}
+[!0&1&!2&!3&4&!6&7&8] 0 {3 4 8}
+[0&!2&!3&4&!6&7&8] 0 {0 3 4 8}
+[!0&!1&!2&!3&4&!6&7&8] 0 {1 3 4 8}
+[!0&1&!2&3&!4&!5&!6&7&8] 0 {5 8}
+[0&!2&3&!4&!5&!6&7&8] 0 {0 5 8}
+[!0&!1&!2&3&!4&!5&!6&7&8] 0 {1 5 8}
+[!0&1&2&!4&!5&!6&7&8] 0 {2 5 8}
+[0&2&!4&!5&!6&7&8] 0 {0 2 5 8}
+[!0&!1&2&!4&!5&!6&7&8] 0 {1 2 5 8}
+[!0&1&!2&!3&!4&!5&!6&7&8] 0 {3 5 8}
+[0&!2&!3&!4&!5&!6&7&8] 0 {0 3 5 8}
+[!0&!1&!2&!3&!4&!5&!6&7&8] 0 {1 3 5 8}
+[!0&1&!2&3&!4&5&6&8] 0 {6 8}
+[0&!2&3&!4&5&6&8] 0 {0 6 8}
+[!0&!1&!2&3&!4&5&6&8] 0 {1 6 8}
+[!0&1&2&!4&5&6&8] 0 {2 6 8}
+[0&2&!4&5&6&8] 0 {0 2 6 8}
+[!0&!1&2&!4&5&6&8] 0 {1 2 6 8}
+[!0&1&!2&!3&!4&5&6&8] 0 {3 6 8}
+[0&!2&!3&!4&5&6&8] 0 {0 3 6 8}
+[!0&!1&!2&!3&!4&5&6&8] 0 {1 3 6 8}
+[!0&1&!2&3&4&6&8] 0 {4 6 8}
+[0&!2&3&4&6&8] 0 {0 4 6 8}
+[!0&!1&!2&3&4&6&8] 0 {1 4 6 8}
+[!0&1&2&4&6&8] 0 {2 4 6 8}
+[0&2&4&6&8] 0 {0 2 4 6 8}
+[!0&!1&2&4&6&8] 0 {1 2 4 6 8}
+[!0&1&!2&!3&4&6&8] 0 {3 4 6 8}
+[0&!2&!3&4&6&8] 0 {0 3 4 6 8}
+[!0&!1&!2&!3&4&6&8] 0 {1 3 4 6 8}
+[!0&1&!2&3&!4&!5&6&8] 0 {5 6 8}
+[0&!2&3&!4&!5&6&8] 0 {0 5 6 8}
+[!0&!1&!2&3&!4&!5&6&8] 0 {1 5 6 8}
+[!0&1&2&!4&!5&6&8] 0 {2 5 6 8}
+[0&2&!4&!5&6&8] 0 {0 2 5 6 8}
+[!0&!1&2&!4&!5&6&8] 0 {1 2 5 6 8}
+[!0&1&!2&!3&!4&!5&6&8] 0 {3 5 6 8}
+[0&!2&!3&!4&!5&6&8] 0 {0 3 5 6 8}
+[!0&!1&!2&!3&!4&!5&6&8] 0 {1 3 5 6 8}
+[!0&1&!2&3&!4&5&!6&!7&8] 0 {7 8}
+[0&!2&3&!4&5&!6&!7&8] 0 {0 7 8}
+[!0&!1&!2&3&!4&5&!6&!7&8] 0 {1 7 8}
+[!0&1&2&!4&5&!6&!7&8] 0 {2 7 8}
+[0&2&!4&5&!6&!7&8] 0 {0 2 7 8}
+[!0&!1&2&!4&5&!6&!7&8] 0 {1 2 7 8}
+[!0&1&!2&!3&!4&5&!6&!7&8] 0 {3 7 8}
+[0&!2&!3&!4&5&!6&!7&8] 0 {0 3 7 8}
+[!0&!1&!2&!3&!4&5&!6&!7&8] 0 {1 3 7 8}
+[!0&1&!2&3&4&!6&!7&8] 0 {4 7 8}
+[0&!2&3&4&!6&!7&8] 0 {0 4 7 8}
+[!0&!1&!2&3&4&!6&!7&8] 0 {1 4 7 8}
+[!0&1&2&4&!6&!7&8] 0 {2 4 7 8}
+[0&2&4&!6&!7&8] 0 {0 2 4 7 8}
+[!0&!1&2&4&!6&!7&8] 0 {1 2 4 7 8}
+[!0&1&!2&!3&4&!6&!7&8] 0 {3 4 7 8}
+[0&!2&!3&4&!6&!7&8] 0 {0 3 4 7 8}
+[!0&!1&!2&!3&4&!6&!7&8] 0 {1 3 4 7 8}
+[!0&1&!2&3&!4&!5&!6&!7&8] 0 {5 7 8}
+[0&!2&3&!4&!5&!6&!7&8] 0 {0 5 7 8}
+[!0&!1&!2&3&!4&!5&!6&!7&8] 0 {1 5 7 8}
+[!0&1&2&!4&!5&!6&!7&8] 0 {2 5 7 8}
+[0&2&!4&!5&!6&!7&8] 0 {0 2 5 7 8}
+[!0&!1&2&!4&!5&!6&!7&8] 0 {1 2 5 7 8}
+[!0&1&!2&!3&!4&!5&!6&!7&8] 0 {3 5 7 8}
+[0&!2&!3&!4&!5&!6&!7&8] 0 {0 3 5 7 8}
+[!0&!1&!2&!3&!4&!5&!6&!7&8] 0 {1 3 5 7 8}
+[!0&1&!2&3&!4&5&!6&7&!8&!9] 0 {9}
+[0&!2&3&!4&5&!6&7&!8&!9] 0 {0 9}
+[!0&!1&!2&3&!4&5&!6&7&!8&!9] 0 {1 9}
+[!0&1&2&!4&5&!6&7&!8&!9] 0 {2 9}
+[0&2&!4&5&!6&7&!8&!9] 0 {0 2 9}
+[!0&!1&2&!4&5&!6&7&!8&!9] 0 {1 2 9}
+[!0&1&!2&!3&!4&5&!6&7&!8&!9] 0 {3 9}
+[0&!2&!3&!4&5&!6&7&!8&!9] 0 {0 3 9}
+[!0&!1&!2&!3&!4&5&!6&7&!8&!9] 0 {1 3 9}
+[!0&1&!2&3&4&!6&7&!8&!9] 0 {4 9}
+[0&!2&3&4&!6&7&!8&!9] 0 {0 4 9}
+[!0&!1&!2&3&4&!6&7&!8&!9] 0 {1 4 9}
+[!0&1&2&4&!6&7&!8&!9] 0 {2 4 9}
+[0&2&4&!6&7&!8&!9] 0 {0 2 4 9}
+[!0&!1&2&4&!6&7&!8&!9] 0 {1 2 4 9}
+[!0&1&!2&!3&4&!6&7&!8&!9] 0 {3 4 9}
+[0&!2&!3&4&!6&7&!8&!9] 0 {0 3 4 9}
+[!0&!1&!2&!3&4&!6&7&!8&!9] 0 {1 3 4 9}
+[!0&1&!2&3&!4&!5&!6&7&!8&!9] 0 {5 9}
+[0&!2&3&!4&!5&!6&7&!8&!9] 0 {0 5 9}
+[!0&!1&!2&3&!4&!5&!6&7&!8&!9] 0 {1 5 9}
+[!0&1&2&!4&!5&!6&7&!8&!9] 0 {2 5 9}
+[0&2&!4&!5&!6&7&!8&!9] 0 {0 2 5 9}
+[!0&!1&2&!4&!5&!6&7&!8&!9] 0 {1 2 5 9}
+[!0&1&!2&!3&!4&!5&!6&7&!8&!9] 0 {3 5 9}
+[0&!2&!3&!4&!5&!6&7&!8&!9] 0 {0 3 5 9}
+[!0&!1&!2&!3&!4&!5&!6&7&!8&!9] 0 {1 3 5 9}
+[!0&1&!2&3&!4&5&6&!8&!9] 0 {6 9}
+[0&!2&3&!4&5&6&!8&!9] 0 {0 6 9}
+[!0&!1&!2&3&!4&5&6&!8&!9] 0 {1 6 9}
+[!0&1&2&!4&5&6&!8&!9] 0 {2 6 9}
+[0&2&!4&5&6&!8&!9] 0 {0 2 6 9}
+[!0&!1&2&!4&5&6&!8&!9] 0 {1 2 6 9}
+[!0&1&!2&!3&!4&5&6&!8&!9] 0 {3 6 9}
+[0&!2&!3&!4&5&6&!8&!9] 0 {0 3 6 9}
+[!0&!1&!2&!3&!4&5&6&!8&!9] 0 {1 3 6 9}
+[!0&1&!2&3&4&6&!8&!9] 0 {4 6 9}
+[0&!2&3&4&6&!8&!9] 0 {0 4 6 9}
+[!0&!1&!2&3&4&6&!8&!9] 0 {1 4 6 9}
+[!0&1&2&4&6&!8&!9] 0 {2 4 6 9}
+[0&2&4&6&!8&!9] 0 {0 2 4 6 9}
+[!0&!1&2&4&6&!8&!9] 0 {1 2 4 6 9}
+[!0&1&!2&!3&4&6&!8&!9] 0 {3 4 6 9}
+[0&!2&!3&4&6&!8&!9] 0 {0 3 4 6 9}
+[!0&!1&!2&!3&4&6&!8&!9] 0 {1 3 4 6 9}
+[!0&1&!2&3&!4&!5&6&!8&!9] 0 {5 6 9}
+[0&!2&3&!4&!5&6&!8&!9] 0 {0 5 6 9}
+[!0&!1&!2&3&!4&!5&6&!8&!9] 0 {1 5 6 9}
+[!0&1&2&!4&!5&6&!8&!9] 0 {2 5 6 9}
+[0&2&!4&!5&6&!8&!9] 0 {0 2 5 6 9}
+[!0&!1&2&!4&!5&6&!8&!9] 0 {1 2 5 6 9}
+[!0&1&!2&!3&!4&!5&6&!8&!9] 0 {3 5 6 9}
+[0&!2&!3&!4&!5&6&!8&!9] 0 {0 3 5 6 9}
+[!0&!1&!2&!3&!4&!5&6&!8&!9] 0 {1 3 5 6 9}
+[!0&1&!2&3&!4&5&!6&!7&!8&!9] 0 {7 9}
+[0&!2&3&!4&5&!6&!7&!8&!9] 0 {0 7 9}
+[!0&!1&!2&3&!4&5&!6&!7&!8&!9] 0 {1 7 9}
+[!0&1&2&!4&5&!6&!7&!8&!9] 0 {2 7 9}
+[0&2&!4&5&!6&!7&!8&!9] 0 {0 2 7 9}
+[!0&!1&2&!4&5&!6&!7&!8&!9] 0 {1 2 7 9}
+[!0&1&!2&!3&!4&5&!6&!7&!8&!9] 0 {3 7 9}
+[0&!2&!3&!4&5&!6&!7&!8&!9] 0 {0 3 7 9}
+[!0&!1&!2&!3&!4&5&!6&!7&!8&!9] 0 {1 3 7 9}
+[!0&1&!2&3&4&!6&!7&!8&!9] 0 {4 7 9}
+[0&!2&3&4&!6&!7&!8&!9] 0 {0 4 7 9}
+[!0&!1&!2&3&4&!6&!7&!8&!9] 0 {1 4 7 9}
+[!0&1&2&4&!6&!7&!8&!9] 0 {2 4 7 9}
+[0&2&4&!6&!7&!8&!9] 0 {0 2 4 7 9}
+[!0&!1&2&4&!6&!7&!8&!9] 0 {1 2 4 7 9}
+[!0&1&!2&!3&4&!6&!7&!8&!9] 0 {3 4 7 9}
+[0&!2&!3&4&!6&!7&!8&!9] 0 {0 3 4 7 9}
+[!0&!1&!2&!3&4&!6&!7&!8&!9] 0 {1 3 4 7 9}
+[!0&1&!2&3&!4&!5&!6&!7&!8&!9] 0 {5 7 9}
+[0&!2&3&!4&!5&!6&!7&!8&!9] 0 {0 5 7 9}
+[!0&!1&!2&3&!4&!5&!6&!7&!8&!9] 0 {1 5 7 9}
+[!0&1&2&!4&!5&!6&!7&!8&!9] 0 {2 5 7 9}
+[0&2&!4&!5&!6&!7&!8&!9] 0 {0 2 5 7 9}
+[!0&!1&2&!4&!5&!6&!7&!8&!9] 0 {1 2 5 7 9}
+[!0&1&!2&!3&!4&!5&!6&!7&!8&!9] 0 {3 5 7 9}
+[0&!2&!3&!4&!5&!6&!7&!8&!9] 0 {0 3 5 7 9}
+[!0&!1&!2&!3&!4&!5&!6&!7&!8&!9] 0 {1 3 5 7 9}
+--END--
+HOA: v1
 States: 2
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Streett 1
 Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1] 0
+[!0&1] 0
 [!0&!1] 0 {0}
-[1] 1 {1}
+[0] 1 {1}
 State: 1
-[!1] 0
-[1] 1 {1}
+[!0] 0
+[0] 1 {1}
 --END--
 HOA: v1
 States: 1
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Buchi
 Acceptance: 1 Inf(0)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1] 0
-[!0 | 1] 0 {0}
+[!0&1] 0
+[0 | !1] 0 {0}
 --END--
 HOA: v1
 States: 4
 Start: 0
-AP: 2 "p1" "p0"
+AP: 2 "p0" "p1"
 acc-name: Streett 1
 Acceptance: 2 Fin(0) | Inf(1)
 properties: trans-labels explicit-labels trans-acc complete
 properties: deterministic
 --BODY--
 State: 0
-[0&!1] 1
+[!0&1] 1
 [!0&!1] 1 {0}
-[1] 2 {1}
+[0] 2 {1}
 State: 1
-[1] 0 {1}
-[!1] 3
+[0] 0 {1}
+[!0] 3
 State: 2
-[!1] 1
-[1] 2 {1}
+[!0] 1
+[0] 2 {1}
 State: 3
-[1] 0 {1}
-[0&!1] 3
+[0] 0 {1}
+[!0&1] 3
 [!0&!1] 3 {0}
 --END--
 HOA: v1
