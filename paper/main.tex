@@ -930,7 +930,22 @@ the LTL formulas.
 Spot version 2.10.4 and Z3 version 4.8.13 have been used in the experimental
 evaluation.
 
-\begin{table}
+For each automata set (that is, the output of individual LTL translator), we
+have run \telatko with various reduction levels, always with the incremental
+solving turned on. We have again filtered out the automata for which any run
+of \telatko timed out after 120 seconds. We do this to make sure the numbers
+of acceptance marks can be meaningfully compared between different reduction
+levels of the same automata set.
+
+Table~\ref{tab:cumm-data} shows the number of marks in the input sets and after
+each reduction level, together with the reduction ratio and time spent by the
+individual reduction level. The columns \textit{solver response} and
+\textit{solver timeout} show the number of automata for which the last query to
+QBF solver has been successfully answered, or the solver timed out within a 30
+seconds limit to a single query, respectively. An unanswered QBF formula (i.e.
+the solver timed out) is considered unsatisfiable.
+
+\begin{table}[h]
 \caption{LTL to automata translators used for the experimental evaluation
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
@@ -941,66 +956,59 @@ tool        & version&homepage & \# formulas \\
 \midrule
 \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 404\\
 \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} \todo{RELEASE} & 376\\
-Delag & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 397\\
-Rabinizer & \todo ? & & 386\\
+\texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 397\\
+\texttt{ltl2dgra} & 21.0 & & 386\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{table}
-\caption{Test: heatmap}
+%\begin{table}[t]
+%\centering
+%\begin{tabular}{c|ccccc|}
+%\multicolumn{1}{c}{} & 3 & 4 & 5 & 6 & \multicolumn{1}{c}{7} \\
+%%\specialrule{2pt}{0pt}{0pt}
+%\cline{2-6}
+%3 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \cellcolor{blue!25}\makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+%4 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+%5 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+%6 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+%7 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
+%\cline{2-6}
+%\end{tabular}
+%\end{table}
+
+\begin{table}[h]
+\caption{The cummulative number of acceptance marks before and after reduction
+for various automata sets. \textit{X/Y solved aut.} means that out of
+\textit{Y} successfully translated LTL formulas, every run of \telatko ended
+within 120 seconds time limit on \textit{X} automata. We sum up the acceptance
+marks only on these automata. The columns \textit{solver response} and
+\textit{solver timeout} refer to last call to the QBF solver (that is, the
+numbers of its successful responses within 30 seconds limit and timeouts).
+}
+\label{tab:cumm-data}
 \centering
-\begin{tabular}{c|ccccc|}
-\multicolumn{1}{c}{} & 3 & 4 & 5 & 6 & \multicolumn{1}{c}{7} \\
-%\specialrule{2pt}{0pt}{0pt}
-\cline{2-6}
-3 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \cellcolor{blue!25}\makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-4 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-5 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-6 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-7 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-\cline{2-6}
-\end{tabular}
+\input{table-data.tex}
 \end{table}
 
-\begin{table}
-\caption{Test: Data}
-\centering
-\begin{tabular}{cccccc}
-\toprule
-& & marks & \% red. & time & timeouts \\
-\midrule
-\multirow{4}{*}{\rotatebox[origin=c]{90}{\makecell{Delag \\ (420 marks)}}} & level 1 & 240 & 12.3 & 133.7 & 42 \\
-& level 2 & 240 & 12.3 & 133.7 & 42 \\
-& level 3 & 240 & 12.3 & 133.7 & 42 \\
-& multilevel & 240 & 12.3 & 133.7 & 42 \\
-\midrule
-\multirow{4}{*}{\rotatebox[origin=c]{90}{\makecell{Rabinizer 4 \\ (420 marks)}}} & level 1 & 240 & 12.3 & 133.7 & 42 \\
-& level 2 & 240 & 12.3 & 133.7 & 42 \\
-& level 3 & 240 & 12.3 & 133.7 & 42 \\
-& multilevel & 240 & 12.3 & 133.7 & 42 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{tikzpicture}
-\begin{axis}[
-	ymode=log,
-	height=5cm,
-	width=10cm,
-	grid=major,
-]
-\addplot coordinates {
-	(1, 0.3)
-	(2, 0.8)
-	(3, 1.5)
-	(4, 2.7)
-	(5, 3.9)
-	(6, 4.1)
-};
-\addlegendentry{Delag}
-\end{axis}
-\end{tikzpicture}
+%\begin{tikzpicture}
+%\begin{axis}[
+%	ymode=log,
+%	height=5cm,
+%	width=10cm,
+%	grid=major,
+%]
+%\addplot coordinates {
+%	(1, 0.3)
+%	(2, 0.8)
+%	(3, 1.5)
+%	(4, 2.7)
+%	(5, 3.9)
+%	(6, 4.1)
+%};
+%\addlegendentry{Delag}
+%\end{axis}
+%\end{tikzpicture}
 
 Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
 automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
