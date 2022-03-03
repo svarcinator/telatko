@@ -548,15 +548,13 @@ The lightweight version is defined as
 which means only that $\Te$ is nonempty. This condition is satisfied by
 every cycle.
 
-With this lightweight version of $\mcycle(\vec{e})$, the formula
-$\Phi_{C,K}$ actually says that
-for every nonempty set
-$T\subseteq\delta$, $T$ satisfies $\varphi$ if and only if $\rem(T)$ satisfies
-$\psi$. Note that the formula is not affected by the placement of
-transitions in the automaton. The only aspect of a transition $t$
-reflected by the formula is its set of marks $\mks(t)$. Hence, we do
-not have to distinguish between transitions with the same sets of
-marks. 
+The formula $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$ actually
+says that for every nonempty set $T\subseteq\delta$, $T$ satisfies
+$\varphi$ if and only if $\rem(T)$ satisfies $\psi$. Note that the
+formula is not affected by the placement of transitions in the
+automaton. The only aspect of a transition $t$ reflected by the
+formula is its set of marks $\mks(t)$. Hence, we do not have to
+distinguish between transitions with the same sets of marks.
 
 Formally, we define an equivalence $\sim\subseteq\delta\times\delta$
 on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
@@ -608,12 +606,12 @@ on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
 \end{proof}
 
 The lemma suggests the following simplification of the whole formula
-$\Phi_{C,K}$ built with $\mcycle_1(\vec{e})$. Before we build the
+$\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$. Before we build the
 formula, we compute the equivalence $\sim$ on automata transitions and
 remove all transitions except one of each class. Then we build the
 formula for this pruned automaton as described above. The more
 transitions we removed, the shorter formula with less $e_t$ variables
-we obtain. If the formula $\Phi_{C,K}$ for the pruned automaton is
+we obtain. If the formula $\Phi_{1,C,K}$ for the pruned automaton is
 satisfiable and we derive $\rem$ and $\psi$ from its model, we can use
 safely them also on the original automaton. We only need to extend
 $\rem$ to all transitions such that it changes the acceptance marks on
@@ -764,9 +762,10 @@ The formula $\mcycle_3(\vec{e})$ is defined as follows.
   \zeta_{\ref{en:3}}(\vec{e},\vec{s}) &= \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge s_p\wedge \neg s_q\big) ~\wedge~
   \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge \neg s_p\wedge s_q\big)
 \end{align*}
-\todo{Zminit, ze z univerzalniho kvantifikatoru se stane existencni.}
 
 \subsection{Optimizations}
+
+\todo{Honza je tu!} 
 
 SCC-based approach
 
