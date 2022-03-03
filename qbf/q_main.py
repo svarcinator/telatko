@@ -153,16 +153,18 @@ def try_evaluate0(aut, orig, qbf_run_info):
     :return: potentionally zero acceptance spot::automaton
     """
     last_eq_aut = spot.automaton(aut.to_str())
-    aut.set_name(aut.get_name() + "F_0_S")
+
+
     last_eq_aut.set_name(last_eq_aut.get_name() + "F_0_U")
     clear_aut_edges(aut)
     aut.set_acceptance(0, spot.acc_code.t())
     if spot.are_equivalent(orig, aut):
-
+        aut.set_name(aut.get_name() + "F_0_S")
         return aut
 
     aut.set_acceptance(0, spot.acc_code.f())
     if spot.are_equivalent(orig, aut):
+        aut.set_name(aut.get_name() + "F_0_S")
         return aut
     return last_eq_aut
 
@@ -335,12 +337,14 @@ def model_assert(model, K):
         if str(t)[0] == 'f' and str(t)[-1] == str(K):
             assert(is_false(model[t]))
 
-def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K,  scc_edg, optimized_scc, timeout, minimized_atribute):
+def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K,  scc_edg, optimized_scc, timeout, minimized_atribute, original):
     currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
     K = aut.get_acceptance().used_sets().count()
     K -= 1
-    original = spot.automaton(aut.to_str())
+
+    #original = spot.automaton(aut.to_str())
     qbf_run_info = ""
+
     # dictionary {acc_set_num : [edge_nums]}
     edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
     formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
@@ -360,10 +364,14 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
         res = solver.check()
 
         if res == sat:
-            print("sat, ", K)
+
             model = solver.model()
+            if K <= 1:
+                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+
+                return try_evaluate0(aut, original, qbf_run_info)
             if aut.get_acceptance().used_sets().count() <= 1:
-                print(aut.get_acceptance(), aut.get_acceptance().used_sets().count())
+
                 return try_evaluate0(aut, original, qbf_run_info)
 
             """
@@ -387,8 +395,7 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
             else:
                 C = C - 1
         else:
-            print("tmp_mode: ", tmp_mode, " unsat, K=", K)
-            #qbf_run_info += update_run_info(K, res, tmp_mode)
+
             aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode))
             """
             if (tmp_mode < mode):
@@ -421,13 +428,12 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
                     process_variables(aut, model, scc_equiv_edges, tmp_mode)
 
                 #aut.set_name(qbf_run_info)
+
                 if aut.get_acceptance().used_sets().count() <= 1:
 
                     return try_evaluate0(aut, original, qbf_run_info)
-
-                if not spot.are_equivalent(original, aut):
-                    print("tmp mode: ", tmp_mode, " not eq")
                 return aut
+
     return try_evaluate0(aut, original, qbf_run_info)
 
 
@@ -458,14 +464,12 @@ def play(aut, C, K, mode, timeout,
     else:
         C -= 1
     if inc_solving:
-        print("tmp_mode: ", tmp_mode, " mode: ", mode, aut.get_name())
         for i in range(tmp_mode, mode + 1):
-            print(i)
             if aut.get_acceptance().used_sets().count() <= 1:
+
                 return try_evaluate0(aut, original, qbf_run_info)
-            aut = inc_loop(original, inner_edges_nums, inner_edges, mode, i, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute)
-            #assert(spot.are_equivalent(original, aut))
-            print(aut.get_name())
+            aut = inc_loop(aut, inner_edges_nums, inner_edges, mode, i, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute, original)
+
         return aut
 
     while C > 0 and K > 0:

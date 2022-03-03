@@ -517,7 +517,8 @@ def parse_dnf_acc(acc):
     Returns:
         [[ACCMark]] -- list of lists of ACCMarks
     """
-    if acc == "":
+    
+    if acc == "" or acc == "t" or acc == "f":
         return []
     formula = []
     for dis in str(acc).split('|'):
@@ -532,7 +533,7 @@ def parse_dnf_acc(acc):
             for c in con:
                 if c.isdigit():
                     num.append(c)
-            
+
             new_dis.append(ACCMark(mtype, int(''.join(num))))
         formula.append(new_dis)
     return formula
