@@ -374,16 +374,6 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
 
                 return try_evaluate0(aut, original, qbf_run_info)
 
-            """
-            if K == 1:
-                continue
-                # does automaton with one mark exist? --the solver asks, answer was yes
-                # therefore my question is if 0 marks can be used
-                # aut with one acc mark is SAT -- rozmysli si tohle jeste
-                process_variables(aut, model, scc_equiv_edges, tmp_mode)
-
-            """
-
 
             if tmp_mode == 1:
                 solver  = update_inc_solver(solver, currently_reduced, C, K, representants)
@@ -396,24 +386,8 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
                 C = C - 1
         else:
 
-            aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode))
-            """
-            if (tmp_mode < mode):
-                if model != None:
-                    process_variables(aut, model, scc_equiv_edges, tmp_mode)
-                    if aut.get_acceptance().used_sets().count() <= 1:
-                        #return empty_aut(aut, original, qbf_run_info)
-                        return try_evaluate0(aut, original, qbf_run_info)
 
-                    #assert(spot.are_equivalent(original, aut)
-                tmp_mode += 1
-                # exists formula with K marks
-                edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
-                formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
-                solver = solver_init(formula, timeout)
-                model = None
-                continue
-            """
+
 
             if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
                 currently_reduced = FormulaAtribute.C
@@ -426,7 +400,7 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
                 #qbf_run_info += update_run_info(K, res, tmp_mode)
                 if model != None:
                     process_variables(aut, model, scc_equiv_edges, tmp_mode)
-
+                aut.set_name(aut.get_name() + update_run_info( aut.get_acceptance().used_sets().count() - 1, res, tmp_mode))
                 #aut.set_name(qbf_run_info)
 
                 if aut.get_acceptance().used_sets().count() <= 1:
