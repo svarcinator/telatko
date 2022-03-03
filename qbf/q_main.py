@@ -360,10 +360,10 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
         res = solver.check()
 
         if res == sat:
-            print("sat, ", K)
+
             model = solver.model()
             if aut.get_acceptance().used_sets().count() <= 1:
-                print(aut.get_acceptance(), aut.get_acceptance().used_sets().count())
+
                 return try_evaluate0(aut, original, qbf_run_info)
 
             """
@@ -387,8 +387,7 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
             else:
                 C = C - 1
         else:
-            print("tmp_mode: ", tmp_mode, " unsat, K=", K)
-            #qbf_run_info += update_run_info(K, res, tmp_mode)
+
             aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode))
             """
             if (tmp_mode < mode):
@@ -424,9 +423,6 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
                 if aut.get_acceptance().used_sets().count() <= 1:
 
                     return try_evaluate0(aut, original, qbf_run_info)
-
-                if not spot.are_equivalent(original, aut):
-                    print("tmp mode: ", tmp_mode, " not eq")
                 return aut
     return try_evaluate0(aut, original, qbf_run_info)
 
@@ -458,14 +454,10 @@ def play(aut, C, K, mode, timeout,
     else:
         C -= 1
     if inc_solving:
-        print("tmp_mode: ", tmp_mode, " mode: ", mode, aut.get_name())
         for i in range(tmp_mode, mode + 1):
-            print(i)
             if aut.get_acceptance().used_sets().count() <= 1:
                 return try_evaluate0(aut, original, qbf_run_info)
             aut = inc_loop(original, inner_edges_nums, inner_edges, mode, i, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute)
-            #assert(spot.are_equivalent(original, aut))
-            print(aut.get_name())
         return aut
 
     while C > 0 and K > 0:
