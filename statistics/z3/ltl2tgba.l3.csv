@@ -1,401 +1,401 @@
 "input.source","input.name","input.ap","input.states","input.edges","input.transitions","input.acc_sets","input.scc","input.nondetstates","input.nondeterministic","input.alternating","tool","exit_status","exit_code","time","output.ap","output.states","output.edges","output.transitions","output.acc_sets","output.scc","output.nondetstates","output.nondeterministic","output.alternating"
-"./bp_sets/ltl2tgba.hoa:1.1-55.7","Xp1 R ((Gp1 R p2) W p3)",3,11,34,57,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549209,3,11,34,57,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:56.1-75.7","Fp3 | G!p2",2,3,6,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545628,2,3,6,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:76.1-88.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55748,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:89.1-105.7","F(p0 R p1)",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551617,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:106.1-131.7","(FGp2 R !p2) | GFp1",2,4,11,16,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.627894,2,4,11,16,2,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:132.1-151.7","X(p3 & X(p3 W !p0))",2,4,5,13,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550968,2,4,5,13,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:152.1-167.7","Fp3",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.540463,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:168.1-179.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548748,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:180.1-228.7","XXG((X!p1 U (!p0 M !p3)) | XGp0)",3,10,29,61,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551209,3,10,29,61,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:229.1-241.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553848,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:242.1-253.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546155,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:254.1-356.7","X((Fp2 W Xp0) <-> (p2 <-> Fp3))",3,21,73,143,2,13,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.722482,3,21,73,143,2,13,0,0,0
-"./bp_sets/ltl2tgba.hoa:357.1-373.7","F((p1 | p2) & G!p0)",3,2,4,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553857,3,2,4,16,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:374.1-392.7","p3 M G((p0 | p2) & Xp2)",3,3,5,14,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.539942,3,3,5,14,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:393.1-430.7","(G(Gp1 | Xp2) | Xp0) W p2",3,7,21,43,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548253,3,7,21,43,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:431.1-449.7","Gp1 & XXp2",2,4,4,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.538395,2,4,4,7,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:450.1-462.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543783,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:463.1-505.7","(p0 U Gp2) R (p0 R Xp1)",3,8,25,45,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552781,3,8,25,45,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:506.1-543.7","(p0 xor Gp1) xor (!p3 & X!p3)",3,8,19,47,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544535,3,8,19,47,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:544.1-564.7","X!p2 | GF(!p0 & !p3)",3,4,6,32,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548414,3,4,6,32,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:565.1-585.7","X(!p2 | XFp1)",2,4,6,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548303,2,4,6,16,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:586.1-603.7","XFp3",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542575,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:604.1-619.7","p3 W p1",2,2,3,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546306,2,2,3,7,0,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:620.1-634.7","!p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546083,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:635.1-649.7","XG!p3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559187,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:650.1-746.7","F((!p2 & F(Fp1 R p3)) | (p2 & G(G!p1 U !p3)))",3,15,71,120,2,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.690835,3,15,71,120,2,10,0,0,0
-"./bp_sets/ltl2tgba.hoa:747.1-807.7","XXF(((Xp0 & (!p2 R F!p0)) | ((p2 U Gp0) & X!p0)) R !p0)",2,13,37,52,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554477,2,13,37,52,1,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:808.1-858.7","X(p0 | Xp1) | (Xp2 M (p0 M p3))",4,11,29,140,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553465,4,11,29,140,1,10,0,0,0
-"./bp_sets/ltl2tgba.hoa:859.1-871.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549711,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:872.1-919.7","X(!p3 <-> F((Fp2 & Gp3) | (G!p2 & F!p3)))",2,9,28,36,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.655014,2,9,28,36,2,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:920.1-957.7","XX(Fp2 & (p3 xor (p2 <-> XFp3)))",2,9,18,32,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555861,2,9,18,32,1,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:958.1-982.7","(p3 | (!p1 U !p0)) W (!p2 R p1)",4,4,10,52,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.560885,4,4,10,52,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:983.1-997.7","p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542294,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:998.1-1016.7","(p1 & p2) | F!p3",3,3,5,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.539526,3,3,5,24,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:1017.1-1065.7","p0 | G(FGp0 U ((p2 | Gp3) R p3))",3,9,29,72,3,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.725661,3,9,29,72,3,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:1066.1-1082.7","F!p1 | FGp2",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547111,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1083.1-1095.7","Gp1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543675,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1096.1-1111.7","Fp1",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551259,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1112.1-1133.7","p0 <-> (p2 xor (p2 | (!p2 M F!p1)))",3,4,7,25,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548176,3,4,7,25,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:1134.1-1152.7","p1 | (p1 U X(p0 U !p1))",2,3,5,11,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542414,2,3,5,11,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:1153.1-1181.7","Xp3 R ((p2 & XFp1) | (!p2 & XG!p1))",3,6,13,38,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558673,3,6,13,38,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:1182.1-1193.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553638,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1194.1-1206.7","G((!p0 & p1) | (p0 & !p1))",2,1,1,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556727,2,1,1,2,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1207.1-1221.7","!p2 <-> !p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557092,2,2,2,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1222.1-1245.7","(p0 & p3) W F(!p3 & X(!p3 W !p2))",3,4,9,32,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546073,3,4,9,32,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:1246.1-1260.7","p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546035,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1261.1-1299.7","F((p1 & GFp2) | (!p1 & FG!p2))",2,7,21,28,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.612637,2,7,21,28,2,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:1300.1-1322.7","p3 xor (p3 W Xp0)",2,5,7,14,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552498,2,5,7,14,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:1323.1-1349.7","G(Fp2 | (!p2 & F!p1))",2,4,12,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554147,2,4,12,16,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1350.1-1375.7","Xp1 | (p3 & ((p1 M GFp1) U X!p0))",3,6,10,44,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556348,3,6,10,44,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:1376.1-1391.7","G(p3 M Fp1)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.59584,2,1,4,4,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1392.1-1413.7","XX(GFp0 R p3)",2,5,7,18,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553875,2,5,7,18,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:1414.1-1427.7","GF!p3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548126,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1428.1-1574.7","((p1 M !p0) U Xp2) W G!p2",3,26,111,160,1,11,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.562111,3,26,111,160,1,11,0,0,0
-"./bp_sets/ltl2tgba.hoa:1575.1-1588.7","FG!p1",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544462,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1589.1-1601.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.538967,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1602.1-1630.7","(G!p1 M F!p3) R (p3 | Fp0)",3,5,13,40,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.6278,3,5,13,40,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:1631.1-1654.7","Fp0 | ((p1 & p3) xor (p1 | Gp2))",4,4,9,64,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547932,4,4,9,64,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:1655.1-1772.7","p3 W ((p0 & F!p2 & F!p1) | (!p0 & (Gp1 | Gp2)))",4,18,89,264,1,15,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545593,4,18,89,264,1,15,0,0,0
-"./bp_sets/ltl2tgba.hoa:1773.1-1795.7","X(p2 M (!p2 | X(p1 | Gp0)))",3,5,7,34,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554604,3,5,7,34,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:1796.1-1811.7","F(!p2 | (p2 & p3))",2,2,3,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542448,2,2,3,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1812.1-1830.7","!p1 & G!p3 & F((p1 & Gp0) | (!p1 & F!p0))",3,3,5,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557282,3,3,5,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:1831.1-1850.7","p2 & XXFp2",1,4,5,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541095,1,4,5,7,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:1851.1-1865.7","p0",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.492527,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1866.1-1880.7","G(!p0 & Xp3)",2,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555485,2,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1881.1-1909.7","p2 R (G(F!p3 & FG!p0) R !p0)",3,5,13,36,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.609094,3,5,13,36,2,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:1910.1-1924.7","!p0 | !p3",2,2,2,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553423,2,2,2,7,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:1925.1-1946.7","Fp0 | XXFp3",2,4,7,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550639,2,4,7,16,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:1947.1-1959.7","G(((p1 & (!p0 | p2)) | (p0 & !p1 & !p2)) & (!p0 U p1))",3,1,1,3,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544795,3,1,1,3,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:1960.1-1983.7","Xp2 & (p3 R !p0)",3,5,8,22,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546495,3,5,8,22,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:1984.1-2003.7","G(!p3 | (p1 U p0)) & GFp3",3,2,7,13,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.603107,3,2,7,13,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:2004.1-2020.7","Fp1 & GF!p0",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546638,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2021.1-2055.7","p0 | X(p0 M ((p1 & X!p3) | (!p1 & Xp3)))",3,7,17,40,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558528,3,7,17,40,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:2056.1-2087.7","p2 <-> XX(p0 W Fp3)",3,8,13,56,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546108,3,8,13,56,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:2088.1-2144.7","F(!p1 & XX((p0 & X!p1) | (!p0 & Xp1)))",2,13,33,52,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54714,2,13,33,52,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2145.1-2175.7","Fp1 | !(Fp3 W p2)",3,5,15,40,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.539387,3,5,15,40,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:2176.1-2188.7","Gp3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.537967,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:2189.1-2226.7","G(F(!p1 W !p0) & FG(p0 | (Fp0 U !p1)))",2,6,22,24,4,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.907214,2,6,22,24,4,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2227.1-2265.7","Gp3 xor (Gp2 U p0)",3,8,20,47,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547422,3,8,20,47,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:2266.1-2283.7","!p0 | X!p2",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547624,2,3,4,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2284.1-2297.7","GFp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544004,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:2298.1-2311.7","GF(p3 | (p2 & G!p3))",2,1,2,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553426,2,1,2,4,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:2312.1-2340.7","!p3 | ((p0 U p2) U ((p0 & !p3) | (!p0 & p3)))",3,5,13,35,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549771,3,5,13,35,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:2341.1-2352.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549036,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:2353.1-2391.7","Xp3 <-> (p0 | (!p0 U X(F!p0 | X(!p1 W !p3))))",3,10,18,58,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54523,3,10,18,58,1,10,0,0,0
-"./bp_sets/ltl2tgba.hoa:2392.1-2484.7","(p2 W (Gp1 | Gp3)) W X((!p0 & X!p2) | (p0 & Xp2))",4,20,62,262,1,20,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547312,4,20,62,262,1,20,0,0,0
-"./bp_sets/ltl2tgba.hoa:2485.1-2500.7","Fp2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54575,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2501.1-2555.7","p1 M (Fp2 W X(p0 & F!p0))",3,10,34,80,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558318,3,10,34,80,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:2556.1-2569.7","GFp2",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555273,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:2570.1-2587.7","XFp1",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547974,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2588.1-2612.7","F(XF!p0 & (p0 W p3))",2,4,10,16,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545918,2,4,10,16,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2613.1-2630.7","X(p3 W ((p0 & p2) | (!p0 & !p2)))",3,3,4,22,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543945,3,3,4,22,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2631.1-2655.7","(!p1 W p0) U !p3",3,4,10,27,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55864,3,4,10,27,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2656.1-2732.7","F(!p2 & X(!p2 U (X!p0 & F!p3))) | FG(p1 M p2)",4,12,54,192,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.714219,4,12,54,192,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2733.1-2762.7","!p3 <-> (Gp1 | (!p0 M p3))",3,6,13,36,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554688,3,6,13,36,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:2763.1-2778.7","F!p2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546682,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2779.1-2796.7","XF(!p2 | !p3)",2,3,4,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55732,2,3,4,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2797.1-2813.7","Xp3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.561289,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2814.1-2838.7","G((Fp3 & X!p0) | (Xp0 & G!p3))",2,5,10,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549197,2,5,10,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2839.1-2856.7","Fp3 -> p3",1,3,4,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54937,1,3,4,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2857.1-2876.7","Gp3 U Gp2",2,3,6,7,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549086,2,3,6,7,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2877.1-2891.7","!p3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545679,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2892.1-2916.7","X((p1 R p0) & F(!p1 | p3))",3,5,9,32,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543518,3,5,9,32,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:2917.1-2969.7","G(Gp2 | F(!p2 & (!p3 W X!p1)))",3,8,34,64,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.708525,3,8,34,64,2,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:2970.1-2987.7","p3 | XGp0",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.538207,2,3,4,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:2988.1-3003.7","Fp0",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544915,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3004.1-3024.7","(!p3 | GFp3) <-> FGp1",2,3,8,12,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.642783,2,3,8,12,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3025.1-3039.7","p0",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543071,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3040.1-3058.7","p0 | !p1 | (!p3 & FG(p0 & p1))",3,3,5,23,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551865,3,3,5,23,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3059.1-3088.7","!(Fp3 xor X(!p2 W !p0))",3,6,13,41,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548006,3,6,13,41,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:3089.1-3109.7","F(Fp3 R (p2 | GFp2))",2,3,7,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547347,2,3,7,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3110.1-3122.7","Gp1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.540131,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3123.1-3153.7","(p2 U p1) xor XG(!p1 | Fp2)",2,6,15,24,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.619902,2,6,15,24,2,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:3154.1-3168.7","p0 & Gp2",2,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546218,2,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3169.1-3191.7","XX(Gp2 R Fp3)",2,4,8,16,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544838,2,4,8,16,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3192.1-3207.7","F!p0",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545942,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3208.1-3227.7","G!p3 M (p2 | p3)",2,3,6,9,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545762,2,3,6,9,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3228.1-3243.7","G(F!p0 & Fp1)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.583572,2,1,4,4,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3244.1-3278.7","F!p3 | G(Gp0 | Xp1)",3,6,18,48,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541408,3,6,18,48,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:3279.1-3292.7","FGp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555964,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3293.1-3350.7","F(((p3 | X(p3 M p1)) & (F!p1 | FG!p0)) | (!p3 & X(!p3 W !p1) & Gp1 & GFp0))",3,9,38,72,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.654198,3,9,38,72,2,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:3351.1-3365.7","!p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549732,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3366.1-3383.7","Fp0 -> Gp0",1,3,4,4,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553762,1,3,4,4,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3384.1-3401.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551214,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3402.1-3416.7","XG(p1 | p2)",2,2,2,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543886,2,2,2,7,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3417.1-3437.7","p0 | XXF!p0",1,4,6,8,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541286,1,4,6,8,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:3438.1-3460.7","(((p0 & !p2) | (!p0 & p2)) R !p0) | G!p3",3,4,8,22,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550198,3,4,8,22,0,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:3461.1-3473.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541665,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3474.1-3490.7","GF!p1 <-> Fp0",2,2,5,8,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.599635,2,2,5,8,2,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3491.1-3591.7","F(((Gp1 M ((p1 & !p3) | (!p1 & p3))) & F!p0) | ((F!p1 W ((p1 & p3) | (!p1 & !p3))) & Gp0))",3,12,78,96,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.815201,3,12,78,96,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3592.1-3615.7","(p0 & !p1) R (p3 | Xp2)",4,4,10,48,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54331,4,4,10,48,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3616.1-3629.7","FG(p1 & ((p0 & p2) | (!p0 & !p2)))",3,1,2,8,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547685,3,1,2,8,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3630.1-3650.7","XGp2 M (p1 R p3)",3,3,8,14,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553799,3,3,8,14,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3651.1-3667.7","FGp2 | Fp0",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546596,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3668.1-3689.7","p3 xor Fp0",2,4,7,13,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546791,2,4,7,13,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:3690.1-3719.7","(p0 <-> p3) & F((p1 & Gp3) | (!p1 & F!p3))",3,5,14,36,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.562814,3,5,14,36,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:3720.1-3735.7","p1 W ((p0 & p2) | (!p0 & !p2))",3,2,3,14,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55021,3,2,3,14,0,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3736.1-3780.7","X(((!p0 & p2) W !p2) U XX!p2)",2,11,23,41,1,11,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548879,2,11,23,41,1,11,0,0,0
-"./bp_sets/ltl2tgba.hoa:3781.1-3799.7","p1 | GF!p2",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552063,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3800.1-3817.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55149,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3818.1-3835.7","FG(p1 U p0)",2,2,5,8,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.609366,2,2,5,8,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3836.1-3848.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553249,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3849.1-3863.7","(p0 -> (p0 | p2)) | (!p1 & X(!p1 U !p3))",4,2,2,32,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552377,4,2,2,32,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3864.1-3881.7","G(p1 & X(p3 | F!p2))",3,3,5,12,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553273,3,3,5,12,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3882.1-3905.7","!p0 <-> (p3 xor FGp1)",3,4,9,32,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.607359,3,4,9,32,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:3906.1-3921.7","(p2 | p3) R Fp2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.530561,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:3922.1-3956.7","X(Fp1 & XXX((!p3 & Xp3) U G!p1))",2,10,14,31,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547497,2,10,14,31,1,10,0,0,0
-"./bp_sets/ltl2tgba.hoa:3957.1-3969.7","G(p0 & X(p0 | !p3))",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548809,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:3970.1-3989.7","X(p0 & p2 & X((p0 & p2) U p1))",3,4,5,23,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542613,3,4,5,23,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:3990.1-4016.7","Fp2 xor XG!p3",2,5,11,20,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549571,2,5,11,20,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:4017.1-4033.7","X!p3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559655,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4034.1-4046.7","G!p3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.540305,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4047.1-4059.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.538974,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4060.1-4077.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541147,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4078.1-4107.7","XX(X(!p0 | Xp2) xor (p0 M Xp0))",2,8,11,28,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546847,2,8,11,28,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:4108.1-4151.7","p2 <-> (XGp3 | (p3 <-> FGp2))",2,9,24,36,2,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.62799,2,9,24,36,2,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:4152.1-4168.7","Xp3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554505,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4169.1-4183.7","(p1 xor p2) xor (((p0 & !p1) | (!p0 & p1)) R (p3 | Fp1))",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552847,2,2,2,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4184.1-4203.7","(p1 <-> Xp1) <-> (Fp1 & F(!p0 R Xp2))",1,4,5,6,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544155,1,4,5,6,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:4204.1-4232.7","X(Xp3 M (p0 W p2))",3,6,13,41,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557764,3,6,13,41,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:4233.1-4250.7","p0 | G!p1",2,3,4,9,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545948,2,3,4,9,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4251.1-4306.7","Fp3 & (F(!p1 | !p3) U XXp2)",3,12,33,96,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546195,3,12,33,96,1,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:4307.1-4318.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55001,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4319.1-4330.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.532549,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4331.1-4389.7","Gp3 <-> (!p3 W (Xp1 R Fp0))",3,11,38,59,2,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.649624,3,11,38,59,2,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:4390.1-4407.7","p3 | G(!p0 & !p2)",3,3,4,15,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547082,3,3,4,15,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4408.1-4427.7","(p0 xor p2) | FGp0 | F(!p2 | !p3)",3,3,6,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54412,3,3,6,24,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4428.1-4440.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551722,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4441.1-4459.7","!p1 | F!p3",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.525144,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4460.1-4477.7","(p0 | Gp2) M F(Xp0 W Gp2)",2,2,5,8,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555925,2,2,5,8,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4478.1-4510.7","G(p0 | p3) | XXXp1",3,9,13,65,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559879,3,9,13,65,1,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:4511.1-4523.7","G!p2",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542374,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4524.1-4561.7","G((((p1 R p3) M Fp3) R X(p1 & p2)) U p1)",3,7,21,44,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558369,3,7,21,44,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4562.1-4578.7","F((!p1 & ((p1 & p3) | (!p1 & !p3))) W (p2 | p3))",3,2,4,16,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544069,3,2,4,16,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4579.1-4604.7","X(p0 W p3) | (!p0 & G!p1)",3,5,10,33,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54161,3,5,10,33,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:4605.1-4617.7","G(p1 | !p2)",2,1,1,3,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548581,2,1,1,3,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4618.1-4632.7","!p2",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542247,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4633.1-4649.7","Xp0",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547392,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4650.1-4668.7","F(!p0 | !p1 | XFp3)",3,3,5,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541531,3,3,5,24,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4669.1-4699.7","(((p0 & !p3) | (!p0 & p3)) & (((p2 | p3) & Fp1) | (!p2 & !p3 & G!p1))) W G!p2",4,5,15,52,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559343,4,5,15,52,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4700.1-4722.7","(!p0 U p1) | ((p1 | Fp2) -> p1)",3,4,8,25,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551265,3,4,8,25,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:4723.1-4752.7","G!p2 | F!p0 | Gp3",3,5,14,40,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555982,3,5,14,40,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:4753.1-4768.7","F((p0 & p2 & !p3) | (!p2 & (!p0 | p3)))",3,2,3,16,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547239,3,2,3,16,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4769.1-4785.7","XG(!p2 U X!p2)",1,3,4,5,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54285,1,3,4,5,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4786.1-4802.7","Fp3 xor GF((p1 & X!p2) | (p1 & Xp2))",2,2,5,8,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.597584,2,2,5,8,2,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4803.1-4823.7","((p1 & !p2) | (!p1 & p2)) M F(p0 W p1)",3,3,7,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551748,3,3,7,24,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4824.1-4836.7","G((!p0 & !p3) | (p0 & p3))",2,1,1,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558819,2,1,1,2,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4837.1-4851.7","XGp1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553083,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4852.1-4866.7","!p3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554483,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:4867.1-4899.7","Fp1 & (FG(p0 | p1) | XXF!p2)",3,7,15,56,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553629,3,7,15,56,1,7,0,0,0
-"./bp_sets/ltl2tgba.hoa:4900.1-4932.7","(p1 <-> (p2 xor X!p0)) & (p1 <-> XG!p2)",3,8,14,40,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542515,3,8,14,40,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:4933.1-4949.7","G((p0 & p1) | (!p0 & !p1)) M Fp3",3,2,4,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55298,3,2,4,16,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4950.1-4962.7","Gp3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544905,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:4963.1-4979.7","X(p3 <-> Fp2) & G!p2 & FGp3",2,3,4,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559716,2,3,4,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:4980.1-5002.7","p1 <-> F(GFp3 | G(!p0 | !p1))",3,3,10,24,3,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.638679,3,3,10,24,3,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5003.1-5021.7","GF!p0 | XGp3",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555888,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5022.1-5037.7","Fp0",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547734,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5038.1-5054.7","F(p1 | p3) | FGp0",3,2,4,16,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.540785,3,2,4,16,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5055.1-5069.7","p1 & p2",2,2,2,5,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551842,2,2,2,5,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5070.1-5086.7","XXG(!p3 & X!p3)",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548302,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5087.1-5100.7","FG(p2 & !p3)",2,1,2,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546076,2,1,2,4,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:5101.1-5114.7","GFp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549454,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:5115.1-5173.7","Fp3 U ((p0 & Xp2) | (!p0 & X!p2))",3,9,39,72,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544934,3,9,39,72,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:5174.1-5381.7","GF(p3 & X(((p1 M p3) & Gp2) | ((!p1 W !p3) & F!p2)))",3,30,167,240,3,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,1.36243,3,30,167,240,3,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:5382.1-5408.7","((Fp2 W p2) | Gp3) W F!p0",3,4,12,32,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542883,3,4,12,32,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5409.1-5460.7","Fp1 R ((Gp0 & FGp2) | (F!p0 & GF!p2))",3,8,33,64,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.635781,3,8,33,64,2,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:5461.1-5476.7","!(!p2 W !p3)",2,2,3,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556943,2,2,3,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5477.1-5528.7","G((XF!p1 & (X!p1 | F!p0)) | (Gp0 & XGp1))",2,10,31,40,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545089,2,10,31,40,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:5529.1-5554.7","XXGp3 | F!p2",2,5,10,20,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54536,2,5,10,20,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:5555.1-5581.7","(p1 M (p2 R Xp1)) M XXp1",2,6,10,20,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54085,2,6,10,20,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:5582.1-5601.7","((p2 & p3) | (!p2 & !p3)) M Fp1",3,3,6,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548337,3,3,6,24,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5602.1-5621.7","GF((p2 & p3) | (!p0 & p2) | (p2 & X((!p0 | p3) R p0)))",3,2,7,16,3,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.634977,3,2,7,16,3,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:5622.1-5646.7","(p3 xor Fp1) & G(F!p1 & FG!p0)",3,4,11,26,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.608501,3,4,11,26,2,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:5647.1-5661.7","p2 xor p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.540681,2,2,2,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5662.1-5674.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541457,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:5675.1-5695.7","Xp1 | FGp2",2,4,6,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557366,2,4,6,16,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:5696.1-5739.7","((!p1 | F((p1 & !p2) | (!p1 & p2))) R Fp2) <-> XFp1",2,9,24,36,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543083,2,9,24,36,1,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:5740.1-5759.7","p0 xor Xp2",2,4,5,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557127,2,4,5,12,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:5760.1-5780.7","p2 R F!p3",2,3,7,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.56122,2,3,7,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5781.1-5804.7","X(!p0 | Xp2 | F!p1)",3,5,8,40,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542173,3,5,8,40,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:5805.1-5834.7","F(p0 & (p2 W !p0) & F!p1)",3,5,14,40,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548366,3,5,14,40,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5835.1-5851.7","G!p0 | GFp2",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553409,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5852.1-5869.7","Xp3 | (p2 R (p0 M p3))",3,3,4,20,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549805,3,3,4,20,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5870.1-5881.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553533,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:5882.1-5899.7","XFp1",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545799,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5900.1-5921.7","p0 & (p1 | !p2 | (p3 U XGp2))",4,4,8,48,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547645,4,4,8,48,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:5922.1-5939.7","!p3 & XFp1",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54799,2,3,4,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:5940.1-5966.7","(p1 xor Xp3) <-> Gp1",2,6,10,19,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544402,2,6,10,19,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:5967.1-5982.7","Gp0 & F!p1",2,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552113,2,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:5983.1-6030.7","(p2 | (p1 M Gp3)) xor XXFp3",3,12,25,92,1,12,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553133,3,12,25,92,1,12,0,0,0
-"./bp_sets/ltl2tgba.hoa:6031.1-6043.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.563414,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6044.1-6098.7","F((!(p0 | p1) & Fp2) | ((p0 | p1) & G!p2)) U !p3",4,8,36,128,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548619,4,8,36,128,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:6099.1-6138.7","p1 <-> (Fp0 & ((Fp0 & Fp3) | G(!p0 & !p3)))",3,8,21,53,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554604,3,8,21,53,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:6139.1-6169.7","p2 M F((p0 & !p3 & Xp0) | (p3 & (!p0 | X!p0)))",3,5,15,40,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541983,3,5,15,40,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6170.1-6188.7","F(p3 W Xp2)",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557672,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6189.1-6207.7","XXXGp0",1,4,4,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543197,1,4,4,7,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:6208.1-6243.7","p0 & (p2 M p1) & X(p0 U Xp2)",3,8,17,40,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549427,3,8,17,40,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:6244.1-6258.7","p0 & !p3 & ((p1 | p2) xor Gp3)",4,2,2,19,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54525,4,2,2,19,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:6259.1-6271.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.560529,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6272.1-6285.7","GFp2",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.560745,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6286.1-6298.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554846,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6299.1-6321.7","G((!p1 M p2) | (!p2 M FGp1))",2,3,9,12,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.615826,2,3,9,12,2,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:6322.1-6342.7","X(p1 W (p3 | X(!p2 U !p3)))",3,4,6,30,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546388,3,4,6,30,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:6343.1-6356.7","FGp0",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552934,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6357.1-6377.7","(p0 | p2) <-> (p2 xor XGp2)",2,4,6,14,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550463,2,4,6,14,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:6378.1-6394.7","X!p3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544015,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6395.1-6413.7","FG((p0 & p2) | (!p0 & !p2)) & XFp2",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558202,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6414.1-6427.7","GFp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552283,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6428.1-6441.7","GFp0",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55941,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6442.1-6459.7","(p3 M p1) & XGp3",2,3,4,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548796,2,3,4,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6460.1-6484.7","FGp2 | XXX(p3 xor (!p1 xor p2))",3,6,8,48,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544964,3,6,8,48,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:6485.1-6499.7","p3 <-> (p0 <-> (!p3 | FG!p1))",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543241,2,2,2,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:6500.1-6535.7","((Fp0 R (p3 -> !p1)) M !p2) U Gp2",4,6,19,64,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545997,4,6,19,64,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:6536.1-6560.7","Fp3 W (p1 | !p2)",3,4,10,32,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554553,3,4,10,32,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6561.1-6578.7","!p1 & !p2 & (p0 | G!p1)",3,3,4,14,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.560736,3,3,4,14,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6579.1-6595.7","p1 & Xp0",2,3,3,8,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553664,2,3,3,8,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6596.1-6607.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550309,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6608.1-6638.7","p2 xor (FGp0 U Gp3)",3,6,14,48,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.618786,3,6,14,48,2,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:6639.1-6673.7","(p3 & ((!p1 W !p0) R !p2)) W (p0 M Gp2)",4,6,18,48,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556977,4,6,18,48,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:6674.1-6849.7","(!p2 | GFp1) U ((Gp3 R p2) W Gp0)",4,22,143,352,2,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.868861,4,22,143,352,2,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:6850.1-6868.7","p2 | Fp3",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549737,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:6869.1-6915.7","XG!p1 <-> (!p3 R (Fp3 & Xp0))",3,10,26,67,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553392,3,10,26,67,1,10,0,0,0
-"./bp_sets/ltl2tgba.hoa:6916.1-6928.7","G!p2",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544246,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:6929.1-7010.7","(p2 U p1) <-> (p0 xor F((p2 & Gp0) | (!p2 & F!p0)))",3,16,56,103,3,12,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.73536,3,16,56,103,3,12,0,0,0
-"./bp_sets/ltl2tgba.hoa:7011.1-7029.7","p2 M XGp3",2,3,5,8,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547755,2,3,5,8,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:7030.1-7058.7","(!p2 <-> (p1 <-> X!p2)) <-> XG!p3",3,6,12,40,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551087,3,6,12,40,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:7059.1-7073.7","!p0",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545708,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:7074.1-7099.7","F((p0 & (!p1 M !p3)) | (!p0 & (p1 W p3)))",3,4,11,32,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.561668,3,4,11,32,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:7100.1-7138.7","X(X(Gp1 R ((p0 & p3) | (!p0 & !p3))) & F(p0 | X(p0 M p1)))",3,8,21,44,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542029,3,8,21,44,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:7139.1-7155.7","F(p2 & Gp3)",2,2,4,8,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541635,2,2,4,8,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7156.1-7169.7","G(((!p2 & p3) | (p2 & !p3)) M !p0)",3,1,2,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546878,3,1,2,4,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7170.1-7203.7","p1 | ((p3 | (!p3 U (p2 M !p0))) W ((p0 & !p3) | (!p0 & p3)))",4,6,17,80,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.576454,4,6,17,80,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:7204.1-7235.7","((p0 | p1) xor Fp3) xor (p1 & Fp2)",4,6,15,86,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.566013,4,6,15,86,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:7236.1-7274.7","F((!p1 & GF!p3) | (p1 & FGp3))",2,7,21,28,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.615589,2,7,21,28,2,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:7275.1-7286.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546449,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7287.1-7309.7","(!p0 xor p2) | X((p1 U p3) | F!p0)",4,4,8,64,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554768,4,4,8,64,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7310.1-7330.7","Gp2 U p1",2,4,6,11,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548283,2,4,6,11,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7331.1-7349.7","XXXG(p1 & X(p1 W p2))",1,4,4,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.537158,1,4,4,7,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7350.1-7362.7","G!p1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54893,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7363.1-7375.7","G!p0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54385,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7376.1-7417.7","F((F((p2 & !p3) | (!p2 & p3)) & X(p2 & Fp3)) | (G((p2 & p3) | (!p2 & !p3)) & X(!p2 | G!p3)))",2,8,23,32,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.5552,2,8,23,32,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:7418.1-7452.7","!p0 W (((p1 & !p2) | (!p1 & (p2 | G!p1))) W (p3 M p0))",4,6,18,74,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548878,4,6,18,74,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:7453.1-7474.7","!p0 & Fp1 & F!p1",2,4,7,14,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554295,2,4,7,14,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7475.1-7565.7","!p0 U ((p1 R Xp3) U ((p1 R p2) W Gp1))",4,14,67,160,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557376,4,14,67,160,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7566.1-7581.7","F!p3",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547955,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:7582.1-7594.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541628,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7595.1-7609.7","!p1 xor p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548872,2,2,2,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:7610.1-7648.7","G(G!p0 | F(!p3 & G!p1) | X!p1)",3,7,21,56,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55894,3,7,21,56,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7649.1-7670.7","(!p3 xor (p0 | p2)) <-> Fp2",3,4,7,26,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554588,3,4,7,26,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7671.1-7709.7","!p1 M (!p2 | F(p1 W p3) | X(!p2 M !p0))",4,6,22,96,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553565,4,6,22,96,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7710.1-7742.7","F((p0 & GF((p1 & ((p0 & p2) | (!p0 & !p2))) | (!p1 & ((p0 & !p2) | (!p0 & p2))))) R p1)",3,5,17,40,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.642234,3,5,17,40,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:7743.1-7769.7","FG(p3 M p1) | XXF((p1 & p2) | (!p1 & !p2))",3,5,11,40,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.612423,3,5,11,40,2,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7770.1-7786.7","Xp2",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555715,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:7787.1-7800.7","GFp0",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.568799,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7801.1-7816.7","G(p0 M Fp3)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.603606,2,1,4,4,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7817.1-7838.7","p2 <-> Gp1",2,4,7,13,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541833,2,4,7,13,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:7839.1-7854.7","Fp2 & ((Gp1 & Fp2) | (F!p1 & G!p2))",2,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547482,2,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:7855.1-7881.7","F((p0 & !p2) | (!p0 & p2)) xor (p1 | X(p0 | p2))",3,6,10,32,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551021,3,6,10,32,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:7882.1-7895.7","FGp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55108,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7896.1-7907.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.537586,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7908.1-7921.7","GF!p3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551777,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7922.1-7935.7","GFp1",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546871,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7936.1-7947.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543775,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7948.1-7959.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552967,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:7960.1-8001.7","X((p2 & F!p1) | (!p2 & Gp1)) M (p0 R p2)",3,9,23,54,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553724,3,9,23,54,1,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:8002.1-8020.7","p0 R (!p0 M !p3)",2,3,5,8,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544429,2,3,5,8,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8021.1-8033.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55885,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8034.1-8050.7","GF!p0 | Gp1",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54687,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:8051.1-8091.7","XX!p2 M (p1 | (p0 W p3))",4,9,22,120,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.506227,4,9,22,120,1,7,0,0,0
-"./bp_sets/ltl2tgba.hoa:8092.1-8112.7","X(G!p1 R p0)",2,4,7,11,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550712,2,4,7,11,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8113.1-8130.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559615,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8131.1-8156.7","Gp2 <-> (G!p2 | F(!p1 | p3))",3,5,10,18,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.560376,3,5,10,18,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:8157.1-8180.7","F(p2 W p1) | XG!p2",2,4,9,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546684,2,4,9,16,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:8181.1-8193.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552048,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8194.1-8209.7","!p3 & FGp3",1,2,3,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544103,1,2,3,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:8210.1-8222.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550658,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8223.1-8236.7","G(F(!p1 & ((!p0 & !p1) | (p0 & p1))) & FG!p1)",2,1,3,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.591164,2,1,3,4,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8237.1-8261.7","G((p0 M G(p0 U p3)) M X!p2)",3,4,11,20,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.618107,3,4,11,20,2,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:8262.1-8313.7","Gp3 U X(p1 & (F!p0 U !p1))",3,12,30,70,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544501,3,12,30,70,1,10,0,0,0
-"./bp_sets/ltl2tgba.hoa:8314.1-8340.7","X(X!p3 | (!p0 R (p0 | !p2)))",3,6,10,41,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550797,3,6,10,41,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:8341.1-8367.7","XF(!p3 W F!p2)",2,5,11,20,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550062,2,5,11,20,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:8368.1-8395.7","(p1 | G!p0) W Xp1",2,6,11,19,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548016,2,6,11,19,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:8396.1-8427.7","Fp0 xor (p1 & X(p1 W p2))",3,6,15,38,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553216,3,6,15,38,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:8428.1-8440.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545285,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8441.1-8463.7","!p1 W XF!p0",2,4,8,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557762,2,4,8,16,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:8464.1-8481.7","!p0 | Xp2",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542308,2,3,4,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8482.1-8507.7","(p0 <-> Fp1) & (p2 | Fp0)",3,5,10,30,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553505,3,5,10,30,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:8508.1-8525.7","G!p0 | Gp0",1,3,4,4,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.55531,1,3,4,4,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8526.1-8545.7","Fp3 | G!p0",2,3,6,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552126,2,3,6,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8546.1-8558.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545464,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8559.1-8575.7","FGp1 | Fp2",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552112,2,2,4,8,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:8576.1-8603.7","(!p3 | (!p2 & X!p1)) W X!p0",4,5,13,68,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.538214,4,5,13,68,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:8604.1-8627.7","X(p1 | X(p1 R F!p1))",1,5,8,10,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545606,1,5,8,10,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:8628.1-8647.7","p0 | X(!p0 & Gp3)",2,4,5,11,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551195,2,4,5,11,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:8648.1-8666.7","p3 & Fp1",2,3,5,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.496833,2,3,5,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8667.1-8679.7","Gp1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552127,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8680.1-8708.7","Gp2 R (p0 | F!p1)",3,4,14,32,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.569914,3,4,14,32,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8709.1-8739.7","G(p0 & p2) | ((p1 | Gp0) R !p3)",4,6,14,58,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544273,4,6,14,58,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:8740.1-8760.7","!p3 R X!p0",2,4,6,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544895,2,4,6,12,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:8761.1-8776.7","Fp2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.555449,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:8777.1-8788.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543955,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8789.1-8824.7","G((!p2 & X(!p2 W !p0)) M F!p3)",3,5,20,40,3,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.733582,3,5,20,40,3,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8825.1-8843.7","G(p3 & ((p3 & Fp0) R p2)) R F!p1",3,2,6,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548395,3,2,6,16,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:8844.1-8863.7","p1 M (p2 R p3)",3,3,6,16,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.552063,3,3,6,16,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8864.1-8891.7","(p2 & Xp3) <-> (p1 & Fp3)",3,6,11,35,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545824,3,6,11,35,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:8892.1-8908.7","X!p3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544189,1,3,3,5,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8909.1-8938.7","GFp1 U (Gp2 M p0)",3,5,14,40,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.621093,3,5,14,40,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8939.1-8971.7","(p2 & Xp1) <-> (((p1 & !p3) | (!p1 & p3)) M p0)",4,7,15,76,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549321,4,7,15,76,1,7,0,0,0
-"./bp_sets/ltl2tgba.hoa:8972.1-8990.7","!p1 | Fp0",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559986,2,3,5,12,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:8991.1-9003.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.553914,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9004.1-9021.7","p1 & F(!p1 & !p3)",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544857,2,3,4,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:9022.1-9039.7","p2 | Gp0",2,3,4,9,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543162,2,3,4,9,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:9040.1-9076.7","Gp3 xor (GFp0 & XXp0)",2,9,18,31,2,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.613159,2,9,18,31,2,8,0,0,0
-"./bp_sets/ltl2tgba.hoa:9077.1-9089.7","G!p1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541033,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9090.1-9108.7","p3 & G(!p0 & (p3 W (!p2 M !p1)))",4,3,5,14,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551115,4,3,5,14,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:9109.1-9122.7","(p1 & G!p3) R F!p3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546532,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9123.1-9142.7","Gp2 M ((p0 & !p2) | (!p0 & p2))",2,3,6,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543133,2,3,6,7,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:9143.1-9156.7","G(!p1 & (p0 U p2))",3,1,2,3,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.539571,3,1,2,3,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9157.1-9174.7","XFp3",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542767,1,3,4,6,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:9175.1-9190.7","F(Gp2 | GFp0)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.598752,2,1,4,4,2,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9191.1-9213.7","Xp0 | Gp2",2,5,7,15,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550123,2,5,7,15,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:9214.1-9237.7","Fp2 & X!p0",2,5,8,16,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551554,2,5,8,16,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:9238.1-9310.7","p2 | ((p2 & p3) xor (p0 R (((p3 & Gp0) | (!p3 & F!p0)) U Xp1)))",4,15,48,184,1,11,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546773,4,15,48,184,1,11,0,0,0
-"./bp_sets/ltl2tgba.hoa:9311.1-9325.7","p2 <-> p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.537494,2,2,2,6,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:9326.1-9351.7","XX(!p3 W X!p1)",2,6,9,22,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546281,2,6,9,22,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:9352.1-9431.7","p1 M ((Gp3 | FG!p1) M (F!p0 & Fp0))",3,12,57,96,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548981,3,12,57,96,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:9432.1-9443.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.544963,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9444.1-9471.7","((!p1 & !p3) U !p2) | X(p3 & Gp0)",4,6,11,66,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543362,4,6,11,66,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:9472.1-9564.7","G(!p1 M ((p1 & (!p3 | X(!p3 R XX!p0))) | (!p1 & p3 & X(p3 U XXp0))))",3,21,62,84,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.530641,3,21,62,84,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9565.1-9586.7","p3 | Xp3 | (!p3 & GFp0)",2,4,7,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545733,2,4,7,16,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:9587.1-9601.7","XGp3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549184,1,2,2,3,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:9602.1-9625.7","Fp1 & !X!p0",2,5,8,16,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551634,2,5,8,16,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:9626.1-9638.7","G((!p1 & !p2) | (p1 & p2))",2,1,1,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.547396,2,1,1,2,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9639.1-9678.7","F((Gp2 & ((p1 & ((p1 & G(!p0 | X!p0)) | (!p1 & F(p0 & Xp0)))) | (!p1 & ((p1 & F(p0 & Xp0)) | (!p1 & G(!p0 | X!p0)))))) | (F!p2 & ((p1 & ((p1 & F(p0 & Xp0)) | (!p1 & G(!p0 | X!p0)))) | (!p1 & ((p1 & G(!p0 | X!p0)) | (!p1 & F(p0 & Xp0)))))))",2,7,22,28,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.550994,2,7,22,28,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:9679.1-9700.7","p1 U (p3 U Gp0)",3,3,8,17,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546412,3,3,8,17,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:9701.1-9728.7","p1 & (p3 M (p0 | (!p3 M Fp0)))",3,5,12,36,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.539485,3,5,12,36,1,5,0,0,0
-"./bp_sets/ltl2tgba.hoa:9729.1-9748.7","(p0 & X!p2) | (!p0 & Xp2)",2,4,5,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556494,2,4,5,12,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:9749.1-9764.7","Fp3",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.543743,1,2,3,4,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:9765.1-9776.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54547,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9777.1-9795.7","p3 & Fp0",2,3,5,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556745,2,3,5,10,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:9796.1-9809.7","FGp1",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54355,1,1,2,2,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9810.1-9851.7","(!p0 R !p3) | (Fp2 & Xp1)",4,9,22,112,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.546045,4,9,22,112,1,9,0,0,0
-"./bp_sets/ltl2tgba.hoa:9852.1-9864.7","G!p3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542352,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9865.1-9886.7","((p1 & !p3) | (!p1 & p3)) R ((p1 & Fp3) | (!p1 & G!p3))",2,4,7,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.559221,2,4,7,12,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:9887.1-9899.7","Gp2",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.545642,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9900.1-9912.7","G!p1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54208,1,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:9913.1-9943.7","F!p3 | (!p1 R (p2 & X(p2 U Xp2)))",3,6,14,48,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.549661,3,6,14,48,1,6,0,0,0
-"./bp_sets/ltl2tgba.hoa:9944.1-9962.7","(p2 | !p3) & Fp2",2,3,5,11,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.540126,2,3,5,11,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:9963.1-9999.7","G((p3 M (!p2 | X!p2)) | ((!p3 U (p2 & Xp2)) & G!p3))",2,7,20,20,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.506229,2,7,20,20,1,2,0,0,0
-"./bp_sets/ltl2tgba.hoa:10000.1-10026.7","FGp0 | (Fp3 W p2)",3,4,12,32,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.613696,3,4,12,32,2,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:10027.1-10038.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.548507,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:10039.1-10058.7","Xp3 xor XFp3",1,4,5,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.551005,1,4,5,7,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:10059.1-10086.7","G(Fp2 | (!p1 R !p3))",3,4,13,32,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.54678,3,4,13,32,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:10087.1-10108.7","p3 | (G!p1 <-> (p1 & Xp0))",3,4,7,28,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.558181,3,4,7,28,1,4,0,0,0
-"./bp_sets/ltl2tgba.hoa:10109.1-10121.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554421,0,1,1,1,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:10122.1-10152.7","F!p1 W (!p2 R p3)",3,5,15,40,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.541261,3,5,15,40,1,3,0,0,0
-"./bp_sets/ltl2tgba.hoa:10153.1-10169.7","FG((!p3 | X!p3) & (p3 | Xp3))",1,2,4,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.554655,1,2,4,4,1,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:10170.1-10202.7","XXGp3 & (p2 R (p2 U p1))",3,7,15,36,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.557477,3,7,15,36,1,7,0,0,0
-"./bp_sets/ltl2tgba.hoa:10203.1-10214.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.542957,0,1,0,0,0,1,0,0,0
-"./bp_sets/ltl2tgba.hoa:10215.1-10233.7","p2 | XF(!p0 & !p2)",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -Q z3","ok",0,0.556266,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:1.1-55.7","Xp1 R ((Gp1 R p2) W p3)",3,11,34,57,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.566546,3,11,34,57,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:56.1-75.7","Fp3 | G!p2",2,3,6,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.617476,2,3,6,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:76.1-88.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.581481,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:89.1-105.7","F(p0 R p1)",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.60496,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:106.1-131.7","(FGp2 R !p2) | GFp1",2,4,11,16,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.669196,2,4,11,16,2,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:132.1-151.7","X(p3 & X(p3 W !p0))",2,4,5,13,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.595639,2,4,5,13,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:152.1-167.7","Fp3",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.651384,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:168.1-179.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.598744,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:180.1-228.7","XXG((X!p1 U (!p0 M !p3)) | XGp0)",3,10,29,61,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.775756,3,10,29,61,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:229.1-241.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.5953,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:242.1-253.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.590075,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:254.1-356.7","X((Fp2 W Xp0) <-> (p2 <-> Fp3))",3,21,73,143,2,13,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.849691,3,21,73,143,2,13,0,0,0
+"./bp_sets/ltl2tgba.hoa:357.1-373.7","F((p1 | p2) & G!p0)",3,2,4,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.641641,3,2,4,16,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:374.1-392.7","p3 M G((p0 | p2) & Xp2)",3,3,5,14,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.689118,3,3,5,14,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:393.1-430.7","(G(Gp1 | Xp2) | Xp0) W p2",3,7,21,43,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.552417,3,7,21,43,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:431.1-449.7","Gp1 & XXp2",2,4,4,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.561054,2,4,4,7,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:450.1-462.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.575345,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:463.1-505.7","(p0 U Gp2) R (p0 R Xp1)",3,8,25,45,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.649403,3,8,25,45,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:506.1-543.7","(p0 xor Gp1) xor (!p3 & X!p3)",3,8,19,47,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564259,3,8,19,47,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:544.1-564.7","X!p2 | GF(!p0 & !p3)",3,4,6,32,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.615352,3,4,6,32,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:565.1-585.7","X(!p2 | XFp1)",2,4,6,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584209,2,4,6,16,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:586.1-603.7","XFp3",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.578334,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:604.1-619.7","p3 W p1",2,2,3,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.58344,2,2,3,7,0,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:620.1-634.7","!p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564996,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:635.1-649.7","XG!p3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.521654,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:650.1-746.7","F((!p2 & F(Fp1 R p3)) | (p2 & G(G!p1 U !p3)))",3,15,71,120,2,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.800273,3,15,71,120,2,10,0,0,0
+"./bp_sets/ltl2tgba.hoa:747.1-807.7","XXF(((Xp0 & (!p2 R F!p0)) | ((p2 U Gp0) & X!p0)) R !p0)",2,13,37,52,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.655484,2,13,37,52,1,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:808.1-858.7","X(p0 | Xp1) | (Xp2 M (p0 M p3))",4,11,29,140,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.565386,4,11,29,140,1,10,0,0,0
+"./bp_sets/ltl2tgba.hoa:859.1-871.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.578277,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:872.1-919.7","X(!p3 <-> F((Fp2 & Gp3) | (G!p2 & F!p3)))",2,9,28,36,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.691981,2,9,28,36,2,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:920.1-957.7","XX(Fp2 & (p3 xor (p2 <-> XFp3)))",2,9,18,32,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.577494,2,9,18,32,1,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:958.1-982.7","(p3 | (!p1 U !p0)) W (!p2 R p1)",4,4,10,52,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.621752,4,4,10,52,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:983.1-997.7","p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.563577,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:998.1-1016.7","(p1 & p2) | F!p3",3,3,5,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.565517,3,3,5,24,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:1017.1-1065.7","p0 | G(FGp0 U ((p2 | Gp3) R p3))",3,9,29,72,3,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.08242,3,9,29,72,3,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:1066.1-1082.7","F!p1 | FGp2",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.644361,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1083.1-1095.7","Gp1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.558823,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1096.1-1111.7","Fp1",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.569012,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1112.1-1133.7","p0 <-> (p2 xor (p2 | (!p2 M F!p1)))",3,4,7,25,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.557903,3,4,7,25,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:1134.1-1152.7","p1 | (p1 U X(p0 U !p1))",2,3,5,11,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.803723,2,3,5,11,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:1153.1-1181.7","Xp3 R ((p2 & XFp1) | (!p2 & XG!p1))",3,6,13,38,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.78161,3,6,13,38,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:1182.1-1193.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.730655,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1194.1-1206.7","G((!p0 & p1) | (p0 & !p1))",2,1,1,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.686084,2,1,1,2,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1207.1-1221.7","!p2 <-> !p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.805658,2,2,2,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1222.1-1245.7","(p0 & p3) W F(!p3 & X(!p3 W !p2))",3,4,9,32,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.07005,3,4,9,32,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:1246.1-1260.7","p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.706646,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1261.1-1299.7","F((p1 & GFp2) | (!p1 & FG!p2))",2,7,21,28,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.735631,2,7,21,28,2,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:1300.1-1322.7","p3 xor (p3 W Xp0)",2,5,7,14,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.658699,2,5,7,14,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:1323.1-1349.7","G(Fp2 | (!p2 & F!p1))",2,4,12,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.988576,2,4,12,16,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1350.1-1375.7","Xp1 | (p3 & ((p1 M GFp1) U X!p0))",3,6,10,44,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.00166,3,6,10,44,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:1376.1-1391.7","G(p3 M Fp1)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.915021,2,1,4,4,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1392.1-1413.7","XX(GFp0 R p3)",2,5,7,18,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.718322,2,5,7,18,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:1414.1-1427.7","GF!p3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.716394,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1428.1-1574.7","((p1 M !p0) U Xp2) W G!p2",3,26,111,160,1,11,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.982064,3,26,111,160,1,11,0,0,0
+"./bp_sets/ltl2tgba.hoa:1575.1-1588.7","FG!p1",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.743411,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1589.1-1601.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.877402,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1602.1-1630.7","(G!p1 M F!p3) R (p3 | Fp0)",3,5,13,40,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.03253,3,5,13,40,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:1631.1-1654.7","Fp0 | ((p1 & p3) xor (p1 | Gp2))",4,4,9,64,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.916917,4,4,9,64,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:1655.1-1772.7","p3 W ((p0 & F!p2 & F!p1) | (!p0 & (Gp1 | Gp2)))",4,18,89,264,1,15,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.611311,4,18,89,264,1,15,0,0,0
+"./bp_sets/ltl2tgba.hoa:1773.1-1795.7","X(p2 M (!p2 | X(p1 | Gp0)))",3,5,7,34,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.84991,3,5,7,34,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:1796.1-1811.7","F(!p2 | (p2 & p3))",2,2,3,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.693652,2,2,3,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1812.1-1830.7","!p1 & G!p3 & F((p1 & Gp0) | (!p1 & F!p0))",3,3,5,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.62308,3,3,5,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:1831.1-1850.7","p2 & XXFp2",1,4,5,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.598875,1,4,5,7,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:1851.1-1865.7","p0",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.588382,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1866.1-1880.7","G(!p0 & Xp3)",2,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.610704,2,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1881.1-1909.7","p2 R (G(F!p3 & FG!p0) R !p0)",3,5,13,36,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.688348,3,5,13,36,2,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:1910.1-1924.7","!p0 | !p3",2,2,2,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.611704,2,2,2,7,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:1925.1-1946.7","Fp0 | XXFp3",2,4,7,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.625264,2,4,7,16,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:1947.1-1959.7","G(((p1 & (!p0 | p2)) | (p0 & !p1 & !p2)) & (!p0 U p1))",3,1,1,3,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.744007,3,1,1,3,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:1960.1-1983.7","Xp2 & (p3 R !p0)",3,5,8,22,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.822532,3,5,8,22,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:1984.1-2003.7","G(!p3 | (p1 U p0)) & GFp3",3,2,7,13,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.723925,3,2,7,13,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:2004.1-2020.7","Fp1 & GF!p0",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.61866,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2021.1-2055.7","p0 | X(p0 M ((p1 & X!p3) | (!p1 & Xp3)))",3,7,17,40,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.624775,3,7,17,40,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:2056.1-2087.7","p2 <-> XX(p0 W Fp3)",3,8,13,56,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.604611,3,8,13,56,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:2088.1-2144.7","F(!p1 & XX((p0 & X!p1) | (!p0 & Xp1)))",2,13,33,52,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.619171,2,13,33,52,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2145.1-2175.7","Fp1 | !(Fp3 W p2)",3,5,15,40,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.700315,3,5,15,40,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:2176.1-2188.7","Gp3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.857406,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:2189.1-2226.7","G(F(!p1 W !p0) & FG(p0 | (Fp0 U !p1)))",2,6,22,24,4,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,7.64453,2,6,22,24,2,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2227.1-2265.7","Gp3 xor (Gp2 U p0)",3,8,20,47,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.548186,3,8,20,47,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:2266.1-2283.7","!p0 | X!p2",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.610426,2,3,4,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2284.1-2297.7","GFp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.608977,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:2298.1-2311.7","GF(p3 | (p2 & G!p3))",2,1,2,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.600991,2,1,2,4,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:2312.1-2340.7","!p3 | ((p0 U p2) U ((p0 & !p3) | (!p0 & p3)))",3,5,13,35,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564567,3,5,13,35,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:2341.1-2352.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.652258,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:2353.1-2391.7","Xp3 <-> (p0 | (!p0 U X(F!p0 | X(!p1 W !p3))))",3,10,18,58,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.654661,3,10,18,58,1,10,0,0,0
+"./bp_sets/ltl2tgba.hoa:2392.1-2484.7","(p2 W (Gp1 | Gp3)) W X((!p0 & X!p2) | (p0 & Xp2))",4,20,62,262,1,20,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.627921,4,20,62,262,1,20,0,0,0
+"./bp_sets/ltl2tgba.hoa:2485.1-2500.7","Fp2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.667903,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2501.1-2555.7","p1 M (Fp2 W X(p0 & F!p0))",3,10,34,80,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.666947,3,10,34,80,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:2556.1-2569.7","GFp2",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.601636,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:2570.1-2587.7","XFp1",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.566899,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2588.1-2612.7","F(XF!p0 & (p0 W p3))",2,4,10,16,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.637584,2,4,10,16,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2613.1-2630.7","X(p3 W ((p0 & p2) | (!p0 & !p2)))",3,3,4,22,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.645937,3,3,4,22,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2631.1-2655.7","(!p1 W p0) U !p3",3,4,10,27,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.627369,3,4,10,27,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2656.1-2732.7","F(!p2 & X(!p2 U (X!p0 & F!p3))) | FG(p1 M p2)",4,12,54,192,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.29176,4,12,54,192,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2733.1-2762.7","!p3 <-> (Gp1 | (!p0 M p3))",3,6,13,36,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.676563,3,6,13,36,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:2763.1-2778.7","F!p2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.681851,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2779.1-2796.7","XF(!p2 | !p3)",2,3,4,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.778613,2,3,4,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2797.1-2813.7","Xp3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.823774,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2814.1-2838.7","G((Fp3 & X!p0) | (Xp0 & G!p3))",2,5,10,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.713746,2,5,10,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2839.1-2856.7","Fp3 -> p3",1,3,4,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.801922,1,3,4,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2857.1-2876.7","Gp3 U Gp2",2,3,6,7,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.835836,2,3,6,7,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2877.1-2891.7","!p3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.852882,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2892.1-2916.7","X((p1 R p0) & F(!p1 | p3))",3,5,9,32,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.866363,3,5,9,32,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:2917.1-2969.7","G(Gp2 | F(!p2 & (!p3 W X!p1)))",3,8,34,64,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.03926,3,8,34,64,2,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:2970.1-2987.7","p3 | XGp0",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.83695,2,3,4,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:2988.1-3003.7","Fp0",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.671739,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3004.1-3024.7","(!p3 | GFp3) <-> FGp1",2,3,8,12,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.944027,2,3,8,12,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3025.1-3039.7","p0",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.709399,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3040.1-3058.7","p0 | !p1 | (!p3 & FG(p0 & p1))",3,3,5,23,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.767677,3,3,5,23,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3059.1-3088.7","!(Fp3 xor X(!p2 W !p0))",3,6,13,41,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.608084,3,6,13,41,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:3089.1-3109.7","F(Fp3 R (p2 | GFp2))",2,3,7,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.626057,2,3,7,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3110.1-3122.7","Gp1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.625494,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3123.1-3153.7","(p2 U p1) xor XG(!p1 | Fp2)",2,6,15,24,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.666743,2,6,15,24,2,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:3154.1-3168.7","p0 & Gp2",2,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.66713,2,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3169.1-3191.7","XX(Gp2 R Fp3)",2,4,8,16,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.62527,2,4,8,16,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3192.1-3207.7","F!p0",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.561004,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3208.1-3227.7","G!p3 M (p2 | p3)",2,3,6,9,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.864997,2,3,6,9,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3228.1-3243.7","G(F!p0 & Fp1)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.812527,2,1,4,4,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3244.1-3278.7","F!p3 | G(Gp0 | Xp1)",3,6,18,48,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.615817,3,6,18,48,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:3279.1-3292.7","FGp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.761636,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3293.1-3350.7","F(((p3 | X(p3 M p1)) & (F!p1 | FG!p0)) | (!p3 & X(!p3 W !p1) & Gp1 & GFp0))",3,9,38,72,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.825551,3,9,38,72,2,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:3351.1-3365.7","!p1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.634865,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3366.1-3383.7","Fp0 -> Gp0",1,3,4,4,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.650228,1,3,4,4,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3384.1-3401.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.741501,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3402.1-3416.7","XG(p1 | p2)",2,2,2,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.63727,2,2,2,7,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3417.1-3437.7","p0 | XXF!p0",1,4,6,8,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.717558,1,4,6,8,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:3438.1-3460.7","(((p0 & !p2) | (!p0 & p2)) R !p0) | G!p3",3,4,8,22,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.70915,3,4,8,22,0,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:3461.1-3473.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.617644,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3474.1-3490.7","GF!p1 <-> Fp0",2,2,5,8,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.678008,2,2,5,8,2,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3491.1-3591.7","F(((Gp1 M ((p1 & !p3) | (!p1 & p3))) & F!p0) | ((F!p1 W ((p1 & p3) | (!p1 & !p3))) & Gp0))",3,12,78,96,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,13.1499,3,12,78,96,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3592.1-3615.7","(p0 & !p1) R (p3 | Xp2)",4,4,10,48,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.803723,4,4,10,48,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3616.1-3629.7","FG(p1 & ((p0 & p2) | (!p0 & !p2)))",3,1,2,8,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.824224,3,1,2,8,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3630.1-3650.7","XGp2 M (p1 R p3)",3,3,8,14,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.855529,3,3,8,14,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3651.1-3667.7","FGp2 | Fp0",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.01867,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3668.1-3689.7","p3 xor Fp0",2,4,7,13,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.958564,2,4,7,13,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:3690.1-3719.7","(p0 <-> p3) & F((p1 & Gp3) | (!p1 & F!p3))",3,5,14,36,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.01313,3,5,14,36,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:3720.1-3735.7","p1 W ((p0 & p2) | (!p0 & !p2))",3,2,3,14,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.613739,3,2,3,14,0,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3736.1-3780.7","X(((!p0 & p2) W !p2) U XX!p2)",2,11,23,41,1,11,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.575656,2,11,23,41,1,11,0,0,0
+"./bp_sets/ltl2tgba.hoa:3781.1-3799.7","p1 | GF!p2",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.611415,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3800.1-3817.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584064,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3818.1-3835.7","FG(p1 U p0)",2,2,5,8,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.691138,2,2,5,8,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3836.1-3848.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.572314,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3849.1-3863.7","(p0 -> (p0 | p2)) | (!p1 & X(!p1 U !p3))",4,2,2,32,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.61838,4,2,2,32,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3864.1-3881.7","G(p1 & X(p3 | F!p2))",3,3,5,12,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.639119,3,3,5,12,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3882.1-3905.7","!p0 <-> (p3 xor FGp1)",3,4,9,32,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.672922,3,4,9,32,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:3906.1-3921.7","(p2 | p3) R Fp2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.624702,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:3922.1-3956.7","X(Fp1 & XXX((!p3 & Xp3) U G!p1))",2,10,14,31,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.747488,2,10,14,31,1,10,0,0,0
+"./bp_sets/ltl2tgba.hoa:3957.1-3969.7","G(p0 & X(p0 | !p3))",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.656266,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:3970.1-3989.7","X(p0 & p2 & X((p0 & p2) U p1))",3,4,5,23,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.68686,3,4,5,23,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:3990.1-4016.7","Fp2 xor XG!p3",2,5,11,20,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.665904,2,5,11,20,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:4017.1-4033.7","X!p3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.601714,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4034.1-4046.7","G!p3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.702208,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4047.1-4059.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.597045,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4060.1-4077.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.753466,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4078.1-4107.7","XX(X(!p0 | Xp2) xor (p0 M Xp0))",2,8,11,28,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.637242,2,8,11,28,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:4108.1-4151.7","p2 <-> (XGp3 | (p3 <-> FGp2))",2,9,24,36,2,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.696331,2,9,24,36,2,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:4152.1-4168.7","Xp3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.58541,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4169.1-4183.7","(p1 xor p2) xor (((p0 & !p1) | (!p0 & p1)) R (p3 | Fp1))",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.581627,2,2,2,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4184.1-4203.7","(p1 <-> Xp1) <-> (Fp1 & F(!p0 R Xp2))",1,4,5,6,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.559324,1,4,5,6,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:4204.1-4232.7","X(Xp3 M (p0 W p2))",3,6,13,41,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564193,3,6,13,41,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:4233.1-4250.7","p0 | G!p1",2,3,4,9,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.5818,2,3,4,9,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4251.1-4306.7","Fp3 & (F(!p1 | !p3) U XXp2)",3,12,33,96,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.65512,3,12,33,96,1,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:4307.1-4318.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.569896,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4319.1-4330.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.572018,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4331.1-4389.7","Gp3 <-> (!p3 W (Xp1 R Fp0))",3,11,38,59,2,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.746614,3,11,38,59,2,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:4390.1-4407.7","p3 | G(!p0 & !p2)",3,3,4,15,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.617873,3,3,4,15,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4408.1-4427.7","(p0 xor p2) | FGp0 | F(!p2 | !p3)",3,3,6,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.639217,3,3,6,24,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4428.1-4440.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.604084,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4441.1-4459.7","!p1 | F!p3",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.594364,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4460.1-4477.7","(p0 | Gp2) M F(Xp0 W Gp2)",2,2,5,8,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.83741,2,2,5,8,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4478.1-4510.7","G(p0 | p3) | XXXp1",3,9,13,65,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.713643,3,9,13,65,1,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:4511.1-4523.7","G!p2",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.818358,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4524.1-4561.7","G((((p1 R p3) M Fp3) R X(p1 & p2)) U p1)",3,7,21,44,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.725988,3,7,21,44,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4562.1-4578.7","F((!p1 & ((p1 & p3) | (!p1 & !p3))) W (p2 | p3))",3,2,4,16,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.687,3,2,4,16,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4579.1-4604.7","X(p0 W p3) | (!p0 & G!p1)",3,5,10,33,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.762376,3,5,10,33,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:4605.1-4617.7","G(p1 | !p2)",2,1,1,3,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.633149,2,1,1,3,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4618.1-4632.7","!p2",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.639055,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4633.1-4649.7","Xp0",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.58044,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4650.1-4668.7","F(!p0 | !p1 | XFp3)",3,3,5,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.628585,3,3,5,24,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4669.1-4699.7","(((p0 & !p3) | (!p0 & p3)) & (((p2 | p3) & Fp1) | (!p2 & !p3 & G!p1))) W G!p2",4,5,15,52,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.655226,4,5,15,52,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4700.1-4722.7","(!p0 U p1) | ((p1 | Fp2) -> p1)",3,4,8,25,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.589086,3,4,8,25,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:4723.1-4752.7","G!p2 | F!p0 | Gp3",3,5,14,40,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.642066,3,5,14,40,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:4753.1-4768.7","F((p0 & p2 & !p3) | (!p2 & (!p0 | p3)))",3,2,3,16,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.68246,3,2,3,16,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4769.1-4785.7","XG(!p2 U X!p2)",1,3,4,5,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.599714,1,3,4,5,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4786.1-4802.7","Fp3 xor GF((p1 & X!p2) | (p1 & Xp2))",2,2,5,8,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.649734,2,2,5,8,2,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4803.1-4823.7","((p1 & !p2) | (!p1 & p2)) M F(p0 W p1)",3,3,7,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.629685,3,3,7,24,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4824.1-4836.7","G((!p0 & !p3) | (p0 & p3))",2,1,1,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.643631,2,1,1,2,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4837.1-4851.7","XGp1",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.596703,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4852.1-4866.7","!p3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.604613,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:4867.1-4899.7","Fp1 & (FG(p0 | p1) | XXF!p2)",3,7,15,56,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.687289,3,7,15,56,1,7,0,0,0
+"./bp_sets/ltl2tgba.hoa:4900.1-4932.7","(p1 <-> (p2 xor X!p0)) & (p1 <-> XG!p2)",3,8,14,40,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.587652,3,8,14,40,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:4933.1-4949.7","G((p0 & p1) | (!p0 & !p1)) M Fp3",3,2,4,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.676282,3,2,4,16,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4950.1-4962.7","Gp3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.565899,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:4963.1-4979.7","X(p3 <-> Fp2) & G!p2 & FGp3",2,3,4,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.650432,2,3,4,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:4980.1-5002.7","p1 <-> F(GFp3 | G(!p0 | !p1))",3,3,10,24,3,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.818996,3,3,10,24,3,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5003.1-5021.7","GF!p0 | XGp3",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.640743,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5022.1-5037.7","Fp0",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.566259,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5038.1-5054.7","F(p1 | p3) | FGp0",3,2,4,16,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.66791,3,2,4,16,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5055.1-5069.7","p1 & p2",2,2,2,5,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.590866,2,2,2,5,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5070.1-5086.7","XXG(!p3 & X!p3)",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584441,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5087.1-5100.7","FG(p2 & !p3)",2,1,2,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.6502,2,1,2,4,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:5101.1-5114.7","GFp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.62799,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:5115.1-5173.7","Fp3 U ((p0 & Xp2) | (!p0 & X!p2))",3,9,39,72,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.576639,3,9,39,72,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:5174.1-5381.7","GF(p3 & X(((p1 M p3) & Gp2) | ((!p1 W !p3) & F!p2)))",3,30,167,240,3,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,53.853,3,30,167,240,3,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:5382.1-5408.7","((Fp2 W p2) | Gp3) W F!p0",3,4,12,32,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.12801,3,4,12,32,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5409.1-5460.7","Fp1 R ((Gp0 & FGp2) | (F!p0 & GF!p2))",3,8,33,64,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.717929,3,8,33,64,2,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:5461.1-5476.7","!(!p2 W !p3)",2,2,3,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.552933,2,2,3,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5477.1-5528.7","G((XF!p1 & (X!p1 | F!p0)) | (Gp0 & XGp1))",2,10,31,40,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.68595,2,10,31,40,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:5529.1-5554.7","XXGp3 | F!p2",2,5,10,20,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.700381,2,5,10,20,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:5555.1-5581.7","(p1 M (p2 R Xp1)) M XXp1",2,6,10,20,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.606754,2,6,10,20,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:5582.1-5601.7","((p2 & p3) | (!p2 & !p3)) M Fp1",3,3,6,24,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.640174,3,3,6,24,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5602.1-5621.7","GF((p2 & p3) | (!p0 & p2) | (p2 & X((!p0 | p3) R p0)))",3,2,7,16,3,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.672233,3,2,7,16,3,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:5622.1-5646.7","(p3 xor Fp1) & G(F!p1 & FG!p0)",3,4,11,26,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.72143,3,4,11,26,2,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:5647.1-5661.7","p2 xor p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.639725,2,2,2,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5662.1-5674.7","Gp0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.608798,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:5675.1-5695.7","Xp1 | FGp2",2,4,6,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.672997,2,4,6,16,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:5696.1-5739.7","((!p1 | F((p1 & !p2) | (!p1 & p2))) R Fp2) <-> XFp1",2,9,24,36,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.58718,2,9,24,36,1,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:5740.1-5759.7","p0 xor Xp2",2,4,5,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.601509,2,4,5,12,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:5760.1-5780.7","p2 R F!p3",2,3,7,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.666012,2,3,7,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5781.1-5804.7","X(!p0 | Xp2 | F!p1)",3,5,8,40,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.683936,3,5,8,40,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:5805.1-5834.7","F(p0 & (p2 W !p0) & F!p1)",3,5,14,40,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.64241,3,5,14,40,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5835.1-5851.7","G!p0 | GFp2",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.656544,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5852.1-5869.7","Xp3 | (p2 R (p0 M p3))",3,3,4,20,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.649927,3,3,4,20,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5870.1-5881.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.56058,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:5882.1-5899.7","XFp1",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.64754,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5900.1-5921.7","p0 & (p1 | !p2 | (p3 U XGp2))",4,4,8,48,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.646496,4,4,8,48,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:5922.1-5939.7","!p3 & XFp1",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.590606,2,3,4,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:5940.1-5966.7","(p1 xor Xp3) <-> Gp1",2,6,10,19,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.589581,2,6,10,19,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:5967.1-5982.7","Gp0 & F!p1",2,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.667045,2,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:5983.1-6030.7","(p2 | (p1 M Gp3)) xor XXFp3",3,12,25,92,1,12,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.603115,3,12,25,92,1,12,0,0,0
+"./bp_sets/ltl2tgba.hoa:6031.1-6043.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.600936,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6044.1-6098.7","F((!(p0 | p1) & Fp2) | ((p0 | p1) & G!p2)) U !p3",4,8,36,128,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.752273,4,8,36,128,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:6099.1-6138.7","p1 <-> (Fp0 & ((Fp0 & Fp3) | G(!p0 & !p3)))",3,8,21,53,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.566761,3,8,21,53,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:6139.1-6169.7","p2 M F((p0 & !p3 & Xp0) | (p3 & (!p0 | X!p0)))",3,5,15,40,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.565602,3,5,15,40,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6170.1-6188.7","F(p3 W Xp2)",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.680011,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6189.1-6207.7","XXXGp0",1,4,4,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.567372,1,4,4,7,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:6208.1-6243.7","p0 & (p2 M p1) & X(p0 U Xp2)",3,8,17,40,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.578225,3,8,17,40,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:6244.1-6258.7","p0 & !p3 & ((p1 | p2) xor Gp3)",4,2,2,19,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.599971,4,2,2,19,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:6259.1-6271.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.574272,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6272.1-6285.7","GFp2",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.634626,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6286.1-6298.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.561128,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6299.1-6321.7","G((!p1 M p2) | (!p2 M FGp1))",2,3,9,12,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.653771,2,3,9,12,2,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:6322.1-6342.7","X(p1 W (p3 | X(!p2 U !p3)))",3,4,6,30,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.563882,3,4,6,30,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:6343.1-6356.7","FGp0",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.615123,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6357.1-6377.7","(p0 | p2) <-> (p2 xor XGp2)",2,4,6,14,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.5678,2,4,6,14,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:6378.1-6394.7","X!p3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.581359,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6395.1-6413.7","FG((p0 & p2) | (!p0 & !p2)) & XFp2",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.643461,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6414.1-6427.7","GFp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.6249,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6428.1-6441.7","GFp0",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.637645,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6442.1-6459.7","(p3 M p1) & XGp3",2,3,4,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.596797,2,3,4,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6460.1-6484.7","FGp2 | XXX(p3 xor (!p1 xor p2))",3,6,8,48,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.617659,3,6,8,48,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:6485.1-6499.7","p3 <-> (p0 <-> (!p3 | FG!p1))",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.604896,2,2,2,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:6500.1-6535.7","((Fp0 R (p3 -> !p1)) M !p2) U Gp2",4,6,19,64,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.572332,4,6,19,64,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:6536.1-6560.7","Fp3 W (p1 | !p2)",3,4,10,32,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.599169,3,4,10,32,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6561.1-6578.7","!p1 & !p2 & (p0 | G!p1)",3,3,4,14,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564162,3,3,4,14,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6579.1-6595.7","p1 & Xp0",2,3,3,8,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.602073,2,3,3,8,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6596.1-6607.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.561579,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6608.1-6638.7","p2 xor (FGp0 U Gp3)",3,6,14,48,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.645057,3,6,14,48,2,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:6639.1-6673.7","(p3 & ((!p1 W !p0) R !p2)) W (p0 M Gp2)",4,6,18,48,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564591,4,6,18,48,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:6674.1-6849.7","(!p2 | GFp1) U ((Gp3 R p2) W Gp0)",4,22,143,352,2,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,8.80494,4,22,143,352,2,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:6850.1-6868.7","p2 | Fp3",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584571,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:6869.1-6915.7","XG!p1 <-> (!p3 R (Fp3 & Xp0))",3,10,26,67,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.690053,3,10,26,67,1,10,0,0,0
+"./bp_sets/ltl2tgba.hoa:6916.1-6928.7","G!p2",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.702997,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:6929.1-7010.7","(p2 U p1) <-> (p0 xor F((p2 & Gp0) | (!p2 & F!p0)))",3,16,56,103,3,12,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.02012,3,16,56,103,2,12,0,0,0
+"./bp_sets/ltl2tgba.hoa:7011.1-7029.7","p2 M XGp3",2,3,5,8,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.571836,2,3,5,8,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:7030.1-7058.7","(!p2 <-> (p1 <-> X!p2)) <-> XG!p3",3,6,12,40,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.603772,3,6,12,40,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:7059.1-7073.7","!p0",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.620512,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:7074.1-7099.7","F((p0 & (!p1 M !p3)) | (!p0 & (p1 W p3)))",3,4,11,32,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.653432,3,4,11,32,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:7100.1-7138.7","X(X(Gp1 R ((p0 & p3) | (!p0 & !p3))) & F(p0 | X(p0 M p1)))",3,8,21,44,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.581988,3,8,21,44,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:7139.1-7155.7","F(p2 & Gp3)",2,2,4,8,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.762622,2,2,4,8,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7156.1-7169.7","G(((!p2 & p3) | (p2 & !p3)) M !p0)",3,1,2,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.75324,3,1,2,4,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7170.1-7203.7","p1 | ((p3 | (!p3 U (p2 M !p0))) W ((p0 & !p3) | (!p0 & p3)))",4,6,17,80,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.662064,4,6,17,80,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:7204.1-7235.7","((p0 | p1) xor Fp3) xor (p1 & Fp2)",4,6,15,86,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.692592,4,6,15,86,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:7236.1-7274.7","F((!p1 & GF!p3) | (p1 & FGp3))",2,7,21,28,2,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.76507,2,7,21,28,2,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:7275.1-7286.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.572429,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7287.1-7309.7","(!p0 xor p2) | X((p1 U p3) | F!p0)",4,4,8,64,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.580204,4,4,8,64,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7310.1-7330.7","Gp2 U p1",2,4,6,11,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.60601,2,4,6,11,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7331.1-7349.7","XXXG(p1 & X(p1 W p2))",1,4,4,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.608975,1,4,4,7,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7350.1-7362.7","G!p1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.580756,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7363.1-7375.7","G!p0",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.581265,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7376.1-7417.7","F((F((p2 & !p3) | (!p2 & p3)) & X(p2 & Fp3)) | (G((p2 & p3) | (!p2 & !p3)) & X(!p2 | G!p3)))",2,8,23,32,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.628782,2,8,23,32,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:7418.1-7452.7","!p0 W (((p1 & !p2) | (!p1 & (p2 | G!p1))) W (p3 M p0))",4,6,18,74,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.630269,4,6,18,74,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:7453.1-7474.7","!p0 & Fp1 & F!p1",2,4,7,14,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584014,2,4,7,14,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7475.1-7565.7","!p0 U ((p1 R Xp3) U ((p1 R p2) W Gp1))",4,14,67,160,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.679143,4,14,67,160,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7566.1-7581.7","F!p3",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.551852,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:7582.1-7594.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.683386,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7595.1-7609.7","!p1 xor p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.839583,2,2,2,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:7610.1-7648.7","G(G!p0 | F(!p3 & G!p1) | X!p1)",3,7,21,56,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.698445,3,7,21,56,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7649.1-7670.7","(!p3 xor (p0 | p2)) <-> Fp2",3,4,7,26,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.574028,3,4,7,26,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7671.1-7709.7","!p1 M (!p2 | F(p1 W p3) | X(!p2 M !p0))",4,6,22,96,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.676052,4,6,22,96,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7710.1-7742.7","F((p0 & GF((p1 & ((p0 & p2) | (!p0 & !p2))) | (!p1 & ((p0 & !p2) | (!p0 & p2))))) R p1)",3,5,17,40,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.668779,3,5,17,40,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:7743.1-7769.7","FG(p3 M p1) | XXF((p1 & p2) | (!p1 & !p2))",3,5,11,40,2,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.634209,3,5,11,40,2,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7770.1-7786.7","Xp2",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.555221,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:7787.1-7800.7","GFp0",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.629589,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7801.1-7816.7","G(p0 M Fp3)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.623564,2,1,4,4,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7817.1-7838.7","p2 <-> Gp1",2,4,7,13,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.624516,2,4,7,13,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:7839.1-7854.7","Fp2 & ((Gp1 & Fp2) | (F!p1 & G!p2))",2,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.737001,2,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:7855.1-7881.7","F((p0 & !p2) | (!p0 & p2)) xor (p1 | X(p0 | p2))",3,6,10,32,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.714836,3,6,10,32,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:7882.1-7895.7","FGp3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.748168,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7896.1-7907.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.633032,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7908.1-7921.7","GF!p3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.702007,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7922.1-7935.7","GFp1",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.685844,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7936.1-7947.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584476,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7948.1-7959.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.638063,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:7960.1-8001.7","X((p2 & F!p1) | (!p2 & Gp1)) M (p0 R p2)",3,9,23,54,1,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.60038,3,9,23,54,1,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:8002.1-8020.7","p0 R (!p0 M !p3)",2,3,5,8,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.579361,2,3,5,8,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8021.1-8033.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.584137,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8034.1-8050.7","GF!p0 | Gp1",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.68331,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:8051.1-8091.7","XX!p2 M (p1 | (p0 W p3))",4,9,22,120,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.574306,4,9,22,120,1,7,0,0,0
+"./bp_sets/ltl2tgba.hoa:8092.1-8112.7","X(G!p1 R p0)",2,4,7,11,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.566316,2,4,7,11,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8113.1-8130.7","XFp2",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.565057,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8131.1-8156.7","Gp2 <-> (G!p2 | F(!p1 | p3))",3,5,10,18,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.582646,3,5,10,18,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:8157.1-8180.7","F(p2 W p1) | XG!p2",2,4,9,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.616074,2,4,9,16,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:8181.1-8193.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.583467,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8194.1-8209.7","!p3 & FGp3",1,2,3,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.596565,1,2,3,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:8210.1-8222.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.561616,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8223.1-8236.7","G(F(!p1 & ((!p0 & !p1) | (p0 & p1))) & FG!p1)",2,1,3,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.619605,2,1,3,4,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8237.1-8261.7","G((p0 M G(p0 U p3)) M X!p2)",3,4,11,20,2,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.635076,3,4,11,20,2,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:8262.1-8313.7","Gp3 U X(p1 & (F!p0 U !p1))",3,12,30,70,1,10,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.562944,3,12,30,70,1,10,0,0,0
+"./bp_sets/ltl2tgba.hoa:8314.1-8340.7","X(X!p3 | (!p0 R (p0 | !p2)))",3,6,10,41,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.576459,3,6,10,41,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:8341.1-8367.7","XF(!p3 W F!p2)",2,5,11,20,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.62954,2,5,11,20,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:8368.1-8395.7","(p1 | G!p0) W Xp1",2,6,11,19,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.5992,2,6,11,19,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:8396.1-8427.7","Fp0 xor (p1 & X(p1 W p2))",3,6,15,38,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.595213,3,6,15,38,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:8428.1-8440.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.61483,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8441.1-8463.7","!p1 W XF!p0",2,4,8,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.631299,2,4,8,16,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:8464.1-8481.7","!p0 | Xp2",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.61041,2,3,4,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8482.1-8507.7","(p0 <-> Fp1) & (p2 | Fp0)",3,5,10,30,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.616284,3,5,10,30,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:8508.1-8525.7","G!p0 | Gp0",1,3,4,4,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.652575,1,3,4,4,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8526.1-8545.7","Fp3 | G!p0",2,3,6,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.612114,2,3,6,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8546.1-8558.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.679754,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8559.1-8575.7","FGp1 | Fp2",2,2,4,8,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.636823,2,2,4,8,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:8576.1-8603.7","(!p3 | (!p2 & X!p1)) W X!p0",4,5,13,68,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.657643,4,5,13,68,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:8604.1-8627.7","X(p1 | X(p1 R F!p1))",1,5,8,10,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.59789,1,5,8,10,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:8628.1-8647.7","p0 | X(!p0 & Gp3)",2,4,5,11,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.617203,2,4,5,11,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:8648.1-8666.7","p3 & Fp1",2,3,5,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.682682,2,3,5,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8667.1-8679.7","Gp1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.650416,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8680.1-8708.7","Gp2 R (p0 | F!p1)",3,4,14,32,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.793745,3,4,14,32,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8709.1-8739.7","G(p0 & p2) | ((p1 | Gp0) R !p3)",4,6,14,58,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.594857,4,6,14,58,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:8740.1-8760.7","!p3 R X!p0",2,4,6,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.615143,2,4,6,12,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:8761.1-8776.7","Fp2",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.599615,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:8777.1-8788.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.589815,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8789.1-8824.7","G((!p2 & X(!p2 W !p0)) M F!p3)",3,5,20,40,3,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.08027,3,5,20,40,3,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8825.1-8843.7","G(p3 & ((p3 & Fp0) R p2)) R F!p1",3,2,6,16,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.631678,3,2,6,16,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:8844.1-8863.7","p1 M (p2 R p3)",3,3,6,16,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.591533,3,3,6,16,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8864.1-8891.7","(p2 & Xp3) <-> (p1 & Fp3)",3,6,11,35,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.722032,3,6,11,35,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:8892.1-8908.7","X!p3",1,3,3,5,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.57689,1,3,3,5,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8909.1-8938.7","GFp1 U (Gp2 M p0)",3,5,14,40,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.641894,3,5,14,40,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8939.1-8971.7","(p2 & Xp1) <-> (((p1 & !p3) | (!p1 & p3)) M p0)",4,7,15,76,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.554928,4,7,15,76,1,7,0,0,0
+"./bp_sets/ltl2tgba.hoa:8972.1-8990.7","!p1 | Fp0",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.594666,2,3,5,12,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:8991.1-9003.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.561483,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9004.1-9021.7","p1 & F(!p1 & !p3)",2,3,4,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.565401,2,3,4,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:9022.1-9039.7","p2 | Gp0",2,3,4,9,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.588726,2,3,4,9,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:9040.1-9076.7","Gp3 xor (GFp0 & XXp0)",2,9,18,31,2,8,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.740827,2,9,18,31,2,8,0,0,0
+"./bp_sets/ltl2tgba.hoa:9077.1-9089.7","G!p1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.564977,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9090.1-9108.7","p3 & G(!p0 & (p3 W (!p2 M !p1)))",4,3,5,14,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.603425,4,3,5,14,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:9109.1-9122.7","(p1 & G!p3) R F!p3",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.62458,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9123.1-9142.7","Gp2 M ((p0 & !p2) | (!p0 & p2))",2,3,6,7,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.614942,2,3,6,7,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:9143.1-9156.7","G(!p1 & (p0 U p2))",3,1,2,3,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.613543,3,1,2,3,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9157.1-9174.7","XFp3",1,3,4,6,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.557482,1,3,4,6,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:9175.1-9190.7","F(Gp2 | GFp0)",2,1,4,4,2,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.661038,2,1,4,4,2,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9191.1-9213.7","Xp0 | Gp2",2,5,7,15,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.56506,2,5,7,15,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:9214.1-9237.7","Fp2 & X!p0",2,5,8,16,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.655327,2,5,8,16,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:9238.1-9310.7","p2 | ((p2 & p3) xor (p0 R (((p3 & Gp0) | (!p3 & F!p0)) U Xp1)))",4,15,48,184,1,11,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.807588,4,15,48,184,1,11,0,0,0
+"./bp_sets/ltl2tgba.hoa:9311.1-9325.7","p2 <-> p3",2,2,2,6,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.601058,2,2,2,6,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:9326.1-9351.7","XX(!p3 W X!p1)",2,6,9,22,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.732262,2,6,9,22,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:9352.1-9431.7","p1 M ((Gp3 | FG!p1) M (F!p0 & Fp0))",3,12,57,96,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,1.09403,3,12,57,96,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:9432.1-9443.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.693606,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9444.1-9471.7","((!p1 & !p3) U !p2) | X(p3 & Gp0)",4,6,11,66,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.58187,4,6,11,66,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:9472.1-9564.7","G(!p1 M ((p1 & (!p3 | X(!p3 R XX!p0))) | (!p1 & p3 & X(p3 U XXp0))))",3,21,62,84,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.781283,3,21,62,84,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9565.1-9586.7","p3 | Xp3 | (!p3 & GFp0)",2,4,7,16,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.678904,2,4,7,16,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:9587.1-9601.7","XGp3",1,2,2,3,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.652003,1,2,2,3,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:9602.1-9625.7","Fp1 & !X!p0",2,5,8,16,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.636239,2,5,8,16,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:9626.1-9638.7","G((!p1 & !p2) | (p1 & p2))",2,1,1,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.676865,2,1,1,2,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9639.1-9678.7","F((Gp2 & ((p1 & ((p1 & G(!p0 | X!p0)) | (!p1 & F(p0 & Xp0)))) | (!p1 & ((p1 & F(p0 & Xp0)) | (!p1 & G(!p0 | X!p0)))))) | (F!p2 & ((p1 & ((p1 & F(p0 & Xp0)) | (!p1 & G(!p0 | X!p0)))) | (!p1 & ((p1 & G(!p0 | X!p0)) | (!p1 & F(p0 & Xp0)))))))",2,7,22,28,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.863672,2,7,22,28,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:9679.1-9700.7","p1 U (p3 U Gp0)",3,3,8,17,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.687716,3,3,8,17,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:9701.1-9728.7","p1 & (p3 M (p0 | (!p3 M Fp0)))",3,5,12,36,1,5,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.599413,3,5,12,36,1,5,0,0,0
+"./bp_sets/ltl2tgba.hoa:9729.1-9748.7","(p0 & X!p2) | (!p0 & Xp2)",2,4,5,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.629641,2,4,5,12,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:9749.1-9764.7","Fp3",1,2,3,4,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.652674,1,2,3,4,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:9765.1-9776.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.600144,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9777.1-9795.7","p3 & Fp0",2,3,5,10,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.58408,2,3,5,10,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:9796.1-9809.7","FGp1",1,1,2,2,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.786026,1,1,2,2,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9810.1-9851.7","(!p0 R !p3) | (Fp2 & Xp1)",4,9,22,112,1,9,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.59107,4,9,22,112,1,9,0,0,0
+"./bp_sets/ltl2tgba.hoa:9852.1-9864.7","G!p3",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.544463,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9865.1-9886.7","((p1 & !p3) | (!p1 & p3)) R ((p1 & Fp3) | (!p1 & G!p3))",2,4,7,12,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.577086,2,4,7,12,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:9887.1-9899.7","Gp2",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.601592,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9900.1-9912.7","G!p1",1,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.678704,1,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:9913.1-9943.7","F!p3 | (!p1 R (p2 & X(p2 U Xp2)))",3,6,14,48,1,6,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.612314,3,6,14,48,1,6,0,0,0
+"./bp_sets/ltl2tgba.hoa:9944.1-9962.7","(p2 | !p3) & Fp2",2,3,5,11,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.574152,2,3,5,11,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:9963.1-9999.7","G((p3 M (!p2 | X!p2)) | ((!p3 U (p2 & Xp2)) & G!p3))",2,7,20,20,1,2,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.633803,2,7,20,20,1,2,0,0,0
+"./bp_sets/ltl2tgba.hoa:10000.1-10026.7","FGp0 | (Fp3 W p2)",3,4,12,32,2,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.739027,3,4,12,32,2,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:10027.1-10038.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.552022,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:10039.1-10058.7","Xp3 xor XFp3",1,4,5,7,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.579343,1,4,5,7,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:10059.1-10086.7","G(Fp2 | (!p1 R !p3))",3,4,13,32,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.731338,3,4,13,32,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:10087.1-10108.7","p3 | (G!p1 <-> (p1 & Xp0))",3,4,7,28,1,4,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.630208,3,4,7,28,1,4,0,0,0
+"./bp_sets/ltl2tgba.hoa:10109.1-10121.7","1",0,1,1,1,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.692196,0,1,1,1,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:10122.1-10152.7","F!p1 W (!p2 R p3)",3,5,15,40,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.690247,3,5,15,40,1,3,0,0,0
+"./bp_sets/ltl2tgba.hoa:10153.1-10169.7","FG((!p3 | X!p3) & (p3 | Xp3))",1,2,4,4,1,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.801784,1,2,4,4,1,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:10170.1-10202.7","XXGp3 & (p2 R (p2 U p1))",3,7,15,36,1,7,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.66677,3,7,15,36,1,7,0,0,0
+"./bp_sets/ltl2tgba.hoa:10203.1-10214.7","0",0,1,0,0,0,1,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.616037,0,1,0,0,0,1,0,0,0
+"./bp_sets/ltl2tgba.hoa:10215.1-10233.7","p2 | XF(!p0 & !p2)",2,3,5,12,1,3,0,0,0,"python3 ./main.py -F%H -O%O -L 3 -I -G","ok",0,0.583064,2,3,5,12,1,3,0,0,0

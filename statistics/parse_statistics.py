@@ -31,7 +31,7 @@ def add_output(data_frame, dict):
     intput_sets = data_frame.at['input.acc_sets', 0]
     output_sets = data_frame.at['output.acc_sets', 0]
     dict["Acceptance sets"].append(output_sets)
-    dict["% reduction"].append(np.round(100*output_sets / intput_sets, 1) )
+    dict["% reduction"].append(np.round(100 - (100*output_sets / intput_sets), 1) )
     dict["Time"].append(np.round((data_frame.at['time', 0]), 3))
 
 def to_string(output, mrkdwn):
@@ -49,6 +49,7 @@ def main(argv):
     parser.add_argument("-L1", "--level1", help="CSV file of statistics level1", default=None)
     parser.add_argument("-L2", "--level2", help="CSV file of statistics level1", default=None)
     parser.add_argument("-L3", "--level3", help="CSV file of statistics level1", default=None)
+    parser.add_argument("-G", "--gradual", help="CSV file of statistics G", default=None)
     parser.add_argument("-O", "--outfile", help="File to print output to.", default=None)
 
     args = parser.parse_args()
@@ -81,8 +82,16 @@ def main(argv):
         if not added_input:
             add_input(level3, dict)
             added_input = True
-        add_output(level2, dict)
+        add_output(level3, dict)
         indices.append("Level3")
+        
+    if args.level3:
+        g = parse_csv(args.gradual)
+        if not added_input:
+            add_input(g, dict)
+            added_input = True
+        add_output(g, dict)
+        indices.append("Multilevel")
 
     df = pd.DataFrame(dict,
                     index =indices)
