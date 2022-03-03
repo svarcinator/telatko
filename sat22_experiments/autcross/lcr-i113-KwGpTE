@@ -1,0 +1,30 @@
+HOA: v1
+name: "Automaton for ((F(G(!a1))) | (F(G(!a2))) | (F(G(!a3))) | (F(G(!a4))) | (G(F(z))))"
+States: 4
+Start: 0
+AP: 5 "a2" "z" "a1" "a3" "a4"
+Acceptance: 5 (Fin(0)|Fin(1)|Fin(2)|Fin(3)) | Inf(4)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[1&!2] 0 {1 2 3 4}
+[1&2] 1 {0 1 2 3 4}
+[!1&2] 1 {0 1 2 3}
+[!1&!2] 0 {1 2 3}
+State: 1
+[0&1] 2 {1 2 3 4}
+[!0&1] 1 {1 2 3 4}
+[!0&!1] 1 {1 2 3}
+[0&!1] 2 {1 2 3}
+State: 2
+[1&!3] 2 {1 2 3 4}
+[!1&3] 3 {1 2 3}
+[!1&!3] 2 {1 2 3}
+[1&3] 3 {1 2 3 4}
+State: 3
+[1&4] 0 {1 2 3 4}
+[!1&!4] 3 {1 2 3}
+[!1&4] 0 {1 2 3}
+[1&!4] 3 {1 2 3 4}
+--END--

@@ -1,0 +1,23 @@
+HOA: v1
+name: "Automaton for G(((F(p0)) | (F(G(p1))) | (F(G(((p0) | (X(p1))))))))"
+States: 3
+Start: 0
+AP: 2 "p0" "p1"
+Acceptance: 3 (Fin(0)|Fin(1)) | Inf(2)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[0&!1] 1 {0 1 2}
+[!0&!1] 2 {0 1}
+[0&1] 0 {1 2}
+[!0&1] 0 {1}
+State: 1
+[0] 1 {1 2}
+[!0] 2 {1}
+State: 2
+[0&1] 1 {1 2}
+[!0&1] 2 {1}
+[0&!1] 0 {1 2}
+[!0&!1] 0 {1}
+--END--
