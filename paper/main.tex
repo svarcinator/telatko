@@ -108,7 +108,7 @@
   state-of-the-art tools Delag, ltl3tela, Rabinizer~4, and Spot. The
   technique reduced some acceptance marks in automata produced by all
   these tools. In the case of Rabinizer~4, the cumulative number of
-  acceptance marks was reduced to less than one half.
+  acceptance marks was reduced to less than one half. \todo{Sazet ltl3tela a jine tooly vsude jako \texttt{ltl3tela} apod?}
 \end{abstract}
 
 %}}}
@@ -763,9 +763,24 @@ The formula $\mcycle_3(\vec{e})$ is defined as follows.
   \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge \neg s_p\wedge s_q\big)
 \end{align*}
 
-\subsection{Optimizations}
+\subsection{SCC-based optimization}
+
+Now we present a formula optimization based on the fact that every
+cycle is completely included in the transition set $\delta_S$ of some
+SCC $S$. Note that we cannot reduce the number of acceptance marks in
+each SCC separately as all SCCs have to share one acceptance formula.
+However, for each SCC we can build a $\Phi_{C,K}$ formula separately and
+then we can put all these formulas into one conjunction such that they
+share the variables $\vec{i},\vec{f}$.
 
 \todo{Honza je tu!} 
+
+For a given automaton $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$, we first
+compute all SCCs. Each SCC $S$ induces an automaton $(S,M,\Sigma,q',\delta_S,\varphi)$, where $q'$ is an arbitrary state
+of $S$. 
+
+
+the optimization saying that So far, we have not use the fact that each cycle is A 
 
 SCC-based approach
 
