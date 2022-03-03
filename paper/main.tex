@@ -991,24 +991,17 @@ numbers of its successful responses within 30 seconds limit and timeouts).
 \input{table-data.tex}
 \end{table}
 
-%\begin{tikzpicture}
-%\begin{axis}[
-%	ymode=log,
-%	height=5cm,
-%	width=10cm,
-%	grid=major,
-%]
-%\addplot coordinates {
-%	(1, 0.3)
-%	(2, 0.8)
-%	(3, 1.5)
-%	(4, 2.7)
-%	(5, 3.9)
-%	(6, 4.1)
-%};
-%\addlegendentry{Delag}
-%\end{axis}
-%\end{tikzpicture}
+Looking at Figure~\ref{fig:quantile}, we ascertain that for every set, the
+reduction of most automata takes under a second.
+
+\begin{figure}[h]
+\caption{Performance of \telatko on different automata sets. The $x$ axis
+represents the number of reduced automata, the $y$ axis shows the time spent
+reducing (in seconds).}
+\label{fig:quantile}
+\centering
+\input{quantile.tex}
+\end{figure}
 
 Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
 automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
