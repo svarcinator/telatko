@@ -234,11 +234,13 @@ such a reduction is not obvious.
 \paragraph*{Structure of the paper} The next section introduces basic
 terms used in the paper. Section~\ref{sec:qbf} explains the
 construction of three mentioned QBF formulas. The reduction algorithm
-based on these formulas is described together with its implementation
-in Section~\ref{sec:algimpl}. Section~\ref{sec:experiments} shows the
-experimental results. Finally, Section~\ref{sec:conclusion} suggests
-other applications of our QBF-based reduction technique and closes the
-paper.
+based on these formulas is presented in
+Section~\ref{sec:algo}. Section~\ref{sec:implementation} describes our
+tool \telatko implemening the reduction technique.
+Experimental results are shown in
+Section~\ref{sec:experiments}. Finally, Section~\ref{sec:conclusion}
+suggests other applications of our QBF-based reduction technique and
+closes the paper.
 
 %}}}
 %{{{ preliminaries
@@ -775,9 +777,9 @@ $\xi_1(\vec{i},\vec{f})$ can be safely omitted, but it speeds up the QBF solving
 
 
 %}}}
-%{{{ algorithm and implementation
+%{{{ algorithm
 
-\section{Reduction algorithm and its implementation}\label{sec:algimpl}
+\section{Reduction algorithm}\label{sec:algo}
 Jak se nastavuji inicialni parametry a jak postupne klesaji.
 Jak prechazim od nizsich levelu k vyssim.
 Vyuzivame incremental QBF solving?
@@ -877,10 +879,11 @@ For simplicity, we do not display letters on the edges of the automata in Figure
     \todo{Pozor, prvni klauzule v levelu 2 je trash!}}
   \label{fig:example}
 \end{figure}
-%}}}
-%{{{ algorithm and implementation
 
-\section{Reduction algorithm and its implementation}\label{sec:algimpl}
+%}}}
+%{{{ implementation
+
+\section{Implementation}\label{sec:implementation}
 
 The presented reduction algorithms have been implemented in a tool called
 \telatko. It uses the Spot library~\cite{duret.16.atva2} for automata parsing
@@ -891,9 +894,7 @@ we use several tools from the Spot library, i.e. \texttt{genltl},
 to generate, simplify and translate LTL formulas and to compare and simplify
 automata. \telatko is implemented in Python.
 
-Jak se nastavuji inicialni parametry a jak postupne klesaji.
-Jak prechazim od nizsich levelu k vyssim.
-Vyuzivame incremental QBF solving?
+\todo{Jake parametry ten tool ma? Co potrebuje k behu? Kde je dostupny? Pod jakou licenci?}
 
 %}}}
 %{{{ experimental evaluation 
