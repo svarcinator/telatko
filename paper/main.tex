@@ -870,8 +870,24 @@ acceptance condition with 0 clauses is $\false$ and this case is
 treated at the beginning of the procedure. Finally, if the procedure
 succeeds to reduce the number of marks or clauses, if constructs the
 modified automaton. Otherwise, it returns the original automaton.
-\todo{do sekce o implementaci napsat, ze namisto opakovaneho budovani
-  $\Phi_{j,C,K}$ puzivame inkrementalni pristup.}
+
+Note that the algorithm can be also reformulated to use an incremental
+approach instead of building a new formula $\Phi$ in each iteration.
+The incremental version of the first \textbf{while} loop builds the formula
+$\Phi=\Phi^\mathit{opt}_{j,C,K{-}1}$ only in the first iteration. In
+each subsequent iteration, it extends the formula with a condition
+saying that one more mark is not used in the automaton, i.e., the mark
+is neither on edges, nor in the acceptance formula. For example, if we
+want to say that mark $k\in N_K$ is not used in the automaton, we replace
+$\Phi$ by
+\[
+  \Phi~\wedge~\bigwedge_{t\in\delta}\neg n_{t,k}~\wedge\bigwedge_{c\in\{1,2,\ldots C\}}(\neg i_{c,k}\wedge\neg f_{c,k}).
+\]
+The second \emph{while} can transformed to an incremental version in a
+similar way. The advantage of the incremental approach comes from the
+fact that some QBF solvers can decide an extended formula faster as
+they profit from the information computed when solving the original
+formula.
 
 \begin{figure}[t]
   \centering
@@ -931,9 +947,9 @@ modified automaton. Otherwise, it returns the original automaton.
   \end{tikzpicture}
   \smallskip
   
-  \caption{An example illustrating the results of the three basic
-    reduction levels: an input automaton and the automata
-    obtained by reduction of level 1, level 2, and level 3.}
+  \caption{An example illustrating the results of the three
+    single-level reductions: an input automaton $\mA$ and the automata
+    obtained by reducing it with level 1, level 2, and level 3.}
   \label{fig:example}
 \end{figure}
 
@@ -972,7 +988,9 @@ application of the three levels, see Algorithm~\ref{alg:multi}.
 The presented reduction algorithms have been implemented in a tool called
 \telatko. It uses the Spot library~\cite{duret.16.atva2} for automata parsing
 and manipulation, and the Z3 Theorem Prover~\cite{demoura.08.tacas} to solve
-the satisfiability of QBF formulas. \telatko is implemented in Python.
+the satisfiability of QBF formulas. \telatko is implemented in Python
+and has a CLI interface which allows users to specify details about a run. The tool expects file containing automata in HOA format ~\cite{babiak.15.cav} and processes the input file, the result is saved in the specified output file again in HOA format. If there is no output file given, \telatko prints the result to $\mathit{stdout}$. 
+The switch \texttt{-L} specifies the level of simplification, \texttt{-I} turns on the incremental solving and \texttt{-T} specifies the timeout of Z3-solver in seconds. The default settings is the incremental version of \emph{multi-level} (see Algorithm~\ref{alg:multi}).
 
 \todo{Jake parametry ten tool ma? Co potrebuje k behu? Kde je dostupny? Pod jakou licenci?}
 
