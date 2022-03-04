@@ -153,9 +153,11 @@ often use less states than equivalent automata with simpler acceptance
 conditions. Further, algorithms handling TELA can automatically handle
 all automata with traditional acceptance conditions. TELA can
 be obtained for example by translating LTL formulas by
-Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
-Rabinizer~4~\cite{kretinsky.18.cav}, or
-Spot~\cite{duret.16.atva2}. There are also some algorithms processing
+\texttt{ltl2dela} (known as Delag)~\cite{muller.17.gandalf}),
+\texttt{ltl3tela}~\cite{major.19.atva},
+\texttt{ltl2dgra} (known as Rabinizer~4)~\cite{kretinsky.18.cav},
+or \texttt{ltl2tgba} which is a part of the Spot library~\cite{duret.16.atva2}.
+There are also some algorithms processing
 these automata, for example the emptiness check~\cite{baier.19.atva}
 or translation of TELA to parity
 automata~\cite{renkin.20.atva,casares.22.tacas}.
@@ -199,9 +201,8 @@ We have implemented our reduction technique in a tool called
 automata produced by Delag~\cite{muller.17.gandalf},
 ltl3tela~\cite{major.19.atva}, Rabinizer~4~\cite{kretinsky.18.cav},
 and Spot~\cite{duret.16.atva2}.  While the reduction is relatively
-modest for TELA produced by ltl3tela and Spot, it is substantial for
-automata produced by Rabinizer~4. \todo{A jak vyjde Delag? Fixnout i
-  Abstract.}
+modest for TELA produced by \texttt{ltl3tela} and Spot,
+it is substantial for automata produced by tools of the Owl library.
 
 \paragraph*{Related results}
 There is a simple technique~\cite{babiak.13.spin} reducing the number
@@ -1060,10 +1061,10 @@ and the number of successfully translated formulas.}
 \toprule
 tool        & version&homepage & automata \\
 \midrule
-\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 89\\
-\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 108\\
 \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 162\\
 \texttt{ltl2dgra} & 21.0 & & 274\\
+\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 89\\
+\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 108\\
 \bottomrule
 \end{tabular}
 \end{table}
