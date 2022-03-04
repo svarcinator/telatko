@@ -218,7 +218,7 @@ the number of states of automata over infinite words. More preceisely,
 there are reductions designed for nondeterministic Büchi
 automata~\cite{ehlers.10.spin}, deterministic Büchi
 automata~\cite{ehlers.10.sat}, and deterministic generalized Büchi
-automata~\cite{baarir.14.forte}. Note that all these techniques are
+automata~\cite{baarir.14.forte}. Note that these techniques are
 usually very slow and their authors typically suggest to use them only
 for specific purposes like looking for cases where some automata
 construction can be improved.
@@ -1014,44 +1014,52 @@ where
 
 \section{Experimental evaluation}\label{sec:experiments}
 
-We have used the tool \texttt{genltl} from Spot to generate LTL formulas
-from literature and from scalable patterns. Using the values from 1 to 5 for
-the parametrized formulas, we have generated 407 unique LTL formulas. These
-have been translated to deterministic or nondeterministic TELA using four
-state-of-the-art translators \texttt{ltl2tgba} (from the Spot library),
-\texttt{ltl3tela}, \texttt{ltl2dela} (known as Delag), and \texttt{ltl2dgra}
-(known as Rabinizer 4). The generated automata sets contain less than 407
-automata as not all of the formulas are successfully translated due to timeouts.
-We have also removed automata with 0 or 1 acceptance marks as there is little
-point reducing these.
-Table \ref{tab:ltltranslators} shows the exact versions, the homepage of the
-used tools and the number of automata produced by the given tool from
-the LTL formulas after filtering.
+We have used the tool \texttt{genltl} of the Spot
+library~\cite{duret.16.atva2} to generate LTL formulas from
+literature. The parametrized formulas were generated for all
+combinations of parameter values from 1 to 5. Altogether, we have
+generated 407 unique LTL formulas. These have been translated to
+deterministic TELA by two state-of-the-art translators from the Owl
+library~\cite{kretinsky.18.atva} and to nondeterministic TELA by
+another two state-of-the-art translators, namely \texttt{ltl2tgba}
+from the Spot library~\cite{duret.16.atva2}) and
+\texttt{ltl3tela}~\cite{major.19.atva}. Each of the four automata sets
+produced by individual tools contain less than 407 automata as not all
+of the formulas are successfully translated due to timeout of 60
+seconds. Further, we have removed automata with 0 or 1 acceptance
+marks as there is little point reducing these. Table
+\ref{tab:ltltranslators} shows the exact versions of used translators,
+the homepage of the used tools and the number of automata produced by
+the given tool from the LTL formulas after filtering.
 
-We have used multiple other helper tools in the experimental evaluation.
-Alongside \texttt{genltl}, we have used \texttt{ltlfilt} to simplify the
-formulas and to remove duplicates, and \texttt{autcross} to compare automata and
-measure the running times.
+We have used multiple other helper tools in the experimental
+evaluation.  Alongside \texttt{genltl}, we have used \texttt{ltlfilt}
+to simplify the formulas and to remove duplicates, and
+\texttt{autcross} to compare automata and measure the running times.
 
-Spot version 2.10.4 and Z3 version 4.8.13 have been used in the experimental
-evaluation.
+Spot version 2.10.4 and Z3 version 4.8.13 have been used in the
+experimental evaluation.
 
-For each automata set (that is, the output of individual LTL translator), we
-have run \telatko with various reduction levels, always with the incremental
-solving turned on. We have again filtered out the automata for which any run
-of \telatko timed out after 120 seconds. We do this to make sure the numbers
-of acceptance marks can be meaningfully compared between different reduction
-levels of the same automata set.
+For each automata set (that is, the output of an individual LTL
+translator), we have applied all single-level reductions and the
+multi-level reduction, always with incremental approach and without
+reduction of the number of clauses. The timeout for each QBF query was
+set to 30 seconds. We have again filtered out the automata for which
+any of the four \telatko runs timed out after 120 seconds. We do this
+to make sure the numbers of acceptance marks can be meaningfully
+compared between different reduction levels of the same automata set.
 
-Table~\ref{tab:cumm-data} shows the number of marks in the input sets and after
-each reduction level, together with the reduction ratio and time spent by the
-individual reduction level. The columns \textit{solver response} and
-\textit{solver timeout} show the number of automata for which the last query to
-QBF solver has been successfully answered, or the solver timed out within a 30
-seconds limit to a single query, respectively. An unanswered QBF formula (i.e.
-the solver timed out) is considered unsatisfiable.
+Table~\ref{tab:cumm-data} shows the cummulative numbers of marks in
+the input automata sets and after each reduction, together with the
+reduction ratio and total time spent by the considered reduction. The
+columns \textit{solver response} and \textit{solver timeout} show the
+number of automata for which the last query to QBF solver has been
+successfully answered, or the solver timed out within a 30 seconds
+limit to a single query, respectively. The timeout of the last QBF
+query implies that the automaton could be potentially further reduced
+by the reduction with a longer time limit.
 
-\begin{table}[h]
+\begin{table}[b]
 \caption{LTL to automata translators used for the experimental evaluation
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
@@ -1082,14 +1090,17 @@ numbers of its successful responses within 30 seconds limit and timeouts).
 \input{table-data.tex}
 \end{table}
 
-Table~\ref{tab:heatmap} shows the number of automata coming from all four sets
-for every input and output number of acceptance marks. The results of the
-multi-level reduction technique are presented. The table indicates that in most
-cases only 1 or 2 marks can be saved. However, some of the automata with
-more than 7 acceptance marks could be, in theory, probably reduced more as
-the query to the QBF solver mostly remains unanswered in the time limit.
-Moreover, some of the results are promising, e.g. in 17 cases, we have
-successfully reduced 8 or more acceptance marks to only 4.
+Table~\ref{tab:heatmap} shows the number of automata coming from all
+four sets that have a given number of original acceptance marks and a
+given number of acceptance marks after multi-level reduction. The
+table indicates that in many cases only 1 or 2 marks can be
+saved. However, the achieved reduction is substantial for some
+automata with a higher number of original acceptance marks. For
+example, in 17 cases, we have successfully reduced 8 or more
+acceptance marks to only 4. 
+% Moreover, there were many timeouts of the last QBF query for manof these automata.
+% Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
+% reduced 8 or more acceptance marks to only 4.
 
 \begin{table}[t]
 \caption{The effect of reduction.
@@ -1103,10 +1114,11 @@ solver has not been answered in the time limit.}
 \input{table-heatmap.tex}
 \end{table}
 
-Figure~\ref{fig:quantile} presents the time spent by reducing the individual
-automata sets. The chart shows a pleasing finding that for every set, most
-automata are reduced in under a second and the high cummulative running times
-are caused by few complicated automata.
+Figure~\ref{fig:quantile} presents the time spent by multi-level
+reduction of automata in individual automata sets. The chart shows a
+pleasing finding that for every set, most automata are reduced in
+under a second and the high cummulative running times are caused by
+few complicated automata.
 
 \begin{figure}[h]
 \caption{Performance of \telatko on different automata sets. The $x$ axis
@@ -1117,16 +1129,16 @@ reducing (in seconds).}
 \input{quantile.tex}
 \end{figure}
 
-Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
-automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
-redukce?  (zvysovat timeout od 1s do 50s a vzdy ukazat miru
-redukce). Ty redukce ukazovat nejak jinak nez jen celkovym cislem
-(boxplot? Scatterplot?).
+% Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
+% automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
+% redukce?  (zvysovat timeout od 1s do 50s a vzdy ukazat miru
+% redukce). Ty redukce ukazovat nejak jinak nez jen celkovym cislem
+% (boxplot? Scatterplot?).
 
-Zkusit upravit redukci tak, aby vysledkem bylo TGBA a zkusit dale
-redukovat akceptacni znacky TGBA automatu redukovanych Spotem?
+% Zkusit upravit redukci tak, aby vysledkem bylo TGBA a zkusit dale
+% redukovat akceptacni znacky TGBA automatu redukovanych Spotem?
 
-Chceme ukazovat, ze redukce znacek muze nekdy umoznit dalsi redukci stavu?
+% Chceme ukazovat, ze redukce znacek muze nekdy umoznit dalsi redukci stavu?
 
 %}}}
 %{{{ conclusion
