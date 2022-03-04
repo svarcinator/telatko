@@ -25,6 +25,7 @@
 \usepackage[table]{xcolor}
 %\usepackage{arydshln}
 %\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+\usepackage[noend]{algorithm2e}
 
 \usepackage{tikz}
 % TikZ libraries
@@ -802,46 +803,81 @@ $\mks(\rem(t))=\emptyset$.
 %{{{ algorithm
 
 \section{Reduction algorithm}\label{sec:algo}
-Jak se nastavuji inicialni parametry a jak postupne klesaji.
-Jak prechazim od nizsich levelu k vyssim.
-Vyuzivame incremental QBF solving?
 
-\todo{Nasleduje stary text, ale pozor, obrazek je novy!}
-Now we describe our simplification algorithm taking as input an arbitrary TELA $\mathcal{A}$ with an acceptance condition $\psi$, required level of simplification $L$ and timeout period $T$.
-\begin{enumerate}
-    \item Convert acceptance condition $ \psi$ to DNF.
-    \item Apply the algorithm for simplification Level 1 described in Section \ref{sec:standard} on $\mathcal{A}$.
-    \item If $L = 1$ return automaton $\mathcal{A}$.
-     \item The initial value of $C$ is the number of clauses in $\psi$. Similarly, the initial value of $K$ is the number of acceptance sets of $\psi$ decreased by 1.
-    \item Encode $\mathcal{A}$ into QBF formula $\varphi$ according to the required level of simplification $L$.
-    \item Run a QBF-solver on $\varphi$ for $T$ seconds.
-    \begin{enumerate}
-        \item If the QBF-solver evaluates $\varphi$ as UNSAT, return automaton $\mathcal{A}'$.
-        \item If the timeout $T$ expires before the QBF-solver evaluates $\varphi$, return automaton $\mathcal{A}'$.
-        \item If the QBF-solver evaluates $\varphi$ as SAT. Decode the assignment into next TELA $\mathcal{A}'$.
-        \begin{enumerate}
-            \item If $K=1$, try to reduce $\varphi$ to $\true$ or $\false$, the simplest form of acceptance condition and return $\mathcal{A}$.
-            \item Decrease $K$ by 1 and go to (b).
-        
-    \end{enumerate}
-        
-    \end{enumerate}
-\end{enumerate}
+This section explains how we use the QBF formulas constructed in the
+previous section to reduce the number of acceptance marks in TELA
+automata. First we describe a \emph{single-level} reduction, which
+uses only a single kind of QBF formulas. More precisely, we talk about
+\emph{level~1} reduction if $\Phi^\mathit{opt}_{1,C,K}$ is
+used. Analogously, we talk about \emph{level~2} and \emph{level~3}
+reduction when $\Phi^\mathit{opt}_{2,C,K}$ or
+$\Phi^\mathit{opt}_{3,C,K}$ is used, respectively.
 
-\todo{kde je optimalni misto, kam napsat:}
-For simplicity, we do not display letters on the edges of the automata in Figures. We can afford to omit them because they are not important for our simplification techniques. 
+\begin{algorithm}[t]
+  \DontPrintSemicolon
+  \SetKwFunction{FextendBackward}{extendBackward}
+  \SetKwProg{PI}{Procedure}{}{}
+  \PI{$\mathit{SingleLevelReduction}(\mA,j,\mathit{reduceC})$}{
+    \KwIn{TELA $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$, level $j\in\{1,2,3\}$, $\mathit{reduceC}\in\{\true,\false\}$}
+    \KwOut{an equivalent TELA with the same structure as $\mA$ and with at most as many acceptance marks as in $\mA$} %with the same or lower number of acceptance~marks}
+    \;
+    \If{$L(\mA)=\emptyset$}{
+%      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'=\{(p,a,\emptyset,q)\mid(p,a,M',q)\in\delta\}$
+      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all acceptance marks removed
+    }
+    $C_\mA\gets$ the number of clauses in the acceptance formula of $\mA$ transformed to DNF\;
+    $K_\mA\gets$ the number of acceptance marks in $\mA$\;
+    $C\gets C_\mA$\;
+    $K\gets K_\mA$\;
+    $\mathit{stop}\gets\false$\;
+    \While{$\neg\mathit{stop}~\wedge~K>0$}{
+      $\Phi\gets\Phi^\mathit{opt}_{j,C,K{-}1}$ for $\mA$\;
+      \leIf{$\mathit{satisfiable}(\Phi)$}{$K\gets K{-}1$}{$\mathit{stop}\gets\true$}
+    }
+    \If{$\mathit{reduceC}$}{
+      $\mathit{stop}\gets\false$\;
+      \While{$\neg\mathit{stop}~\wedge~C>1$}{
+        $\Phi\gets\Phi^\mathit{opt}_{j,C-1,K}$ for $\mA$\;
+        \leIf{$\mathit{satisfiable}(\Phi)$}{$C\gets C{-}1$}{$\mathit{stop}\gets\true$}
+      }
+    }
+    \eIf{$K=K_\mA~\wedge~C=C_\mA$}{
+      \KwRet $\mA$
+    }{
+      compute $\rem$ and $\psi$ from a model of $\Phi^\mathit{opt}_{j,C,K}$\;
+      \KwRet $(Q,N_K,\Sigma,q_I,\rem(\delta),\psi)$
+    }
+  }\;
+  \caption{The single-level reduction procedure}
+  \label{alg:single}
+\end{algorithm}
 
-\begin{itemize}
-\item obecny popis konstrukce formule
-\item (level 3)
-\item level 4
-\end{itemize}
+The reduction procedure is given in Algorithm~\ref{alg:single}. Besides
+the reduction of acceptance marks, the algorithm also reduces the
+number of clauses in acceptance formula if the last argument
+$\mathit{reduceC}$ is set to $\true$. In the first step, the procedure
+checks whether the input automaton represents the empty language and
+if this is the case, it returns the same automaton with acceptance
+conditon $\false$ and with all acceptance marks removed. Otherwise it
+gradually decreases the number of marks until 0 is reached or the QBF
+solver behind the function $\mathit{satisfiable}(\Phi)$ fails to
+reduce the number of marks, i.e., it claims unsatisfiability of $\Phi$
+or it runs out of resources. In the next step, if $\mathit{reduceC}$
+is set to $\true$ then the procedure gradually reduces the number of
+clauses. It stops if no equivalent automaton with less clauses is
+found or the number of clauses is reduced to one. Note that the
+acceptance condition with 0 clauses is $\false$ and this case is
+treated at the beginning of the procedure. Finally, if the procedure
+succeeds to reduce the number of marks or clauses, if constructs the
+modified automaton. Otherwise, it returns the original automaton.
+\todo{do sekce o implementaci napsat, ze namisto opakovaneho budovani
+  $\Phi_{j,C,K}$ puzivame inkrementalni pristup.}
 
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[smallautomaton]
     \begin{scope}[initial angle=90,xshift=-3.5cm]
-      \node (l) at (1,1.3) {input:};
+      \node (l) at (1,1.3) {automaton $\mA$};
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (2,0) {};
       \path[->,auto]
@@ -851,10 +887,10 @@ For simplicity, we do not display letters on the edges of the automata in Figure
       (q) edge[out=-150,in=-30] pic {acc={3}{3}} pic {l=$d$} (p);
 
       \node[acclabel] at (1,-1.4)
-      {\small$(\Fin\tacc{1}{1}\wedge\Inf\tacc{2}{2})\vee(\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Inf\tacc{3}{3})$};
+      {$(\Fin\tacc{1}{1}\wedge\Inf\tacc{2}{2})\vee(\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Inf\tacc{3}{3})$};
     \end{scope}
     \begin{scope}[initial angle=90,xshift=3.5cm]
-      \node (l) at (1,1.3) {level 1:};
+      \node (l) at (1,1.3) {$\mathit{SingleLevelReduction}(\mA,1,\true)$}; %{level 1:};
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (2,0) {};
       \path[->,auto]
@@ -864,10 +900,10 @@ For simplicity, we do not display letters on the edges of the automata in Figure
       (q) edge[out=-150,in=-30] pic {acc={1}{1}} pic {l=$d$} (p);
 
       \node[acclabel] at (1,-1.4)
-      {\small$(\Fin\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Fin\tacc{2}{2})\vee(\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Inf\tacc{2}{2})$};
+      {$\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Inf\tacc{2}{2}$};
     \end{scope}
     \begin{scope}[initial angle=90,xshift=-3.5cm,yshift=-4cm]
-      \node (l) at (1,1.3) {level 2:};
+      \node (l) at (1,1.3) {$\mathit{SingleLevelReduction}(\mA,2,\true)$}; %{level 2:};
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (2,0) {};
       \path[->,auto]
@@ -877,10 +913,10 @@ For simplicity, we do not display letters on the edges of the automata in Figure
       (q) edge[out=-150,in=-30] pic {acc={1}{1}} pic {l=$d$} (p);
 
       \node[acclabel] at (1,-1.4)
-      {\small$(\Fin\tacc{0}{0}\wedge\Inf\tacc{1}{1})\vee(\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1})$};
+      {$\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}$};
     \end{scope}
     \begin{scope}[initial angle=90,xshift=3.5cm,yshift=-4cm]
-      \node (l) at (1,1.3) {level 3:};
+      \node (l) at (1,1.3) {$\mathit{SingleLevelReduction}(\mA,3,\true)$}; %{level 3:};
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (2,0) {};
       \path[->,auto]
@@ -890,17 +926,43 @@ For simplicity, we do not display letters on the edges of the automata in Figure
       (q) edge[out=-150,in=-30] pic {l=$d$} (p);
 
       \node[acclabel] at (1,-1.4)
-      {\small$\Fin\tacc{0}{0}$};
+      {$\Fin\tacc{0}{0}$};
     \end{scope}
   \end{tikzpicture}
   \smallskip
   
   \caption{An example illustrating the results of the three basic
     reduction levels: an input automaton and the automata
-    obtained by reduction of level 1, level 2, and level 3.
-    \todo{Pozor, prvni klauzule v levelu 2 je trash!}}
+    obtained by reduction of level 1, level 2, and level 3.}
   \label{fig:example}
 \end{figure}
+
+Figure~\ref{fig:example} shows a very simple automaton $\mA$ and the
+three automata produced by calls of
+$\mathit{SingleLevelReduction}(\mA,j,\true)$ for $j\in\{1,2,3\}$. The
+figure clearly illustrates that the higher level of reduction we use,
+the more acceptance marks can be reduced. On the other side, lower
+levels are typically faster. The best results can be often achieved by
+combining reductions of all levels. We call this aproach
+\emph{multi-level} reduction. It is a straightforward sequential
+application of the three levels, see Algorithm~\ref{alg:multi}.
+
+\begin{algorithm}[t]
+  \DontPrintSemicolon
+  \SetKwFunction{FextendBackward}{extendBackward}
+  \SetKwProg{PI}{Procedure}{}{}
+  \PI{$\mathit{MultiLevelReduction}(\mA,\mathit{reduceC})$}{
+    \KwIn{TELA $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$ and $\mathit{reduceC}\in\{\true,\false\}$}
+    \KwOut{an equivalent TELA with the same structure as $\mA$ and with at most as many acceptance marks as in $\mA$} %with the same or lower number of acceptance~marks}
+    \;
+    $\mA\gets\mathit{SingleLevelReduction}(\mA,1,\mathit{reduceC})$\;
+    $\mA\gets\mathit{SingleLevelReduction}(\mA,2,\mathit{reduceC})$\;
+    $\mA\gets\mathit{SingleLevelReduction}(\mA,3,\mathit{reduceC})$\;
+    \KwRet $\mA$
+  }\;
+  \caption{The multi-level reduction procedure}
+  \label{alg:multi}
+\end{algorithm}
 
 %}}}
 %{{{ implementation
