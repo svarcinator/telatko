@@ -988,11 +988,8 @@ application of the three levels, see Algorithm~\ref{alg:multi}.
 The presented reduction algorithms have been implemented in a tool called
 \telatko. It uses the Spot library~\cite{duret.16.atva2} for automata parsing
 and manipulation, and the Z3 Theorem Prover~\cite{demoura.08.tacas} to solve
-the satisfiability of QBF formulas. Moreover, in the experimental evaluation
-we use several tools from the Spot library, i.e. \texttt{genltl},
-\texttt{ltlfilt}, \texttt{ltl2tgba}, \texttt{autcross} and \texttt{autfilt},
-to generate, simplify and translate LTL formulas and to compare and simplify
-automata. \telatko is implemented in Python and has a CLI interface which allows users to specify details about a run. The tool expects file containing automata in HOA format ~\cite{babiak.15.cav} and processes the input file, the result is saved in the specified output file again in HOA format. If there is no output file given, \telatko prints the result to $\mathit{stdout}$. 
+the satisfiability of QBF formulas. \telatko is implemented in Python
+and has a CLI interface which allows users to specify details about a run. The tool expects file containing automata in HOA format ~\cite{babiak.15.cav} and processes the input file, the result is saved in the specified output file again in HOA format. If there is no output file given, \telatko prints the result to $\mathit{stdout}$. 
 The switch \texttt{-L} specifies the level of simplification, \texttt{-I} turns on the incremental solving and \texttt{-T} specifies the timeout of Z3-solver in seconds. The default settings is the incremental version of \emph{multi-level} (see Algorithm~\ref{alg:multi}).
 
 \todo{Jake parametry ten tool ma? Co potrebuje k behu? Kde je dostupny? Pod jakou licenci?}
@@ -1015,6 +1012,11 @@ point reducing these.
 Table \ref{tab:ltltranslators} shows the exact versions, the homepage of the
 used tools and the number of automata produced by the given tool from
 the LTL formulas after filtering.
+
+We have used multiple other helper tools in the experimental evaluation.
+Alongside \texttt{genltl}, we have used \texttt{ltlfilt} to simplify the
+formulas and to remove duplicates, and \texttt{autcross} to compare automata and
+measure the running times.
 
 Spot version 2.10.4 and Z3 version 4.8.13 have been used in the experimental
 evaluation.
@@ -1086,8 +1088,10 @@ solver has not been answered in the time limit.}
 \input{table-heatmap.tex}
 \end{table}
 
-Looking at Figure~\ref{fig:quantile}, we ascertain that for every set, the
-reduction of most automata takes under a second.
+Figure~\ref{fig:quantile} presents the time spent by reducing the individual
+automata sets. The chart shows a pleasing finding that for every set, most
+automata are reduced in under a second and the high cummulative running times
+are caused by few complicated automata.
 
 \begin{figure}[h]
 \caption{Performance of \telatko on different automata sets. The $x$ axis
