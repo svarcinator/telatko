@@ -1137,19 +1137,19 @@ Chceme ukazovat, ze redukce znacek muze nekdy umoznit dalsi redukci stavu?
 
 We have presented a QBF-based method that reduces the number of
 acceptance marks in transition-based Emerson-Lei automata. The method
-has ben implemented and our experimental results show that
+has been implemented and our experimental results show that it is possible
+to use the QBF solvers to find equivalent acceptance conditions of TELA
+without changes to their structure.
+The reduction of acceptance marks is not the only purpose of the approach,
+one could possibly look for e.g. equivalent parity automata or automata without
+$\Fin$-marks, depending on the subsequent use of the automata.
+Even though the QBF queries can be time-consuming, in practice it can be well
+used and one can find a good trade-off between speed and efficiency by setting
+a reasonable timeout.
 
-chceme sem napsat, ze QBF-based reduction se da pouzit napr. k
-nalezeni akceptacni formule s $c$ klauzulemi a $m$ znackami v CNF,
-pripadne k nalezeni ekvivalentniho paritniho automat s danou maximalni
-paritou $p$ a stejnou strukturou. Nebo zkusit nalezt $\Fin$-less
-acceptance formuli.
-
-Redukce netrva vecne, da se prakicky pouzit a zkracenim timeoutu na
-QBF-solver se da zrychlit (tradeoff s ucinnosti). Prinejmensim u
-Rabinizeru 4 je velmi dobra sance, ze se to vyplati. Pridat do
-experimentu nejaky graf, ktery ukaze, jak rychle se nektere automaty
-redukovaly na minimum?
+In the future work, it could be examined how the reductions of the acceptance
+condition can contribute to further reduction of the state space by enabling
+various optimizations, e.g. simulations.
 
 %}}}
 
