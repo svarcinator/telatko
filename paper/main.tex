@@ -151,7 +151,7 @@ TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
 often use less states than equivalent automata with simpler acceptance
 conditions. Further, algorithms handling TELA can automatically handle
-all automata with traditional acceptance conditions. TELA automata can
+all automata with traditional acceptance conditions. TELA can
 be obtained for example by translating LTL formulas by
 Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
 Rabinizer~4~\cite{kretinsky.18.cav}, or
@@ -870,8 +870,24 @@ acceptance condition with 0 clauses is $\false$ and this case is
 treated at the beginning of the procedure. Finally, if the procedure
 succeeds to reduce the number of marks or clauses, if constructs the
 modified automaton. Otherwise, it returns the original automaton.
-\todo{do sekce o implementaci napsat, ze namisto opakovaneho budovani
-  $\Phi_{j,C,K}$ puzivame inkrementalni pristup.}
+
+Note that the algorithm can be also reformulated to use an incremental
+approach instead of building a new formula $\Phi$ in each iteration.
+The incremental version of the first \textbf{while} loop builds the formula
+$\Phi=\Phi^\mathit{opt}_{j,C,K{-}1}$ only in the first iteration. In
+each subsequent iteration, it extends the formula with a condition
+saying that one more mark is not used in the automaton, i.e., the mark
+is neither on edges, nor in the acceptance formula. For example, if we
+want to say that mark $k\in N_K$ is not used in the automaton, we replace
+$\Phi$ by
+\[
+  \Phi~\wedge~\bigwedge_{t\in\delta}\neg n_{t,k}~\wedge\bigwedge_{c\in\{1,2,\ldots C\}}(\neg i_{c,k}\wedge\neg f_{c,k}).
+\]
+The second \emph{while} can transformed to an incremental version in a
+similar way. The advantage of the incremental approach comes from the
+fact that some QBF solvers can decide an extended formula faster as
+they profit from the information computed when solving the original
+formula.
 
 \begin{figure}[t]
   \centering
@@ -931,9 +947,9 @@ modified automaton. Otherwise, it returns the original automaton.
   \end{tikzpicture}
   \smallskip
   
-  \caption{An example illustrating the results of the three basic
-    reduction levels: an input automaton and the automata
-    obtained by reduction of level 1, level 2, and level 3.}
+  \caption{An example illustrating the results of the three
+    single-level reductions: an input automaton $\mA$ and the automata
+    obtained by reducing it with level 1, level 2, and level 3.}
   \label{fig:example}
 \end{figure}
 
@@ -1035,21 +1051,6 @@ tool        & version&homepage & automata \\
 \end{tabular}
 \end{table}
 
-%\begin{table}[t]
-%\centering
-%\begin{tabular}{c|ccccc|}
-%\multicolumn{1}{c}{} & 3 & 4 & 5 & 6 & \multicolumn{1}{c}{7} \\
-%%\specialrule{2pt}{0pt}{0pt}
-%\cline{2-6}
-%3 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \cellcolor{blue!25}\makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%4 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%5 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%6 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%7 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%\cline{2-6}
-%\end{tabular}
-%\end{table}
-
 \begin{table}[h]
 \caption{The cummulative number of acceptance marks before and after reduction
 for various automata sets. \textit{X/Y solved aut.} means that out of
@@ -1062,6 +1063,27 @@ numbers of its successful responses within 30 seconds limit and timeouts).
 \label{tab:cumm-data}
 \centering
 \input{table-data.tex}
+\end{table}
+
+Table~\ref{tab:heatmap} shows the number of automata coming from all four sets
+for every input and output number of acceptance marks. The results of the
+multi-level reduction technique are presented. The table indicates that in most
+cases only 1 or 2 marks can be saved. However, some of the automata with
+more than 7 acceptance marks could be, in theory, probably reduced more as
+the query to the QBF solver mostly remains unanswered in the time limit.
+Moreover, some of the results are promising, e.g. in 17 cases, we have
+successfully reduced 8 or more acceptance marks to only 4.
+
+\begin{table}[t]
+\caption{The effect of reduction.
+A cell on coordinates $(x,y)$ contains the number of automata that have been
+reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
+numbers, the latter represents number of automata where the last query to QBF
+solver has not been answered in the time limit.}
+\label{tab:heatmap}
+\setlength{\tabcolsep}{4pt}
+\centering
+\input{table-heatmap.tex}
 \end{table}
 
 Looking at Figure~\ref{fig:quantile}, we ascertain that for every set, the
