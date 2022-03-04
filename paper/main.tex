@@ -537,8 +537,8 @@ In the following, we define three versions of $\mcycle(\vec{e})$:
   existential ones and the resulting formula thus contains quantifier
   alternation.
 \end{itemize}
-We write $\Phi_{i,C,K}$ when we want to emphasize that the particular
-formula $\Phi_{C,K}$ contains the version $\mcycle_i(\vec{e})$.
+We write $\Phi_{j,C,K}$ when we want to emphasize that the particular
+formula $\Phi_{C,K}$ contains the version $\mcycle_j(\vec{e})$.
 
 \subsection{Lightweight version $\mcycle_1(\vec{e})$}
 The lightweight version is defined as
@@ -765,30 +765,38 @@ The formula $\mcycle_3(\vec{e})$ is defined as follows.
 
 \subsection{SCC-based optimization}
 
-Now we present a formula optimization based on the fact that every
-cycle is completely included in the transition set $\delta_S$ of some
-SCC $S$. Note that we cannot reduce the number of acceptance marks in
-each SCC separately as all SCCs have to share one acceptance formula.
-However, for each SCC we can build a $\Phi_{C,K}$ formula separately and
-then we can put all these formulas into one conjunction such that they
-share the variables $\vec{i},\vec{f}$.
+Now we present an optimized formula construction based on the fact
+that every cycle is completely included in the transition set
+$\delta_S$ of some SCC $S$. Note that we cannot reduce the number of
+acceptance marks in each SCC separately as all SCCs have to share the
+same acceptance formula after the reduction. However, for each SCC we
+can build the formula $\Phi_{C,K}$ separately and then we can put all
+these formulas into one conjunction such that they share the variables
+$\vec{i},\vec{f}$.
 
-\todo{Honza je tu!} 
+Now we describe the construction of optimized QBF formulas
+$\Phi^\mathit{opt}_{j,C,K}$ formally. Given an automaton
+$\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$ and its SCC $S$, by $\mA^S$ we
+denote the automaton corresponding to the part of $\mA$ delimited by
+$S$, i.e., $\mA^S=(S,M,\Sigma,q',\delta_S,\varphi)$ where $q'$ is an
+arbitrary state of $S$. Further, let $\vec{n}_S$ denote the vector of
+variables $n_{t,k}$ where $t\in\delta_S$ and $k\in N_k$. By
+$\Phi^S_{j,C,K}(\vec{n}_S,\vec{i},\vec{f})$ we denote the formula
+$\Phi_{j,C,K}$ constructed for $\mA^S$ as presented above.
+Finally, we define the optimized QBF formula as
+\[
+  \Phi^\mathit{opt}_{j,C,K}(\vec{n}',\vec{i},\vec{f})=\bigwedge_{\textrm{SCC }S}\Phi^S_{j,C,K}(\vec{n}_S,\vec{i},\vec{f})
+\]
+where $\vec{n}'$ is the vector of all varibles contained in vectors
+$\vec{n}_S$ for SCCs $S$.
 
-For a given automaton $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$, we first
-compute all SCCs. Each SCC $S$ induces an automaton $(S,M,\Sigma,q',\delta_S,\varphi)$, where $q'$ is an arbitrary state
-of $S$. 
-
-
-the optimization saying that So far, we have not use the fact that each cycle is A 
-
-SCC-based approach
-
-Its first part $\xi_1(\vec{i},\vec{f})$ says that any clause does not
-contain both $\Inf k$ and $\Fin k$ for the same mark $k$ as a clause
-with both such terms is always unsatisfiable. Note that the subformula
-$\xi_1(\vec{i},\vec{f})$ can be safely omitted, but it speeds up the QBF solving.
-
+One effect of this optimization is that the formula
+$\Phi^\mathit{opt}_{j,C,K}$ contains no variables $n_{t,k}$ %and $e_t$
+for transitions $t$ that do not lead between states of the same SCC.
+The acceptance marks on such a transition $t$ do not affect the
+acceptance of any run as $t$ appears at most once on each run. For
+these transitions $t$, we can define $\rem(t)$ such that
+$\mks(\rem(t))=\emptyset$.
 
 %}}}
 %{{{ algorithm
