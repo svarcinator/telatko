@@ -1147,23 +1147,48 @@ reducing (in seconds).}
 
 \section{Conclusions}\label{sec:conclusion}
 
-We have presented a QBF-based method that reduces the number of
+We have presented an application of QBF solving to reduction of the number of
 acceptance marks in transition-based Emerson-Lei automata. The method
 has been implemented and our experimental results show that it is possible
 to use the QBF solvers to find equivalent acceptance conditions of TELA
-without changes to their structure.
-The reduction of acceptance marks is not the only purpose of the approach,
-one could possibly look for e.g. equivalent parity automata or automata without
-$\Fin$-marks, depending on the subsequent use of the automata.
-Even though the QBF queries can be time-consuming, in practice it can be well
-used and one can find a good trade-off between speed and efficiency by setting
-a reasonable timeout.
+with less acceptance marks and without changes to automata structure.
+
+The reduction of acceptance marks is not the only application of the
+presented approach: one could possibly look for, e.g., equivalent
+parity automata or automata without $\Fin$-marks, depending on the
+subsequent use of the automata. Even though the QBF queries can be
+time-consuming, in practice it can be well used and one can find a
+good trade-off between speed and efficiency by choosing precision of
+the reduction and setting a reasonable timeout.
 
 In the future work, it could be examined how the reductions of the acceptance
 condition can contribute to further reduction of the state space by enabling
-various optimizations, e.g. simulations.
+various optimizations, e.g., simulations.
 
 %}}}
+
+\section{TODO}
+
+Do submission:
+\begin{itemize}
+\item do experimentu napsat, jaky hardware pouzivame (merit cas bez toho nedava smysl)
+\item spustit experimenty bez timeoutu na telatko (?a delsi timeout na QBF?)
+\item prelestit text v poslednich dvou kapitolach
+\end{itemize}
+
+\noindent
+Do budoucna:
+\begin{itemize}
+\item level 1 bez SCC optimalizace
+\item nahradit weak SCC jednou hranou pro neakceptujici a jinou pro akceptujici
+\item sladit konstrukci QBF formuli s implementaci
+\item podivat se znovu na uzitecnost a potrebnost optimalizaci typu ``klauzule neni false'' a ``alespon jedna klauzule je neprazdna''
+\item sladit popis algoritmu s implementaci
+\item v experimentech nejak sledovat vztah usetreneho casu a usetrenych znacek?
+\item zkusit aplikovat na jine typy automatu (treba TGBA nebo Rabin)?
+\item zkusit, zda/jak redukce znacek umozni redukovat stavovy prostor
+\end{itemize}
+
 
 %\bibliographystyle{plain}
 \bibliography{mc}
