@@ -151,7 +151,7 @@ TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
 often use less states than equivalent automata with simpler acceptance
 conditions. Further, algorithms handling TELA can automatically handle
-all automata with traditional acceptance conditions. TELA automata can
+all automata with traditional acceptance conditions. TELA can
 be obtained for example by translating LTL formulas by
 Delag~\cite{muller.17.gandalf}, ltl3tela~\cite{major.19.atva},
 Rabinizer~4~\cite{kretinsky.18.cav}, or
@@ -409,7 +409,7 @@ free variables representing possible instances of $\psi$ and
 $\rem$. If the formula is satisfiable, then its models encode desired
 instances of $\psi$ and $\rem$.  In the following, we assume that we
 are looking for a new acceptance formula $\psi$ in DNF. Note that our
-reduction method can be easily adopted to look for $\psi$ of a
+reduction method can be easily adapted to look for $\psi$ of a
 different shape.
 
 Now we describe the construction of QBF formulas in detail. The
@@ -1050,21 +1050,6 @@ tool        & version&homepage & automata \\
 \end{tabular}
 \end{table}
 
-%\begin{table}[t]
-%\centering
-%\begin{tabular}{c|ccccc|}
-%\multicolumn{1}{c}{} & 3 & 4 & 5 & 6 & \multicolumn{1}{c}{7} \\
-%%\specialrule{2pt}{0pt}{0pt}
-%\cline{2-6}
-%3 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \cellcolor{blue!25}\makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%4 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%5 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%6 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%7 & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} & \makecell{\tiny{12} \\ \tiny{34}} \\
-%\cline{2-6}
-%\end{tabular}
-%\end{table}
-
 \begin{table}[h]
 \caption{The cummulative number of acceptance marks before and after reduction
 for various automata sets. \textit{X/Y solved aut.} means that out of
@@ -1077,6 +1062,27 @@ numbers of its successful responses within 30 seconds limit and timeouts).
 \label{tab:cumm-data}
 \centering
 \input{table-data.tex}
+\end{table}
+
+Table~\ref{tab:heatmap} shows the number of automata coming from all four sets
+for every input and output number of acceptance marks. The results of the
+multi-level reduction technique are presented. The table indicates that in most
+cases only 1 or 2 marks can be saved. However, some of the automata with
+more than 7 acceptance marks could be, in theory, probably reduced more as
+the query to the QBF solver mostly remains unanswered in the time limit.
+Moreover, some of the results are promising, e.g. in 17 cases, we have
+successfully reduced 8 or more acceptance marks to only 4.
+
+\begin{table}[t]
+\caption{The effect of reduction.
+A cell on coordinates $(x,y)$ contains the number of automata that have been
+reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
+numbers, the latter represents number of automata where the last query to QBF
+solver has not been answered in the time limit.}
+\label{tab:heatmap}
+\setlength{\tabcolsep}{4pt}
+\centering
+\input{table-heatmap.tex}
 \end{table}
 
 Looking at Figure~\ref{fig:quantile}, we ascertain that for every set, the
