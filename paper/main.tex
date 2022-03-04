@@ -976,7 +976,8 @@ the satisfiability of QBF formulas. Moreover, in the experimental evaluation
 we use several tools from the Spot library, i.e. \texttt{genltl},
 \texttt{ltlfilt}, \texttt{ltl2tgba}, \texttt{autcross} and \texttt{autfilt},
 to generate, simplify and translate LTL formulas and to compare and simplify
-automata. \telatko is implemented in Python.
+automata. \telatko is implemented in Python and has a CLI interface which allows users to specify details about a run. The tool expects file containing automata in HOA format ~\cite{babiak.15.cav} and processes the input file, the result is saved in the specified output file again in HOA format. If there is no output file given, \telatko prints the result to $\mathit{stdout}$. 
+The switch \texttt{-L} specifies the level of simplification, \texttt{-I} turns on the incremental solving and \texttt{-T} specifies the timeout of Z3-solver in seconds. The default settings is the incremental version of \emph{multi-level} (see Algorithm~\ref{alg:multi}).
 
 \todo{Jake parametry ten tool ma? Co potrebuje k behu? Kde je dostupny? Pod jakou licenci?}
 
