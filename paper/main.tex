@@ -985,14 +985,29 @@ application of the three levels, see Algorithm~\ref{alg:multi}.
 
 \section{Implementation}\label{sec:implementation}
 
-The presented reduction algorithms have been implemented in a tool called
-\telatko. It uses the Spot library~\cite{duret.16.atva2} for automata parsing
-and manipulation, and the Z3 Theorem Prover~\cite{demoura.08.tacas} to solve
-the satisfiability of QBF formulas. \telatko is implemented in Python
-and has a CLI interface which allows users to specify details about a run. The tool expects file containing automata in HOA format ~\cite{babiak.15.cav} and processes the input file, the result is saved in the specified output file again in HOA format. If there is no output file given, \telatko prints the result to $\mathit{stdout}$. 
-The switch \texttt{-L} specifies the level of simplification, \texttt{-I} turns on the incremental solving and \texttt{-T} specifies the timeout of Z3-solver in seconds. The default settings is the incremental version of \emph{multi-level} (see Algorithm~\ref{alg:multi}).
-
-\todo{Jake parametry ten tool ma? Co potrebuje k behu? Kde je dostupny? Pod jakou licenci?}
+The presented reduction algorithms have been implemented in a tool
+called \telatko. The tool is implemented in Python 3 and uses the Spot
+library~\cite{duret.16.atva2} for automata parsing and manipulation
+and the theorem prover Z3~\cite{demoura.08.tacas} to solve the
+satisfiability of QBF formulas. \telatko is available at
+\url{https://gitlab.fi.muni.cz/xschwar3/telatko} under the GNU GPLv3
+license. The tool can be executed by the command 
+\begin{center}
+  \texttt{telatko -F <input.hoa> [-L }$j$\texttt{] [-C] [-I] [-T }$t$\texttt{] [-O <output.hoa>]}
+\end{center}
+where
+\begin{description}
+\item[\texttt{-F <input.hoa>}] specifies the file with the input automaton in HOA format~\cite{babiak.15.cav}, 
+\item[\texttt{-L }$j$] specifies the reduction level; if omitted, the multi-level reduction is used,
+\item[\texttt{-C}] switches on the reduction of the number of clauses
+  after the number of marks is reduced (it corresponds to
+  $\mathit{reduceC}=\true$ in Algortihms~\ref{alg:single}
+  and~\ref{alg:multi}),
+\item[\texttt{-I}] switches on the incremental version,
+\item[\texttt{-T }$t$] sets the timeout for QBF query to $t$ seconds (the default value is 50 seconds), 
+\item[\texttt{-O <output.hoa>}] specifies the output file; if omitted,
+  the produced automaton is sent to \textit{stdout} in the HOA format.
+\end{description}
 
 %}}}
 %{{{ experimental evaluation 
