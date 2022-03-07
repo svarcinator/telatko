@@ -146,7 +146,7 @@ def create_formula(
 
     return z3_formula
 
-def try_evaluate0(aut, orig, qbf_run_info):
+def try_evaluate0(aut, orig):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
     :param aut: spot::automaton
@@ -294,22 +294,28 @@ def restrict_f_vars(K, inner_edges_nums):
         # these two are not equivalent?
         #var1 = Bool("f_{0}_{1} ".format(str(e), str(K)))
         var = Bool("f_" + str(e) + "_" +str(K))
-        #assert("f_{0}_{1} ".format(str(e), str(K)) == "f_" + str(e) + "_" +str(K) )
-        #assert(var == var1)
+
         formula.append(Not(var))
     return And(formula)
 
 def restrict_pn_vars(C, K):
     formula = []
     for i in range(1, C + 1):
-        #p = Bool("p_{0}_{1} ".format(str(i), str(K)))
-        #n = Bool("n_{0}_{1} ".format(str(i), str(K)))
 
         p = Bool("p_" + str(i) + "_" + str(K))
         n = Bool("n_" + str(i) + "_" + str(K))
         formula.append(Not(p))
         formula.append(Not(n))
-    #print(formula)
+    return And(formula)
+
+def restrict_C_vars(C, K):
+    formula = []
+    for i in range(1, K + 1):
+
+        p = Bool("p_" + str(C) + "_" + str(i))
+        n = Bool("n_" + str(C) + "_" + str(i))
+        formula.append(Not(p))
+        formula.append(Not(n))
     return And(formula)
 
 
@@ -321,15 +327,17 @@ def update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums):
 
         return solver
     else:
-        print("TBD")
+        solver.push()
+        solver.add(restrict_C_vars(C, K))
+        return solver
     assert(False)
 
-def empty_aut(aut, original, qbf_run_info):
+def empty_aut(aut, original):
     clear_aut_edges(aut)
     aut.set_acceptance(0, spot.acc_code.t())
     if not spot.are_equivalent(original, aut):
         aut.set_acceptance(0, spot.acc_code.f())
-    aut.set_name(qbf_run_info)
+    aut.set_name(aut.get_name() + "F_0_S")
     return aut
 
 def model_assert(model, K):
@@ -337,18 +345,19 @@ def model_assert(model, K):
         if str(t)[0] == 'f' and str(t)[-1] == str(K):
             assert(is_false(model[t]))
 
-def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info, C, K,  scc_edg, optimized_scc, timeout, minimized_atribute, original):
-    currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
-    K = aut.get_acceptance().used_sets().count()
-    K -= 1
+def inc_loop(aut, inner_edges_nums, inner_edges, tmp_mode, scc_state_info, scc_edg, currently_reduced, original, formula_attr):
 
-    #original = spot.automaton(aut.to_str())
-    qbf_run_info = ""
+    K = aut.get_acceptance().used_sets().count()
+    C =len(aut.get_acceptance().to_dnf().top_disjuncts())
+    if currently_reduced == FormulaAtribute.K:
+        K -= 1
+    else:
+        C -= 1
 
     # dictionary {acc_set_num : [edge_nums]}
     edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
-    formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
-    solver = solver_init(formula, timeout)
+    formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, formula_attr.scc_optimization, inner_edges_nums, inner_edges)
+    solver = solver_init(formula, formula_attr.timeout)
     model = None
     if currently_reduced == FormulaAtribute.K:
         K += 1
@@ -364,55 +373,78 @@ def inc_loop(aut, inner_edges_nums, inner_edges, mode, tmp_mode, scc_state_info,
         res = solver.check()
 
         if res == sat:
-
             model = solver.model()
-            if K <= 1:
+            if (K <= 1  or aut.get_acceptance().used_sets().count() <= 1)and currently_reduced == FormulaAtribute.K:
                 process_variables(aut, model, scc_equiv_edges, tmp_mode)
-
-                return try_evaluate0(aut, original, qbf_run_info)
-            if aut.get_acceptance().used_sets().count() <= 1:
-
-                return try_evaluate0(aut, original, qbf_run_info)
-
+                return try_evaluate0(aut, original)
+            elif C <= 1 and currently_reduced == FormulaAtribute.C:
+                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                return aut
 
             if tmp_mode == 1:
-                solver  = update_inc_solver(solver, currently_reduced, C, K, representants)
+                solver  = update_inc_solver(solver, currently_reduced, formula_attr.C, K, representants)
             else:
-                solver  = update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums)
+                solver  = update_inc_solver(solver, currently_reduced, formula_attr.C, K, inner_edges_nums)
 
             if currently_reduced == FormulaAtribute.K:
                 K = K - 1
             else:
-                C = C - 1
+                C -= 1
         else:
+            if model != None:
+                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+            if currently_reduced == FormulaAtribute.K:
+                aut.set_name(aut.get_name() + update_run_info(aut.get_acceptance().used_sets().count() - 1, res, tmp_mode))
+
+            if aut.get_acceptance().used_sets().count() <= 1 and currently_reduced == FormulaAtribute.K:
+                return try_evaluate0(aut, original)
+            return aut
+
+    return try_evaluate0(aut, original)
+
+def not_incr_loop(aut, inner_edges_nums, inner_edges, tmp_mode, scc_state_info, scc_edg, currently_reduced, original, formula_attr):
+    K = aut.get_acceptance().used_sets().count()
+    C =len(aut.get_acceptance().to_dnf().top_disjuncts())
+    if currently_reduced == FormulaAtribute.K:
+        K -= 1
+    else:
+        C -= 1
+
+    while C > 0 and K > 0:
+
+        if aut.get_acceptance().used_sets().count(
+        ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
+            return aut
+
+        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
+        formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, formula_attr.scc_optimization, inner_edges_nums, inner_edges)
+
+        solver = Solver()
+        solver.add(formula)
+        solver.set("timeout",1000* formula_attr.timeout)
+        solver.push()
+        res = solver.check()
+
+        if res == sat:
+            s = solver.model()
+            process_variables(aut, s, scc_equiv_edges, tmp_mode)
+        else:
+            if currently_reduced == FormulaAtribute.K:
+                aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode) )
+            return aut
+
+        if aut.get_acceptance().used_sets().count() < 1:
+            return empty_aut(aut, original)
 
 
+        if currently_reduced == FormulaAtribute.K:
+            K = K - 1
+        else:
+            C = C - 1
+    return try_evaluate0(aut, original)
 
 
-            if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
-                currently_reduced = FormulaAtribute.C
-                K = K + 1
-                C = C - 1
-                # prindat solver.pop() - tim odstranim posledni omezeni pro K
-                # a solver.add( " formule zakazujici cokoliv v klauzuli C " )
-                continue
-            else:
-                #qbf_run_info += update_run_info(K, res, tmp_mode)
-                if model != None:
-                    process_variables(aut, model, scc_equiv_edges, tmp_mode)
-                aut.set_name(aut.get_name() + update_run_info( aut.get_acceptance().used_sets().count() - 1, res, tmp_mode))
-                #aut.set_name(qbf_run_info)
-
-                if aut.get_acceptance().used_sets().count() <= 1:
-
-                    return try_evaluate0(aut, original, qbf_run_info)
-                return aut
-
-    return try_evaluate0(aut, original, qbf_run_info)
-
-
-def play(aut, C, K, mode, timeout,
-         optimized_scc, minimized_atribute, tmp_mode, inc_solving):
+def play(aut, formula_attr):
     aut.set_name("")
 
     spot.cleanup_acceptance_here(aut)
@@ -425,72 +457,34 @@ def play(aut, C, K, mode, timeout,
 
     # [int] - all nums of inner edges of SCCs
     inner_edges_nums, inner_edges = get_edges(aut)
-    qbf_run_info = ""
 
     # scc_edg [[nums of edges of one scc]]
     # scc state info [{state num : [[num of edge of which is the state source
     # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
 
-    currently_reduced = resolve_formula_atributes(minimized_atribute, C, K)
-    if currently_reduced == FormulaAtribute.K:
-        K -= 1
-    else:
-        C -= 1
-    if inc_solving:
-        for i in range(tmp_mode, mode + 1):
+    if formula_attr.incremental:
+        for i in range(formula_attr.tmp_level, formula_attr.level + 1):
             if aut.get_acceptance().used_sets().count() <= 1:
-
-                return try_evaluate0(aut, original, qbf_run_info)
-            aut = inc_loop(aut, inner_edges_nums, inner_edges, mode, i, scc_state_info, C, K, scc_edg, optimized_scc, timeout, minimized_atribute, original)
-
+                aut =  try_evaluate0(aut, original)
+                break
+            aut = inc_loop(aut, inner_edges_nums, inner_edges, i, scc_state_info, scc_edg, FormulaAtribute.K, original, formula_attr)
+        # if reduce C, reduce C
+        if formula_attr.min_clauses:
+            aut = inc_loop(aut, inner_edges_nums, inner_edges, formula_attr.level, scc_state_info, scc_edg, FormulaAtribute.C, original, formula_attr)
         return aut
 
-    while C > 0 and K > 0:
+    # not incremental solving
 
-        if aut.get_acceptance().used_sets().count(
-        ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
-            return aut
-
-        edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode)
-        formula = get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg, representants, optimized_scc, inner_edges_nums, inner_edges)
-
-        solver = Solver()
-        solver.add(formula)
-        solver.set("timeout",1000* timeout)
-        solver.push()
-        res = solver.check()
-
-        if res == sat:
-            s = solver.model()
-            process_variables(aut, s, scc_equiv_edges, tmp_mode)
-        else:
-
-            aut.set_name(aut.get_name() + update_run_info(K, res, tmp_mode) )
-            if (tmp_mode < mode):
-                tmp_mode += 1
-                continue
-            else:
-                if minimized_atribute == 'all' and currently_reduced == FormulaAtribute.K:
-                    currently_reduced = FormulaAtribute.C
-                    K = K + 1
-                    C = C - 1
-                    continue
-                else:
-                    #aut.set_name(qbf_run_info)
-                    return aut
-
-        if aut.get_acceptance().used_sets().count() < 1:
-            return empty_aut(aut, original, qbf_run_info)
-
-
-        if currently_reduced == FormulaAtribute.K:
-            K = K - 1
-        else:
-            C = C - 1
-
-
-    return try_evaluate0(aut, original, qbf_run_info)
+    for i in range(formula_attr.tmp_level, formula_attr.level + 1):
+        if aut.get_acceptance().used_sets().count() <= 1:
+            aut =  try_evaluate0(aut, original)
+            break
+        aut = not_incr_loop(aut, inner_edges_nums, inner_edges, i, scc_state_info, scc_edg, FormulaAtribute.K, original, formula_attr)
+    # if reduce C, reduce C
+    if formula_attr.min_clauses:
+        aut = inc_loop(aut, inner_edges_nums, inner_edges, formula_attr.level, scc_state_info, scc_edg, FormulaAtribute.C, original, formula_attr)
+    return aut
 
 
 def test_aut(a1, a2):

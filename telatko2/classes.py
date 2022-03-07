@@ -25,6 +25,24 @@ class Variable:
         self.clause = int(var[1])
         self.set = int(var[2].split('=')[0])
 
+class Switches:
+    """
+    Class containing overwiev of switches.
+    """
+    def __init__(self, args):
+        self.level = args.level
+        self.tmp_level = 1 if args.gradual else args.level
+        self.min_clauses = args.minimize_clauses
+        self.timeout = args.timeout
+        self.scc_optimization = args.scc
+        self.incremental = args.incremental
+        self.gradual = args.gradual
+        self.C = None
+
+    def set_C(self, aut):
+        self.C = len(
+            aut.get_acceptance().to_dnf().top_disjuncts())
+
 
 class SATformula:
     """
@@ -517,7 +535,7 @@ def parse_dnf_acc(acc):
     Returns:
         [[ACCMark]] -- list of lists of ACCMarks
     """
-    
+
     if acc == "" or acc == "t" or acc == "f":
         return []
     formula = []

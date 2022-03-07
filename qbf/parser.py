@@ -207,6 +207,7 @@ def process_variables(aut, model, scc_equiv_edges, mode):
     """
 
     condition_vars, acc_set_vars = parse_z3(model)
+
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))
 
