@@ -3,9 +3,9 @@ from z3 import *
 #from qbf.q_main import FormulaCreator
 
 
-
 class Z3_f_ctor():
-    def __init__(self,  edge_dict, scc_edg, scc_state_info , inner_edges_nums ,C, K, inner_edges, mode):
+    def __init__(self, edge_dict, scc_edg, scc_state_info,
+                 inner_edges_nums, C, K, inner_edges, mode):
         self.univ_vars = []
         self.exist_vars = []
         self.edge_dict = edge_dict
@@ -15,8 +15,7 @@ class Z3_f_ctor():
         self.C = C
         self.K = K
         self.inner_edges = inner_edges
-        self.mode = mode # level of simplification
-
+        self.mode = mode  # level of simplification
 
     def foo(self):
         var1 = Bool('a')
@@ -30,7 +29,6 @@ class Z3_f_ctor():
         if s.check() == sat:
 
             s = s.model()
-
 
     def add_inf_fin(self, impl):
         inf_not_fin = self.inf_is_not_fin_clause()
@@ -81,7 +79,6 @@ class Z3_f_ctor():
         formula = ForAll(self.univ_vars, formula)
         return formula
 
-
     def rejecting_scc(self, representants):
         self.inner_edges_nums = representants
         self.quant_all()
@@ -100,10 +97,10 @@ class Z3_f_ctor():
     def prune_scc_edg(self, representants):
         tmp = []
         for alist in self.scc_edg:
-            tmp.append(list(filter(lambda e: e in representants,  alist)))
+            tmp.append(list(filter(lambda e: e in representants, alist)))
         self.scc_edg = tmp
 
-    def get_level1(self, aut, representants ):
+    def get_level1(self, aut, representants):
         self.inner_edges_nums = representants
         self.quant_all()
 
@@ -114,9 +111,8 @@ class Z3_f_ctor():
 
         new = self.new_formula()
 
-
         new = simplify(new)
-        if old != None:
+        if old is not None:
             old = simplify(old)
             eq = self.equivalence_f(old, new)
         else:
@@ -129,8 +125,8 @@ class Z3_f_ctor():
 
     def get_qbf_formula(self, aut):
         # adds unif. quantified variables to
-        #self.foo()
-        #assert(False)
+        # self.foo()
+        # assert(False)
         self.quant_all()
         if self.mode > 2:
 
@@ -149,12 +145,12 @@ class Z3_f_ctor():
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
 
         new = self.new_formula()
-        
+
         new = simplify(new)
 
         laso = simplify(laso)
 
-        if old != None:
+        if old is not None:
             old = simplify(old)
             eq = self.equivalence_f(old, new)
         else:
@@ -177,20 +173,22 @@ class Z3_f_ctor():
             src = str(e.src)
             dst = str(e.dst)
             c = And(Bool("w_" + src), Bool("w_" + dst))
-            impl = Implies(Bool("e_" + str(aut.edge_number(e))),c)
+            impl = Implies(Bool("e_" + str(aut.edge_number(e))), c)
             con1.append(impl)
 
             # part two
-            c1 =And(Not(Bool("w_" + src)), Not(Bool("w_" + dst)))
-            con2.append(Implies(Bool("e_" + str(aut.edge_number(e))),c1 ))
+            c1 = And(Not(Bool("w_" + src)), Not(Bool("w_" + dst)))
+            con2.append(Implies(Bool("e_" + str(aut.edge_number(e))), c1))
 
             # part three
-            #dis1
-            c2 = And(Bool("e_" + str(aut.edge_number(e))), Bool("w_" + src), Not(Bool("w_" + dst)))
+            # dis1
+            c2 = And(Bool("e_" + str(aut.edge_number(e))),
+                     Bool("w_" + src), Not(Bool("w_" + dst)))
             dis1.append(c2)
 
-            #dis2
-            c3 = And(Bool("e_" + str(aut.edge_number(e))), Not(Bool("w_" + src)), Bool("w_" + dst))
+            # dis2
+            c3 = And(Bool("e_" + str(aut.edge_number(e))),
+                     Not(Bool("w_" + src)), Bool("w_" + dst))
             dis2.append(c3)
         con3.append(Or(dis1))
         con3.append(Or(dis2))
@@ -203,8 +201,6 @@ class Z3_f_ctor():
         laso = And(Or(main_dis), one_scc)
 
         return laso
-
-
 
     def inf_or_fin_f(self):
         clauses_dis = []
@@ -230,7 +226,6 @@ class Z3_f_ctor():
             clauses_con.append(And(set_con))
         return And(clauses_con)
 
-
     def one_fin(self, c, k):
         n = Bool("n_" + str(c) + "_" + str(k))
 
@@ -250,8 +245,6 @@ class Z3_f_ctor():
             f_var = Bool("f_" + str(t) + "_" + str(k))
             dis.append(And(e_var, f_var))
         return Implies(p, Or(dis))
-
-
 
     def new_formula(self):
         clauses_disj = []
@@ -288,7 +281,6 @@ class Z3_f_ctor():
         tmp_acc = copy.deepcopy(acc)
         tmp_acc.clean_up2(self.marks_of_scc(self.edge_dict))
 
-
         top_disjuncts = []
         for dis in tmp_acc.formula:
             conjuncts = []
@@ -312,7 +304,6 @@ class Z3_f_ctor():
             return None
         return Or(top_disjuncts)
 
-
     def disjunct_formula(self, edges):
         alist = []
         for e in edges:
@@ -320,14 +311,16 @@ class Z3_f_ctor():
             alist.append(var)
         return Or(alist)
 
-
     def in_n_out(self):
         eq_list = []
         for dict in self.scc_state_info:
             for src_dst in dict.values():
                 src = src_dst[0]
                 dst = src_dst[1]
-                eq_list.append(self.equivalence_f(self.disjunct_formula(dst), self.disjunct_formula(src)))
+                eq_list.append(
+                    self.equivalence_f(
+                        self.disjunct_formula(dst),
+                        self.disjunct_formula(src)))
         return And(eq_list)
 
     def disjunct_formula_list(self, scc_edg):
@@ -356,7 +349,6 @@ class Z3_f_ctor():
 
         in_out = self.in_n_out()
 
-
         # edges that are true are in one SCC and none of edges from other SCCs is
         # true
         one_scc = self.one_scc_f()
@@ -364,11 +356,10 @@ class Z3_f_ctor():
         laso = And(in_out, one_scc)
         return laso
 
-
     def w_quant(self, aut):
         for dict in self.scc_state_info:
             for key in dict:
-                var  = Bool("w_" + str(key))
+                var = Bool("w_" + str(key))
                 self.exist_vars.append(var)
 
     def quant_all(self):

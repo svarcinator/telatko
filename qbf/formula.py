@@ -2,6 +2,7 @@
 from telatko2.classes import *
 import re
 
+
 def SAT_output(name, quantified, formula):
     """
     Prints formula into file(for QBF solver) named satfile.
@@ -22,9 +23,8 @@ class FormulaCreator:
         Creates formula for QBF solver.
     """
 
-    def __init__(self,  edge_dict, scc_edg, scc_state_info
-                  ,inner_edges_nums,C, K, inner_edges
-                  , mode, qbf_solver):
+    def __init__(self, edge_dict, scc_edg, scc_state_info,
+                 inner_edges_nums, C, K, inner_edges, mode, qbf_solver):
 
         self.edge_dict = edge_dict
         self.scc_edg = scc_edg
@@ -33,15 +33,13 @@ class FormulaCreator:
         self.C = C
         self.K = K
         self.inner_edges = inner_edges
-        self.mode = mode # level of simplification
+        self.mode = mode  # level of simplification
         self.qbf_solver = qbf_solver
 
 
 # how can I write this more pretty?
 class Limboole_f_ctor():
-    def __init__(self,  edge_dict, scc_edg, scc_state_info
-                  ,inner_edges_nums,C, K, inner_edges
-                  , mode)
+    def __init__(self, edge_dict, scc_edg, scc_state_info, inner_edges_nums, C, K, inner_edges, mode)
 
     def get_qbf_formula(self, aut):
         # quantified edges #e_1 ... #e_n
@@ -273,9 +271,6 @@ def quant_all(edges):
     return formula
 
 
-
-
-
 def inf_set_old_formula(edge_dict, set_num):
     new_shape = SATformula('|')
     for edge in edge_dict[set_num]:
@@ -318,7 +313,7 @@ def old_formula(acc, edge_dict):
     for f in fin_sets:
         reg = r"Fin\(" + str(f) + r"\)"
         formula = re.sub(reg, str(fin_set_old_formula(edge_dict, f)), formula)
-    #print(formula)
+    # print(formula)
     return SATformula(formula)
 
 
@@ -501,6 +496,7 @@ def negate_part(aut, inner_edges, edges_translator):
     if not con.is_empty():
         return con
     return None
+
 
 def w_quant(aut):
     """

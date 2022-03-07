@@ -467,9 +467,7 @@ def get_mapping(merged_f, acc):
                     acc, clause_index, merge_log, merged_f)
     #print("merged_f: ", merged_f)
     #print("acc: ", acc)
-    #print(merge_log)
-
-
+    # print(merge_log)
 
 
 def duplicate_marks(aut, merged_f, acc, sccs):
@@ -581,7 +579,8 @@ def resolve_dependencies(aut, merged_f, short_accs, sccs):
         unused_dep_log = {}
 
         unused_dep_log = resolve_unused_clause_dep(aut, scc, merged_f, acc)
-        #print(unused_dep_log)
+        # print(unused_dep_log)
         unused_clauses_depend.append(unused_dep_log)
-        # update of dependencies, might have changed during resolve_unused_clause_dep
+        # update of dependencies, might have changed during
+        # resolve_unused_clause_dep
     return unused_clauses_depend

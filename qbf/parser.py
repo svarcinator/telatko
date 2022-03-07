@@ -139,7 +139,6 @@ def process_f_variables(aut, acc_set_vars):
     # creates dictionary {edge number : [acceptance set number]}
     f_dict = parse_dict(acc_set_vars)
 
-
     # puts marks corresponding to dict on edges
     marks_on_edges(aut, f_dict)
     return f_dict
@@ -161,6 +160,7 @@ def max_set_num(acc):
                 num = con.num
     return num
 
+
 def parse_limboole(model):
     # list of variables that are true and are denoted as p/n - acceptance
     # condition variables
@@ -171,6 +171,7 @@ def parse_limboole(model):
         filter(lambda var: var[0] == "f" and var[-1] == '1', model))
 
     return condition_vars, acc_set_vars
+
 
 def parse_z3(model):
 
@@ -193,6 +194,7 @@ def clone_to_representant(aut, f_dict, scc_equiv_edges):
                 for m in f_dict[aut.edge_number(val[0])]:
                     for e in val[1:]:
                         e.acc.set(m)
+
 
 def process_variables(aut, model, scc_equiv_edges, mode):
     """
@@ -221,9 +223,6 @@ def process_variables(aut, model, scc_equiv_edges, mode):
     aut.set_acceptance(max_num + 3, spot.acc_code(string_formula(acc)))
 
     spot.cleanup_acceptance_here(aut)
-
-
-
 
 
 def print_aut(aut, output, m):

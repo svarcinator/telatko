@@ -60,18 +60,18 @@ def get_acc(aut):
     Returns PACC (dnf) if dnf formula is shorter else PACC_CNF(cnf)
     """
     dnf_acc = ACC_DNF(aut.get_acceptance().to_dnf())
-    #return dnf_acc
+    # return dnf_acc
     cnf_acc = ACC_CNF(aut.get_acceptance().to_cnf())
 
     #print((cnf_acc),"\n", (dnf_acc))
 
     if (dnf_acc.acc_len() < cnf_acc.acc_len()) or (dnf_acc.acc_len()
                                                    == cnf_acc.acc_len() and len(dnf_acc) <= len(cnf_acc)):
-        #print("DNF")
+        # print("DNF")
         return dnf_acc
     else:
         #acc = PACC_CNF(cnf_acc)
-        #print("CNF")
+        # print("CNF")
         return cnf_acc
 
 
@@ -272,7 +272,6 @@ def process_automaton(aut):
 
     merge_accs(aut, merged_f, short_accs, sccs)
 
-
     # make aut equivalent with acceptance formula
     new_make_equiv(
         aut,
@@ -284,7 +283,7 @@ def process_automaton(aut):
     spot.cleanup_acceptance_here(aut)
     if not spot.are_equivalent(aut, orig):
 
-        #assert(False)
+        # assert(False)
         # precaution
         return orig
     else:

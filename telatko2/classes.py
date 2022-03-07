@@ -25,10 +25,12 @@ class Variable:
         self.clause = int(var[1])
         self.set = int(var[2].split('=')[0])
 
+
 class Switches:
     """
     Class containing overwiev of switches.
     """
+
     def __init__(self, args):
         self.level = args.level
         self.tmp_level = 1 if args.gradual else args.level
@@ -428,9 +430,7 @@ class ACC_DNF(ACC):
                 self.sat = True
                 return
 
-
         self.formula = clean_f
-
 
 
 class ACC_CNF(ACC):

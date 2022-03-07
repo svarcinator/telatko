@@ -53,7 +53,6 @@ def main(argv):
         help="Levels will gradually grow from L1 up to specified level.", action='store_true')
     args = parser.parse_args()
 
-
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
 
@@ -83,7 +82,7 @@ def main(argv):
                     if formula_attributes.tmp_level != args.level:
                         formula_attributes.tmp_level = 2
 
-                    auto = play( a, formula_attributes)
+                    auto = play(a, formula_attributes)
                 else:
                     auto = a
             else:
@@ -100,7 +99,6 @@ def main(argv):
             if not spot.are_equivalent(origin, auto):
                 assert(False)
 
-
             acc_sets_count2 = auto.get_acceptance().used_sets().count()
 
         # except BaseException as err:
@@ -110,7 +108,6 @@ def main(argv):
             print(
                 "Automaton has too many acceptance sets, 32 is the limit.",
                 file=sys.stderr)
-
 
 
 if __name__ == "__main__":

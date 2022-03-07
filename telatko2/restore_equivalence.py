@@ -232,7 +232,8 @@ def new_make_equiv(aut, accs, sccs, merged_f, depend_logs):
             unused = []
             for clause in acc:
                 for lit in clause:
-                    used.append(merged_f.formula[lit.map_clause_index][lit.map_literal_index].num)
+                    used.append(
+                        merged_f.formula[lit.map_clause_index][lit.map_literal_index].num)
             unused = [num for num in all_set_nums if num not in used]
 
             """
