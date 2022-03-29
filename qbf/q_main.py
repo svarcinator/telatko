@@ -509,6 +509,8 @@ def not_incr_loop(aut, inner_edges_nums, inner_edges, tmp_mode,
                         K,
                         res,
                         tmp_mode))
+            if aut.get_acceptance().used_sets().count() <= 1:
+                return try_evaluate0(aut, original)
             return aut
 
         if aut.get_acceptance().used_sets().count() < 1:
