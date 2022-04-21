@@ -1011,6 +1011,24 @@ where
   the produced automaton is sent to \textit{stdout} in the HOA format.
 \end{description}
 
+
+The parameters of the last query of the QBF solver are encoded in the name of the automaton.
+
+The name of the automaton is in the following format:
+\begin{center}
+  \texttt{level\_marks\_solver}
+\end{center}
+where 
+\begin{itemize}
+    \item \texttt{level} $\in \{L1, L2, L3, T, F\}$ and it gives us the information about which level of simplification was applied (or in case of $T$ and $F$ if the acceptance formula can be $\true$ or $\false$).
+    \item \texttt{marks} $\in \mathbf{N}$ representing the number of marks we built the formula for.
+    \item \texttt{solver} $\in \{U, T, S\}$ where $U$ means that the query was unsatisfiable, $T$ means the solver timeouted and $S$ means that the simplification is satisfiable.
+\end{itemize}
+
+Note that we are only interested in the result of the last query, therefore we get the information that the simplification was satisfiable only if the result automaton has zero acceptance marks. Meaning that the acceptance condition is either $\true$ or $\false$.
+
+
+
 %}}}
 %{{{ experimental evaluation 
 
