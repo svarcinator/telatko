@@ -1011,6 +1011,24 @@ where
   the produced automaton is sent to \textit{stdout} in the HOA format.
 \end{description}
 
+
+The parameters of the last query of the QBF solver are encoded in the name of the automaton.
+
+The name of the automaton is in the following format:
+\begin{center}
+  \texttt{level\_marks\_solver}
+\end{center}
+where 
+\begin{itemize}
+    \item \texttt{level} $\in \{L1, L2, L3, T, F\}$ and it gives us the information about which level of simplification was applied (or in case of $T$ and $F$ if the acceptance formula can be $\true$ or $\false$).
+    \item \texttt{marks} $\in \mathbf{N}$ representing the number of marks we built the formula for.
+    \item \texttt{solver} $\in \{U, T, S\}$ where $U$ means that the query was unsatisfiable, $T$ means the solver timeouted and $S$ means that the simplification is satisfiable.
+\end{itemize}
+
+Note that we are only interested in the result of the last query, therefore we get the information that the simplification was satisfiable only if the result automaton has zero acceptance marks. Meaning that the acceptance condition is either $\true$ or $\false$.
+
+
+
 %}}}
 %{{{ experimental evaluation 
 
@@ -1019,14 +1037,14 @@ where
 We have used the tool \texttt{genltl} of the Spot
 library~\cite{duret.16.atva2} to generate LTL formulas from
 literature. The parametrized formulas were generated for all
-combinations of parameter values from 1 to 5. Altogether, we have
-generated 407 unique LTL formulas. These have been translated to
+combinations of parameter values from 1 to 4. Altogether, we have
+generated 348 unique LTL formulas. These have been translated to
 deterministic TELA by two state-of-the-art translators from the Owl
 library~\cite{kretinsky.18.atva} and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
-from the Spot library~\cite{duret.16.atva2}) and
+from the Spot library~\cite{duret.16.atva2} and
 \texttt{ltl3tela}~\cite{major.19.atva}. Each of the four automata sets
-produced by individual tools contain less than 407 automata as not all
+produced by individual tools contain less than 348 automata as not all
 of the formulas are successfully translated due to timeout of 60
 seconds. Further, we have removed automata with 0 or 1 acceptance
 marks as there is little point reducing these. Table
@@ -1046,10 +1064,14 @@ For each automata set (that is, the output of an individual LTL
 translator), we have applied all single-level reductions and the
 multi-level reduction, always with incremental approach and without
 reduction of the number of clauses. The timeout for each QBF query was
-set to 30 seconds. We have again filtered out the automata for which
-any of the four \telatko runs timed out after 120 seconds. We do this
-to make sure the numbers of acceptance marks can be meaningfully
-compared between different reduction levels of the same automata set.
+set to 30 seconds.
+%We have again filtered out the automata for which
+%any of the four \telatko runs timed out after 120 seconds. We do this
+%to make sure the numbers of acceptance marks can be meaningfully
+%compared between different reduction levels of the same automata set.
+Additionally, we have filtered one automaton from the \texttt{ltl3tela} set
+that cannot be processed by \telatko due to an extensive use of system
+resources.
 
 Table~\ref{tab:cumm-data} shows the cummulative numbers of marks in
 the input automata sets and after each reduction, together with the
@@ -1070,20 +1092,22 @@ and the number of successfully translated formulas.}
 \toprule
 tool        & version&homepage & automata \\
 \midrule
-\texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 162\\
-\texttt{ltl2dgra} & 21.0 & & 274\\
-\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 89\\
-\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 108\\
+\texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
+\texttt{ltl2dgra} & 21.0 & & 234\\
+\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
+\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 90\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[h]
 \caption{The cummulative number of acceptance marks before and after reduction
-for various automata sets. \textit{X/Y solved aut.} means that out of
-\textit{Y} successfully translated LTL formulas, every run of \telatko ended
-within 120 seconds time limit on \textit{X} automata. We sum up the acceptance
-marks only on these automata. The columns \textit{solver response} and
+for various automata sets.
+%\textit{X/Y solved aut.} means that out of
+%\textit{Y} successfully translated LTL formulas, every run of \telatko ended
+%within 120 seconds time limit on \textit{X} automata. We sum up the acceptance
+%marks only on these automata.
+The columns \textit{solver response} and
 \textit{solver timeout} refer to last call to the QBF solver (that is, the
 numbers of its successful responses within 30 seconds limit and timeouts).
 }
@@ -1098,8 +1122,8 @@ given number of acceptance marks after multi-level reduction. The
 table indicates that in many cases only 1 or 2 marks can be
 saved. However, the achieved reduction is substantial for some
 automata with a higher number of original acceptance marks. For
-example, in 17 cases, we have successfully reduced 8 or more
-acceptance marks to only 4. 
+example, in 22 cases, we have successfully reduced 7 or more
+acceptance marks to only 4.
 % Moreover, there were many timeouts of the last QBF query for manof these automata.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
 % reduced 8 or more acceptance marks to only 4.
