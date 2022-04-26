@@ -1058,7 +1058,9 @@ to simplify the formulas and to remove duplicates, and
 \texttt{autcross} to compare automata and measure the running times.
 
 Spot version 2.10.4 and Z3 version 4.8.13 have been used in the
-experimental evaluation.
+experimental evaluation. The experiments have been run on a computer
+with Intel® Core™ i7-8550U processor and 16 GB of memory running
+Debian 11.
 
 For each automata set (that is, the output of an individual LTL
 translator), we have applied all single-level reductions and the
@@ -1069,9 +1071,9 @@ set to 30 seconds.
 %any of the four \telatko runs timed out after 120 seconds. We do this
 %to make sure the numbers of acceptance marks can be meaningfully
 %compared between different reduction levels of the same automata set.
-Additionally, we have filtered one automaton from the \texttt{ltl3tela} set
-that cannot be processed by \telatko due to an extensive use of system
-resources.
+%Additionally, we have filtered one automaton from the \texttt{ltl3tela} set
+%that cannot be processed by \telatko due to an extensive use of system
+%resources.
 
 Table~\ref{tab:cumm-data} shows the cummulative numbers of marks in
 the input automata sets and after each reduction, together with the
@@ -1095,7 +1097,7 @@ tool        & version&homepage & automata \\
 \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
 \texttt{ltl2dgra} & 21.0 & & 234\\
 \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
-\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 90\\
+\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
 \bottomrule
 \end{tabular}
 \end{table}
