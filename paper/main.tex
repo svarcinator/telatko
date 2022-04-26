@@ -1,4 +1,4 @@
-\documentclass[a4paper,UKenglish,cleveref, autoref, thm-restate]{lipics-v2021}
+\documentclass[a4paper,UKenglish,cleveref,autoref,thm-restate]{lipics-v2021}
 %\documentclass[a4paper,UKenglish,cleveref, autoref, anonymous, thm-restate]{lipics-v2021}
 %
 %This is a template for producing LIPIcs articles. 
@@ -39,7 +39,7 @@
 %{{{ (La)TeX definitions
 
 \newcommand{\Nset}{{\mathbb{N}_0}}
-\newcommand{\todo}[1]{\textcolor{red}{#1}}
+\newcommand{\todo}[1]{\marginpar{\textcolor{red}{#1}}}
 %\def\Inf{\ensuremath{\mathsf{Inf}}}
 %\def\Fin{\ensuremath{\mathsf{Fin}}}
 \DeclareMathOperator{\Inf}{\mathsf{Inf}}
@@ -87,7 +87,7 @@
 %{{{ abstract
 
 \begin{abstract}
-  \emph{Transition-based Emerson-Lei automata (TELA)} become a popular
+  \emph{Transition-based Emerson-Lei automata (TELA)} became a popular
   formalism that generalizes many traditional kinds of automata over
   infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
   automata. Transitions in a TELA are labelled with acceptance marks
@@ -103,13 +103,19 @@
   % : if a constructed QBF formula is satisfiable then
   % its model encodes an equivalent accepting formula with less
   % acceptance marks.
-  In fact, we present three formula constructions trading speed for
-  higher reduction efficiency. We evaluated our reduction technique on
-  TELA produced by state-of-the-art tools of the libraries Owl and
-  Spot and by the tool \texttt{ltl3tela}. The technique reduced some
-  acceptance marks in automata produced by all the tools. The achieved
-  reduction on automata produced by tools of the Owl library was
-  between 30 and 40\%.
+  In fact, we present three formula constructions
+  % trading speed for higher reduction efficiency.
+  with increasing reduction potential and formula complexity, and thus
+  also decreasing speed of their satisfiability solving. We evaluated
+  our reduction technique on TELA produced by state-of-the-art tools
+  of the libraries Owl and Spot and by the tool \texttt{ltl3tela}. The
+  technique reduced some acceptance marks in automata produced by all
+  the tools. On automata with more than one acceptance mark produced
+  by tools Delag and Rabinizer~4 of the Owl library, our technique reduced
+  reduced 27.5\% and 38.4\% of acceptance marks, respectively. \todo{zkontrolovat!}
+  % The achieved
+  % reduction of acceptance marks on automata produced by tools of the Owl library was
+  % between 25 and 40\%.
 \end{abstract}
 
 %}}}
@@ -133,17 +139,22 @@
 % acceptance condition was implemented in the \emph{Hanoi omega-automata
 %   format (HOAF)}~\cite{babiak.15.cav}, with the difference that finiteness 
 
-In 1987, Emerson and Lei~\cite{emerson.87.scp} introduced automata
-over infinite words where acceptance conditions are arbitrary
-combinations of acceptance primitives saying that a certain set of
-states should be visited finitely often or infinitely often. In 2015,
-the same kind of acceptance condition was described in the \emph{Hanoi
-  omega-automata format (HOAF)}~\cite{babiak.15.cav}. The only
-difference is that the acceptance primitives talk about finitely or
-infinitely often visited acceptance marks rather than sets of states.
-Acceptance marks are placed on transitions and each mark identifies
-the set of transitions containing this mark. Hence, these automata are
-called \emph{transition-based Emerson-Lei automata (TELA)} and they
+Automata over infinite words like Büchi, Rabin, Streett, or parity
+automata play a crucial role in many algorithms related to the
+concurrency theory. In particular, they are used in specification,
+verification, analysis, monitoring, and synthesis of various systems
+with infinite behaviour. In 1987, Emerson and
+Lei~\cite{emerson.87.scp} introduced automata over infinite words
+where acceptance conditions are arbitrary combinations of acceptance
+primitives saying that a certain set of states should be visited
+finitely often or infinitely often. In 2015, the same kind of
+acceptance condition was described in the \emph{Hanoi omega-automata
+  format (HOAF)}~\cite{babiak.15.cav}. The only difference is that the
+acceptance primitives talk about finitely or infinitely often visited
+acceptance marks rather than sets of states.  Acceptance marks are
+placed on transitions and each mark identifies the set of transitions
+containing this mark. Hence, these automata are called
+\emph{transition-based Emerson-Lei automata (TELA)} and they
 generalize many traditional kinds of automata over infinite words
 including Büchi, co-Büchi, Rabin, Streett, and parity automata.
 
@@ -151,15 +162,14 @@ TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
 often use less states than equivalent automata with simpler acceptance
 conditions. Further, algorithms handling TELA can automatically handle
-all automata with traditional acceptance conditions. TELA can
-be obtained for example by translating LTL formulas by
-\texttt{ltl2dela} (known as Delag)~\cite{muller.17.gandalf}),
-\texttt{ltl3tela}~\cite{major.19.atva},
-\texttt{ltl2dgra} (known as Rabinizer~4)~\cite{kretinsky.18.cav},
-or \texttt{ltl2tgba} which is a part of the Spot library~\cite{duret.16.atva2}.
-There are also some algorithms processing
-these automata, for example the emptiness check~\cite{baier.19.atva}
-or translation of TELA to parity
+all automata with traditional acceptance conditions. TELA can be
+obtained for example by translating LTL formulas by \texttt{ltl2dela}
+(known as Delag)~\cite{muller.17.gandalf},
+\texttt{ltl3tela}~\cite{major.19.atva}, \texttt{ltl2dgra} (known as
+Rabinizer~4)~\cite{kretinsky.18.cav}, or \texttt{ltl2tgba} which is a
+part of the Spot library~\cite{duret.16.atva2}.  There are also
+algorithms processing these automata, for example the emptiness
+check~\cite{baier.19.atva} or translation of TELA to parity
 automata~\cite{renkin.20.atva,casares.22.tacas}.
 
 Algorithms processing TELA are often sensitive to the number of
@@ -202,8 +212,8 @@ automata produced by Delag~\cite{muller.17.gandalf},
 Rabinizer~4~\cite{kretinsky.18.cav} (both included in the Owl library),
 Spot~\cite{duret.16.atva2}
 and \texttt{ltl3tela}~\cite{major.19.atva}.  While the reduction is relatively
-modest for TELA produced by \texttt{ltl3tela} and Spot,
-it is substantial for automata produced by tools of the Owl library.
+modest on TELA produced by \texttt{ltl3tela} and Spot,
+it is substantial on automata produced by the tools of the Owl library.
 
 \paragraph*{Related results}
 There is a simple technique~\cite{babiak.13.spin} reducing the number
@@ -284,13 +294,13 @@ set of marks that appear on transitions in $T$.
 %   marks that occur in infinitely many transitions of run $\pi$.
 % \end{itemize}
 
-A run $\pi$ of $\mA$ over an infinite word
-$u = u_{0}u_{1}u_{2}\dots \in \Sigma^{\omega}$ is an infinite sequence
+A \emph{run} $\pi$ of $\mA$ over an infinite word
+$u = u_{0}u_{1}u_{2}\ldots \in \Sigma^{\omega}$ is an infinite sequence
 of adjacent transitions
-$\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots\in\delta^{\omega}$ where
+$\pi=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\ldots\in\delta^{\omega}$ where
 $q_0=q_I$. Let $\minf(\pi)$ denote the set of transitions that appear
 infinitely many times in $\pi$. Run $\pi$ is \emph{accepting} iff
-$\minf(\pi)$ satisfies the formula $\varphi$, where a set of $T$ of
+$\minf(\pi)$ satisfies the formula $\varphi$, where a set $T$ of
 transitions satisfies $\Inf m$ iff $m\in\mks(T)$ and it satisfies
 $\Fin m$ iff $m\not\in\mks(T)$. The \emph{language} of automaton $\mA$ is
 the set
@@ -302,34 +312,34 @@ if $L(\mA)=L(\mB)$.
 
 An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
   (DNF)} if it is a disjunction of clauses, where each clause is a
-conjunction of some terms of the form $\Fin m$ or $\Inf m$. Formula
-$\false$ corresponds to the disjunction of zero clauses and formula
-$\true$ corresponds to one clause with zero terms. Each acceptance
-formula can be transformed into an equivalent formula in DNF.
+conjunction of terms of the form $\Fin m$ or $\Inf m$.  Each
+acceptance formula can be transformed into an equivalent formula
+in~DNF. Formula $\false$ corresponds to the disjunction of zero
+clauses and formula $\true$ corresponds to one clause with zero terms.
 
 A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
 adjacent transitions of the form
-$\rho=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\dots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
+$\rho=(q_0,u_0,M_0,q_1)(q_1,u_1,M_1,q_2)\ldots(q_{n-1},u_{n-1},M_{n-1},q_n)\in\delta^+$
 such that $p=q_0$ and $q=q_n$. A nonempty set of states $S\subseteq Q$
 is called a nontrivial \emph{strongly connected component (SCC)} if
 for each $p,q\in S$ there is a path from $p$ to $q$. An SCC S is
 \emph{maximal} if there is no SCC $S'$ satisfying $S\subsetneq S'$. In
 the rest of this paper, SCC always refers to a maximal SCC. Given a
-set of states $S\subseteq Q$, $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
-denotes the set of all transitions between states in $S$. Further, for
-each mark $m\in M$, let $\delta_m$ denotes the set of all transitions
-marked with $m$, i.e., $\delta_m=\{t\in\delta\mid m\in
-\mks(t)\}$.
+set of states $S\subseteq Q$, let $\delta_S=\delta\cap (S\times \Sigma \times 2^M \times S)$
+denote the set of all transitions between states in $S$. Further, for
+each mark $m\in M$, let $\delta_m=\{t\in\delta\mid m\in
+\mks(t)\}$ denote the set of all transitions
+marked with $m$.
 % \todo{The sets $\delta_m$ are called \emph{acceptance sets}. Given
 % an SCC $S$ and a mark $m\in M$, by $\delta_{S,m}$ we denote the set
 % $\delta_{S,m}=\delta_S\cap\delta_m$.}
 A set of transitions $T\subseteq\delta$ is called a \emph{cycle} is
-there exists a path from a state $p$ to the same state containing all
-transitions of $T$ (potentially multiple times) and no transition
-outside $T$. Finally, we assume that each TELA $\mA$ contains only
-states $q$ that are reachable from the initial state $q_I$ (i.e.,
-$q=q_I$ or there is a path from $q_I$ to $q$) as states that are not
-reachable from $q_I$ can be eliminated without any impact on $L(\mA)$.
+there exists a path from a state $p$ to the same state containing each
+transition of $T$ at least once and no transition outside
+$T$. Finally, we assume that each TELA $\mA$ contains only states $q$
+that are reachable from the initial state $q_I$ (i.e., $q=q_I$ or
+there is a path from $q_I$ to $q$) as states that are not reachable
+from $q_I$ can be eliminated without any impact on $L(\mA)$.
 
 In graphical representation of automata, we often use acceptance marks
 $\tacc{1}{1},\tacc{2}{2},\ldots\in M$. Further, an edge 
@@ -361,7 +371,7 @@ formula. However, the size of this Boolean formula can be exponential
 in the size of the original QBF. Let $V$ be the set of all
 propositional variables. A mapping $\mu:V\rightarrow\{\true,\false\}$
 is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
-assignment of the equivalent Boolean formula. A QBF formula is
+assignment of an equivalent Boolean formula. A QBF formula is
 \emph{satisfiable} iff it has a model.
 
 % A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
@@ -408,11 +418,11 @@ In fact, this corresponds to the shape of the QBF formulas we will
 construct. As we are looking for $\psi$ and $\rem$ such that the
 formula holds, the subformula $\msat_{\psi,\rem}(T)$ contains many
 free variables representing possible instances of $\psi$ and
-$\rem$. If the formula is satisfiable, then its models encode desired
-instances of $\psi$ and $\rem$.  In the following, we assume that we
-are looking for a new acceptance formula $\psi$ in DNF. Note that our
-reduction method can be easily adapted to look for $\psi$ of a
-different shape.
+$\rem$. If the formula is satisfiable, then each of its models encodes
+a desired instance of $\psi$ and $\rem$.  In the following, we assume
+that we are looking for a new acceptance formula $\psi$ in DNF. Note
+that our reduction method can be easily adapted to look for $\psi$ of
+a different shape.
 
 Now we describe the construction of QBF formulas in detail. The
 construction is parametrized by two integers $C,K\ge 0$, where $K$ is
@@ -420,8 +430,8 @@ the desired number of acceptance marks and $C$ is the number of
 clauses of $\psi$. For simplicity, we assume that the reduced
 automaton will use the acceptance marks $N_K=\{1,2,\ldots,K\}$.
 %Further, we consider only subsets $T\subseteq\bigcup_{\textrm{SCC}~S}\delta_S$
-First we describe Boolean variables used in the constructed QBF
-formulas.
+We start with a description of Boolean variables used in the
+constructed QBF formulas.
 \begin{itemize}
 \item For each transition $t\in\delta$, variable $e_t$ says whether
   $t$ is in the current set $T$ or not.
@@ -475,8 +485,8 @@ original acceptance formula $\varphi$ and it is derived directly from
 $\varphi$. Recall that $T$ satisfies $\Inf m$ iff $m\in\mks(T)$, which
 means that $T$ contains some transition with mark $m$. As the
 transitions with mark $m$ form the set $\delta_m$, $\Inf m$ can be
-expresses by $\bigvee_{t\in\delta_m}e_t$. Similarly, $T$ satisfies
-$\Fin m$ iff $m\not\in\mks(T)$, which can be expresses by
+expressed by $\bigvee_{t\in\delta_m}e_t$. Similarly, $T$ satisfies
+$\Fin m$ iff $m\not\in\mks(T)$, which can be expressed by
 $\bigwedge_{t\in\delta_m}\neg e_t$. Hence, $\msat_\varphi(\vec{e})$
 arises from $\varphi$ by replacing
 \begin{itemize}
@@ -512,25 +522,28 @@ intended meaning of $\mcycle(\vec{e})$ is
 \[
   \mcycle(\vec{e}) \iff \Te\textrm{ is a cycle}.
 \]
-In fact, only the direction ``$\Longleftarrow$'' is required for the
-correctness of our reduction method. If $\Te$ is not a cycle and
-$\mcycle(\vec{e})$ holds, then the required equivalence
+In fact, only the direction ``$\Longleftarrow$'' is needed for the
+correctness of our reduction method. If there are some valuations of
+$\vec{e}$ such that $\mcycle(\vec{e})$ holds and $\Te$ is not a cycle,
+then we will superfluously require the equivalence
 $\msat_\varphi(\vec{e}) \iff
-\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ on this valuation of
-$\vec{e}$ adds a superfluous constraint on $\psi$ represented by
-$\vec{i},\vec{f}$ and $\rem$ represented by $\vec{n}$. These
-superfluous constraints can lead to loss of reduction opportunities,
-but not to incorrectness. This observation allows us to trade the
-precision of $\mcycle(\vec{e})$ for simplicity of the formula.
-
-In the following, we define three versions of $\mcycle(\vec{e})$:
+\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ on these valuations.
+% adds a superfluous constraint on $\psi$ (represented by
+% $\vec{i},\vec{f}$) and $\rem$ (represented by $\vec{n}$).
+These superfluous constraints can lead to loss of reduction
+opportunities, but not to incorrectness. This observation allows us to
+trade the precision of $\mcycle(\vec{e})$ for its simplicity.
+formula.
+%
+We define three versions of $\mcycle(\vec{e})$:
 \begin{itemize}
 \item $\mcycle_1(\vec{e})$ is a lightweight version, which only says
   that $\Te$ is nonempty. It does not use the information about
   automaton structure, but it comes with an interesting simplification
   of the whole formula $\Phi_{C,K}$.
 \item $\mcycle_2(\vec{e})$ is an intermediate version. It says that $\Te$
-  is nonempty and every transition in $\Te$ has to have a preceding
+  is nonempty and every transition in $\Te$ has % to have
+  a preceding
   and a succeeding transition in $\Te$, which is a necessary condition
   for being a cycle, but not a sufficient one.
 \item $\mcycle_3(\vec{e})$ is a strict version saying that $\Te$ is a
@@ -540,7 +553,8 @@ In the following, we define three versions of $\mcycle(\vec{e})$:
   existential ones and the resulting formula thus contains quantifier
   alternation.
 \end{itemize}
-We write $\Phi_{j,C,K}$ when we want to emphasize that the particular
+We write $\Phi_{j,C,K}$ %when we want
+to emphasize that a particular
 formula $\Phi_{C,K}$ contains the version $\mcycle_j(\vec{e})$.
 
 \subsection{Lightweight version $\mcycle_1(\vec{e})$}
@@ -559,7 +573,7 @@ automaton. The only aspect of a transition $t$ reflected by the
 formula is its set of marks $\mks(t)$. Hence, we do not have to
 distinguish between transitions with the same sets of marks.
 
-Formally, we define an equivalence $\sim\subseteq\delta\times\delta$
+Formally, we define an equivalence ${\sim}\subseteq\delta\times\delta$
 on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
 \begin{lemma}
   Assume that there is a function $\rem$ and a formula $\psi$ such that 
@@ -587,7 +601,7 @@ on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
 
   Let $T\subseteq\delta$ be an arbitrary nonempty set. We construct
   the set $\overline{T}=\{\overline{t}\mid t\in T\}$. As
-  $\mks(t)=\mks(\overline{t})$ holds for all transitions, we get
+  $\mks(t)=\mks(\overline{t})$ for all transitions, we get
   $\mks(T)=\mks(\overline{T})$ and thus
   \[
     T~\msat~\varphi~\iff~\overline{T}~\msat~\varphi.
@@ -612,13 +626,13 @@ The lemma suggests the following simplification of the whole formula
 $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$. Before we build the
 formula, we compute the equivalence $\sim$ on automata transitions and
 remove all transitions except one of each class. Then we build the
-formula for this pruned automaton as described above. The more
-transitions we removed, the shorter formula with less $e_t$ variables
-we obtain. If the formula $\Phi_{1,C,K}$ for the pruned automaton is
-satisfiable and we derive $\rem$ and $\psi$ from its model, we can use
-safely them also on the original automaton. We only need to extend
-$\rem$ to all transitions such that it changes the acceptance marks on
-all equivalent transitions in the same way.
+formula $\Phi_{1,C,K}$ for this pruned automaton. The more transitions
+we removed, the shorter formula with less $e_t$ variables we
+obtain. If the formula $\Phi_{1,C,K}$ for the pruned automaton is
+satisfiable, we derive $\rem$ and $\psi$ from its model and use them
+with the original automaton. We only need to extend $\rem$ to all
+transitions such that it changes the acceptance marks on all
+equivalent transitions in the same way. \todo{je to OK?}
 
 \subsection{Intermediate version $\mcycle_2(\vec{e})$}
 The intermediate version says that $\Te$ is nonempty and for each state
@@ -736,11 +750,18 @@ cycles can be characterised in the following way.
   $\post,\pre$. Hence, let us assume that $T\subseteq\delta_\post$ and
   $T\subseteq\delta_\pre$. Then for each $t_i\in T$ leading from $p_i$
   to $q_i$ we have that $p_i\in\post$ and $q_i\in\pre$, which implies
-  that there is a path $\rho_i\in T^+$ containing $t_i$ and leading
-  from $p$ back to $p$. If we concatenate all these paths, we get the
-  path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that contains all transitions of
-  $T$ and leads from $p$ back to $p$, which means that $T$ is a cycle.
-  This is a contradiction.
+  that
+  \begin{itemize}
+  \item $p_i=p$ (we set $\rho'_i=\varepsilon$ in this case) or
+    there is a path $\rho'_i\in T^+$ leading from $p$ to $p_i$, and
+  \item $q_i=p$ (we set $\rho''_i=\varepsilon$ in this case) or
+    there is a path $\rho''_i\in T^+$ leading from $q_i$ to $p$.
+  \end{itemize}
+  Then there is a path $\rho_i=\rho'_it_i\rho''_i\in T^+$ leading from
+  $p$ back to $p$ and containing $t_i$. If we concatenate all these
+  paths, we get the path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that
+  contains all transitions of $T$ and leads from $p$ back to $p$,
+  which means that $T$ is a cycle.  This is a contradiction.
 \end{proof}
 
 The formula $\mcycle_3(\vec{e})$ says that $\Te$ is nonempty and each
@@ -783,7 +804,7 @@ $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$ and its SCC $S$, by $\mA^S$ we
 denote the automaton corresponding to the part of $\mA$ delimited by
 $S$, i.e., $\mA^S=(S,M,\Sigma,q',\delta_S,\varphi)$ where $q'$ is an
 arbitrary state of $S$. Further, let $\vec{n}_S$ denote the vector of
-variables $n_{t,k}$ where $t\in\delta_S$ and $k\in N_k$. By
+variables $n_{t,k}$ where $t\in\delta_S$ and $k\in N_K$. By
 $\Phi^S_{j,C,K}(\vec{n}_S,\vec{i},\vec{f})$ we denote the formula
 $\Phi_{j,C,K}$ constructed for $\mA^S$ as presented above.
 Finally, we define the optimized QBF formula as
@@ -1197,6 +1218,7 @@ various optimizations, e.g., simulations.
 
 Do submission:
 \begin{itemize}
+\item upravit nazev a abstrakt, zduraznit uzitecnost TELA pro concurrency (analysis of probabilistic systems...)
 \item do experimentu napsat, jaky hardware pouzivame (merit cas bez toho nedava smysl)
 \item spustit experimenty bez timeoutu na telatko (?a delsi timeout na QBF?)
 \item prelestit text v poslednich dvou kapitolach
