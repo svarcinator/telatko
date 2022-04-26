@@ -832,7 +832,7 @@ $\mks(\rem(t))=\emptyset$.
 
 This section explains how we use the QBF formulas constructed in the
 previous section to reduce the number of acceptance marks in TELA
-automata. First we describe a \emph{single-level} reduction, which
+automata. First, we describe a \emph{single-level} reduction, which
 uses only a single kind of QBF formulas. More precisely, we talk about
 \emph{level~1}, \emph{level~2}, or \emph{level~3} reduction when
 $\Phi^\mathit{opt}_{1,C,K}$, $\Phi^\mathit{opt}_{2,C,K}$, or
@@ -924,8 +924,7 @@ $\Phi^\mathit{opt}_{3,C,K}$ is used, respectively.
 
 The reduction procedure called $\mathit{SingleLevelReduction}$ is
 given in Algorithm~\ref{alg:single}. Besides the reduction of
-acceptance marks, the algorithm also reduces the number of clauses in
-acceptance formula if the last argument $\mathit{reduceC}$ is set to
+acceptance marks, the algorithm also reduces the number of clauses in the acceptance formula if the last argument $\mathit{reduceC}$ is set to
 $\true$.
 % In the first step, the procedure checks whether the input
 % automaton represents the empty language and if this is the case, it
@@ -939,7 +938,7 @@ or it runs out of resources. If the loop ends with $K=1$, we check
 whether an acceptance condition without any mark (i.e., $\true$ or
 $\false$) can be used. These checks are based on an inspection of the
 automaton rather than on QBF solving. If some of the checks succeeds,
-we return the correspodning automaton without any acceptance
+we return the corresponding automaton without any acceptance
 mark. Otherwise, if $\mathit{reduceC}$ is set to $\true$ then the
 procedure gradually reduces the number of clauses in the second
 \textbf{while} loop. Note that the loop never checks for acceptance
@@ -960,7 +959,7 @@ want to say that the mark $k\in N_K$ is not used, we replace $\Phi$ by
 \[
   \Phi~\wedge~\bigwedge_{t\in\delta}\neg n_{t,k}~\wedge\bigwedge_{c\in\{1,2,\ldots C\}}(\neg i_{c,k}\wedge\neg f_{c,k}).
 \]
-The second \textbf{while} can transformed to an incremental version
+The second \textbf{while} can be transformed to an incremental version
 similarly. The incremental approach benefits from the fact that some
 QBF solvers can decide an extended formula faster as they reuse the
 information computed when solving the original formula.
@@ -1035,7 +1034,7 @@ $\mathit{SingleLevelReduction}(\mA,j,\true)$ for $j\in\{1,2,3\}$. The
 figure clearly illustrates that the higher level of reduction we use,
 the more acceptance marks can be reduced. On the other side, lower
 levels are typically faster. The best results can be often achieved by
-combining reductions of all levels. We call this aproach
+combining reductions of all levels. We call this approach
 \emph{multi-level} reduction. It is a straightforward sequential
 application of the three levels, see Algorithm~\ref{alg:multi}.
 
@@ -1089,9 +1088,9 @@ If some call of the function
 $\mathit{satisfiable}(\Phi^\mathit{opt}_{j,C,K{-}1})$ in the first
 \textbf{while} loop of Algorithm~\ref{alg:single} does not return
 $\true$, then the name of the output automaton encodes the reason for
-it. In case of a single level reduction, the name has the form
+it. In the case of a single level reduction, the name has the form
 \texttt{L$j$\_$k$\_$X$}, where $j$ is the considered level, $k=K-1$ is
-the number of acceptance mark considered by the formula, $X$ is either
+the number of acceptance marks considered by the formula, $X$ is either
 \texttt{U} if the formula is unsatisfiable or \texttt{T} if the solver
 did not decided within the time limit. If $X$ is \texttt{T}, we longer
 timeout may lead to further reductions. a If the multi-level reduction
@@ -1139,8 +1138,8 @@ library~\cite{kretinsky.18.atva} and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
 from the Spot library~\cite{duret.16.atva2} and
 \texttt{ltl3tela}~\cite{major.19.atva}. Each of the four automata sets
-produced by individual tools contain less than 348 automata as not all
-of the formulas are successfully translated due to timeout of 60
+produced by individual tools contains less than 348 automata as not all
+of the formulas are successfully translated due to a timeout of 60
 seconds. Further, we have removed automata with 0 or 1 acceptance
 marks as there is a little point reducing these. Table
 \ref{tab:ltltranslators} shows the exact versions and homepages of
@@ -1228,8 +1227,8 @@ solver has not been answered in the time limit.}
 Figure~\ref{fig:quantile} presents the time spent by multi-level
 reduction of automata in individual automata sets. The chart shows a
 pleasing finding that for every set, most automata are reduced in
-under a second and the high cummulative running times are caused by
-few complicated automata.
+under a second and the high cumulative running times are caused by
+a few complicated automata.
 
 \begin{figure}[b]
 \caption{Performance of \telatko on different automata sets. The $x$ axis
@@ -1262,14 +1261,14 @@ We have presented an application of QBF solving to reduction of the number of
 acceptance marks in transition-based Emerson-Lei automata. The method
 has been implemented and our experimental results show that it is possible
 to use the QBF solvers to find equivalent acceptance conditions of TELA
-with less acceptance marks and without changes to automata structure.
+with fewer acceptance marks and without changes to automata structure.
 
 The reduction of acceptance marks is not the only application of the
 presented approach: one could possibly look for, e.g., equivalent
 parity automata or automata without $\Fin$-marks, depending on the
 subsequent use of the automata. Even though the QBF queries can be
 time-consuming, in practice it can be well used and one can find a
-good trade-off between speed and efficiency by choosing precision of
+good trade-off between speed and efficiency by choosing the precision of
 the reduction and setting a reasonable timeout.
 
 In the future work, it could be examined how the reductions of the acceptance
