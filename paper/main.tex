@@ -1093,14 +1093,15 @@ it. In case of a single level reduction, the name has the form
 \texttt{L$j$\_$k$\_$X$}, where $j$ is the considered level, $k=K-1$ is
 the number of acceptance mark considered by the formula, $X$ is either
 \texttt{U} if the formula is unsatisfiable or \texttt{T} if the solver
-ran out of resources. If $X$ is \texttt{T}, we know that additional
-resources (typically longer timeout) may lead to further reductions.
-If the multi-level reduction is used, the automaton name contains the
-information from all levels. For example, the name `\texttt{L1\_5\_U
-  L2\_3\_U L3\_1\_T}' means that level 1 reduced the number of marks
-to 6 (reduction to 5 is impossible on this level), level 2 reduced it
-to 4, and level 3 to 2 and the automaton may be potentially reduced
-further.
+did not decided within the time limit. If $X$ is \texttt{T}, we longer
+timeout may lead to further reductions. a If the multi-level reduction
+is used, the automaton name contains the information from all
+levels. For example, the name `\texttt{L1\_5\_U L2\_3\_U L3\_1\_T}'
+means that level 1 reduced the number of marks to 6 (reduction to 5 is
+impossible on this level), level 2 reduced it to 4, and level 3 to 2
+as the QBF solver did not finished in the time limit when trying to
+reduce the number of marks to
+1.%when tryint the automaton may be potentially reduced further.
 
 
 % that does not . 
@@ -1129,9 +1130,11 @@ further.
 We have used the tool \texttt{genltl} of the Spot
 library~\cite{duret.16.atva2} to generate LTL formulas from
 literature. The parametrized formulas were generated for all
-combinations of parameter values from 1 to 4. Altogether, we have
-generated 348 unique LTL formulas. These have been translated to
-deterministic TELA by two state-of-the-art translators from the Owl
+combinations of parameter values from 1 to 4. We used the tool
+\texttt{ltlfilt} of the Spot library to simplify the formulas and
+remove duplicates. Altogether, we have generated 348 unique LTL
+formulas. These have been translated to deterministic TELA by two
+state-of-the-art translators from the Owl
 library~\cite{kretinsky.18.atva} and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
 from the Spot library~\cite{duret.16.atva2} and
@@ -1139,43 +1142,10 @@ from the Spot library~\cite{duret.16.atva2} and
 produced by individual tools contain less than 348 automata as not all
 of the formulas are successfully translated due to timeout of 60
 seconds. Further, we have removed automata with 0 or 1 acceptance
-marks as there is little point reducing these. Table
-\ref{tab:ltltranslators} shows the exact versions of used translators,
-the homepage of the used tools and the number of automata produced by
-the given tool from the LTL formulas after filtering.
-
-We have used multiple other helper tools in the experimental
-evaluation.  Alongside \texttt{genltl}, we have used \texttt{ltlfilt}
-to simplify the formulas and to remove duplicates, and
-\texttt{autcross} to compare automata and measure the running times.
-
-Spot version 2.10.3.dev and Z3 version 4.8.15 have been used in the
-experimental evaluation. The experiments have been run on a computer
-with Intel® Core™ i7-8700 processor and 32 GB of memory running
-Ubuntu 20.04.4.
-
-For each automata set (that is, the output of an individual LTL
-translator), we have applied all single-level reductions and the
-multi-level reduction, always with incremental approach and without
-reduction of the number of clauses. The timeout for each QBF query was
-set to 30 seconds.
-%We have again filtered out the automata for which
-%any of the four \telatko runs timed out after 120 seconds. We do this
-%to make sure the numbers of acceptance marks can be meaningfully
-%compared between different reduction levels of the same automata set.
-%Additionally, we have filtered one automaton from the \texttt{ltl3tela} set
-%that cannot be processed by \telatko due to an extensive use of system
-%resources.
-
-Table~\ref{tab:cumm-data} shows the cummulative numbers of marks in
-the input automata sets and after each reduction, together with the
-reduction ratio and total time spent by the considered reduction. The
-columns \textit{solver response} and \textit{solver timeout} show the
-number of automata for which the last query to QBF solver has been
-successfully answered, or the solver timed out within a 30 seconds
-limit to a single query, respectively. The timeout of the last QBF
-query implies that the automaton could be potentially further reduced
-by the reduction with a longer time limit.
+marks as there is a little point reducing these. Table
+\ref{tab:ltltranslators} shows the exact versions and homepages of
+used translators, and the number of automata produced by each
+translator after removing the automata with less than two marks.
 
 \begin{table}[b]
 \caption{LTL to automata translators used for the experimental evaluation
@@ -1194,19 +1164,40 @@ tool        & version&homepage & automata \\
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
-\caption{The cummulative number of acceptance marks before and after reduction
-for various automata sets.
+For each automata set (that is, the automata produced by an individual
+LTL translator), we have applied all single-level reductions and the
+multi-level reduction, always with incremental approach and without
+reduction of the number of clauses. The timeout for each QBF query was
+set to 30 seconds.
+
+For the experiments we used the version of \texttt{telatko} build with
+Spot library version 2.10.4 and Z3 version 4.8.15. The experiments
+have been run on a computer with Intel® Core™ i7-8700 processor and 32
+GB of memory running Ubuntu 20.04.4. We used the tool
+\texttt{autcross} of the Spot library to get the statistics of the
+reduced automata and the running times.
+
+Table~\ref{tab:cumm-data} shows the cummulative numbers of marks in
+the input automata sets and after each reduction, together with the
+reduction ratio and total time spent by the considered reduction. The
+column \textit{solver timeout} shows the number of automata for which
+the last query to QBF solver did not finished within the 30 seconds
+limit. The timeout of the last QBF query implies that the automaton
+may be potentially further reduced by the reduction with a longer time
+limit.
+
+\begin{table}[t]
+\caption{The cummulative numbers of acceptance marks before and after reduction
+for various reductions and automata sets.
 %\textit{X/Y solved aut.} means that out of
 %\textit{Y} successfully translated LTL formulas, every run of \telatko ended
 %within 120 seconds time limit on \textit{X} automata. We sum up the acceptance
 %marks only on these automata.
-The columns \textit{solver response} and
-\textit{solver timeout} refer to last call to the QBF solver (that is, the
-numbers of its successful responses within 30 seconds limit and timeouts).
-}
+The column \textit{solver timeout} indicates the number of instances
+when the last call to the QBF solver timed out.  }
 \label{tab:cumm-data}
 \centering
+\setlength{\tabcolsep}{10pt}
 \input{table-data.tex}
 \end{table}
 
@@ -1216,7 +1207,7 @@ given number of acceptance marks after multi-level reduction. The
 table indicates that in many cases only 1 or 2 marks can be
 saved. However, the achieved reduction is substantial for some
 automata with a higher number of original acceptance marks. For
-example, in 22 cases, we have successfully reduced 7 or more
+example, in 24 cases, we have successfully reduced 7 or more
 acceptance marks to only 4.
 % Moreover, there were many timeouts of the last QBF query for manof these automata.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
@@ -1240,7 +1231,7 @@ pleasing finding that for every set, most automata are reduced in
 under a second and the high cummulative running times are caused by
 few complicated automata.
 
-\begin{figure}[h]
+\begin{figure}[b]
 \caption{Performance of \telatko on different automata sets. The $x$ axis
 represents the number of reduced automata, the $y$ axis shows the time spent
 reducing (in seconds).}
@@ -1248,6 +1239,8 @@ reducing (in seconds).}
 \centering
 \input{quantile.tex}
 \end{figure}
+
+\todo{dodelat popis os u quantile plotu}
 
 % Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
 % automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
@@ -1285,28 +1278,20 @@ various optimizations, e.g., simulations.
 
 %}}}
 
-\section{TODO}
+% \section{TODO}
 
-Do submission:
-\begin{itemize}
-\item upravit nazev a abstrakt, zduraznit uzitecnost TELA pro concurrency (analysis of probabilistic systems...)
-\item do experimentu napsat, jaky hardware pouzivame (merit cas bez toho nedava smysl)
-\item spustit experimenty bez timeoutu na telatko (?a delsi timeout na QBF?)
-\item prelestit text v poslednich dvou kapitolach
-\end{itemize}
-
-\noindent
-Do budoucna:
-\begin{itemize}
-\item level 1 bez SCC optimalizace
-\item nahradit weak SCC jednou hranou pro neakceptujici a jinou pro akceptujici
-\item sladit konstrukci QBF formuli s implementaci
-\item podivat se znovu na uzitecnost a potrebnost optimalizaci typu ``klauzule neni false'' a ``alespon jedna klauzule je neprazdna''
-\item sladit popis algoritmu s implementaci
-\item v experimentech nejak sledovat vztah usetreneho casu a usetrenych znacek?
-\item zkusit aplikovat na jine typy automatu (treba TGBA nebo Rabin)?
-\item zkusit, zda/jak redukce znacek umozni redukovat stavovy prostor
-\end{itemize}
+% \noindent
+% Do budoucna:
+% \begin{itemize}
+% \item level 1 bez SCC optimalizace
+% \item nahradit weak SCC jednou hranou pro neakceptujici a jinou pro akceptujici
+% \item sladit konstrukci QBF formuli s implementaci
+% \item podivat se znovu na uzitecnost a potrebnost optimalizaci typu ``klauzule neni false'' a ``alespon jedna klauzule je neprazdna''
+% \item sladit popis algoritmu s implementaci
+% \item v experimentech nejak sledovat vztah usetreneho casu a usetrenych znacek?
+% \item zkusit aplikovat na jine typy automatu (treba TGBA nebo Rabin)?
+% \item zkusit, zda/jak redukce znacek umozni redukovat stavovy prostor
+% \end{itemize}
 
 
 %\bibliographystyle{plain}
