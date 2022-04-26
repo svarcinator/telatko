@@ -625,14 +625,17 @@ on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
 The lemma suggests the following simplification of the whole formula
 $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$. Before we build the
 formula, we compute the equivalence $\sim$ on automata transitions and
-remove all transitions except one of each class. Then we build the
-formula $\Phi_{1,C,K}$ for this pruned automaton. The more transitions
-we removed, the shorter formula with less $e_t$ variables we
-obtain. If the formula $\Phi_{1,C,K}$ for the pruned automaton is
-satisfiable, we derive $\rem$ and $\psi$ from its model and use them
-with the original automaton. We only need to extend $\rem$ to all
-transitions such that it changes the acceptance marks on all
-equivalent transitions in the same way. \todo{je to OK?}
+temporarily remove all transitions except one of each equivalence class. Then we
+build the formula $\Phi_{1,C,K}$ for the pruned automaton. The more
+transitions we removed, the shorter formula with less $e_t$ variables
+we obtain. If the formula $\Phi_{1,C,K}$ for the pruned automaton is
+satisfiable, we derive $\rem$ and $\psi$ from its model and extend % use them
+% with the original automaton. We only need to extend
+$\rem$ to all transitions of the original automaton such that
+it changes the acceptance marks on all equivalent transitions in the
+same way. In the following, we use this simplification whenever
+$\Phi_{1,C,K}$ is employed.
+\todo{Terko, je to OK?}
 
 \subsection{Intermediate version $\mcycle_2(\vec{e})$}
 The intermediate version says that $\Te$ is nonempty and for each state
@@ -831,10 +834,54 @@ This section explains how we use the QBF formulas constructed in the
 previous section to reduce the number of acceptance marks in TELA
 automata. First we describe a \emph{single-level} reduction, which
 uses only a single kind of QBF formulas. More precisely, we talk about
-\emph{level~1} reduction if $\Phi^\mathit{opt}_{1,C,K}$ is
-used. Analogously, we talk about \emph{level~2} and \emph{level~3}
-reduction when $\Phi^\mathit{opt}_{2,C,K}$ or
+\emph{level~1}, \emph{level~2}, or \emph{level~3} reduction when
+$\Phi^\mathit{opt}_{1,C,K}$, $\Phi^\mathit{opt}_{2,C,K}$, or
 $\Phi^\mathit{opt}_{3,C,K}$ is used, respectively.
+
+% \begin{algorithm}[t]
+%   \DontPrintSemicolon
+%   \SetKwFunction{FextendBackward}{extendBackward}
+%   \SetKwProg{PI}{Procedure}{}{}
+%   \PI{$\mathit{SingleLevelReduction}(\mA,j,\mathit{reduceC})$}{
+%     \KwIn{TELA $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$, level $j\in\{1,2,3\}$, $\mathit{reduceC}\in\{\true,\false\}$}
+%     \KwOut{an equivalent TELA with the same structure as $\mA$ and with at most as many acceptance marks as in $\mA$} %with the same or lower number of acceptance~marks}
+%     \;
+%   %   \If{$L(\mA)=\emptyset$}{
+%   % %      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'=\{(p,a,\emptyset,q)\mid(p,a,M',q)\in\delta\}$
+%   %       \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all acceptance marks removed
+%   %     }
+%     $C_\mA\gets$ the number of clauses in the acceptance formula of $\mA$ transformed to DNF\;
+%     $K_\mA\gets$ the number of acceptance marks in $\mA$\;
+%     $C\gets C_\mA$\;
+%     $K\gets K_\mA$\;
+%     $\mathit{stop}\gets\false$\;
+%     \While(\tcp*[f]{reduction of the number of marks}){$\neg\mathit{stop}~\wedge~K>0$}{
+%       $\Phi\gets\Phi^\mathit{opt}_{j,C,K{-}1}$ for $\mA$\;
+%       \leIf{$\mathit{satisfiable}(\Phi)$}{$K\gets K{-}1$}{$\mathit{stop}\gets\true$}
+%     }
+%     \If(\tcp*[f]{check whether the condition $\false$ fits}){$K=1~\wedge~\mathit{stop}$}{
+%       $\Phi\gets\Phi^\mathit{opt}_{j,0,0}$ for $\mA$\; 
+%       \If{$\mathit{satisfiable}(\Phi)$}{
+%         \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all marks removed
+%       }
+%     }  
+%     \If(\tcp*[f]{reduction of the number of clauses}){$\mathit{reduceC}$}{
+%       $\mathit{stop}\gets\false$\;
+%       \While{$\neg\mathit{stop}~\wedge~C>1$}{
+%         $\Phi\gets\Phi^\mathit{opt}_{j,C-1,K}$ for $\mA$\;
+%         \leIf{$\mathit{satisfiable}(\Phi)$}{$C\gets C{-}1$}{$\mathit{stop}\gets\true$}
+%       }
+%     }
+%     \eIf{$K=K_\mA~\wedge~C=C_\mA$}{
+%       \KwRet $\mA$
+%     }{
+%       compute $\rem$ and $\psi$ from a model of $\Phi^\mathit{opt}_{j,C,K}$\;
+%       \KwRet $(Q,N_K,\Sigma,q_I,\rem(\delta),\psi)$
+%     }
+%   }\;
+%   \caption{The single-level reduction procedure}
+%   \label{alg:single}
+% \end{algorithm}
 
 \begin{algorithm}[t]
   \DontPrintSemicolon
@@ -844,73 +891,79 @@ $\Phi^\mathit{opt}_{3,C,K}$ is used, respectively.
     \KwIn{TELA $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$, level $j\in\{1,2,3\}$, $\mathit{reduceC}\in\{\true,\false\}$}
     \KwOut{an equivalent TELA with the same structure as $\mA$ and with at most as many acceptance marks as in $\mA$} %with the same or lower number of acceptance~marks}
     \;
-    \If{$L(\mA)=\emptyset$}{
-%      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'=\{(p,a,\emptyset,q)\mid(p,a,M',q)\in\delta\}$
-      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all acceptance marks removed
-    }
+  %   \If{$L(\mA)=\emptyset$}{
+  % %      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'=\{(p,a,\emptyset,q)\mid(p,a,M',q)\in\delta\}$
+  %       \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all acceptance marks removed
+  %     }
     $C_\mA\gets$ the number of clauses in the acceptance formula of $\mA$ transformed to DNF\;
     $K_\mA\gets$ the number of acceptance marks in $\mA$\;
     $C\gets C_\mA$\;
     $K\gets K_\mA$\;
-    $\mathit{stop}\gets\false$\;
-    \While{$\neg\mathit{stop}~\wedge~K>0$}{
-      $\Phi\gets\Phi^\mathit{opt}_{j,C,K{-}1}$ for $\mA$\;
-      \leIf{$\mathit{satisfiable}(\Phi)$}{$K\gets K{-}1$}{$\mathit{stop}\gets\true$}
-    }
-    \If{$\mathit{reduceC}$}{
-      $\mathit{stop}\gets\false$\;
-      \While{$\neg\mathit{stop}~\wedge~C>1$}{
-        $\Phi\gets\Phi^\mathit{opt}_{j,C-1,K}$ for $\mA$\;
-        \leIf{$\mathit{satisfiable}(\Phi)$}{$C\gets C{-}1$}{$\mathit{stop}\gets\true$}
+%    \While(\tcp*[f]{reduction of the number of marks}){$K>1~\wedge~\mathit{satisfiable}(\Phi^\mathit{opt}_{j,C,K{-}1})$}{$K\gets K{-}1$}
+    \lWhile{$K>1~\wedge~\mathit{satisfiable}(\Phi^\mathit{opt}_{j,C,K{-}1})$}{$K\gets K{-}1$}
+    \If{$K=1$}{
+      \If(\tcp*[f]{check the condition $\true$}){all cycles in $\mA$ are accepting}{ %$\mathit{satisfiable}(\Phi^\mathit{opt}_{j,1,0})$}{
+        \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\true)$ where $\delta'$ is $\delta$ with all marks removed
       }
+      \If(\tcp*[f]{check the condition $\false$}){all cycles in $\mA$ are rejecting}{ %$\mathit{satisfiable}(\Phi^\mathit{opt}_{j,0,0})$}{
+        \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all marks removed
+      }
+    }  
+    \If(\tcp*[f]{reduction of the number of clauses}){$\mathit{reduceC}$}{
+      \lWhile{$C>1~\wedge~\mathit{satisfiable}(\Phi^\mathit{opt}_{j,C-1,K})$}{$C\gets C{-}1$}
     }
-    \eIf{$K=K_\mA~\wedge~C=C_\mA$}{
-      \KwRet $\mA$
-    }{
+    \If{$K<K_\mA~\vee~C<C_\mA$}{
       compute $\rem$ and $\psi$ from a model of $\Phi^\mathit{opt}_{j,C,K}$\;
       \KwRet $(Q,N_K,\Sigma,q_I,\rem(\delta),\psi)$
     }
+    \KwRet $\mA$
   }\;
   \caption{The single-level reduction procedure}
   \label{alg:single}
 \end{algorithm}
 
-The reduction procedure is given in Algorithm~\ref{alg:single}. Besides
-the reduction of acceptance marks, the algorithm also reduces the
-number of clauses in acceptance formula if the last argument
-$\mathit{reduceC}$ is set to $\true$. In the first step, the procedure
-checks whether the input automaton represents the empty language and
-if this is the case, it returns the same automaton with acceptance
-conditon $\false$ and with all acceptance marks removed. Otherwise it
-gradually decreases the number of marks until 0 is reached or the QBF
-solver behind the function $\mathit{satisfiable}(\Phi)$ fails to
-reduce the number of marks, i.e., it claims unsatisfiability of $\Phi$
-or it runs out of resources. In the next step, if $\mathit{reduceC}$
-is set to $\true$ then the procedure gradually reduces the number of
-clauses. It stops if no equivalent automaton with less clauses is
-found or the number of clauses is reduced to one. Note that the
-acceptance condition with 0 clauses is $\false$ and this case is
-treated at the beginning of the procedure. Finally, if the procedure
-succeeds to reduce the number of marks or clauses, if constructs the
-modified automaton. Otherwise, it returns the original automaton.
+The reduction procedure called $\mathit{SingleLevelReduction}$ is
+given in Algorithm~\ref{alg:single}. Besides the reduction of
+acceptance marks, the algorithm also reduces the number of clauses in
+acceptance formula if the last argument $\mathit{reduceC}$ is set to
+$\true$.
+% In the first step, the procedure checks whether the input
+% automaton represents the empty language and if this is the case, it
+% returns the same automaton with acceptance conditon $\false$ and with
+% all acceptance marks removed. Otherwise it
+The first \textbf{while} loop gradually decreases the number of marks
+until $K=1$ is reached or the QBF solver behind the function
+$\mathit{satisfiable}(\Phi^\mathit{opt}_{j,C,K{-}1})$ fails to reduce
+the number of marks, i.e., it claims unsatisfiability of the formula
+or it runs out of resources. If the loop ends with $K=1$, we check
+whether an acceptance condition without any mark (i.e., $\true$ or
+$\false$) can be used. These checks are based on an inspection of the
+automaton rather than on QBF solving. If some of the checks succeeds,
+we return the correspodning automaton without any acceptance
+mark. Otherwise, if $\mathit{reduceC}$ is set to $\true$ then the
+procedure gradually reduces the number of clauses in the second
+\textbf{while} loop. Note that the loop never checks for acceptance
+condition with 0 clauses as it is equivalent to $\false$ and this case
+was treated above. Finally, if the procedure succeeds to reduce the
+number of marks or clauses, it constructs the modified
+automaton. Otherwise, it returns the original automaton.
 
-Note that the algorithm can be also reformulated to use an incremental
-approach instead of building a new formula $\Phi$ in each iteration.
-The incremental version of the first \textbf{while} loop builds the formula
+The algorithm can be reformulated to use an incremental approach
+instead of building a new formula in each iteration of the
+\textbf{while} loops. The incremental version of the first
+\textbf{while} loop builds the formula
 $\Phi=\Phi^\mathit{opt}_{j,C,K{-}1}$ only in the first iteration. In
-each subsequent iteration, it extends the formula with a condition
+each subsequent iteration, it extends this formula with a condition
 saying that one more mark is not used in the automaton, i.e., the mark
 is neither on edges, nor in the acceptance formula. For example, if we
-want to say that mark $k\in N_K$ is not used in the automaton, we replace
-$\Phi$ by
+want to say that the mark $k\in N_K$ is not used, we replace $\Phi$ by
 \[
   \Phi~\wedge~\bigwedge_{t\in\delta}\neg n_{t,k}~\wedge\bigwedge_{c\in\{1,2,\ldots C\}}(\neg i_{c,k}\wedge\neg f_{c,k}).
 \]
-The second \emph{while} can transformed to an incremental version in a
-similar way. The advantage of the incremental approach comes from the
-fact that some QBF solvers can decide an extended formula faster as
-they profit from the information computed when solving the original
-formula.
+The second \textbf{while} can transformed to an incremental version
+similarly. The incremental approach benefits from the fact that some
+QBF solvers can decide an extended formula faster as they reuse the
+information computed when solving the original formula.
 
 \begin{figure}[t]
   \centering
@@ -941,7 +994,7 @@ formula.
       \node[acclabel] at (1,-1.4)
       {$\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}\wedge\Inf\tacc{2}{2}$};
     \end{scope}
-    \begin{scope}[initial angle=90,xshift=-3.5cm,yshift=-4cm]
+    \begin{scope}[initial angle=90,xshift=-3.5cm,yshift=-4.1cm]
       \node (l) at (1,1.3) {$\mathit{SingleLevelReduction}(\mA,2,\true)$}; %{level 2:};
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (2,0) {};
@@ -954,7 +1007,7 @@ formula.
       \node[acclabel] at (1,-1.4)
       {$\Inf\tacc{0}{0}\wedge\Fin\tacc{1}{1}$};
     \end{scope}
-    \begin{scope}[initial angle=90,xshift=3.5cm,yshift=-4cm]
+    \begin{scope}[initial angle=90,xshift=3.5cm,yshift=-4.1cm]
       \node (l) at (1,1.3) {$\mathit{SingleLevelReduction}(\mA,3,\true)$}; %{level 3:};
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (2,0) {};
@@ -994,8 +1047,8 @@ application of the three levels, see Algorithm~\ref{alg:multi}.
     \KwIn{TELA $\mA=(Q,M,\Sigma,\delta,q_I,\varphi)$ and $\mathit{reduceC}\in\{\true,\false\}$}
     \KwOut{an equivalent TELA with the same structure as $\mA$ and with at most as many acceptance marks as in $\mA$} %with the same or lower number of acceptance~marks}
     \;
-    $\mA\gets\mathit{SingleLevelReduction}(\mA,1,\mathit{reduceC})$\;
-    $\mA\gets\mathit{SingleLevelReduction}(\mA,2,\mathit{reduceC})$\;
+    $\mA\gets\mathit{SingleLevelReduction}(\mA,1,\false)$\;
+    $\mA\gets\mathit{SingleLevelReduction}(\mA,2,\false)$\;
     $\mA\gets\mathit{SingleLevelReduction}(\mA,3,\mathit{reduceC})$\;
     \KwRet $\mA$
   }\;
