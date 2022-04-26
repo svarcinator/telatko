@@ -1098,7 +1098,7 @@ is used, the automaton name contains the information from all
 levels. For example, the name `\texttt{L1\_5\_U L2\_3\_U L3\_1\_T}'
 means that level 1 reduced the number of marks to 6 (reduction to 5 is
 impossible on this level), level 2 reduced it to 4, and level 3 to 2
-as the QBF solver did not finished in the time limit when trying to
+as the QBF solver did not finish in the time limit when trying to
 reduce the number of marks to
 1.%when tryint the automaton may be potentially reduced further.
 
@@ -1141,7 +1141,7 @@ from the Spot library~\cite{duret.16.atva2} and
 produced by individual tools contains less than 348 automata as not all
 of the formulas are successfully translated due to a timeout of 60
 seconds. Further, we have removed automata with 0 or 1 acceptance
-marks as there is a little point reducing these. Table
+marks as there is a little point in reducing these. Table
 \ref{tab:ltltranslators} shows the exact versions and homepages of
 used translators, and the number of automata produced by each
 translator after removing the automata with less than two marks.
@@ -1169,14 +1169,14 @@ multi-level reduction, always with incremental approach and without
 reduction of the number of clauses. The timeout for each QBF query was
 set to 30 seconds.
 
-For the experiments we used the version of \texttt{telatko} build with
+For the experiments, we used the version of \texttt{telatko} build with
 Spot library version 2.10.4 and Z3 version 4.8.15. The experiments
 have been run on a computer with Intel® Core™ i7-8700 processor and 32
 GB of memory running Ubuntu 20.04.4. We used the tool
 \texttt{autcross} of the Spot library to get the statistics of the
 reduced automata and the running times.
 
-Table~\ref{tab:cumm-data} shows the cummulative numbers of marks in
+Table~\ref{tab:cumm-data} shows the cumulative numbers of marks in
 the input automata sets and after each reduction, together with the
 reduction ratio and total time spent by the considered reduction. The
 column \textit{solver timeout} shows the number of automata for which
@@ -1186,17 +1186,12 @@ may be potentially further reduced by the reduction with a longer time
 limit.
 
 \begin{table}[t]
-  \caption{The cummulative numbers of acceptance marks before and
-    after reduction for various reductions and automata sets. The
-    column \emph{reduction} shows the cummulative percentage of saved
-    acceptance marks and \emph{time} reports the cummulative reduction
-    time.
-%\textit{X/Y solved aut.} means that out of
-%\textit{Y} successfully translated LTL formulas, every run of \telatko ended
-%within 120 seconds time limit on \textit{X} automata. We sum up the acceptance
-%marks only on these automata.
-The column \textit{solver timeout} indicates the number of instances
-when the last call to the QBF solver timed out.  }
+  \caption{The cumulative numbers of acceptance marks before and after
+    reduction for various reductions and automata sets. The column
+    \emph{reduction} shows the cumulative percentage of saved
+    acceptance marks and \emph{time} reports the cumulative reduction
+    time. The column \textit{solver timeout} indicates the number of
+    instances when the last call to the QBF solver timed out.  }
 \label{tab:cumm-data}
 \centering
 \setlength{\tabcolsep}{10pt}
