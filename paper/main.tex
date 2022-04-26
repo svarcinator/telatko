@@ -1186,8 +1186,11 @@ may be potentially further reduced by the reduction with a longer time
 limit.
 
 \begin{table}[t]
-\caption{The cummulative numbers of acceptance marks before and after reduction
-for various reductions and automata sets.
+  \caption{The cummulative numbers of acceptance marks before and
+    after reduction for various reductions and automata sets. The
+    column \emph{reduction} shows the cummulative percentage of saved
+    acceptance marks and \emph{time} reports the cummulative reduction
+    time.
 %\textit{X/Y solved aut.} means that out of
 %\textit{Y} successfully translated LTL formulas, every run of \telatko ended
 %within 120 seconds time limit on \textit{X} automata. We sum up the acceptance
@@ -1200,13 +1203,13 @@ when the last call to the QBF solver timed out.  }
 \input{table-data.tex}
 \end{table}
 
-Table~\ref{tab:heatmap} shows the number of automata coming from all
+Table~\ref{tab:heatmap} shows the number of automata from all
 four sets that have a given number of original acceptance marks and a
 given number of acceptance marks after multi-level reduction. The
 table indicates that in many cases only 1 or 2 marks can be
 saved. However, the achieved reduction is substantial for some
 automata with a higher number of original acceptance marks. For
-example, in 24 cases, we have successfully reduced 7 or more
+example, in 24 cases, we have reduced 7 or more
 acceptance marks to only 4.
 % Moreover, there were many timeouts of the last QBF query for manof these automata.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
@@ -1216,8 +1219,8 @@ acceptance marks to only 4.
 \caption{The effect of reduction.
 A cell on coordinates $(x,y)$ contains the number of automata that have been
 reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
-numbers, the latter represents number of automata where the last query to QBF
-solver has not been answered in the time limit.}
+numbers, the latter represents number of automata where the last call to QBF
+solver reached the time limit.}
 \label{tab:heatmap}
 \setlength{\tabcolsep}{4pt}
 \centering
@@ -1255,23 +1258,28 @@ reducing (in seconds).}
 
 \section{Conclusions}\label{sec:conclusion}
 
-We have presented an application of QBF solving to reduction of the number of
-acceptance marks in transition-based Emerson-Lei automata. The method
-has been implemented and our experimental results show that it is possible
-to use the QBF solvers to find equivalent acceptance conditions of TELA
-with fewer acceptance marks and without changes to automata structure.
+We have presented a method reducing the number of acceptance marks in
+transition-based Emerson-Lei automata with use of QBF solving and
+without altering automata structure. We have implemented the method in
+a tool called \texttt{telatko}. The presented experimental results
+show that the tool can indeed reduce the number of acceptance marks in
+automata produced by state-of-the-art LTL to automata translators. The
+reduction was significant on automata produced by the translators of
+the Owl library.
 
 The reduction of acceptance marks is not the only application of the
-presented approach: one could possibly look for, e.g., equivalent
-parity automata or automata without $\Fin$-marks, depending on the
-subsequent use of the automata. Even though the QBF queries can be
-time-consuming, in practice it can be well used and one can find a
-good trade-off between speed and efficiency by choosing the precision of
-the reduction and setting a reasonable timeout.
+presented approach. For example, it can be easily adopted to look for
+an equivalent automaton with the same structure and an acceptance
+formula of a specific form (e.g., without any $\Fin m$ terms). Even
+though the QBF queries can be time-consuming, in practice one can
+often find a good trade-off between speed and efficiency by adjusting 
+the formula precision and choosing a reasonable timeout.
 
-In the future work, it could be examined how the reductions of the acceptance
-condition can contribute to further reduction of the state space by enabling
-various optimizations, e.g., simulations.
+In future, we plan to improve the reduction process (e.g., use the
+bisection method to reduce the number of acceptance marks more
+efficiently) and study whether the reduction of acceptance condition
+can enable further reductions or simplifications of automata
+structures.
 
 %}}}
 
