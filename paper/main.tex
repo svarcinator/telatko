@@ -1085,21 +1085,39 @@ where
   the produced automaton is sent to \textit{stdout} in the HOA format.
 \end{description}
 
+If some call of the function
+$\mathit{satisfiable}(\Phi^\mathit{opt}_{j,C,K{-}1})$ in the first
+\textbf{while} loop of Algorithm~\ref{alg:single} does not return
+$\true$, then the name of the output automaton encodes the reason for
+it. In case of a single level reduction, the name has the form
+\texttt{L$j$\_$k$\_$X$}, where $j$ is the considered level, $k=K-1$ is
+the number of acceptance mark considered by the formula, $X$ is either
+\texttt{U} if the formula is unsatisfiable or \texttt{T} if the solver
+ran out of resources. If $X$ is \texttt{T}, we know that additional
+resources (typically longer timeout) may lead to further reductions.
+If the multi-level reduction is used, the automaton name contains the
+information from all levels. For example, the name `\texttt{L1\_5\_U
+  L2\_3\_U L3\_1\_T}' means that level 1 reduced the number of marks
+to 6 (reduction to 5 is impossible on this level), level 2 reduced it
+to 4, and level 3 to 2 and the automaton may be potentially reduced
+further.
 
-The parameters of the last query of the QBF solver are encoded in the name of the automaton.
 
-The name of the automaton is in the following format:
-\begin{center}
-  \texttt{level\_marks\_solver}
-\end{center}
-where 
-\begin{itemize}
-    \item \texttt{level} $\in \{L1, L2, L3, T, F\}$ and it gives us the information about which level of simplification was applied (or in case of $T$ and $F$ if the acceptance formula can be $\true$ or $\false$).
-    \item \texttt{marks} $\in \mathbf{N}$ representing the number of marks we built the formula for.
-    \item \texttt{solver} $\in \{U, T, S\}$ where $U$ means that the query was unsatisfiable, $T$ means the solver timeouted and $S$ means that the simplification is satisfiable.
-\end{itemize}
+% that does not . 
+% The parameters of the last query of the QBF solver are encoded in the name of the automaton.
 
-Note that we are only interested in the result of the last query, therefore we get the information that the simplification was satisfiable only if the result automaton has zero acceptance marks. Meaning that the acceptance condition is either $\true$ or $\false$.
+% The name of the automaton is in the following format:
+% \begin{center}
+%   \texttt{level\_marks\_solver}
+% \end{center}
+% where 
+% \begin{itemize}
+%     \item \texttt{level} $\in \{L1, L2, L3, T, F\}$ and it gives us the information about which level of simplification was applied (or in case of $T$ and $F$ if the acceptance formula can be $\true$ or $\false$).
+%     \item \texttt{marks} $\in \mathbf{N}$ representing the number of marks we built the formula for.
+%     \item \texttt{solver} $\in \{U, T, S\}$ where $U$ means that the query was unsatisfiable, $T$ means the solver timeouted and $S$ means that the simplification is satisfiable.
+% \end{itemize}
+
+% Note that we are only interested in the result of the last query, therefore we get the information that the simplification was satisfiable only if the result automaton has zero acceptance marks. Meaning that the acceptance condition is either $\true$ or $\false$.
 
 
 
