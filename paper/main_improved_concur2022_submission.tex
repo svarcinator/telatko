@@ -1,8 +1,23 @@
-% vim: tw=78 ai spell spelllang=en
+\documentclass[a4paper,UKenglish,cleveref,autoref,thm-restate]{lipics-v2021}
+%\documentclass[a4paper,UKenglish,cleveref, autoref, anonymous, thm-restate]{lipics-v2021}
+%
+%This is a template for producing LIPIcs articles. 
+%See lipics-v2021-authors-guidelines.pdf for further information.
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+%for section-numbered lemmas etc., use "numberwithinsect"
+%for enabling cleveref support, use "cleveref"
+%for enabling autoref support, use "autoref"
+%for anonymousing the authors (e.g. for double-blind review), add "anonymous"
+%for enabling thm-restate support, use "thm-restate"
+%for enabling a two-column layout for the author/affilation part (only applicable for > 6 authors), use "authorcolumns"
+%for producing a PDF according the PDF/A standard, add "pdfa"
 
-\documentclass[runningheads]{llncs}
+%\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
+%\hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository% \usepackage[numbers]{natbib}
 
-%\usepackage[paperheight=235mm, paperwidth=155mm,textwidth=12.2cm,textheight=19.3cm]{geometry}
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{xspace}
@@ -11,8 +26,6 @@
 %\usepackage{arydshln}
 %\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
 \usepackage[noend]{algorithm2e}
-\usepackage{amsmath,amssymb}
-\usepackage{enumerate}
 
 \usepackage{tikz}
 % TikZ libraries
@@ -51,37 +64,23 @@
 \newcommand{\telatko}{\texttt{telatko}\xspace}
 
 %}}}
-%{{{ hyperref and ORCID ref
-
-\makeatletter
-\RequirePackage[bookmarks,unicode,colorlinks=true]{hyperref}%
-   \def\@citecolor{blue}%
-   \def\@urlcolor{blue}%
-   \def\@linkcolor{blue}%
-\def\UrlFont{\rmfamily}
-\def\orcidID#1{\smash{\href{http://orcid.org/#1}{\protect\raisebox{-1.25pt}{\protect\includegraphics{orcid_color.eps}}}}}
-\makeatother
-
-\usepackage{academicons}
-\definecolor{orcidlogocol}{HTML}{A6CE39}
-
-%}}}
-
-\begin{document}
 
 %{{{ title and authors
 
 \title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF-solving}
-\author{Tereza Schwarzov\'{a} \and
-        Jan Strej\v{c}ek\orcidID{0000-0001-5873-403X}\thanks{Corresponding author: \email{strejcek@fi.muni.cz}} \and
-        Juraj Major}
+\author{Tereza Schwarzov\'{a}}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{xschwar3@mail.muni.cz}{}{}
+\author{Jan Strej\v{c}ek}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{strejcek@fi.muni.cz}{https://orcid.org/0000-0001-5873-403X}{}
+\author{Juraj Major}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{}{}
 \authorrunning{T. Schwarzov\'{a}, J. Strej\v{c}ek, and J. Major}
-\titlerunning{Reducing Acceptance Marks in TELA by QBF-solving}
-\institute{%Faculty of Informatics,
-  Masaryk University, Brno, Czech Republic
-}
+\Copyright{Tereza Schwarzov\'{a}, Jan Strej\v{c}ek, and Juraj Major}
+\ccsdesc[500]{Theory of computation~Logic}
+\ccsdesc[500]{Theory of computation~Automata over infinite objects}
+\keywords{Emerson-Lei automata, TELA, automata reduction, QBF, telatko}
+\funding{This work has been supported by the Czech Science Foundation grant GA19-24397S.}
 
 %}}}
+
+\begin{document}
 
 \maketitle
 
@@ -303,7 +302,7 @@ $q_0=q_I$. Let $\minf(\pi)$ denote the set of transitions that appear
 infinitely many times in $\pi$. Run $\pi$ is \emph{accepting} iff
 $\minf(\pi)$ satisfies the formula $\varphi$, where a set $T$ of
 transitions satisfies $\Inf m$ iff $m\in\mks(T)$ and it satisfies
-$\Fin m$ iff $m\not\in\mks(T)$. The \emph{language} of $\mA$ is
+$\Fin m$ iff $m\not\in\mks(T)$. The \emph{language} of automaton $\mA$ is
 the set
 $L(\mA)=\{u\in \Sigma^{\omega}\mid\textrm{there is an accepting run of
 }\mA\textrm{ over }u\}$. Two automata $\mA,\mB$ are \emph{equivalent}
@@ -342,7 +341,7 @@ that are reachable from the initial state $q_I$ (i.e., $q=q_I$ or
 there is a path from $q_I$ to $q$) as states that are not reachable
 from $q_I$ can be eliminated without any impact on $L(\mA)$.
 
-In graphical representation, we often use acceptance marks
+In graphical representation of automata, we often use acceptance marks
 $\tacc{1}{1},\tacc{2}{2},\ldots\in M$. Further, an edge 
 \begin{tikzpicture}[smallautomaton,baseline=-2pt]
   \node[state] (p) at (0,0) {$p$};
@@ -473,12 +472,13 @@ By $\vec{e},\vec{n},\vec{i},\vec{f}$ we denote the vectors of all
 variables of the form $e_t$, $n_{t,k}$, $i_{c,k}$, and $f_{c,k}$,
 respectively. The constructed QBF formulas have the form 
 \[
-  \Phi_{C,K}(\vec{n},\vec{i},\vec{f})~~=~~\forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) \iff \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})\big),
+  \Phi_{C,K}(\vec{n},\vec{i},\vec{f})~~=~~\forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) \iff \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})\big).
 \]
-where the subformulas $\mcycle(\vec{e})$, $\msat_\varphi(\vec{e})$,
-and $\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ are defined
-as follows. The subformula $\mcycle(\vec{e})$ will be defined as the last
-one and we present three versions of it.
+It remains to describe the subformulas $\mcycle(\vec{e})$,
+$\msat_\varphi(\vec{e})$, and
+$\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$. The subformula
+$\mcycle(\vec{e})$ will be defined as the last one and we present
+three versions of it.
 
 The subformula $\msat_\varphi(\vec{e})$ says whether $T$ satisfies the
 original acceptance formula $\varphi$ and it is derived directly from
@@ -494,7 +494,7 @@ arises from $\varphi$ by replacing
 \item all terms of the form $\Fin m$ by $\bigwedge_{t\in\delta_m}\neg e_t$.
 \end{itemize}
 
-Next, we construct the subformula
+Now we construct the subformula
 $\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ that evaluates to true
 iff $\rem(T)$ satisfies~$\psi$. The subformula reflects the basic
 structure of $\psi$. As we assume that $\psi$ is a disjunction of $C$
@@ -619,7 +619,7 @@ on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
   \[
     T~\msat~\varphi~\iff~\overline{T}~\msat~\varphi~\iff~\rem(\overline{T})~\msat~\psi~\iff~\rem'(T)~\msat~\psi
   \]
-  which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$.\qed
+  which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$. 
 \end{proof}
 
 The lemma suggests the following simplification of the whole formula
@@ -764,7 +764,7 @@ cycles can be characterised in the following way.
   $p$ back to $p$ and containing $t_i$. If we concatenate all these
   paths, we get the path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that
   contains all transitions of $T$ and leads from $p$ back to $p$,
-  which means that $T$ is a cycle.  This is a contradiction.\qed
+  which means that $T$ is a cycle.  This is a contradiction.
 \end{proof}
 
 The formula $\mcycle_3(\vec{e})$ says that $\Te$ is nonempty and each
@@ -1294,9 +1294,9 @@ structures.
 % \end{itemize}
 
 
-\bibliographystyle{plain}
-%\bibliographystyle{abbrvnat}
+%\bibliographystyle{plain}
 \bibliography{mc}
+
 
 \end{document}
 
