@@ -1,0 +1,45 @@
+We would like to thank the reviewers for the constructive suggestions and questions.
+
+Questions about experiments: not striking results, comparison with minimization algorithms of Spot, deterministic vs. nondeterministic automata etc.
+
+Answer: To our best knowledge, our technique is the first that looks for the minimal number of acceptance marks in given automata structures. Low reductions on automata produced by some translators do not diminish our technique, but show that these translators construct automata nearly without redundant marks. In particular, ltl2tgba and partly also ltl3tela benefit from a lightweight reduction of acceptance formulas implemented in Spot. This reduction can be invoked by Spot’s tool autfilt --simplify-acceptance and it is included in the automata minimization process invoked by autfilt --small. Below we compare the reduction of marks achieved by our technique and by autfilt --small.
+
+To challenge the hypothesis that our reduction performs better on deterministic than on nondeterministic automata, we additionally configured ltl3tela to produce deterministic automata. The results (see below) show that the reduction depends more on the automata producer than on the (non)determinism.
+
+Reduction of marks achieved by MultiLevelReduction and autfilt --small on automata with at least 2 marks produced by individual translators for formulas from literature (extended results from the paper):
+
+tool         MultiLevelReduction   autfilt --small
+---------------------------------------------------------
+ltl2dela (det.)    29.1%               23.9%
+ltl2dgra (det.)    38.5%               29.6%
+ltl3tela (det.)     0.0%                0.0%
+ltl2tgba (nondet.)  4.5%                0.0%
+ltl3tela (nondet.)  7.2%                0.0%
+
+Reductions are even higher on automata for random LTL formulas:
+
+tool         MultiLevelReduction   autfilt --small
+---------------------------------------------------------
+ltl2dela (det.)    36.8%               23.5%
+ltl2dgra (det.)    56.3%               41.3%
+ltl3tela (det.)     5.2%                0.0%
+ltl2tgba (nondet.)  4.2%                0.0%
+ltl3tela (nondet.) 21.3%                5.7%
+
+The fact that we save only a few marks on average is heavily influenced by the fact that the input automata have only a few marks on average (e.g., 252 of 524 input automata considered in the paper have 2 acceptance marks).
+
+Q: What are the sizes of automata considered in the experiments?
+
+A: The cumulative numbers do not say much; instead, we provide the numbers of states and transitions of the largest successfully reduced automata from each set considered in the paper. For ltl2dela, it is an automaton with 163 states and 41 713 transitions. For ltl2dgra, it has 3088/14 451 states/transitions. For ltl2tgba, there are automata with 8/21 and 5/74 states/transitions. For ltl3tela, there are automata with 29/249 and 20/900 states/transitions.
+
+Q: Why is there only one level 2 cycle definition?
+
+A: We cannot figure out any other interesting necessary condition that does not need additional QBF variables. If you suggest some, we will be happy to implement and evaluate them.
+
+Q: Is it true that if level 1 fails to optimize the automation, levels 2 and 3 will also fail?
+
+A: Not true. Table 2 shows that level 1 fails to reduce automata produced by ltl2tgba and there are marks reduced by level 3.
+
+Q: Why is the option reduceC activated only for level 3 in MultiLevelReduction?
+
+A: We made this design choice to save some QBF queries.
