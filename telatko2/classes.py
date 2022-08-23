@@ -28,7 +28,7 @@ class Variable:
 
 class Switches:
     """
-    Class containing overwiev of switches.
+    Class containing overwiev of switches set by user.
     """
 
     def __init__(self, args):

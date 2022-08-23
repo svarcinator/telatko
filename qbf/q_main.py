@@ -1,7 +1,5 @@
 import random
-# from classes import *
 from qbf.parser import *
-#from qbf.optimization import *
 from qbf.z3_formula import *
 
 
