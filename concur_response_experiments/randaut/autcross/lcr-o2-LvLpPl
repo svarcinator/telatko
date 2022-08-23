@@ -1,0 +1,24 @@
+HOA: v1
+name: "Automaton for X(((((p1) R (p0))) & (((F(!p1)) | (F(p3))))))"
+States: 5
+Start: 0
+AP: 3 "p0" "p3" "p1"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels trans-acc deterministic
+--BODY--
+State: 0
+[t] 1
+State: 1
+[0&!1&2] 2
+[0&!2] 3
+[0&1&2] 4
+State: 2
+[!1&2] 2
+[1 | !2] 4
+State: 3
+[0&!2] 3 {0}
+[0&2] 4
+State: 4
+[t] 4 {0}
+--END--
