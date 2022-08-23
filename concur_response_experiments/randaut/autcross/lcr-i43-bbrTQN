@@ -1,0 +1,20 @@
+HOA: v1
+name: "Automaton for ((((p0) | (G(p2)))) M (((F(G(p2))) | (F(G(X(p0)))))))"
+States: 2
+Start: 0
+AP: 2 "p2" "p0"
+acc-name: generalized-co-Buchi 2
+Acceptance: 2 Fin(0)|Fin(1)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[1] 1
+[0&!1] 0 {1}
+[!0&!1] 0 {0 1}
+State: 1
+[0&!1] 1 {1}
+[!0&!1] 1 {0 1}
+[0&1] 1
+[!0&1] 1 {0}
+--END--

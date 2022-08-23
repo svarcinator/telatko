@@ -1,0 +1,23 @@
+HOA: v1
+name: "Automaton for ((X(p0)) & (G(((p0) | (X(!p0)) | (X(X(p0)))))))"
+States: 5
+Start: 0
+AP: 1 "p0"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[0] 1
+[!0] 2
+State: 1
+[0] 3
+State: 2
+[0] 1
+State: 3
+[!0] 4
+[0] 3
+State: 4
+[0] 1
+[!0] 4
+--END--

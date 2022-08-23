@@ -1,0 +1,25 @@
+HOA: v1
+name: "Automaton for ((((p2) | (F(p0)))) & (((p0) <-> (F(p1)))))"
+States: 5
+Start: 0
+AP: 3 "p0" "p2" "p1"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[!0&!1&!2] 1
+[0&!2] 2
+[0&2] 3
+[!0&1&!2] 4
+State: 1
+[!0&!2] 1
+[0&!2] 4
+State: 2
+[!2] 2
+[2] 3
+State: 3 {0}
+[t] 3
+State: 4 {0}
+[!2] 4
+--END--
