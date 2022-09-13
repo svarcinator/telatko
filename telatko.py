@@ -56,6 +56,8 @@ def main(argv):
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
 
+
+    # if no arguments givvent, default variant is gradually go up to level 3
     if args.level == 0:
         args.gradual = True
         args.level = 3
@@ -71,9 +73,6 @@ def main(argv):
         origin = spot.automaton(a.to_str())
         try:
             spot.cleanup_acceptance_here(a)
-            acc_sets_count = a.get_acceptance().used_sets().count()
-            clauses_count = len(
-                a.get_acceptance().to_dnf().top_disjuncts())
             formula_attributes.set_C(a)
 
             if args.base_level == "telatko":
@@ -95,12 +94,14 @@ def main(argv):
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
+
+            
+            if not spot.are_equivalent(origin, auto):
+                print("NOT EQUIVALENT!")
+                assert(False)
+            
             
 
-            # if not spot.are_equivalent(origin, auto):
-                # assert(False)
-
-            acc_sets_count2 = auto.get_acceptance().used_sets().count()
 
         # except BaseException as err:
             #print(f"Unexpected {err=}, {type(err)=}")

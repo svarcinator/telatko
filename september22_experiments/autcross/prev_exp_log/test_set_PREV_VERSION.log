@@ -1,0 +1,17 @@
+patterns-test_set.hoa:1.1-80.7
+Running [A0]: autfilt '/home/ter/telatko/september22_experiments/autcross/lcr-i0-WOZqLO' > '/home/ter/telatko/september22_experiments/autcross/lcr-o0-WvhUhO'
+Running [A1]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-MvuIOP' -T 15 -L 1 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o1-0JAlwM'
+Running [A2]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-4YkJHN' -T 15 -L 2 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o2-lv1FvO'
+Running [A3]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-j3ctCP' -T 15 -L 3 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o3-IdlX3N'
+Running [A4]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-287aPP' -T 15 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o4-OwkeHP'
+Gathering statistics...
+
+patterns-test_set.hoa:81.1-108.7
+Running [A0]: autfilt '/home/ter/telatko/september22_experiments/autcross/lcr-i1-LCM2VN' > '/home/ter/telatko/september22_experiments/autcross/lcr-o0-QNP3hP'
+Running [A1]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-2jzbaO' -T 15 -L 1 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o1-ZvnZAN'
+Running [A2]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-bXSMrN' -T 15 -L 2 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o2-50PW3M'
+Running [A3]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-V5GdCM' -T 15 -L 3 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o3-cjdOjO'
+Running [A4]: /home/ter/Desktop/telatko-previous_paper_version/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-mE8sOQ' -T 15 -I -O '/home/ter/telatko/september22_experiments/autcross/lcr-o4-fifUnP'
+Gathering statistics...
+
+No problem detected.

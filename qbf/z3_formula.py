@@ -1,34 +1,20 @@
-from telatko2.classes import *
 from z3 import *
-#from qbf.q_main import FormulaCreator
+from telatko2.classes import ACC, ACC_DNF, MarkType
 
 
-class Z3_f_ctor():
-    def __init__(self, edge_dict, scc_edg, scc_state_info,
-                 inner_edges_nums, C, K, inner_edges, mode):
+class Z3_f_ctor:
+    def __init__(self, edge_dict, scc_edg,scc_edges_nums, scc_state_info, C, K, mode):
         self.univ_vars = []
         self.exist_vars = []
         self.edge_dict = edge_dict
         self.scc_edg = scc_edg
+        self.scc_edges_nums = scc_edges_nums
+
         self.scc_state_info = scc_state_info
-        self.inner_edges_nums = inner_edges_nums
+        self.inner_edges_nums = [num for one_scc_edges_nums in scc_edges_nums for num in one_scc_edges_nums]
         self.C = C
         self.K = K
-        self.inner_edges = inner_edges
         self.mode = mode  # level of simplification
-
-    def foo(self):
-        var1 = Bool('a')
-        var2 = Bool('b')
-        var3 = Bool('c')
-        f = Or(var1, var2)
-        f = And(var3, f)
-        f = Exists(var1, f)
-        s = Solver()
-        s.add(f)
-        if s.check() == sat:
-
-            s = s.model()
 
     def add_inf_fin(self, impl):
         inf_not_fin = self.inf_is_not_fin_clause()
@@ -38,109 +24,32 @@ class Z3_f_ctor():
         formula = And(impl, inf_not_fin, inf_or_fin)
         return formula
 
-    def accepting_scc(self, representants):
-        self.inner_edges_nums = representants
-        self.quant_all()
-
-        self.prune_scc_edg(representants)
-        laso = self.one_scc_f()
-        new = self.new_formula()
-        #new = simplify(new)
-
-        impl = Implies(laso, (new))
-        formula = self.add_inf_fin(impl)
-
-        formula = ForAll(self.univ_vars, formula)
-
-        return formula
-
-    def rejecting_scc_l23(self, aut):
-        self.quant_all()
-        if self.mode > 2:
-            self.w_quant(aut)
-
-        if self.mode == 3:
-            laso = self.laso_cycles(aut)
-            laso = simplify(laso)
-            in_out = self.in_n_out()
-            laso = And(laso, in_out)
-
-        else:
-            laso = self.laso_f(aut)
-
-        new = self.new_formula()
-        new = simplify(new)
-        laso = simplify(laso)
-
-        impl = Implies(laso, Not(new))
-        formula = self.add_inf_fin(impl)
-        if self.exist_vars:
-            formula = Exists(self.exist_vars, formula)
-        formula = ForAll(self.univ_vars, formula)
-        return formula
-
-    def rejecting_scc(self, representants):
-        self.inner_edges_nums = representants
-        self.quant_all()
-
-        self.prune_scc_edg(representants)
-        laso = self.one_scc_f()
-        new = self.new_formula()
-        new = simplify(new)
-
-        impl = Implies(laso, Not(new))
-        formula = self.add_inf_fin(impl)
-        formula = ForAll(self.univ_vars, formula)
-
-        return formula
-
-    def prune_scc_edg(self, representants):
-        tmp = []
-        for alist in self.scc_edg:
-            tmp.append(list(filter(lambda e: e in representants, alist)))
-        self.scc_edg = tmp
-
-    def get_level1(self, aut, representants):
-        self.inner_edges_nums = representants
-        self.quant_all()
-
-        self.prune_scc_edg(representants)
-        laso = self.one_scc_f()
-
-        old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
-
-        new = self.new_formula()
-
-        new = simplify(new)
-        if old is not None:
-            old = simplify(old)
-            eq = self.equivalence_f(old, new)
-        else:
-            eq = new
-        impl = Implies(laso, eq)
-        formula = self.add_inf_fin(impl)
-        formula = ForAll(self.univ_vars, formula)
-
-        return formula
-
+    
     def get_qbf_formula(self, aut):
-        # adds unif. quantified variables to
-        # self.foo()
-        # assert(False)
-        self.quant_all()
-        if self.mode > 2:
 
-            self.w_quant(aut)
+
+        # adds universally quantified variables
+        self.quant_all()
+    
 
         if self.mode == 3:
 
+            self.w_quant()
+
             laso = self.laso_cycles(aut)
             laso = simplify(laso)
-            in_out = self.in_n_out()
-            laso = And(laso, in_out)
+            #in_out = self.in_n_out()
+            #one_scc = self.one_scc_f()
+            #laso = And(laso, in_out, one_scc)
+            least_one_edge = self.disjunct_formula( self.inner_edges_nums)
+            laso = And(laso, least_one_edge)
 
-        else:
+        elif self.mode == 2:
             laso = self.laso_f(aut)
+
+        else: 
+            #laso = self.laso_f(aut)
+            laso = self.disjunct_formula( self.inner_edges_nums)
 
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
 
@@ -164,43 +73,7 @@ class Z3_f_ctor():
 
         return formula
 
-    def laso_cycles(self, aut):
-        main_dis = []
-        con1, con2, con3 = [], [], []
-        dis1, dis2 = [], []
-        for e in self.inner_edges:
-            # part one
-            src = str(e.src)
-            dst = str(e.dst)
-            c = And(Bool("w_" + src), Bool("w_" + dst))
-            impl = Implies(Bool("e_" + str(aut.edge_number(e))), c)
-            con1.append(impl)
-
-            # part two
-            c1 = And(Not(Bool("w_" + src)), Not(Bool("w_" + dst)))
-            con2.append(Implies(Bool("e_" + str(aut.edge_number(e))), c1))
-
-            # part three
-            # dis1
-            c2 = And(Bool("e_" + str(aut.edge_number(e))),
-                     Bool("w_" + src), Not(Bool("w_" + dst)))
-            dis1.append(c2)
-
-            # dis2
-            c3 = And(Bool("e_" + str(aut.edge_number(e))),
-                     Not(Bool("w_" + src)), Bool("w_" + dst))
-            dis2.append(c3)
-        con3.append(Or(dis1))
-        con3.append(Or(dis2))
-
-        main_dis.append(And(con1))
-        main_dis.append(And(con2))
-        main_dis.append(And(con3))
-
-        one_scc = self.one_scc_f()
-        laso = And(Or(main_dis), one_scc)
-
-        return laso
+# NEW CONDITION PART
 
     def inf_or_fin_f(self):
         clauses_dis = []
@@ -275,6 +148,8 @@ class Z3_f_ctor():
 
         return marks
 
+# OLD CONDITION PART
+
     def old_formula(self, acc):
         # top disjunct
 
@@ -287,7 +162,7 @@ class Z3_f_ctor():
             for con in dis:
                 edges_vars = []
                 if con.num in self.edge_dict:
-                    for e in self.edge_dict[con.num]:
+                    for e in list(set(self.edge_dict[con.num]) & set(self.inner_edges_nums)):
                         var = Bool("e_" + str(e))
                         edges_vars.append(var)
                     assert(edges_vars != [])
@@ -303,6 +178,9 @@ class Z3_f_ctor():
         elif len(top_disjuncts) == 0:
             return None
         return Or(top_disjuncts)
+
+
+# LASO PART
 
     def disjunct_formula(self, edges):
         alist = []
@@ -323,16 +201,16 @@ class Z3_f_ctor():
                         self.disjunct_formula(src)))
         return And(eq_list)
 
-    def disjunct_formula_list(self, scc_edg):
+    def disjunct_formula_list(self, scc_edges_nums):
         alist = []
-        for i in scc_edg:
+        for i in scc_edges_nums:
             dis = self.disjunct_formula(i)
             dis = Not(dis)
             alist.append(dis)
         return alist
 
     def one_scc_f(self):
-        formula_list = self.disjunct_formula_list(self.scc_edg)
+        formula_list = self.disjunct_formula_list(self.scc_edges_nums)
         dis = []
         for i in range(len(formula_list)):
             formula_list[i] = simplify(Not(formula_list[i]))
@@ -351,12 +229,53 @@ class Z3_f_ctor():
 
         # edges that are true are in one SCC and none of edges from other SCCs is
         # true
-        one_scc = self.one_scc_f()
+        #one_scc = self.one_scc_f()
+        least_one_edge = self.disjunct_formula( self.inner_edges_nums)
 
-        laso = And(in_out, one_scc)
+        laso = And(in_out, least_one_edge)
         return laso
 
-    def w_quant(self, aut):
+    def laso_cycles(self, aut):
+        main_dis = []
+        con1, con2, con3 = [], [], []
+        dis1, dis2 = [], []
+        for alist in self.scc_edg:
+            for e in alist:
+                # part one -- both adges in group w
+                src = str(e.src)
+                dst = str(e.dst)
+                c = And(Bool("w_" + src), Bool("w_" + dst))
+                impl = Implies(Bool("e_" + str(aut.edge_number(e))), c)
+                con1.append(impl)
+
+                # part two -- both edges not in group w
+                c1 = And(Not(Bool("w_" + src)), Not(Bool("w_" + dst)))
+                con2.append(Implies(Bool("e_" + str(aut.edge_number(e))), c1))
+
+                # part three -- one edge in w, other one not
+                # dis1
+                c2 = And(Bool("e_" + str(aut.edge_number(e))),
+                         Bool("w_" + src), Not(Bool("w_" + dst)))
+                dis1.append(c2)
+
+                # dis2
+                c3 = And(Bool("e_" + str(aut.edge_number(e))),
+                         Not(Bool("w_" + src)), Bool("w_" + dst))
+                dis2.append(c3)
+        con3.append(Or(dis1))
+        con3.append(Or(dis2))
+
+        main_dis.append(And(con1))
+        main_dis.append(And(con2))
+        main_dis.append(And(con3))
+
+        
+        laso = Or(main_dis)
+
+        return laso
+
+# QUANTIFIED PART
+    def w_quant(self):
         for dict in self.scc_state_info:
             for key in dict:
                 var = Bool("w_" + str(key))
