@@ -195,6 +195,20 @@ class ACC:
 
     def __len__(self):
         return len(self.formula)
+    
+    def __str__(self):
+        f = []
+        for dis in self.formula:
+            f.append('(')
+            for con in dis:
+                f.append(str(con))
+                if con is not dis[-1]:
+                    f.append(" & ")
+            f.append(')')
+            if dis is not self.formula[-1]:
+                f.append(" | ")
+        return ''.join(f)
+        
 
     def set_merged_f(self):
         self.merged_f = True
@@ -349,18 +363,7 @@ class ACC_DNF(ACC):
     def __init__(self, acc):
         super().__init__(parse_dnf_acc(acc), AccType.dnf)
 
-    def __str__(self):
-        f = []
-        for dis in self.formula:
-            f.append('(')
-            for con in dis:
-                f.append(str(con))
-                if con is not dis[-1]:
-                    f.append(" & ")
-            f.append(')')
-            if dis is not self.formula[-1]:
-                f.append(" | ")
-        return ''.join(f)
+    
 
     def initial_cleanup(self, aut, scc):
         """
