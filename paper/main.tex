@@ -583,46 +583,51 @@ which means only that $\Te$ is nonempty and $\Te\subseteq\delta_S$ for
 some SCC $S$.
 This condition is satisfied by every cycle.
 
-The formula $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$ actually
-says that for every nonempty set $T\subseteq\delta_S$ whenere $S$ is
-an SCC, $T$ satisfies $\varphi$ if and only if $\rem(T)$ satisfies
-$\psi$. Note that the formula is not affected by the placement of
-transitions in the automaton. \todo{Tady to predelat, aby to
-  reflektovalo $T\subseteq\delta_S$.}  The only aspect of a transition
-$t$ reflected by the formula is its set of marks $\mks(t)$. Hence, we
-do not have to distinguish between transitions with the same sets of
-marks.
+The formula $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$ says that
+for every nonempty set $T\subseteq\delta_S$ whenere $S$ is an SCC, $T$
+satisfies $\varphi$ if and only if $\rem(T)$ satisfies $\psi$. Note
+that the only aspects of a transition $t$ reflected by the formula are
+its set of marks $\mks(t)$ and its affiliation to an SCC.
+% In partcular, it is not affected by its placement inside the
+% corresponding SCCs. The only aspect of a transition $t$ reflected by
+% the formula is its set of marks $\mks(t)$.
+Hence, we do not have to distinguish between transitions that are
+affiliated to the same SCC an have the same sets of marks.
 
-Formally, we define an equivalence ${\sim}\subseteq\delta\times\delta$
-on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
-\begin{lemma}
-  Assume that there is a function $\rem$ and a formula $\psi$ such that 
+Let us now fix an SCC $S$. We define an equivalence
+${\sim_S}\subseteq\delta_S\times\delta_S$ on transitions % in $\delta_S$
+such that $t_1\sim_S t_2$ whenever $\mks(t_1)=\mks(t_2)$.
+\begin{lemma} Assume that there is a function $\rem$ and a formula
+  $\psi$ such that
   \[
-    \textrm{for every set $\emptyset\neq T\subseteq\delta$ it holds }
+    \textrm{for every set $\emptyset\neq T\subseteq\delta_S$ it holds }
       (T~\msat~\varphi~\iff~\rem(T)~\msat~\psi).\tag{$1$}\label{eq:lem1} 
   \]  
   Then there exists a function $\rem'$ that respects % the equivalence
-  $\sim$ (i.e.,
-  if $t_1\sim t_2$ then $\rem'(t_1)=\rem'(t_2)$) and
+  $\sim_S$ (i.e.,
+  if $t_1\sim_S t_2$ then $\rem'(t_1)=\rem'(t_2)$) and
   \[
-    \textrm{for every set $\emptyset\neq T\subseteq\delta$ it holds }
+    \textrm{for every set $\emptyset\neq T\subseteq\delta_S$ it holds }
     (T~\msat~\varphi~\iff~\rem'(T)~\msat~\psi).\tag{$2$}\label{eq:lem2} 
   \]  
 \end{lemma}
 \begin{proof}
   Let $\rem$ be a function and $\psi$ a formula such that
   \eqref{eq:lem1} holds. To construct the function $\rem'$, we first
-  select one transition from each equivalence class of $\sim$. For
-  every transition $t\in\delta$, by $\overline{t}$ we denote the
-  selected transition equivalent to $t$. We define the function
-  $\rem'$ as $\rem'(t)=\rem(\overline{t})$. Clearly, $\rem'$ respects
-  the equivalence $\sim$. It remains to show that \eqref{eq:lem2}
-  holds for $\rem'$ and $\psi$.
+  select one transition from each equivalence class of~$\sim_S$. For
+  every transition $t\in\delta_S$, by $\overline{t}$ we denote the
+  selected transition equivalent to $t$ and we define the function
+  $\rem'$ as $\rem'(t)=\rem(\overline{t})$. Note that we do not need
+  to discuss the value of $\rem'$ on transitions outside $\delta_S$ as
+  it is not relevant for the lemma. Clearly, $\rem'$ respects the
+  equivalence $\sim_S$. It remains to show that \eqref{eq:lem2} holds
+  for $\rem'$ and $\psi$.
 
-  Let $T\subseteq\delta$ be an arbitrary nonempty set. We construct
+  Let $T\subseteq\delta_S$ be a % an arbitrary
+  nonempty set. We construct
   the set $\overline{T}=\{\overline{t}\mid t\in T\}$. As
-  $\mks(t)=\mks(\overline{t})$ for all transitions, we get
-  $\mks(T)=\mks(\overline{T})$ and thus
+  $\mks(t)=\mks(\overline{t})$ for all transitions of $\delta_S$, we
+  get $\mks(T)=\mks(\overline{T})$ and thus
   \[
     T~\msat~\varphi~\iff~\overline{T}~\msat~\varphi.
   \]
@@ -650,12 +655,13 @@ on transitions such that $t_1\sim t_2$ whenever $\mks(t_1)=\mks(t_2)$.
 
 The lemma suggests the following simplification of the whole formula
 $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$. Before we build the
-formula, we compute the equivalence $\sim$ on automata transitions and
-temporarily remove all transitions except one of each equivalence class. Then we
-build the formula $\Phi_{1,C,K}$ for the pruned automaton. The more
-transitions we removed, the shorter formula with less $e_t$ variables
-we obtain. If the formula $\Phi_{1,C,K}$ for the pruned automaton is
-satisfiable, we derive $\rem$ and $\psi$ from its model and extend % use them
+formula, we compute the equivalences $\sim_S$ for all SCCs and
+temporarily remove all transitions affilited to SCCs except one of
+each equivalence class. Then we build the formula $\Phi_{1,C,K}$ for
+the pruned automaton. The more transitions we removed, the shorter
+formula with less $e_t$ variables we obtain. If the formula
+$\Phi_{1,C,K}$ for the pruned automaton is satisfiable, we derive
+$\rem$ and $\psi$ from its model and extend % use them
 % with the original automaton. We only need to extend
 $\rem$ to all transitions of the original automaton such that
 it changes the acceptance marks on all equivalent transitions in the
@@ -789,7 +795,7 @@ cycles can be characterised in the following way.
   \end{itemize}
   Then there is a path $\rho_i=\rho'_it_i\rho''_i\in T^+$ leading from
   $p$ back to $p$ and containing $t_i$. If we concatenate all these
-  paths, we get the path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that
+/  paths, we get the path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that
   contains all transitions of $T$ and leads from $p$ back to $p$,
   which means that $T$ is a cycle.  This is a contradiction.\qed
 \end{proof}
@@ -832,7 +838,7 @@ run. For these transitions $t$, we can define $\rem(t)$ such that
 $\mks(\rem(t))=\emptyset$.
 
 The second optimization is specific for $\Phi_{3,C,K}$. In
-construction of $\mcycle_3(\vec{e})$, we replace the subformula
+the construction of $\mcycle_3(\vec{e})$, we replace the subformula
 $\bigvee_{t\in\delta}e_t$ enforcing the nonemptiness of $\Te$ by
 $\mcycle_2(\vec{e})$. This modification does not change the overall
 semantics of $\mcycle_3(\vec{e})$, but our prelimnary experiments
