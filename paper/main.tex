@@ -422,7 +422,7 @@ Further, each set $\minf(\pi)$ for a run $\pi$ is a cycle and vice
 versa. Hence, our reduction method is looking for a new acceptance
 formula $\psi$ and function $\rem$ such that for each cycle
 $T\subseteq\delta$, it holds that $T$ satisfies $\varphi$ if and only
-if $\rem(T)$ satisifes $\psi$. This can be roughly denoted by the
+if $\rem(T)$ satisfies $\psi$. This can be roughly denoted by the
 formula
 \[
   \forall T\subseteq\delta~.~\mcycle(T)\implies\big(\msat_\varphi(T) ~\iff~ \msat_{\psi,\rem}(T)\big).
@@ -738,12 +738,12 @@ cycles can be characterised in the following way.
   $T\not\subseteq\delta_{Q\smallsetminus S}$. Then there are two
   cases.
   \begin{itemize}
-  \item $T$ contains a transtition $t\in\delta_S$ and a transition
+  \item $T$ contains a transition $t\in\delta_S$ and a transition
     $t'\in\delta_{Q\smallsetminus S}$. The definition of a cycle
     implies that there exists a path $t_1t_2\ldots t_n\in T^+$ from a
     state $p$ back to $p$ containing both $t$ and $t'$. However, this
-    implies that $T$ contains a transtion leading from a state in $S$
-    to a state outside $S$ and a transtion leading from a state outside $S$
+    implies that $T$ contains a transition leading from a state in $S$
+    to a state outside $S$ and a transition leading from a state outside $S$
     to a state in $S$.
   \item $T$ contains a transition $t$ leading from a state in $S$ to a
     state outside $S$ (or vice versa). However, as $T$ is a cycle,
@@ -760,7 +760,7 @@ cycles can be characterised in the following way.
   (\ref{en:1}) nor (\ref{en:2}) nor (\ref{en:3}) holds. Let $p$ be a
   state such that some transition of $T$ leads from $p$. We define the
   set $\post$ of states reachable from $p$ via transitions in $T$ and the set
-  $\pre$ of states from which $p$ is reachable via transtitions of $T$.
+  $\pre$ of states from which $p$ is reachable via transitions of $T$.
   \[
     \begin{array}{r}
     \post=\{p\}\cup\{q\in Q\mid \textrm{there is a path in }T^+\textrm{ from }p\textrm{ to }q\}\\[.5ex]
@@ -831,11 +831,11 @@ affect the acceptance of any run as $t$ appears at most once on each
 run. For these transitions $t$, we can define $\rem(t)$ such that
 $\mks(\rem(t))=\emptyset$.
 
-The second optimization is specific for $\Phi_{3,C,K}$. In
+The second optimization is specific for $\Phi_{3,C,K}$. In the
 construction of $\mcycle_3(\vec{e})$, we replace the subformula
 $\bigvee_{t\in\delta}e_t$ enforcing the nonemptiness of $\Te$ by
 $\mcycle_2(\vec{e})$. This modification does not change the overall
-semantics of $\mcycle_3(\vec{e})$, but our prelimnary experiments
+semantics of $\mcycle_3(\vec{e})$, but our preliminary experiments
 showed that QBF solvers can often solve the modified formula
 $\Phi_{3,C,K}$ faster.
 
@@ -1144,7 +1144,7 @@ it. In the case of a single level reduction, the name has the form
 \texttt{L$j$\_$k$\_$X$}, where $j$ is the considered level, $k=K-1$ is
 the number of acceptance marks considered by the formula, $X$ is either
 \texttt{U} if the formula is unsatisfiable or \texttt{T} if the solver
-did not decided within the time limit. If $X$ is \texttt{T}, a longer
+did not decide within the time limit. If $X$ is \texttt{T}, a longer
 timeout may lead to further reductions. If the multi-level reduction
 is used, the automaton name contains the information from all
 levels. For example, the name `\texttt{L1\_5\_U L2\_3\_U L3\_1\_T}'
@@ -1231,7 +1231,7 @@ Table~\ref{tab:cumm-data} shows the cumulative numbers of marks in
 the input automata sets and after each reduction, together with the
 reduction ratio and total time spent by the considered reduction. The
 column \textit{solver timeout} shows the number of automata for which
-the last query to QBF solver did not finished within the 30 seconds
+the last query to QBF solver did not finish within the 30 seconds
 limit. The timeout of the last QBF query implies that the automaton
 may be potentially further reduced by the reduction with a longer time
 limit.
@@ -1326,7 +1326,7 @@ though the QBF queries can be time-consuming, in practice one can
 often find a good trade-off between speed and efficiency by adjusting 
 the formula precision and choosing a reasonable timeout.
 
-In future, we plan to improve the reduction process (e.g., use the
+In the future, we plan to improve the reduction process (e.g., use the
 bisection method to reduce the number of acceptance marks more
 efficiently) and study whether the reduction of acceptance condition
 can enable further reductions or simplifications of automata
