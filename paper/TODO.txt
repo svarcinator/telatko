@@ -1,0 +1,12 @@
+Priste chceme:
+- udelat level1 bez SCC optimalizace 
+- jako globalni optimalizaci nahradit vsechny hrany
+  z neakceptujicich SCC jednou virtualni SCC s jednou neakceptujici hranou
+- analyzovat casove rozdily v ruznych verzich experimentu
+- do experimentu pridat deterministicke TELA automaty
+  generovane Spotem a ltl3tela
+- do experimentu pridat nahodne formule
+
+- zkusit veci navrhzene v zaveru clanku: transformovat 
+  akceptacni formule do jneho tvaru, zkusit puleni intervalu...
+
