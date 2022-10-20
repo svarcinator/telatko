@@ -38,18 +38,18 @@ class Z3_f_ctor:
 
             laso = self.laso_cycles(aut)
             laso = simplify(laso)
-            #in_out = self.in_n_out()
-            #one_scc = self.one_scc_f()
-            #laso = And(laso, in_out, one_scc)
-            least_one_edge = self.disjunct_formula( self.inner_edges_nums)
-            laso = And(laso, least_one_edge)
+            in_out = self.in_n_out()
+            one_scc = self.one_scc_f()
+            laso = And(laso, in_out, one_scc)
+            #least_one_edge = self.disjunct_formula( self.inner_edges_nums)
+            #laso = And(laso, least_one_edge)
 
         elif self.mode == 2:
             laso = self.laso_f(aut)
 
         else: 
-            #laso = self.laso_f(aut)
-            laso = self.disjunct_formula( self.inner_edges_nums)
+            one_scc = self.one_scc_f()
+            laso = one_scc
 
         old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
 

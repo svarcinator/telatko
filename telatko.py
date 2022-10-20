@@ -39,10 +39,7 @@ def main(argv):
         "-C",
         "--minimize_clauses",
         help="Turn on reduction of clauses.", action='store_true')
-    parser.add_argument(
-        "-B",
-        "--base_level",
-        help="Choose whether qbf level 1 or standard level 1(original TELAtko).", choices=['telatko', 'z3'], default='z3')
+    
     parser.add_argument(
         "-I",
         "--incremental",
@@ -57,8 +54,13 @@ def main(argv):
         print("No automata to process.", file=sys.stderr)
 
 
-    # if no arguments givvent, default variant is gradually go up to level 3
-    if args.level == 0:
+    # if no arguments given, default variant is gradually go up to level 3
+    if args.level == 0 and not args.gradual and not args.incremental and not args.scc:
+        args.gradual = True
+        args.level = 3
+        args.incremental = True
+        args.scc = True
+    elif args.level == 0:
         args.gradual = True
         args.level = 3
 
@@ -67,6 +69,7 @@ def main(argv):
 
     aut = spot.automata(args.autfile)
     formula_attributes = Switches(args)
+    #formula_attributes.print_settings()
 
     for a in aut:
 
@@ -75,33 +78,23 @@ def main(argv):
             spot.cleanup_acceptance_here(a)
             formula_attributes.set_C(a)
 
-            if args.base_level == "telatko":
-                a = process_automaton(a)
-                if args.level > 1 and a.get_acceptance().used_sets().count() != 0:
-                    if formula_attributes.tmp_level != args.level:
-                        formula_attributes.tmp_level = 2
-
-                    auto = play(a, formula_attributes)
-                else:
-                    auto = a
+            
+            if a.get_acceptance().used_sets().count() == 0:
+                auto = a
             else:
-                if a.get_acceptance().used_sets().count() == 0:
-                    auto = a
-                else:
-                    auto = play(a, formula_attributes)
+                auto = play(a, formula_attributes)
 
             if args.outfile:
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
 
-            
+            """
             if not spot.are_equivalent(origin, auto):
                 print("NOT EQUIVALENT!")
                 assert(False)
+            """
             
-            
-
 
         # except BaseException as err:
             #print(f"Unexpected {err=}, {type(err)=}")

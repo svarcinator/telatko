@@ -105,10 +105,15 @@ def edge_dictionary(aut, mode, sccs_edges, scc_optimalization):
                 if mode == 1:
                     for m in e.acc.sets():
                         add_or_append(edge_dict, m, aut.edge_number(e))
+        scc_equiv_edges.append(marks_edges)
+                    
+        """
         if scc_optimalization or scc_equiv_edges == []:
             scc_equiv_edges.append(marks_edges)
         else:
             scc_equiv_edges[0] = dict_union(scc_equiv_edges[0], marks_edges)
+        """
+        
         
 
             
