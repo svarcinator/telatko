@@ -39,7 +39,7 @@ def main(argv):
         "-C",
         "--minimize_clauses",
         help="Turn on reduction of clauses.", action='store_true')
-    
+
     parser.add_argument(
         "-I",
         "--incremental",
@@ -78,7 +78,7 @@ def main(argv):
             spot.cleanup_acceptance_here(a)
             formula_attributes.set_C(a)
 
-            
+
             if a.get_acceptance().used_sets().count() == 0:
                 auto = a
             else:
@@ -89,12 +89,12 @@ def main(argv):
             else:
                 print_aut(auto, None, " ")
 
-            """
+
             if not spot.are_equivalent(origin, auto):
                 print("NOT EQUIVALENT!")
                 assert(False)
-            """
-            
+        
+
 
         # except BaseException as err:
             #print(f"Unexpected {err=}, {type(err)=}")
