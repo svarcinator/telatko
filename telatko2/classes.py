@@ -44,6 +44,16 @@ class Switches:
     def set_C(self, aut):
         self.C = len(
             aut.get_acceptance().to_dnf().top_disjuncts())
+    def print_settings(self):
+        print("Global Level ", self.level)
+        print("Current Level ", self.tmp_level)
+        print("Minimize clauses ", self.min_clauses)
+        print("Timeout ", self.timeout )
+        print("SCC optimization ", self.scc_optimization)
+        print("Incremental ", self.incremental)
+        print("Gradual ", self.gradual)
+
+
 
 
 class SATformula:
