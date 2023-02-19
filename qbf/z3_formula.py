@@ -24,13 +24,13 @@ class Z3_f_ctor:
         formula = And(impl, inf_not_fin, inf_or_fin)
         return formula
 
-    
+
     def get_qbf_formula(self, aut):
 
 
         # adds universally quantified variables
         self.quant_all()
-    
+
 
         if self.mode == 3:
 
@@ -47,11 +47,13 @@ class Z3_f_ctor:
         elif self.mode == 2:
             laso = self.laso_f(aut)
 
-        else: 
+        else:
             one_scc = self.one_scc_f()
             laso = one_scc
 
-        old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
+        #old = self.old_formula(ACC_DNF(aut.get_acceptance().to_dnf()))
+        old = self.rec_old_original_shape(aut.get_acceptance(),  'c', 0)
+        
 
         new = self.new_formula()
 
@@ -70,6 +72,7 @@ class Z3_f_ctor:
             formula = Exists(self.exist_vars, formula)
 
         formula = ForAll(self.univ_vars, formula)
+
 
         return formula
 
@@ -150,11 +153,75 @@ class Z3_f_ctor:
 
 # OLD CONDITION PART
 
+    def encode_acc_mark(self, acc):
+        """
+            acc - acceptance condition that has only one literal
+            i.e. Fin(x) / Inf(x)
+
+            Returns encoded literal.
+        """
+
+        inf, fin = acc.used_inf_fin_sets()
+        used_set = acc.used_sets()
+
+        assert(inf == [] or fin == [])
+        assert(inf.count() == 1 or fin.count() == 1)
+        assert(used_set.count() == 1)
+
+        edges_vars = []
+
+
+        # spot anomaly, cant extract number of mark the standard way
+        #mark_num = -1
+        for m in used_set.sets():
+            mark_num = m
+            break
+
+        if mark_num in self.edge_dict:
+
+            for e in list(set(self.edge_dict[mark_num]) & set(self.inner_edges_nums)):
+                var = Bool("e_" + str(e))
+                edges_vars.append(var)
+
+
+            if edges_vars == []:
+                if inf:
+                    #  Inf(∅) = False
+                    return False
+                else:
+                    #  Fin(∅) = True
+                    return True
+
+            literal_formula = Or(edges_vars)
+            if fin:
+                literal_formula = Not(literal_formula)
+
+        return literal_formula
+
+
+
+    def rec_old_original_shape(self, acc, prev_type, level):
+
+        if acc.top_disjuncts() == acc.top_conjuncts():
+            return self.encode_acc_mark(acc)
+
+        subformulas = []
+        if prev_type == 'c':
+            for a in acc.top_disjuncts():
+                subformulas.append(self.rec_old_original_shape( a, 'd', level+1,))
+            return Or(subformulas)
+        else:
+            for a in acc.top_conjuncts():
+                subformulas.append(self.rec_old_original_shape( a, 'c', level+1))
+            return And(subformulas)
+
     def old_formula(self, acc):
+
         # top disjunct
 
         tmp_acc = copy.deepcopy(acc)
         tmp_acc.clean_up2(self.marks_of_scc(self.edge_dict))
+
 
         top_disjuncts = []
         for dis in tmp_acc.formula:
@@ -162,6 +229,7 @@ class Z3_f_ctor:
             for con in dis:
                 edges_vars = []
                 if con.num in self.edge_dict:
+
                     for e in list(set(self.edge_dict[con.num]) & set(self.inner_edges_nums)):
                         var = Bool("e_" + str(e))
                         edges_vars.append(var)
@@ -269,7 +337,7 @@ class Z3_f_ctor:
         main_dis.append(And(con2))
         main_dis.append(And(con3))
 
-        
+
         laso = Or(main_dis)
 
         return laso
