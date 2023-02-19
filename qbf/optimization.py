@@ -171,13 +171,13 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
         Returns: Formula in DNF
 
         """
-    #print("acc: ", acc)
-    #print("scc sets:", scc_sets)
+    # print("acc: ", acc)
+    # print("scc sets:", scc_sets)
     tmp_acc = copy.deepcopy(acc)
 
     tmp_acc.clean_up2(list(scc_sets.sets()))
 
-    #print("cleaned acc: ", tmp_acc)
+    # print("cleaned acc: ", tmp_acc)
     dnf_formula = SATformula('|')
     for dis in tmp_acc.formula:
         conjunct_f = SATformula('&')
@@ -193,7 +193,7 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
                             "e_" +
                             str(edge_translator[edge])))
             else:
-                #print("con num:", con.num)
+                # print("con num:", con.num)
                 # print(edge_dict)
                 new_shape = SATformula('&')
                 for edge in edge_dict[con.num]:
@@ -204,7 +204,7 @@ def old_formula2(acc, edge_dict, edge_translator, scc_sets, aut, scc):
             conjunct_f.add_subf(new_shape)
 
         dnf_formula.add_subf(conjunct_f)
-    #print("dnf formula:  ",dnf_formula)
+    # print("dnf formula:  ",dnf_formula)
 
     return dnf_formula
 

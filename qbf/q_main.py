@@ -6,7 +6,6 @@ from qbf.not_incremental import not_incr_loop
 from qbf.formula_preparation import try_evaluate0
 
 
-
 def scc_info(aut):
     """
 
@@ -28,28 +27,27 @@ def scc_info(aut):
         states = si.states_of(i)
         if si.is_trivial(i):
             continue
-        
+
         if si.check_scc_emptiness(i):
             # if rejecting ignore edges (for now)
             states = si.states_of(i)
             continue
-        
+
         state_dict = {}
         for s in states:
             state_dict[s] = [[], []]
         edges = si.inner_edges_of(i)
-        
+
         scc_edges.append(list(edges))
-    
+
         for e in edges:
-            
+
             state_dict[e.src][0].append(aut.edge_number(e))
             state_dict[e.dst][1].append(aut.edge_number(e))
 
         scc_state_inf.append(state_dict)
-    
-    return scc_state_inf, scc_edges
 
+    return scc_state_inf, scc_edges
 
 
 def count_sets(sets):
@@ -59,8 +57,6 @@ def count_sets(sets):
     return counter
 
 
-
-
 def resolve_formula_atributes(minimized_atribute, C, K):
     if minimized_atribute == 'clauses':
 
@@ -68,7 +64,6 @@ def resolve_formula_atributes(minimized_atribute, C, K):
     else:
 
         return FormulaAtribute.K
-
 
 
 def play(aut, formula_attr):
@@ -81,9 +76,6 @@ def play(aut, formula_attr):
         return aut
 
     original = spot.automaton(aut.to_str())
-
-    
-
 
     # scc_edg [[nums of edges of one scc]]
     # scc state info [{state num : [[num of edge of which is the state source

@@ -8,7 +8,7 @@ def restrict_f_vars(K, inner_edges_nums):
     formula = []
     for e in inner_edges_nums:
         # these two are not equivalent?
-        #var1 = Bool("f_{0}_{1} ".format(str(e), str(K)))
+        # var1 = Bool("f_{0}_{1} ".format(str(e), str(K)))
         var = Bool("f_" + str(e) + "_" + str(K))
 
         formula.append(Not(var))
@@ -48,16 +48,13 @@ def update_inc_solver(solver, currently_reduced, C, K, inner_edges_nums):
         solver.push()
         solver.add(restrict_C_vars(C, K))
         return solver
-    assert(False)
-
-
+    assert (False)
 
 
 def model_assert(model, K):
     for t in model.decls():
         if str(t)[0] == 'f' and str(t)[-1] == str(K):
-            assert(is_false(model[t]))
-
+            assert (is_false(model[t]))
 
 
 def inc_loop(aut, tmp_mode,
@@ -75,12 +72,15 @@ def inc_loop(aut, tmp_mode,
     # edge_dict: {acc_set_num : [edge_nums]}
     # scc_equiv_edges: [ {"combination (tuple) of marks  : ["edges that contain this combination of marks"]" }]
     # representants: ["first edge that I see for each combination of marks"]
-    edge_dict, scc_equiv_edges, representants = edge_dictionary(aut, tmp_mode, scc_edg, formula_attr.scc_optimization)
+    edge_dict, scc_equiv_edges, representants = edge_dictionary(
+        aut, tmp_mode, scc_edg, formula_attr.scc_optimization)
 
     if tmp_mode == 1:
-            scc_edg, scc_state_info = filter_out_representants(aut, set(representants), scc_edg, scc_state_info)
+        scc_edg, scc_state_info = filter_out_representants(
+            aut, set(representants), scc_edg, scc_state_info)
     else:
-        # during gradual increasing of level we dont want the filtered versions of scc info
+        # during gradual increasing of level we dont want the filtered versions
+        # of scc info
         scc_edg = orig_scc_edg
         scc_state_info = orig_scc_state_info
 
@@ -97,7 +97,8 @@ def inc_loop(aut, tmp_mode,
 
     inner_edges_nums = []
     for scc_edg_list in scc_edg:
-        inner_edges_nums += list( map( lambda e: aut.edge_number( e ), scc_edg_list ) )
+        inner_edges_nums += list(map(lambda e: aut.edge_number(e),
+                                 scc_edg_list))
 
     model = None
     if currently_reduced == FormulaAtribute.K:

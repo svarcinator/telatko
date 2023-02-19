@@ -44,16 +44,15 @@ class Switches:
     def set_C(self, aut):
         self.C = len(
             aut.get_acceptance().to_dnf().top_disjuncts())
+
     def print_settings(self):
         print("Global Level ", self.level)
         print("Current Level ", self.tmp_level)
         print("Minimize clauses ", self.min_clauses)
-        print("Timeout ", self.timeout )
+        print("Timeout ", self.timeout)
         print("SCC optimization ", self.scc_optimization)
         print("Incremental ", self.incremental)
         print("Gradual ", self.gradual)
-
-
 
 
 class SATformula:
@@ -197,7 +196,7 @@ class ACC:
         # mapping of acc clause to merged_f clause (if not self.merged_f)
         self.clauses_mapping = {}
         # literals mapping on literals in paired clause (if not self.merged_f)
-        #self.literals_mapping = []
+        # self.literals_mapping = []
         self.dependencies = None
 
     def __getitem__(self, index):
@@ -205,7 +204,7 @@ class ACC:
 
     def __len__(self):
         return len(self.formula)
-    
+
     def __str__(self):
         f = []
         for dis in self.formula:
@@ -218,7 +217,6 @@ class ACC:
             if dis is not self.formula[-1]:
                 f.append(" | ")
         return ''.join(f)
-        
 
     def set_merged_f(self):
         self.merged_f = True
@@ -373,15 +371,13 @@ class ACC_DNF(ACC):
     def __init__(self, acc):
         super().__init__(parse_dnf_acc(acc), AccType.dnf)
 
-    
-
     def initial_cleanup(self, aut, scc):
         """
         Evaluates acc condition for SCC and adjusts acc for SCC.
         Removes all conjuncts that are False.
         If disjunct is always True => formula is always True
         """
-        #marks__on_all_edges = scc_everywhere(aut, scc)
+        # marks__on_all_edges = scc_everywhere(aut, scc)
         marks__on_all_edges = scc.common_marks().sets()
         marks_on_some_edges = scc.acc_marks().sets()
         clean_f = []

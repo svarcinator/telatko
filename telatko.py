@@ -53,7 +53,6 @@ def main(argv):
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
 
-
     # if no arguments given, default variant is gradually go up to level 3
     if args.level == 0 and not args.gradual and not args.incremental and not args.scc:
         args.gradual = True
@@ -69,7 +68,7 @@ def main(argv):
 
     aut = spot.automata(args.autfile)
     formula_attributes = Switches(args)
-    #formula_attributes.print_settings()
+    # formula_attributes.print_settings()
 
     for a in aut:
 
@@ -77,7 +76,6 @@ def main(argv):
         try:
             spot.cleanup_acceptance_here(a)
             formula_attributes.set_C(a)
-
 
             if a.get_acceptance().used_sets().count() == 0:
                 auto = a
@@ -89,15 +87,12 @@ def main(argv):
             else:
                 print_aut(auto, None, " ")
 
-
             if not spot.are_equivalent(origin, auto):
                 print("NOT EQUIVALENT!")
-                assert(False)
-        
-
+                assert (False)
 
         # except BaseException as err:
-            #print(f"Unexpected {err=}, {type(err)=}")
+            # print(f"Unexpected {err=}, {type(err)=}")
 
         except RuntimeError as e:  # too many marks
             print(
