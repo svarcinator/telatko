@@ -1,8 +1,9 @@
 % vim: tw=78 ai spell spelllang=en
 
-\documentclass[runningheads]{llncs}
+\documentclass[a4paper,UKenglish,cleveref,autoref,thm-restate]{lipics-v2021}
 
-%\usepackage[paperheight=235mm, paperwidth=155mm,textwidth=12.2cm,textheight=19.3cm]{geometry}
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{xspace}
@@ -59,35 +60,36 @@
 %}}}
 %{{{ hyperref and ORCID ref
 
-\makeatletter
-\RequirePackage[bookmarks,unicode,colorlinks=true]{hyperref}%
-   \def\@citecolor{blue}%
-   \def\@urlcolor{blue}%
-   \def\@linkcolor{blue}%
-\def\UrlFont{\rmfamily}
-\def\orcidID#1{\smash{\href{http://orcid.org/#1}{\protect\raisebox{-1.25pt}{\protect\includegraphics{orcid_color.eps}}}}}
-\makeatother
+% \makeatletter
+% \RequirePackage[bookmarks,unicode,colorlinks=true]{hyperref}%
+%    \def\@citecolor{blue}%
+%    \def\@urlcolor{blue}%
+%    \def\@linkcolor{blue}%
+% \def\UrlFont{\rmfamily}
+% \def\orcidID#1{\smash{\href{http://orcid.org/#1}{\protect\raisebox{-1.25pt}{\protect\includegraphics{orcid_color.eps}}}}}
+% \makeatother
 
-\usepackage{academicons}
-\definecolor{orcidlogocol}{HTML}{A6CE39}
+% \usepackage{academicons}
+% \definecolor{orcidlogocol}{HTML}{A6CE39}
 
 %}}}
-
-\begin{document}
 
 %{{{ title and authors
 
 \title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF-solving}
-\author{Tereza Schwarzov\'{a} \and
-        Jan Strej\v{c}ek\orcidID{0000-0001-5873-403X}\thanks{Corresponding author: \email{strejcek@fi.muni.cz}} \and
-        Juraj Major}
+\author{Tereza Schwarzov\'{a}}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{xschwar3@mail.muni.cz}{}{}
+\author{Jan Strej\v{c}ek}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{strejcek@fi.muni.cz}{https://orcid.org/0000-0001-5873-403X}{}
+\author{Juraj Major}{Faculty of Informatics, Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{}{}
 \authorrunning{T. Schwarzov\'{a}, J. Strej\v{c}ek, and J. Major}
-\titlerunning{Reducing Acceptance Marks in TELA by QBF-solving}
-\institute{%Faculty of Informatics,
-  Masaryk University, Brno, Czech Republic
-}
+\Copyright{Tereza Schwarzov\'{a}, Jan Strej\v{c}ek, and Juraj Major}
+\ccsdesc[500]{Theory of computation~Logic}
+\ccsdesc[500]{Theory of computation~Automata over infinite objects}
+\keywords{Emerson-Lei automata, TELA, automata reduction, QBF, telatko}
+%\funding{This work has been supported by the Czech Science Foundation grant GA19-24397S.}
 
 %}}}
+
+\begin{document}
 
 \maketitle
 
@@ -97,7 +99,7 @@
   \emph{Transition-based Emerson-Lei automata (TELA)} became a popular
   formalism that generalizes many traditional kinds of automata over
   infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
-  automata.  Transitions in a TELA are labelled with acceptance marks
+  automata. Transitions in a TELA are labelled with acceptance marks
   and its accepting formula is a positive Boolean combination of terms
   saying that a particular mark has to be visited infinitely or
   finitely often. % in an accepting run.
