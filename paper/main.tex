@@ -76,7 +76,7 @@
 
 %{{{ title and authors
 
-\title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF-Solving}
+\title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF Solving}
 \author{Tereza Schwarzov\'{a}}{%Faculty of Informatics,
   Masaryk University, Brno, Czech Republic}{xschwar3@mail.muni.cz}{}{}
 \author{Jan Strej\v{c}ek}{%Faculty of Informatics,
@@ -99,19 +99,21 @@
 %{{{ abstract
 
 \begin{abstract}
-  \emph{Transition-based Emerson-Lei automata (TELA)} became a popular
-  formalism that generalizes many traditional kinds of automata over
-  infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
-  automata. Transitions in a TELA are labelled with acceptance marks
-  and its accepting formula is a positive Boolean combination of terms
-  saying that a particular mark has to be visited infinitely or
-  finitely often. % in an accepting run.
+  This paper presents a novel application of QBF solving to automata
+  reduction. We focus on \emph{Transition-based Emerson-Lei automata
+    (TELA)}, which is a popular formalism that generalizes many
+  traditional kinds of automata over infinite words including Büchi,
+  co-Büchi, Rabin, Streett, and parity automata. Transitions in a TELA
+  are labelled with acceptance marks and its accepting formula is a
+  positive Boolean combination of atoms saying that a particular mark
+  has to be visited infinitely or finitely
+  often. % in an accepting run.
   Algorithms processing these automata are often very sensitive to the
   number of %different
   acceptance marks. We introduce a new technique for reducing the
   number of %different
-  acceptance marks in TELA based on satisfiability of \emph{quantified Boolean
-    formulas (QBF)}.
+  acceptance marks in TELA based on satisfiability of \emph{quantified
+    Boolean formulas (QBF)}.
   % : if a constructed QBF formula is satisfiable then
   % its model encodes an equivalent accepting formula with less
   % acceptance marks.
@@ -327,10 +329,10 @@ if $L(\mA)=L(\mB)$.
 
 An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
   (DNF)} if it is a disjunction of cubes, where each cube is a
-conjunction of terms of the form $\Fin m$ or $\Inf m$.  Each
+conjunction of atoms of the form $\Fin m$ or $\Inf m$.  Each
 acceptance formula can be transformed into an equivalent formula
 in~DNF. Formula $\false$ corresponds to the disjunction of zero
-cubes and formula $\true$ corresponds to one cube with zero terms.
+cubes and formula $\true$ corresponds to the cube with zero atoms.
 
 A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
 adjacent transitions of the form
@@ -472,7 +474,7 @@ constructed QBF formulas.
   \]
 \item For each $c\in\{1,2,\ldots,C\}$ and acceptance mark $k\in N_K$,
   variables $i_{c,k}$ and $f_{c,k}$ say whether the $c^\textrm{th}$
-  cube of $\psi$ contains terms $\Inf k$ or $\Fin k$, respectively.
+  cube of $\psi$ contains atoms $\Inf k$ or $\Fin k$, respectively.
   \[i_{c,k}=\left\{
       \begin{array}{ll}
         1~~ & \textrm{if the $c^\textrm{th}$ cube of $\psi$ contains $\Inf k$}\\[.5ex]
@@ -508,8 +510,8 @@ $\Fin m$ iff $m\not\in\mks(T)$, which can be expressed by
 $\bigwedge_{t\in\delta_m}\neg e_t$. Hence, $\msat_\varphi(\vec{e})$
 arises from $\varphi$ by replacing
 \begin{itemize}
-\item all terms of the form $\Inf m$ by $\bigvee_{t\in\delta_m}e_t$ and
-\item all terms of the form $\Fin m$ by $\bigwedge_{t\in\delta_m}\neg e_t$.
+\item all atoms of the form $\Inf m$ by $\bigvee_{t\in\delta_m}e_t$ and
+\item all atoms of the form $\Fin m$ by $\bigwedge_{t\in\delta_m}\neg e_t$.
 \end{itemize}
 
 Next, we construct the subformula
@@ -521,7 +523,7 @@ cubes, we have
   \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})=\bigvee_{c\in\{1,2,\ldots,C\}}\xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})
 \]
 where each $\xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ corresponds to
-one cube. Recall that the presence of terms $\Inf k$ and $\Fin k$ in
+one cube. Recall that the presence of atoms $\Inf k$ and $\Fin k$ in
 the $c^\textrm{th}$ cube is given by variables $i_{c,k}$ and
 $f_{c,k}$, respectively. $\Inf k$ is satisfied by $\rem(T)$ iff $T$
 contains a transition $t$ such that $k\in\mks(\rem(t))$, which can be
@@ -1309,7 +1311,7 @@ a few complicated automata.
 
 \begin{figure}[b!]
 \caption{Performance of \telatko on different automata sets. The $x$ axis
-represents the number of reduced automata, the $y$ axis shows the time spent
+represents the number of processed automata, the $y$ axis shows the time spent
 reducing (in seconds).}
 \label{fig:quantile}
 \bigskip
@@ -1349,7 +1351,7 @@ economical with acceptance marks than the other two translators.
 The reduction of acceptance marks is not the only application of the
 presented approach. For example, it can be easily adopted to look for
 an equivalent automaton with the same structure and an acceptance
-formula of a specific form (e.g., without any $\Fin m$ terms). Even
+formula of a specific form (e.g., without any $\Fin m$ atoms). Even
 though the QBF queries can be time-consuming, in practice one can
 often find a good trade-off between speed and efficiency by adjusting 
 the formula precision and choosing a reasonable timeout.
