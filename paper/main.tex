@@ -174,15 +174,16 @@ including Büchi, co-Büchi, Rabin, Streett, and parity automata.
 
 TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
-often use fewer states than equivalent automata with simpler acceptance
-conditions. Further, algorithms handling TELA can automatically handle
-all automata with traditional acceptance conditions. TELA can be
-obtained for example by translating LTL formulas by \texttt{ltl2dela}
-(known as Delag)~\cite{muller.17.gandalf},
-\texttt{ltl3tela}~\cite{major.19.atva}, \texttt{ltl2dgra} (known as
-Rabinizer~4)~\cite{kretinsky.18.cav}, or \texttt{ltl2tgba} which is a
-part of the Spot library~\cite{duret.16.atva2}.  There are also
-algorithms processing these automata, for example the emptiness
+often use fewer states than equivalent automata with simpler
+acceptance conditions. Further, algorithms handling TELA can
+automatically handle all automata with traditional acceptance
+conditions. TELA can be obtained for example by translating LTL
+formulas with tools \texttt{ltl2dela} (known as
+Delag)~\cite{muller.17.gandalf} or \texttt{ltl2dgra} (known as
+Rabinizer~4)~\cite{kretinsky.18.cav} of the Owl library,
+\texttt{ltl2tgba} of the Spot library~\cite{duret.16.atva2}, or
+\texttt{ltl3tela}~\cite{major.19.atva}. There are also algorithms
+processing these automata, for example the emptiness
 check~\cite{baier.19.atva} or translation of TELA to parity
 automata~\cite{renkin.20.atva,casares.22.tacas}.
 
@@ -383,7 +384,7 @@ occurrences of $x$ simultaneously replaced by $\rho$. The equivalences
 imply that each QBF can be transformed into an equivalent Boolean
 formula. However, the size of this Boolean formula can be exponential
 in the size of the original QBF. Let $V$ be the set of all
-propositional variables. A mapping $\mu:V\rightarrow\{\true,\false\}$
+propositional variables. A mapping $\mu:V\rightarrow\{0,1\}$
 is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
 assignment of an equivalent Boolean formula. A QBF formula is
 \emph{satisfiable} iff it has a model.
@@ -1213,15 +1214,31 @@ translator after removing the automata with less than two marks.
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
 \centering
-\begin{tabular}{lr@{~~~~~~}lr}
-\toprule
-tool        & version&homepage & ~~~automata \\
-\midrule
-\texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
-\texttt{ltl2dgra} & 21.0 & & 234\\
-\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
-\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
-\bottomrule
+% \begin{tabular}{lr@{~~~~~~}lr}
+% \toprule
+% tool        & version&homepage & ~~~automata \\
+% \midrule
+% \texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
+% \texttt{ltl2dgra} & 21.0 & & 234\\
+% \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
+% \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
+% \bottomrule
+% \end{tabular}
+%
+\begin{tabular}{lrlrrr}
+  \toprule
+  &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
+  tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
+  \midrule
+  \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
+       & ? & ? & \textbf{129} \\
+  \texttt{ltl2dgra} & 21.0 &
+       & ? & ? & \textbf{234}\\
+  \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
+       & ? & ? & \textbf{70}\\
+  \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
+       & ? & ? & \textbf{91}\\
+  \bottomrule
 \end{tabular}
 \end{table}
 
