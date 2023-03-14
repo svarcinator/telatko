@@ -1,8 +1,9 @@
 % vim: tw=78 ai spell spelllang=en
 
-\documentclass[runningheads]{llncs}
+\documentclass[a4paper,UKenglish,cleveref,autoref,thm-restate]{lipics-v2021}
 
-%\usepackage[paperheight=235mm, paperwidth=155mm,textwidth=12.2cm,textheight=19.3cm]{geometry}
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{xspace}
@@ -59,54 +60,60 @@
 %}}}
 %{{{ hyperref and ORCID ref
 
-\makeatletter
-\RequirePackage[bookmarks,unicode,colorlinks=true]{hyperref}%
-   \def\@citecolor{blue}%
-   \def\@urlcolor{blue}%
-   \def\@linkcolor{blue}%
-\def\UrlFont{\rmfamily}
-\def\orcidID#1{\smash{\href{http://orcid.org/#1}{\protect\raisebox{-1.25pt}{\protect\includegraphics{orcid_color.eps}}}}}
-\makeatother
+% \makeatletter
+% \RequirePackage[bookmarks,unicode,colorlinks=true]{hyperref}%
+%    \def\@citecolor{blue}%
+%    \def\@urlcolor{blue}%
+%    \def\@linkcolor{blue}%
+% \def\UrlFont{\rmfamily}
+% \def\orcidID#1{\smash{\href{http://orcid.org/#1}{\protect\raisebox{-1.25pt}{\protect\includegraphics{orcid_color.eps}}}}}
+% \makeatother
 
-\usepackage{academicons}
-\definecolor{orcidlogocol}{HTML}{A6CE39}
+% \usepackage{academicons}
+% \definecolor{orcidlogocol}{HTML}{A6CE39}
+
+%}}}
+
+%{{{ title and authors
+
+\title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF Solving}
+\author{Tereza Schwarzov\'{a}}{%Faculty of Informatics,
+  Masaryk University, Brno, Czech Republic}{xschwar3@mail.muni.cz}{}{}
+\author{Jan Strej\v{c}ek}{%Faculty of Informatics,
+  Masaryk University, Brno, Czech Republic}{strejcek@fi.muni.cz}{https://orcid.org/0000-0001-5873-403X}{}
+\author{Juraj Major}{%Faculty of Informatics,
+  Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{}{}
+\authorrunning{T. Schwarzov\'{a}, J. Strej\v{c}ek, and J. Major}
+\Copyright{Tereza Schwarzov\'{a}, Jan Strej\v{c}ek, and Juraj Major}
+\ccsdesc[500]{Theory of computation~Logic}
+\ccsdesc[500]{Theory of computation~Automata over infinite objects}
+\keywords{Emerson-Lei automata, TELA, automata reduction, QBF, telatko}
+%\funding{This work has been supported by the Czech Science Foundation grant GA19-24397S.}
 
 %}}}
 
 \begin{document}
-
-%{{{ title and authors
-
-\title{Reducing Acceptance Marks in Emerson-Lei Automata by QBF-solving}
-\author{Tereza Schwarzov\'{a} \and
-        Jan Strej\v{c}ek\orcidID{0000-0001-5873-403X}\thanks{Corresponding author: \email{strejcek@fi.muni.cz}} \and
-        Juraj Major}
-\authorrunning{T. Schwarzov\'{a}, J. Strej\v{c}ek, and J. Major}
-\titlerunning{Reducing Acceptance Marks in TELA by QBF-solving}
-\institute{%Faculty of Informatics,
-  Masaryk University, Brno, Czech Republic
-}
-
-%}}}
 
 \maketitle
 
 %{{{ abstract
 
 \begin{abstract}
-  \emph{Transition-based Emerson-Lei automata (TELA)} became a popular
-  formalism that generalizes many traditional kinds of automata over
-  infinite words including Büchi, co-Büchi, Rabin, Streett, and parity
-  automata.  Transitions in a TELA are labelled with acceptance marks
-  and its accepting formula is a positive Boolean combination of terms
-  saying that a particular mark has to be visited infinitely or
-  finitely often. % in an accepting run.
+  This paper presents a novel application of QBF solving to automata
+  reduction. We focus on \emph{Transition-based Emerson-Lei automata
+    (TELA)}, which is a popular formalism that generalizes many
+  traditional kinds of automata over infinite words including Büchi,
+  co-Büchi, Rabin, Streett, and parity automata. Transitions in a TELA
+  are labelled with acceptance marks and its accepting formula is a
+  positive Boolean combination of atoms saying that a particular mark
+  has to be visited infinitely or finitely
+  often. % in an accepting run.
   Algorithms processing these automata are often very sensitive to the
   number of %different
   acceptance marks. We introduce a new technique for reducing the
   number of %different
-  acceptance marks in TELA with the use of \emph{quantified Boolean
-    formulas (QBF)}.
+  acceptance marks in TELA based on satisfiability of \emph{quantified
+    Boolean formulas (QBF)}.
   % : if a constructed QBF formula is satisfiable then
   % its model encodes an equivalent accepting formula with less
   % acceptance marks.
@@ -169,15 +176,16 @@ including Büchi, co-Büchi, Rabin, Streett, and parity automata.
 
 TELA have attracted a lot of attention during the last five years.
 Their popularity comes probably from the fact that these automata can
-often use less states than equivalent automata with simpler acceptance
-conditions. Further, algorithms handling TELA can automatically handle
-all automata with traditional acceptance conditions. TELA can be
-obtained for example by translating LTL formulas by \texttt{ltl2dela}
-(known as Delag)~\cite{muller.17.gandalf},
-\texttt{ltl3tela}~\cite{major.19.atva}, \texttt{ltl2dgra} (known as
-Rabinizer~4)~\cite{kretinsky.18.cav}, or \texttt{ltl2tgba} which is a
-part of the Spot library~\cite{duret.16.atva2}.  There are also
-algorithms processing these automata, for example the emptiness
+often use fewer states than equivalent automata with simpler
+acceptance conditions. Further, algorithms handling TELA can
+automatically handle all automata with traditional acceptance
+conditions. TELA can be obtained for example by translating LTL
+formulas with tools \texttt{ltl2dela} (known as
+Delag)~\cite{muller.17.gandalf} or \texttt{ltl2dgra} (known as
+Rabinizer~4)~\cite{kretinsky.18.cav} of the Owl library,
+\texttt{ltl2tgba} of the Spot library~\cite{duret.16.atva2}, or
+\texttt{ltl3tela}~\cite{major.19.atva}. There are also algorithms
+processing these automata, for example the emptiness
 check~\cite{baier.19.atva} or translation of TELA to parity
 automata~\cite{renkin.20.atva,casares.22.tacas}.
 
@@ -202,18 +210,18 @@ determinism can be lost. This motivates our study of a technique
 reducing the number of acceptance marks without altering the structure
 of the automaton.
 
-We present such a technique heavily based on \emph{quantified Boolean
-  formulas (QBF)}. For a given TELA and parameters $c,k$, it produces
+Our reduction technique is heavily based on \emph{quantified Boolean
+  formulas (QBF)}. For a given TELA and parameters $C,K$, it produces
 a QBF formula which is satisfiable if and only if there exists an
-automaton with the same structure, $k$ acceptance marks, an acceptance
-formula in disjunctive normal form with $c$ clauses, and the same set
-of accepting runs as the original automaton. The placement of the
-marks on transitions and the acceptance formula can be obtained from a
-model of the formula. Besides this formula, we describe also the
-construction of two simpler formulas such that their satisfiability
-implies the existence of an automaton with the same structure, $k$
-acceptance marks, and the same set of accepting runs, but not vice
-versa.
+automaton with the same structure, $K$ acceptance marks, an acceptance
+formula in disjunctive normal form with $C$ cubes (i.e., conjunctive
+clauses), and the same set of accepting runs as the original
+automaton. The placement of the marks on transitions and the
+acceptance formula can be obtained from a model of the
+formula. Besides this formula, we describe also the construction of
+two simpler formulas whose satisfiability implies the existence of an
+automaton with the same structure, $K$ acceptance marks, and the same
+set of accepting runs, but not vice versa.
 
 We have implemented our reduction technique in a tool called
 \telatko. We show that the tool can reduce acceptance marks in
@@ -226,7 +234,7 @@ is substantial on automata produced by the tools of the Owl library.
 
 \paragraph*{Related results}
 There is a simple technique~\cite{babiak.13.spin} reducing the number
-of acceptance marks in \emph{transition-based genealised Büchi
+of acceptance marks in \emph{transition-based generalised Büchi
   automata (TGBA)} without changing its structure. We are not aware
 of any existing research aimed at simplification of acceptance
 formulas of TELA or reduction of the number of its acceptance marks
@@ -269,7 +277,7 @@ closes the paper.
 
 \section{Preliminaries}\label{sec:prelim}
 
-In this section we recall the basic terms around TELA and QBF.
+In this section we recall the basic terms related to TELA and QBF.
 
 \begin{definition}[TELA]
   A \emph{transition-based Emerson-Lei automaton (TELA)} is a tuple
@@ -320,11 +328,11 @@ if $L(\mA)=L(\mB)$.
 % an accepting run over $u$.
 
 An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
-  (DNF)} if it is a disjunction of clauses, where each clause is a
-conjunction of terms of the form $\Fin m$ or $\Inf m$.  Each
+  (DNF)} if it is a disjunction of cubes, where each cube is a
+conjunction of atoms of the form $\Fin m$ or $\Inf m$.  Each
 acceptance formula can be transformed into an equivalent formula
 in~DNF. Formula $\false$ corresponds to the disjunction of zero
-clauses and formula $\true$ corresponds to one clause with zero terms.
+cubes and formula $\true$ corresponds to the cube with zero atoms.
 
 A \emph{path} from a state $p$ to a state $q$ is a finite sequence of
 adjacent transitions of the form
@@ -378,7 +386,7 @@ occurrences of $x$ simultaneously replaced by $\rho$. The equivalences
 imply that each QBF can be transformed into an equivalent Boolean
 formula. However, the size of this Boolean formula can be exponential
 in the size of the original QBF. Let $V$ be the set of all
-propositional variables. A mapping $\mu:V\rightarrow\{\true,\false\}$
+propositional variables. A mapping $\mu:V\rightarrow\{0,1\}$
 is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
 assignment of an equivalent Boolean formula. A QBF formula is
 \emph{satisfiable} iff it has a model.
@@ -432,15 +440,15 @@ construct. As we are looking for $\psi$ and $\rem$ such that the
 formula holds, the subformula $\msat_{\psi,\rem}(T)$ contains many
 free variables representing possible instances of $\psi$ and
 $\rem$. If the formula is satisfiable, then each of its models encodes
-a desired instance of $\psi$ and $\rem$.  In the following, we assume
+a desired instance of $\psi$ and $\rem$. In the following, we assume
 that we are looking for a new acceptance formula $\psi$ in DNF. Note
-that our reduction method can be easily adapted to look for $\psi$ of
-a different shape.
+that our reduction method can be easily adapted to look for $\psi$ in
+CNF or in a different shape.
 
 Now we describe the construction of QBF formulas in detail. The
 construction is parametrized by two integers $C,K\ge 0$, where $K$ is
-the desired number of acceptance marks and $C$ is the number of
-clauses of $\psi$. For simplicity, we assume that the reduced
+the desired number of acceptance marks and $C$ is the number of cubes
+of $\psi$. Without loss of generality, we assume that the reduced
 automaton will use the acceptance marks $N_K=\{1,2,\ldots,K\}$.
 %Further, we consider only subsets $T\subseteq\bigcup_{\textrm{SCC}~S}\delta_S$
 We start with a description of Boolean variables used in the
@@ -466,16 +474,16 @@ constructed QBF formulas.
   \]
 \item For each $c\in\{1,2,\ldots,C\}$ and acceptance mark $k\in N_K$,
   variables $i_{c,k}$ and $f_{c,k}$ say whether the $c^\textrm{th}$
-  clause of $\psi$ contains terms $\Inf k$ or $\Fin k$, respectively.
+  cube of $\psi$ contains atoms $\Inf k$ or $\Fin k$, respectively.
   \[i_{c,k}=\left\{
       \begin{array}{ll}
-        1~~ & \textrm{if the $c^\textrm{th}$ clause of $\psi$ contains $\Inf k$}\\[.5ex]
+        1~~ & \textrm{if the $c^\textrm{th}$ cube of $\psi$ contains $\Inf k$}\\[.5ex]
         0 & \textrm{otherwise}    
       \end{array}\right.
   \]
   \[f_{c,k}=\left\{
       \begin{array}{ll}
-        1~~ & \textrm{if the $c^\textrm{th}$ clause of $\psi$ contains $\Fin k$}\\[.5ex]
+        1~~ & \textrm{if the $c^\textrm{th}$ cube of $\psi$ contains $\Fin k$}\\[.5ex]
         0 & \textrm{otherwise}    
       \end{array}\right.
   \]
@@ -502,22 +510,22 @@ $\Fin m$ iff $m\not\in\mks(T)$, which can be expressed by
 $\bigwedge_{t\in\delta_m}\neg e_t$. Hence, $\msat_\varphi(\vec{e})$
 arises from $\varphi$ by replacing
 \begin{itemize}
-\item all terms of the form $\Inf m$ by $\bigvee_{t\in\delta_m}e_t$ and
-\item all terms of the form $\Fin m$ by $\bigwedge_{t\in\delta_m}\neg e_t$.
+\item all atoms of the form $\Inf m$ by $\bigvee_{t\in\delta_m}e_t$ and
+\item all atoms of the form $\Fin m$ by $\bigwedge_{t\in\delta_m}\neg e_t$.
 \end{itemize}
 
 Next, we construct the subformula
 $\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ that evaluates to true
 iff $\rem(T)$ satisfies~$\psi$. The subformula reflects the basic
 structure of $\psi$. As we assume that $\psi$ is a disjunction of $C$
-clauses, we have
+cubes, we have
 \[
   \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})=\bigvee_{c\in\{1,2,\ldots,C\}}\xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})
 \]
 where each $\xi_{c,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ corresponds to
-one clause. Recall that the presence of terms $\Inf k$ and $\Fin k$ in
-the $c^\textrm{th}$ clause is given by variables $i_{c,k}$ and
-$f_{c,k}$, respecively. $\Inf k$ is satisfied by $\rem(T)$ iff $T$
+one cube. Recall that the presence of atoms $\Inf k$ and $\Fin k$ in
+the $c^\textrm{th}$ cube is given by variables $i_{c,k}$ and
+$f_{c,k}$, respectively. $\Inf k$ is satisfied by $\rem(T)$ iff $T$
 contains a transition $t$ such that $k\in\mks(\rem(t))$, which can be
 expressed as $\bigvee_{t\in\delta}(e_t\wedge n_{t,k})$. Similarly,
 $\Fin k$ is satisfied by $\rem(T)$ iff there is no transition $t\in T$
@@ -550,7 +558,7 @@ We define three versions of $\mcycle(\vec{e})$:
 \begin{itemize}
 \item $\mcycle_1(\vec{e})$ is a lightweight version, which only says
   that $\Te$ is nonempty and $\Te\subseteq\delta_S$ for some SCC $S$.
-  Except for SCCs, it does not use the information about automaton
+  Except for SCCs, it does not use the information about the automaton
   structure, but it comes with an interesting simplification of the
   whole formula $\Phi_{C,K}$.
 \item $\mcycle_2(\vec{e})$ is an intermediate version. It says that
@@ -631,7 +639,7 @@ such that $t_1\sim_S t_2$ whenever $\mks(t_1)=\mks(t_2)$.
   \[
     T~\msat~\varphi~\iff~\overline{T}~\msat~\varphi.
   \]
-  Now we apply $\eqref{eq:lem1}$ on $\overline{T}$ to get that
+  Now we apply $\eqref{eq:lem1}$ to $\overline{T}$ and we get % that
   \[
     \overline{T}~\msat~\varphi~\iff~\rem(\overline{T})~\msat~\psi.
   \]
@@ -650,7 +658,7 @@ such that $t_1\sim_S t_2$ whenever $\mks(t_1)=\mks(t_2)$.
       & \iff~\rem'(T)~\msat~\psi
     \end{array}
   \]
-  which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$.\qed
+  which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$.%\qed
 \end{proof}
 
 The lemma suggests the following simplification of the whole formula
@@ -696,7 +704,7 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
       (q) edge[out=-150,in=-30] (p);
     \end{scope}
 
-    \begin{scope}[initial angle=90,densely dotted,black!20]
+    \begin{scope}[initial angle=90,densely dotted,black!35]
       \node[state,initial,solid,draw=black] (p) at (0,0) {};
       \node[state,solid,draw=black] (q) at (1.8,0) {};
       \path[->,auto]
@@ -706,7 +714,7 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
       (q) edge[out=-150,in=-30] (p);
     \end{scope}
 
-    \begin{scope}[initial angle=90,densely dotted,black!20,xshift=4cm]
+    \begin{scope}[initial angle=90,densely dotted,black!35,xshift=4cm]
       \node[state,initial,solid,draw=black] (p) at (0,0) {};
       \node[state,solid,draw=black] (q) at (1.8,0) {};
       \path[->,auto]
@@ -719,7 +727,7 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
   \caption{An automaton structure where transition labels and
     acceptance marks are not depicted (left) and two sets $\Te$ that
     are not cycles even if $\mcycle_2(\vec{e})$ holds (middle and
-    right)}
+    right).}
   \label{fig:inter}
 \end{figure}
 
@@ -795,9 +803,9 @@ cycles can be characterised in the following way.
   \end{itemize}
   Then there is a path $\rho_i=\rho'_it_i\rho''_i\in T^+$ leading from
   $p$ back to $p$ and containing $t_i$. If we concatenate all these
-/  paths, we get the path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that
+  paths, we get the path $\rho_1\rho_2\ldots\rho_{|T|}\in T^+$ that
   contains all transitions of $T$ and leads from $p$ back to $p$,
-  which means that $T$ is a cycle.  This is a contradiction.\qed
+  which means that $T$ is a cycle.  This is a contradiction.%\qed
 \end{proof}
 
 The formula $\mcycle_3(\vec{e})$ says that $\Te$ is nonempty and each
@@ -905,7 +913,7 @@ $\Phi_{3,C,K}$ is used, respectively.
 %   % %      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'=\{(p,a,\emptyset,q)\mid(p,a,M',q)\in\delta\}$
 %   %       \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all acceptance marks removed
 %   %     }
-%     $C_\mA\gets$ the number of clauses in the acceptance formula of $\mA$ transformed to DNF\;
+%     $C_\mA\gets$ the number of cubes in the acceptance formula of $\mA$ transformed to DNF\;
 %     $K_\mA\gets$ the number of acceptance marks in $\mA$\;
 %     $C\gets C_\mA$\;
 %     $K\gets K_\mA$\;
@@ -920,7 +928,7 @@ $\Phi_{3,C,K}$ is used, respectively.
 %         \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all marks removed
 %       }
 %     }  
-%     \If(\tcp*[f]{reduction of the number of clauses}){$\mathit{reduceC}$}{
+%     \If(\tcp*[f]{reduction of the number of cubes}){$\mathit{reduceC}$}{
 %       $\mathit{stop}\gets\false$\;
 %       \While{$\neg\mathit{stop}~\wedge~C>1$}{
 %         $\Phi\gets\Phi_{j,C-1,K}$ for $\mA$\;
@@ -950,7 +958,7 @@ $\Phi_{3,C,K}$ is used, respectively.
   % %      \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'=\{(p,a,\emptyset,q)\mid(p,a,M',q)\in\delta\}$
   %       \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all acceptance marks removed
   %     }
-    $C_\mA\gets$ the number of clauses in the formula $\varphi$ transformed to~DNF\;
+    $C_\mA\gets$ the number of cubes in the formula $\varphi$ transformed to~DNF\;
     $K_\mA\gets$ the number of acceptance marks in $\mA$\;
     $C\gets C_\mA$\;
     $K\gets K_\mA$\;
@@ -964,7 +972,7 @@ $\Phi_{3,C,K}$ is used, respectively.
         \KwRet $(Q,\emptyset,\Sigma,\delta',q_I,\false)$ where $\delta'$ is $\delta$ with all marks removed
       }
     }  
-    \If(\tcp*[f]{reduction of the number of clauses}){$\mathit{reduceC}$}{
+    \If(\tcp*[f]{reduction of the number of cubes}){$\mathit{reduceC}$}{
       \lWhile{$C>1~\wedge~\mathit{satisfiable}(\Phi_{j,C-1,K})$}{$C\gets C{-}1$}
     }
     \If{$K<K_\mA~\vee~C<C_\mA$}{
@@ -979,7 +987,7 @@ $\Phi_{3,C,K}$ is used, respectively.
 
 The reduction procedure called $\mathit{SingleLevelReduction}$ is
 given in Algorithm~\ref{alg:single}. Besides the reduction of
-acceptance marks, the algorithm also reduces the number of clauses in the acceptance formula if the last argument $\mathit{reduceC}$ is set to
+acceptance marks, the algorithm also reduces the number of cubes in the acceptance formula if the last argument $\mathit{reduceC}$ is set to
 $\true$.
 % In the first step, the procedure checks whether the input
 % automaton represents the empty language and if this is the case, it
@@ -995,11 +1003,11 @@ $\false$) can be used. These checks are based on an inspection of the
 automaton rather than on QBF solving. If some of the checks succeeds,
 we return the corresponding automaton without any acceptance
 mark. Otherwise, if $\mathit{reduceC}$ is set to $\true$ then the
-procedure gradually reduces the number of clauses in the second
+procedure gradually reduces the number of cubes in the second
 \textbf{while} loop. Note that the loop never checks for acceptance
-condition with 0 clauses as it is equivalent to $\false$ and this case
+condition with 0 cubes as it is equivalent to $\false$ and this case
 was treated above. Finally, if the procedure succeeds to reduce the
-number of marks or clauses, it constructs the modified
+number of marks or cubes, it constructs the modified
 automaton. Otherwise, it returns the original automaton.
 
 The algorithm can be reformulated to use an incremental approach
@@ -1079,7 +1087,7 @@ information computed when solving the original formula.
   
   \caption{An example illustrating the results of the three
     single-level reductions: an input automaton $\mA$ and the automata
-    obtained by reducing it with level 1, level 2, and level 3.}
+    obtained by reducing it with level 1, level 2, and level~3.}
   \label{fig:example}
 \end{figure}
 
@@ -1132,12 +1140,12 @@ where
 \begin{description}
 \item[\texttt{-F <input.hoa>}] specifies the file with the input automaton in HOA format~\cite{babiak.15.cav}, 
 \item[\texttt{-L }$j$] specifies the reduction level; if omitted, the multi-level reduction is used,
-\item[\texttt{-C}] switches on the reduction of the number of clauses
+\item[\texttt{-C}] switches on the reduction of the number of cubes
   after the number of marks is reduced (it corresponds to
   $\mathit{reduceC}=\true$ in Algortihms~\ref{alg:single}
   and~\ref{alg:multi}),
 \item[\texttt{-I}] switches on the incremental version,
-\item[\texttt{-T }$t$] sets the timeout for QBF query to $t$ seconds (the default value is 50 seconds), 
+\item[\texttt{-T }$t$] sets the timeout for each QBF query to $t$ seconds (the default value is 50 seconds), 
 \item[\texttt{-O <output.hoa>}] specifies the output file; if omitted,
   the produced automaton is sent to \textit{stdout} in the HOA format.
 \end{description}
@@ -1195,7 +1203,7 @@ Rabinzer~4)~\cite{kretinsky.18.cav}, and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
 from the Spot library~\cite{duret.16.atva2} and
 \texttt{ltl3tela}~\cite{major.19.atva}. Each of the four automata sets
-produced by individual tools contains less than 348 automata as not
+produced by the individual tools contains less than 348 automata as not
 all of the formulas are successfully translated due to a timeout of 60
 seconds. Further, we have removed automata with 0 or 1 acceptance
 marks as there is a little point in reducing these. Table
@@ -1208,26 +1216,42 @@ translator after removing the automata with less than two marks.
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
 \centering
-\begin{tabular}{lr@{~~~~~~}lr}
-\toprule
-tool        & version&homepage & ~~~automata \\
-\midrule
-\texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
-\texttt{ltl2dgra} & 21.0 & & 234\\
-\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
-\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
-\bottomrule
+% \begin{tabular}{lr@{~~~~~~}lr}
+% \toprule
+% tool        & version&homepage & ~~~automata \\
+% \midrule
+% \texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
+% \texttt{ltl2dgra} & 21.0 & & 234\\
+% \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
+% \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
+% \bottomrule
+% \end{tabular}
+%
+\begin{tabular}{lrlrrr}
+  \toprule
+  &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
+  tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
+  \midrule
+  \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
+       & ? & ? & \textbf{129} \\
+  \texttt{ltl2dgra} & 21.0 &
+       & ? & ? & \textbf{234}\\
+  \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
+       & ? & ? & \textbf{70}\\
+  \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
+       & ? & ? & \textbf{91}\\
+  \bottomrule
 \end{tabular}
 \end{table}
 
 For each automata set (that is, the automata produced by an individual
 LTL translator), we have applied all single-level reductions and the
 multi-level reduction, always with incremental approach and without
-reducing of the number of clauses. The timeout for each QBF query was
+reducing of the number of cubes. The timeout for each QBF query was
 set to 30 seconds.
 %
 All reductions have been performed by the tool \texttt{telatko}
-build with Spot library version 2.10.4 and Z3 version 4.8.15. The
+built with Spot library version 2.10.4 and Z3 version 4.8.15. The
 experiments have been run on a computer with Intel$^\text{®}$ Core™ i7-8700
 processor and 32 GB of memory running Ubuntu 20.04.4. We used the tool
 \texttt{autcross} of the Spot library to get the statistics of the
@@ -1237,7 +1261,7 @@ Table~\ref{tab:cumm-data} shows the cumulative numbers of marks in
 the input automata sets and after each reduction, together with the
 reduction ratio and total time spent by the considered reduction. The
 column \textit{solver timeout} shows the number of automata for which
-the last query to QBF solver did not finish within the 30 seconds
+the last query to QBF solver did not finish within the 30~seconds
 limit. The timeout of the last QBF query implies that the automaton
 may be potentially further reduced by the reduction with a longer time
 limit.
@@ -1258,7 +1282,7 @@ limit.
 Table~\ref{tab:heatmap} shows the number of automata from all
 four sets that have a given number of original acceptance marks and a
 given number of acceptance marks after multi-level reduction. The
-table indicates that in many cases only 1 or 2 marks can be
+table indicates that in many cases only 1 or 2~marks can be
 saved. However, the achieved reduction is substantial for some
 automata with a higher number of original acceptance marks. For
 example, in 24 cases, we have reduced 7 or more
@@ -1287,7 +1311,7 @@ a few complicated automata.
 
 \begin{figure}[b!]
 \caption{Performance of \telatko on different automata sets. The $x$ axis
-represents the number of reduced automata, the $y$ axis shows the time spent
+represents the number of processed automata, the $y$ axis shows the time spent
 reducing (in seconds).}
 \label{fig:quantile}
 \bigskip
@@ -1327,7 +1351,7 @@ economical with acceptance marks than the other two translators.
 The reduction of acceptance marks is not the only application of the
 presented approach. For example, it can be easily adopted to look for
 an equivalent automaton with the same structure and an acceptance
-formula of a specific form (e.g., without any $\Fin m$ terms). Even
+formula of a specific form (e.g., without any $\Fin m$ atoms). Even
 though the QBF queries can be time-consuming, in practice one can
 often find a good trade-off between speed and efficiency by adjusting 
 the formula precision and choosing a reasonable timeout.
