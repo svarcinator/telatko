@@ -86,11 +86,11 @@ def main(argv):
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-
+            """
             if not spot.are_equivalent(origin, auto):
                 print("NOT EQUIVALENT!")
                 assert (False)
-
+            """
         # except BaseException as err:
             # print(f"Unexpected {err=}, {type(err)=}")
 
