@@ -28,6 +28,7 @@
 
 \newcommand{\Nset}{{\mathbb{N}_0}}
 \newcommand{\todo}[1]{\marginpar{\textcolor{red}{#1}}}
+%\newcommand{\todo}[1]{}
 %\def\Inf{\ensuremath{\mathsf{Inf}}}
 %\def\Fin{\ensuremath{\mathsf{Fin}}}
 \DeclareMathOperator{\Inf}{\mathsf{Inf}}
@@ -840,7 +841,7 @@ The formula $\mcycle_3(\vec{e})$ is defined as follows.
   \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge \neg s_p\wedge s_q\big)
 \end{align*}
 
-\todo{Sem nebo za tu dalsi subsection strcity analyzu slozitosti.}
+\todo{Sem nebo za tu dalsi subsection strcit analyzu slozitosti.}
 
 \subsection{Optimizations}
 
@@ -1236,39 +1237,39 @@ translator after removing the automata with less than two marks.
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
 \centering
-% \begin{tabular}{lr@{~~~~~~}lr}
-% \toprule
-% tool        & version&homepage & ~~~automata \\
-% \midrule
-% \texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
-% \texttt{ltl2dgra} & 21.0 & & 234\\
-% \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
-% \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
-% \bottomrule
-% \end{tabular}
-%
-\begin{tabular}{lrlrrr}
-  \toprule
-  &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
-  tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
-  \midrule
-  \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
-       & ? & ? & \textbf{129} \\
-  \texttt{ltl2dgra} & 21.0 &
-       & ? & ? & \textbf{234}\\
-  \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
-       & ? & ? & \textbf{70}\\
-  \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
-       & ? & ? & \textbf{91}\\
-  \bottomrule
+\begin{tabular}{lr@{~~~~~~}lr}
+\toprule
+tool        & version&homepage & ~~~automata \\
+\midrule
+\texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
+\texttt{ltl2dgra} & 21.0 & & 234\\
+\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
+\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
+\bottomrule
 \end{tabular}
+%
+% \begin{tabular}{lrlrrr}
+%   \toprule
+%   &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
+%   tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
+%   \midrule
+%   \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
+%        & ? & ? & \textbf{129} \\
+%   \texttt{ltl2dgra} & 21.0 &
+%        & ? & ? & \textbf{234}\\
+%   \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
+%        & ? & ? & \textbf{70}\\
+%   \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
+%        & ? & ? & \textbf{91}\\
+%   \bottomrule
+% \end{tabular}
 \end{table}
 
 For each automata set (that is, the automata produced by an individual
 LTL translator), we have applied all single-level reductions and the
 multi-level reduction, always with incremental approach and without
 reducing of the number of cubes.
-\todo{Vysvetlit, proc neredukujeme cubes?}
+\todo{Vysvetlit, proc neredukujeme pocet cubes?}
 The timeout for each QBF query was set to 30 seconds.
 %
 All reductions have been performed by the tool \texttt{telatko}
@@ -1330,11 +1331,14 @@ pleasing finding that for every set, most automata are reduced in
 under a second and the high cumulative running times are caused by
 a few complicated automata.
 
-\todo{popisek Fig. 3 neni hezky. Je to wall time nebo CPU time?}
+\todo{popisek Fig. 3 neni hezky. Je to wall time nebo CPU time? Je to
+  kumulovany cas nebo pro kazdy automat zvlast? Zmenit popisky os v
+  obrazku?}
 \begin{figure}[b!]
   \caption{Performance of \telatko on different automata sets. The $x$
-    axis represents the number of automata that are processed by
-    telatko in the time shown on the $y$ axis.}
+    axis represents the number of automata from each automata
+    set that are processed by \telatko in the time shown on the $y$
+    axis.}
 \label{fig:quantile}
 \bigskip
 \centering
@@ -1401,8 +1405,6 @@ structures.
 % \item zkusit, zda/jak redukce znacek umozni redukovat stavovy prostor
 % \end{itemize}
 
-
-\bibliographystyle{plain}
 %\bibliographystyle{abbrvnat}
 \bibliography{mc}
 
