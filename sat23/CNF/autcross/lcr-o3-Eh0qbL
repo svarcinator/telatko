@@ -1,0 +1,28 @@
+HOA: v1
+name: "F_0_U"
+States: 5
+Start: 0
+AP: 5 "p0" "p1" "p2" "p3" "p4"
+Acceptance: 1 Fin(0) & Fin(0) & Fin(0) & Fin(0)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!0&1] 0
+[!0&!1] 1 {0}
+[0] 2
+State: 1
+[!0&!2] 3
+[!0&2] 1
+[0] 2
+State: 2
+[t] 2
+State: 3
+[!0&3] 3
+[!0&!3] 4
+[0] 2
+State: 4
+[!0&!4] 0
+[!0&4] 4
+[0] 2
+--END--
