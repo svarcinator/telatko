@@ -28,6 +28,7 @@
 
 \newcommand{\Nset}{{\mathbb{N}_0}}
 \newcommand{\todo}[1]{\marginpar{\textcolor{red}{#1}}}
+%\newcommand{\todo}[1]{}
 %\def\Inf{\ensuremath{\mathsf{Inf}}}
 %\def\Fin{\ensuremath{\mathsf{Fin}}}
 \DeclareMathOperator{\Inf}{\mathsf{Inf}}
@@ -193,12 +194,12 @@ Algorithms processing TELA are often sensitive to the number of
 acceptance marks more than to other parts of the automaton. For
 example, the transformation of TELA to parity automata based on
 \emph{color appearance record}~\cite{renkin.20.atva} transforms a TELA
-with $s$ states and $m$ acceptance marks into a parity automaton with
-up to $s\cdot m!$ states. Further, the emptiness
-check~\cite{baier.19.atva} is exponential in the number of acceptance
-marks that appear in acceptance primitives saying that a mark has to
-be visited finitely often, while it is only polynomial in other
-measures of the input automaton.
+with $m$ acceptance marks and $s$ states into a parity automaton with
+up to $m!\cdot s$ states. Further, the emptiness-check
+algorithm~\cite{baier.19.atva} is exponential in the number of
+acceptance marks that appear in acceptance primitives saying that a
+mark has to be visited finitely often, while it is only polynomial in
+other measures of the input automaton.
 
 The number of acceptance marks can be algorithmically reduced to one
 as every TELA can be transformed to an equivalent Büchi automaton
@@ -263,7 +264,7 @@ such a reduction is not obvious.
 
 \paragraph*{Structure of the paper} The next section introduces basic
 terms used in the paper. Section~\ref{sec:qbf} explains the
-construction of three mentioned QBF formulas. The reduction algorithm
+construction of the three mentioned QBF formulas. The reduction algorithm
 based on these formulas is presented in
 Section~\ref{sec:algo}. Section~\ref{sec:implementation} describes our
 tool \telatko implemening the reduction technique.
@@ -327,7 +328,7 @@ if $L(\mA)=L(\mB)$.
 % such that $\mA$ has
 % an accepting run over $u$.
 
-An acceptance formula $\varphi$ is in \emph{disjunctive normal formal
+An acceptance formula $\varphi$ is in \emph{disjunctive normal form
   (DNF)} if it is a disjunction of cubes, where each cube is a
 conjunction of atoms of the form $\Fin m$ or $\Inf m$.  Each
 acceptance formula can be transformed into an equivalent formula
@@ -441,11 +442,12 @@ formula holds, the subformula $\msat_{\psi,\rem}(T)$ contains many
 free variables representing possible instances of $\psi$ and
 $\rem$. If the formula is satisfiable, then each of its models encodes
 a desired instance of $\psi$ and $\rem$. In the following, we assume
-that we are looking for a new acceptance formula $\psi$ in DNF. Note
-that our reduction method can be easily adapted to look for $\psi$ in
-CNF or in a different shape.
+that we are looking for a new acceptance formula $\psi$ in DNF. The
+choice of DNF is not fundamental, but inherited from our previous
+attempt to reduce acceptance formulas. The presented method can be
+easily adapted to look for $\psi$ in CNF or in a different shape.
 
-Now we describe the construction of QBF formulas in detail. The
+Now we describe the construction of the QBF formulas in detail. The
 construction is parametrized by two integers $C,K\ge 0$, where $K$ is
 the desired number of acceptance marks and $C$ is the number of cubes
 of $\psi$. Without loss of generality, we assume that the reduced
@@ -495,9 +497,11 @@ respectively. The constructed QBF formulas have the form
 \[
   \Phi_{C,K}(\vec{n},\vec{i},\vec{f})~~=~~\forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) \iff \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})\big),
 \]
-where the subformulas $\mcycle(\vec{e})$, $\msat_\varphi(\vec{e})$,
-and $\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ are defined
-as follows. The subformula $\mcycle(\vec{e})$ will be defined as the last
+where $\forall\vec{e}$ denotes the sequence composed of $\forall e_t$
+for all variables $e_t$ and the subformulas $\mcycle(\vec{e})$,
+$\msat_\varphi(\vec{e})$, and
+$\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ are defined as
+follows. The subformula $\mcycle(\vec{e})$ will be defined as the last
 one and we present three versions of it.
 
 The subformula $\msat_\varphi(\vec{e})$ says whether $T$ satisfies the
@@ -649,15 +653,21 @@ such that $t_1\sim_S t_2$ whenever $\mks(t_1)=\mks(t_2)$.
     \rem(\overline{T})~\msat~\psi~\iff~\rem'(T)~\msat~\psi.
   \]
   Altogether, we obtain
+  % \[
+  %   \setlength{\arraycolsep}{0pt}
+  %   \begin{array}{rl}
+  %     T~\msat~\varphi~ 
+  %     & \iff~\overline{T}~\msat~\varphi \\
+  %     & \iff~\rem(\overline{T})~\msat~\psi\\
+  %     & \iff~\rem'(T)~\msat~\psi
+  %   \end{array}
+  % \]
   \[
-    \setlength{\arraycolsep}{0pt}
-    \begin{array}{rl}
       T~\msat~\varphi~ 
-      & \iff~\overline{T}~\msat~\varphi \\
-      & \iff~\rem(\overline{T})~\msat~\psi\\
-      & \iff~\rem'(T)~\msat~\psi
-    \end{array}
-  \]
+      \iff~\overline{T}~\msat~\varphi
+      \iff~\rem(\overline{T})~\msat~\psi
+      \iff~\rem'(T)~\msat~\psi
+  \]  
   which proves that \eqref{eq:lem2} holds for $\rem'$ and $\psi$.%\qed
 \end{proof}
 
@@ -784,7 +794,7 @@ cycles can be characterised in the following way.
   As there is a transition of $T$ leading from $p$, we have that
   $T\not\subseteq\delta_{Q\smallsetminus\post}$ and
   $T\not\subseteq\delta_{Q\smallsetminus\pre}$, i.e., (\ref{en:2})
-  does not holds for $\post$ and $\pre$. Further, the definition of
+  does not hold for $\post$ and $\pre$. Further, the definition of
   $\post$ implies that there is no transition of $T$ leading from a
   state in $\post$ to a state outside $\post$, which means that
   (\ref{en:3}) does not hold for $\post$. Similarly, $T$ contains no
@@ -831,6 +841,8 @@ The formula $\mcycle_3(\vec{e})$ is defined as follows.
   \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge \neg s_p\wedge s_q\big)
 \end{align*}
 
+\todo{Sem nebo za tu dalsi subsection strcit analyzu slozitosti.}
+
 \subsection{Optimizations}
 
 Finally, we mention two simple optimizations of the formula
@@ -852,6 +864,12 @@ $\mcycle_2(\vec{e})$. This modification does not change the overall
 semantics of $\mcycle_3(\vec{e})$, but our preliminary experiments
 showed that QBF solvers can often solve the modified formula
 $\Phi_{3,C,K}$ faster.
+
+\todo{Zminit, ze nase QBF formule navic rikaji, ze v zadne
+  klauzulu/cude neni zaroven $\Fin m$ a $\Inf m$ a ze cela formule
+  ma alepson 1 $\Inf$ nebo $\Fin$? Je to tak, Terko?}
+
+\todo{Zminit, ze jsme zkouseli symmetry breaking, ale nefungoval?}
 
 % \subsection{SCC-based optimization}
 
@@ -1022,10 +1040,10 @@ want to say that the mark $k\in N_K$ is not used, we replace $\Phi$ by
 \[
   \Phi~\wedge~\bigwedge_{t\in\delta}\neg n_{t,k}~\wedge\bigwedge_{c\in\{1,2,\ldots C\}}(\neg i_{c,k}\wedge\neg f_{c,k}).
 \]
-The second \textbf{while} can be transformed to an incremental version
-similarly. The incremental approach benefits from the fact that some
-QBF solvers can decide an extended formula faster as they reuse the
-information computed when solving the original formula.
+The second \textbf{while} loop can be transformed to an incremental
+version similarly. The incremental approach benefits from the fact
+that some QBF solvers can decide an extended formula faster as they
+reuse the information computed when solving the original formula.
 
 \begin{figure}[t]
   \centering
@@ -1150,6 +1168,8 @@ where
   the produced automaton is sent to \textit{stdout} in the HOA format.
 \end{description}
 
+\todo{Nekde zminit, ze inkrementalni pristup je implementovan jen pro prvni while loop? Je to tak, Terko?}
+
 If some call of the function
 $\mathit{satisfiable}(\Phi_{j,C,K{-}1})$ in the first
 \textbf{while} loop of Algorithm~\ref{alg:single} does not return
@@ -1189,6 +1209,7 @@ reduce the number of marks to
 
 \section{Experimental evaluation}\label{sec:experiments}
 
+\todo{Upravit experimenty: pridat dalsi 2 sady automatu.}
 We have used the tool \texttt{genltl} of the Spot
 library~\cite{duret.16.atva2} to generate LTL formulas from
 literature. The parametrized formulas were generated for all
@@ -1216,39 +1237,40 @@ translator after removing the automata with less than two marks.
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
 \centering
-% \begin{tabular}{lr@{~~~~~~}lr}
-% \toprule
-% tool        & version&homepage & ~~~automata \\
-% \midrule
-% \texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
-% \texttt{ltl2dgra} & 21.0 & & 234\\
-% \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
-% \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
-% \bottomrule
-% \end{tabular}
-%
-\begin{tabular}{lrlrrr}
-  \toprule
-  &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
-  tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
-  \midrule
-  \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
-       & ? & ? & \textbf{129} \\
-  \texttt{ltl2dgra} & 21.0 &
-       & ? & ? & \textbf{234}\\
-  \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
-       & ? & ? & \textbf{70}\\
-  \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
-       & ? & ? & \textbf{91}\\
-  \bottomrule
+\begin{tabular}{lr@{~~~~~~}lr}
+\toprule
+tool        & version&homepage & ~~~automata \\
+\midrule
+\texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
+\texttt{ltl2dgra} & 21.0 & & 234\\
+\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
+\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
+\bottomrule
 \end{tabular}
+%
+% \begin{tabular}{lrlrrr}
+%   \toprule
+%   &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
+%   tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
+%   \midrule
+%   \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
+%        & ? & ? & \textbf{129} \\
+%   \texttt{ltl2dgra} & 21.0 &
+%        & ? & ? & \textbf{234}\\
+%   \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
+%        & ? & ? & \textbf{70}\\
+%   \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
+%        & ? & ? & \textbf{91}\\
+%   \bottomrule
+% \end{tabular}
 \end{table}
 
 For each automata set (that is, the automata produced by an individual
 LTL translator), we have applied all single-level reductions and the
 multi-level reduction, always with incremental approach and without
-reducing of the number of cubes. The timeout for each QBF query was
-set to 30 seconds.
+reducing of the number of cubes.
+\todo{Vysvetlit, proc neredukujeme pocet cubes?}
+The timeout for each QBF query was set to 30 seconds.
 %
 All reductions have been performed by the tool \texttt{telatko}
 built with Spot library version 2.10.4 and Z3 version 4.8.15. The
@@ -1309,10 +1331,14 @@ pleasing finding that for every set, most automata are reduced in
 under a second and the high cumulative running times are caused by
 a few complicated automata.
 
+\todo{popisek Fig. 3 neni hezky. Je to wall time nebo CPU time? Je to
+  kumulovany cas nebo pro kazdy automat zvlast? Zmenit popisky os v
+  obrazku?}
 \begin{figure}[b!]
-\caption{Performance of \telatko on different automata sets. The $x$ axis
-represents the number of processed automata, the $y$ axis shows the time spent
-reducing (in seconds).}
+  \caption{Performance of \telatko on different automata sets. The $x$
+    axis represents the number of automata from each automata
+    set that are processed by \telatko in the time shown on the $y$
+    axis.}
 \label{fig:quantile}
 \bigskip
 \centering
@@ -1379,8 +1405,6 @@ structures.
 % \item zkusit, zda/jak redukce znacek umozni redukovat stavovy prostor
 % \end{itemize}
 
-
-\bibliographystyle{plain}
 %\bibliographystyle{abbrvnat}
 \bibliography{mc}
 
