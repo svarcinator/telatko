@@ -240,7 +240,7 @@ of acceptance marks in \emph{transition-based generalised Büchi
 of any existing research aimed at simplification of acceptance
 formulas of TELA or reduction of the number of its acceptance marks
 without increasing the number of states. There exists only a SAT-based
-approach that transforms a deterministic TELA automaton to an
+approach that transforms a deterministic TELA to an
 equivalent automaton with a given acceptance condition and a given
 number of states~\cite{baarir.15.lpar} (if such an automaton
 exists). Further, there are some SAT-based approaches aimed to reduce
@@ -912,8 +912,8 @@ $\Phi_{3,C,K}$ faster.
 \section{Reduction algorithm}\label{sec:algo}
 
 This section explains how we use the QBF formulas constructed in the
-previous section to reduce the number of acceptance marks in TELA
-automata. First, we describe a \emph{single-level} reduction, which
+previous section to reduce the number of acceptance marks in TELA.
+First, we describe a \emph{single-level} reduction, which
 uses only a single kind of QBF formulas. More precisely, we talk about
 \emph{level~1}, \emph{level~2}, or \emph{level~3} reduction when
 $\Phi_{1,C,K}$, $\Phi_{2,C,K}$, or
