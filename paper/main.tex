@@ -246,7 +246,7 @@ approach that transforms a deterministic TELA to an
 equivalent automaton with a given acceptance condition and a given
 number of states~\cite{baarir.15.lpar} (if such an automaton
 exists). Further, there are some SAT-based approaches aimed to reduce
-the number of states of automata over infinite words. More preceisely,
+the number of states of automata over infinite words. More precisely,
 there are reductions designed for nondeterministic Büchi
 automata~\cite{ehlers.10.spin}, deterministic Büchi
 automata~\cite{ehlers.10.sat}, and deterministic generalized Büchi
@@ -259,7 +259,7 @@ Casares, Colcombet, and Fijalkow very recently introduced a structure
 called \emph{alternating cycle decomposition
   (ACD)}~\cite{casares.21.icalp} which compactly represents the
 information about all accepting and non-accepting automata cycles. We
-expect that ACD could potentialy be used to reduce the number of
+expect that ACD could potentially be used to reduce the number of
 acceptance marks or to simplify the acceptance condition. However,
 such a reduction is not obvious.
 %Moreover, the construction of ACD seems to be computationally expensive.
@@ -269,7 +269,7 @@ terms used in the paper. Section~\ref{sec:qbf} explains the
 construction of the three mentioned QBF formulas. The reduction algorithm
 based on these formulas is presented in
 Section~\ref{sec:algo}. Section~\ref{sec:implementation} describes our
-tool \telatko implemening the reduction technique.
+tool \telatko implementing the reduction technique.
 Experimental results are shown in
 Section~\ref{sec:experiments}. Finally, Section~\ref{sec:conclusion}
 suggests other applications of our QBF-based reduction technique and
@@ -301,7 +301,7 @@ In this section we recall the basic terms related to TELA and QBF.
 
 A tuple $t=(p,a,M',q)\in\delta$ is the \emph{transition} leading from
 state $p$ to state $q$ labelled with $a$ and acceptance marks $M'$.
-The set $M'$ is also refered to by $\mks(t)$. For a set of transitions
+The set $M'$ is also referred to by $\mks(t)$. For a set of transitions
 $T\subseteq\delta$, let $\mks(T)=\bigcup_{t\in T}\mks(t)$ denote the
 set of marks that appear on transitions in $T$.
 % of various objects:
@@ -600,7 +600,7 @@ some SCC $S$.
 This condition is satisfied by every cycle.
 
 The formula $\Phi_{1,C,K}$ built with $\mcycle_1(\vec{e})$ says that
-for every nonempty set $T\subseteq\delta_S$ whenere $S$ is an SCC, $T$
+for every nonempty set $T\subseteq\delta_S$ where $S$ is an SCC, $T$
 satisfies $\varphi$ if and only if $\rem(T)$ satisfies $\psi$. Note
 that the only aspects of a transition $t$ reflected by the formula are
 its set of marks $\mks(t)$ and its affiliation to an SCC.
@@ -1202,7 +1202,7 @@ where
 \item[\texttt{-L }$j$] specifies the reduction level; if omitted, the multi-level reduction is used,
 \item[\texttt{-C}] switches on the reduction of the number of cubes
   after the number of marks is reduced (it corresponds to
-  $\mathit{reduceC}=\true$ in Algortihms~\ref{alg:single}
+  $\mathit{reduceC}=\true$ in Algorithms~\ref{alg:single}
   and~\ref{alg:multi}),
 \item[\texttt{-I}] switches on the incremental version,
 \item[\texttt{-T }$t$] sets the timeout for each QBF query to $t$ seconds (the default value is 50 seconds), 
@@ -1260,7 +1260,7 @@ formulas. These have been translated to deterministic TELA by two
 state-of-the-art translators from the Owl
 library~\cite{kretinsky.18.atva}, namely \texttt{ltl2dela} (known as
 Delag)~\cite{muller.17.gandalf} and \texttt{ltl2dgra} (known as
-Rabinzer~4)~\cite{kretinsky.18.cav}, and to nondeterministic TELA by
+Rabinizer~4)~\cite{kretinsky.18.cav}, and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
 from the Spot library~\cite{duret.16.atva2} and
 \texttt{ltl3tela}~\cite{major.19.atva}. Each of the four considered
