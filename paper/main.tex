@@ -870,10 +870,13 @@ K\cdot|\delta|)=\bigO\big((S+|\varphi|+C\cdot K)\cdot|\delta|\big)$
 and
 $|\Phi_{3,C,K}|\in\bigO(|\delta|+|\varphi|\cdot|\delta|+C\cdot
 K\cdot|\delta|)=\bigO\big((|\varphi|+C\cdot K)\cdot|\delta|\big)$.
+Note that the formula $\Phi_{3,C,K}$ is asymptotically shorter than
+$\Phi_{1,C,K}$ and $\Phi_{2,C,K}$, but it contains an additional quantifier
+alternation.
 
 \subsection{Optimizations of formulas}
 
-Finally, we mention two simple optimizations of the formula
+Finally, we mention several three simple optimizations of the formula
 construction, which are always applied in the rest of the paper.
 
 The first optimization is based on the fact that every cycle is
@@ -893,15 +896,22 @@ does not change the overall semantics of $\mcycle_3(\vec{e})$ and our
 preliminary experiments showed that QBF solvers can often solve the
 modified formula $\Phi_{3,C,K}$ faster.
 
+The third optimization adds to each formula $\Phi_{j,C,K}$ a conjunct
+\[
+   \bigwedge_{c\in\{1,2,\ldots,C\}}\bigwedge_{k\in N_K} \neg
+   i_{c,k}~\vee~\neg f_{c,k}
+\]
+saying that any cube does not contain both $\Inf k$ and $\Fin k$ for any
+$k$ as such a cube cannot be satisfied by any run. 
+
 We have also made some experiments with breaking the symmetries in the
 formula models. In particular, we have ordered new acceptance marks by
 their placements on transitions and we have ordered the cubes by their
 content. As the effect of these modifications was inconclusive, we do
 not describe it here.
 
-\todo{Zminit, ze nase QBF formule navic rikaji, ze v zadne
-  klauzulu/cude neni zaroven $\Fin m$ a $\Inf m$ a ze cela formule
-  ma alepson 1 $\Inf$ nebo $\Fin$? Je to tak, Terko?}
+% \todo{Zminit, ze cela formule
+%   ma alepson 1 $\Inf$ nebo $\Fin$? Je to tak, Terko?}
 
 % \subsection{SCC-based optimization}
 
@@ -1200,8 +1210,6 @@ where
   the produced automaton is sent to \textit{stdout} in the HOA format.
 \end{description}
 
-\todo{Nekde zminit, ze inkrementalni pristup je implementovan jen pro prvni while loop? Je to tak, Terko?}
-
 If some call of the function
 $\mathit{satisfiable}(\Phi_{j,C,K{-}1})$ in the first
 \textbf{while} loop of Algorithm~\ref{alg:single} does not return
@@ -1218,7 +1226,7 @@ means that level 1 reduced the number of marks to 6 (reduction to 5 is
 impossible on this level), level 2 reduced it to 4, and level 3 to 2
 as the QBF solver did not finish in the time limit when trying to
 reduce the number of marks to
-1.%when tryint the automaton may be potentially reduced further.
+1.%when trying the automaton may be potentially reduced further.
 
 % that does not . 
 % The parameters of the last query of the QBF solver are encoded in the name of the automaton.
@@ -1241,7 +1249,7 @@ reduce the number of marks to
 
 \section{Experimental evaluation}\label{sec:experiments}
 
-\todo{Upravit experimenty: pridat dalsi 2 sady automatu.}
+%\todo{Upravit experimenty: pridat dalsi 2 sady automatu.}
 We have used the tool \texttt{genltl} of the Spot
 library~\cite{duret.16.atva2} to generate LTL formulas from
 literature. The parametrized formulas were generated for all
@@ -1251,22 +1259,29 @@ remove duplicates. Altogether, we have generated 348 unique LTL
 formulas. These have been translated to deterministic TELA by two
 state-of-the-art translators from the Owl
 library~\cite{kretinsky.18.atva}, namely \texttt{ltl2dela} (known as
-Delag)~\cite{muller.17.gandalf}, and \texttt{ltl2dgra} (known as
+Delag)~\cite{muller.17.gandalf} and \texttt{ltl2dgra} (known as
 Rabinzer~4)~\cite{kretinsky.18.cav}, and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
 from the Spot library~\cite{duret.16.atva2} and
-\texttt{ltl3tela}~\cite{major.19.atva}. Each of the four automata sets
-produced by the individual tools contains less than 348 automata as not
-all of the formulas are successfully translated due to a timeout of 60
-seconds. Further, we have removed automata with 0 or 1 acceptance
-marks as there is a little point in reducing these. Table
+\texttt{ltl3tela}~\cite{major.19.atva}. Each of the four considered
+tools failed on some formulas: it usually reached a timeout of 60
+seconds or it produced an automaton that cannot be parsed by the Spot
+library.
+% produced by the individual tools contains less than 348 automata as not
+% all of the formulas are successfully translated due to a timeout of 60
+% seconds.
+Further, we have removed automata with 0 or 1 acceptance marks as
+there is a little point in reducing these. Table
 \ref{tab:ltltranslators} shows the exact versions and homepages of
-used translators, and the number of automata produced by each
-translator after removing the automata with less than two marks.
+used translators. For each translator, it also provides the numbers of
+fails, produced automata with less than two marks, and automata with
+at least two marks that are actually used for the experimental
+evaluation of our reduction technique.
 
 \begin{table}[t]
-\caption{LTL to automata translators used for the experimental evaluation
-and the number of successfully translated formulas.}
+  \caption{LTL to automata translators used for the experimental
+    evaluation and the numbers of fails and successfully constructed
+    automata with less than two marks and with at least two marks.}
 \label{tab:ltltranslators}
 \centering
 % \begin{tabular}{lr@{~~~~~~}lr}
@@ -1283,7 +1298,7 @@ and the number of successfully translated formulas.}
 \begin{tabular}{lrrrr}
   \toprule
   &&& \multicolumn{2}{c}{constructed automata with} \\ \cmidrule(lr){4-5}
-  tool &\!\!\!version/homepage & timeout & 0 or 1 mark & \textbf{at least 2 marks}\\
+  tool &\!\!\!version/homepage & fails & 0 or 1 mark & \textbf{at least 2 marks}\\
   \midrule
   \texttt{ltl2dela} & 21.0\tablefootnote{\label{fn:owl}\url{https://owl.model.in.tum.de/}}
        & ? & ? & \textbf{129} \\
