@@ -1273,10 +1273,11 @@ library.
 Further, we have removed automata with 0 or 1 acceptance marks as
 there is a little point in reducing these. Table
 \ref{tab:ltltranslators} shows the exact versions and homepages of
-used translators. For each translator, it also provides the numbers of
-fails, produced automata with less than two marks, and automata with
-at least two marks that are actually used for the experimental
-evaluation of our reduction technique.
+used translators. For each translator, it also provides the number of
+fails, the number of produced automata with less than two marks, and
+the number of automata with at least two marks. The last number is
+typeset in bold as these automata are actually used for the
+experimental evaluation of our reduction technique.
 
 \begin{table}[t]
   \caption{LTL to automata translators used for the experimental
@@ -1312,11 +1313,12 @@ evaluation of our reduction technique.
 \end{tabular}
 \end{table}
 
-For each automata set (that is, the automata produced by an individual
-LTL translator), we have applied all single-level reductions and the
-multi-level reduction, always with incremental approach and without
-reducing of the number of cubes. We do not reduce the number of cubes
-as our primary aim is to reduce the number of acceptance marks.
+For each automata set (that is, the automata with at least two marks
+produced by an individual LTL translator), we have applied all
+single-level reductions and the multi-level reduction, always with
+incremental approach and without reducing of the number of cubes. We
+do not reduce the number of cubes as our primary aim is to reduce the
+number of acceptance marks.
 %\todo{Vysvetlit, proc neredukujeme pocet cubes?}
 The timeout for each QBF query was set to 30 seconds.
 %
