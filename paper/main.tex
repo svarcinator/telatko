@@ -896,13 +896,14 @@ does not change the overall semantics of $\mcycle_3(\vec{e})$ and our
 preliminary experiments showed that QBF solvers can often solve the
 modified formula $\Phi_{3,C,K}$ faster.
 
-The third optimization adds to each formula $\Phi_{j,C,K}$ a conjunct
+The third optimization extends $\Phi_{j,C,K}$ into the conjunction
 \[
-   \bigwedge_{c\in\{1,2,\ldots,C\}}\bigwedge_{k\in N_K} \neg
-   i_{c,k}~\vee~\neg f_{c,k}
+   \Phi_{j,C,K}~\wedge \bigwedge_{c\in\{1,2,\ldots,C\}}\bigwedge_{k\in N_K} (\neg
+   i_{c,k}\vee\neg f_{c,k}).
 \]
-saying that any cube does not contain both $\Inf k$ and $\Fin k$ for any
-$k$ as such a cube cannot be satisfied by any run. 
+The added part says that any cube does not contain both $\Inf k$ and
+$\Fin k$ for any $k$. A cube with both $\Inf k$ and $\Fin k$ would be
+useless as it cannot be satisfied by any run.
 
 We have also made some experiments with breaking the symmetries in the
 formula models. In particular, we have ordered new acceptance marks by
@@ -1363,7 +1364,7 @@ acceptance marks to only 4.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
 % reduced 8 or more acceptance marks to only 4.
 
-\begin{table}[t]
+\begin{table}[b!]
 \caption{The effect of reduction.
 A cell on coordinates $(x,y)$ contains the number of automata that have been
 reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
@@ -1381,7 +1382,7 @@ shows a pleasing finding that for every set, most automata are reduced
 in under a second and the high cumulative running times are caused by 
 a relatively small number of complicated automata.
 
-\begin{figure}[b!]
+\begin{figure}[t]
   \caption{Performance of \telatko on individual automata of each automata sets.
     The graph shows the time ($y$ axis) needed by \telatko
     to process the $x$-th automaton of the set, where automata of each set are ordered by their processing time.
