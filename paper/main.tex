@@ -1263,10 +1263,10 @@ Delag)~\cite{muller.17.gandalf} and \texttt{ltl2dgra} (known as
 Rabinzer~4)~\cite{kretinsky.18.cav}, and to nondeterministic TELA by
 another two state-of-the-art translators, namely \texttt{ltl2tgba}
 from the Spot library~\cite{duret.16.atva2} and
-\texttt{ltl3tela}~\cite{major.19.atva}. Each of the four considered
-tools failed on some formulas: it usually reached a timeout of 60
-seconds or it produced an automaton that cannot be parsed by the Spot
-library.
+\texttt{ltl3tela}~\cite{major.19.atva}. Three of the considered
+translators failed on some formulas: it usually reached a timeout of
+60 seconds or it produced an automaton that cannot be parsed by the
+Spot library.
 % produced by the individual tools contains less than 348 automata as not
 % all of the formulas are successfully translated due to a timeout of 60
 % seconds.
@@ -1299,7 +1299,7 @@ experimental evaluation of our reduction technique.
 \begin{tabular}{lrrrr}
   \toprule
   &&& \multicolumn{2}{c}{constructed automata with} \\ \cmidrule(lr){4-5}
-  tool &\!\!\!version/homepage & fails & 0 or 1 mark & \textbf{at least 2 marks}\\
+  tool &\!\!\!version/homepage & ~~~~fails & less than 2 marks & \textbf{at least 2 marks}\\
   \midrule
   \texttt{ltl2dela} & 21.0\tablefootnote{\label{fn:owl}\url{https://owl.model.in.tum.de/}}
        & 5 & 214 & \textbf{129} \\
@@ -1313,7 +1313,7 @@ experimental evaluation of our reduction technique.
 \end{tabular}
 \end{table}
 
-For each automata set (that is, the automata with at least two marks
+To each automata set (that is, the automata with at least two marks
 produced by an individual LTL translator), we have applied all
 single-level reductions and the multi-level reduction, always with
 incremental approach and without reducing of the number of cubes. We
@@ -1376,19 +1376,19 @@ solver reached the time limit.}
 \end{table}
 
 Figure~\ref{fig:quantile} presents the time spent by multi-level
-reduction of automata in individual automata sets. The chart shows a
-pleasing finding that for every set, most automata are reduced in
-under a second and the high cumulative running times are caused by
-a few complicated automata.
+reduction on individual automata of each automata sets. The chart
+shows a pleasing finding that for every set, most automata are reduced
+in under a second and the high cumulative running times are caused by 
+a relatively small number of complicated automata.
 
-\todo{popisek Fig. 3 neni hezky. Je to wall time nebo CPU time? Je to
-  kumulovany cas nebo pro kazdy automat zvlast? Zmenit popisky os v
-  obrazku?}
 \begin{figure}[b!]
-  \caption{Performance of \telatko on different automata sets. The $x$
-    axis represents the number of automata from each automata
-    set that are processed by \telatko in the time shown on the $y$
-    axis.}
+  \caption{Performance of \telatko on individual automata of each automata sets.
+    The graph shows the time ($y$ axis) needed by \telatko
+    to process the $x$-th automaton of the set, where automata of each set are ordered by their processing time.
+    % The $x$ axis represents the number of automata from each automata
+    % set that are processed by \telatko in the time shown on the $y$
+    % axis.
+  }
 \label{fig:quantile}
 \bigskip
 \centering
