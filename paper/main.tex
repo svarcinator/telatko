@@ -14,6 +14,7 @@
 \usepackage[noend]{algorithm2e}
 \usepackage{amsmath,amssymb}
 \usepackage{enumerate}
+\usepackage{tablefootnote}
 
 \usepackage{tikz}
 % TikZ libraries
@@ -49,6 +50,7 @@
 \def\true{\mathit{true}}
 \newcommand{\mA}{\mathcal{A}}
 \newcommand{\mB}{\mathcal{B}}
+\newcommand{\bigO}{\mathcal{O}}
 
 \newcommand{\telatko}{\texttt{telatko}\xspace}
 
@@ -357,7 +359,9 @@ transition of $T$ at least once and no transition outside
 $T$. Finally, we assume that each TELA $\mA$ contains only states $q$
 that are reachable from the initial state $q_I$ (i.e., $q=q_I$ or
 there is a path from $q_I$ to $q$) as states that are not reachable
-from $q_I$ can be eliminated without any impact on $L(\mA)$.
+from $q_I$ can be eliminated without any impact on $L(\mA)$. We also
+assume that each TELA has at least one SCC as automata without any SCC
+trivially desribe an empty language.
 
 In graphical representation, we often use acceptance marks
 $\tacc{1}{1},\tacc{2}{2},\ldots\in M$. Further, an edge 
@@ -841,9 +845,33 @@ The formula $\mcycle_3(\vec{e})$ is defined as follows.
   \big(\bigvee_{t=(p,a,M',q)\in\delta}\hspace{-5mm}e_t\wedge \neg s_p\wedge s_q\big)
 \end{align*}
 
-\todo{Sem nebo za tu dalsi subsection strcit analyzu slozitosti.}
+\subsection{Complexity of formulas}
+The constructed formulas $\Phi_{j,C,K}$ for $j\in\{1,2,3\}$ use
+$|\delta|$ universally quantified variables $e_t$, $|\delta|\cdot K$
+free variables $n_{t,k}$, and $C\cdot K$ free variables $i_{c,k}$ and
+$f_{c,k}$. The formula $\Phi_{3,C,K}$ additionally uses $|Q|$
+variables $s_q$ that are existentially quantified (when the formula is
+transformed to prenex normal form).
 
-\subsection{Optimizations}
+To analyze the length of the formulas, we start with its subformulas.
+One can easily check that
+$|\msat_\varphi(\vec{e})|\in\bigO(|\varphi|\cdot|\delta|)$ and
+$|\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})|\in\bigO(C\cdot
+K\cdot|\delta|)$. Further,
+$|\mcycle_1(\vec{e})|,|\mcycle_2(\vec{e})|\in\bigO(S\cdot|\delta|)$, % and
+%$|\mcycle_2(\vec{e})|\in\bigO(S\cdot|\delta|+|\delta|)=\bigO(S\cdot|\delta|)$,
+where $S$ is the number of SCCs in the automaton.  Next,
+$|\mcycle_3(\vec{e})|\in\bigO(|\delta|+|Q|)$, which can be simplified
+to $|\mcycle_3(\vec{e})|\in\bigO(|\delta|)$ as $|Q|\le|\delta|$
+follows from the assumptions that all states are reachable and each
+automaton has at least one SCC. Altogether, we get
+$|\Phi_{1,C,K}|,|\Phi_{2,C,K}|\in\bigO(S\cdot|\delta|+|\varphi|\cdot|\delta|+C\cdot
+K\cdot|\delta|)=\bigO\big((S+|\varphi|+C\cdot K)\cdot|\delta|\big)$
+and
+$|\Phi_{3,C,K}|\in\bigO(|\delta|+|\varphi|\cdot|\delta|+C\cdot
+K\cdot|\delta|)=\bigO\big((|\varphi|+C\cdot K)\cdot|\delta|\big)$.
+
+\subsection{Optimizations of formulas}
 
 Finally, we mention two simple optimizations of the formula
 construction, which are always applied in the rest of the paper.
@@ -860,16 +888,20 @@ $\mks(\rem(t))=\emptyset$.
 The second optimization is specific for $\Phi_{3,C,K}$. In the
 construction of $\mcycle_3(\vec{e})$, we replace the subformula
 $\bigvee_{t\in\delta}e_t$ enforcing the nonemptiness of $\Te$ by
-$\mcycle_2(\vec{e})$. This modification does not change the overall
-semantics of $\mcycle_3(\vec{e})$, but our preliminary experiments
-showed that QBF solvers can often solve the modified formula
-$\Phi_{3,C,K}$ faster.
+$\mcycle_2(\vec{e})$. This modification prolongs the formula, but it
+does not change the overall semantics of $\mcycle_3(\vec{e})$ and our
+preliminary experiments showed that QBF solvers can often solve the
+modified formula $\Phi_{3,C,K}$ faster.
+
+We have also made some experiments with breaking the symmetries in the
+formula models. In particular, we have ordered new acceptance marks by
+their placements on transitions and we have ordered the cubes by their
+content. As the effect of these modifications was inconclusive, we do
+not describe it here.
 
 \todo{Zminit, ze nase QBF formule navic rikaji, ze v zadne
   klauzulu/cude neni zaroven $\Fin m$ a $\Inf m$ a ze cela formule
   ma alepson 1 $\Inf$ nebo $\Fin$? Je to tak, Terko?}
-
-\todo{Zminit, ze jsme zkouseli symmetry breaking, ale nefungoval?}
 
 % \subsection{SCC-based optimization}
 
@@ -1232,44 +1264,45 @@ marks as there is a little point in reducing these. Table
 used translators, and the number of automata produced by each
 translator after removing the automata with less than two marks.
 
-\begin{table}[b]
+\begin{table}[t]
 \caption{LTL to automata translators used for the experimental evaluation
 and the number of successfully translated formulas.}
 \label{tab:ltltranslators}
 \centering
-\begin{tabular}{lr@{~~~~~~}lr}
-\toprule
-tool        & version&homepage & ~~~automata \\
-\midrule
-\texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
-\texttt{ltl2dgra} & 21.0 & & 234\\
-\texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
-\texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
-\bottomrule
-\end{tabular}
-%
-% \begin{tabular}{lrlrrr}
-%   \toprule
-%   &&&& \multicolumn{2}{c}{automata with} \\ \cmidrule(lr){5-6}
-%   tool &\!\!\!version&homepage & T/O & 0--1 mark & \textbf{2+ marks}\\
-%   \midrule
-%   \texttt{ltl2dela} & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}}
-%        & ? & ? & \textbf{129} \\
-%   \texttt{ltl2dgra} & 21.0 &
-%        & ? & ? & \textbf{234}\\
-%   \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr}
-%        & ? & ? & \textbf{70}\\
-%   \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela}
-%        & ? & ? & \textbf{91}\\
-%   \bottomrule
+% \begin{tabular}{lr@{~~~~~~}lr}
+% \toprule
+% tool        & version&homepage & ~~~automata \\
+% \midrule
+% \texttt{ltl2dela}~~~ & 21.0 & \multirow{2}{*}{\url{https://owl.model.in.tum.de/}} & 129\\
+% \texttt{ltl2dgra} & 21.0 & & 234\\
+% \texttt{ltl2tgba} & 2.10.4 & \url{https://spot.lrde.epita.fr} & 70\\
+% \texttt{ltl3tela} & 2.2.0  & \url{https://github.com/jurajmajor/ltl3tela} & 91\\
+% \bottomrule
 % \end{tabular}
+%
+\begin{tabular}{lrrrr}
+  \toprule
+  &&& \multicolumn{2}{c}{constructed automata with} \\ \cmidrule(lr){4-5}
+  tool &\!\!\!version/homepage & timeout & 0 or 1 mark & \textbf{at least 2 marks}\\
+  \midrule
+  \texttt{ltl2dela} & 21.0\tablefootnote{\label{fn:owl}\url{https://owl.model.in.tum.de/}}
+       & ? & ? & \textbf{129} \\
+  \texttt{ltl2dgra} & 21.0\footnotemark[1]
+       & ? & ? & \textbf{234}\\
+  \texttt{ltl2tgba} & 2.10.4\tablefootnote{\url{https://spot.lrde.epita.fr}}
+       & ? & ? & \textbf{70}\\
+  \texttt{ltl3tela} & 2.2.0\tablefootnote{\url{https://github.com/jurajmajor/ltl3tela}}
+       & ? & ? & \textbf{91}\\
+  \bottomrule
+\end{tabular}
 \end{table}
 
 For each automata set (that is, the automata produced by an individual
 LTL translator), we have applied all single-level reductions and the
 multi-level reduction, always with incremental approach and without
-reducing of the number of cubes.
-\todo{Vysvetlit, proc neredukujeme pocet cubes?}
+reducing of the number of cubes. We do not reduce the number of cubes
+as our primary aim is to reduce the number of acceptance marks.
+%\todo{Vysvetlit, proc neredukujeme pocet cubes?}
 The timeout for each QBF query was set to 30 seconds.
 %
 All reductions have been performed by the tool \texttt{telatko}
