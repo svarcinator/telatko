@@ -10,9 +10,8 @@ Switch -L -- sets level of simplification [1, 2, 3].
 Switch -T -- timeout = number of seconds, that QBF solver solves the formula. If ommited, default timeout is 50 seconds.  
 Switch -C -- minimizes number of clauses.  
 Switch -I -- switches on the incremental solving.  
-Switch -G -- switches on gradual solving.  
-Switch -S -- switches on the SCC optimization.  
+Switch -G -- switches on gradual solving.
 Switch -O -- output_file.hoa  
 
 Default:  
-gradual, level 3
+-G -I -L 3 -T 50
