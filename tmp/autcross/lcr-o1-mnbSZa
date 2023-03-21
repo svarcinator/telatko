@@ -1,0 +1,14 @@
+HOA: v1
+name: "Automaton for ((!b) & (m) & (G(((!m) | (X(m))))) & (G(((b) | (!m) | (((!c) & (X(b))))))) & (G(((!b) | (!m) | (((c) & (X(!b))))))) & (G(((c) | (X(m)) | (((X(!c)) & (((X(b)) <-> (X(X(b)))))))))) & (G(((!c) | (((((X(b)) | (((X(!c)) & (X(X(b))))))) & (((X(!b)) | (((X(c)) & (X(X(!b)))))))))))))"
+States: 2
+Start: 0
+AP: 3 "m" "b" "c"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[0&!1&!2] 1
+State: 1
+[0&1&2] 0
+--END--
