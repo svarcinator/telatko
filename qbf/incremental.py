@@ -57,8 +57,14 @@ def model_assert(model, K):
             assert (is_false(model[t]))
 
 
-def inc_loop(aut, tmp_mode,
-             scc_state_info, scc_edg, currently_reduced, original, formula_attr):
+def inc_loop(
+        aut,
+        tmp_mode,
+        scc_state_info,
+        scc_edg,
+        currently_reduced,
+        original,
+        formula_attr):
 
     K = aut.get_acceptance().used_sets().count()
     C = len(aut.get_acceptance().to_dnf().top_disjuncts())
@@ -93,6 +99,7 @@ def inc_loop(aut, tmp_mode,
         edge_dict,
         scc_edg,
         formula_attr.scc_optimization)
+
     solver = solver_init(formula, formula_attr.timeout)
 
     inner_edges_nums = []

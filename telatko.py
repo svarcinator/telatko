@@ -30,7 +30,9 @@ def main(argv):
     parser.add_argument(
         "-T",
         "--timeout",
-        help="Kill QBF solver after inserted number of seconds.", type=int, default=50)
+        help="Kill QBF solver after inserted number of seconds.",
+        type=int,
+        default=50)
     parser.add_argument(
         "-S",
         "--scc",
@@ -47,7 +49,8 @@ def main(argv):
     parser.add_argument(
         "-G",
         "--gradual",
-        help="Levels will gradually grow from L1 up to specified level.", action='store_true')
+        help="Levels will gradually grow from L1 up to specified level.",
+        action='store_true')
     args = parser.parse_args()
 
     if not args.autfile:

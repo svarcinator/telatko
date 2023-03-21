@@ -76,7 +76,6 @@ def prepare_acc_vars(acc_vars):
     return var_list
 
 
-
 def print_edges(aut):
     for edge in aut.edges():
         print("edges[{e}].src={src}, edges[{e}].dst={dst}, edges[{e}].acc={acc}".format(
@@ -131,7 +130,7 @@ def process_f_variables(aut, acc_set_vars):
     Returns:
 
     """
-    
+
     # creates dictionary {edge number : [acceptance set number]}
     f_dict = parse_dict(acc_set_vars)
 
@@ -182,21 +181,21 @@ def parse_z3(model):
 
     return condition_vars, acc_set_vars
 
+
 def print_eq_edges(aut, eq_edges):
     for d in eq_edges:
         for key, val in d.items():
             print(key, " : ", list(map(lambda e: aut.edge_number(e), val)))
 
+
 def clone_to_representant(aut, f_dict, scc_equiv_edges):
-    
+
     for scc_dict in scc_equiv_edges:
         for val in scc_dict.values():
             if aut.edge_number(val[0]) in f_dict:
                 for m in f_dict[aut.edge_number(val[0])]:
                     for e in val[1:]:
                         e.acc.set(m)
-
-
 
 
 def process_variables(aut, model, scc_equiv_edges, mode):
@@ -215,14 +214,14 @@ def process_variables(aut, model, scc_equiv_edges, mode):
 
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))
-    
+
     rejecting_sccs_edges(aut, string_formula(acc))
-    
+
     # puts new acceptance marks on edges and removes old acc. marks
     f_dict = process_f_variables(aut, acc_set_vars)
     if mode == 1:
         clone_to_representant(aut, f_dict, scc_equiv_edges)
-        
+
     max_num = max_set_num(acc)
 
     aut.set_acceptance(max_num + 3, spot.acc_code(string_formula(acc)))

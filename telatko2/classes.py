@@ -487,7 +487,7 @@ class ACC_CNF(ACC):
 
                     clean_con.append(dis)
 
-                elif val == True:
+                elif val:
                     add_con = False
                     break
             if add_con:

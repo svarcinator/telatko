@@ -4,8 +4,14 @@ from telatko2.classes import *
 from z3 import *
 
 
-def not_incr_loop(aut,tmp_mode,
-                  scc_state_info, scc_edg, currently_reduced, original, formula_attr):
+def not_incr_loop(
+        aut,
+        tmp_mode,
+        scc_state_info,
+        scc_edg,
+        currently_reduced,
+        original,
+        formula_attr):
     K = aut.get_acceptance().used_sets().count()
     C = len(aut.get_acceptance().to_dnf().top_disjuncts())
     orig_scc_edg = scc_edg
@@ -16,7 +22,6 @@ def not_incr_loop(aut,tmp_mode,
         C -= 1
 
     while C > 0 and K > 0:
-        
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
@@ -25,12 +30,10 @@ def not_incr_loop(aut,tmp_mode,
         edge_dict, scc_equiv_edges, representants = edge_dictionary(
             aut, tmp_mode, scc_edg, formula_attr.scc_optimization)
 
-        
         if tmp_mode == 1:
-            scc_edg, scc_state_info = filter_out_representants(aut, set(representants), orig_scc_edg, orig_scc_state_info)
-        
-        
-           
+            scc_edg, scc_state_info = filter_out_representants(
+                aut, set(representants), orig_scc_edg, orig_scc_state_info)
+
         formula = get_formula(
             aut,
             scc_state_info,
@@ -43,7 +46,6 @@ def not_incr_loop(aut,tmp_mode,
 
         scc_edg = orig_scc_edg
         scc_state_info = orig_scc_state_info
-        
 
         solver = Solver()
         solver.add(formula)
@@ -54,14 +56,13 @@ def not_incr_loop(aut,tmp_mode,
         if res == sat:
             s = solver.model()
             process_variables(aut, s, scc_equiv_edges, tmp_mode)
-            
+
             """
             if not spot.are_equivalent(original, aut):
                 print("NOT EQUIVALENT! C=", C, " K=", K)
                 return aut
             """
-            
-                
+
         else:
             if currently_reduced == FormulaAtribute.K:
                 aut.set_name(
