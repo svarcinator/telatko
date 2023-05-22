@@ -14,6 +14,15 @@ import itertools
 from math import ceil, log2
 
 
+class Solver_result(enum.Enum):
+    """
+        Result of QBF query.
+    """
+    sat = 1
+    unsat = 2
+    timeout = 3
+
+
 class Variable:
     """
     Class that contains information retrieved from SAT-result.
@@ -40,6 +49,7 @@ class Switches:
         self.incremental = args.incremental
         self.gradual = args.gradual
         self.C = None
+        self.solver = args.solver  # z3 or limboole
 
     def set_C(self, aut):
         self.C = len(
@@ -53,6 +63,7 @@ class Switches:
         print("SCC optimization ", self.scc_optimization)
         print("Incremental ", self.incremental)
         print("Gradual ", self.gradual)
+        print("Solver ", self.solver)
 
 
 class SATformula:
@@ -61,11 +72,18 @@ class SATformula:
 
     """
 
-    def __init__(self, bool):
-        self.formula = bool
-        self.subformula = []
-        self.negation = False
-        self.imperativ = False
+    def __init__(
+            self,
+            op,
+            subf_list: list = [],
+            negate: bool = False,
+            quantifier=False,
+            quantified_vars=[]):
+        self.operator = op
+        self.subformula = subf_list
+        self.negation = negate
+        self.quantifier = quantifier
+        self.quantified_vars = quantified_vars
 
     def __len__(self):
         if not self.subformula:
@@ -75,22 +93,34 @@ class SATformula:
 
     def __str__(self):
 
-        if not self.subformula:
+        if self.quantifier:
+            if self.subformula:
+                return self.operator + \
+                    f" {self.operator}".join(self.quantified_vars) + f" {str(self.subformula[0])}  "
+            else:
+                return self.operator + \
+                    f" {self.operator}".join(self.quantified_vars)
 
-            return ''.join(" " + self.formula + " ")
+        if not self.subformula:
+            if self.negation:
+                return ''.join(" !" + self.operator + " ")
+            return ''.join(" " + self.operator + " ")
 
         elif len(self.subformula) == 1:
-            if self.negation and self.imperativ:
+            if self.negation:
 
                 return ''.join('!(' + str(self.subformula[0]) + ')')
             return ''.join('(' + str(self.subformula[0]) + ')')
 
         else:
-            if self.negation and self.imperativ:
-                return '!(' + str(self.subformula[0]) + self.formula + ''.join(str(
-                    elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
-            return '(' + str(self.subformula[0]) + self.formula + ''.join(str(
-                elem) + self.formula for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+            if self.negation:
+                return '!(' + str(self.subformula[0]) + self.operator + ''.join(str(
+                    elem) + self.operator for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+            return '(' + str(self.subformula[0]) + self.operator + ''.join(str(
+                elem) + self.operator for elem in self.subformula[1:-1]) + str(self.subformula[-1]) + ')'
+
+    def print_info(self):
+        print(f"operator {self.operator}, negated {self.is_negated()}, len subf {len(self.subformula)}, prefix {self.quantifier}, quant vars {self.quantified_vars}")
 
     def just_operator(self):
         if is_empty() and ["&", "|", "->", "<->"] in bool and lne(bool) <= 3:
@@ -100,20 +130,136 @@ class SATformula:
     def is_empty(self):
         return self.subformula == []
 
-    def add_subf(self, new_subform):
+    def add_subf(self, new_subform ):
         self.subformula.append(new_subform)
 
     def negate(self):
         self.negation = not self.negation
 
-    def imper(self):
-        self.imperativ = True
+    def is_negated(self):
+        return self.negation
+
+    def is_quantified(self):
+        return self.quantifier
+
+    def pop_subformula(self):
+        sub = self.subformula.pop()
+        return sub
+
+    def delete_subformulas(self):
+        self.subformula = []
 
     def remove_last_kiddo(self):
         self.subformula.pop()
 
     def subformula_list(self):
         return self.subformula
+
+    def set_op(self, op):
+        self.operator = op
+
+    def get_op(self):
+        return self.operator
+
+    def add_list_subf(self, subf_list):
+        for s in subf_list:
+            self.subformula.append(s)
+
+    def last_node(self):
+        if self.is_empty():
+            return self
+        node = self.subformula[0]
+        while not node.is_empty():
+            node = node.subformula[0]
+
+        return node
+
+    def get_prefix_and_nonprefix_part(self):
+
+        prefix = None
+        formula = copy.deepcopy(self)
+
+        while formula.is_quantified():
+            # each quantifier has only one successor
+
+            assert(len(formula.subformula_list()) == 1)
+            pref = copy.deepcopy(formula)
+            pref.delete_subformulas()
+
+            if prefix:
+                prefix.last_node().add_subf(pref)
+
+            else:
+                prefix = pref
+
+            formula = formula.pop_subformula()
+
+        return prefix, formula
+
+    def is_leaf(self):
+        if self.operator not in ["|", "&", "->", "<->", "#", "?"]:
+            if not self.subformula:
+                return True
+            assert(False)
+        return False
+
+    # CHECKS
+
+    def check_operator_least_binary(self):
+        if not self.is_leaf() and not self.quantifier:
+            assert(len(self.subformula) >= 2)
+            for child in self.subformula:
+                child.check_operator_least_binary()
+
+    def check_quantifier_is_unary(self):
+        if self.operator in ["#", "?"]:
+            assert(len(self.subformula) == 1)
+        for child in self.subformula:
+            child.check_quantifier_is_unary()
+
+    def check_is_impl_binary(self):
+        if self.operator == "->":
+            assert(len(self.subformula) == 2)
+        for child in self.subformula:
+            child.check_is_impl_binary()
+
+    def check_is_eq_binary(self):
+        if self.operator == "<->":
+            assert(len(self.subformula) == 2)
+        for child in self.subformula:
+            child.check_is_eq_binary()
+
+    def sanity_checks(self):
+        # assert (in the sub functions) fails if sanity checks do not pass
+        self.check_operator_least_binary()
+        self.check_quantifier_is_unary()
+        self.check_is_impl_binary()
+        self.check_is_eq_binary()
+
+    def check_cnf(self) -> bool:
+        if not self.check_nnf():
+            return False
+
+        if self.operator in ["#", "?"]:
+            return self.subformula[0].check_cnf()
+
+        if self.operator != "&" and not self.is_leaf():
+            return False
+        for child in self.subformula:
+            if child.get_op() != "|" and not child.is_leaf():
+                return False
+            for granchild in child.subformula_list():
+                if not granchild.is_leaf():
+                    return False
+        return True
+
+    def check_nnf(self):
+        if self.is_negated() and not self.is_leaf():
+            return False
+        for child in self.subformula:
+            if not child.check_nnf():
+                return False
+        return True
 
 
 class FormulaAtribute(enum.Enum):

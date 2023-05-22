@@ -198,19 +198,24 @@ def clone_to_representant(aut, f_dict, scc_equiv_edges):
                         e.acc.set(m)
 
 
-def process_variables(aut, model, scc_equiv_edges, mode):
+def process_variables(aut, model, scc_equiv_edges, mode, qbf_solver):
     """
     Filters SAT-variables that are true and splits them. Then calls functions to process these variables.
     Args:
         aut: input automata
         model: output from SAT-solver
         qbf_solver : type of solver (solver output)
+        mode: 1 - Level 1, need to clone edges of SCC's
+
 
     Returns:
 
     """
 
-    condition_vars, acc_set_vars = parse_z3(model)
+    if qbf_solver == "z3":
+        condition_vars, acc_set_vars = parse_z3(model)
+    else:
+        condition_vars, acc_set_vars = parse_limboole(model)
 
     # returns acceptance condition [[MarkType]]
     acc = create_acc(prepare_acc_vars(condition_vars))

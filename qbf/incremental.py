@@ -1,4 +1,4 @@
-from qbf.formula_preparation import edge_dictionary, update_run_info, try_evaluate0, get_formula, solver_init, filter_out_representants
+from qbf.formula_preparation import edge_dictionary, update_run_info, try_evaluate0, get_formula, solver_init, filter_out_representants, z3_result
 from qbf.parser import process_variables
 from telatko2.classes import *
 from z3 import *
@@ -98,7 +98,7 @@ def inc_loop(
         tmp_mode,
         edge_dict,
         scc_edg,
-        formula_attr.scc_optimization)
+        formula_attr)
 
     solver = solver_init(formula, formula_attr.timeout)
 
@@ -119,16 +119,29 @@ def inc_loop(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
             return aut
 
+        solver.check()
         res = solver.check()
 
-        if res == sat:
+        result, _ = z3_result(res)
+
+        if result == Solver_result.sat:
             model = solver.model()
             if (K <= 1 or aut.get_acceptance().used_sets().count()
                     <= 1) and currently_reduced == FormulaAtribute.K:
-                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                process_variables(
+                    aut,
+                    model,
+                    scc_equiv_edges,
+                    tmp_mode,
+                    formula_attr.solver)
                 return try_evaluate0(aut, original)
             elif C <= 1 and currently_reduced == FormulaAtribute.C:
-                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                process_variables(
+                    aut,
+                    model,
+                    scc_equiv_edges,
+                    tmp_mode,
+                    formula_attr.solver)
                 return aut
 
             if tmp_mode == 1:
@@ -143,15 +156,21 @@ def inc_loop(
             else:
                 C -= 1
         else:
+
             if model is not None:
-                process_variables(aut, model, scc_equiv_edges, tmp_mode)
+                process_variables(
+                    aut,
+                    model,
+                    scc_equiv_edges,
+                    tmp_mode,
+                    formula_attr.solver)
             if currently_reduced == FormulaAtribute.K:
                 aut.set_name(
                     aut.get_name() +
                     update_run_info(
                         aut.get_acceptance().used_sets().count() -
                         1,
-                        res,
+                        result,
                         tmp_mode))
 
             if aut.get_acceptance().used_sets().count(

@@ -51,17 +51,29 @@ def main(argv):
         "--gradual",
         help="Levels will gradually grow from L1 up to specified level.",
         action='store_true')
+
+    parser.add_argument(
+        "-M",
+        "--solver",
+        help="Choose solver",
+        choices=['limboole', 'z3'],
+        default='z3')
     args = parser.parse_args()
 
     if not args.autfile:
         print("No automata to process.", file=sys.stderr)
 
     # if no arguments given, default variant is gradually go up to level 3
-    if args.level == 0 and not args.gradual and not args.incremental and not args.scc:
+    if args.level == 0 and not args.gradual and not args.incremental and not args.scc and args.solver != "limboole":
         args.gradual = True
         args.level = 3
         args.incremental = True
         args.scc = True
+
+    elif args.incremental and args.solver == "limboole":
+        print("Incremental solving is possible only with Z3 solver.")
+        return
+
     elif args.level == 0:
         args.gradual = True
         args.level = 3
@@ -81,7 +93,9 @@ def main(argv):
             formula_attributes.set_C(a)
 
             if a.get_acceptance().used_sets().count() == 0:
+
                 auto = a
+                auto.set_name("F_0_S")
             else:
                 auto = play(a, formula_attributes)
 
@@ -89,11 +103,11 @@ def main(argv):
                 print_aut(auto, args.outfile, "a")
             else:
                 print_aut(auto, None, " ")
-            """
+
             if not spot.are_equivalent(origin, auto):
                 print("NOT EQUIVALENT!")
                 assert (False)
-            """
+
         # except BaseException as err:
             # print(f"Unexpected {err=}, {type(err)=}")
 

@@ -1,12 +1,120 @@
 from qbf.z3_formula import *
 from qbf.parser import clear_aut_edges
 import spot
+from qbf.limboole_formula import *
+from telatko2.classes import Solver_result
+import subprocess
+import time
+
+
+COUNTER = 0
+
+
+def booleguru_translate(out_path):
+    global COUNTER
+
+    try:
+        cp = subprocess.run(["./../solvers/booleguru/build/booleguru",
+                             "./qbf_formula.boole",
+                             "--qdimacs"],
+                            universal_newlines=True,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            timeout=3)
+        cp2 = subprocess.run(
+            [
+                "./../solvers/booleguru/build/booleguru",
+                "./qbf_formula.boole",
+                "--qcir"],
+            universal_newlines=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=3)
+    except subprocess.TimeoutExpired:
+        print("expired")
+        return
+
+    f1 = open(f"{out_path}/qdimacs/telatko{COUNTER}.qdimacs", "w")
+    f1.write(cp.stdout)
+    f1.close()
+
+    f2 = open(f"{out_path}/qcir/telatko{COUNTER}.qcir", "w")
+    f2.write(cp2.stdout)
+    f2.close()
+
+    COUNTER += 1
+
+
+def z3_result(result, model=None):
+
+    if result == sat:
+        return Solver_result.sat, model
+    elif result == z3.unknown:
+        return Solver_result.timeout, None
+    elif result == unsat:
+        return Solver_result.unsat, None
+    assert(False)
+
+
+def query(formula, formula_attr):
+
+    if formula_attr.solver == "z3":
+        solver = Solver()
+        solver.add(formula)
+        solver.set("timeout", 1000 * formula_attr.timeout)
+        solver.push()
+        result = solver.check()
+        model = None
+        if result == sat:
+            model = solver.model()
+        return z3_result(result, model)
+
+    else:
+        #print("Limboole TODO")
+        limb_f = open("qbf_formula.boole", "w")
+        limb_f.write(str(formula))
+        limb_f.close()
+        #elapsed = -1
+
+        try:
+            #start = time.time()
+
+            cp = subprocess.run(["./../solvers/limboole1.2/limboole",
+                                 "./qbf_formula.boole"],
+                                universal_newlines=True,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                timeout=formula_attr.timeout)
+            #elapsed = (time.time() - start)
+
+        except subprocess.TimeoutExpired:
+            print("expired")
+            return Solver_result.timeout, None
+
+        except:
+            print("Subprocess running limboole failed. Be sure that limboole is installed in ./../solvers/limboole1.2")
+            return Solver_result.unsat, None
+
+        out = cp.stdout.splitlines()
+        f = open("sat_evaluation", "w")
+        f.write(cp.stdout)
+        f.close()
+        if len(out) == 1:
+            print("unsatisfiable")
+            return Solver_result.unsat, None
+
+
+        if len(out) == 0:
+            print("sat error")
+            assert(False)
+        model = out[1:]
+        return Solver_result.sat, model
 
 
 def update_run_info(K, res, tmp_mode):
-    if res == z3.unknown:
+    if res == Solver_result.timeout:
         str_res = "T"
-    if res == unsat:
+    if res == Solver_result.unsat:
         str_res = "U"
     assert (str_res != "")
     return "L{0}_{1}_{2} ".format(str(tmp_mode), str(K), str_res)
@@ -138,7 +246,7 @@ def scc_unoptimized_formula(
         scc_state_info,
         C,
         K,
-        mode):
+        mode, solver):
     """
 
     :param aut:
@@ -155,19 +263,30 @@ def scc_unoptimized_formula(
     for scc_edg_list in scc_edg:
         scc_edges_nums.append(
             list(map(lambda e: aut.edge_number(e), scc_edg_list)))
+    f_creator = None
+    if solver == "z3":
+        f_creator = Z3_f_ctor(
+            edge_dict,
+            scc_edg,
+            scc_edges_nums,
+            scc_state_info,
+            C,
+            K,
+            mode)
+    else:
+        #print(f"Limboole formula")
 
-    f_creator = Z3_f_ctor(
-        edge_dict,
-        scc_edg,
-        scc_edges_nums,
-        scc_state_info,
-        C,
-        K,
-        mode)
+        f_creator = Limboole_f_ctor(
+            edge_dict,
+            scc_edg,
+            scc_edges_nums,
+            scc_state_info,
+            C,
+            K,
+            mode)
 
-    z3_formula = f_creator.get_qbf_formula(aut)
-
-    return z3_formula
+    formula = f_creator.get_qbf_formula(aut)
+    return formula
 
 
 def remove_edges(edge_dict, edges):
@@ -235,8 +354,8 @@ def try_evaluate0(aut, orig):
 
 
 def get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg,
-                optimized_scc):
-    if (optimized_scc):
+                formula_attr):
+    if (formula_attr.scc_optimization):
 
         formula = scc_optimized_formula(
             aut,
@@ -255,5 +374,5 @@ def get_formula(aut, scc_state_info, C, K, tmp_mode, edge_dict, scc_edg,
             scc_state_info,
             C,
             K,
-            tmp_mode)
+            tmp_mode, formula_attr.solver)
     return formula

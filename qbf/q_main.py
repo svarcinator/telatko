@@ -71,8 +71,8 @@ def play(aut, formula_attr):
 
     spot.cleanup_acceptance_here(aut)
 
-    if aut.get_acceptance().used_sets().count(
-    ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
+    if aut.get_acceptance().used_sets().count() < 1:
+
         return aut
 
     original = spot.automaton(aut.to_str())
@@ -81,12 +81,13 @@ def play(aut, formula_attr):
     # scc state info [{state num : [[num of edge of which is the state source
     # of][num of edge of which is the state destination of]]}]
     scc_state_info, scc_edg = scc_info(aut)
-
+    tmp_l = formula_attr.tmp_level
     if formula_attr.incremental:
-        for i in range(formula_attr.tmp_level, formula_attr.level + 1):
+        for i in range(tmp_l, formula_attr.level + 1):
             if aut.get_acceptance().used_sets().count() <= 1:
                 aut = try_evaluate0(aut, original)
                 break
+
             aut = inc_loop(
                 aut,
                 i,
@@ -95,6 +96,7 @@ def play(aut, formula_attr):
                 FormulaAtribute.K,
                 original,
                 formula_attr)
+
         # if reduce C, reduce C
         if formula_attr.min_clauses:
             aut = inc_loop(
@@ -109,7 +111,7 @@ def play(aut, formula_attr):
 
     # not incremental solving
 
-    for i in range(formula_attr.tmp_level, formula_attr.level + 1):
+    for i in range(tmp_l, formula_attr.level + 1):
         if aut.get_acceptance().used_sets().count() <= 1:
             aut = try_evaluate0(aut, original)
             break

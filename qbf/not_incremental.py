@@ -1,4 +1,4 @@
-from qbf.formula_preparation import edge_dictionary, update_run_info, try_evaluate0, empty_aut, get_formula, filter_out_representants
+from qbf.formula_preparation import edge_dictionary, update_run_info, try_evaluate0, empty_aut, get_formula, filter_out_representants, query
 from qbf.parser import process_variables
 from telatko2.classes import *
 from z3 import *
@@ -12,6 +12,7 @@ def not_incr_loop(
         currently_reduced,
         original,
         formula_attr):
+
     K = aut.get_acceptance().used_sets().count()
     C = len(aut.get_acceptance().to_dnf().top_disjuncts())
     orig_scc_edg = scc_edg
@@ -42,20 +43,21 @@ def not_incr_loop(
             tmp_mode,
             edge_dict,
             scc_edg,
-            formula_attr.scc_optimization)
+            formula_attr)
 
         scc_edg = orig_scc_edg
         scc_state_info = orig_scc_state_info
 
-        solver = Solver()
-        solver.add(formula)
-        solver.set("timeout", 1000 * formula_attr.timeout)
-        solver.push()
-        res = solver.check()
+        result, model = query(formula, formula_attr)
 
-        if res == sat:
-            s = solver.model()
-            process_variables(aut, s, scc_equiv_edges, tmp_mode)
+        if result == Solver_result.sat:
+
+            process_variables(
+                aut,
+                model,
+                scc_equiv_edges,
+                tmp_mode,
+                formula_attr.solver)
 
             """
             if not spot.are_equivalent(original, aut):
@@ -64,12 +66,13 @@ def not_incr_loop(
             """
 
         else:
+
             if currently_reduced == FormulaAtribute.K:
                 aut.set_name(
                     aut.get_name() +
                     update_run_info(
                         K,
-                        res,
+                        result,
                         tmp_mode))
             if aut.get_acceptance().used_sets().count() <= 1:
                 return try_evaluate0(aut, original)

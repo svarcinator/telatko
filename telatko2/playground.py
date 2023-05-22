@@ -63,14 +63,14 @@ def get_acc(aut):
     # return dnf_acc
     cnf_acc = ACC_CNF(aut.get_acceptance().to_cnf())
 
-    #print((cnf_acc),"\n", (dnf_acc))
+    # print((cnf_acc),"\n", (dnf_acc))
 
     if (dnf_acc.acc_len() < cnf_acc.acc_len()) or (dnf_acc.acc_len()
                                                    == cnf_acc.acc_len() and len(dnf_acc) <= len(cnf_acc)):
         # print("DNF")
         return dnf_acc
     else:
-        #acc = PACC_CNF(cnf_acc)
+        # acc = PACC_CNF(cnf_acc)
         # print("CNF")
         return cnf_acc
 
