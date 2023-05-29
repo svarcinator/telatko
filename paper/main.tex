@@ -177,7 +177,8 @@ called \emph{transition-based Emerson-Lei automata (TELA)} and they
 generalize many traditional kinds of automata over infinite words
 including Büchi, co-Büchi, Rabin, Streett, and parity automata.
 
-TELA have attracted a lot of attention during the last five years.
+TELA have attracted a lot of attention during the last five
+years~\cite{baier.19.atva,major.19.atva,muller.17.gandalf,renkin.20.atva}.
 Their popularity comes probably from the fact that these automata can
 often use fewer states than equivalent automata with simpler
 acceptance conditions. Further, algorithms handling TELA can
@@ -215,10 +216,10 @@ of the automaton.
 
 Our reduction technique is heavily based on \emph{quantified Boolean
   formulas (QBF)}. For a given TELA and parameters $C,K$, it produces
-a QBF formula which is satisfiable if and only if there exists an
+a QBF which is satisfiable if and only if there exists an
 automaton with the same structure, $K$ acceptance marks, an acceptance
-formula in disjunctive normal form with $C$ cubes (i.e., conjunctive
-clauses), and the same set of accepting runs as the original
+formula in disjunctive normal form with $C$ cubes (i.e., conjunction
+of literals), and the same set of accepting runs as the original
 automaton. The placement of the marks on transitions and the
 acceptance formula can be obtained from a model of the
 formula. Besides this formula, we describe also the construction of
@@ -268,7 +269,7 @@ such a reduction is not obvious.
 
 \paragraph*{Structure of the paper} The next section introduces basic
 terms used in the paper. Section~\ref{sec:qbf} explains the
-construction of the three mentioned QBF formulas. The reduction algorithm
+construction of the three mentioned QBF. The reduction algorithm
 based on these formulas is presented in
 Section~\ref{sec:algo}. Section~\ref{sec:implementation} describes our
 tool \telatko implementing the reduction technique.
@@ -394,8 +395,8 @@ imply that each QBF can be transformed into an equivalent Boolean
 formula. However, the size of this Boolean formula can be exponential
 in the size of the original QBF. Let $V$ be the set of all
 propositional variables. A mapping $\mu:V\rightarrow\{0,1\}$
-is a \emph{model} of a QBF formula $\varphi$ iff it is a satisfying
-assignment of an equivalent Boolean formula. A QBF formula is
+is a \emph{model} of a QBF $\varphi$ iff it is a satisfying
+assignment of an equivalent Boolean formula. A QBF is
 \emph{satisfiable} iff it has a model.
 
 % A QBF $\varphi$ is in the \emph{prenex normal form} if it has the form
@@ -406,23 +407,23 @@ assignment of an equivalent Boolean formula. A QBF formula is
 %}}}
 %{{{ construction of QBF formulas
 
-\section{Construction of QBF formulas}\label{sec:qbf}
+\section{Construction of formulas}\label{sec:qbf}
 
 Recall that we aim to reduce the number of acceptance marks in a given
 TELA $\mA =(Q,M,\Sigma,\delta,q_I,\varphi)$ without altering its
-structure and language. In other words, we are looking for
+structure and language. In other words, we look for
 \begin{itemize}
-\item a set $\oM$ of acceptance marks,
+\item a set $\oM$ of acceptance marks such that $|\oM|<|M|$,
 \item an acceptance formula $\psi$ over $\oM$, and 
 \item a function
   $\rem:\delta\rightarrow Q \times \Sigma \times 2^{\oM}\times Q$
   assigning new marks to transitions (i.e., for each
   $t=(p,a,M',q)\in\delta$, we assume that $\rem(t)=(p,a,\oM',q)$ for
   some $\oM'\subseteq\oM$)
+\item such that the automaton
+$\mB=(Q,\oM,\Sigma,\rem(\delta),q_I,\psi)$ is equivalent to $\mA$.
 \end{itemize}
-such that $|\oM|<|M|$ and the automaton
-$\mB=(Q,\oM,\Sigma,\rem(\delta),q_I,\psi)$ is equivalent to $\mA$. To
-ensure that the modified automaton is equivalent to the original one,
+To ensure that the modified automaton is equivalent to the original one,
 we actually look for $\psi$ and $\rem$ such that each run
 $\pi=t_0t_1t_2\ldots$ of $\mA$ is accepting if and only if the run
 $\rem(t_0)\rem(t_1)\rem(t_2)\ldots$ of $\mB$ is accepting.
@@ -440,11 +441,11 @@ $T\subseteq\delta$, it holds that $T$ satisfies $\varphi$ if and only
 if $\rem(T)$ satisfies $\psi$. This can be roughly denoted by the
 formula
 \[
-  \forall T\subseteq\delta~.~\mcycle(T)\implies\big(\msat_\varphi(T) ~\iff~ \msat_{\psi,\rem}(T)\big).
+  \forall T\subseteq\delta~.~\mcycle(T)\implies\big(\msat_\varphi(T) ~\iff~ \msat_{\psi}(\rem(T))\big).
 \]
-In fact, this corresponds to the shape of the QBF formulas we will
+In fact, this corresponds to the shape of the QBF we will
 construct. As we are looking for $\psi$ and $\rem$ such that the
-formula holds, the subformula $\msat_{\psi,\rem}(T)$ contains many
+formula holds, the subformula $\msat_{\psi}(\rem(T))$ contains many
 free variables representing possible instances of $\psi$ and
 $\rem$. If the formula is satisfiable, then each of its models encodes
 a desired instance of $\psi$ and $\rem$. In the following, we assume
@@ -453,14 +454,14 @@ choice of DNF is not fundamental, but inherited from our previous
 attempt to reduce acceptance formulas. The presented method can be
 easily adapted to look for $\psi$ in CNF or in a different shape.
 
-Now we describe the construction of the QBF formulas in detail. The
+Now we describe the construction of the QBF in detail. The
 construction is parametrized by two integers $C,K\ge 0$, where $K$ is
 the desired number of acceptance marks and $C$ is the number of cubes
 of $\psi$. Without loss of generality, we assume that the reduced
 automaton will use the acceptance marks $N_K=\{1,2,\ldots,K\}$.
 %Further, we consider only subsets $T\subseteq\bigcup_{\textrm{SCC}~S}\delta_S$
 We start with a description of Boolean variables used in the
-constructed QBF formulas.
+constructed QBF.
 \begin{itemize}
 \item For each transition $t\in\delta$, variable $e_t$ says whether
   $t$ is in the current set $T$ or not.
@@ -499,7 +500,7 @@ constructed QBF formulas.
 \end{itemize}
 By $\vec{e},\vec{n},\vec{i},\vec{f}$ we denote the vectors of all
 variables of the form $e_t$, $n_{t,k}$, $i_{c,k}$, and $f_{c,k}$,
-respectively. The constructed QBF formulas have the form 
+respectively. The constructed QBF have the form
 \[
   \Phi_{C,K}(\vec{n},\vec{i},\vec{f})~~=~~\forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) \iff \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})\big),
 \]
@@ -740,10 +741,10 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
       (q) edge[out=-150,in=-30] (p);
     \end{scope}
   \end{tikzpicture}
-  \caption{An automaton structure where transition labels and
-    acceptance marks are not depicted (left) and two sets $\Te$ that
+  \caption{An automaton structure where the transition set forms a cycle
+    (left) and two sets $\Te$ that
     are not cycles even if $\mcycle_2(\vec{e})$ holds (middle and
-    right).}
+    right). The transition labels and acceptance marks are not depicted.}
   \label{fig:inter}
 \end{figure}
 
@@ -956,10 +957,10 @@ not describe it here.
 
 \section{Reduction algorithm}\label{sec:algo}
 
-This section explains how we use the QBF formulas constructed in the
+This section explains how we use the QBF constructed in the
 previous section to reduce the number of acceptance marks in TELA.
 First, we describe a \emph{single-level} reduction, which
-uses only a single kind of QBF formulas. More precisely, we talk about
+uses only a single kind of QBF. More precisely, we talk about
 \emph{level~1}, \emph{level~2}, or \emph{level~3} reduction when
 $\Phi_{1,C,K}$, $\Phi_{2,C,K}$, or
 $\Phi_{3,C,K}$ is used, respectively.
@@ -1190,7 +1191,7 @@ The presented reduction algorithms have been implemented in a tool
 called \telatko. It is implemented in Python 3 and uses the Spot
 library~\cite{duret.16.atva2} for automata parsing and manipulation,
 and the theorem prover Z3~\cite{demoura.08.tacas} to solve the
-satisfiability of QBF formulas. Our tool is available at
+satisfiability of QBF. Our tool is available at
 \begin{center}
 \url{https://gitlab.fi.muni.cz/xschwar3/telatko}
 \end{center}
@@ -1370,8 +1371,8 @@ acceptance marks to only 4.
 \caption{The effect of reduction.
 A cell on coordinates $(x,y)$ contains the number of automata that have been
 reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
-numbers, the latter represents number of automata where the last call to QBF
-solver reached the time limit.}
+numbers, the latter represents number of automata where the attempt to reduce
+another mark has been unsuccessful due to a QBF solver timeout.}
 \label{tab:heatmap}
 \setlength{\tabcolsep}{2.5pt}
 \centering
