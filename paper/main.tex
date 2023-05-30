@@ -378,17 +378,15 @@ denotes the transition $(p,a,\{\tacc{4}{j},\tacc{8}{k}\},q)\in\delta$.
 
 By choosing an appropriate acceptance condition, one can easily
 represent many classical kinds of automata over infinite words. For
-example, a transition-based B\"uchi automaton is a TELA with
-$M = \{\tacc{1}{1}\}$, $\varphi = \Inf\tacc{1}{1}$, and the acceptance
-mark \tacc{1}{1} being placed on all accepting transitions.
-Similarly, a transition-based Rabin automaton with $k$ acceptance
-pairs has
-$M = \{\tacc{5}{1}, \tacc{3}{1'}, \ldots, \tacc{5}{k}, \tacc{3}{k'}\}$
-and
+example, a Büchi automaton can be represented as a TELA with the
+acceptance condition $\varphi = \Inf\tacc{1}{1}$ and the single mark
+$\tacc{1}{1}$ placed on all transitions leaving the accepting states
+of the Büchi automaton. Further, a Rabin automaton with $k$ acceptance
+pairs can be similarly represented as a TELA with acceptance condition
 $\varphi = (\Fin\tacc{5}{1} \land \Inf\tacc{3}{1'}) \lor \ldots \lor
-(\Fin\tacc{5}{k} \land \Inf\tacc{3}{k'})$.  \fixme{A state-based acceptance
-can be represented by TELA by placing the corresponding acceptance
-marks on all transitions leaving the accepting states.} 
+(\Fin\tacc{5}{k} \land \Inf\tacc{3}{k'})$ and marks
+$M = \{\tacc{5}{1}, \tacc{3}{1'}, \ldots, \tacc{5}{k},
+\tacc{3}{k'}\}$.
 
 \bigskip
 
@@ -522,11 +520,10 @@ respectively. The constructed QBF have the form
   \Phi_{C,K}(\vec{n},\vec{i},\vec{f})~~=~~\forall \vec{e}~.~\mcycle(\vec{e})\implies\big(\msat_\varphi(\vec{e}) \iff \msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})\big),
 \]
 where $\forall\vec{e}$ denotes the sequence composed of $\forall e_t$
-for all variables $e_t$ and the subformulas $\mcycle(\vec{e})$,
-$\msat_\varphi(\vec{e})$, and
-$\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$ are defined as
-follows. \fixme{The subformula $\mcycle(\vec{e})$ will be defined as the last
-one and we present three versions of it.}
+for all variables $e_t$. Now we define the subformulas
+$\msat_\varphi(\vec{e})$,
+$\msat_{C,K}(\vec{e},\vec{n},\vec{i},\vec{f})$, and three versions of
+$\mcycle(\vec{e})$.
 
 The subformula $\msat_\varphi(\vec{e})$ says whether $T$ satisfies the
 original acceptance formula $\varphi$ and it is derived directly from
@@ -639,9 +636,10 @@ such that $t_1\sim_S t_2$ whenever $\mks(t_1)=\mks(t_2)$.
     \textrm{for every set $\emptyset\neq T\subseteq\delta_S$ it holds }
       (T~\msat~\varphi~\iff~\rem(T)~\msat~\psi).\tag{$1$}\label{eq:lem1} 
   \]  
-  Then there exists a function $\rem'$ that respects % the equivalence
-  $\sim_S$ (i.e.,
-  if $t_1\sim_S t_2$ then $\rem'(t_1)=\rem'(t_2)$) and
+  Then there exists a function $\rem'$ that respects the equivalence
+  $\sim_S$ (i.e., it assigns the same marks to equivalent transitions)
+  % if $t_1\sim_S t_2$ then $\mks(\rem'(t_1))=\mks(\rem'(t_2))$)
+  and
   \[
     \textrm{for every set $\emptyset\neq T\subseteq\delta_S$ it holds }
     (T~\msat~\varphi~\iff~\rem'(T)~\msat~\psi).\tag{$2$}\label{eq:lem2} 
@@ -651,9 +649,10 @@ such that $t_1\sim_S t_2$ whenever $\mks(t_1)=\mks(t_2)$.
   Let $\rem$ be a function and $\psi$ a formula such that
   \eqref{eq:lem1} holds. To construct the function $\rem'$, we first
   select one transition from each equivalence class of~$\sim_S$. For
-  every transition $t\in\delta_S$, by $\overline{t}$ we denote the
-  selected transition equivalent to $t$ and we define the function
-  $\rem'$ as $\rem'(t)=\rem(\overline{t})$. Note that we do not need
+  every transition $t=(p,a,M',q)\in\delta_S$, by $\overline{t}$ we
+  denote the selected transition equivalent to $t$ and we define the
+  function $\rem'$ such that
+  $\rem'(t)=(p,a,\mks(\rem(\overline{t})),q)$. Note that we do not need
   to discuss the value of $\rem'$ on transitions outside $\delta_S$ as
   it is not relevant for the lemma. Clearly, $\rem'$ respects the
   equivalence $\sim_S$. It remains to show that \eqref{eq:lem2} holds
@@ -728,7 +727,7 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[smallautomaton]
-    \begin{scope}[initial angle=90,xshift=-4cm]
+    \begin{scope}[initial angle=90,xshift=-4.5cm]
       \node[state,initial] (p) at (0,0) {};
       \node[state] (q) at (1.8,0) {};
       \path[->,auto]
@@ -748,7 +747,7 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
       (q) edge[out=-150,in=-30] (p);
     \end{scope}
 
-    \begin{scope}[initial angle=90,densely dotted,black!35,xshift=4cm]
+    \begin{scope}[initial angle=90,densely dotted,black!35,xshift=4.5cm]
       \node[state,initial,solid,draw=black] (p) at (0,0) {};
       \node[state,solid,draw=black] (q) at (1.8,0) {};
       \path[->,auto]
@@ -758,10 +757,10 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
       (q) edge[out=-150,in=-30] (p);
     \end{scope}
   \end{tikzpicture}
-  \caption{An automaton structure where the transition set forms a cycle
-    (left) and two sets $\Te$ that
-    are not cycles even if $\mcycle_2(\vec{e})$ holds (middle and
-    right). The transition labels and acceptance marks are not depicted.}
+  \caption{An automaton structure % where the transition set forms a cycle
+    (left) and two sets $\Te$ (middle and right) that are not
+    cycles even if $\mcycle_2(\vec{e})$ holds. The transition labels
+    and acceptance marks are not depicted.}
   \label{fig:inter}
 \end{figure}
 
@@ -769,8 +768,8 @@ transitions that are not cycles. Some examples of such sets are provided in Figu
 Before we give the definition of $\mcycle_3(\vec{e})$, we prove that
 cycles can be characterised in the following way.
 \begin{lemma}
-  A nonempty set $T\subseteq\delta$ is a cycle if and only if for each
-  set of states $S\subseteq Q$ one of the following conditions holds.
+  A nonempty set $T\subseteq\delta$ is a cycle if and only if, for each
+  set of states $S\subseteq Q$, one of the following conditions holds.
   \begin{enumerate}[A.]
   \item\label{en:1} All transitions in $T$ lead from a state in $S$ to a state in $S$ (i.e., $T\subseteq\delta_S$).
   \item\label{en:2} All transitions in $T$ lead from a state outside $S$ to a state outside $S$ (i.e., $T\subseteq\delta_{Q\smallsetminus S}$).
@@ -871,7 +870,8 @@ $|\delta|$ universally quantified variables $e_t$, $|\delta|\cdot K$
 free variables $n_{t,k}$, and $C\cdot K$ free variables $i_{c,k}$ and
 $f_{c,k}$. The formula $\Phi_{3,C,K}$ additionally uses $|Q|$
 variables $s_q$ that are existentially quantified (when the formula is
-transformed to prenex normal form).
+transformed to prenex normal form) in the scope of universal
+quantification of variables $e_t$.
 
 To analyze the length of the formulas, we start with its subformulas.
 One can easily check that
@@ -895,7 +895,6 @@ $\Phi_{1,C,K}$ and $\Phi_{2,C,K}$, but it contains an additional quantifier
 alternation.
 
 \subsection{Optimizations of formulas}
-
 Finally, we mention three simple optimizations of the formula
 construction, which are always applied in the rest of the paper.
 
@@ -1208,7 +1207,8 @@ The presented reduction algorithms have been implemented in a tool
 called \telatko. It is implemented in Python 3 and uses the Spot
 library~\cite{duret.16.atva2} for automata parsing and manipulation,
 and the theorem prover Z3~\cite{demoura.08.tacas} to solve the
-satisfiability of QBF. Our tool is available at
+satisfiability of QBF transformed to prenex normal form (and not using
+CNF). Our tool is available at
 \begin{center}
 \url{https://gitlab.fi.muni.cz/xschwar3/telatko}
 \end{center}
@@ -1269,14 +1269,13 @@ finish in the time limit when trying to reduce the number of marks to
 
 \section{Experimental evaluation}\label{sec:experiments}
 
-%\todo{Upravit experimenty: pridat dalsi 2 sady automatu.}
-\fixme{We have used the tool \texttt{genltl} of the Spot
-library~\cite{duret.16.atva2} to generate LTL formulas from
-literature, using all available formula sets implemented in
-\texttt{genltl} 2.10.4.} The parametrized formulas were generated for all
-combinations of parameter values from 1 to 4. We used the tool
-\texttt{ltlfilt} of the Spot library to simplify the formulas and
-remove duplicates. Altogether, we have generated 348 unique LTL
+To evaluate our reduction technique, we considered all sets of LTL
+formulas from literature as they are provided by the tool
+\texttt{genltl} of the Spot library~\cite{duret.16.atva2}~2.10.4, where
+parametrized formulas were generated for all combinations of
+parameter values from 1 to 4. We used the tool \texttt{ltlfilt} of the
+Spot library to simplify the formulas and remove
+duplicates. Altogether, we have generated 348 unique LTL
 formulas. These have been translated to deterministic TELA by two
 state-of-the-art translators from the Owl
 library~\cite{kretinsky.18.atva}, namely \texttt{ltl2dela} (known as
@@ -1350,20 +1349,21 @@ processor and 32 GB of memory running Ubuntu 20.04.4. We used the tool
 \texttt{autcross} of the Spot library to get the statistics of the
 reduced automata and the running times.
 
-Table~\ref{tab:cumm-data} shows the cumulative numbers of marks in
-the input automata sets and after each reduction, together with the
+Table~\ref{tab:cumm-data} shows the cumulative numbers of marks in the
+input automata sets and after each reduction, together with the
 reduction ratio and total time spent by the considered reduction. The
 column \textit{solver timeout} shows the number of automata for which
 the last query to QBF solver did not finish within the 30~seconds
-limit. The timeout of the last QBF query implies that the automaton
-may be potentially further reduced by the reduction with a longer time
-limit. \fixme{The reduction ratio drop in higher levels, e.g.~between level~1
-and level~2 for \texttt{ltl2dgra}, happens due to the QBF solver timeouts
-occuring earlier as the formula being solved in higher level is more
-complex. For \texttt{ltl2dela} and \texttt{ltl2dgra}, the automata sets
-do not contain any automaton where level~2 or level~3 achieves a better
-result than level~1. However, all levels contribute to the reductions in
-the multilevel setting.}
+limit. The timeout of the last QBF query means that the automaton may
+be potentially further reduced if a longer time limit is used. One can
+observe that a higher level sometimes achieves a smaller reduction
+than a lower level (e.g., compare level~1 and level~2 for
+\texttt{ltl2dgra}). This is caused by the QBF solver timeouts occuring
+earlier as formulas constructed by the higher level are more
+complex. For \texttt{ltl2dela} and \texttt{ltl2dgra}, the automata
+sets do not contain any automaton where level~2 or level~3 achieves a
+better result than level~1. However, all levels contribute to the
+reductions in the multi-level setting.
 
 \begin{table}[t]
   \caption{The cumulative numbers of acceptance marks before and after
@@ -1391,10 +1391,10 @@ acceptance marks to only 4.
 % reduced 8 or more acceptance marks to only 4.
 
 \begin{table}[b!]
-\caption{The effect of reduction.
+\caption{The effect of multi-level reduction.
 A cell on coordinates $(x,y)$ contains the number of automata that have been
 reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
-numbers, the latter represents number of automata where the attempt to reduce
+numbers, the latter represents the number of automata where the attempt to reduce
 another mark has been unsuccessful due to a QBF solver timeout.}
 \label{tab:heatmap}
 \setlength{\tabcolsep}{2.5pt}
