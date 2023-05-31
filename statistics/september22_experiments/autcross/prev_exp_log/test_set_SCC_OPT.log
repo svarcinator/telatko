@@ -1,0 +1,17 @@
+patterns-test_set.hoa:1.1-80.7
+Running [A0]: autfilt '/home/ter/telatko/september22_experiments/autcross/lcr-i0-YhKqh5' > '/home/ter/telatko/september22_experiments/autcross/lcr-o0-cD8jP2'
+Running [A1]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-L1R945' -T 15 -L 1 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o1-jnA1k6'
+Running [A2]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-dFw713' -T 15 -L 2 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o2-PVA0V2'
+Running [A3]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-3GFxh6' -T 15 -L 3 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o3-1zomZ5'
+Running [A4]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i0-RyUU23' -T 15 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o4-iHXtN4'
+Gathering statistics...
+
+patterns-test_set.hoa:81.1-108.7
+Running [A0]: autfilt '/home/ter/telatko/september22_experiments/autcross/lcr-i1-YHSFM3' > '/home/ter/telatko/september22_experiments/autcross/lcr-o0-4OiTg3'
+Running [A1]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-bmkRz6' -T 15 -L 1 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o1-me6s75'
+Running [A2]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-F9JPv6' -T 15 -L 2 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o2-Ad8AZ4'
+Running [A3]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-6RNwh6' -T 15 -L 3 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o3-VEuFx4'
+Running [A4]: /home/ter/telatko/telatko.py -F '/home/ter/telatko/september22_experiments/autcross/lcr-i1-LZI8o6' -T 15 -I -S -O '/home/ter/telatko/september22_experiments/autcross/lcr-o4-GqZ5r5'
+Gathering statistics...
+
+No problem detected.

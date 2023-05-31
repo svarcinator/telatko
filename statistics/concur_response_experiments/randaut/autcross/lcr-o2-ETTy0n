@@ -1,0 +1,32 @@
+HOA: v1
+name: "Automaton for ((F(!p3)) <-> (((G(F(p0))) & (X(X(p0))))))"
+States: 8
+Start: 0
+AP: 2 "p3" "p0"
+Acceptance: 2 (Inf(0)&Inf(1)) | (Fin(0) & Fin(1))
+properties: trans-labels explicit-labels trans-acc deterministic
+--BODY--
+State: 0
+[!0] 1
+[0] 2
+State: 1
+[t] 3
+State: 2
+[0] 4
+[!0] 3
+State: 3
+[1] 5
+State: 4
+[0&!1] 6
+[!0&1] 5
+[0&1] 7
+State: 5
+[1] 5 {0 1}
+[!1] 5 {0}
+State: 6
+[0] 6
+State: 7
+[0&!1] 7
+[0&1] 7 {1}
+[!0] 5
+--END--

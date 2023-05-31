@@ -1,0 +1,23 @@
+HOA: v1
+name: "(((p0 & !p2) | (!p0 & p2)) R !p0) | G!p3"
+States: 4
+Start: 3
+AP: 3 "p3" "p0" "p2"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+properties: stutter-invariant very-weak
+--BODY--
+State: 0
+[!0] 0
+State: 1
+[!1&!2] 1
+[!1&2] 2
+State: 2
+[t] 2
+State: 3
+[!0&1] 0
+[0&!1&!2] 1
+[!1&2] 2
+[!0&!1&!2] 3
+--END--

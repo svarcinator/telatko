@@ -1,0 +1,309 @@
+ltl3tela_det.filt.hoa:1.1-23.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i0-75Sbc0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-dJ6qHY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i0-GHkVh1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-QEE4UX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i0-giJNjZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-twGcyY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i0-sUtnTY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-OSodL0' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:24.1-126.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i1-V9mTZY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-j16af0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i1-n5KnS0' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-i7sqXY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i1-gn9QvX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-OLpIvZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i1-wnLCkY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-jO8Cq1' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:127.1-184.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i2-U9lRfY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-NVUxoX'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i2-j3J58Y' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-4woRSX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i2-0LHQD0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-b6i0LY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i2-DMJ19Z' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-kGTYP0' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:185.1-231.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i3-ijSMFY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-rgBGdZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i3-HkR6SY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-wvEzkX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i3-hmDy4W' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-ItY12X' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i3-mouoQX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-O5JDB0' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:232.1-261.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i4-jRZSNX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-nGM3d1'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i4-vwIVOY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-0KAgLZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i4-0qYb20' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-oXUku0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i4-wbOkO0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-qyjZEX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:262.1-283.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i5-uG28KZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-p6sPr1'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i5-NyA2iY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-mYwLrX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i5-ZjwwlX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-MV5UT0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i5-M4cQDY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-JwNU9W' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:284.1-298.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i6-S1xDkZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-Z4Fp9Y'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i6-0WSdvY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-6zbzi0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i6-Dh0kn0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-dPSepZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i6-XS80TW' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-E5vkzX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:299.1-326.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i7-dnGStZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-I8G7nZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i7-e5gzMY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-rg1sG0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i7-sOQHYW' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-msxLt0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i7-IiKrvX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-ljgzFX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:327.1-348.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i8-wvrmAZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-H8zK2W'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i8-WBzenY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-NmNGmX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i8-2EYROX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-54F8MY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i8-Pxjxw0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-vYDnkY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:349.1-366.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i9-cA0TbX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-XeTaaY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i9-1wufmY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-9YL6AY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i9-0Dhdo1' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-HEgyQ0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i9-WAzdNZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-DH67MZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:367.1-403.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i10-vgqEh0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-A1U8bY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i10-Aw9vv1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-MD62lY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i10-D3nVbZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-FlZgI0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i10-R5fU8Z' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-IYATCZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:404.1-451.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i11-6E3uvY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-n6YS5Y'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i11-NxyBOZ' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-mRJdPX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i11-qfZ1lY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-Z8ZSc0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i11-IAaBfX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-Q0n2aZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:452.1-482.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i12-BQDp6Z' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-ExaZkZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i12-y58YVZ' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-95u7JY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i12-RZBygX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-bXrRX0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i12-dlJiHZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-fy87RY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:483.1-502.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i13-D4sX9Y' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-eksYm0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i13-57EoIY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-kkCNoX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i13-IpeVP0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-pIRMBY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i13-pAIMj0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-z7KvzX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:503.1-533.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i14-XBtZFZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-2kC58W'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i14-HLbcDX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-KXpfw1'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i14-i4lyM0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-xhyYF0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i14-OJ5bYW' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-ayCqIZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:534.1-548.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i15-vJ2qsX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-IyU1HZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i15-GliLLY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-x59NAZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i15-fzyQ2X' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-7PaeuY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i15-cUsEEX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-74ezVZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:549.1-601.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i16-cRtEmY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-hYBxSY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i16-1AZJsX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-kPWZWW'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i16-VY7QaX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-thiY8W' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i16-frWGxY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-UDCtwY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:602.1-618.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i17-4x10U0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-EY2FaY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i17-nM9lTZ' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-S69OH0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i17-tEPuC0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-gtCjkX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i17-vltQQX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-9nlIEY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:619.1-675.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i18-AyoSW0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-ShPZsX'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i18-NjUOOY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-LBLwwY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i18-FNa5zY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-w9oPCZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i18-9BWYm0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-80xp2W' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:676.1-689.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i19-S8lUAZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-0xQHYW'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i19-foZvjZ' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-RY9jSY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i19-oRzVEZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-zJRXCZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i19-9v1OYW' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-1MGkgX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:690.1-722.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i20-qKY7cZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-RxB6kY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i20-LJJni1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-ED8IbZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i20-SMVriY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-GNpwWW' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i20-Ch6ld0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-xyDbvZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:723.1-780.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i21-Dht0nZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-xhjlKY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i21-b0aKD0' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-EHYTNZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i21-srSALZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-ghkE4Y' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i21-8rRCS0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-0N898W' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:781.1-795.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i22-Jq2E90' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-70mXEX'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i22-K06M3X' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-YNh9w0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i22-SYzdBY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-llEtu1' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i22-bmvbf0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-me9g8Z' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:796.1-812.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i23-qUjGn0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-9Vk7m1'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i23-16k0eZ' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-JBJCrZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i23-4AR24X' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-afGdfX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i23-YurC4Z' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-mp6Xo0' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:813.1-834.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i24-MRAB30' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-FcnFZZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i24-RYE6c1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-mZoQTZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i24-XaykwX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-iO8HbZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i24-WzPau0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-aYPkPX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:835.1-906.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i25-fPHCyY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-LtPOuX'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i25-54Iku0' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-jZIwNZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i25-x3CGk1' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-IymCGX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i25-ukMyjZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-6sVt3Y' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:907.1-951.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i26-btb5HZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-5IuoTZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i26-09L5VX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-UeiYd0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i26-y5i8aY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-29TaD0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i26-AoIzpY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-AyHD5W' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:952.1-970.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i27-CfAjUZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-Q7DMYZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i27-1KRMp0' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-3eLJO0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i27-K2krbX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-5LT1DX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i27-m0HyzY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-C9Hrp1' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:971.1-994.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i28-qGfgZ0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-AWEzpY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i28-ZeBxr1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-pVix30'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i28-pmhX6Z' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-K6dEwZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i28-ZzlGw0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-8WYF8W' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:995.1-1012.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i29-XxURmZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-GbyfsY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i29-xdFmTW' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-rQZ2t0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i29-YeYeZ0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-zxQElX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i29-KHFRgY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-l7E7UY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1013.1-1039.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i30-u9USzY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-0pFaYY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i30-SWGZOZ' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-v9iRMX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i30-oBBxr0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-pkM9hX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i30-WtzNtY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-jJ9G9Y' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1040.1-1101.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i31-bkkR7W' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-46NPs1'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i31-9ERDeY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-8FmBRY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i31-IbkLN0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-i6MsyZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i31-5VCVbX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-kwj1IZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1102.1-1176.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i32-llm710' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-q2i5FY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i32-XowYfX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-LUAJH0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i32-KVPJXY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-YRfpHZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i32-l5GOjY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-qtymsX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1177.1-1198.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i33-Gqvn5W' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-Qus6W0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i33-n6j6yY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-vqGol0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i33-ppBnjX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-jtRFSX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i33-1lpFm0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-9pvUxX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1199.1-1216.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i34-PCa7KX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-X6UMsZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i34-Ltkty0' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-dyrNSX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i34-joa6iX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-OcZiHY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i34-ELHHw0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-4vr1i0' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1217.1-1237.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i35-mshLi0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-FS1RA0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i35-B07YRY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-kL66qZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i35-nn4mWY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-3fL5pY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i35-KLqCf1' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-suZnWY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1238.1-1252.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i36-CiO40W' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-DUgEkY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i36-MsH5b0' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-dJYgmZ'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i36-cnFfzZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-zBGMLZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i36-g8F3vY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-nrY5jZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1253.1-1266.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i37-oK64I0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-ijEvJY'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i37-hwUiFX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-i9k2lX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i37-bBqHm0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-dDzESY' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i37-DWu7SX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-QJkCZZ' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1267.1-1290.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i38-JrL47Y' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-WQYFLZ'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i38-ljRKLX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-ZLiFmX'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i38-e3TnlY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-uGR9nX' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i38-4GYJR0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-IKkXFX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1291.1-1313.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i39-OePd2X' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-8iL5F0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i39-63Dek1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-wCUdp1'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i39-PSy19Z' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-CS455Y' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i39-RlbzPX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-7sZZCX' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1314.1-1342.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i40-dVQNgZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-R3dvz0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i40-PPP8u1' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-SG6HS0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i40-qbQMaZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-mlQYZZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i40-YyDevX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-HCGQu1' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1343.1-1374.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i41-ZO7sgZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-KyQJ7W'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i41-odwLHX' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-7Kb78X'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i41-7rD6j0' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-K2gwE0' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i41-YfnoxY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-BtsPf1' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1375.1-1388.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i42-yhiyTZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-YcKcO0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i42-6RvB4W' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-QqXcJY'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i42-DT7dpX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-Sli5NZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i42-lwuK10' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-kCwYSY' --small
+Gathering statistics...
+
+ltl3tela_det.filt.hoa:1389.1-1414.7
+Running [A0]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i43-xgnkLZ' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o0-uDRID0'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i43-TYbzcY' -T 30 -L 3 -I -G -O '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o1-hZ1YY0'
+Running [A2]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i43-dwOEAY' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o2-offoKZ' --simplify-acceptance
+Running [A3]: autfilt '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-i43-OFNrLX' > '/home/xschwar3/telatko/concur_response_experiments/randaut/autcross/lcr-o3-VUmjtZ' --small
+Gathering statistics...
+
+No problem detected.

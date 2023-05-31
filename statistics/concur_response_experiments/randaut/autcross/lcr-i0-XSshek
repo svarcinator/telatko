@@ -1,0 +1,55 @@
+HOA: v1
+name: "Automaton for ((X(p1)) R (((((G(p1)) R (p2))) W (p3))))"
+States: 11
+Start: 0
+AP: 3 "p2" "p1" "p3"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[0&!1&!2] 1
+[2] 2
+[0&1&!2] 3
+State: 1
+[0&!1&!2] 1
+[0&1&!2] 4
+[0&1&2] 5
+[0&!1&2] 6
+State: 2
+[0&!1&!2] 1
+[!1&2] 2
+[1] 7
+State: 3
+[0&!1&!2] 1
+[0&1&!2] 4
+[0&1&2] 5
+[!0&1&2] 8
+[0&!1&2] 6
+State: 4
+[0&1&!2] 4
+[0&1&2] 5
+[!0&1&2] 8
+[0&!1&!2] 9
+[0&!1&2] 10
+State: 5
+[0&1] 5
+[!0&1] 8
+[0&!1] 10
+State: 6
+[0&!1&!2] 1
+[0&1] 5
+[0&!1&2] 6
+State: 7
+[t] 7
+State: 8
+[1] 8
+State: 9
+[0&1&!2] 4
+[0&1&2] 5
+[0&!1&!2] 9
+[0&!1&2] 10
+State: 10
+[0&1] 5
+[0&!1] 10
+--END--

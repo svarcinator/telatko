@@ -1,0 +1,38 @@
+HOA: v1
+name: "Automaton for ((F(G(((a) | (b))))) | (F(G(((!a) | (X(b)))))) | (F(G(((a) | (X(X(b))))))))"
+States: 6
+Start: 0
+AP: 2 "a" "b"
+acc-name: generalized-co-Buchi 2
+Acceptance: 2 Fin(0)|Fin(1)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!0&1] 0
+[!0&!1] 0 {1}
+[0] 1
+State: 1
+[!0&1] 0
+[0&!1] 2
+[!0&!1] 3 {1}
+[0&1] 1
+State: 2
+[0] 2
+[!0&1] 3
+[!0&!1] 3 {1}
+State: 3
+[!0&!1] 4 {1}
+[!0&1] 4
+[0] 5
+State: 4
+[!0&1] 4
+[0&1] 5
+[!0&!1] 0 {0 1}
+[0&!1] 1 {0}
+State: 5
+[!0&!1] 0 {0 1}
+[0&1] 2
+[!0&1] 3
+[0&!1] 1 {0}
+--END--
