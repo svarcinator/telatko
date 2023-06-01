@@ -60,8 +60,10 @@ class Z3_f_ctor:
         laso = simplify(laso)
 
         if old is not None:
-            old = simplify(old)
+
+
             eq = self.equivalence_f(old, new)
+            simplify(eq)
         else:
             eq = new
         impl = Implies(laso, eq)
@@ -158,6 +160,8 @@ class Z3_f_ctor:
             Returns encoded literal.
         """
 
+
+
         inf, fin = acc.used_inf_fin_sets()
         used_set = acc.used_sets()
 
@@ -167,6 +171,7 @@ class Z3_f_ctor:
 
         edges_vars = []
 
+
         # spot anomaly, cant extract number of mark the standard way
         # mark_num = -1
         for m in used_set.sets():
@@ -175,8 +180,11 @@ class Z3_f_ctor:
 
         if mark_num in self.edge_dict:
 
+
             for e in list(set(self.edge_dict[mark_num]) & set(
                     self.inner_edges_nums)):
+
+
                 var = Bool("e_" + str(e))
                 edges_vars.append(var)
 
@@ -192,9 +200,19 @@ class Z3_f_ctor:
             if fin:
                 literal_formula = Not(literal_formula)
 
-        return literal_formula
+
+            return literal_formula
+        if inf:
+            #  Inf(∅) = False
+            return False
+        else:
+            #  Fin(∅) = True
+            return True
+
 
     def rec_old_original_shape(self, acc, prev_type, level):
+        
+
 
         if acc.top_disjuncts() == acc.top_conjuncts():
             return self.encode_acc_mark(acc)

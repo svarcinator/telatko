@@ -69,7 +69,8 @@ def query(formula, formula_attr):
         qcir_c = Qcir_ctor(formula)
         qcir_c.to_qcir("./qbf/solver_manipulation/formulas_files/formula.qcir")
         return Solver_result.unsat, None
-    elif formula_attr.solver == "caqe":
+        
+    elif formula_attr.solver == "booleguru + caqe":
         safe_file(formula_file_path, str(formula), "w")
         formula_file_path = encode_qdimacs(formula_file_path)
         tool_path = "./../solvers/caqe/target/release/caqe"
