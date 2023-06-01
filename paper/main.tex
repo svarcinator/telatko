@@ -92,7 +92,9 @@
 \ccsdesc[500]{Theory of computation~Logic}
 \ccsdesc[500]{Theory of computation~Automata over infinite objects}
 \keywords{Emerson-Lei automata, TELA, automata reduction, QBF, telatko}
-%\funding{This work has been supported by the Czech Science Foundation grant GA19-24397S.}
+\funding{T.~Schwarzová received funding from
+the European Union’s Horizon Europe program under the Grant Agreement
+No.\ 101087529.}
 
 %}}}
 
@@ -178,7 +180,7 @@ called \emph{transition-based Emerson-Lei automata (TELA)} and they
 generalize many traditional kinds of automata over infinite words
 including Büchi, co-Büchi, Rabin, Streett, and parity automata.
 
-TELA have attracted a lot of attention during the last %five
+TELA have attracted a lot of attention during the last few
 years~\cite{baier.19.atva,major.19.atva,muller.17.gandalf,renkin.20.atva}.
 Their popularity comes probably from the fact that these automata can
 often use fewer states than equivalent automata with simpler
@@ -437,17 +439,87 @@ structure and language. In other words, we look for
   such that the automaton $\mB=(Q,\oM,\Sigma,\rem(\delta),q_I,\psi)$
   is equivalent to $\mA$.
 \end{itemize}
-To ensure that the modified automaton is equivalent to the original one,
-we actually look for $\psi$ and $\rem$ such that each run
+% To simplify the task, 
+% To ensure that the modified automaton is equivalent to the original one,
+We will actually look for $\psi$ and $\rem$ such that each run
 $\pi=t_0t_1t_2\ldots$ of $\mA$ is accepting if and only if the run
-$\rem(t_0)\rem(t_1)\rem(t_2)\ldots$ of $\mB$ is accepting.
+$\rem(t_0)\rem(t_1)\rem(t_2)\ldots$ of $\mB$ is accepting. This
+requirement clearly guarantees the equiavalence of $\mA$ and $\mB$. We
+note that preserving the acceptance of individual runs is not a
+necessary condition for language equivalence of $\mA$ and $\mB$ and
+there exist automata where relaxing this requirement can lead to
+a bigger reduction of acceptance marks (see
+Figure~\ref{fig:counter}). However, looking for $\psi$ and $\rem$
+preserving the acceptance of individual runs makes the problem easier
+as we can, for example, ignore the labelling of transitions by the
+elements of $\Sigma$.
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[smallautomaton]
+    \begin{scope}[initial angle=180,xshift=-3.5cm]
+      \node[state,initial] (p) at (0,0) {};
+      \node[state] (q) at (2,0) {};
+      \path[->,auto]
+      (p) edge[out=120,in=60,looseness=10] pic {acc={0}{0}} pic {l=$a$} (p)
+      (p) edge[out=-60,in=-120,looseness=10] pic {acc={1}{1}} pic {l=$b$} (p)
+      (p) edge[out=30,in=150] pic {l=$a$} (q)
+      (q) edge[out=-150,in=-30] pic {l=$b$} (p);
 
+      \node[acclabel] at (1,-1.7)
+      {$\Inf\tacc{0}{0}\wedge\Inf\tacc{1}{1}$};
+    \end{scope}
+    \begin{scope}[initial angle=180,xshift=3.5cm]
+      \node[state,initial] (p) at (0,0) {};
+      \node[state] (q) at (2,0) {};
+      \path[->,auto]
+      (p) edge[out=120,in=60,looseness=10] pic {l=$a$} (p)
+      (p) edge[out=-60,in=-120,looseness=10] pic {l=$b$} (p)
+      (p) edge[out=30,in=150] pic {acc={0}{0}} pic {l=$a$} (q)
+      (q) edge[out=-150,in=-30] pic {l=$b$} (p);
+
+      \node[acclabel] at (1,-1.7)
+      {$\Inf\tacc{0}{0}$};
+    \end{scope}
+  \end{tikzpicture}
+  \smallskip
+  
+  \caption{Both automata accept the same language of words
+    $w\in\{a,b\}^\omega$ that contain infinitely many occurences of
+    both $a$ and $b$. Each accepting run of the left automaton has to
+    contain infinitely many occurrences of both transitions looping on
+    the initial state. Hence, there does not exist any automaton with
+    the same accepting runs as the left automaton and less than two
+    accetpance marks.}
+  \label{fig:counter}
+\end{figure}
+
+\fixme{TADY TO HONZA JESTE UPRAVUJE}
 We start with several simple observations. Acceptance of a run $\pi$
 is fully determined by the set $\minf(\pi)$.
 % of acceptance marks that
 % appear infinitely often on $\pi$, which is in turn fully determined by
 % the set $\minf(\pi)$ of transitions appearing infinitely often in
 % $\pi$.
+\begin{lemma}
+  A set $T\subseteq\delta$ is a cycle if and only if
+  there is a run $\pi$ such that $T=\minf(\pi)$.
+\end{lemma}
+
+
+
+As $\minf(\pi)$ is the set of transitions that appear infinitely many
+times in $\pi$, there has to be a suffix $\pi'$ of $\pi$ containing
+only transitions of $\minf(\pi)$. Let $p$ be the first state of
+$\pi'$. As each transition of $\pi'$ appears infinitely many times in
+$\pi$ and thus also in $\pi'$, there has to be a finite prefix $\rho$
+of $\pi'$ such that $\rho$ is a path from $p$ to $p$ that contains all
+transitions of $\minf(\pi)$. In other words, the set $\minf(\pi)$ of a
+run $\pi$ is always a cycle. Moreover, as we assume that 
+%\footnote{We can also prove that for each cycle $T$ there exists a run $\pi$ such that $T=\minf(\pi)$.}
+
+
+\fixme{ODTUD DAL JE TO PUVODNI, ale taky se to trochu bude menit!}
+
 Further, each set $\minf(\pi)$ for a run $\pi$ is a cycle and vice
 versa. Hence, our reduction method is looking for a new acceptance
 formula $\psi$ and function $\rem$ such that for each cycle
