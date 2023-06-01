@@ -1,0 +1,20 @@
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl3tela_det.hoa:1.1-15.7
+Running [A0]: autfilt './autcross/lcr-i0-Rn3FqM' > './autcross/lcr-o0-ZQaNZM'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-GVDh0L' -T 30 -L 1 -I -O './autcross/lcr-o1-mBLb5M'
+autcross: received signal 2
+Traceback (most recent call last):
+  File "/home/xschwar3/Desktop/telatko/telatko.py", line 9, in <module>
+    from qbf.q_main import play, print_aut
+  File "/home/xschwar3/Desktop/telatko/qbf/q_main.py", line 3, in <module>
+    from qbf.parser import *
+  File "/home/xschwar3/Desktop/telatko/qbf/parser.py", line 2, in <module>
+    from z3 import is_true
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/z3/__init__.py", line 4, in <module>
+    from . import z3poly
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 939, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1037, in get_data
+KeyboardInterrupt

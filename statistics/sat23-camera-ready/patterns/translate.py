@@ -2,7 +2,7 @@ import spot
 import os
 import re
 from ltlcross_runner import LtlcrossRunner, ResultsAnalyzer
-
+import sys
 
 def main(argv):
     tools = {
@@ -14,11 +14,11 @@ def main(argv):
     'rabinizer4': '/home/xschwar3/owl/bin/owl ltl2dgra -f %f > %O',
     }
 
-    tools_order = [ 'delag', 'rabinizer4', 'ltl2tgba', 'ltl3tela', 'ltl3tela_det', 'ltl2tgba_det']
+    tools_order = [ 'ltl2tgba_det']
 
-    pattern_ltl = 'pattern.ltl'
-    pattern_aut = 'pattern.csv'
-    lcr = LtlcrossRunner(tools, formulas = [pattern_ltl], res_filename = pattern_aut)
+    rand_ltl = 'patterns.ltl'
+    rand_aut = 'patterns.csv'
+    lcr = LtlcrossRunner(tools, formulas = [rand_ltl], res_filename = rand_aut)
     lcr.run_ltlcross(automata = True, timeout = '60')
     ra = ResultsAnalyzer(rand_aut)
     ra.parse_results()
@@ -29,7 +29,7 @@ def main(argv):
 
         ltlf_translated[tool] = len(fs[fs[('acc', tool)] > 1])
 
-        fd = open('pattern-' + tool + '.hoa', 'w')
+        fd = open('random-' + tool + '.hoa', 'w')
         for (ix, _), _ in fs.iterrows():
             fd.write(ra.aut_for_id(ix, tool).to_str() + '\n')
         fd.close()

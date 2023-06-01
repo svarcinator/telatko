@@ -1,0 +1,30 @@
+HOA: v1
+name: "F((!p2 & X(!p2 U (X!p0 & F!p3))) | G(p1 M p2))"
+States: 7
+Start: 0
+AP: 4 "p2" "p0" "p3" "p1"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels trans-acc
+--BODY--
+State: 0
+[t] 0
+[!0] 1
+[0&3] 2
+State: 1
+[!2] 3
+[2] 4
+State: 2
+[0&!3] 2
+[0&3] 2 {0}
+State: 3
+[!1] 5
+State: 4
+[!1&!2] 5
+[!1&2] 6
+State: 5
+[t] 5 {0}
+State: 6
+[!2] 5
+[2] 6
+--END--

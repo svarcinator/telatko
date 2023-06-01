@@ -1,0 +1,27 @@
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl3tela.hoa:1.1-15.7
+Running [A0]: autfilt './autcross/lcr-i0-jllCcc' > './autcross/lcr-o0-dy5Vsc'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-ZjfQxb' -T 30 -L 1 -I -O './autcross/lcr-o1-cSg4R8'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-M74uCc' -T 30 -L 2 -I -O './autcross/lcr-o2-3FCx7a'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-TN6BFb' -T 30 -L 3 -I -O './autcross/lcr-o3-IXs1ec'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-6DsoX8' -T 30 -L 3 -I -G -O './autcross/lcr-o4-y8nAB9'
+autcross: received signal 2
+Traceback (most recent call last):
+  File "/home/xschwar3/Desktop/telatko/telatko.py", line 8, in <module>
+    from telatko2.classes import Switches
+  File "/home/xschwar3/Desktop/telatko/telatko2/classes.py", line 8, in <module>
+    from scipy.optimize import linear_sum_assignment
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/scipy/__init__.py", line 67, in <module>
+    from numpy import show_config as show_numpy_config
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/numpy/__init__.py", line 144, in <module>
+    from . import core
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/numpy/core/__init__.py", line 71, in <module>
+    from . import numerictypes as nt
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/numpy/core/numerictypes.py", line 104, in <module>
+    from ._type_aliases import (
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 939, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1037, in get_data
+KeyboardInterrupt

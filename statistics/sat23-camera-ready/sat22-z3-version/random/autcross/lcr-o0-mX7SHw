@@ -1,0 +1,18 @@
+HOA: v1
+name: "(p0 | Gp2) M F(Xp0 W Gp2)"
+States: 2
+Start: 1
+AP: 2 "p2" "p0"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[1] 0
+[!0&!1] 0 {0}
+[0&!1] 1 {0}
+State: 1
+[!0] 0 {0}
+[0] 1
+--END--

@@ -1,0 +1,1484 @@
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1.1-16.7	Fp1
+Running [A0]: autfilt './autcross/lcr-i0-HDqRaG' > './autcross/lcr-o0-BaVzID'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-P1vitD' -T 30 -L 1 -I -O './autcross/lcr-o1-cIXHHC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-SBi1GD' -T 30 -L 2 -I -O './autcross/lcr-o2-qjIuPC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-mmgWaG' -T 30 -L 3 -I -O './autcross/lcr-o3-qAAWcF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i0-ENOoxF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-30B9WE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:17.1-40.7	Fp1 & Fp2
+Running [A0]: autfilt './autcross/lcr-i1-hj1nnE' > './autcross/lcr-o0-c58E7D'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i1-3ehbID' -T 30 -L 1 -I -O './autcross/lcr-o1-iUounC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i1-AP21AE' -T 30 -L 2 -I -O './autcross/lcr-o2-zS8K8D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i1-1CfyKC' -T 30 -L 3 -I -O './autcross/lcr-o3-uP3TbD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i1-QVhhTC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-t4DpxG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:41.1-86.7	Fp1 & Fp2 & Fp3
+Running [A0]: autfilt './autcross/lcr-i2-g66vKF' > './autcross/lcr-o0-M8S2XF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i2-wPWm6E' -T 30 -L 1 -I -O './autcross/lcr-o1-RygVtC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i2-bbXhqD' -T 30 -L 2 -I -O './autcross/lcr-o2-D3zUFC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i2-gwTJbF' -T 30 -L 3 -I -O './autcross/lcr-o3-aKRq8E'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i2-vsxlwG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-hScguD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:87.1-194.7	Fp1 & Fp2 & Fp3 & Fp4
+Running [A0]: autfilt './autcross/lcr-i3-q08d7D' > './autcross/lcr-o0-BqVoyG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i3-7aWVyF' -T 30 -L 1 -I -O './autcross/lcr-o1-JxP4jC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i3-DOYxnC' -T 30 -L 2 -I -O './autcross/lcr-o2-fGzF2C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i3-qG12oG' -T 30 -L 3 -I -O './autcross/lcr-o3-RLwNHE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i3-H23ZwG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-FT3K2D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:195.1-210.7	FGp1
+Running [A0]: autfilt './autcross/lcr-i4-8W20GD' > './autcross/lcr-o0-hxuHrE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i4-9UnP6F' -T 30 -L 1 -I -O './autcross/lcr-o1-Fh0UwF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i4-iZrYoD' -T 30 -L 2 -I -O './autcross/lcr-o2-kjJwyE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i4-9QPk9B' -T 30 -L 3 -I -O './autcross/lcr-o3-ANM3vC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i4-uomwTC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-bVsnxD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:211.1-226.7	FG(p1 & p2)
+Running [A0]: autfilt './autcross/lcr-i5-s139IF' > './autcross/lcr-o0-kMhDVD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i5-01wbzE' -T 30 -L 1 -I -O './autcross/lcr-o1-A1rQOF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i5-2RDc5D' -T 30 -L 2 -I -O './autcross/lcr-o2-8O6NiE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i5-kVdqqC' -T 30 -L 3 -I -O './autcross/lcr-o3-BhRXDE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i5-EtAEFE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-lL295E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:227.1-242.7	FG(p1 & p2 & p3)
+Running [A0]: autfilt './autcross/lcr-i6-6UNRzG' > './autcross/lcr-o0-NWut8E'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i6-UU6UJC' -T 30 -L 1 -I -O './autcross/lcr-o1-fkyp9F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i6-TNKlSD' -T 30 -L 2 -I -O './autcross/lcr-o2-hUA1BC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i6-IkbGyD' -T 30 -L 3 -I -O './autcross/lcr-o3-vFHrOC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i6-H0Q5aF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-8lbnYD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:243.1-258.7	FG(p1 & p2 & p3 & p4)
+Running [A0]: autfilt './autcross/lcr-i7-YyYQ6F' > './autcross/lcr-o0-IiOLWF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i7-3tU0wE' -T 30 -L 1 -I -O './autcross/lcr-o1-B9lRQF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i7-5fzeGD' -T 30 -L 2 -I -O './autcross/lcr-o2-2UrEbG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i7-shAxQD' -T 30 -L 3 -I -O './autcross/lcr-o3-4RVzKE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i7-cR31qE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-DTyOmE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:259.1-272.7	GFp1
+Running [A0]: autfilt './autcross/lcr-i8-sd5ssC' > './autcross/lcr-o0-K0GwpF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i8-tUMggC' -T 30 -L 1 -I -O './autcross/lcr-o1-TIaCGC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i8-cQDIPC' -T 30 -L 2 -I -O './autcross/lcr-o2-dG76iD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i8-d1liuC' -T 30 -L 3 -I -O './autcross/lcr-o3-CjkGVC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i8-ZfAQwE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-gPE9YB'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:273.1-288.7	G(Fp1 & Fp2)
+Running [A0]: autfilt './autcross/lcr-i9-norX9F' > './autcross/lcr-o0-XJwwsG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i9-vGwnqC' -T 30 -L 1 -I -O './autcross/lcr-o1-rkbZuF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i9-ZfDfOE' -T 30 -L 2 -I -O './autcross/lcr-o2-O6o2bE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i9-RXL5rC' -T 30 -L 3 -I -O './autcross/lcr-o3-N37WaE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i9-VnJDBE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-0Ect1D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:289.1-308.7	G(Fp1 & Fp2 & Fp3)
+Running [A0]: autfilt './autcross/lcr-i10-wz0bOC' > './autcross/lcr-o0-flAmhE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i10-uVA75E' -T 30 -L 1 -I -O './autcross/lcr-o1-z4IunG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i10-M5imfG' -T 30 -L 2 -I -O './autcross/lcr-o2-MNhJrF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i10-pprBNF' -T 30 -L 3 -I -O './autcross/lcr-o3-vnXDYE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i10-QpwwDG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-24HeZB'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:309.1-336.7	G(Fp1 & Fp2 & Fp3 & Fp4)
+Running [A0]: autfilt './autcross/lcr-i11-MEotcC' > './autcross/lcr-o0-4YftCC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i11-N97LhC' -T 30 -L 1 -I -O './autcross/lcr-o1-nww8nG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i11-1hSLXD' -T 30 -L 2 -I -O './autcross/lcr-o2-hK8oYE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i11-KhN3fF' -T 30 -L 3 -I -O './autcross/lcr-o3-WreN2C'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i11-fW9HJD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-0CmYrD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:337.1-360.7	Fp1 & Fq1
+Running [A0]: autfilt './autcross/lcr-i12-2DA8aD' > './autcross/lcr-o0-FUmHyE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i12-MX6trC' -T 30 -L 1 -I -O './autcross/lcr-o1-oEPqAG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i12-HIIm0B' -T 30 -L 2 -I -O './autcross/lcr-o2-sAHOOD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i12-CuoJyE' -T 30 -L 3 -I -O './autcross/lcr-o3-rhQfeE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i12-iPbMhF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-KsJ97D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:361.1-416.7	F(p1 & Fp2) & F(q1 & Fq2)
+Running [A0]: autfilt './autcross/lcr-i13-gN6n6B' > './autcross/lcr-o0-1BpFsG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i13-a81CdG' -T 30 -L 1 -I -O './autcross/lcr-o1-UaxxYE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i13-wBZbqC' -T 30 -L 2 -I -O './autcross/lcr-o2-YMJtqD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i13-JMSdZE' -T 30 -L 3 -I -O './autcross/lcr-o3-SikZNE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i13-MJA1eC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-bZGJDE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:417.1-543.7	F(p1 & F(p2 & Fp3)) & F(q1 & F(q2 & Fq3))
+Running [A0]: autfilt './autcross/lcr-i14-2PoQ7E' > './autcross/lcr-o0-eWUPCG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i14-VPwXIC' -T 30 -L 1 -I -O './autcross/lcr-o1-JoUjfC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i14-E1Gw2C' -T 30 -L 2 -I -O './autcross/lcr-o2-nhgQ2F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i14-TGHpfC' -T 30 -L 3 -I -O './autcross/lcr-o3-qh8oBG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i14-dQ81TC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ifew7E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:544.1-804.7	F(p1 & F(p2 & F(p3 & Fp4))) & F(q1 & F(q2 & F(q3 & Fq4)))
+Running [A0]: autfilt './autcross/lcr-i15-ORb4rD' > './autcross/lcr-o0-HCUNpF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i15-Ntq4aF' -T 30 -L 1 -I -O './autcross/lcr-o1-GtaqxC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i15-skpXiC' -T 30 -L 2 -I -O './autcross/lcr-o2-BjmBvE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i15-djITiC' -T 30 -L 3 -I -O './autcross/lcr-o3-iIr7nG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i15-hhDi8F' -T 30 -L 3 -I -G -O './autcross/lcr-o4-UKhyyE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:805.1-828.7	Fp & Fq
+Running [A0]: autfilt './autcross/lcr-i16-bVtmQE' > './autcross/lcr-o0-LNdk9D'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i16-SoXEkC' -T 30 -L 1 -I -O './autcross/lcr-o1-In5ikG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i16-BwjdBD' -T 30 -L 2 -I -O './autcross/lcr-o2-VPJE2D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i16-93lSoD' -T 30 -L 3 -I -O './autcross/lcr-o3-vccYvE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i16-2izFDF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Q3KQeF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:829.1-873.7	F(p & Xp) & F(q & Xq)
+Running [A0]: autfilt './autcross/lcr-i17-BpLh3E' > './autcross/lcr-o0-3XsnlE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i17-HpOrQE' -T 30 -L 1 -I -O './autcross/lcr-o1-imWFEC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i17-0H6PlG' -T 30 -L 2 -I -O './autcross/lcr-o2-Du1AbD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i17-EqjmvF' -T 30 -L 3 -I -O './autcross/lcr-o3-7yi5rF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i17-tZmSfE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-qIwfiG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:874.1-949.7	F(p & X(p & Xp)) & F(q & X(q & Xq))
+Running [A0]: autfilt './autcross/lcr-i18-sU7UEE' > './autcross/lcr-o0-xSSumD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i18-pEsFpG' -T 30 -L 1 -I -O './autcross/lcr-o1-SJrj3D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i18-i1JmaF' -T 30 -L 2 -I -O './autcross/lcr-o2-xq87qG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i18-YZ6TUE' -T 30 -L 3 -I -O './autcross/lcr-o3-LxFR8F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i18-86mI5E' -T 30 -L 3 -I -G -O './autcross/lcr-o4-v4WIgE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:950.1-1066.7	F(p & X(p & X(p & Xp))) & F(q & X(q & X(q & Xq)))
+Running [A0]: autfilt './autcross/lcr-i19-vAr7tF' > './autcross/lcr-o0-3ltgCG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i19-oEdp9C' -T 30 -L 1 -I -O './autcross/lcr-o1-3fmABF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i19-Hfm35B' -T 30 -L 2 -I -O './autcross/lcr-o2-n9URgD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i19-IK2gMF' -T 30 -L 3 -I -O './autcross/lcr-o3-zY85kD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i19-X8r7eG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-EwaR9D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1067.1-1142.7	F(p & X(p & Xp)) & F(q & X(q & Xq))
+Running [A0]: autfilt './autcross/lcr-i20-ktOTIF' > './autcross/lcr-o0-hoBQFD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i20-UT6WDC' -T 30 -L 1 -I -O './autcross/lcr-o1-ECDG1E'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i20-2nWBND' -T 30 -L 2 -I -O './autcross/lcr-o2-OHBA6F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i20-ps0TSF' -T 30 -L 3 -I -O './autcross/lcr-o3-VgFzfG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i20-RLVYmG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-IRoN9F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1143.1-1259.7	F(p & X(p & X(p & Xp))) & F(q & X(q & X(q & Xq)))
+Running [A0]: autfilt './autcross/lcr-i21-4nTFTF' > './autcross/lcr-o0-AxegaE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i21-7K5U0D' -T 30 -L 1 -I -O './autcross/lcr-o1-bT3tzD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i21-WhCSFF' -T 30 -L 2 -I -O './autcross/lcr-o2-TqLGJD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i21-8I4J3C' -T 30 -L 3 -I -O './autcross/lcr-o3-cX0LoE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i21-x89QeF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-9DSe3F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1260.1-1272.7	G!p0
+Running [A0]: autfilt './autcross/lcr-i22-skCKJD' > './autcross/lcr-o0-ViREWF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i22-7TA3BF' -T 30 -L 1 -I -O './autcross/lcr-o1-N7zxPF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i22-C3q2aG' -T 30 -L 2 -I -O './autcross/lcr-o2-24NlIE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i22-JTkskG' -T 30 -L 3 -I -O './autcross/lcr-o3-ivtBRD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i22-PaPNqF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-V4caQF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1273.1-1291.7	(!p1 U p0) | G!p0
+Running [A0]: autfilt './autcross/lcr-i23-nlFnID' > './autcross/lcr-o0-zIaitC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i23-hxx7gG' -T 30 -L 1 -I -O './autcross/lcr-o1-UZGceE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i23-wlRvTD' -T 30 -L 2 -I -O './autcross/lcr-o2-wY5QzF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i23-x95R8F' -T 30 -L 3 -I -O './autcross/lcr-o3-WMxr4D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i23-XG9YeF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-hGg9MF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1292.1-1307.7	G(!p0 | G!p1)
+Running [A0]: autfilt './autcross/lcr-i24-i96mTD' > './autcross/lcr-o0-2aIy8B'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i24-she8zG' -T 30 -L 1 -I -O './autcross/lcr-o1-PIp4QD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i24-aktaJC' -T 30 -L 2 -I -O './autcross/lcr-o2-g3hbYD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i24-cUGzOE' -T 30 -L 3 -I -O './autcross/lcr-o3-n11x0F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i24-ud34hD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-56EHkG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1308.1-1328.7	G(!p0 | (!p2 U p1) | G!p1)
+Running [A0]: autfilt './autcross/lcr-i25-mRgwsF' > './autcross/lcr-o0-7VVTDC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i25-rVkr9C' -T 30 -L 1 -I -O './autcross/lcr-o1-pyiXsF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i25-7DTTTC' -T 30 -L 2 -I -O './autcross/lcr-o2-jKHv9B'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i25-owszeE' -T 30 -L 3 -I -O './autcross/lcr-o3-ldsgfF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i25-yHLHrD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ifrUdD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1329.1-1345.7	G(!p0 | (!p2 W p1))
+Running [A0]: autfilt './autcross/lcr-i26-Qyj2OE' > './autcross/lcr-o0-Lp6oDF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i26-PR5KCE' -T 30 -L 1 -I -O './autcross/lcr-o1-J9NOYD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i26-qEPipG' -T 30 -L 2 -I -O './autcross/lcr-o2-PY5VlG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i26-4WVCzG' -T 30 -L 3 -I -O './autcross/lcr-o3-AnmNUD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i26-XxRS0B' -T 30 -L 3 -I -G -O './autcross/lcr-o4-n8DSpC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1346.1-1361.7	Fp0
+Running [A0]: autfilt './autcross/lcr-i27-1KyXwC' > './autcross/lcr-o0-4kzo7E'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i27-ZLNQrF' -T 30 -L 1 -I -O './autcross/lcr-o1-WLYLcE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i27-aozOeC' -T 30 -L 2 -I -O './autcross/lcr-o2-l1KKvE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i27-KJ97dG' -T 30 -L 3 -I -O './autcross/lcr-o3-O4pwmG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i27-nkggYD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-guJIXE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1362.1-1377.7	p1 R !p0
+Running [A0]: autfilt './autcross/lcr-i28-DlVM9E' > './autcross/lcr-o0-DsrzbE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i28-6T0hHC' -T 30 -L 1 -I -O './autcross/lcr-o1-T80DXF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i28-CIohhE' -T 30 -L 2 -I -O './autcross/lcr-o2-SaydEG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i28-MCvPMC' -T 30 -L 3 -I -O './autcross/lcr-o3-SHrAcF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i28-ActHaD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ywsBSE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1378.1-1397.7	!p0 W (p0 & Fp1)
+Running [A0]: autfilt './autcross/lcr-i29-o9su0B' > './autcross/lcr-o0-vnOoCF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i29-gSpDhC' -T 30 -L 1 -I -O './autcross/lcr-o1-2H8fME'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i29-G5cj0D' -T 30 -L 2 -I -O './autcross/lcr-o2-oG4sDD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i29-O6Y6FE' -T 30 -L 3 -I -O './autcross/lcr-o3-iEzYTE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i29-qoXVND' -T 30 -L 3 -I -G -O './autcross/lcr-o4-uwU0GF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1398.1-1414.7	G(!p0 | p1 | (p2 R !p1))
+Running [A0]: autfilt './autcross/lcr-i30-1NPVpG' > './autcross/lcr-o0-HLNDBC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i30-wGLN7F' -T 30 -L 1 -I -O './autcross/lcr-o1-y43T3E'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i30-8aOKkE' -T 30 -L 2 -I -O './autcross/lcr-o2-RPtFwF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i30-opVw0D' -T 30 -L 3 -I -O './autcross/lcr-o3-wHXGLF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i30-GD5HSC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-HDnOSC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1415.1-1431.7	G(!p0 | p1 | (p2 M !p1))
+Running [A0]: autfilt './autcross/lcr-i31-gzhuQC' > './autcross/lcr-o0-0i5BcC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i31-3EgVdD' -T 30 -L 1 -I -O './autcross/lcr-o1-38mA7C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i31-3DHKAF' -T 30 -L 2 -I -O './autcross/lcr-o2-l7VIgD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i31-uc0kmF' -T 30 -L 3 -I -O './autcross/lcr-o3-HnzFiE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i31-oisV7B' -T 30 -L 3 -I -G -O './autcross/lcr-o4-jLkLvE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1432.1-1456.7	!p0 W (p0 W (!p0 W (p0 W G!p0)))
+Running [A0]: autfilt './autcross/lcr-i32-eHt7ZC' > './autcross/lcr-o0-TJKf5F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i32-xTsuuF' -T 30 -L 1 -I -O './autcross/lcr-o1-stZkeG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i32-NSUwBG' -T 30 -L 2 -I -O './autcross/lcr-o2-vwgSVD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i32-rJfWsG' -T 30 -L 3 -I -O './autcross/lcr-o3-uBPE0F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i32-PoNhUD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-LuKjkG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1457.1-1491.7	G!p0 | ((!p0 & !p1) U ((!p0 & p1) U ((!p0 & !p1) U ((!p0 & p1) U (!p1 U p0)))))
+Running [A0]: autfilt './autcross/lcr-i33-scZY6D' > './autcross/lcr-o0-G1J8yF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i33-JrobpC' -T 30 -L 1 -I -O './autcross/lcr-o1-2evF7E'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i33-cGzC2D' -T 30 -L 2 -I -O './autcross/lcr-o2-nSoXrC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i33-N7ELGD' -T 30 -L 3 -I -O './autcross/lcr-o3-mXrwXC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i33-RJu0ED' -T 30 -L 3 -I -G -O './autcross/lcr-o4-EZo0bG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1492.1-1520.7	!p0 W (p0 & (!p1 W (p1 W (!p1 W (p1 W G!p1)))))
+Running [A0]: autfilt './autcross/lcr-i34-p8k2KF' > './autcross/lcr-o0-2Fzm0E'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i34-ENtMmE' -T 30 -L 1 -I -O './autcross/lcr-o1-rxUtWD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i34-GeuDaG' -T 30 -L 2 -I -O './autcross/lcr-o2-vPG9bE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i34-HEqaaE' -T 30 -L 3 -I -O './autcross/lcr-o3-ldE0aF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i34-vMCirD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-QsRVGE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1521.1-1557.7	G(!p0 | G!p1 | ((!p1 & !p2) U ((!p1 & p2) U ((!p1 & !p2) U ((!p1 & p2) U (!p2 U p1))))))
+Running [A0]: autfilt './autcross/lcr-i35-oG00jE' > './autcross/lcr-o0-3k3spG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i35-eqKhoG' -T 30 -L 1 -I -O './autcross/lcr-o1-nVdGNE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i35-6yhmFF' -T 30 -L 2 -I -O './autcross/lcr-o2-DYXKlE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i35-Z129jG' -T 30 -L 3 -I -O './autcross/lcr-o3-3xkwdD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i35-LbG1OC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-PKWAyD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1558.1-1591.7	G(!p0 | ((!p1 & !p2) U ((p1 & !p2) U ((!p1 & !p2) U ((p1 & !p2) U (Gp1 | (!p1 W p2)))))))
+Running [A0]: autfilt './autcross/lcr-i36-K5G7lD' > './autcross/lcr-o0-hJd2dD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i36-ToWqaG' -T 30 -L 1 -I -O './autcross/lcr-o1-PkaRUC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i36-09Y0bF' -T 30 -L 2 -I -O './autcross/lcr-o2-GOybFE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i36-Dr1iuD' -T 30 -L 3 -I -O './autcross/lcr-o3-K37gdF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i36-mOBL0D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-4zJXZD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1592.1-1604.7	Gp0
+Running [A0]: autfilt './autcross/lcr-i37-yn5XVD' > './autcross/lcr-o0-U0kg3B'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i37-8R4DiF' -T 30 -L 1 -I -O './autcross/lcr-o1-I2uOXF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i37-GuzXoF' -T 30 -L 2 -I -O './autcross/lcr-o2-H6MK3C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i37-SArYsF' -T 30 -L 3 -I -O './autcross/lcr-o3-WIS4PD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i37-UcnLSE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-FrB4rF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1605.1-1623.7	(p1 U p0) | G!p0
+Running [A0]: autfilt './autcross/lcr-i38-dFUebG' > './autcross/lcr-o0-xoCaRD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i38-1zOiQE' -T 30 -L 1 -I -O './autcross/lcr-o1-Qh6M0C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i38-p2a9CD' -T 30 -L 2 -I -O './autcross/lcr-o2-O7ZQXE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i38-wBPs5E' -T 30 -L 3 -I -O './autcross/lcr-o3-dP9H4C'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i38-m61UwC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-bqOU4E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1624.1-1639.7	G(!p0 | Gp1)
+Running [A0]: autfilt './autcross/lcr-i39-fIUOlG' > './autcross/lcr-o0-mF7mdE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i39-n0i4GF' -T 30 -L 1 -I -O './autcross/lcr-o1-pTJagG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i39-Mc0NAD' -T 30 -L 2 -I -O './autcross/lcr-o2-ZAd8mF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i39-6LWYaF' -T 30 -L 3 -I -O './autcross/lcr-o3-0bJVJE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i39-DXDYDC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-buRU9E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1640.1-1660.7	G(!p0 | (p2 U p1) | G!p1)
+Running [A0]: autfilt './autcross/lcr-i40-LgWTMD' > './autcross/lcr-o0-o6WvtE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i40-MSjiNE' -T 30 -L 1 -I -O './autcross/lcr-o1-9zqJQD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i40-BMrBCC' -T 30 -L 2 -I -O './autcross/lcr-o2-H7NWVF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i40-JnUhCG' -T 30 -L 3 -I -O './autcross/lcr-o3-1h9tQE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i40-rm0f2D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-n7vOJC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1661.1-1677.7	G(!p0 | (p2 W p1))
+Running [A0]: autfilt './autcross/lcr-i41-mFfA0E' > './autcross/lcr-o0-CguK0E'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i41-xtjGZF' -T 30 -L 1 -I -O './autcross/lcr-o1-2kfd1F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i41-o29G4D' -T 30 -L 2 -I -O './autcross/lcr-o2-uTgXLC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i41-9zEhLC' -T 30 -L 3 -I -O './autcross/lcr-o3-NdJ40E'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i41-mK8ETF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-P3zLhC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1678.1-1693.7	!p0 W p1
+Running [A0]: autfilt './autcross/lcr-i42-Vo2G4E' > './autcross/lcr-o0-FU9YTC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i42-rCBjwD' -T 30 -L 1 -I -O './autcross/lcr-o1-kVzazC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i42-tlqwkC' -T 30 -L 2 -I -O './autcross/lcr-o2-swJQJD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i42-wVeTAC' -T 30 -L 3 -I -O './autcross/lcr-o3-NEMqrG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i42-0ZLjGC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-APTZYB'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1694.1-1712.7	(!p1 U (p0 | p2)) | G!p0
+Running [A0]: autfilt './autcross/lcr-i43-0pfKrC' > './autcross/lcr-o0-g5d3YF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i43-KEYr4F' -T 30 -L 1 -I -O './autcross/lcr-o1-xSZ68D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i43-jEMdYE' -T 30 -L 2 -I -O './autcross/lcr-o2-edIAYC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i43-udRmcC' -T 30 -L 3 -I -O './autcross/lcr-o3-OOi5FE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i43-j9SbnF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-LOezMD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1713.1-1739.7	G!p0 | F(p0 & (!p1 W p2))
+Running [A0]: autfilt './autcross/lcr-i44-K1nDbD' > './autcross/lcr-o0-NJ5EBF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i44-1VUygE' -T 30 -L 1 -I -O './autcross/lcr-o1-szrDrD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i44-YeUo4F' -T 30 -L 2 -I -O './autcross/lcr-o2-0968XB'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i44-uIqdmG' -T 30 -L 3 -I -O './autcross/lcr-o3-e6j4pC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i44-qFDyfE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-poFidD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1740.1-1760.7	G(!p0 | (!p2 U (p1 | p3)) | G!p1)
+Running [A0]: autfilt './autcross/lcr-i45-WbLPFC' > './autcross/lcr-o0-GeklTE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i45-cLF9fG' -T 30 -L 1 -I -O './autcross/lcr-o1-KsXQzE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i45-WIPmsE' -T 30 -L 2 -I -O './autcross/lcr-o2-8YGrrG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i45-7glutC' -T 30 -L 3 -I -O './autcross/lcr-o3-1nps9B'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i45-Sky45C' -T 30 -L 3 -I -G -O './autcross/lcr-o4-gohcqC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1761.1-1777.7	G(!p0 | (!p2 W (p1 | p3)))
+Running [A0]: autfilt './autcross/lcr-i46-ZGcVvC' > './autcross/lcr-o0-Ag1hOC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i46-TkTRxD' -T 30 -L 1 -I -O './autcross/lcr-o1-ZurjsD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i46-wbU53F' -T 30 -L 2 -I -O './autcross/lcr-o2-RzmUgG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i46-65NVMF' -T 30 -L 3 -I -O './autcross/lcr-o3-RPUFnE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i46-yK13KF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-5MuhVC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1778.1-1794.7	G(!p0 | Fp1)
+Running [A0]: autfilt './autcross/lcr-i47-BQbgnD' > './autcross/lcr-o0-YfwBfE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i47-ysjgQD' -T 30 -L 1 -I -O './autcross/lcr-o1-TEF1KD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i47-brVytF' -T 30 -L 2 -I -O './autcross/lcr-o2-viFL1C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i47-x96ZCC' -T 30 -L 3 -I -O './autcross/lcr-o3-HhiJND'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i47-BpleED' -T 30 -L 3 -I -G -O './autcross/lcr-o4-CMuClC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1795.1-1814.7	G!p0 | ((!p1 | (p2 M !p0)) U p0)
+Running [A0]: autfilt './autcross/lcr-i48-OiLowE' > './autcross/lcr-o0-xGanLC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i48-VlBMjC' -T 30 -L 1 -I -O './autcross/lcr-o1-nL0wRE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i48-e5L5dG' -T 30 -L 2 -I -O './autcross/lcr-o2-POGhGF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i48-OgDkjC' -T 30 -L 3 -I -O './autcross/lcr-o3-KeX3LF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i48-4l2NCF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-LMmLBD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1815.1-1835.7	G(!p0 | G(!p1 | Fp2))
+Running [A0]: autfilt './autcross/lcr-i49-p8SAAF' > './autcross/lcr-o0-3VY6cG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i49-B4oGYF' -T 30 -L 1 -I -O './autcross/lcr-o1-Ph1V7D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i49-jbICRF' -T 30 -L 2 -I -O './autcross/lcr-o2-ekCn5F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i49-KRpkOC' -T 30 -L 3 -I -O './autcross/lcr-o3-tkRloC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i49-CvpPPF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-q0c3AE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1836.1-1857.7	G(!p0 | G!p1 | ((!p2 | (p3 M !p1)) U p1))
+Running [A0]: autfilt './autcross/lcr-i50-b1rwdC' > './autcross/lcr-o0-jQ34uD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i50-ZNoegG' -T 30 -L 1 -I -O './autcross/lcr-o1-z9BbMD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i50-Zlbs9D' -T 30 -L 2 -I -O './autcross/lcr-o2-hCIZrC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i50-X4DUTE' -T 30 -L 3 -I -O './autcross/lcr-o3-1weEpE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i50-tpLe3D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-dYpPGE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1858.1-1879.7	G(!p0 | ((!p2 | (p3 M !p1)) W p1))
+Running [A0]: autfilt './autcross/lcr-i51-nYAk6D' > './autcross/lcr-o0-Gu4nyD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i51-2y0JRD' -T 30 -L 1 -I -O './autcross/lcr-o1-wLJ9rE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i51-xNwMIF' -T 30 -L 2 -I -O './autcross/lcr-o2-TyRFBE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i51-bHPeuD' -T 30 -L 3 -I -O './autcross/lcr-o3-SIcGtG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i51-LvBpxC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-h9GqSF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1880.1-1898.7	(p1 & X(!p0 U p2)) R !p0
+Running [A0]: autfilt './autcross/lcr-i52-S9xFvF' > './autcross/lcr-o0-MLmuDC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i52-wVdb5E' -T 30 -L 1 -I -O './autcross/lcr-o1-ub0EeD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i52-RzSaYD' -T 30 -L 2 -I -O './autcross/lcr-o2-lCeP9F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i52-mzefCC' -T 30 -L 3 -I -O './autcross/lcr-o3-VdhuwC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i52-gpGpoG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-HVv5iE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1899.1-1922.7	(!p1 U (p0 | (!p1 & p2 & X(!p1 U p3)))) | G!p0
+Running [A0]: autfilt './autcross/lcr-i53-lULGlG' > './autcross/lcr-o0-tWl4pD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i53-j0RKYF' -T 30 -L 1 -I -O './autcross/lcr-o1-RCY6PE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i53-my2tNF' -T 30 -L 2 -I -O './autcross/lcr-o2-trXlmF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i53-pWRO4B' -T 30 -L 3 -I -O './autcross/lcr-o3-croW7D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i53-jmiVUF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ajD9JE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1923.1-1945.7	!p0 | ((p2 & X(!p1 U p3)) R !p1)
+Running [A0]: autfilt './autcross/lcr-i54-7guEMC' > './autcross/lcr-o0-Qby0iE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i54-RAUyEC' -T 30 -L 1 -I -O './autcross/lcr-o1-w6JiHD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i54-GdIxyE' -T 30 -L 2 -I -O './autcross/lcr-o2-F1G27C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i54-lpApxD' -T 30 -L 3 -I -O './autcross/lcr-o3-QHS9hE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i54-7BJPAE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ThhdAC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1946.1-1973.7	G(!p0 | (!p2 U (p1 | (!p2 & p3 & X(!p2 U p4)))) | G!p1)
+Running [A0]: autfilt './autcross/lcr-i55-u0kWNE' > './autcross/lcr-o0-wmKRzC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i55-LFlV1F' -T 30 -L 1 -I -O './autcross/lcr-o1-ti2D9B'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i55-NP9CiD' -T 30 -L 2 -I -O './autcross/lcr-o2-tByGyD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i55-RYNujE' -T 30 -L 3 -I -O './autcross/lcr-o3-kJpKzC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i55-LXeEnC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-cV7seE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1974.1-1996.7	G(!p0 | (!p1 W (p2 | (!p1 & p3 & X(!p1 U p4)))))
+Running [A0]: autfilt './autcross/lcr-i56-GmmIJE' > './autcross/lcr-o0-UMP6OF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i56-BbD6jF' -T 30 -L 1 -I -O './autcross/lcr-o1-KPKZcC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i56-8zvnzE' -T 30 -L 2 -I -O './autcross/lcr-o2-ZvCdcC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i56-AiPMxD' -T 30 -L 3 -I -O './autcross/lcr-o3-3jD8bF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i56-mEe0vG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-MDUu7D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:1997.1-2015.7	(!p0 U p2) | G(!p0 | XG!p1)
+Running [A0]: autfilt './autcross/lcr-i57-WPtSmD' > './autcross/lcr-o0-D8YzmF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i57-yKttBG' -T 30 -L 1 -I -O './autcross/lcr-o1-cWvYeD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i57-PSICsF' -T 30 -L 2 -I -O './autcross/lcr-o2-VLjqoD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i57-bsCBLD' -T 30 -L 3 -I -O './autcross/lcr-o3-HNzotF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i57-tnVCDF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-7mXUnC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2016.1-2038.7	G!p0 | ((!p1 | X(!p2 W p0)) U (p0 | p3))
+Running [A0]: autfilt './autcross/lcr-i58-1SbZKD' > './autcross/lcr-o0-ieADaF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i58-E1aiaE' -T 30 -L 1 -I -O './autcross/lcr-o1-OtN7kF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i58-0gW4nC' -T 30 -L 2 -I -O './autcross/lcr-o2-RVwilF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i58-WqYG6E' -T 30 -L 3 -I -O './autcross/lcr-o3-0fjjXF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i58-W7PbAG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-hYNobE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2039.1-2062.7	!p0 W (p0 & ((!p1 U p3) | G(!p1 | XG!p2)))
+Running [A0]: autfilt './autcross/lcr-i59-mEKYVE' > './autcross/lcr-o0-OpfL3B'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i59-yIamPF' -T 30 -L 1 -I -O './autcross/lcr-o1-3MQ9GE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i59-NGrUzC' -T 30 -L 2 -I -O './autcross/lcr-o2-gdiP8D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i59-v7oiWC' -T 30 -L 3 -I -O './autcross/lcr-o3-70PLRC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i59-qqeaZD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-aZgb4B'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2063.1-2087.7	G(!p0 | G!p1 | ((!p2 | X(!p3 W p1)) U (p1 | p4)))
+Running [A0]: autfilt './autcross/lcr-i60-Kalt2E' > './autcross/lcr-o0-S6xJdE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i60-6xuK9C' -T 30 -L 1 -I -O './autcross/lcr-o1-SmdorG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i60-XMPuKF' -T 30 -L 2 -I -O './autcross/lcr-o2-rNoVwF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i60-WNrSzD' -T 30 -L 3 -I -O './autcross/lcr-o3-f6QlaC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i60-C98skC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-bFJR2C'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2088.1-2109.7	G(!p0 | G(!p2 | XG!p3) | ((!p2 | X(!p3 W p1)) U (p1 | p4)))
+Running [A0]: autfilt './autcross/lcr-i61-YZoMyC' > './autcross/lcr-o0-TdLyPD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i61-Ktd1ZF' -T 30 -L 1 -I -O './autcross/lcr-o1-oB6R3D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i61-B4qPID' -T 30 -L 2 -I -O './autcross/lcr-o2-kyeGBC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i61-ohGAwE' -T 30 -L 3 -I -O './autcross/lcr-o3-Co3vfE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i61-bjTEoD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-WrLEdE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2110.1-2138.7	G(!p0 | X(!p1 W (p1 & Fp2)))
+Running [A0]: autfilt './autcross/lcr-i62-PSgW6E' > './autcross/lcr-o0-bdnieG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i62-eFLXpF' -T 30 -L 1 -I -O './autcross/lcr-o1-nU4HkD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i62-bVzRjE' -T 30 -L 2 -I -O './autcross/lcr-o2-JWD8uD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i62-RfdI6B' -T 30 -L 3 -I -O './autcross/lcr-o3-EyENWE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i62-5ECNhE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ngCSgG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2139.1-2179.7	G!p0 | ((!p1 | X((!p0 U (p2 & Fp3)) | (p0 R !p2))) U p0)
+Running [A0]: autfilt './autcross/lcr-i63-ozgjEC' > './autcross/lcr-o0-8UCWtE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i63-SEsjEF' -T 30 -L 1 -I -O './autcross/lcr-o1-53xcrE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i63-WqeElE' -T 30 -L 2 -I -O './autcross/lcr-o2-jvwPJC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i63-p3mRCD' -T 30 -L 3 -I -O './autcross/lcr-o3-YK3WpF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i63-LYqtcC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-KLTy8C'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2180.1-2212.7	G(!p0 | G(!p1 | X(!p2 W (p2 & Fp3))))
+Running [A0]: autfilt './autcross/lcr-i64-mtx5ZF' > './autcross/lcr-o0-Ypxs0D'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i64-m6pNuE' -T 30 -L 1 -I -O './autcross/lcr-o1-RjQcWE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i64-JDWAAG' -T 30 -L 2 -I -O './autcross/lcr-o2-fCkrUC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i64-v74zIC' -T 30 -L 3 -I -O './autcross/lcr-o3-7Bez3D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i64-axoSiC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-WkPgOF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2213.1-2281.7	G(!p0 | G!p1 | ((!p2 | X((!p1 U (p3 & Fp4)) | (p1 R !p3))) U p1))
+Running [A0]: autfilt './autcross/lcr-i65-EN3lSE' > './autcross/lcr-o0-aOGfND'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i65-HzshvE' -T 30 -L 1 -I -O './autcross/lcr-o1-U8a0MF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i65-BVBE8D' -T 30 -L 2 -I -O './autcross/lcr-o2-cHrwQD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i65-wBg1KF' -T 30 -L 3 -I -O './autcross/lcr-o3-Y9kZeC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i65-XMtR3B' -T 30 -L 3 -I -G -O './autcross/lcr-o4-M9RJ4F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2282.1-2358.7	G(!p0 | ((!p1 | X((!p2 U (p3 & Fp4)) | (p2 R !p3))) W p2))
+Running [A0]: autfilt './autcross/lcr-i66-r4vpwE' > './autcross/lcr-o0-Nc06MD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i66-pQkKDF' -T 30 -L 1 -I -O './autcross/lcr-o1-7bPU7B'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i66-h6MBZF' -T 30 -L 2 -I -O './autcross/lcr-o2-xHxmbE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i66-jeOMyG' -T 30 -L 3 -I -O './autcross/lcr-o3-nFrM6B'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i66-dzL7DF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-LSJUvE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2359.1-2386.7	G(!p0 | F(p1 & XFp2))
+Running [A0]: autfilt './autcross/lcr-i67-74lm4C' > './autcross/lcr-o0-C6N0oF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i67-lOpCdD' -T 30 -L 1 -I -O './autcross/lcr-o1-RJPExF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i67-sA8C5F' -T 30 -L 2 -I -O './autcross/lcr-o2-SOPrTC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i67-7566RC' -T 30 -L 3 -I -O './autcross/lcr-o3-PiVzID'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i67-aFlm0F' -T 30 -L 3 -I -G -O './autcross/lcr-o4-lwD34F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2387.1-2412.7	G!p0 | ((!p1 | ((p2 & X(!p0 U p3)) M !p0)) U p0)
+Running [A0]: autfilt './autcross/lcr-i68-DjbOdF' > './autcross/lcr-o0-OqBgAE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i68-ODQxQF' -T 30 -L 1 -I -O './autcross/lcr-o1-Q7vF8C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i68-rg1rCG' -T 30 -L 2 -I -O './autcross/lcr-o2-bzAE0C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i68-6YQXjE' -T 30 -L 3 -I -O './autcross/lcr-o3-5oNWBD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i68-NGNLkF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-RQ7izG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2413.1-2433.7	G(!p0 | G(!p1 | (p2 & XFp3)))
+Running [A0]: autfilt './autcross/lcr-i69-FQSBID' > './autcross/lcr-o0-sCl14C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i69-QCQRGC' -T 30 -L 1 -I -O './autcross/lcr-o1-q6orfE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i69-9Gn8xF' -T 30 -L 2 -I -O './autcross/lcr-o2-4T0CPF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i69-chi5DE' -T 30 -L 3 -I -O './autcross/lcr-o3-GGzFVD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i69-yvuPrF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-zK4tfF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2434.1-2462.7	G(!p0 | G!p1 | ((!p2 | ((p3 & X(!p1 U p4)) M !p1)) U p1))
+Running [A0]: autfilt './autcross/lcr-i70-T6x4AG' > './autcross/lcr-o0-ef3mbE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i70-zCgKYD' -T 30 -L 1 -I -O './autcross/lcr-o1-mJ2REE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i70-2ch8SF' -T 30 -L 2 -I -O './autcross/lcr-o2-7gl0ZE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i70-cTzhFC' -T 30 -L 3 -I -O './autcross/lcr-o3-R5HCfF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i70-x53YOE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-r3E5xE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2463.1-2501.7	G(!p0 | ((!p1 | ((p3 & X(!p2 U p4)) M !p2)) U (p2 | G(!p1 | (p3 & XFp4)))))
+Running [A0]: autfilt './autcross/lcr-i71-nkSfiC' > './autcross/lcr-o0-4Qrs9C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i71-GlCrMC' -T 30 -L 1 -I -O './autcross/lcr-o1-R6itBC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i71-7SCuuC' -T 30 -L 2 -I -O './autcross/lcr-o2-HukfQC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i71-bav9sE' -T 30 -L 3 -I -O './autcross/lcr-o3-q6xNhD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i71-neBXSE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-nX4roE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2502.1-2529.7	G(!p0 | F(p1 & !p2 & X(!p2 U p3)))
+Running [A0]: autfilt './autcross/lcr-i72-J14ftC' > './autcross/lcr-o0-nAdKfC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i72-9kg1iF' -T 30 -L 1 -I -O './autcross/lcr-o1-Uiv5CE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i72-lzeYDD' -T 30 -L 2 -I -O './autcross/lcr-o2-1aQo8D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i72-ln302F' -T 30 -L 3 -I -O './autcross/lcr-o3-PBIU2C'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i72-ylsl9F' -T 30 -L 3 -I -G -O './autcross/lcr-o4-GGh9kG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2530.1-2555.7	G!p0 | ((!p1 | ((p2 & !p3 & X((!p0 & !p3) U p4)) M !p0)) U p0)
+Running [A0]: autfilt './autcross/lcr-i73-G0fSGE' > './autcross/lcr-o0-Q6XUJF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i73-x4rZfD' -T 30 -L 1 -I -O './autcross/lcr-o1-Bl9m7C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i73-2YsfRE' -T 30 -L 2 -I -O './autcross/lcr-o2-HEBIBE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i73-aQW8TE' -T 30 -L 3 -I -O './autcross/lcr-o3-YNv65F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i73-59Td5D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-eOBRgF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2556.1-2576.7	G(!p0 | G(!p1 | (p2 & !p3 & X(!p3 U p4))))
+Running [A0]: autfilt './autcross/lcr-i74-YfufhC' > './autcross/lcr-o0-YbpHkC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i74-QyChIE' -T 30 -L 1 -I -O './autcross/lcr-o1-EjshCD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i74-rS1LbE' -T 30 -L 2 -I -O './autcross/lcr-o2-CvXlgE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i74-LybSnC' -T 30 -L 3 -I -O './autcross/lcr-o3-3JUkLE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i74-A3F8jG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Mtg5oG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2577.1-2605.7	G(!p0 | G!p1 | ((!p2 | ((p3 & !p4 & X((!p1 & !p4) U p5)) M !p1)) U p1))
+Running [A0]: autfilt './autcross/lcr-i75-FawEtC' > './autcross/lcr-o0-nDEskE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i75-IVtpsC' -T 30 -L 1 -I -O './autcross/lcr-o1-Ybi0kD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i75-waoIcC' -T 30 -L 2 -I -O './autcross/lcr-o2-aApP8C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i75-XvY10C' -T 30 -L 3 -I -O './autcross/lcr-o3-h4WbiG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i75-alifUE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Av6VsG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2606.1-2643.7	G(!p0 | ((!p1 | ((p3 & !p4 & X((!p2 & !p4) U p5)) M !p2)) U (p2 | G(!p1 | (p3 & !p4 & X(!p4 U p5))))))
+Running [A0]: autfilt './autcross/lcr-i76-83yILD' > './autcross/lcr-o0-XybCpE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i76-pfXmqD' -T 30 -L 1 -I -O './autcross/lcr-o1-FgvP5E'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i76-d4tqYB' -T 30 -L 2 -I -O './autcross/lcr-o2-xwW45F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i76-s8w6mC' -T 30 -L 3 -I -O './autcross/lcr-o3-tXmYoE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i76-ZbtFID' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Lb1x3D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2644.1-2659.7	p0 U (p1 & Gp2)
+Running [A0]: autfilt './autcross/lcr-i77-BpNVrC' > './autcross/lcr-o0-GgmwrE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i77-61iVrD' -T 30 -L 1 -I -O './autcross/lcr-o1-CRaAWC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i77-7JXirF' -T 30 -L 2 -I -O './autcross/lcr-o2-JDKsCE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i77-fnasEE' -T 30 -L 3 -I -O './autcross/lcr-o3-HNfuSC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i77-FTvlaD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-p2nriD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2660.1-2677.7	p0 U (p1 & X(p2 U p3))
+Running [A0]: autfilt './autcross/lcr-i78-fyjuUF' > './autcross/lcr-o0-hcAAuF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i78-8zydhC' -T 30 -L 1 -I -O './autcross/lcr-o1-BJH1aF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i78-TvW1WE' -T 30 -L 2 -I -O './autcross/lcr-o2-kSrN5B'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i78-UM27LD' -T 30 -L 3 -I -O './autcross/lcr-o3-YNzWdF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i78-nqg1xF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-bmMw4E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2678.1-2707.7	p0 U (p1 & X(p2 & F(p3 & XF(p4 & XF(p5 & XFp6)))))
+Running [A0]: autfilt './autcross/lcr-i79-9GJSwC' > './autcross/lcr-o0-4RoA9C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i79-MMTX2B' -T 30 -L 1 -I -O './autcross/lcr-o1-QDKW5C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i79-6B67IE' -T 30 -L 2 -I -O './autcross/lcr-o2-snCEvG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i79-aznoCF' -T 30 -L 3 -I -O './autcross/lcr-o3-JQoieG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i79-K1PmTC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-zNWS1D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2708.1-2722.7	F(p0 & XGp1)
+Running [A0]: autfilt './autcross/lcr-i80-JsH1WD' > './autcross/lcr-o0-2pJrkG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i80-avCulF' -T 30 -L 1 -I -O './autcross/lcr-o1-VAR4vD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i80-kKyIvD' -T 30 -L 2 -I -O './autcross/lcr-o2-PalYWF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i80-Zx2BZB' -T 30 -L 3 -I -O './autcross/lcr-o3-JigOuF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i80-hjkbxG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-uwazvE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2723.1-2745.7	F(p0 & X(p1 & XFp2))
+Running [A0]: autfilt './autcross/lcr-i81-D4rKRE' > './autcross/lcr-o0-9I2WGD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i81-XNiWrD' -T 30 -L 1 -I -O './autcross/lcr-o1-FumKPC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i81-THkqJF' -T 30 -L 2 -I -O './autcross/lcr-o2-ctN2eF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i81-loT4VF' -T 30 -L 3 -I -O './autcross/lcr-o3-vfBP4E'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i81-RLCRYE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-khNPPC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2746.1-2765.7	F(p0 & X(p1 U p2))
+Running [A0]: autfilt './autcross/lcr-i82-YMilRC' > './autcross/lcr-o0-ZEY03C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i82-1RRfrF' -T 30 -L 1 -I -O './autcross/lcr-o1-xMvirF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i82-jM22iD' -T 30 -L 2 -I -O './autcross/lcr-o2-FPqJVC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i82-JVdQCD' -T 30 -L 3 -I -O './autcross/lcr-o3-IC8laD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i82-1Z1HFF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Yv0T3D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2766.1-2784.7	F(GFp1 | Gp0)
+Running [A0]: autfilt './autcross/lcr-i83-0CcegG' > './autcross/lcr-o0-jHFolE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i83-f6tm8F' -T 30 -L 1 -I -O './autcross/lcr-o1-703kZD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i83-iX69LD' -T 30 -L 2 -I -O './autcross/lcr-o2-nCD5yE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i83-DmnH8D' -T 30 -L 3 -I -O './autcross/lcr-o3-TeyHrD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i83-bsUMlE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-IrTZxF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2785.1-2801.7	G(!p0 | (p1 U p2))
+Running [A0]: autfilt './autcross/lcr-i84-UCrexC' > './autcross/lcr-o0-AET0sD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i84-in8s3E' -T 30 -L 1 -I -O './autcross/lcr-o1-TzqYwE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i84-G8NvlF' -T 30 -L 2 -I -O './autcross/lcr-o2-mWLVlD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i84-fSljYE' -T 30 -L 3 -I -O './autcross/lcr-o3-wzqc8D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i84-GKkTIF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-2Qq4xF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2802.1-2821.7	G(p0 & Fp3 & Fp1 & Fp2)
+Running [A0]: autfilt './autcross/lcr-i85-ile5gC' > './autcross/lcr-o0-5NDkfG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i85-eGoqAD' -T 30 -L 1 -I -O './autcross/lcr-o1-DgwEsF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i85-lgxtaC' -T 30 -L 2 -I -O './autcross/lcr-o2-eUlo2D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i85-KLCCcF' -T 30 -L 3 -I -O './autcross/lcr-o3-4sqSOE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i85-2KXieC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-u9WgfC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2822.1-2865.7	G(Fp1 & Fp2 & Fp3 & Fp4 & Fp0)
+Running [A0]: autfilt './autcross/lcr-i86-Iu0CkD' > './autcross/lcr-o0-4erOyC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i86-UsKLND' -T 30 -L 1 -I -O './autcross/lcr-o1-jxNbTE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i86-KvcPUF' -T 30 -L 2 -I -O './autcross/lcr-o2-mRh73C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i86-V0qs4D' -T 30 -L 3 -I -O './autcross/lcr-o3-vIlU6F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i86-PXVldG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-6CuR4D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2866.1-2880.7	(p0 U (p1 U p2)) | (p1 U (p2 U p0)) | (p2 U (p0 U p1))
+Running [A0]: autfilt './autcross/lcr-i87-h0FcbG' > './autcross/lcr-o0-Wls1SC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i87-GaavDG' -T 30 -L 1 -I -O './autcross/lcr-o1-FtooBE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i87-jdpuJF' -T 30 -L 2 -I -O './autcross/lcr-o2-NAtUcD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i87-HIkESF' -T 30 -L 3 -I -O './autcross/lcr-o3-7xyKJC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i87-rAmOkC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Tg8KbC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2881.1-2903.7	G(!p0 | (p1 U (Gp2 | Gp3)))
+Running [A0]: autfilt './autcross/lcr-i88-xsEePC' > './autcross/lcr-o0-nL8qVC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i88-SA0mcG' -T 30 -L 1 -I -O './autcross/lcr-o1-e9rV8F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i88-H0ZwQE' -T 30 -L 2 -I -O './autcross/lcr-o2-9AHLWF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i88-PNWCrG' -T 30 -L 3 -I -O './autcross/lcr-o3-3CfsxG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i88-k1DrcD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ZNr3DE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2904.1-2922.7	F(p0 | Gp1)
+Running [A0]: autfilt './autcross/lcr-i89-VVm9pE' > './autcross/lcr-o0-Ge3WBC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i89-wz3EfE' -T 30 -L 1 -I -O './autcross/lcr-o1-IJ7NEE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i89-NcREVF' -T 30 -L 2 -I -O './autcross/lcr-o2-cYzYXF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i89-6np56B' -T 30 -L 3 -I -O './autcross/lcr-o3-d4Rz0E'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i89-vPybdE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-qHGpKC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2923.1-2944.7	F(p0 | Gp2 | Gp1)
+Running [A0]: autfilt './autcross/lcr-i90-k1JkED' > './autcross/lcr-o0-bDYkWE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i90-2JVAjD' -T 30 -L 1 -I -O './autcross/lcr-o1-OJO7TF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i90-CNXwWD' -T 30 -L 2 -I -O './autcross/lcr-o2-b6JQDE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i90-thG6WC' -T 30 -L 3 -I -O './autcross/lcr-o3-PDhCXD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i90-XGD1pC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-teKDbC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2945.1-2969.7	F(p0 | Gp3 | Gp1 | Gp2)
+Running [A0]: autfilt './autcross/lcr-i91-klyDwG' > './autcross/lcr-o0-4W5oNF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i91-ZwUTLC' -T 30 -L 1 -I -O './autcross/lcr-o1-QVyY3C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i91-yrLYzE' -T 30 -L 2 -I -O './autcross/lcr-o2-OYGgrE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i91-rQIPrC' -T 30 -L 3 -I -O './autcross/lcr-o3-Hd6AeF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i91-Ep3u7F' -T 30 -L 3 -I -G -O './autcross/lcr-o4-YEKocE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2970.1-2997.7	F(p0 | Gp4 | Gp1 | Gp2 | Gp3)
+Running [A0]: autfilt './autcross/lcr-i92-nT5lPC' > './autcross/lcr-o0-K5gvHF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i92-427w7F' -T 30 -L 1 -I -O './autcross/lcr-o1-dnaBpG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i92-YYvjUC' -T 30 -L 2 -I -O './autcross/lcr-o2-dxDVdG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i92-4KF45E' -T 30 -L 3 -I -O './autcross/lcr-o3-HH6ZOE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i92-GVAm7B' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ECokDC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:2998.1-3018.7	F(G(Fa1 & Fz) | G(!a1 & !z))
+Running [A0]: autfilt './autcross/lcr-i93-P0oEZF' > './autcross/lcr-o0-ncWpOF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i93-VJa1zE' -T 30 -L 1 -I -O './autcross/lcr-o1-jzEzrF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i93-7QgigC' -T 30 -L 2 -I -O './autcross/lcr-o2-kaTlBE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i93-zOhypE' -T 30 -L 3 -I -O './autcross/lcr-o3-1AkZjE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i93-Ib8vlE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-XkT2eC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3019.1-3050.7	G(Fz & Fa1 & Fa2) | (FG!z & F(G!a1 | G!a2))
+Running [A0]: autfilt './autcross/lcr-i94-kXJkhE' > './autcross/lcr-o0-e1ZOsC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i94-MfD5oE' -T 30 -L 1 -I -O './autcross/lcr-o1-syb8bG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i94-fW0SoE' -T 30 -L 2 -I -O './autcross/lcr-o2-GEU49F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i94-gk9A5E' -T 30 -L 3 -I -O './autcross/lcr-o3-LQfjzD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i94-0QKinE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-MZ7suC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3051.1-3094.7	G(Fz & Fa1 & Fa2 & Fa3) | (FG!z & F(G!a1 | G!a2 | G!a3))
+Running [A0]: autfilt './autcross/lcr-i95-15OKiE' > './autcross/lcr-o0-B5844C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i95-8VmCaF' -T 30 -L 1 -I -O './autcross/lcr-o1-vwHXcF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i95-U1Q8ME' -T 30 -L 2 -I -O './autcross/lcr-o2-XLw2AC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i95-L9rMVD' -T 30 -L 3 -I -O './autcross/lcr-o3-mp3t4F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i95-aWdfvC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-i7aLwD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3095.1-3158.7	G(Fz & Fa1 & Fa2 & Fa3 & Fa4) | (FG!z & F(G!a1 | G!a2 | G!a3 | G!a4))
+Running [A0]: autfilt './autcross/lcr-i96-OpS0cG' > './autcross/lcr-o0-jacUCC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i96-xxwiaF' -T 30 -L 1 -I -O './autcross/lcr-o1-9QcHTE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i96-ZdAzUC' -T 30 -L 2 -I -O './autcross/lcr-o2-AY2hiD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i96-dsqS0D' -T 30 -L 3 -I -O './autcross/lcr-o3-p7JXVF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i96-TGDnGC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-YhFenC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3159.1-3175.7	GF((a & Xa) | (!a & X!a))
+Running [A0]: autfilt './autcross/lcr-i97-cR6jEC' > './autcross/lcr-o0-0VxkCD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i97-32f8oE' -T 30 -L 1 -I -O './autcross/lcr-o1-dnbjsE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i97-lfmJbC' -T 30 -L 2 -I -O './autcross/lcr-o2-fswEMD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i97-E8T4AG' -T 30 -L 3 -I -O './autcross/lcr-o3-Pk1QuF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i97-UoKg0C' -T 30 -L 3 -I -G -O './autcross/lcr-o4-GKj6sC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3176.1-3198.7	GF((a & XXa) | (!a & XX!a))
+Running [A0]: autfilt './autcross/lcr-i98-7k9STE' > './autcross/lcr-o0-WoPh1F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i98-OXa5lF' -T 30 -L 1 -I -O './autcross/lcr-o1-bTZ6BF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i98-ecPwBC' -T 30 -L 2 -I -O './autcross/lcr-o2-fAPgMF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i98-LWq0aC' -T 30 -L 3 -I -O './autcross/lcr-o3-ZOfSgE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i98-pc169E' -T 30 -L 3 -I -G -O './autcross/lcr-o4-uqvISF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3199.1-3224.7	GF((a & XXXa) | (!a & XXX!a))
+Running [A0]: autfilt './autcross/lcr-i99-QnDIOE' > './autcross/lcr-o0-gfgFqD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i99-Tr941E' -T 30 -L 1 -I -O './autcross/lcr-o1-ACR03D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i99-vJre3C' -T 30 -L 2 -I -O './autcross/lcr-o2-8lbAbG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i99-7aJVbE' -T 30 -L 3 -I -O './autcross/lcr-o3-yhWLLE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i99-dljSAE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-rqx2JE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3225.1-3254.7	GF((a & XXXXa) | (!a & XXXX!a))
+Running [A0]: autfilt './autcross/lcr-i100-1zBvWC' > './autcross/lcr-o0-v1dk9B'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i100-xzetJF' -T 30 -L 1 -I -O './autcross/lcr-o1-vnfEcF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i100-skNOTF' -T 30 -L 2 -I -O './autcross/lcr-o2-67i1BG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i100-w4jbyD' -T 30 -L 3 -I -O './autcross/lcr-o3-ULW2PC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i100-77WJ2C' -T 30 -L 3 -I -G -O './autcross/lcr-o4-T3zbhC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3255.1-3273.7	F(GFz | G!a1)
+Running [A0]: autfilt './autcross/lcr-i101-oFUAIC' > './autcross/lcr-o0-rQwL8F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i101-IpaTUF' -T 30 -L 1 -I -O './autcross/lcr-o1-coqqgG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i101-YVzNvD' -T 30 -L 2 -I -O './autcross/lcr-o2-LcnA2F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i101-sMw4jD' -T 30 -L 3 -I -O './autcross/lcr-o3-YGgw8B'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i101-soHLsC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-NCZSfG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3274.1-3295.7	F(GFz | G!a1 | G!a2)
+Running [A0]: autfilt './autcross/lcr-i102-WlB4LF' > './autcross/lcr-o0-0TfdrD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i102-JpDwHE' -T 30 -L 1 -I -O './autcross/lcr-o1-HMcV9B'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i102-4tuTLD' -T 30 -L 2 -I -O './autcross/lcr-o2-jc9GxG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i102-XW4FDF' -T 30 -L 3 -I -O './autcross/lcr-o3-uDNxwE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i102-K4poqC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-JgVxRC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3296.1-3320.7	F(GFz | G!a1 | G!a2 | G!a3)
+Running [A0]: autfilt './autcross/lcr-i103-WA9LkD' > './autcross/lcr-o0-IR66kG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i103-N5BVpC' -T 30 -L 1 -I -O './autcross/lcr-o1-XlAa7F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i103-Di8McF' -T 30 -L 2 -I -O './autcross/lcr-o2-QipypD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i103-Nqg1cF' -T 30 -L 3 -I -O './autcross/lcr-o3-fey70D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i103-7MmO7F' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Wb1OrC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3321.1-3348.7	F(GFz | G!a1 | G!a2 | G!a3 | G!a4)
+Running [A0]: autfilt './autcross/lcr-i104-LiXzdC' > './autcross/lcr-o0-NnX24F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i104-ZKTSgF' -T 30 -L 1 -I -O './autcross/lcr-o1-4G5IhC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i104-CUGleC' -T 30 -L 2 -I -O './autcross/lcr-o2-sBtmQD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i104-eacxlC' -T 30 -L 3 -I -O './autcross/lcr-o3-tIl9KF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i104-4QH91C' -T 30 -L 3 -I -G -O './autcross/lcr-o4-c6bdJF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3349.1-3361.7	1
+Running [A0]: autfilt './autcross/lcr-i105-sfFezC' > './autcross/lcr-o0-b38nyF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i105-l8dZWF' -T 30 -L 1 -I -O './autcross/lcr-o1-579PbG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i105-0TUxOD' -T 30 -L 2 -I -O './autcross/lcr-o2-HbXsZB'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i105-n5GbYE' -T 30 -L 3 -I -O './autcross/lcr-o3-IEFXhG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i105-4UYHbE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-yNznOC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3362.1-3374.7	1
+Running [A0]: autfilt './autcross/lcr-i106-d9k3YD' > './autcross/lcr-o0-4xANNF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i106-IPfJvF' -T 30 -L 1 -I -O './autcross/lcr-o1-6ONdgG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i106-OAjsLE' -T 30 -L 2 -I -O './autcross/lcr-o2-0X0ahC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i106-LvTS9C' -T 30 -L 3 -I -O './autcross/lcr-o3-cByvkE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i106-W3oQwF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-MQV96C'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3375.1-3387.7	1
+Running [A0]: autfilt './autcross/lcr-i107-d4pHgE' > './autcross/lcr-o0-LIB1tF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i107-MN79dG' -T 30 -L 1 -I -O './autcross/lcr-o1-0UpdTD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i107-HykAuG' -T 30 -L 2 -I -O './autcross/lcr-o2-FKHiFE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i107-7YyGHC' -T 30 -L 3 -I -O './autcross/lcr-o3-uS3fdC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i107-fzbPRD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-RPdU7D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3388.1-3400.7	1
+Running [A0]: autfilt './autcross/lcr-i108-xWM6ID' > './autcross/lcr-o0-3dSEcE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i108-vPuPKF' -T 30 -L 1 -I -O './autcross/lcr-o1-dt1YeC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i108-GiYMrC' -T 30 -L 2 -I -O './autcross/lcr-o2-yj7qfE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i108-RfJiPD' -T 30 -L 3 -I -O './autcross/lcr-o3-yziSMD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i108-94fMgF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-3SdbsC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3401.1-3420.7	Fp1 | Gp2
+Running [A0]: autfilt './autcross/lcr-i109-Iin4lC' > './autcross/lcr-o0-wHQBWE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i109-nDdOhG' -T 30 -L 1 -I -O './autcross/lcr-o1-sgZkLF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i109-51SRvD' -T 30 -L 2 -I -O './autcross/lcr-o2-d3ILLC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i109-2PtVbG' -T 30 -L 3 -I -O './autcross/lcr-o3-Bl99xE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i109-KGpwWF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-633WYC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3421.1-3466.7	(Fp1 | Gp2) & (Fp2 | Gp3)
+Running [A0]: autfilt './autcross/lcr-i110-5BZK6B' > './autcross/lcr-o0-9vhdAG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i110-mTBA8F' -T 30 -L 1 -I -O './autcross/lcr-o1-hUWApG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i110-BVCIyE' -T 30 -L 2 -I -O './autcross/lcr-o2-m4VwkD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i110-Y7Ir9C' -T 30 -L 3 -I -O './autcross/lcr-o3-7iTeBG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i110-FSPHrD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-JlunuE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3467.1-3588.7	(Fp1 | Gp2) & (Fp2 | Gp3) & (Fp3 | Gp4)
+Running [A0]: autfilt './autcross/lcr-i111-GBIqNC' > './autcross/lcr-o0-Bqjt4F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i111-q6ypyF' -T 30 -L 1 -I -O './autcross/lcr-o1-C6q7YB'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i111-tlARgG' -T 30 -L 2 -I -O './autcross/lcr-o2-87xn0B'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i111-5QQ0KF' -T 30 -L 3 -I -O './autcross/lcr-o3-92bYJC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i111-trATfC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-LR5ScF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3589.1-3971.7	(Fp1 | Gp2) & (Fp2 | Gp3) & (Fp3 | Gp4) & (Fp4 | Gp5)
+Running [A0]: autfilt './autcross/lcr-i112-rcXAyF' > './autcross/lcr-o0-ry6NqF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i112-9P06OE' -T 30 -L 1 -I -O './autcross/lcr-o1-YgSfqE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i112-VgvwtC' -T 30 -L 2 -I -O './autcross/lcr-o2-PdDLsD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i112-LlwT7E' -T 30 -L 3 -I -O './autcross/lcr-o3-3ELTvC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i112-rfC8bG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ExJMqD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3972.1-3990.7	F(Gp2 | GFp1)
+Running [A0]: autfilt './autcross/lcr-i113-ReodcF' > './autcross/lcr-o0-zUtWZF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i113-3u9dZE' -T 30 -L 1 -I -O './autcross/lcr-o1-XNCqpF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i113-B352pE' -T 30 -L 2 -I -O './autcross/lcr-o2-6Jxt6C'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i113-kVWq7B' -T 30 -L 3 -I -O './autcross/lcr-o3-QuhPlG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i113-ExkYYC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Qf3sIF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:3991.1-4015.7	F(Gp2 | GFp1) & F(Gp3 | GFp2)
+Running [A0]: autfilt './autcross/lcr-i114-XatrcC' > './autcross/lcr-o0-HqETTF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i114-7lDGYE' -T 30 -L 1 -I -O './autcross/lcr-o1-xTLjZF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i114-GBeWnG' -T 30 -L 2 -I -O './autcross/lcr-o2-PjUUhF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i114-iNSdbC' -T 30 -L 3 -I -O './autcross/lcr-o3-s8GDtF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i114-9iB5tE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-AzWr0F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4016.1-4054.7	F(Gp2 | GFp1) & F(Gp3 | GFp2) & F(Gp4 | GFp3)
+Running [A0]: autfilt './autcross/lcr-i115-f6PeGE' > './autcross/lcr-o0-9iN7gG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i115-OBkYKF' -T 30 -L 1 -I -O './autcross/lcr-o1-hhMmtG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i115-HP48SC' -T 30 -L 2 -I -O './autcross/lcr-o2-v038pG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i115-xTKtpC' -T 30 -L 3 -I -O './autcross/lcr-o3-61oFDD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i115-nGlfzG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-1u9fjD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4055.1-4123.7	F(Gp2 | GFp1) & F(Gp3 | GFp2) & F(Gp4 | GFp3) & F(GFp4 | Gp5)
+Running [A0]: autfilt './autcross/lcr-i116-0VCC0F' > './autcross/lcr-o0-UKNEjC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i116-oB3G5C' -T 30 -L 1 -I -O './autcross/lcr-o1-yCf2yE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i116-DUCIyC' -T 30 -L 2 -I -O './autcross/lcr-o2-JPyFnD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i116-hbNFlF' -T 30 -L 3 -I -O './autcross/lcr-o3-D1Kp5D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i116-j9NPYD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-HZ4CwG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4124.1-4139.7	GFp1 & F(q & G!r)
+Running [A0]: autfilt './autcross/lcr-i117-TWQQrF' > './autcross/lcr-o0-VLta9F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i117-62RvxG' -T 30 -L 1 -I -O './autcross/lcr-o1-NsGfpC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i117-WwYdSC' -T 30 -L 2 -I -O './autcross/lcr-o2-PF3vzD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i117-NNzy1F' -T 30 -L 3 -I -O './autcross/lcr-o3-fQIVdG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i117-JuXwUD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-SOHtvF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4140.1-4157.7	F(q & G!r) & G(Fp1 & Fp2)
+Running [A0]: autfilt './autcross/lcr-i118-coybeD' > './autcross/lcr-o0-KsbrJE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i118-v9DMTD' -T 30 -L 1 -I -O './autcross/lcr-o1-U5G9aC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i118-jTb9vD' -T 30 -L 2 -I -O './autcross/lcr-o2-imlGFD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i118-6ccvdG' -T 30 -L 3 -I -O './autcross/lcr-o3-Sl3CLE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i118-ELZtgC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-2zbsCF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4158.1-4179.7	F(q & G!r) & G(Fp1 & Fp2 & Fp3)
+Running [A0]: autfilt './autcross/lcr-i119-65Pg1F' > './autcross/lcr-o0-Aun47F'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i119-1KYj3F' -T 30 -L 1 -I -O './autcross/lcr-o1-kegsnD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i119-uaakzE' -T 30 -L 2 -I -O './autcross/lcr-o2-E3JEWD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i119-F1xYUD' -T 30 -L 3 -I -O './autcross/lcr-o3-eZNjGD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i119-Qy4T6E' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ED43GC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4180.1-4209.7	F(q & G!r) & G(Fp1 & Fp2 & Fp3 & Fp4)
+Running [A0]: autfilt './autcross/lcr-i120-4PsVgG' > './autcross/lcr-o0-B9radF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i120-xD1eJE' -T 30 -L 1 -I -O './autcross/lcr-o1-fUoheG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i120-nTLubE' -T 30 -L 2 -I -O './autcross/lcr-o2-IVZniE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i120-Xlpq1E' -T 30 -L 3 -I -O './autcross/lcr-o3-8m9agD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i120-VvUkVD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-BeFJkC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4210.1-4223.7	G(p0 & Fp1)
+Running [A0]: autfilt './autcross/lcr-i121-mscHED' > './autcross/lcr-o0-TJ4ToD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i121-LVpmMD' -T 30 -L 1 -I -O './autcross/lcr-o1-3UMrHC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i121-KxLItD' -T 30 -L 2 -I -O './autcross/lcr-o2-0vOkQD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i121-RMY6RF' -T 30 -L 3 -I -O './autcross/lcr-o3-3IF87D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i121-U6rmqG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-JhzVJD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4224.1-4239.7	G(p0 & Fp2 & Fp1)
+Running [A0]: autfilt './autcross/lcr-i122-0lsFjE' > './autcross/lcr-o0-7s0kSF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i122-eDhVCC' -T 30 -L 1 -I -O './autcross/lcr-o1-tV9V8C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i122-VOmHuE' -T 30 -L 2 -I -O './autcross/lcr-o2-LefgWC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i122-HHcncE' -T 30 -L 3 -I -O './autcross/lcr-o3-g4DTKE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i122-EilDiE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-PUgY1B'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4240.1-4267.7	G(p0 & Fp4 & Fp1 & Fp2 & Fp3)
+Running [A0]: autfilt './autcross/lcr-i123-nwQRHF' > './autcross/lcr-o0-g4meNC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i123-Ne6GhD' -T 30 -L 1 -I -O './autcross/lcr-o1-XJa5NC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i123-6Dz29C' -T 30 -L 2 -I -O './autcross/lcr-o2-ZeG4JE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i123-2oCueE' -T 30 -L 3 -I -O './autcross/lcr-o3-vZ1y5B'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i123-KBRrcE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-4y2u9D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4268.1-4281.7	G(Fp0 & F!p0)
+Running [A0]: autfilt './autcross/lcr-i124-6bsQpD' > './autcross/lcr-o0-EoAPVF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i124-1kxzOC' -T 30 -L 1 -I -O './autcross/lcr-o1-RQyOBE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i124-RdgfID' -T 30 -L 2 -I -O './autcross/lcr-o2-mA5lcD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i124-nu9MbD' -T 30 -L 3 -I -O './autcross/lcr-o3-StOy7F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i124-9A6GzG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-PKyQ9C'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4282.1-4295.7	G(Fp0 & F!p0)
+Running [A0]: autfilt './autcross/lcr-i125-V8MZrE' > './autcross/lcr-o0-LcypKE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i125-2NeWpF' -T 30 -L 1 -I -O './autcross/lcr-o1-VDpawD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i125-wpmlHC' -T 30 -L 2 -I -O './autcross/lcr-o2-k8wxYC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i125-IHBI4C' -T 30 -L 3 -I -O './autcross/lcr-o3-8J2DYE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i125-nj2ZoE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-8L4XqD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4296.1-4326.7	GF((p1 & X!p1) | (!p1 & Xp1) | (p0 & X!p0) | (!p0 & Xp0))
+Running [A0]: autfilt './autcross/lcr-i126-ocxTCG' > './autcross/lcr-o0-mMn7YC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i126-BDj3RF' -T 30 -L 1 -I -O './autcross/lcr-o1-zhXI8E'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i126-eWBDDC' -T 30 -L 2 -I -O './autcross/lcr-o2-KZtgMF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i126-vqBomG' -T 30 -L 3 -I -O './autcross/lcr-o3-3M7JXF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i126-ZC03KF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-maY7wE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4327.1-4418.7	GF((p1 & X!p1) | (!p1 & Xp1) | (p0 & X!p0) | (!p0 & Xp0) | (p2 & X!p2) | (!p2 & Xp2) | (p3 & X!p3) | (!p3 & Xp3))
+Running [A0]: autfilt './autcross/lcr-i127-9kaR0B' > './autcross/lcr-o0-7JCiLE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i127-UI1TtE' -T 30 -L 1 -I -O './autcross/lcr-o1-oi0geE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i127-BQ0KWC' -T 30 -L 2 -I -O './autcross/lcr-o2-MV0acC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i127-HHEW1F' -T 30 -L 3 -I -O './autcross/lcr-o3-yj0wmG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i127-JgNBnG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-CcUMXD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4419.1-4432.7	G(F!p0 & Fp0)
+Running [A0]: autfilt './autcross/lcr-i128-IpbRmF' > './autcross/lcr-o0-tN7T9C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i128-2wkSRE' -T 30 -L 1 -I -O './autcross/lcr-o1-jocb9B'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i128-uDdnbD' -T 30 -L 2 -I -O './autcross/lcr-o2-b7mFhG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i128-srM0aC' -T 30 -L 3 -I -O './autcross/lcr-o3-qIvheE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i128-BCYzSC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-KjSzAF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4433.1-4449.7	G(!p0 | F(p0 & p1))
+Running [A0]: autfilt './autcross/lcr-i129-T47eUE' > './autcross/lcr-o0-M2SGaG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i129-KfwRoD' -T 30 -L 1 -I -O './autcross/lcr-o1-BGaLlG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i129-7oCAzC' -T 30 -L 2 -I -O './autcross/lcr-o2-YS3k9D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i129-jC94oF' -T 30 -L 3 -I -O './autcross/lcr-o3-9dGGmC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i129-meqDOC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-CiMnUF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4450.1-4462.7	1
+Running [A0]: autfilt './autcross/lcr-i130-BS9s2B' > './autcross/lcr-o0-7o4qtE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i130-gR0ADC' -T 30 -L 1 -I -O './autcross/lcr-o1-icg9wF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i130-wK5DwD' -T 30 -L 2 -I -O './autcross/lcr-o2-uCmm9D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i130-7Z4jrF' -T 30 -L 3 -I -O './autcross/lcr-o3-KGx8nC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i130-wOHGdG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-PdRi9F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4463.1-4479.7	G(!p0 | F!p1)
+Running [A0]: autfilt './autcross/lcr-i131-EuUlcE' > './autcross/lcr-o0-dMBnyC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i131-vbh3bF' -T 30 -L 1 -I -O './autcross/lcr-o1-7oGwsG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i131-gIvk9F' -T 30 -L 2 -I -O './autcross/lcr-o2-s5ZDEE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i131-BsJWzC' -T 30 -L 3 -I -O './autcross/lcr-o3-2FwoLC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i131-ZcqalD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-TJgFIC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4480.1-4496.7	G(!p0 | F(!p1 | p2))
+Running [A0]: autfilt './autcross/lcr-i132-qqPWkF' > './autcross/lcr-o0-Fq205B'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i132-wowRjD' -T 30 -L 1 -I -O './autcross/lcr-o1-yK666C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i132-hLEULD' -T 30 -L 2 -I -O './autcross/lcr-o2-tBQ8IC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i132-nCTNcC' -T 30 -L 3 -I -O './autcross/lcr-o3-fFga2D'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i132-AXjeQE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-CxVmQC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4497.1-4513.7	G(!p0 | F(p3 | !(p1 & p2)))
+Running [A0]: autfilt './autcross/lcr-i133-9r5GqF' > './autcross/lcr-o0-pd1QxD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i133-AlQ1zG' -T 30 -L 1 -I -O './autcross/lcr-o1-ouBhwF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i133-N1T8DF' -T 30 -L 2 -I -O './autcross/lcr-o2-l7sCfF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i133-ClRf2C' -T 30 -L 3 -I -O './autcross/lcr-o3-Sc9QND'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i133-4cGMtF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-fASdGF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4514.1-4796.7	G((!p0 | Fp1) & (!p2 | Fp3) & (!p4 | Fp5) & (!p6 | Fp7))
+Running [A0]: autfilt './autcross/lcr-i134-AUzMsE' > './autcross/lcr-o0-pVEcME'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i134-eWmEsG' -T 30 -L 1 -I -O './autcross/lcr-o1-g4gtoE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i134-UKaBBD' -T 30 -L 2 -I -O './autcross/lcr-o2-gg3meE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i134-MFQYfF' -T 30 -L 3 -I -O './autcross/lcr-o3-SynTJF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i134-jH9IEG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-wRKhuF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4797.1-4809.7	G(!p0 & !p1)
+Running [A0]: autfilt './autcross/lcr-i135-hy6pCE' > './autcross/lcr-o0-uWbcuG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i135-yoRNNF' -T 30 -L 1 -I -O './autcross/lcr-o1-lR3GrE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i135-WuxMhC' -T 30 -L 2 -I -O './autcross/lcr-o2-obZzlC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i135-3V92nE' -T 30 -L 3 -I -O './autcross/lcr-o3-YyPtrE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i135-gl5zyE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-KlyuEG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4810.1-4822.7	G(!p0 | !p1)
+Running [A0]: autfilt './autcross/lcr-i136-tRO0WE' > './autcross/lcr-o0-1G9f9B'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i136-HBwM5E' -T 30 -L 1 -I -O './autcross/lcr-o1-iuxKfE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i136-KFdqsF' -T 30 -L 2 -I -O './autcross/lcr-o2-VUxG4E'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i136-eJa1sC' -T 30 -L 3 -I -O './autcross/lcr-o3-g8r11C'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i136-u4YRzC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-zhOzFC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4823.1-4835.7	G(!p0 | p1)
+Running [A0]: autfilt './autcross/lcr-i137-jaxJoC' > './autcross/lcr-o0-ePeajF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i137-TDXh7B' -T 30 -L 1 -I -O './autcross/lcr-o1-BEPTLE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i137-sdt0YC' -T 30 -L 2 -I -O './autcross/lcr-o2-vJfAID'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i137-8Db8SD' -T 30 -L 3 -I -O './autcross/lcr-o3-3nNqsE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i137-yU3xVD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-vDdUID'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4836.1-4848.7	G(!p0 | !p1)
+Running [A0]: autfilt './autcross/lcr-i138-EdhVdE' > './autcross/lcr-o0-NDrQCG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i138-Sb5qIE' -T 30 -L 1 -I -O './autcross/lcr-o1-GyDBuG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i138-cns17F' -T 30 -L 2 -I -O './autcross/lcr-o2-m9CPKE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i138-jMS8YC' -T 30 -L 3 -I -O './autcross/lcr-o3-Lyx5GF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i138-PdRpzF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-dc2qjC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4849.1-4861.7	G(p0 | (p1 & !p2) | (!p1 & p2))
+Running [A0]: autfilt './autcross/lcr-i139-UedyRC' > './autcross/lcr-o0-4xxhnC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i139-krt7DD' -T 30 -L 1 -I -O './autcross/lcr-o1-acQ7xE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i139-xDT4hF' -T 30 -L 2 -I -O './autcross/lcr-o2-qam3IE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i139-7vkJ3E' -T 30 -L 3 -I -O './autcross/lcr-o3-LRXvZB'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i139-PYCWgG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-ORcAeG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4862.1-4874.7	G((!p0 & (p1 | p2 | p3)) -> p4)
+Running [A0]: autfilt './autcross/lcr-i140-1Dvt3D' > './autcross/lcr-o0-xVjxvD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i140-5Pl5yE' -T 30 -L 1 -I -O './autcross/lcr-o1-7oIoMD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i140-1eDxiF' -T 30 -L 2 -I -O './autcross/lcr-o2-zhStFC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i140-8FK7cF' -T 30 -L 3 -I -O './autcross/lcr-o3-z1ulwE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i140-YMyyGE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-dXl2vD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4875.1-4887.7	G((p0 & p1) -> (p2 | !(p3 & p4)))
+Running [A0]: autfilt './autcross/lcr-i141-bkvisD' > './autcross/lcr-o0-bF5HBD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i141-iM8JPC' -T 30 -L 1 -I -O './autcross/lcr-o1-ITA3AF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i141-9N31TE' -T 30 -L 2 -I -O './autcross/lcr-o2-cdsQCE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i141-2StdfD' -T 30 -L 3 -I -O './autcross/lcr-o3-kRKV0F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i141-xWPMrC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-zQaOAG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4888.1-4904.7	G(!(!p0 & p1 & !p2 & !p3 & !p4) | F(!p5 & !p6 & !p7 & !p8))
+Running [A0]: autfilt './autcross/lcr-i142-6hIDbE' > './autcross/lcr-o0-d56DEF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i142-8gtAyC' -T 30 -L 1 -I -O './autcross/lcr-o1-2fFLUD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i142-oqPPgF' -T 30 -L 2 -I -O './autcross/lcr-o2-uTmWgF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i142-l93ULF' -T 30 -L 3 -I -O './autcross/lcr-o3-l8m62F'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i142-wcHA9D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-HeI9VF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4905.1-4921.7	G(!(p0 & p1 & !p2 & !p3 & !p4) | F(p5 & !p6 & !p7 & !p8))
+Running [A0]: autfilt './autcross/lcr-i143-OJYRXC' > './autcross/lcr-o0-rfWFnC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i143-HaXwbD' -T 30 -L 1 -I -O './autcross/lcr-o1-gNvODF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i143-bsCrbF' -T 30 -L 2 -I -O './autcross/lcr-o2-SWvoiF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i143-dsCiiE' -T 30 -L 3 -I -O './autcross/lcr-o3-FSr7aG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i143-DnhejG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-EsEz2D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4922.1-4934.7	G(!p0 -> !(p1 & p2 & p3 & p4 & p5))
+Running [A0]: autfilt './autcross/lcr-i144-uyCfuG' > './autcross/lcr-o0-42VJ9C'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i144-9Bs5sF' -T 30 -L 1 -I -O './autcross/lcr-o1-aal65D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i144-HcZInG' -T 30 -L 2 -I -O './autcross/lcr-o2-jn8QiD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i144-RU4woC' -T 30 -L 3 -I -O './autcross/lcr-o3-GO0xAF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i144-DXjdwE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-7RQDUF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4935.1-4947.7	G(!p0 -> ((p1 & p2 & p3 & p4) -> !p5))
+Running [A0]: autfilt './autcross/lcr-i145-c13FEG' > './autcross/lcr-o0-SHqjOF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i145-W1sjwG' -T 30 -L 1 -I -O './autcross/lcr-o1-sJoOjF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i145-ZpGjXE' -T 30 -L 2 -I -O './autcross/lcr-o2-71mzvC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i145-4y9fRD' -T 30 -L 3 -I -O './autcross/lcr-o3-4DXNHE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i145-td7k1E' -T 30 -L 3 -I -G -O './autcross/lcr-o4-thpVyE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4948.1-4960.7	G((p0 & p1) -> (p2 | p3 | !(p4 & p5)))
+Running [A0]: autfilt './autcross/lcr-i146-9QdZoF' > './autcross/lcr-o0-xlDcVD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i146-4STgBE' -T 30 -L 1 -I -O './autcross/lcr-o1-rlKGZD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i146-22q9xF' -T 30 -L 2 -I -O './autcross/lcr-o2-1gVB3B'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i146-vsBmbD' -T 30 -L 3 -I -O './autcross/lcr-o3-roHivE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i146-Bq1xeF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Js9CuC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4961.1-4973.7	G((!p0 & (p1 | p2 | p3 | p4)) -> (!p5 <-> p6))
+Running [A0]: autfilt './autcross/lcr-i147-QW8nxF' > './autcross/lcr-o0-WzuZtC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i147-lccKbG' -T 30 -L 1 -I -O './autcross/lcr-o1-doOVWF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i147-6zhYqE' -T 30 -L 2 -I -O './autcross/lcr-o2-4IwHSF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i147-qGPevG' -T 30 -L 3 -I -O './autcross/lcr-o3-cmuoRC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i147-RDXu3D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-jHdpAG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4974.1-4986.7	G((p0 & p1) -> (p2 | p3 | p4 | !(p5 & p6)))
+Running [A0]: autfilt './autcross/lcr-i148-U2iadG' > './autcross/lcr-o0-aZOoGF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i148-yndTKD' -T 30 -L 1 -I -O './autcross/lcr-o1-6L4hhF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i148-LYuDPE' -T 30 -L 2 -I -O './autcross/lcr-o2-GBlFVC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i148-84fMPF' -T 30 -L 3 -I -O './autcross/lcr-o3-fiLHmF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i148-JN7AyG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-q1vNjD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:4987.1-4999.7	G((p0 & p1) -> (p2 | p3 | p4 | p5 | !(p6 & p7)))
+Running [A0]: autfilt './autcross/lcr-i149-gxTuGE' > './autcross/lcr-o0-SqrD5E'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i149-rY1B5C' -T 30 -L 1 -I -O './autcross/lcr-o1-WNDp1F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i149-5XY0FF' -T 30 -L 2 -I -O './autcross/lcr-o2-TbyR0D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i149-4Iq37C' -T 30 -L 3 -I -O './autcross/lcr-o3-gi9faC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i149-PzBcbF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-H5mMyG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5000.1-5020.7	G(!p0 | !p1 | p2 | X(!p2 | p3 | X(!p1 | p3)))
+Running [A0]: autfilt './autcross/lcr-i150-RxiRpD' > './autcross/lcr-o0-jAg05D'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i150-JNz9uC' -T 30 -L 1 -I -O './autcross/lcr-o1-yCBfSD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i150-A4MRrG' -T 30 -L 2 -I -O './autcross/lcr-o2-IbgCGF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i150-fXEJPD' -T 30 -L 3 -I -O './autcross/lcr-o3-oElXWD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i150-6rU6VC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-0nDa2F'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5021.1-5051.7	G(!p0 | !p1 | p2 | X(!p2 | (p2 U (!p2 U (p2 U (!p1 | p3))))))
+Running [A0]: autfilt './autcross/lcr-i151-q31uzD' > './autcross/lcr-o0-unOdoF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i151-6THF0D' -T 30 -L 1 -I -O './autcross/lcr-o1-6WaAvE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i151-yY4MQE' -T 30 -L 2 -I -O './autcross/lcr-o2-LAoF6D'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i151-ezrIsF' -T 30 -L 3 -I -O './autcross/lcr-o3-FSl2YF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i151-Hv4ZBC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-vEddaD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5052.1-5064.7	1
+Running [A0]: autfilt './autcross/lcr-i152-ixlupG' > './autcross/lcr-o0-fueiuD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i152-25OLvC' -T 30 -L 1 -I -O './autcross/lcr-o1-hv2fJE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i152-gaMfkE' -T 30 -L 2 -I -O './autcross/lcr-o2-QaVJAF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i152-JGCWxE' -T 30 -L 3 -I -O './autcross/lcr-o3-y5DyrE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i152-uPXWKF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-67AusG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5065.1-5086.7	G(!p0 | (p1 U (!p1 U (!p2 | p3))))
+Running [A0]: autfilt './autcross/lcr-i153-VhZY6B' > './autcross/lcr-o0-Wlm4qG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i153-JPmn2B' -T 30 -L 1 -I -O './autcross/lcr-o1-mU5daE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i153-bX1lkC' -T 30 -L 2 -I -O './autcross/lcr-o2-JflV0F'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i153-leHpjD' -T 30 -L 3 -I -O './autcross/lcr-o3-7SZufG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i153-rwN5WC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-lyxN3E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5087.1-5108.7	G(!p0 | (p1 U (!p1 U (p2 | p3))))
+Running [A0]: autfilt './autcross/lcr-i154-Kyk8pG' > './autcross/lcr-o0-SVrfrF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i154-J6eDcG' -T 30 -L 1 -I -O './autcross/lcr-o1-ly10eE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i154-x54v9D' -T 30 -L 2 -I -O './autcross/lcr-o2-pY0rZD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i154-egiTwC' -T 30 -L 3 -I -O './autcross/lcr-o3-aXIdwD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i154-cRcTrD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-eiqK1E'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5109.1-5125.7	G(p0 | !p1 | Xp2)
+Running [A0]: autfilt './autcross/lcr-i155-mmGO4E' > './autcross/lcr-o0-5dRXnF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i155-znWnxD' -T 30 -L 1 -I -O './autcross/lcr-o1-otpnIF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i155-KSzf9F' -T 30 -L 2 -I -O './autcross/lcr-o2-fDhKfF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i155-cmjoNE' -T 30 -L 3 -I -O './autcross/lcr-o3-jSEjAF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i155-SaGbND' -T 30 -L 3 -I -G -O './autcross/lcr-o4-DSh2rD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5126.1-5142.7	G(!p0 | X(p0 | p1))
+Running [A0]: autfilt './autcross/lcr-i156-UJk2CC' > './autcross/lcr-o0-znZiaG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i156-HoZUpG' -T 30 -L 1 -I -O './autcross/lcr-o1-8BJKjC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i156-ngFIdG' -T 30 -L 2 -I -O './autcross/lcr-o2-FPwUaC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i156-NNG7RD' -T 30 -L 3 -I -O './autcross/lcr-o3-Dw5KTE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i156-hyJsVC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-mFxsKF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5143.1-5299.7	G((((p1 & Xp1) | (!p1 & X!p1)) & ((p0 & Xp0) | (!p0 & X!p0)) & ((p2 & Xp2) | (!p2 & X!p2)) & ((p3 & Xp3) | (!p3 & X!p3))) | X(!p4 & ((((p1 & Xp1) | (!p1 & X!p1)) & ((p0 & Xp0) | (!p0 & X!p0)) & ((p2 & Xp2) | (!p2 & X!p2)) & ((p3 & Xp3) | (!p3 & X!p3))) U p4)))
+Running [A0]: autfilt './autcross/lcr-i157-v3EfkF' > './autcross/lcr-o0-1ukRmD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i157-R5UckF' -T 30 -L 1 -I -O './autcross/lcr-o1-X6SABF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i157-ZIZMcG' -T 30 -L 2 -I -O './autcross/lcr-o2-Gl4ZqC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i157-XYjQJD' -T 30 -L 3 -I -O './autcross/lcr-o3-xEkkBC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i157-ExaazG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-iIZH3D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5300.1-5316.7	G(!p0 | p1 | !p2 | X(!p0 | !p1 | p3))
+Running [A0]: autfilt './autcross/lcr-i158-NuerID' > './autcross/lcr-o0-bc48rF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i158-CsvygE' -T 30 -L 1 -I -O './autcross/lcr-o1-1cudhD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i158-La1JBE' -T 30 -L 2 -I -O './autcross/lcr-o2-Q6A2gF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i158-IKr58C' -T 30 -L 3 -I -O './autcross/lcr-o3-nkvKKD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i158-xMmTpD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-SshbmE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5317.1-5333.7	G(!p0 | X(!p0 U p1))
+Running [A0]: autfilt './autcross/lcr-i159-mvMH5D' > './autcross/lcr-o0-ZWYfDF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i159-ktv7LF' -T 30 -L 1 -I -O './autcross/lcr-o1-wTsGjF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i159-CFPwFC' -T 30 -L 2 -I -O './autcross/lcr-o2-k6zzGE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i159-DblTYF' -T 30 -L 3 -I -O './autcross/lcr-o3-pkpQcG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i159-qSzfUF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-PyBWsC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5334.1-5355.7	G(p0 | X(!p0 | (p0 W p1)))
+Running [A0]: autfilt './autcross/lcr-i160-wyPU2F' > './autcross/lcr-o0-4I6JiD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i160-WWPaVD' -T 30 -L 1 -I -O './autcross/lcr-o1-6bp23F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i160-RNLzmG' -T 30 -L 2 -I -O './autcross/lcr-o2-7G9rhF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i160-rrNgOD' -T 30 -L 3 -I -O './autcross/lcr-o3-AjoNeC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i160-IwCjlF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-DgaqFE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5356.1-5377.7	G(p0 | X(!p0 | ((!p1 & X(p0 & p1)) M p0)))
+Running [A0]: autfilt './autcross/lcr-i161-IpYkaD' > './autcross/lcr-o0-dQZvAF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i161-wnEGfD' -T 30 -L 1 -I -O './autcross/lcr-o1-U1tSnF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i161-rwpJBC' -T 30 -L 2 -I -O './autcross/lcr-o2-1Q4gAG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i161-PgW9rE' -T 30 -L 3 -I -O './autcross/lcr-o3-872WfF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i161-VG8oMF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-pAb8tF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5378.1-5404.7	G(p0 | X(!p0 | ((!p1 & X(p1 & ((!p1 & X(p0 & p1)) M p0))) M p0)))
+Running [A0]: autfilt './autcross/lcr-i162-E0Pq8E' > './autcross/lcr-o0-1neYxG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i162-hTfrxD' -T 30 -L 1 -I -O './autcross/lcr-o1-EjmqND'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i162-7L4uiG' -T 30 -L 2 -I -O './autcross/lcr-o2-EZ2oKE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i162-2OwccF' -T 30 -L 3 -I -O './autcross/lcr-o3-lBVagG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i162-cHYCuD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-Ntz7ZC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5405.1-5431.7	G(!p0 | X(p0 | ((!p1 & X(p1 & ((!p1 & X(!p0 & p1)) M !p0))) M !p0)))
+Running [A0]: autfilt './autcross/lcr-i163-pX5mbG' > './autcross/lcr-o0-JldezF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i163-zBF3OE' -T 30 -L 1 -I -O './autcross/lcr-o1-93YBTD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i163-Y0B5rC' -T 30 -L 2 -I -O './autcross/lcr-o2-4qcGoE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i163-4QlaKC' -T 30 -L 3 -I -O './autcross/lcr-o3-G83QOC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i163-1rzwiC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-4aFPzD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5432.1-5463.7	G(!p0 | X(p0 | ((!p1 & X(p1 & ((!p1 & X(p1 & ((!p1 & X(!p0 & p1)) M !p0))) M !p0))) M !p0)))
+Running [A0]: autfilt './autcross/lcr-i164-BsfBVE' > './autcross/lcr-o0-vXveCE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i164-JF149E' -T 30 -L 1 -I -O './autcross/lcr-o1-IIvm4E'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i164-Nvs1oG' -T 30 -L 2 -I -O './autcross/lcr-o2-7zaZbF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i164-pBoq4D' -T 30 -L 3 -I -O './autcross/lcr-o3-QBapiC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i164-KrTJWD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-whZ1PD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5464.1-5494.7	G(p0 | X(!p0 | ((p0 | X!p0) U (!p1 & Xp1))))
+Running [A0]: autfilt './autcross/lcr-i165-qeeDOD' > './autcross/lcr-o0-2LRDjC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i165-vIbtGD' -T 30 -L 1 -I -O './autcross/lcr-o1-MmELEE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i165-ci3b1D' -T 30 -L 2 -I -O './autcross/lcr-o2-AAfGgG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i165-lIiilE' -T 30 -L 3 -I -O './autcross/lcr-o3-T1Kb6C'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i165-kRXw1D' -T 30 -L 3 -I -G -O './autcross/lcr-o4-CmlucG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5495.1-5540.7	G(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X(!p0 | X!p0)))))))))))
+Running [A0]: autfilt './autcross/lcr-i166-Rz8oWC' > './autcross/lcr-o0-F5LrBD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i166-cDVW1C' -T 30 -L 1 -I -O './autcross/lcr-o1-SminbE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i166-FLu20B' -T 30 -L 2 -I -O './autcross/lcr-o2-RbqyyD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i166-gfdyXD' -T 30 -L 3 -I -O './autcross/lcr-o3-ANQyCC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i166-AuuaIC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-V03EBF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5541.1-5563.7	G((p1 & Xp1) | (!p1 & X!p1) | (!p0 & Xp0))
+Running [A0]: autfilt './autcross/lcr-i167-DdAqmE' > './autcross/lcr-o0-Sow4yG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i167-Re2FiE' -T 30 -L 1 -I -O './autcross/lcr-o1-4Ow23F'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i167-76J4gG' -T 30 -L 2 -I -O './autcross/lcr-o2-GjF9oE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i167-zDhs2C' -T 30 -L 3 -I -O './autcross/lcr-o3-0ooX5C'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i167-DpdTiC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-zEwJpC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5564.1-5586.7	G(((!p1 | Xp1) & (p1 | X!p1)) | (!p0 & Xp0))
+Running [A0]: autfilt './autcross/lcr-i168-0enXmD' > './autcross/lcr-o0-RvQgCE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i168-ShcrtD' -T 30 -L 1 -I -O './autcross/lcr-o1-S9znCF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i168-gicUlE' -T 30 -L 2 -I -O './autcross/lcr-o2-yqn7HD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i168-CcJBSC' -T 30 -L 3 -I -O './autcross/lcr-o3-9oNmnG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i168-WMJrgG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-AnhZiE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5587.1-5602.7	!p0 U G!((p1 & p2) | (p3 & p4) | (p2 & p3) | (p2 & p4) | (p1 & p4) | (p1 & p3))
+Running [A0]: autfilt './autcross/lcr-i169-MyNZ9C' > './autcross/lcr-o0-UoFjsF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i169-XWQgzG' -T 30 -L 1 -I -O './autcross/lcr-o1-hB3QnG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i169-dxBjKF' -T 30 -L 2 -I -O './autcross/lcr-o2-y8Z40E'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i169-jT0Q3C' -T 30 -L 3 -I -O './autcross/lcr-o3-Fy9myF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i169-7NhvcG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-PRHCMC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5603.1-5618.7	!p0 U p1
+Running [A0]: autfilt './autcross/lcr-i170-zRr6nC' > './autcross/lcr-o0-p65sXE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i170-KKkgWC' -T 30 -L 1 -I -O './autcross/lcr-o1-S9xQ9C'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i170-L69sYB' -T 30 -L 2 -I -O './autcross/lcr-o2-sGmYUF'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i170-4n8usE' -T 30 -L 3 -I -O './autcross/lcr-o3-UFBDqC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i170-xNsybC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-SPwoWF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5619.1-5634.7	p0 W p1
+Running [A0]: autfilt './autcross/lcr-i171-dBbIZB' > './autcross/lcr-o0-mewYmG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i171-LPp13B' -T 30 -L 1 -I -O './autcross/lcr-o1-RUBOIC'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i171-SiTDYC' -T 30 -L 2 -I -O './autcross/lcr-o2-rbwGCG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i171-HHCzkF' -T 30 -L 3 -I -O './autcross/lcr-o3-e58aeG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i171-zDK3UF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-xvd7LD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5635.1-5649.7	p0 & XG!p0
+Running [A0]: autfilt './autcross/lcr-i172-ADRWlE' > './autcross/lcr-o0-zaJtkD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i172-fI8QaF' -T 30 -L 1 -I -O './autcross/lcr-o1-tfaM3D'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i172-H5wPlG' -T 30 -L 2 -I -O './autcross/lcr-o2-2YgSlG'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i172-4EuhfD' -T 30 -L 3 -I -O './autcross/lcr-o3-IWnAKC'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i172-JGgPzG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-qhLOGD'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5650.1-5670.7	XG(!p0 | p2 | G!p1 | X(p2 M !p1))
+Running [A0]: autfilt './autcross/lcr-i173-3AMK8C' > './autcross/lcr-o0-fDlBCG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i173-TXZRTC' -T 30 -L 1 -I -O './autcross/lcr-o1-UjefbE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i173-Tj0XjC' -T 30 -L 2 -I -O './autcross/lcr-o2-ccIORE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i173-nWFJBD' -T 30 -L 3 -I -O './autcross/lcr-o3-zVcBvF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i173-tn5PSE' -T 30 -L 3 -I -G -O './autcross/lcr-o4-FISYmG'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5671.1-5688.7	XG(!p0 | p1 | (!p1 W p2))
+Running [A0]: autfilt './autcross/lcr-i174-r2vWNE' > './autcross/lcr-o0-wUk9tD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i174-vMEa0E' -T 30 -L 1 -I -O './autcross/lcr-o1-iqdHWE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i174-RWkf3D' -T 30 -L 2 -I -O './autcross/lcr-o2-QVAmCE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i174-Kn2uQE' -T 30 -L 3 -I -O './autcross/lcr-o3-SSabrD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i174-zqut0E' -T 30 -L 3 -I -G -O './autcross/lcr-o4-QdZggF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5689.1-5706.7	XG(!p0 | !p1 | (p1 W p2))
+Running [A0]: autfilt './autcross/lcr-i175-DItikC' > './autcross/lcr-o0-gwKfdG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i175-FgT4YC' -T 30 -L 1 -I -O './autcross/lcr-o1-bAQVIE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i175-YsVVBD' -T 30 -L 2 -I -O './autcross/lcr-o2-g6jBTC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i175-B9shbF' -T 30 -L 3 -I -O './autcross/lcr-o3-t5az5B'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i175-zDtdMC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-hY4KsE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5707.1-5729.7	Xp0 & G(p0 | X(!p0 | Xp0))
+Running [A0]: autfilt './autcross/lcr-i176-LkpWYC' > './autcross/lcr-o0-mPLLBF'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i176-KIxlkF' -T 30 -L 1 -I -O './autcross/lcr-o1-rdEDzG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i176-gM7KeC' -T 30 -L 2 -I -O './autcross/lcr-o2-qkTSeE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i176-qN1G0B' -T 30 -L 3 -I -O './autcross/lcr-o3-mAp7kG'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i176-VfGv6F' -T 30 -L 3 -I -G -O './autcross/lcr-o4-FNdz0B'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5730.1-5761.7	c & X(a1 | b1 | d) & (!d U (d & X((a1 | b1) & XGc))) & F(c & X(!c & (((a1 & F(d & Fa1)) | (b1 & F(d & Fb1))) U c))) & G(((!a1 & !b1) | (!c & !d)) & (!c | !d) & (!a1 | !b1) & ((!a1 & !b1) | X(c & X(a1 | b1 | d | Gc))))
+Running [A0]: autfilt './autcross/lcr-i177-sF4vFE' > './autcross/lcr-o0-fZdVcG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i177-dJgSaC' -T 30 -L 1 -I -O './autcross/lcr-o1-xzVhtF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i177-q4cckD' -T 30 -L 2 -I -O './autcross/lcr-o2-dPvaRD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i177-RCUvdE' -T 30 -L 3 -I -O './autcross/lcr-o3-TKRxOF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i177-fUlscG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-RAczGC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5762.1-5827.7	c & X(a1 | b1 | d) & (!d U (d & X((a1 | b1) & XXGc))) & F(c & X(!c & (((a1 & F(d & Fa1)) | (b1 & F(d & Fb1)) | (a2 & F(d & Fa2)) | (b2 & F(d & Fb2))) U c))) & G((!c | !d) & ((!a1 & !a2 & !b1 & !b2) | (!c & !d)) & (!a1 | !b1) & (!a2 | !b2) & ((!a1 & !b1) | X(a2 | b2)) & ((!a2 & !b2) | X(c & X(a1 | b1 | d | Gc))))
+Running [A0]: autfilt './autcross/lcr-i178-PNKLjC' > './autcross/lcr-o0-vIQRcG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i178-NZRSqF' -T 30 -L 1 -I -O './autcross/lcr-o1-TIdvtD'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i178-tgXHRC' -T 30 -L 2 -I -O './autcross/lcr-o2-4JSKFD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i178-UsvdED' -T 30 -L 3 -I -O './autcross/lcr-o3-4GJaGF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i178-QPI6GF' -T 30 -L 3 -I -G -O './autcross/lcr-o4-SwFoIF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5828.1-5967.7	c & X(a1 | b1 | d) & (!d U (d & X((a1 | b1) & XXXGc))) & F(c & X(!c & (((a1 & F(d & Fa1)) | (b1 & F(d & Fb1)) | (a2 & F(d & Fa2)) | (b2 & F(d & Fb2)) | (a3 & F(d & Fa3)) | (b3 & F(d & Fb3))) U c))) & G((!c | !d) & ((!a1 & !a2 & !a3 & !b1 & !b2 & !b3) | (!c & !d)) & (!a1 | !b1) & (!a2 | !b2) & (!a3 | !b3) & ((!a1 & !b1) | X(a2 | b2)) & ((!a2 & !b2) | X(a3 | b3)) & ((!a3 & !b3) | X(c & X(a1 | b1 | d | Gc))))
+Running [A0]: autfilt './autcross/lcr-i179-ITlmjD' > './autcross/lcr-o0-gCmSmD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i179-TNJgMC' -T 30 -L 1 -I -O './autcross/lcr-o1-sPPmWE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i179-GA4G4E' -T 30 -L 2 -I -O './autcross/lcr-o2-TcpGjC'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i179-ECi6NE' -T 30 -L 3 -I -O './autcross/lcr-o3-bRLd0B'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i179-NDvLKD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-wvOa4D'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:5968.1-6269.7	c & X(a1 | b1 | d) & (!d U (d & X((a1 | b1) & XXXXGc))) & F(c & X(!c & (((a1 & F(d & Fa1)) | (b1 & F(d & Fb1)) | (a2 & F(d & Fa2)) | (b2 & F(d & Fb2)) | (a3 & F(d & Fa3)) | (b3 & F(d & Fb3)) | (a4 & F(d & Fa4)) | (b4 & F(d & Fb4))) U c))) & G((!c | !d) & ((!a1 & !a2 & !a3 & !a4 & !b1 & !b2 & !b3 & !b4) | (!c & !d)) & (!a1 | !b1) & (!a2 | !b2) & (!a3 | !b3) & (!a4 | !b4) & ((!a1 & !b1) | X(a2 | b2)) & ((!a2 & !b2) | X(a3 | b3)) & ((!a3 & !b3) | X(a4 | b4)) & ((!a4 & !b4) | X(c & X(a1 | b1 | d | Gc))))
+Running [A0]: autfilt './autcross/lcr-i180-E1bcxF' > './autcross/lcr-o0-lONUyG'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i180-f2mR7B' -T 30 -L 1 -I -O './autcross/lcr-o1-UONDPF'
+error: execution terminated by signal 9.
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i180-BUgslD' -T 30 -L 2 -I -O './autcross/lcr-o2-fFVR1B'
+error: execution terminated by signal 9.
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i180-33pbuF' -T 30 -L 3 -I -O './autcross/lcr-o3-nITYfD'
+error: execution terminated by signal 9.
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i180-boM7kD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-lz5KGF'
+error: execution terminated by signal 9.
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:6270.1-6311.7	c & X(d | y) & (!d U (d & X(y & XXGc))) & F(c & X(!c & ((!y | X((a & F(d & F(y & Xa))) | (b & F(d & F(y & Xb))))) U c))) & G((!a | !b) & (!a | !c) & (!a | !d) & (!a | !y) & (!b | !c) & (!b | !d) & (!b | !y) & (!c | !d) & (!c | !y) & (!d | !y) & (!y | X((a | b) & X(c & X(d | y | Gc)))))
+Running [A0]: autfilt './autcross/lcr-i181-VBSIwE' > './autcross/lcr-o0-SDXCcE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i181-Aum1nG' -T 30 -L 1 -I -O './autcross/lcr-o1-z5svEF'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i181-gYNNQE' -T 30 -L 2 -I -O './autcross/lcr-o2-iw7RnD'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i181-cEDBBD' -T 30 -L 3 -I -O './autcross/lcr-o3-2PLyZD'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i181-smGjjC' -T 30 -L 3 -I -G -O './autcross/lcr-o4-zyDQvC'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:6312.1-6413.7	c & X(d | y) & (!d U (d & X(y & XXXXGc))) & F(c & X(!c & (((!y | X((a & F(d & F(y & Xa))) | (b & F(d & F(y & Xb))))) & (!z | X((a & F(d & F(z & Xa))) | (b & F(d & F(z & Xb)))))) U c))) & G((!a | !b) & (!a | !c) & (!a | !d) & (!a | !y) & (!b | !c) & (!b | !d) & (!b | !y) & (!c | !d) & (!c | !y) & (!d | !y) & (!a | !z) & (!b | !z) & (!c | !z) & (!d | !z) & (!y | !z) & (!y | X((a | b) & Xz)) & (!z | X((a | b) & X(c & X(d | y | Gc)))))
+Running [A0]: autfilt './autcross/lcr-i182-DNO19D' > './autcross/lcr-o0-I9zOGE'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i182-JyLssC' -T 30 -L 1 -I -O './autcross/lcr-o1-J6g1qE'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i182-Q5UyrD' -T 30 -L 2 -I -O './autcross/lcr-o2-6f11PE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i182-d4k3tC' -T 30 -L 3 -I -O './autcross/lcr-o3-EghdNE'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i182-RLDxoG' -T 30 -L 3 -I -G -O './autcross/lcr-o4-9dRUOE'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:6414.1-6741.7	c & X(d | (y & Xy)) & (!d U (d & X(y & X(y & XXXXXXXXGc)))) & F(c & X(!c & (((!y | X(!y | X((a & F(d & F(y & X(y & Xa)))) | (b & F(d & F(y & X(y & Xb))))))) & (!z | X(!y | X((a & F(d & F(z & X(y & Xa)))) | (b & F(d & F(z & X(y & Xb))))))) & (!y | X(!z | X((a & F(d & F(y & X(z & Xa)))) | (b & F(d & F(y & X(z & Xb)))))))) U c))) & G((!a | !b) & (!a | !c) & (!a | !d) & (!a | !y) & (!b | !c) & (!b | !d) & (!b | !y) & (!c | !d) & (!c | !y) & (!d | !y) & (!a | !z) & (!b | !z) & (!c | !z) & (!d | !z) & (!y | !z) & (!y | X(!y | X((a | b) & X(z & Xy)))) & (!z | X(!y | X((a | b) & X(y & Xz)))) & (!y | X(!z | X((a | b) & X(c & X(d | (y & Xy) | Gc))))))
+Running [A0]: autfilt './autcross/lcr-i183-PMmP8D' > './autcross/lcr-o0-5ejFtC'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i183-3X4F8D' -T 30 -L 1 -I -O './autcross/lcr-o1-TS6rnG'
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i183-3VFgQC' -T 30 -L 2 -I -O './autcross/lcr-o2-YH8tKE'
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i183-q1eALC' -T 30 -L 3 -I -O './autcross/lcr-o3-JncIzF'
+Running [A4]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i183-U5wsUD' -T 30 -L 3 -I -G -O './autcross/lcr-o4-pFseNF'
+Gathering statistics...
+
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba.hoa:6742.1-7491.7	c & X(d | (y & Xy)) & (!d U (d & X(y & X(y & XXXXXXXXXXXGc)))) & F(c & X(!c & (((!y | X(!y | X((a & F(d & F(y & X(y & Xa)))) | (b & F(d & F(y & X(y & Xb))))))) & (!z | X(!y | X((a & F(d & F(z & X(y & Xa)))) | (b & F(d & F(z & X(y & Xb))))))) & (!y | X(!z | X((a & F(d & F(y & X(z & Xa)))) | (b & F(d & F(y & X(z & Xb))))))) & (!z | X(!z | X((a & F(d & F(z & X(z & Xa)))) | (b & F(d & F(z & X(z & Xb)))))))) U c))) & G((!a | !b) & (!a | !c) & (!a | !d) & (!a | !y) & (!b | !c) & (!b | !d) & (!b | !y) & (!c | !d) & (!c | !y) & (!d | !y) & (!a | !z) & (!b | !z) & (!c | !z) & (!d | !z) & (!y | !z) & (!y | X(!y | X((a | b) & X(z & Xy)))) & (!z | X(!y | X((a | b) & X(y & Xz)))) & (!y | X(!z | X((a | b) & X(z & Xz)))) & (!z | X(!z | X((a | b) & X(c & X(d | (y & Xy) | Gc))))))
+Running [A0]: autfilt './autcross/lcr-i184-t9Mq1E' > './autcross/lcr-o0-22RRiD'
+Running [A1]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i184-RaZKIF' -T 30 -L 1 -I -O './autcross/lcr-o1-0UPXsF'
+error: execution terminated by signal 9.
+Running [A2]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i184-wHjggE' -T 30 -L 2 -I -O './autcross/lcr-o2-WxjtcG'
+error: execution terminated by signal 9.
+Running [A3]: /home/xschwar3/Desktop/telatko/telatko.py -F './autcross/lcr-i184-VzoHKE' -T 30 -L 3 -I -O './autcross/lcr-o3-ek9KfD'
+autcross: received signal 2
