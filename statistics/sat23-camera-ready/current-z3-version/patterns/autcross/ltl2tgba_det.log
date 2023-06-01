@@ -1,4 +1,0 @@
-/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl2tgba_det.hoa:1.1-16.7	Fp1
-Running [A0]: autfilt './autcross/lcr-i0-SsD7Lp' > './autcross/lcr-o0-6n1z0o'
-Running [A1]: /home/xschwar3/telatko/telatko.py -F './autcross/lcr-i0-xXRz1r' -T 30 -L 1 -I -O './autcross/lcr-o1-BxVhMs'
-autcross: received signal 2
