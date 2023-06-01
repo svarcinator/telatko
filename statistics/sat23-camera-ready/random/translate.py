@@ -2,7 +2,7 @@ import spot
 import os
 import re
 from ltlcross_runner import LtlcrossRunner, ResultsAnalyzer
-
+import sys
 
 def main(argv):
     tools = {

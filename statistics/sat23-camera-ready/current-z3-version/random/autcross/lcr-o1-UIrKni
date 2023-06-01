@@ -1,0 +1,23 @@
+HOA: v1
+name: "L1_2_U "
+States: 2
+Start: 0
+AP: 3 "p2" "p3" "p0"
+Acceptance: 3 (Inf(0) & Fin(1)) | Inf(2)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!0&2] 0
+[!0&!2] 0 {1}
+[0&1&2] 0 {0 2}
+[0&!2] 0 {0 1 2}
+[0&!1&2] 1 {0}
+State: 1
+[!0&!2] 0 {1}
+[!0&1&2] 0 {2}
+[0&1&2] 0 {0 2}
+[0&!2] 0 {0 1 2}
+[!0&!1&2] 1
+[0&!1&2] 1 {0}
+--END--

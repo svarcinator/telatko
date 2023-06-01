@@ -1,0 +1,25 @@
+/home/xschwar3/telatko/statistics/sat23-camera-ready/patterns/patterns-ltl3tela_det.hoa:1.1-15.7
+Running [A0]: autfilt './autcross/lcr-i0-yOJb8l' > './autcross/lcr-o0-G9J9Xn'
+Running [A1]: /home/xschwar3/telatko/telatko.py -F './autcross/lcr-i0-SLzOcm' -T 30 -L 1 -I -O './autcross/lcr-o1-e36WCp'
+autcross: received signal 2
+Traceback (most recent call last):
+  File "/home/xschwar3/telatko/telatko.py", line 8, in <module>
+    from telatko2.classes import Switches
+  File "/home/xschwar3/telatko/telatko2/classes.py", line 8, in <module>
+    from scipy.optimize import linear_sum_assignment
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/scipy/optimize/__init__.py", line 401, in <module>
+    from ._root import *
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/scipy/optimize/_root.py", line 19, in <module>
+    from ._minpack_py import _root_hybr, leastsq
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/scipy/optimize/_minpack_py.py", line 13, in <module>
+    from ._lsq import least_squares
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/scipy/optimize/_lsq/__init__.py", line 2, in <module>
+    from .least_squares import least_squares
+  File "/home/xschwar3/.local/lib/python3.8/site-packages/scipy/optimize/_lsq/least_squares.py", line 13, in <module>
+    from .dogbox import dogbox
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 939, in get_code
+KeyboardInterrupt

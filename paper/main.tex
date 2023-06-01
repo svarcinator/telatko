@@ -444,15 +444,13 @@ structure and language. In other words, we look for
 We will actually look for $\psi$ and $\rem$ such that each run
 $\pi=t_0t_1t_2\ldots$ of $\mA$ is accepting if and only if the run
 $\rem(t_0)\rem(t_1)\rem(t_2)\ldots$ of $\mB$ is accepting. This
-requirement clearly guarantees the equiavalence of $\mA$ and $\mB$. We
-note that preserving the acceptance of individual runs is not a
-necessary condition for language equivalence of $\mA$ and $\mB$ and
-there exist automata where relaxing this requirement can lead to
-a bigger reduction of acceptance marks (see
-Figure~\ref{fig:counter}). However, looking for $\psi$ and $\rem$
-preserving the acceptance of individual runs makes the problem easier
-as we can, for example, ignore the labelling of transitions by the
-elements of $\Sigma$.
+requirement clearly guarantees the equiavalence of $\mA$ and $\mB$,
+but it is not a necessary condition for the equivalence. Indeed, there
+exist automata where relaxing this requirement can lead to a bigger
+reduction of acceptance marks (see Figure~\ref{fig:counter}). However,
+looking for $\psi$ and $\rem$ that preserve the acceptance of individual
+runs makes the problem easier as we can, for example, ignore the
+labelling of transitions by the elements of $\Sigma$.
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[smallautomaton]
@@ -483,48 +481,55 @@ elements of $\Sigma$.
   \end{tikzpicture}
   \smallskip
   
-  \caption{Both automata accept the same language of words
-    $w\in\{a,b\}^\omega$ that contain infinitely many occurences of
-    both $a$ and $b$. Each accepting run of the left automaton has to
-    contain infinitely many occurrences of both transitions looping on
-    the initial state. Hence, there does not exist any automaton with
-    the same accepting runs as the left automaton and less than two
-    accetpance marks.}
+  \caption{The left automaton accepts the words % $w\in\{a,b\}^\omega$
+    that contain infinitely many occurences of both $a$ and $b$. Each
+    accepting run of the left automaton has to contain infinitely many
+    occurrences of both transitions looping on the initial
+    state. Hence, there does not exist any automaton with the same
+    accepting runs as the left automaton and less than two accetpance
+    marks. The right automaton accepts the same language using one
+    acceptance mark and a different set of accepting runs.}
   \label{fig:counter}
 \end{figure}
 
-\fixme{TADY TO HONZA JESTE UPRAVUJE}
-We start with several simple observations. Acceptance of a run $\pi$
-is fully determined by the set $\minf(\pi)$.
-% of acceptance marks that
-% appear infinitely often on $\pi$, which is in turn fully determined by
-% the set $\minf(\pi)$ of transitions appearing infinitely often in
-% $\pi$.
+Our reduction method is based on two facts. First, the acceptance of a
+run $\pi$ is fully determined by $\minf(\pi)$. Second, each set
+$\minf(\pi)$ is a cycle and vice versa.
+
+% Before we We start with a reformulation of our requirement on $\psi$
+% and $\rem$.  Recall that a run $\pi$ of $\mA$ is accepting if and
+% only iff $\minf(\pi)$ satisfies $\varphi$.  Further, the following
+% lemma says that each set $\minf(\pi)$ is a cycle and vice versa.
+
 \begin{lemma}
   A set $T\subseteq\delta$ is a cycle if and only if
-  there is a run $\pi$ such that $T=\minf(\pi)$.
+  there is a run $\pi$ such that $\minf(\pi)=T$.
 \end{lemma}
+\begin{proof}
+  To prove the direction `$\Longrightarrow$', we assume that $T$ is a
+  cycle. The definition says that there exists a path $\tau$ from a
+  state $p$ to the same state containing each transition of $T$ at
+  least once and no transition outside $T$. As our automata contain
+  only reachable states, there exists a path $\rho$ from the initial
+  state $q_I$ to $p$ or $p=q_I$ and we set $\rho=\varepsilon$. The
+  infinite sequence $\pi=\rho.\tau^\omega$ is a run satisfying
+  $\minf(\pi)=T$.
 
+  To prove the direction `$\Longleftarrow$', we consider a run
+  $\pi$.  As $\minf(\pi)$ is the set of transitions that appear
+  infinitely many times in $\pi$, there has to be a suffix $\pi'$ of
+  $\pi$ containing only transitions of $\minf(\pi)$. Let $p$ be the
+  first state of $\pi'$. As each transition of $\pi'$ appears
+  infinitely many times in $\pi$ and thus also in $\pi'$, there has to
+  be a finite prefix $\rho$ of $\pi'$ such that $\rho$ is a path from
+  $p$ to $p$ that contains all transitions of $\minf(\pi)$. In other
+  words, the set $\minf(\pi)$ is a cycle.
+\end{proof}
 
-
-As $\minf(\pi)$ is the set of transitions that appear infinitely many
-times in $\pi$, there has to be a suffix $\pi'$ of $\pi$ containing
-only transitions of $\minf(\pi)$. Let $p$ be the first state of
-$\pi'$. As each transition of $\pi'$ appears infinitely many times in
-$\pi$ and thus also in $\pi'$, there has to be a finite prefix $\rho$
-of $\pi'$ such that $\rho$ is a path from $p$ to $p$ that contains all
-transitions of $\minf(\pi)$. In other words, the set $\minf(\pi)$ of a
-run $\pi$ is always a cycle. Moreover, as we assume that 
-%\footnote{We can also prove that for each cycle $T$ there exists a run $\pi$ such that $T=\minf(\pi)$.}
-
-
-\fixme{ODTUD DAL JE TO PUVODNI, ale taky se to trochu bude menit!}
-
-Further, each set $\minf(\pi)$ for a run $\pi$ is a cycle and vice
-versa. Hence, our reduction method is looking for a new acceptance
-formula $\psi$ and function $\rem$ such that for each cycle
-$T\subseteq\delta$, it holds that $T$ satisfies $\varphi$ if and only
-if $\rem(T)$ satisfies $\psi$. This can be roughly denoted by the
+Hence, our goal can be reformulated as follows. We look for a new
+acceptance formula $\psi$ and a function $\rem$ such that for each
+cycle $T\subseteq\delta$, it holds that $T$ satisfies $\varphi$ if and
+only if $\rem(T)$ satisfies $\psi$. This can be roughly denoted by the
 formula
 \[
   \forall T\subseteq\delta~.~\mcycle(T)\implies\big(\msat_\varphi(T) ~\iff~ \msat_{\psi}(\rem(T))\big).
