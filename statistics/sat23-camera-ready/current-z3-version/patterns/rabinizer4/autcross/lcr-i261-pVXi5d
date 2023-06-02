@@ -1,0 +1,14 @@
+HOA: v1
+name: "Automaton for ((!b) & (m) & (G(((!m) | (X(m))))) & (G(((b) | (!m) | (X(((b) & (((((!m) & (((b) <-> (X(b)))))) U (m))))))))) & (G(((!b) | (!m) | (X(((!b) & (((((b) & (!m) & (X(!b)))) U (((m) | (((!b) & (!m) & (X(((b) & (((((!m) & (((b) <-> (X(b)))))) U (m)))))))))))))))))))"
+States: 2
+Start: 0
+AP: 2 "m" "b"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[0&!1] 1
+State: 1
+[0&1] 0
+--END--

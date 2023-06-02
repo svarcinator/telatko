@@ -1,0 +1,20 @@
+HOA: v1
+name: "Automaton for ((!p3) R (X(!p0)))"
+States: 4
+Start: 0
+AP: 2 "p0" "p3"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[!1] 1
+[1] 2
+State: 1
+[!0] 3
+State: 2
+[!0&!1] 1
+[!0&1] 2
+State: 3
+[t] 3
+--END--
