@@ -162,6 +162,7 @@ def scc_unoptimized_formula(
             list(map(lambda e: aut.edge_number(e), scc_edg_list)))
     f_creator = None
     if solver == "z3":
+        print("z3 formula")
         f_creator = Z3_f_ctor(
             edge_dict,
             scc_edg,
@@ -230,6 +231,7 @@ def scc_optimized_formula(aut, scc_state_info, C,
 
 
 def run_with_limited_time(aut1, aut2, time):
+    
     safe_file("a1", aut1.to_str(), "w")
     safe_file("a2", aut2.to_str(), "w")
 

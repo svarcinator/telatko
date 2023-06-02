@@ -211,7 +211,7 @@ class Z3_f_ctor:
 
 
     def rec_old_original_shape(self, acc, prev_type, level):
-        
+
 
 
         if acc.top_disjuncts() == acc.top_conjuncts():
@@ -309,14 +309,16 @@ class Z3_f_ctor:
 
     def laso_f(self, aut):
 
+
         in_out = self.in_n_out()
 
         # edges that are true are in one SCC and none of edges from other SCCs is
         # true
-        # one_scc = self.one_scc_f()
-        least_one_edge = self.disjunct_formula(self.inner_edges_nums)
+        one_scc = self.one_scc_f()
+        #least_one_edge = self.disjunct_formula(self.inner_edges_nums)
+        
 
-        laso = And(in_out, least_one_edge)
+        laso = And(in_out, one_scc)
         return laso
 
     def laso_cycles(self, aut):

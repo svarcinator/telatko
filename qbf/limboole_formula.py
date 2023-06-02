@@ -244,6 +244,7 @@ class Boole_f_ctor:
         return SATformula("&", eq_list)
 
     def disjunct_formula_list(self, scc_edges_nums):
+        ptint(f" scc edges nums {scc_edges_nums}")
         alist = []
         for i in scc_edges_nums:
             dis = self.disjunct_formula(i)
@@ -271,10 +272,10 @@ class Boole_f_ctor:
 
         # edges that are true are in one SCC and none of edges from other SCCs is
         # true
-        # one_scc = self.one_scc_f()
-        least_one_edge = self.disjunct_formula(self.inner_edges_nums)
+        one_scc = self.one_scc_f()
+        #least_one_edge = self.disjunct_formula(self.inner_edges_nums)
 
-        laso = SATformula("&", [in_out, least_one_edge])
+        laso = SATformula("&", [in_out, one_scc])
         return laso
 
     def laso_cycles(self, aut):
