@@ -2,9 +2,9 @@ from qbf.z3_formula import *
 from qbf.parser import clear_aut_edges
 import spot
 from qbf.limboole_formula import *
-from telatko2.classes import Solver_result
+from telatko2.classes import Solver_result, safe_file
 from qbf.solver_manipulation.solver_functions import z3_result, query
-
+import subprocess
 
 
 
@@ -228,23 +228,55 @@ def scc_optimized_formula(aut, scc_state_info, C,
     return And(formula)
 
 
+
+def run_with_limited_time(aut1, aut2, time):
+    safe_file("a1", aut1.to_str(), "w")
+    safe_file("a2", aut2.to_str(), "w")
+
+    try:
+        cp = subprocess.run(["python3",
+                             "./are_eq.py",
+                             "-F1", "./a1", "-F2", "a2"],
+                            universal_newlines=True,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            timeout=time)
+    except subprocess.TimeoutExpired:
+        print("expired")
+        return False
+
+    if cp.stdout == "NOT-EQUIVALENT\n":
+        return False
+    else:
+        return True
+
+
+
+
 def try_evaluate0(aut, orig):
     """
     Try evaluate with K = 0(len of acceptance formula == 0)
     :param aut: spot::automaton
     :return: potentionally zero acceptance spot::automaton
     """
+
     last_eq_aut = spot.automaton(aut.to_str())
 
     last_eq_aut.set_name(last_eq_aut.get_name() + "F_0_U")
     clear_aut_edges(aut)
     aut.set_acceptance(0, spot.acc_code.t())
-    if spot.are_equivalent(orig, aut):
+
+    are_eq = run_with_limited_time(orig, aut, 20)
+
+    if are_eq:
         aut.set_name(aut.get_name() + "F_0_S")
         return aut
 
     aut.set_acceptance(0, spot.acc_code.f())
-    if spot.are_equivalent(orig, aut):
+
+    are_eq = run_with_limited_time(orig, aut, 2)
+
+    if are_eq:
         aut.set_name(aut.get_name() + "F_0_S")
         return aut
     return last_eq_aut

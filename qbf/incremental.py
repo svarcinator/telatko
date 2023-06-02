@@ -114,6 +114,7 @@ def inc_loop(
         C += 1
 
     while C > 0 and K > 0:
+        
 
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
