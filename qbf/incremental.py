@@ -118,9 +118,12 @@ def inc_loop(
         if aut.get_acceptance().used_sets().count(
         ) < 1 or aut.prop_state_acc() == spot.trival.yes_value:
             return aut
-        
+        print(f"C = {C}, K = {K} solver call")
         solver.check()
+        print("___")
         res = solver.check()
+        print("solver call done")
+
 
 
         result, _, _ = z3_result(res)
