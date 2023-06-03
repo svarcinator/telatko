@@ -125,6 +125,7 @@ def inc_loop(
         print("solver call done")
 
 
+        res = solver.check()
 
         result, _, _ = z3_result(res)
 

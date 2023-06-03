@@ -1,0 +1,19 @@
+HOA: v1
+name: "Automaton for ((((X(p0)) U (p1))) | (X(((!p0) R (((!p0) | (!p1)))))))"
+States: 3
+Start: 0
+AP: 2 "p0" "p1"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!1] 1
+[1] 2
+State: 1
+[!0 | 1] 2
+[0&!1] 1
+State: 2
+[t] 2
+--END--

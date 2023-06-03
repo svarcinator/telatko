@@ -237,7 +237,7 @@ def run_with_limited_time(aut1, aut2, time):
 
     try:
         cp = subprocess.run(["python3",
-                             "./are_eq.py",
+                             "/home/xschwar3/telatko/are_eq.py",
                              "-F1", "./a1", "-F2", "a2"],
                             universal_newlines=True,
                             stdout=subprocess.PIPE,
