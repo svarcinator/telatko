@@ -1464,26 +1464,7 @@ processor and 32 GB of memory running Ubuntu 20.04.4. We used the tool
 \texttt{autcross} of the Spot library to get the statistics of the
 reduced automata and the running times.
 
-For each automata set identified by the translator and the set of
-formulas, Table~\ref{tab:cumm-data} shows the cumulative numbers of
-marks in the input automata sets and after each reduction, together
-with the reduction ratio and total time spent by the considered
-reduction. The column \textit{solver timeout} shows the number of
-automata for which the last query to QBF solver did not finish within
-the 30~seconds limit. The timeout of the last QBF query means that the
-automaton may be potentially further reduced if a longer time limit is
-used. \fixme{Zkontrolovat zbytek odstavce podle aktualnich vysledku,
-  specifikovat formula set.} One can observe that a higher level
-sometimes achieves a smaller reduction than a lower level (e.g.,
-compare level~1 and level~2 for \texttt{ltl2dgra}). This is caused by
-the QBF solver timeouts occuring earlier as formulas constructed by
-the higher level are more complex. For \texttt{ltl2dela} and
-\texttt{ltl2dgra}, the automata sets do not contain any automaton
-where level~2 or level~3 achieves a better result than
-level~1. However, all levels contribute to the reductions in the
-multi-level setting.
-
-\begin{table}[t]
+\begin{table}[tp]
   \caption{The cumulative numbers of acceptance marks before and after
     reduction for various reduction levels and automata sets given by
     the translator and formula set. The column \emph{reduction} shows
@@ -1504,7 +1485,7 @@ multi-level setting.
   & marks & \makecell{reduction\\[-1ex] [\%]} & \makecell{time\\[-1ex] [s]} & \makecell{solver\\[-1ex] timeout} 
   & marks & \makecell{reduction\\[-1ex] [\%]} & \makecell{time\\[-1ex] [s]} & \makecell{solver\\[-1ex] timeout} \\
   \midrule
-%  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
   \multicolumn{2}{l}{\texttt{ltl2tgba -G}} 
   & \multicolumn{4}{c}{\mybox{198 marks in 70 automata}}
   & \multicolumn{4}{c}{\mybox{32 marks in 15 automata}}\\
@@ -1521,7 +1502,7 @@ multi-level setting.
   & 189 & 4.5~~~ & 427.6 & 7~~~
   &   26 &   18.8~~~ &    44.9 & 1~~~ \\                    
   \midrule
-%  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
   \multicolumn{2}{l}{\texttt{ltl3tela}} 
   & \multicolumn{4}{c}{\mybox{348 marks in 91 automata}}
   & \multicolumn{4}{c}{\mybox{120 marks in 49 automata}}\\
@@ -1588,62 +1569,28 @@ multi-level setting.
   & multi
   & 378 & 27.7~~~ & 9186.0 & 24~~~
   &   148 &   36.8~~~ &    219.8 & 2~~~ \\                    
-
-% \\
-% level 1 &
-% 387~ & 26.0~~~~~~ & 755.4~ &  18~~~
-% \\
-% &
-% level 2 &
-% 390~ & 25.4~~~~~~ & 1024.5~ &  20~~~
-% \\
-% &
-% level 3 &
-% 393~ & 24.9~~~~~~ & 7273.3~ &  25~~~
-% \\
-% &
-% multi &
-% 371~ & 29.1~~~~~~ & 9111.4~ &  21~~~
-% \\
-% \midrule
-% \multirow{4}{*}{\makecell{\texttt{ltl2dgra}\\234 automata\\882 acc.~marks}}
-% &
-% level 1 &
-% 552~ & 37.4~~~~~~ & 738.7~ & 14~~~
-% \\
-% &
-% level 2 &
-% 569~ & 35.5~~~~~~ & 907.3~ &  18~~~
-% \\
-% &
-% level 3 &
-% 561~ & 36.4~~~~~~ & 1163.4~ &  21~~~
-% \\
-% &
-% multi &
-% 542~ & 38.5~~~~~~ & 2320.7~ &  21~~~
-% \\
-% \midrule
-% \multirow{4}{*}{\makecell{\texttt{ltl3tela}\\91 automata\\348 acc.~marks}}
-% &
-% level 1 &
-% 332~ & 4.6~~~~~~ & 465.9~ &  12~~~
-% \\
-% &
-% level 2 &
-% 334~ & 4.0~~~~~~ & 553.9~ &  15~~~
-% \\
-% &
-% level 3 &
-% 326~ & 6.3~~~~~~ & 691.8~ &  18~~~
-% \\
-% &
-% multi &
-% 323~ & 7.2~~~~~~ & 1545.9~ & 18~~~
-% \\
-\bottomrule                                                                     
+  \bottomrule                                                                     
 \end{tabular}
 \end{table}
+
+For each automata set identified by the translator and the set of
+formulas, Table~\ref{tab:cumm-data} shows the cumulative numbers of
+marks in the input automata sets and after each reduction, together
+with the reduction ratio and total time spent by the considered
+reduction. The column \textit{solver timeout} shows the number of
+automata for which the last query to QBF solver did not finish within
+the 30~seconds limit. The timeout of the last QBF query means that the
+automaton may be potentially further reduced if a longer time limit is
+used. \fixme{Zkontrolovat zbytek odstavce podle aktualnich vysledku,
+  specifikovat formula set.} One can observe that a higher level
+sometimes achieves a smaller reduction than a lower level (e.g.,
+compare level~1 and level~2 for \texttt{ltl2dgra}). This is caused by
+the QBF solver timeouts occuring earlier as formulas constructed by
+the higher level are more complex. For \texttt{ltl2dela} and
+\texttt{ltl2dgra}, the automata sets do not contain any automaton
+where level~2 or level~3 achieves a better result than
+level~1. However, all levels contribute to the reductions in the
+multi-level setting.
 
 \fixme{Upravit zbytek textu.}
 Table~\ref{tab:heatmap} shows the number of automata from all
@@ -1658,7 +1605,7 @@ acceptance marks to only 4.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
 % reduced 8 or more acceptance marks to only 4.
 
-\begin{table}[b!]
+\begin{table}[t]
 \caption{The effect of multi-level reduction.
 A cell on coordinates $(x,y)$ contains the number of automata that have been
 reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
