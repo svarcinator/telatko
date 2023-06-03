@@ -1428,8 +1428,11 @@ evaluation of our reduction technique.
   \cmidrule(lr){3-5} \cmidrule(lr){6-8}
   &&& \multicolumn{2}{c}{automata with} && \multicolumn{2}{c}{automata with}\\
   \cmidrule(lr){4-5} \cmidrule(lr){7-8}
-  &&& at most & \textbf{at least} && at most & \textbf{at least}\\[-.8ex]
-  \multicolumn{2}{l}{translator ~~~ (version)$^{\text{web}}$} & ~~~~fails & 1 mark & \!\!\!\!\textbf{2 marks} & ~~~~fails & 1 mark & \!\!\!\!\textbf{2 marks}\\
+  \multicolumn{2}{l}{translator ~~~ (version)$^{\text{web}}$}
+  & ~~~~fails & \makecell[r]{at most\\[-1ex] 1 mark} & \makecell[r]{\textbf{at least}\\[-1ex] \textbf{2 marks}}
+  & ~~~~fails & \makecell[r]{at most\\[-1ex] 1 mark} & \makecell[r]{\textbf{at least}\\[-1ex] \textbf{2 marks}}\\
+  % &&& at most & \textbf{at least} && at most & \textbf{at least}\\[-.8ex]
+  % \multicolumn{2}{l}{translator ~~~ (version)$^{\text{web}}$} & ~~~~fails & 1 mark & \!\!\!\!\textbf{2 marks} & ~~~~fails & 1 mark & \!\!\!\!\textbf{2 marks}\\
   \midrule 
   \texttt{ltl2tgba -G} & (2.10.4)\tablefootnote{\url{https://spot.lrde.epita.fr}}
   & 0 & 278 & \textbf{70} & ? & ? & \textbf{?}\\
@@ -1438,9 +1441,9 @@ evaluation of our reduction technique.
   \texttt{ltl3tela -D1} & (2.2.0)\footnotemark[2]
   & ? & ? & \textbf{?} & ? & ? & \textbf{?}\\ 
   \texttt{ltl2dela} & (21.0)\tablefootnote{\label{fn:owl}\url{https://owl.model.in.tum.de/}}
-       & 5 & 214 & \textbf{129} & ? & ? & \textbf{?} \\
+  & 5 & 214 & \textbf{129} & ? & ? & \textbf{?}\\
   \texttt{ltl2dgra} & (21.0)\footnotemark[3]
-       & 12 & 102 & \textbf{234} & ? & ? & \textbf{?}\\
+  & 12 & 102 & \textbf{234} & ? & ? & \textbf{?}\\
   \bottomrule
 \end{tabular}
 \end{table}
@@ -1494,8 +1497,8 @@ multi-level setting.
 \newcommand{\mybox}[1]{\fbox{\begin{minipage}{4.7cm}\centering#1\end{minipage}}}
 \begin{tabular}{lcrrrrrrrr}
   \toprule
-  && \multicolumn{4}{c}{\makecell{reduction of automata from\\[-.8ex] formulas from literature}}
-  & \multicolumn{4}{c}{\makecell{reduction of automata from\\[-.8ex] random formulas}}
+  && \multicolumn{4}{c}{\makecell{reduction of marks in automata\\[-.8ex] from formulas from literature}}
+  & \multicolumn{4}{c}{\makecell{reduction of marks in automata\\[-.8ex] from random formulas}}
   \\ \cmidrule(lr){3-6} \cmidrule(lr){7-10}
   translator & \makecell{reduction\\[-1ex] level}
   & marks & \makecell{reduction\\[-1ex] [\%]} & \makecell{time\\[-1ex] [s]} & \makecell{solver\\[-1ex] timeout} 
