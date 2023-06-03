@@ -1,0 +1,19 @@
+HOA: v1
+name: "Automaton for X(((p0) & (p2) & (X(((((p0) & (p2))) U (p1))))))"
+States: 4
+Start: 0
+AP: 3 "p2" "p0" "p1"
+acc-name: Rabin 1
+Acceptance: 2 Fin(0) & Inf(1)
+properties: trans-labels explicit-labels state-acc deterministic
+--BODY--
+State: 0
+[t] 1
+State: 1
+[0&1] 2
+State: 2
+[0&1&!2] 2
+[2] 3
+State: 3 {1}
+[t] 3
+--END--

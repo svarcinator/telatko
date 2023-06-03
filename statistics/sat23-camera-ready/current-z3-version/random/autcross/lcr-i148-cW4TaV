@@ -1,0 +1,20 @@
+HOA: v1
+name: "Automaton for ((((p0) | (G(p2)))) M (((F(G(p2))) | (F(G(X(p0)))))))"
+States: 2
+Start: 0
+AP: 2 "p2" "p0"
+acc-name: generalized-Rabin 2 0 1
+Acceptance: 3 Fin(0) | (Fin(1) & Inf(2))
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[1] 1
+[!0&!1] 0 {0}
+[0&!1] 0
+State: 1
+[!0&!1] 1 {0 1}
+[0&!1] 1 {1}
+[!0&1] 1 {0 2}
+[0&1] 1 {2}
+--END--

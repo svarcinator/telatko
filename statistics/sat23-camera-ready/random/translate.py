@@ -20,13 +20,14 @@ def main(argv):
     rand_aut = 'random.csv'
     lcr = LtlcrossRunner(tools, formulas = [rand_ltl], res_filename = rand_aut)
     lcr.run_ltlcross(automata = True, timeout = '60')
+    
     ra = ResultsAnalyzer(rand_aut)
     ra.parse_results()
     ltlf_translated = {}
 
     for tool in tools_order:
         fs = ra.values.filter(items = [('acc', tool)]).dropna()
-
+        
         ltlf_translated[tool] = len(fs[fs[('acc', tool)] > 1])
 
         fd = open('random-' + tool + '.hoa', 'w')
