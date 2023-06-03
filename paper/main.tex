@@ -1361,7 +1361,7 @@ produced by the following process. We started with two sets of LTL formulas.
 On both these sets, we applied the tool \texttt{ltlfilt} of the Spot
 library to simplify the formulas and remove duplicates and formulas
 equivalent to $\true$ and $\false$. After these steps, we had 348
-LTL formulas from literature and 366 random formulas.
+LTL formulas from literature and 335 random formulas.
 %
 Formulas from both sets have been translated to nondeterministic TELA
 by two state-of-the-art translators, namely \texttt{ltl2tgba} (used
@@ -1507,38 +1507,88 @@ multi-level setting.
 %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
   \multicolumn{2}{l}{\texttt{ltl2tgba -G}} 
   & \multicolumn{4}{c}{\mybox{198 marks in 70 automata}}
-  & \multicolumn{4}{c}{\mybox{XYZ marks in XYZ automata}}\\
+  & \multicolumn{4}{c}{\mybox{32 marks in 15 automata}}\\
   & 1
-  & 198 & 0.0~~~ & 49.3 & 0~~~
-  &   ? &   ?~~~ &    ? & ?~~~ \\                     
+  & 198 & 0.0~~~ & 48.5 & 0~~~
+  &   32 &   0.0~~~ &    8.4 & 0~~~ \\                     
   & 2
-  & 198 & 0.0~~~ & 78.9 & 0~~~
-  &   ? &   ?~~~ &    ? & ?~~~ \\                     
+  & 198 & 0.0~~~ & 65.2 & 0~~~
+  &   31 &   3.1~~~ &    9.4 & 0~~~ \\                     
   & 3
-  & 189 & 4.5~~~ & 1222.8 & 7~~~
-  &   ? &   ?~~~ &    ? & ?~~~ \\                     
+  & 189 & 4.5~~~ & 409.8 & 7~~~
+  &   26 &   18.8~~~ &    43.9 & 1~~~ \\                     
   & multi
-  & 189 & 4.5~~~ & 1259.1 & 6~~~
-  &   ? &   ?~~~ &    ? & ?~~~ \\                    
+  & 189 & 4.5~~~ & 427.6 & 7~~~
+  &   26 &   18.8~~~ &    44.9 & 1~~~ \\                    
   \midrule
 %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
   \multicolumn{2}{l}{\texttt{ltl3tela}} 
   & \multicolumn{4}{c}{\mybox{348 marks in 91 automata}}
-  & \multicolumn{4}{c}{\mybox{XYZ marks in XYZ automata}}\\
+  & \multicolumn{4}{c}{\mybox{120 marks in 49 automata}}\\
+  & 1
+  & 332 & 4.6~~~ & 530.3 & 13~~~
+  &   101 &   15.8~~~ &     32.4 &  0~~~ \\                     
+  & 2
+  & 334 & 4.0~~~ & 551.0 & 14~~~
+  &   100 &   16.7~~~ &     32.3 &  0~~~ \\                     
+  & 3
+  & 326 & 6.3~~~ & 698.5 & 18~~~
+  &   95 &   20.8~~~ &     66.9 &  1~~~ \\                     
+  & multi
+  & 319 & 8.3~~~ & 1619.2 & 18~~~
+  &   95 &   20.8~~~ &    73.4 & 1~~~ \\                    
+  \midrule
+  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  \multicolumn{2}{l}{\texttt{ltl3tela -D1}} 
+  & \multicolumn{4}{c}{\mybox{272 marks in 81 automata}}
+  & \multicolumn{4}{c}{\mybox{97 marks in 44 automata}}\\
+  & 1
+  & 272 & 0.0~~~ & 383.1 & 9~~~
+  &   95 &   2.1~~~ &     23.8 &  0~~~ \\                     
+  & 2
+  & 272 & 0.0~~~ & 386.6 & 10~~~
+  &   95 &   2.1~~~ &     24.6 &  0~~~ \\                     
+  & 3
+  & 272 & 0.0~~~ & 950.2 & 14~~~
+  &   92 &   5.2~~~ &     54.1 &  0~~~ \\                     
+  & multi
+  & 272 & 0.0~~~ & 1659.6 & 16~~~
+  &   92 &   5.2~~~ &    67.2 & 1~~~ \\                    
+  \midrule
+  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  \multicolumn{2}{l}{\texttt{ltl2dgra}} 
+  & \multicolumn{4}{c}{\mybox{882 marks in 234 automata}}
+  & \multicolumn{4}{c}{\mybox{491 marks in 205 automata}}\\
+  & 1
+  & 544 & 38.3~~~ & 859.1 & 14~~~
+  &   293 &   40.3~~~ &     275.6 &  0~~~ \\                     
+  & 2
+  & 554 & 37.2~~~ & 1073.5 & 17~~~
+  &   280 &   43.0~~~ &     283.9 &  0~~~ \\                     
+  & 3
+  & 553 & 37.3~~~ & 1349.7 & 22~~~
+  &   267 &   45.6~~~ &     433.6 &  3~~~ \\                     
+  & multi
+  & 535 & 39.3~~~ & 2434.0 & 23~~~
+  &   264 &   46.2~~~ &    411.7 & 2~~~ \\                    
+  \midrule
+  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  \multicolumn{2}{l}{\texttt{ltl2dela}} 
+  & \multicolumn{4}{c}{\mybox{348 marks in 91 automata}}
+  & \multicolumn{4}{c}{\mybox{234 marks in 89 automata}}\\
   & 1
   & 332 & 4.6~~~ & 465.9 & 12~~~
-  &   ? &   ?~~~ &     ? &  ?~~~ \\                     
+  &   154 &   34.2~~~ &     89.0 &  0~~~ \\                     
   & 2
   & 334 & 4.0~~~ & 553.9 & 15~~~
-  &   ? &   ?~~~ &     ? &  ?~~~ \\                     
+  &   153 &   34.6~~~ &     123.6 &  0~~~ \\                     
   & 3
   & 326 & 6.3~~~ & 691.8 & 18~~~
-  &   ? &   ?~~~ &     ? &  ?~~~ \\                     
+  &   149 &   36.3~~~ &     172.7 &  2~~~ \\                     
   & multi
   & 323 & 7.2~~~ & 1545.9 & 18~~~
-  &   ? &   ?~~~ &    ? & ?~~~ \\                    
-  \midrule
-  &&&& \vdots \\
+  &   148 &   36.8~~~ &    219.8 & 2~~~ \\                    
+
 % \\
 % level 1 &
 % 387~ & 26.0~~~~~~ & 755.4~ &  18~~~
