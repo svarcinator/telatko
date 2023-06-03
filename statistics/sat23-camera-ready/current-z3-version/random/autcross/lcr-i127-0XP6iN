@@ -1,0 +1,13 @@
+HOA: v1
+name: "Automaton for ((p0) | (!p0) | (p2) | (((!p1) & (X(((!p1) U (!p3)))))))"
+States: 1
+Start: 0
+AP: 0
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
+properties: trans-labels explicit-labels state-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[t] 0
+--END--

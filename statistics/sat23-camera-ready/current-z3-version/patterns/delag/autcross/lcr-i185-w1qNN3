@@ -1,0 +1,21 @@
+HOA: v1
+name: "Automaton for ((G(F(a1))) & (F(((b1) & (F(b2))))))"
+States: 3
+Start: 0
+AP: 3 "a1" "b2" "b1"
+acc-name: generalized-Buchi 2
+Acceptance: 2 Inf(0)&Inf(1)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[!2] 0
+[!1&2] 1
+[1&2] 2
+State: 1
+[!1] 1
+[1] 2
+State: 2
+[!0] 2 {1}
+[0] 2 {0 1}
+--END--

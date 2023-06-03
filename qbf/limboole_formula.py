@@ -244,7 +244,7 @@ class Boole_f_ctor:
         return SATformula("&", eq_list)
 
     def disjunct_formula_list(self, scc_edges_nums):
-        ptint(f" scc edges nums {scc_edges_nums}")
+        
         alist = []
         for i in scc_edges_nums:
             dis = self.disjunct_formula(i)

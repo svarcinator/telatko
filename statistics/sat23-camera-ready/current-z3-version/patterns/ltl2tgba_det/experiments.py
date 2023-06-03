@@ -5,7 +5,7 @@ import os
 import sys
 
 def main(argv):
-    print("Current telatko z3 version - patterns ltl2tgba_det)
+    print("Current telatko z3 version - patterns ltl2tgba_det")
     telatko = "/home/xschwar3/telatko/telatko.py"
 
     os.environ['SPOT_TMPDIR'] = './autcross'

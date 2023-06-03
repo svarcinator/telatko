@@ -1,0 +1,22 @@
+HOA: v1
+name: "(!p0 & ((p3 & GF!p1) | (!p3 & FGp1))) | (p0 & ((p3 & FGp1) | (!p3 & GF!p1)))"
+States: 4
+Start: 0
+AP: 3 "p1" "p0" "p3"
+acc-name: Buchi
+Acceptance: 1 Inf(0)
+properties: trans-labels explicit-labels trans-acc stutter-invariant
+--BODY--
+State: 0
+[0&!1&!2 | 0&1&2] 1
+[!1&!2 | 1&2] 2
+[!1&2 | 1&!2] 3
+State: 1
+[0] 1 {0}
+State: 2
+[0] 1
+[t] 2
+State: 3
+[0] 3
+[!0] 3 {0}
+--END--

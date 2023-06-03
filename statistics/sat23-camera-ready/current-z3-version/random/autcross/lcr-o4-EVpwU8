@@ -1,0 +1,24 @@
+HOA: v1
+name: "F_0_S"
+States: 5
+Start: 0
+AP: 3 "p2" "p0" "p1"
+acc-name: all
+Acceptance: 0 t
+properties: trans-labels explicit-labels state-acc very-weak
+--BODY--
+State: 0
+[t] 1
+[1] 2
+State: 1
+[2] 1
+[1&2] 2
+State: 2
+[0&2] 3
+[1&2] 4
+State: 3
+[0] 3
+State: 4
+[0] 3
+[1] 4
+--END--

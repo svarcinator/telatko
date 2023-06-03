@@ -1,0 +1,51 @@
+HOA: v1
+name: "L1_2_U L2_2_U F_0_U"
+States: 9
+Start: 0
+AP: 3 "p0" "p3" "p1"
+acc-name: co-Buchi
+Acceptance: 1 Fin(0)
+properties: trans-labels explicit-labels trans-acc complete
+properties: deterministic
+--BODY--
+State: 0
+[0] 1
+[!0] 2
+State: 1
+[0&!2] 1
+[2] 3
+[!0&!2] 2
+State: 2
+[0&!2] 1
+[0&2] 3
+[!0&!2] 2
+[!0&2] 4
+State: 3
+[!1&!2] 5
+[1&!2] 3 {0}
+[2] 3 {0}
+State: 4
+[0&!1&!2] 5
+[!0&1 | !0&2] 6
+[0&1 | 0&2] 3
+[!0&!1&!2] 7
+State: 5
+[1&!2] 5
+[!1&!2] 5
+[2] 3 {0}
+State: 6
+[0&!1&!2] 5
+[!0&1 | !0&2] 6
+[0&1 | 0&2] 3
+[!0&!1&!2] 8
+State: 7
+[0&!2] 5
+[!0&!2] 7
+[0&2] 3
+[!0&2] 6
+State: 8
+[0&!2] 5
+[!0&!2] 8
+[0&2] 3
+[!0&2] 6
+--END--
