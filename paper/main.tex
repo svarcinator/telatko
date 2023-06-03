@@ -86,7 +86,7 @@
 \author{Jan Strej\v{c}ek}{%Faculty of Informatics,
   Masaryk University, Brno, Czech Republic}{strejcek@fi.muni.cz}{https://orcid.org/0000-0001-5873-403X}{}
 \author{Juraj Major}{%Faculty of Informatics,
-  Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{}{}
+  Masaryk University, Brno, Czech Republic}{major@fi.muni.cz}{https://orcid.org/0009-0007-1871-9047}{}
 \authorrunning{T. Schwarzov\'{a}, J. Strej\v{c}ek, and J. Major}
 \Copyright{Tereza Schwarzov\'{a}, Jan Strej\v{c}ek, and Juraj Major}
 \ccsdesc[500]{Theory of computation~Logic}
@@ -444,7 +444,7 @@ structure and language. In other words, we look for
 We will actually look for $\psi$ and $\rem$ such that each run
 $\pi=t_0t_1t_2\ldots$ of $\mA$ is accepting if and only if the run
 $\rem(t_0)\rem(t_1)\rem(t_2)\ldots$ of $\mB$ is accepting. This
-requirement clearly guarantees the equiavalence of $\mA$ and $\mB$,
+requirement clearly guarantees the equivalence of $\mA$ and $\mB$,
 but it is not a necessary condition for the equivalence. Indeed, there
 exist automata where relaxing this requirement can lead to a bigger
 reduction of acceptance marks (see Figure~\ref{fig:counter}). However,
@@ -486,7 +486,7 @@ labelling of transitions by the elements of $\Sigma$.
     accepting run of the left automaton has to contain infinitely many
     occurrences of both transitions looping on the initial
     state. Hence, there does not exist any automaton with the same
-    accepting runs as the left automaton and less than two accetpance
+    accepting runs as the left automaton and less than two acceptance
     marks. The right automaton accepts the same language using one
     acceptance mark and a different set of accepting runs.}
   \label{fig:counter}
@@ -1421,7 +1421,6 @@ evaluation of our reduction technique.
 %   \bottomrule
 % \end{tabular}
 %
-
 \setlength{\tabcolsep}{5.7pt}
 \begin{tabular}{lrrrrrrr}
   \toprule
@@ -1446,13 +1445,12 @@ evaluation of our reduction technique.
 \end{tabular}
 \end{table}
 
-\fixme{Honza je tu.}
 To each automata set (that is, the automata with at least two marks
-produced by an individual LTL translator), we have applied all
-single-level reductions and the multi-level reduction, always with
-incremental approach and without reducing the number of cubes. We
-do not reduce the number of cubes as our primary aim is to reduce the
-number of acceptance marks.
+produced by an individual LTL translator for one of the two formula
+sets), we have applied all single-level reductions and the multi-level
+reduction, always with incremental approach and without reducing the
+number of cubes. We do not reduce the number of cubes as our primary
+aim is to reduce the number of acceptance marks.
 %\todo{Vysvetlit, proc neredukujeme pocet cubes?}
 The timeout for each QBF query was set to 30 seconds.
 %
@@ -1463,35 +1461,138 @@ processor and 32 GB of memory running Ubuntu 20.04.4. We used the tool
 \texttt{autcross} of the Spot library to get the statistics of the
 reduced automata and the running times.
 
-Table~\ref{tab:cumm-data} shows the cumulative numbers of marks in the
-input automata sets and after each reduction, together with the
-reduction ratio and total time spent by the considered reduction. The
-column \textit{solver timeout} shows the number of automata for which
-the last query to QBF solver did not finish within the 30~seconds
-limit. The timeout of the last QBF query means that the automaton may
-be potentially further reduced if a longer time limit is used. One can
-observe that a higher level sometimes achieves a smaller reduction
-than a lower level (e.g., compare level~1 and level~2 for
-\texttt{ltl2dgra}). This is caused by the QBF solver timeouts occuring
-earlier as formulas constructed by the higher level are more
-complex. For \texttt{ltl2dela} and \texttt{ltl2dgra}, the automata
-sets do not contain any automaton where level~2 or level~3 achieves a
-better result than level~1. However, all levels contribute to the
-reductions in the multi-level setting.
+For each automata set identified by the translator and the set of
+formulas, Table~\ref{tab:cumm-data} shows the cumulative numbers of
+marks in the input automata sets and after each reduction, together
+with the reduction ratio and total time spent by the considered
+reduction. The column \textit{solver timeout} shows the number of
+automata for which the last query to QBF solver did not finish within
+the 30~seconds limit. The timeout of the last QBF query means that the
+automaton may be potentially further reduced if a longer time limit is
+used. \fixme{Zkontrolovat zbytek odstavce podle aktualnich vysledku,
+  specifikovat formula set.} One can observe that a higher level
+sometimes achieves a smaller reduction than a lower level (e.g.,
+compare level~1 and level~2 for \texttt{ltl2dgra}). This is caused by
+the QBF solver timeouts occuring earlier as formulas constructed by
+the higher level are more complex. For \texttt{ltl2dela} and
+\texttt{ltl2dgra}, the automata sets do not contain any automaton
+where level~2 or level~3 achieves a better result than
+level~1. However, all levels contribute to the reductions in the
+multi-level setting.
 
 \begin{table}[t]
   \caption{The cumulative numbers of acceptance marks before and after
-    reduction for various reductions and automata sets. The column
-    \emph{reduction} shows the cumulative percentage of saved
-    acceptance marks and \emph{time} reports the cumulative reduction
-    time. The column \textit{solver timeout} indicates the number of
-    instances where the last call to the QBF solver timed out.  }
+    reduction for various reduction levels and automata sets given by
+    the translator and formula set. The column \emph{reduction} shows
+    the cumulative percentage of saved acceptance marks and
+    \emph{time} reports the cumulative reduction time. The column
+    \textit{solver timeout} indicates the number of instances where
+    the last call to the QBF solver timed out.  }
 \label{tab:cumm-data}
 \centering
-\setlength{\tabcolsep}{10pt}
-\input{table-data.tex}
+\setlength{\tabcolsep}{3.9pt}
+\newcommand{\mybox}[1]{\fbox{\begin{minipage}{4.7cm}\centering#1\end{minipage}}}
+\begin{tabular}{lcrrrrrrrr}
+  \toprule
+  && \multicolumn{4}{c}{\makecell{reduction of automata from\\[-.8ex] formulas from literature}}
+  & \multicolumn{4}{c}{\makecell{reduction of automata from\\[-.8ex] random formulas}}
+  \\ \cmidrule(lr){3-6} \cmidrule(lr){7-10}
+  translator & \makecell{reduction\\[-1ex] level}
+  & marks & \makecell{reduction\\[-1ex] [\%]} & \makecell{time\\[-1ex] [s]} & \makecell{solver\\[-1ex] timeout} 
+  & marks & \makecell{reduction\\[-1ex] [\%]} & \makecell{time\\[-1ex] [s]} & \makecell{solver\\[-1ex] timeout} \\
+  \midrule
+%  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  \multicolumn{2}{l}{\texttt{ltl2tgba -G}} 
+  & \multicolumn{4}{c}{\mybox{198 marks in 70 automata}}
+  & \multicolumn{4}{c}{\mybox{XYZ marks in XYZ automata}}\\
+  & 1
+  & 198 & 0.0~~~ & 49.3 & 0~~~
+  &   ? &   ?~~~ &    ? & ?~~~ \\                     
+  & 2
+  & 198 & 0.0~~~ & 78.9 & 0~~~
+  &   ? &   ?~~~ &    ? & ?~~~ \\                     
+  & 3
+  & 189 & 4.5~~~ & 1222.8 & 7~~~
+  &   ? &   ?~~~ &    ? & ?~~~ \\                     
+  & multi
+  & 189 & 4.5~~~ & 1259.1 & 6~~~
+  &   ? &   ?~~~ &    ? & ?~~~ \\                    
+  \midrule
+%  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  \multicolumn{2}{l}{\texttt{ltl3tela}} 
+  & \multicolumn{4}{c}{\mybox{348 marks in 91 automata}}
+  & \multicolumn{4}{c}{\mybox{XYZ marks in XYZ automata}}\\
+  & 1
+  & 332 & 4.6~~~ & 465.9 & 12~~~
+  &   ? &   ?~~~ &     ? &  ?~~~ \\                     
+  & 2
+  & 334 & 4.0~~~ & 553.9 & 15~~~
+  &   ? &   ?~~~ &     ? &  ?~~~ \\                     
+  & 3
+  & 326 & 6.3~~~ & 691.8 & 18~~~
+  &   ? &   ?~~~ &     ? &  ?~~~ \\                     
+  & multi
+  & 323 & 7.2~~~ & 1545.9 & 18~~~
+  &   ? &   ?~~~ &    ? & ?~~~ \\                    
+  \midrule
+  &&&& \vdots \\
+% \\
+% level 1 &
+% 387~ & 26.0~~~~~~ & 755.4~ &  18~~~
+% \\
+% &
+% level 2 &
+% 390~ & 25.4~~~~~~ & 1024.5~ &  20~~~
+% \\
+% &
+% level 3 &
+% 393~ & 24.9~~~~~~ & 7273.3~ &  25~~~
+% \\
+% &
+% multi &
+% 371~ & 29.1~~~~~~ & 9111.4~ &  21~~~
+% \\
+% \midrule
+% \multirow{4}{*}{\makecell{\texttt{ltl2dgra}\\234 automata\\882 acc.~marks}}
+% &
+% level 1 &
+% 552~ & 37.4~~~~~~ & 738.7~ & 14~~~
+% \\
+% &
+% level 2 &
+% 569~ & 35.5~~~~~~ & 907.3~ &  18~~~
+% \\
+% &
+% level 3 &
+% 561~ & 36.4~~~~~~ & 1163.4~ &  21~~~
+% \\
+% &
+% multi &
+% 542~ & 38.5~~~~~~ & 2320.7~ &  21~~~
+% \\
+% \midrule
+% \multirow{4}{*}{\makecell{\texttt{ltl3tela}\\91 automata\\348 acc.~marks}}
+% &
+% level 1 &
+% 332~ & 4.6~~~~~~ & 465.9~ &  12~~~
+% \\
+% &
+% level 2 &
+% 334~ & 4.0~~~~~~ & 553.9~ &  15~~~
+% \\
+% &
+% level 3 &
+% 326~ & 6.3~~~~~~ & 691.8~ &  18~~~
+% \\
+% &
+% multi &
+% 323~ & 7.2~~~~~~ & 1545.9~ & 18~~~
+% \\
+\bottomrule                                                                     
+\end{tabular}
 \end{table}
 
+\fixme{Upravit zbytek textu.}
 Table~\ref{tab:heatmap} shows the number of automata from all
 four sets that have a given number of original acceptance marks and a
 given number of acceptance marks after multi-level reduction. The
