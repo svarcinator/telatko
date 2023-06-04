@@ -1367,15 +1367,16 @@ LTL formulas from literature and 335 random formulas.
 %
 Formulas from both sets have been translated to nondeterministic TELA
 by two state-of-the-art translators, namely \texttt{ltl2tgba} (used
-with option \texttt{-G}) from the Spot library~\cite{duret.16.atva2}
-and \texttt{ltl3tela}~\cite{major.19.atva}, and to deterministic TELA
-by \texttt{ltl3tela} with option \texttt{-D1} and by two
-state-of-the-art translators from the Owl
-library~\cite{kretinsky.18.atva}, namely \texttt{ltl2dela} (known as
-Delag)~\cite{muller.17.gandalf} and \texttt{ltl2dgra} (known as
-Rabinizer~4)~\cite{kretinsky.18.cav}. Some translators failed on some
-formulas: it usually reached a timeout of 60 seconds or it produced an
-automaton that cannot be parsed by the Spot library.
+with option \texttt{-G} to get generic TELA) from the Spot
+library~\cite{duret.16.atva2} and
+\texttt{ltl3tela}~\cite{major.19.atva}, and to deterministic TELA by
+\texttt{ltl3tela} with option \texttt{-D1} and by two state-of-the-art
+translators from the Owl library~\cite{kretinsky.18.atva}, namely
+\texttt{ltl2dela} (known as Delag)~\cite{muller.17.gandalf} and
+\texttt{ltl2dgra} (known as Rabinizer~4)~\cite{kretinsky.18.cav}. Some
+translators failed on some formulas: it usually reached a timeout of
+60 seconds or it produced an automaton that cannot be parsed by the
+Spot library.
 % produced by the individual tools contains less than 348 automata as not
 % all of the formulas are successfully translated due to a timeout of 60
 % seconds.
@@ -1466,13 +1467,15 @@ processor and 32 GB of memory running Ubuntu 20.04.4. We used the tool
 reduced automata and the running times.
 
 \begin{table}[tp]
-  \caption{The cumulative numbers of acceptance marks before and after
-    reduction for various reduction levels and automata sets given by
-    the translator and formula set. The column \emph{reduction} shows
-    the cumulative percentage of saved acceptance marks and
-    \emph{time} reports the cumulative reduction time. The column
-    \textit{solver timeout} indicates the number of instances where
-    the last call to the QBF solver timed out.  }
+  \caption{For each automata set identified by the translator and the
+    set of formulas, the table provides the cumulative number of
+    acceptance marks before any reduction (in the box), after
+    reduction of individual levels and after multi-level reduction
+    (column \emph{marks}). The column \emph{reduction} shows the
+    percentage of saved acceptance marks and \emph{time} reports the
+    cumulative reduction time in seconds. The column \textit{solver
+      timeout} indicates the number of instances where the last call
+    to the QBF solver timed out.  }
 \label{tab:cumm-data}
 \centering
 \setlength{\tabcolsep}{3.9pt}
@@ -1593,25 +1596,28 @@ automaton where level~2 or level~3 achieves a better result than
 level~1. However, all levels contribute to the reductions in the
 multi-level setting.
 
-\fixme{Upravit zbytek textu a popis Table~3.}
-Table~\ref{tab:heatmap} shows the number of automata from all
-four sets that have a given number of original acceptance marks and a
-given number of acceptance marks after multi-level reduction. The
-table indicates that in many cases only 1 or 2~marks can be
-saved. However, the achieved reduction is substantial for some
-automata with a higher number of original acceptance marks. For
-example, in 24 cases, we have reduced 7 or more
-acceptance marks to only 4.
+Table~\ref{tab:heatmap} shows the number of automata from all five
+sets constructed from formulas from literature that have a given
+number of original acceptance marks and a given number of acceptance
+marks after multi-level reduction. The table indicates that in many
+cases only 1 or 2~marks can be saved. However, the achieved reduction
+is substantial for some automata with a higher number of original
+acceptance marks. For example, in 26 cases, we have reduced 7 or more
+acceptance marks to only 4 or less.
 % Moreover, there were many timeouts of the last QBF query for manof these automata.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
 % reduced 8 or more acceptance marks to only 4.
+Table~\ref{tab:heatmap-random} shows the same information for all
+considered automata constructed from random formulas.
 
 \begin{table}[t]
-\caption{The effect of multi-level reduction.
-A cell on coordinates $(x,y)$ contains the number of automata that have been
-reduced from $x$ to $y$ acceptance marks. If the cell contains a sum of two
-numbers, the latter represents the number of automata where the attempt to reduce
-another mark has been unsuccessful due to a QBF solver timeout.}
+  \caption{The effect of multi-level reduction on automata constructed
+    from formulas from literature.  A cell on coordinates $(x,y)$
+    contains the number of automata that have been reduced from $x$ to
+    $y$ acceptance marks. If the cell contains a sum of two numbers,
+    the latter represents the number of automata where the attempt to
+    reduce another mark has been unsuccessful due to a QBF solver
+    timeout.}
 \label{tab:heatmap}
 \setlength{\tabcolsep}{2.5pt}
 \centering
@@ -1619,7 +1625,8 @@ another mark has been unsuccessful due to a QBF solver timeout.}
 \end{table}
 
 \begin{table}[t]
-\caption{Heatmap random}
+\caption{The effect of multi-level reduction on automata constructed
+    from random formulas. The meaning of each cell is the same as in Table~\ref{tab:heatmap}.}
 \label{tab:heatmap-random}
 \setlength{\tabcolsep}{2.5pt}
 \centering
@@ -1633,7 +1640,6 @@ in under a second and the high cumulative running times are caused by
 a relatively small number of complicated automata.
 
 \ref{fig:quantile-random}
-\ref{fig:heatmap-random}
 
 \begin{figure}[t]
   \caption{Performance of \telatko on individual automata of each automata sets.
