@@ -128,13 +128,15 @@ No.\ 101087529.}
   % % trading speed for higher reduction efficiency.
   % with increasing reduction potential and formula complexity, and thus
   % also decreasing speed of their satisfiability solving.
-  We evaluated
-  our reduction technique on TELA produced by state-of-the-art tools
-  of the libraries Owl and Spot and by the tool \texttt{ltl3tela}. The
-  technique reduced some acceptance marks in automata produced by all
-  the tools. \fixme{On automata with more than one acceptance mark produced
-  by tools Delag and Rabinizer~4 of the Owl library, our technique reduced
-  29.1\% and 38.5\% of acceptance marks, respectively.}
+  We evaluated our reduction technique on TELA produced by
+  state-of-the-art tools of the libraries Owl and Spot and by the tool
+  \texttt{ltl3tela}. The technique reduced some acceptance marks in
+  automata produced by all the tools. On automata with more than one
+  acceptance mark obtained by translation of LTL formulas from
+  literature with tools Delag and Rabinizer~4, our
+  technique reduced 27.7\% and 39.3\% of acceptance marks,
+  respectively. The reduction was even higher on automata from random
+  formulas.
   % The achieved
   % reduction of acceptance marks on automata produced by tools of the Owl library was
   % between 25 and 40\%.
@@ -1284,8 +1286,8 @@ The presented reduction algorithms have been implemented in a tool
 called \telatko. It is implemented in Python 3 and uses the Spot
 library~\cite{duret.16.atva2} for automata parsing and manipulation,
 and the theorem prover Z3~\cite{demoura.08.tacas} to solve the
-satisfiability of QBF transformed to prenex normal form (and not using
-CNF). Our tool is available at
+satisfiability of QBF transformed to prenex (non-CNF) normal form. Our
+tool is available at
 \begin{center}
 \url{https://gitlab.fi.muni.cz/xschwar3/telatko}
 \end{center}
@@ -1367,7 +1369,7 @@ Formulas from both sets have been translated to nondeterministic TELA
 by two state-of-the-art translators, namely \texttt{ltl2tgba} (used
 with option \texttt{-G}) from the Spot library~\cite{duret.16.atva2}
 and \texttt{ltl3tela}~\cite{major.19.atva}, and to deterministic TELA
-by \texttt{ltl3tela} with option \texttt{-D1} and by another two
+by \texttt{ltl3tela} with option \texttt{-D1} and by two
 state-of-the-art translators from the Owl
 library~\cite{kretinsky.18.atva}, namely \texttt{ltl2dela} (known as
 Delag)~\cite{muller.17.gandalf} and \texttt{ltl2dgra} (known as
@@ -1377,15 +1379,14 @@ automaton that cannot be parsed by the Spot library.
 % produced by the individual tools contains less than 348 automata as not
 % all of the formulas are successfully translated due to a timeout of 60
 % seconds.
-Further, we have removed automata with 0 or 1 acceptance mark as
-there is a little point in reducing these. Table
-\ref{tab:ltltranslators} shows the exact versions of the
-translators. For each set of formulas and for each translator, it also
-provides the number of fails, the number of produced automata with
-less than two marks, and the number of automata with at least two
-marks. The numbers of automata with at least two marks are typeset in
-bold as these automata are actually used for the experimental
-evaluation of our reduction technique.
+Further, we have removed automata with 0 or 1 acceptance mark as there
+is a little point in reducing these. Table \ref{tab:ltltranslators}
+shows the exact versions of the translators. For each translator and
+each set of formulas, the table also provides the number of fails, the
+number of produced automata with less than two marks, and the number
+of automata with at least two marks. The numbers of automata with at
+least two marks are typeset in bold as these automata are actually
+used for the experimental evaluation of our reduction technique.
 
 \begin{table}[t]
   \caption{Considered translators and the numbers of \emph{fails} and
@@ -1537,23 +1538,6 @@ reduced automata and the running times.
   &   92 &   5.2~~~ &    67.2 & 1~~~ \\                    
   \midrule
   %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
-  \multicolumn{2}{l}{\texttt{ltl2dgra}} 
-  & \multicolumn{4}{c}{\mybox{882 marks in 234 automata}}
-  & \multicolumn{4}{c}{\mybox{491 marks in 205 automata}}\\
-  & 1
-  & 544 & 38.3~~~ & 859.1 & 14~~~
-  &   293 &   40.3~~~ &     275.6 &  0~~~ \\                     
-  & 2
-  & 554 & 37.2~~~ & 1073.5 & 17~~~
-  &   280 &   43.0~~~ &     283.9 &  0~~~ \\                     
-  & 3
-  & 553 & 37.3~~~ & 1349.7 & 22~~~
-  &   267 &   45.6~~~ &     433.6 &  3~~~ \\                     
-  & multi
-  & 535 & 39.3~~~ & 2434.0 & 23~~~
-  &   264 &   46.2~~~ &    411.7 & 2~~~ \\                    
-  \midrule
-  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
   \multicolumn{2}{l}{\texttt{ltl2dela}} 
   & \multicolumn{4}{c}{\mybox{523 marks in 129 automata}}
   & \multicolumn{4}{c}{\mybox{234 marks in 89 automata}}\\
@@ -1568,31 +1552,48 @@ reduced automata and the running times.
   &   149 &   36.3~~~ &     172.7 &  2~~~ \\                     
   & multi
   & 378 & 27.7~~~ & 9186.0 & 24~~~
-  &   148 &   36.8~~~ &    219.8 & 2~~~ \\                    
+  &   148 &   36.8~~~ &    219.8 & 2~~~ \\
+  \midrule
+  %  \multirow{5}{*}{\makecell{\texttt{ltl2tgba -G}}} &
+  \multicolumn{2}{l}{\texttt{ltl2dgra}} 
+  & \multicolumn{4}{c}{\mybox{882 marks in 234 automata}}
+  & \multicolumn{4}{c}{\mybox{491 marks in 205 automata}}\\
+  & 1
+  & 544 & 38.3~~~ & 859.1 & 14~~~
+  &   293 &   40.3~~~ &     275.6 &  0~~~ \\                     
+  & 2
+  & 554 & 37.2~~~ & 1073.5 & 17~~~
+  &   280 &   43.0~~~ &     283.9 &  0~~~ \\                     
+  & 3
+  & 553 & 37.3~~~ & 1349.7 & 22~~~
+  &   267 &   45.6~~~ &     433.6 &  3~~~ \\                     
+  & multi
+  & 535 & 39.3~~~ & 2434.0 & 23~~~
+  &   264 &   46.2~~~ &    411.7 & 2~~~ \\                             
   \bottomrule                                                                     
 \end{tabular}
 \end{table}
 
 For each automata set identified by the translator and the set of
 formulas, Table~\ref{tab:cumm-data} shows the cumulative numbers of
-marks in the input automata sets and after each reduction, together
+marks in the input automata set and after each reduction, together
 with the reduction ratio and total time spent by the considered
 reduction. The column \textit{solver timeout} shows the number of
 automata for which the last query to QBF solver did not finish within
 the 30~seconds limit. The timeout of the last QBF query means that the
 automaton may be potentially further reduced if a longer time limit is
-used. \fixme{Zkontrolovat zbytek odstavce podle aktualnich vysledku,
-  specifikovat formula set.} One can observe that a higher level
-sometimes achieves a smaller reduction than a lower level (e.g.,
-compare level~1 and level~2 for \texttt{ltl2dgra}). This is caused by
-the QBF solver timeouts occuring earlier as formulas constructed by
-the higher level are more complex. For \texttt{ltl2dela} and
-\texttt{ltl2dgra}, the automata sets do not contain any automaton
-where level~2 or level~3 achieves a better result than
+used. One can observe that a higher level sometimes achieves a smaller
+reduction than a lower level (e.g., compare level~1 and level~2 for
+\texttt{ltl3tela} on automata coming from formulas from
+literature). This is caused by the QBF solver timeouts occuring
+earlier as formulas constructed by the higher level are more
+complex. The automata sets produced by \texttt{ltl2dela} and
+\texttt{ltl2dgra}, on formulas from literature do not contain any
+automaton where level~2 or level~3 achieves a better result than
 level~1. However, all levels contribute to the reductions in the
 multi-level setting.
 
-\fixme{Upravit zbytek textu.}
+\fixme{Upravit zbytek textu a popis Table~3.}
 Table~\ref{tab:heatmap} shows the number of automata from all
 four sets that have a given number of original acceptance marks and a
 given number of acceptance marks after multi-level reduction. The
