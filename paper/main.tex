@@ -1614,7 +1614,15 @@ another mark has been unsuccessful due to a QBF solver timeout.}
 \label{tab:heatmap}
 \setlength{\tabcolsep}{2.5pt}
 \centering
-\input{table-heatmap2.tex}
+\input{table-heatmap.tex}
+\end{table}
+
+\begin{table}[t]
+\caption{Heatmap random}
+\label{tab:heatmap-random}
+\setlength{\tabcolsep}{2.5pt}
+\centering
+\input{table-heatmap-random.tex}
 \end{table}
 
 Figure~\ref{fig:quantile} presents the time spent by multi-level
@@ -1622,6 +1630,9 @@ reduction on individual automata of each automata set. The chart
 shows a pleasing finding that for every set, most automata are reduced
 in under a second and the high cumulative running times are caused by 
 a relatively small number of complicated automata.
+
+\ref{fig:quantile-random}
+\ref{fig:heatmap-random}
 
 \begin{figure}[t]
   \caption{Performance of \telatko on individual automata of each automata sets.
@@ -1635,6 +1646,14 @@ a relatively small number of complicated automata.
 \bigskip
 \centering
 \input{quantile.tex}
+\end{figure}
+
+\begin{figure}[t]
+  \caption{Quantile random.}
+\label{fig:quantile-random}
+\bigskip
+\centering
+\input{quantile-random.tex}
 \end{figure}
 
 % Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
