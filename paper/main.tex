@@ -1508,28 +1508,31 @@ automaton where level~2 or level~3 achieves a better result than
 level~1. However, all levels contribute to the reductions in the
 multi-level setting.
 
-Table~\ref{tab:heatmap} shows the number of all automata constructed
-from formulas from literature that have a given number of original
-acceptance marks and a given number of acceptance marks after
-multi-level reduction. The table indicates that in many cases only 1
-or 2~marks can be saved. However, the achieved reduction is
-substantial for some automata with a higher number of original
-acceptance marks. For example, in 26 cases, we have reduced 7 or more
-acceptance marks to only 4 or less.
+Table~\ref{tab:heatmap} shows the effect of multi-level reduction to
+the number of acceptance marks in individual automata constructed from
+formulas from literature.
+% that have a given number of original
+% acceptance marks and a given number of acceptance marks after
+% multi-level reduction.
+The table indicates that in many cases only 1 or 2~marks can be
+saved. However, the achieved reduction is substantial for some
+automata with a higher number of original acceptance marks. For
+example, in 26 cases, we have reduced 7 or more acceptance marks to
+only 4 or less.
 % Moreover, there were many timeouts of the last QBF query for manof these automata.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
 % reduced 8 or more acceptance marks to only 4.
-Table~\ref{tab:heatmap-random} shows the same information for all
+Table~\ref{tab:heatmap-random} shows the same information for
 automata constructed from random formulas.
 
 \begin{table}[t]
-  \caption{The effect of multi-level reduction on automata constructed
-    from formulas from literature.  A cell on coordinates $(x,y)$
-    contains the number of automata that have been reduced from $x$ to
-    $y$ acceptance marks. If the cell contains a sum of two numbers,
-    the latter represents the number of automata where the attempt to
-    reduce another mark has been unsuccessful due to a QBF solver
-    timeout.}
+  \caption{The effect of multi-level reduction on all considered
+    automata constructed from formulas from literature.  A cell on
+    coordinates $(x,y)$ contains the number of automata that have been
+    reduced from $x$ to $y$ acceptance marks. If the cell contains a
+    sum of two numbers, the latter represents the number of automata
+    where the attempt to reduce another mark has been unsuccessful due
+    to a QBF solver timeout.}
 \label{tab:heatmap}
 \setlength{\tabcolsep}{2.5pt}
 \centering
@@ -1537,8 +1540,9 @@ automata constructed from random formulas.
 \end{table}
 
 \begin{table}[t]
-\caption{The effect of multi-level reduction on automata constructed
-    from random formulas. The meaning of each cell is the same as in Table~\ref{tab:heatmap}.}
+  \caption{The effect of multi-level reduction on all considered
+    automata constructed from random formulas. The meaning of each
+    cell is the same as in Table~\ref{tab:heatmap}.}
 \label{tab:heatmap-random}
 \setlength{\tabcolsep}{2.5pt}
 \centering
