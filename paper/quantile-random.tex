@@ -5,12 +5,15 @@
        height=8cm,
        width=12cm,
        grid=major,
-       legend style={at={(0.55,0.97)}, anchor= north west},
+       legend cell align={left},
+       legend style={at={(0.51,0.97)}, anchor= north west},
        %legend pos=north east,
-       xmin=-2
+       xmin=-2,
+       xlabel={automata from random formulas ordered by processing time},
+       ylabel={processing time [s]},
     ]
     
-\addplot[line width = 0.7, dashdotted,mark = none, draw = blue] coordinates {
+\addplot[line width = 0.9, dashdotted,mark = none, draw = blue] coordinates {
 	(1, 0.525848)
 	(2, 0.554064)
 	(3, 0.559469)
@@ -27,8 +30,8 @@
 	(14, 2.5538)
 	(15, 31.3894)
 };
-\addlegendentry{\texttt{ltl2tgba -G}}
-\addplot[line width = 0.7, dotted,mark = none, draw = red] coordinates {
+\addlegendentry{\texttt{~ltl2tgba -G}}
+\addplot[line width = 0.9, dotted,mark = none, draw = red] coordinates {
 	(1, 0.519052)
 	(2, 0.530141)
 	(3, 0.540048)
@@ -79,8 +82,8 @@
 	(48, 2.91162)
 	(49, 31.3063)
 };
-\addlegendentry{\texttt{ltl3tela}}
-\addplot[line width = 0.7, dashed,mark = none, draw = purple] coordinates {
+\addlegendentry{\texttt{~ltl3tela}}
+\addplot[line width = 0.9, dashed,mark = none, draw = purple] coordinates {
 	(1, 0.51714)
 	(2, 0.526589)
 	(3, 0.531321)
@@ -126,8 +129,8 @@
 	(43, 8.51135)
 	(44, 31.5286)
 };
-\addlegendentry{\texttt{ltl3tela -D1}}
-\addplot[line width = 0.7, densely dashed,mark = none, draw = green] coordinates {
+\addlegendentry{\texttt{~ltl3tela -D1}}
+\addplot[line width = 0.9, densely dashed,mark = none, draw = green] coordinates {
 	(1, 0.504099)
 	(2, 0.533177)
 	(3, 0.537095)
@@ -218,8 +221,8 @@
 	(88, 31.3554)
 	(89, 63.2979)
 };
-\addlegendentry{\texttt{ltl2dela}}
-\addplot[line width = 0.7, solid,mark = none, draw = orange] coordinates {
+\addlegendentry{\texttt{~ltl2dela}}
+\addplot[line width = 0.9, solid,mark = none, draw = orange] coordinates {
 	(1, 0.498876)
 	(2, 0.52523)
 	(3, 0.528003)
@@ -426,7 +429,7 @@
 	(204, 33.6952)
 	(205, 35.6486)
 };
-\addlegendentry{\texttt{ltl2dgra}}
+\addlegendentry{\texttt{~ltl2dgra}}
 
     \end{axis}
     \end{tikzpicture}

@@ -5,12 +5,15 @@
        height=8cm,
        width=12cm,
        grid=major,
+       legend cell align={left},
        legend style={ anchor=north east},
        %legend pos=north east,
-       xmin=-2
+       xmin=-2,
+       xlabel={automata from formulas from literature ordered by processing time},
+       ylabel={processing time [s]},
     ]
     
-\addplot[line width = 0.7, dashdotted, mark = none, draw = blue] coordinates {
+\addplot[line width = 0.9, dashdotted, mark = none, draw = blue] coordinates {
 	(1, 0.636357)
 	(2, 0.643329)
 	(3, 0.644253)
@@ -82,8 +85,8 @@
 	(69, 38.6384)
 	(70, 158.945)
 };
-\addlegendentry{\texttt{ltl2tgba -G}}
-\addplot[line width = 0.7, dotted, mark = none, draw = red] coordinates {
+\addlegendentry{\texttt{~ltl2tgba -G}}
+\addplot[line width = 0.9, dotted, mark = none, draw = red] coordinates {
 	(1, 0.707531)
 	(2, 0.707713)
 	(3, 0.711883)
@@ -176,8 +179,8 @@
 	(90, 102.8)
 	(91, 114.516)
 };
-\addlegendentry{\texttt{ltl3tela}}
-\addplot[line width = 0.7, dashed, mark = none, draw = purple] coordinates {
+\addlegendentry{\texttt{~ltl3tela}}
+\addplot[line width = 0.9, dashed, mark = none, draw = purple] coordinates {
 	(1, 0.625504)
 	(2, 0.629432)
 	(3, 0.636142)
@@ -260,8 +263,8 @@
 	(80, 100.404)
 	(81, 373.197)
 };
-\addlegendentry{\texttt{ltl3tela -D1}}
-\addplot[line width = 0.7, densely dashed, mark = none, draw = green] coordinates {
+\addlegendentry{\texttt{~ltl3tela -D1}}
+\addplot[line width = 0.9, densely dashed, mark = none, draw = green] coordinates {
 	(1, 0.610562)
 	(2, 0.651967)
 	(3, 0.656144)
@@ -392,8 +395,8 @@
 	(128, 199.077)
 	(129, 6745.93)
 };
-\addlegendentry{\texttt{ltl2dela}}
-\addplot[line width = 0.7, solid, mark = none, draw = orange] coordinates {
+\addlegendentry{\texttt{~ltl2dela}}
+\addplot[line width = 0.9, solid, mark = none, draw = orange] coordinates {
 	(1, 0.573886)
 	(2, 0.574966)
 	(3, 0.575323)
@@ -629,7 +632,7 @@
 	(233, 143.781)
 	(234, 220.926)
 };
-\addlegendentry{\texttt{ltl2dgra}}
+\addlegendentry{\texttt{~ltl2dgra}}
 
     \end{axis}
     \end{tikzpicture}

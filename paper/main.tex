@@ -1633,35 +1633,29 @@ considered automata constructed from random formulas.
 \input{table-heatmap-random.tex}
 \end{table}
 
-Figure~\ref{fig:quantile} presents the time spent by multi-level
-reduction on individual automata of each automata set. The chart
-shows a pleasing finding that for every set, most automata are reduced
-in under a second and the high cumulative running times are caused by 
-a relatively small number of complicated automata.
-
-\ref{fig:quantile-random}
-
-\begin{figure}[t]
-  \caption{Performance of \telatko on individual automata of each automata sets.
-    The graph shows the time ($y$ axis) needed by \telatko
-    to process the $x$-th automaton of the set, where automata of each set are ordered by their processing time.
+\begin{figure}[p]
+  \centering
+  \input{quantile.tex}
+  \bigskip\bigskip
+  \input{quantile-random.tex}
+  \bigskip
+  \caption{Performance of \telatko on individual automata of each automata set.
+    Automata sets constructed from formulas from literature are in the upper graph,
+    automata sets constructed from random formulas are in the lower graph.
+    Each line shows the time ($y$ axis) needed by \telatko to process the
+    $x$-th automaton of the set, where automata in the set are ordered by
+    their processing time.
     % The $x$ axis represents the number of automata from each automata
     % set that are processed by \telatko in the time shown on the $y$
     % axis.
   }
-\label{fig:quantile}
-\bigskip
-\centering
-\input{quantile.tex}
-\end{figure}
+\label{fig:quantile}\end{figure}
 
-\begin{figure}[t]
-  \caption{Quantile random.}
-\label{fig:quantile-random}
-\bigskip
-\centering
-\input{quantile-random.tex}
-\end{figure}
+Figure~\ref{fig:quantile} presents the time spent by multi-level
+reduction on individual automata of each automata set. The charts
+show a pleasing finding that for every set, most automata are reduced
+in under 5 seconds and the high cumulative running times are caused by 
+a relatively small number of complicated automata.
 
 % Pridat do experimentu nejaky graf, ktery ukaze, jak rychle se nektere
 % automaty redukovaly na minimum? Nebo spis ukazat vliv timeoutu na
@@ -1688,9 +1682,9 @@ given TELA. Second, it discloses how tools producing TELA are
 economical with acceptance marks. The presented experimental results
 show that the tool can indeed reduce the number of acceptance marks in
 automata produced by all considered state-of-the-art LTL to automata
-translators on formulas from literature. Further, it clearly shows
-that the translators of the Owl library are significantly less
-economical with acceptance marks than the other two translators.
+translators. Further, it clearly shows that the translators of the Owl
+library are significantly less economical with acceptance marks than
+the other two translators.
 
 The reduction of acceptance marks is not the only application of the
 presented approach. For example, it can be easily adapted to look for
@@ -1700,11 +1694,11 @@ though the QBF queries can be time-consuming, in practice one can
 often find a good trade-off between speed and efficiency by adjusting 
 the formula precision and choosing a reasonable timeout.
 
-In the future, we plan to improve the reduction process (e.g., use the
-bisection method to reduce the number of acceptance marks more
-efficiently) and study whether the reduction of acceptance condition
-can enable further reductions or simplifications of automata
-structures.
+% In the future, we plan to improve the reduction process (e.g., use the
+% bisection method to reduce the number of acceptance marks more
+% efficiently) and study whether the reduction of acceptance condition
+% can enable further reductions or simplifications of automata
+% structures.
 
 %}}}
 
