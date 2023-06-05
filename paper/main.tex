@@ -1299,8 +1299,8 @@ produced by the following process. We started with two sets of LTL formulas.
 \end{itemize}
 On both these sets, we applied the tool \texttt{ltlfilt} of the Spot
 library to simplify the formulas and remove duplicates and formulas
-equivalent to $\true$ and $\false$. After these steps, we had 348
-LTL formulas from literature and 335 random formulas.
+equivalent to $\true$ and $\false$. After these steps, we had 348~LTL
+formulas from literature and 335 random formulas.
 %
 Formulas from both sets have been translated to nondeterministic TELA
 by two state-of-the-art translators, namely \texttt{ltl2tgba} (used
@@ -1311,8 +1311,8 @@ library~\cite{duret.16.atva2} and
 translators from the Owl library~\cite{kretinsky.18.atva}, namely
 \texttt{ltl2dela} (known as Delag)~\cite{muller.17.gandalf} and
 \texttt{ltl2dgra} (known as Rabinizer~4)~\cite{kretinsky.18.cav}. Some
-translators failed on some formulas: it usually reached a timeout of
-60 seconds or it produced an automaton that cannot be parsed by the
+translators failed on some formulas: they usually reached a timeout of
+60 seconds or produced an automaton that cannot be parsed by the
 Spot library.
 % produced by the individual tools contains less than 348 automata as not
 % all of the formulas are successfully translated due to a timeout of 60
@@ -1360,9 +1360,11 @@ used for the experimental evaluation of our reduction technique.
 \end{tabular}
 \end{table}
 
-To each automata set (that is, the automata with at least two marks
-produced by an individual LTL translator for one of the two formula
-sets), we have applied all single-level reductions and the multi-level
+To all automata,
+% To each automata set (that is, the automata with at least two marks
+% produced by an individual LTL translator for one of the two formula
+% sets),
+we have applied all single-level reductions and the multi-level
 reduction, always with incremental approach and without reducing the
 number of cubes. We do not reduce the number of cubes as our primary
 aim is to reduce the number of acceptance marks.
@@ -1372,7 +1374,7 @@ The timeout for each QBF query was set to 30 seconds.
 All reductions have been performed by the tool \texttt{telatko}
 built with Spot library version 2.10.4 and Z3 version 4.8.15. The
 experiments have been run on a computer with Intel$^\text{®}$ Core™ i7-8700
-processor and 32 GB of memory running Ubuntu 20.04.4. We used the tool
+processor and 32~GB of memory running Ubuntu 20.04.4. We used the tool
 \texttt{autcross} of the Spot library to get the statistics of the
 reduced automata and the running times.
 
@@ -1501,24 +1503,24 @@ reduction than a lower level (e.g., compare level~1 and level~2 for
 literature). This is caused by the QBF solver timeouts occurring
 earlier as formulas constructed by the higher level are more
 complex. The automata sets produced by \texttt{ltl2dela} and
-\texttt{ltl2dgra}, on formulas from literature do not contain any
+\texttt{ltl2dgra} on formulas from literature do not contain any
 automaton where level~2 or level~3 achieves a better result than
 level~1. However, all levels contribute to the reductions in the
 multi-level setting.
 
-Table~\ref{tab:heatmap} shows the number of automata from all five
-sets constructed from formulas from literature that have a given
-number of original acceptance marks and a given number of acceptance
-marks after multi-level reduction. The table indicates that in many
-cases only 1 or 2~marks can be saved. However, the achieved reduction
-is substantial for some automata with a higher number of original
+Table~\ref{tab:heatmap} shows the number of all automata constructed
+from formulas from literature that have a given number of original
+acceptance marks and a given number of acceptance marks after
+multi-level reduction. The table indicates that in many cases only 1
+or 2~marks can be saved. However, the achieved reduction is
+substantial for some automata with a higher number of original
 acceptance marks. For example, in 26 cases, we have reduced 7 or more
 acceptance marks to only 4 or less.
 % Moreover, there were many timeouts of the last QBF query for manof these automata.
 % Let us note that some that some reductions are the results are promising, e.g. in 17 cases, we have successfully
 % reduced 8 or more acceptance marks to only 4.
 Table~\ref{tab:heatmap-random} shows the same information for all
-considered automata constructed from random formulas.
+automata constructed from random formulas.
 
 \begin{table}[t]
   \caption{The effect of multi-level reduction on automata constructed
@@ -1549,7 +1551,7 @@ considered automata constructed from random formulas.
   \bigskip\bigskip
   \input{quantile-random.tex}
   \bigskip
-  \caption{Performance of \telatko on individual automata of each automata set.
+  \caption{Running times of \telatko on individual automata of each automata set.
     Automata sets constructed from formulas from literature are in the upper graph,
     automata sets constructed from random formulas are in the lower graph.
     Each line shows the time ($y$ axis) needed by \telatko to process the
